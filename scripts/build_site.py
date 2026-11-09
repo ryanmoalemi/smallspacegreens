@@ -727,19 +727,15 @@ def step_strip() -> str:
 def harvest_chart() -> str:
     data = json.loads((SRC / "harvest-windows.json").read_text())
     rates = {row["id"]: row for row in json.loads((SRC / "rates.json").read_text())}
-    scale = data["scale_max"]
-    ticks = '<span>0</span><span>7</span><span>14</span><span>21</span><span>28</span>'
     rows = []
     for crop in data["crops"]:
         low, high = crop["low"], crop["high"]
-        if not 0 <= low < high <= scale:
+        if not 0 <= low < high:
             raise SystemExit(f'Invalid harvest range for {crop["id"]}')
         expected = f'Harvest about {low} to {high} days.'
         if expected not in rates[crop["id"]]["timing"]:
             raise SystemExit(f'Harvest chart disagrees with calculator guidance for {crop["id"]}')
         photo = LIST_PHOTOS[crop["photo"]]
-        left = 100 * low / scale
-        width = 100 * (high - low) / scale
         rows.append(
             '<li class="harvest-row" role="listitem">'
             '<div class="harvest-crop">'
@@ -749,11 +745,7 @@ def harvest_chart() -> str:
             f'<a class="harvest-crop-name" href="/tools/microgreens-seed-calculator/?crop={esc(crop["id"])}&amp;tray=10x10">{esc(crop["name"])}</a>'
             f'<p class="photo-credit">Credit: <a href="/photo-credits/#{esc(photo["credit_id"])}">{esc(photo["author"])}</a></p>'
             '</div></div>'
-            f'<p class="harvest-value"><strong>{low}<span class="harvest-to"> to </span>{high}</strong><span>days</span></p>'
-            '<div class="harvest-timeline" aria-hidden="true">'
-            '<div class="harvest-track"><span class="harvest-grid"></span>'
-            f'<span class="harvest-range" style="left:{left:.6f}%;width:{width:.6f}%"></span></div>'
-            f'<div class="harvest-mobile-ticks">{ticks}</div></div>'
+            f'<p class="harvest-value"><strong>{low}<span class="harvest-to"> to </span>{high}</strong> <span>days</span></p>'
             '</li>'
         )
     return (
@@ -761,9 +753,6 @@ def harvest_chart() -> str:
         '<div class="harvest-heading"><p class="eyebrow">Plan your first harvest</p>'
         '<h2 id="harvest-times">When can you harvest?</h2>'
         '<p class="harvest-subtitle">Compare estimated harvest times by crop.</p></div>'
-        '<p class="harvest-legend"><span aria-hidden="true"></span>Dark bar = estimated harvest window</p>'
-        '<div class="harvest-axis" aria-hidden="true"><span>Crop</span>'
-        f'<div class="harvest-desktop-ticks">{ticks}</div><span>Days</span></div>'
         '<ul class="harvest-rows" role="list">' + ''.join(rows) + '</ul>'
         '<div class="harvest-footer"><p>Use these ranges to plan, then check your crop before cutting.</p>'
         f'<p class="harvest-source">Estimates: <a href="{esc(data["source_url"])}">{esc(data["source"])}</a>.</p>'

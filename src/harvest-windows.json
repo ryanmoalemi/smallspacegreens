@@ -3,7 +3,6 @@
   "source_url": "https://extension.usu.edu/yardandgarden/research/grow-your-own-microgreens",
   "source_table": "Table 1, Estimated time to harvest",
   "checked": "2026-11-09",
-  "scale_max": 28,
   "crops": [
     {"id": "arugula", "name": "Arugula", "photo": "arugula", "low": 6, "high": 8},
     {"id": "pea", "name": "Pea shoots", "photo": "peas", "low": 8, "high": 10},
