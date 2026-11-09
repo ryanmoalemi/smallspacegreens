@@ -83,7 +83,20 @@ Use a single short caption below each photograph: `Credit: <a href="/photo-credi
 
 Maintain the complete attribution at `/photo-credits/#ASSET-STEM`: original title, creator and profile, original source, license, matching thumbnail, and crop or resize notes. Preserve the original license for thumbnails and social crops; cropped Teogenesis and Netha Hussain photographs remain under CC BY-SA 4.0. The Photo credits page includes every published photograph, including compact list thumbnails and the lettuce photograph retained in social imagery. Do not present these photographs as evidence of a trial conducted by this site.
 
-The eight oversized step illustrations and homepage space-selector drawings have been removed from the rendered site. Growing steps now use compact photographic rows, with real equipment or action thumbnails and short credits. Supply lists, crop choices and other editorial lists use relevant real photos through the shared `src/list-photos.json` registry. Guide-directory thumbnails use credited photographs. Decorative window, kit-versus-DIY and balcony-layout drawings are no longer shown in their article introductions. Data charts and the two-tray watering diagram remain where they explain measurements or method; they are not photographs or evidence of a site trial.
+The eight oversized step illustrations and homepage space-selector drawings have been removed from the rendered site. Growing steps now use compact photographic rows, with real equipment or action thumbnails and short credits. Supply lists, crop choices and other editorial lists use relevant real photos through the shared `src/list-photos.json` registry. Guide-directory thumbnails use credited photographs. Decorative window, kit-versus-DIY and balcony-layout drawings are not in the repository. The seed-density bar chart remains, because it is a data chart of published gram rates. The two-tray watering drawing has been replaced by the KVDP photograph below, with the water and drain steps kept as text. The nominal tray-area boxes were removed. No licensed photograph showed a 10 by 20 inch tray, a 10 by 10 inch tray, and a 5 by 5 inch tray together at one scale, so that comparison stays as text on the seed-density guide and the calculator. Unused drawing files for harvest-window bars, icon symbols, and the photo-soon placeholder are not in the repository.
+
+### Nested seedling trays by KVDP
+
+- Local file: `assets/photos/seedling-trays-nested-kvdp.jpg` (1200 × 714).
+- Photographer: [KVDP](https://en.wikipedia.org/wiki/User:KVDP).
+- Original: [Horticulture Tray1.jpg](https://commons.wikimedia.org/wiki/File:Horticulture_Tray1.jpg), Wikimedia Commons. Self-made in Belgium on 28 March 2008.
+- Direct source image: https://upload.wikimedia.org/wikipedia/commons/2/23/Horticulture_Tray1.jpg
+- License: [Public domain](https://commons.wikimedia.org/wiki/Template:PD-user-en) (author dedication, PD-user-en).
+- Source dimensions: 2776 × 1652.
+- Processing: original EXIF orientation applied, converted to RGB, resized to 1200 × 714 with Lanczos resampling, and saved as an optimized progressive JPEG at quality 84. No crop, color change, generated objects, or AI processing.
+- Subject and alt: Young seedlings in a cell tray nested inside a solid black tray on a windowsill. Standing water is not visible.
+- Credit: `Credit: <a href="/photo-credits/#seedling-trays-nested-kvdp">KVDP</a>`.
+- Use: bottom-watering guide, in place of the three-view drawing. The photograph is not a Small Space Greens grow.
 
 ## Photo-backed list assets
 
