@@ -7,6 +7,7 @@ import json
 import hashlib
 import re
 import subprocess
+import sys
 from datetime import datetime
 from html.parser import HTMLParser
 from pathlib import Path
@@ -266,8 +267,9 @@ class PhotoListAudit(HTMLParser):
         attrs = dict(attrs)
         context = [node["tag"] for node in self.stack]
         is_source = any("sources" in node["attrs"].get("class", "").split() for node in self.stack)
+        is_affiliate = any("affiliate-box" in node["attrs"].get("class", "").split() for node in self.stack)
         node = {"tag": tag, "attrs": attrs}
-        if tag == "li" and "main" in context and "nav" not in context and not is_source:
+        if tag == "li" and "main" in context and "nav" not in context and not is_source and not is_affiliate:
             node.update(photo=False, text=[])
             self.items.append(node)
         if tag == "img" and attrs.get("src", "").startswith("/assets/photos/"):
@@ -438,7 +440,96 @@ def page_share_image(html: str) -> tuple[str, int, int]:
     return f"{SITE}/{chosen}", size[0], size[1]
 
 
+LETPOT_URLS = {
+    "home": "https://www.awin1.com/cread.php?awinmid=47605&awinaffid=3149328&ued=https%3A%2F%2Fletpot.com%2F",
+    "max": "https://www.awin1.com/cread.php?awinmid=47605&awinaffid=3149328&ued=https%3A%2F%2Fletpot.com%2Fproducts%2Flph-max-21-pod-hydroponics-system-with-app-control",
+    "se": "https://www.awin1.com/cread.php?awinmid=47605&awinaffid=3149328&ued=https%3A%2F%2Fletpot.com%2Fproducts%2Fletpot-senior-12-pod-hydroponic-growing-system-with-app-control",
+    "lite": "https://www.awin1.com/cread.php?awinmid=47605&awinaffid=3149328&ued=https%3A%2F%2Fletpot.com%2Fproducts%2Fletpot-lph-lite-hydroponics-growing-system-12-pods",
+    "air": "https://www.awin1.com/cread.php?awinmid=47605&awinaffid=3149328&ued=https%3A%2F%2Fletpot.com%2Fproducts%2Flph-air-indoor-hydroponic-gardening-system",
+    "mini": "https://www.awin1.com/cread.php?awinmid=47605&awinaffid=3149328&ued=https%3A%2F%2Fletpot.com%2Fproducts%2Fmini-hydroponics-growing-system",
+}
+
+# One sentence each, taken from LetPot's own product pages on November 9, 2026.
+LETPOT_MODELS = {
+    "mini": (
+        "LPH-Mini",
+        "LetPot lists the LPH-Mini as a 5-pod indoor garden with app control, a 1.5L water tank, and a growing light you can schedule.",
+    ),
+    "lite": (
+        "LPH-Lite",
+        "LetPot describes the LPH-Lite as a 12-pod indoor herb garden with app and Wi-Fi control, a 24W growing LED, a 5.5L water tank, a pump, and an automatic timer.",
+    ),
+    "se": (
+        "LPH-SE",
+        "LetPot describes the LPH-SE as a 12-pod system with app and manual touch control, a 21-inch adjustable LED panel, and a 5.5L water tank.",
+    ),
+    "air": (
+        "LPH-Air",
+        "LetPot describes the LPH-Air as a 10-pod indoor garden with full-spectrum LED lights, light settings you can control from the app, automatic water circulation, and adjustable height.",
+    ),
+    "max": (
+        "LPH-Max",
+        "LetPot describes the LPH-Max as a 21-pod system with app control, automatic water refilling, and automatic watering, nutrients, lighting, and cycling.",
+    ),
+}
+
+LETPOT_BOXES = {
+    "apartment": (
+        "A countertop hydroponic garden is a different setup from a tray of mix. These notes come from LetPot's product pages. This site has not grown these units.",
+        ["mini", "lite", "max"],
+    ),
+    "windowsill": (
+        "If a tray of mix is a poor fit for the sill, a small countertop garden keeps the water and light in one unit. This note comes from LetPot's product page. This site has not grown this unit.",
+        ["mini"],
+    ),
+    "seed-starting": (
+        "These gardens grow plants in the unit. They do not raise transplants for a balcony. These notes come from LetPot's product pages. This site has not grown these units.",
+        ["mini", "lite"],
+    ),
+    "cost": (
+        "A hydroponic countertop garden is a different purchase from a microgreen tray kit or a stack of trays. Prices are not listed here. These notes come from LetPot's product pages. This site has not grown these units.",
+        ["mini", "se", "max"],
+    ),
+    "balcony": (
+        "If the balcony is too dark, or you would rather grow inside, a countertop garden is a different project from an outdoor pot. These notes come from LetPot's product pages. This site has not grown these units.",
+        ["mini", "air"],
+    ),
+}
+
+
+def letpot_link(key: str, label: str) -> str:
+    return (
+        f'<a href="{esc(LETPOT_URLS[key])}" rel="sponsored nofollow" target="_blank">{esc(label)}</a>'
+    )
+
+
+def letpot_box(name: str) -> str:
+    lead, keys = LETPOT_BOXES[name]
+    items = "".join(
+        f"<li>{letpot_link(key, LETPOT_MODELS[key][0])}. {esc(LETPOT_MODELS[key][1])}</li>"
+        for key in keys
+    )
+    return (
+        '<section class="affiliate-offer">'
+        '<p class="affiliate-disclosure">We earn a commission if you buy through these links, at no extra cost to you.</p>'
+        '<aside class="note affiliate-box" aria-labelledby="letpot-choice">'
+        "<h2 id=\"letpot-choice\">If you'd rather not deal with trays and soil</h2>"
+        f"<p>{esc(lead)}</p>"
+        f"<ul>{items}</ul>"
+        "</aside></section>"
+    )
+
+
+def apply_letpot(html: str) -> str:
+    html = re.sub(r"<!--LETPOT:([a-z-]+)-->", lambda match: letpot_box(match.group(1)), html)
+    html = html.replace("<!--LETPOT_HOME-->", letpot_link("home", "LetPot"))
+    if "<!--LETPOT" in html:
+        raise SystemExit("Unresolved LetPot placeholder")
+    return html
+
+
 def layout(page: dict, main: str, graph: list[dict]) -> str:
+    main = apply_letpot(main)
     main = render_content_photos(main)
     title = page["title"]
     description = page["description"]
@@ -1540,6 +1631,9 @@ def main() -> None:
     print("built", len(pages), "pages")
     print("photographed editorial list items", photographed_items)
     print("indexnow", INDEXNOW)
+    check = subprocess.run([sys.executable, str(ROOT / "scripts" / "check_affiliate_links.py")], check=False)
+    if check.returncode != 0:
+        raise SystemExit("Affiliate link check failed")
 
 
 if __name__ == "__main__":
