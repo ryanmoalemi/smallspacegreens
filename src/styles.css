@@ -194,7 +194,13 @@ svg{flex-shrink:0}
 .photo-credit{font-size:12px;color:var(--muted);margin:12px 0 0;line-height:1.7;overflow-wrap:anywhere}
 .photo-credit a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 .photo-credit a:hover{color:var(--green)}
-.photo-credit span{display:block}
+.photo-credit a{white-space:normal}
+.photo-credit-entry{display:grid;grid-template-columns:128px minmax(0,1fr);gap:24px;border-top:1px solid var(--line);padding:24px 0;scroll-margin-top:24px}
+.photo-credit-entry>img{display:block;width:128px;height:112px;object-fit:cover;border-radius:3px}
+.photo-credit-entry h2{font-size:27px;line-height:1.15;margin:0 0 12px;text-wrap:pretty}
+.photo-credit-entry p{font-size:14px;line-height:1.65;margin:0 0 8px;overflow-wrap:anywhere}
+.photo-credit-entry p:last-child{margin-bottom:0}
+@media(max-width:620px){.photo-credit-entry{grid-template-columns:84px minmax(0,1fr);gap:16px;padding:20px 0}.photo-credit-entry>img{width:84px;height:84px}.photo-credit-entry h2{font-size:23px}.photo-credit-entry p{font-size:13px}}
 ol.steps{list-style:none;counter-reset:steps;padding:0}
 ol.steps li{counter-increment:steps;position:relative;padding:0 0 24px 46px;margin-bottom:20px;border-bottom:1px solid var(--line);font-size:15px}
 ol.steps li::before{content:counter(steps);position:absolute;left:0;top:0;border:1px solid #b7c6ac;background:var(--sage);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}
