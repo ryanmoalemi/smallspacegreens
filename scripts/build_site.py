@@ -496,10 +496,83 @@ LETPOT_BOXES = {
     ),
 }
 
+# True Leaf Market through Awin, merchant 124042. Collection notes only.
+TRUELEAF_URLS = {
+    "home": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2F",
+    "micro-seed": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fmicro-greens-planting-seed",
+    "micro-kits": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fmicrogreens-kits-and-supplies",
+    "sprout-seed": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fwholesale-sprouting-seed",
+    "sprout-kits": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fsprouting-kits-and-supplies",
+}
+
+TRUELEAF_LINKS = {
+    "micro-seed": (
+        "Microgreens seed",
+        "True Leaf Market describes this as a collection of organic and conventional microgreens seed, including bulk sizes.",
+    ),
+    "micro-kits": (
+        "Microgreens kits and supplies",
+        "True Leaf Market describes this as kits and supplies for growing microgreens at home, with bulk and wholesale options.",
+    ),
+    "sprout-seed": (
+        "Wholesale sprouting seed",
+        "True Leaf Market labels this collection wholesale sprouting seed: organic and conventional seed for sprouting.",
+    ),
+    "sprout-kits": (
+        "Sprouting kits and supplies",
+        "True Leaf Market describes this as sprouting seeds, sprouters, and other supplies for sprouting at home, with bulk and wholesale options.",
+    ),
+}
+
+TRUELEAF_BOXES = {
+    "apartment": (
+        "A first tray needs microgreen seed, and some people start with a kit. Sprouting seed is a different food from the microgreens on this page. These notes describe True Leaf Market collections. This site has not grown seed from them.",
+        ["micro-seed", "micro-kits", "sprout-seed"],
+    ),
+    "windowsill": (
+        "A windowsill tray needs microgreen seed. A kit is a separate choice. These notes describe True Leaf Market collections. This site has not grown seed from them.",
+        ["micro-seed", "micro-kits"],
+    ),
+    "seed-starting": (
+        "The collection below is microgreens seed. It is not seed for the vegetable transplants on this page. This note describes a True Leaf Market collection. This site has not grown seed from it.",
+        ["micro-seed"],
+    ),
+    "density": (
+        "After you have a gram amount, the seed still has to be for an edible microgreen crop. This note describes a True Leaf Market collection. This site has not grown seed from it.",
+        ["micro-seed"],
+    ),
+    "pea": (
+        "Radish and pea are different seed. This note describes a True Leaf Market collection. This site has not grown seed from it.",
+        ["micro-seed"],
+    ),
+    "cost": (
+        "A kit and a bag of seed are different purchases. Prices are not listed here. These notes describe True Leaf Market collections. This site has not grown seed from them.",
+        ["micro-kits", "micro-seed", "sprout-kits"],
+    ),
+}
+
+
+def affiliate_link(url: str, label: str) -> str:
+    return f'<a href="{esc(url)}" rel="sponsored nofollow" target="_blank">{esc(label)}</a>'
+
 
 def letpot_link(key: str, label: str) -> str:
+    return affiliate_link(LETPOT_URLS[key], label)
+
+
+def trueleaf_link(key: str, label: str) -> str:
+    return affiliate_link(TRUELEAF_URLS[key], label)
+
+
+def affiliate_box(heading_id: str, heading: str, lead: str, items: str) -> str:
     return (
-        f'<a href="{esc(LETPOT_URLS[key])}" rel="sponsored nofollow" target="_blank">{esc(label)}</a>'
+        '<section class="affiliate-offer">'
+        '<p class="affiliate-disclosure">We earn a commission if you buy through these links, at no extra cost to you.</p>'
+        f'<aside class="note affiliate-box" aria-labelledby="{heading_id}">'
+        f'<h2 id="{heading_id}">{heading}</h2>'
+        f"<p>{esc(lead)}</p>"
+        f"<ul>{items}</ul>"
+        "</aside></section>"
     )
 
 
@@ -509,15 +582,16 @@ def letpot_box(name: str) -> str:
         f"<li>{letpot_link(key, LETPOT_MODELS[key][0])}. {esc(LETPOT_MODELS[key][1])}</li>"
         for key in keys
     )
-    return (
-        '<section class="affiliate-offer">'
-        '<p class="affiliate-disclosure">We earn a commission if you buy through these links, at no extra cost to you.</p>'
-        '<aside class="note affiliate-box" aria-labelledby="letpot-choice">'
-        "<h2 id=\"letpot-choice\">If you'd rather not deal with trays and soil</h2>"
-        f"<p>{esc(lead)}</p>"
-        f"<ul>{items}</ul>"
-        "</aside></section>"
+    return affiliate_box("letpot-choice", "If you'd rather not deal with trays and soil", lead, items)
+
+
+def trueleaf_box(name: str) -> str:
+    lead, keys = TRUELEAF_BOXES[name]
+    items = "".join(
+        f"<li>{trueleaf_link(key, TRUELEAF_LINKS[key][0])}. {esc(TRUELEAF_LINKS[key][1])}</li>"
+        for key in keys
     )
+    return affiliate_box("trueleaf-choice", "If you need seed or a kit", lead, items)
 
 
 def apply_letpot(html: str) -> str:
@@ -528,8 +602,17 @@ def apply_letpot(html: str) -> str:
     return html
 
 
+def apply_trueleaf(html: str) -> str:
+    html = re.sub(r"<!--TRUELEAF:([a-z-]+)-->", lambda match: trueleaf_box(match.group(1)), html)
+    html = html.replace("<!--TRUELEAF_HOME-->", trueleaf_link("home", "True Leaf Market"))
+    if "<!--TRUELEAF" in html:
+        raise SystemExit("Unresolved True Leaf placeholder")
+    return html
+
+
 def layout(page: dict, main: str, graph: list[dict]) -> str:
     main = apply_letpot(main)
+    main = apply_trueleaf(main)
     main = render_content_photos(main)
     title = page["title"]
     description = page["description"]
@@ -1091,10 +1174,10 @@ def check_copy(path: Path, text: str) -> None:
     for phrase in ["we tested", "in our tests", "we grew", "gardener's supply", "gardeners supply", "amazon.com", "johnny's", "johnnys selected"]:
         if phrase in lowered:
             raise SystemExit(f"{path} contains banned phrase: {phrase}")
-    for banned in ("hamama.com", "bootstrapfarmer.com", "trueleafmarket.com"):
+    for banned in ("hamama.com", "bootstrapfarmer.com"):
         if banned in lowered:
             raise SystemExit(f"{path} links a store that is not approved for the live site")
-    for banned in ("True Leaf", "Bootstrap Farmer", "Hamama"):
+    for banned in ("Bootstrap Farmer", "Hamama"):
         if banned in text:
             raise SystemExit(f"{path} names a product that is not approved for the live site")
     if re.search(r"amazon", lowered):
