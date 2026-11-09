@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" role="img" aria-labelledby="taTitle taDesc">
+  <title id="taTitle">Nominal tray areas compared</title>
+  <desc id="taDesc">A 10 by 20 inch tray, a 10 by 10 inch tray, and a 5 by 5 inch tray drawn to the same scale.</desc>
+  <rect width="880" height="360" fill="#f6f3ea"/>
+  <text x="24" y="36" font-size="22" font-weight="700" font-family="system-ui, Segoe UI, sans-serif" fill="#1c2420">Nominal area, same scale</text>
+  <text x="24" y="62" font-size="15" font-family="system-ui, Segoe UI, sans-serif" fill="#4e5a52">Outer nameplate size, not a measured inner floor. A diagram, not a product photo.</text>
+  <rect x="40" y="100" width="400" height="200" fill="#e7efe8" stroke="#17382a" stroke-width="3"/>
+  <text x="48" y="128" font-size="16" font-family="system-ui, Segoe UI, sans-serif" fill="#17382a">10 by 20 in</text>
+  <text x="48" y="152" font-size="14" font-family="system-ui, Segoe UI, sans-serif" fill="#1c2420">200 square inches. Reference rate.</text>
+  <rect x="470" y="100" width="200" height="200" fill="#d5e4d8" stroke="#17382a" stroke-width="3"/>
+  <text x="478" y="128" font-size="16" font-family="system-ui, Segoe UI, sans-serif" fill="#17382a">10 by 10 in</text>
+  <text x="478" y="152" font-size="14" font-family="system-ui, Segoe UI, sans-serif" fill="#1c2420">Half the seed.</text>
+  <rect x="700" y="200" width="100" height="100" fill="#c4a574" stroke="#17382a" stroke-width="3"/>
+  <text x="700" y="188" font-size="16" font-family="system-ui, Segoe UI, sans-serif" fill="#17382a">5 by 5 in</text>
+  <text x="40" y="340" font-size="15" font-family="system-ui, Segoe UI, sans-serif" fill="#1c2420">Measure the inside floor if you want the area that actually holds mix. Use custom size in the calculator.</text>
+</svg>

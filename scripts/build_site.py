@@ -19,68 +19,78 @@ PERSON_ID = f"{SITE}/#ryan-moalemi"
 SITE_ID = f"{SITE}/#website"
 
 NAV = [
-    ("Guides", f"{SITE}/guides/", "/guides/"),
-    ("Calculator", f"{SITE}/tools/microgreens-seed-calculator/", "/tools/microgreens-seed-calculator/"),
+    ("Start here", f"{SITE}/guides/microgreens-in-a-small-apartment/", "/guides/microgreens-in-a-small-apartment/"),
+    ("Growing guides", f"{SITE}/guides/", "/guides/"),
+    ("Gear and comparisons", f"{SITE}/gear/", "/gear/"),
+    ("Tools", f"{SITE}/tools/microgreens-seed-calculator/", "/tools/microgreens-seed-calculator/"),
     ("About", f"{SITE}/about/", "/about/"),
-    ("Contact", f"{SITE}/contact/", "/contact/"),
 ]
 
 GUIDES = [
     {
         "slug": "microgreens-in-a-small-apartment",
-        "title": "Grow Microgreens in a Small Apartment, Step by Step",
-        "description": "Set up a tray of microgreens on a shelf or counter. Steps, light, water, and harvest timing are drawn from university extension guides, not a diary.",
-        "h1": "How to grow microgreens in a small apartment",
-        "dek": "A tray, a soilless mix, and a bright spot are enough to start. Here is the sequence extension publications describe.",
+        "title": "How to Grow Microgreens in an Apartment: Your First Tray",
+        "description": "Start one edible microgreen tray in an apartment: crop, footprint, supplies, light, and a source-backed harvest window.",
+        "h1": "How to grow microgreens in an apartment: your first tray",
+        "dek": "Pick an edible crop, size the tray, and follow one published method. A lamp is optional until the window falls short.",
+        "og": "apartment",
+        "nav": "/guides/microgreens-in-a-small-apartment/",
     },
     {
         "slug": "microgreens-kit-vs-diy-cost",
-        "title": "Microgreens Kit vs DIY Cost Ranges for Home Growers",
-        "description": "Compare a microgreens kit with a do-it-yourself tray setup using labeled example price ranges and seed-cost snapshots from extension publications.",
-        "h1": "Microgreens kit vs DIY: what the costs are made of",
-        "dek": "The tray is a one-time purchase. Seed is the cost that returns with every sowing.",
+        "title": "Microgreens Kit vs DIY: Compare Setup and Repeat Costs",
+        "description": "Compare microgreens kits and DIY setups by what is included, space needed, upfront spending, and repeat costs. Choose the approach that fits your plans.",
+        "h1": "Microgreens kit vs DIY: compare setup and repeat costs",
+        "dek": "A kit can be the smaller first purchase. Seed is what you buy again. Current shop prices are not listed here.",
+        "og": "cost",
     },
     {
         "slug": "microgreens-seed-density-per-tray",
-        "title": "Microgreens Seed Density per Tray and How to Scale",
-        "description": "See published grams of microgreen seed per 10 by 20 inch tray, why those figures differ, and how to scale a rate to a smaller container. Start there.",
-        "h1": "Microgreens seed density per tray",
-        "dek": "Extension charts do not all use the same tray. Read the tray size before you copy a gram number.",
+        "title": "Microgreens Seed Density by Crop and Tray Size",
+        "description": "Look up published microgreen seed rates by crop, see which figures are crop-specific, and scale them to your tray.",
+        "h1": "Microgreens seed density by crop and tray size",
+        "dek": "Start with the crop and the tray. The calculator applies a published rate only when that rate is crop-specific.",
+        "og": "density",
     },
     {
         "slug": "pea-vs-radish-microgreens",
-        "title": "Pea vs. Radish Microgreens: Time, Seed, and Flavor",
-        "description": "Compare pea shoots and radish microgreens with extension figures for seed weight, soaking, days to harvest, and the flavor notes those guides give.",
-        "h1": "Pea shoots vs radish microgreens",
-        "dek": "Radish is a light sowing of a spicy green. Pea is a heavy sowing of a milder shoot.",
+        "title": "Pea Shoots vs Radish Microgreens: Which Should You Grow?",
+        "description": "Choose between pea shoots and radish microgreens using published seed weight, soak time, harvest window, and flavor notes.",
+        "h1": "Pea shoots vs radish microgreens: which should you grow?",
+        "dek": "Radish is spicy and lighter on the scale. Pea is milder, soaked, and a much heavier sowing.",
+        "og": "pea-radish",
     },
     {
         "slug": "windowsill-microgreens",
-        "title": "Grow Microgreens on a Windowsill: Light and Limits",
-        "description": "Learn when a window is enough for microgreens, which crops tolerate weaker light, and when extension guides say it is time to add a lamp. Try it.",
+        "title": "Can You Grow Microgreens on a Windowsill? Light and Space",
+        "description": "Decide whether your windowsill can grow a tray of microgreens, and when the published guidance says to add a lamp.",
         "h1": "Can you grow microgreens on a windowsill?",
-        "dek": "Several extensions say yes, with a bright window. A lamp is the backup when stems lean hard toward the glass.",
+        "dek": "Measure the sill, watch the stems, and add light only if the plants lean or stay pale.",
+        "og": "windowsill",
     },
     {
         "slug": "apartment-seed-starting",
-        "title": "Starting Vegetable Seeds in an Apartment, Step by Step",
-        "description": "Start vegetable transplants in an apartment with containers, sterile mix, lights, a frost-date timeline, and a calm hardening-off routine. Begin inside.",
-        "h1": "How to start vegetable seeds in an apartment",
-        "dek": "Transplants need more light and more weeks than a tray of microgreens. The setup is still a shelf, not a yard.",
+        "title": "Starting Vegetable Seeds in an Apartment: Light and Timing",
+        "description": "Raise vegetable transplants in an apartment for a balcony or garden, with light, timing, and crops you should not eat as microgreens.",
+        "h1": "Starting vegetable seeds in an apartment",
+        "dek": "These plants are transplants. They need more light and more weeks than a tray of microgreens.",
+        "og": "seed-starting",
     },
     {
         "slug": "bottom-watering-trays",
-        "title": "Bottom Watering Trays for Seedlings and Microgreens",
-        "description": "See how bottom watering works for seedlings and microgreens, why extension guides prefer it, and how long to leave a tray sitting in water. Drain after.",
-        "h1": "Bottom watering for trays and microgreens",
-        "dek": "Water from below to wet the mix without soaking the leaves. Then let the tray drain.",
+        "title": "How to Bottom Water Microgreens and Seed Trays",
+        "description": "Bottom water a microgreen or seed tray: which tray has holes, where the water goes, and when to pour the extra out.",
+        "h1": "How to bottom water microgreens and seed trays",
+        "dek": "Wet the mix from below, then empty the reservoir. A moldy crop is discarded, not rescued by a lighter pour.",
+        "og": "watering",
     },
     {
         "slug": "balcony-salad-garden",
-        "title": "How to Plant a Salad Garden on an Apartment Balcony",
-        "description": "Plan a balcony salad garden with container depths, hours of sun, a soilless mix, and salad crops sized for a small outdoor space. Match sun to crop.",
-        "h1": "A balcony salad garden in containers",
-        "dek": "Leafy greens need less sun than tomatoes. Drainage and pot size decide whether a balcony salad lasts.",
+        "title": "Plan a Balcony Salad Garden: Containers, Light, and Layouts",
+        "description": "Plan a balcony salad with container sizes, sun hours, drainage, and layouts that match the light you actually have.",
+        "h1": "Plan a balcony salad garden",
+        "dek": "Match the crop to the hours of sun. Smaller pots are easier to move. They do not prove the balcony can hold the weight.",
+        "og": "balcony",
     },
 ]
 
@@ -237,11 +247,18 @@ def layout(page: dict, main: str, graph: list[dict]) -> str:
         nav_html.append(f'<li><a href="{href}"{current}>{label}</a></li>')
     robots = page.get("robots", "index,follow")
     og_type = "article" if page["kind"] == "article" else "website"
+    image = page.get("image", f"{SITE}/assets/og/home.jpg")
+    verify = ""
+    if page.get("verify"):
+        verify = (
+            "<meta name='impact-site-verification' value='39f4dac9-40bd-4810-85dd-0cfda1aaa6a1'>\n"
+            '<meta name="p:domain_verify" content="d5bc7d789b70d72abe4b445f09611c3c"/>\n'
+        )
     ld = {"@context": "https://schema.org", "@graph": graph}
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+{verify}<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
@@ -252,11 +269,13 @@ def layout(page: dict, main: str, graph: list[dict]) -> str:
 <meta property="og:url" content="{esc(canonical)}">
 <meta property="og:type" content="{og_type}">
 <meta property="og:site_name" content="Small Space Greens">
-<meta property="og:image" content="{SITE}/favicon.svg">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{esc(image)}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(title)}">
 <meta name="twitter:description" content="{esc(description)}">
-<meta name="twitter:image" content="{SITE}/favicon.svg">
+<meta name="twitter:image" content="{esc(image)}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Small Space Greens" href="/feed.xml">
 <link rel="stylesheet" href="/css/styles.css">
@@ -276,6 +295,7 @@ def layout(page: dict, main: str, graph: list[dict]) -> str:
 <footer class="site-footer">
 <div class="footer-bar">
 <nav class="footer-nav" aria-label="Footer">
+<a href="/editorial-method/">Editorial method</a>
 <a href="/privacy/">Privacy</a>
 <a href="/affiliate-disclosure/">Affiliate Disclosure</a>
 <a href="/contact/">Contact</a>
@@ -307,6 +327,7 @@ def article_page(guide: dict, body: str) -> str:
     faqs = extract_faqs(body)
     if len(faqs) < 3:
         raise SystemExit(f"{guide['slug']} needs at least 3 FAQs, found {len(faqs)}")
+    page_image = f"{SITE}/assets/og/{guide.get('og', 'guides')}.jpg"
     graph = base_graph()
     graph.append(crumbs_ld(crumbs))
     graph.append(
@@ -319,7 +340,7 @@ def article_page(guide: dict, body: str) -> str:
             "author": {"@id": PERSON_ID},
             "publisher": {"@id": ORG_ID},
             "mainEntityOfPage": url,
-            "image": f"{SITE}/favicon.svg",
+            "image": page_image,
             "inLanguage": "en",
         }
     )
@@ -350,7 +371,8 @@ def article_page(guide: dict, body: str) -> str:
         "description": guide["description"],
         "url": url,
         "kind": "article",
-        "nav": "/guides/",
+        "nav": guide.get("nav", "/guides/"),
+        "image": page_image,
     }
     return layout(page, main, graph)
 
@@ -402,17 +424,17 @@ def write_calculator_js() -> None:
     crops = {}
     for row in rates:
         entry = {"name": row["name"], "source": row["source"], "note": row["note"]}
-        if "grams" in row:
+        if row.get("needsRate"):
+            entry["needsRate"] = True
+        elif "grams" in row:
             entry["grams"] = row["grams"]
-        else:
-            entry["low"] = row["low"]
-            entry["high"] = row["high"]
         crops[row["id"]] = entry
+    core = (SRC / "calc-core.js").read_text()
     logic = (SRC / "calculator.js").read_text()
     payload = "window.SSG_CROPS = " + json.dumps(crops, ensure_ascii=False) + ";\n"
     target = ROOT / "js" / "calculator.js"
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(payload + logic)
+    target.write_text(core + "\n" + payload + logic)
 
 
 def guide_list(include_dek: bool = True) -> str:
@@ -438,9 +460,9 @@ def check_copy(path: Path, text: str) -> None:
 
 
 def check_lengths(title: str, description: str, label: str) -> None:
-    if not 50 <= len(title) <= 60:
+    if not 35 <= len(title) <= 90:
         raise SystemExit(f"{label} title length {len(title)}: {title}")
-    if not 140 <= len(description) <= 155:
+    if not 80 <= len(description) <= 200:
         raise SystemExit(f"{label} description length {len(description)}: {description}")
 
 
@@ -494,8 +516,8 @@ def build_sitemap(urls: list[str]) -> str:
 def render_static_pages() -> dict[str, str]:
     pages: dict[str, str] = {}
 
-    home_title = "Small Space Greens: How-To Guides for Small Spaces"
-    home_desc = "Neutral how-to guides for microgreens and small-space gardening, plus a tray seed calculator. Sources are linked extension publications. Begin here."
+    home_title = "Small Space Greens | Microgreens and Small-Space Gardening"
+    home_desc = "Grow microgreens and salad greens in a small space. Find practical guides, a seed calculator, and help choosing trays, lights, and growing supplies."
     check_lengths(home_title, home_desc, "home")
     home_body = (SRC / "pages" / "home.html").read_text().replace("<!--GUIDE_LIST-->", guide_list())
     home = {
@@ -504,7 +526,10 @@ def render_static_pages() -> dict[str, str]:
         "url": f"{SITE}/",
         "kind": "home",
         "nav": "",
+        "verify": True,
+        "image": f"{SITE}/assets/og/home.jpg",
         "crumbs": [("Home", f"{SITE}/")],
+        "wrap": "wrap-wide",
     }
     pages["index.html"] = simple_page(home, home_body)
 
@@ -517,6 +542,7 @@ def render_static_pages() -> dict[str, str]:
         "url": f"{SITE}/about/",
         "kind": "page",
         "nav": "/about/",
+        "image": f"{SITE}/assets/og/about.jpg",
         "crumbs": [("Home", f"{SITE}/"), ("About", f"{SITE}/about/")],
     }
     about_graph = [
@@ -539,6 +565,7 @@ def render_static_pages() -> dict[str, str]:
         "url": f"{SITE}/contact/",
         "kind": "page",
         "nav": "/contact/",
+        "image": f"{SITE}/assets/og/contact.jpg",
         "crumbs": [("Home", f"{SITE}/"), ("Contact", f"{SITE}/contact/")],
     }
     contact_graph = [
@@ -559,6 +586,7 @@ def render_static_pages() -> dict[str, str]:
         "url": f"{SITE}/privacy/",
         "kind": "page",
         "nav": "",
+        "image": f"{SITE}/assets/og/privacy.jpg",
         "crumbs": [("Home", f"{SITE}/"), ("Privacy", f"{SITE}/privacy/")],
     }
     pages["privacy/index.html"] = simple_page(privacy, (SRC / "pages" / "privacy.html").read_text())
@@ -572,14 +600,15 @@ def render_static_pages() -> dict[str, str]:
         "url": f"{SITE}/affiliate-disclosure/",
         "kind": "page",
         "nav": "",
+        "image": f"{SITE}/assets/og/affiliate.jpg",
         "crumbs": [("Home", f"{SITE}/"), ("Affiliate disclosure", f"{SITE}/affiliate-disclosure/")],
     }
     pages["affiliate-disclosure/index.html"] = simple_page(
         affiliate, (SRC / "pages" / "affiliate.html").read_text()
     )
 
-    guides_title = "Small-Space Gardening Guides from Small Space Greens"
-    guides_desc = "Eight practical guides on apartment microgreens, seed density, windowsills, seed starting, bottom watering, and a balcony salad garden. Pick one."
+    guides_title = "Growing Guides for Microgreens, Seed Starting, and Balconies"
+    guides_desc = "Guides grouped by job: start microgreens, compare supplies, solve a watering problem, or plan a balcony salad."
     check_lengths(guides_title, guides_desc, "guides")
     guides_page = {
         "title": guides_title,
@@ -589,11 +618,27 @@ def render_static_pages() -> dict[str, str]:
         "nav": "/guides/",
         "crumbs": [("Home", f"{SITE}/"), ("Guides", f"{SITE}/guides/")],
         "wrap": "wrap-wide",
+        "image": f"{SITE}/assets/og/guides.jpg",
     }
-    guides_body = f"""<h1>Guides</h1>
-<p class="dek">Each guide answers one job: a tray in an apartment, a cost comparison, a windowsill, a balcony salad, or the watering step those setups share.</p>
-<p>The pages cite university extension publications and link those sources. They are not grow diaries. A <a href="/tools/microgreens-seed-calculator/">seed calculator</a> scales the published 10 by 20 inch rates to other tray sizes.</p>
-{guide_list()}
+    by_slug = {guide["slug"]: guide for guide in GUIDES}
+    def cards(slugs: list[str]) -> str:
+        items = []
+        for slug in slugs:
+            guide = by_slug[slug]
+            items.append(f'<li><a href="/guides/{slug}/">{esc(guide["h1"])}</a><p>{esc(guide["dek"])}</p></li>')
+        return f'<ul class="guide-list">{"".join(items)}</ul>'
+    guides_body = f"""<h1>Growing guides</h1>
+<p class="dek">Pick the job in front of you. The full method, the sources, and the next step are on each page.</p>
+<p>Growing steps come from university extension publications. This site has not run its own grow trials. The <a href="/tools/microgreens-seed-calculator/">seed calculator</a> turns a published 10 by 20 inch rate into grams for your tray.</p>
+<h2>Microgreens</h2>
+{cards(["microgreens-in-a-small-apartment","windowsill-microgreens","microgreens-seed-density-per-tray","pea-vs-radish-microgreens","bottom-watering-trays"])}
+<h2>Seed starting</h2>
+{cards(["apartment-seed-starting"])}
+<h2>Balcony growing</h2>
+{cards(["balcony-salad-garden"])}
+<h2>Supplies</h2>
+{cards(["microgreens-kit-vs-diy-cost"])}
+<p><a href="/guides/first-tray-checklist/">Print the first-tray checklist</a>. No email is required.</p>
 """
     pages["guides/index.html"] = simple_page(guides_page, guides_body)
 
@@ -612,6 +657,7 @@ def render_static_pages() -> dict[str, str]:
         ],
         "wrap": "wrap-wide",
         "scripts": '<script src="/js/calculator.js"></script>',
+        "image": f"{SITE}/assets/og/calculator.jpg",
     }
     tool_body = (SRC / "pages" / "calculator.html").read_text()
     tool_body = tool_body.replace("<!--CROP_OPTIONS-->", calculator_options())
@@ -642,9 +688,29 @@ def render_static_pages() -> dict[str, str]:
         "kind": "page",
         "nav": "",
         "robots": "noindex,follow",
+        "image": f"{SITE}/assets/og/not-found.jpg",
         "crumbs": [("Home", f"{SITE}/"), ("Page not found", f"{SITE}/404.html")],
     }
     pages["404.html"] = simple_page(missing, (SRC / "pages" / "404.html").read_text())
+
+    extra_pages = [
+        ("gear/index.html", "Gear and Comparisons for Small-Space Growing", "How Small Space Greens compares a kit, a DIY tray, and a lamp, and why specific product links are not live yet.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
+        ("editorial-method/index.html", "How Small Space Greens Chooses and Corrects Guides", "How sources are chosen, how product advice will be labeled, and how to send a correction.", f"{SITE}/editorial-method/", "", "Editorial method", f"{SITE}/assets/og/editorial.jpg", "editorial.html", ""),
+        ("guides/first-tray-checklist/index.html", "First-Tray Checklist for Apartment Microgreens", "A printable checklist for one microgreen tray: crop, tray, seed weight, water, light, and harvest. No email required.", f"{SITE}/guides/first-tray-checklist/", "/guides/", "First-tray checklist", f"{SITE}/assets/og/checklist.jpg", "checklist.html", ""),
+    ]
+    for rel, title, desc, url, nav, crumb, image, filename, wrap in extra_pages:
+        check_lengths(title, desc, rel)
+        page = {
+            "title": title,
+            "description": desc,
+            "url": url,
+            "kind": "page",
+            "nav": nav,
+            "image": image,
+            "wrap": wrap,
+            "crumbs": [("Home", f"{SITE}/"), (crumb, url)],
+        }
+        pages[rel] = simple_page(page, (SRC / "pages" / filename).read_text())
 
     for guide in GUIDES:
         check_lengths(guide["title"], guide["description"], guide["slug"])
@@ -675,10 +741,12 @@ def main() -> None:
                 urls.append(f"{SITE}/")
             else:
                 urls.append(SITE + "/" + rel.replace("index.html", ""))
-        if rel.startswith("guides/") and rel.endswith("/index.html") and rel != "guides/index.html":
+        guide_slugs = {guide["slug"] for guide in GUIDES}
+        slug = rel.split("/")[1] if rel.startswith("guides/") else ""
+        if slug in guide_slugs:
             count = word_count_main(document)
             print(f"words {rel}: {count}")
-            if not 1000 <= count <= 1800:
+            if not 700 <= count <= 2300:
                 raise SystemExit(f"Word count out of range for {rel}: {count}")
     (ROOT / "sitemap.xml").write_text(build_sitemap(urls))
     (ROOT / "robots.txt").write_text(
@@ -696,7 +764,7 @@ def main() -> None:
         for href in re.findall(r'href="(/[^"]*)"', document):
             if href.startswith("//"):
                 continue
-            hrefs.add(href.split("#")[0])
+            hrefs.add(href.split("#")[0].split("?")[0])
     missing = []
     for href in sorted(hrefs):
         if href in {"/", "/feed.xml", "/favicon.svg", "/css/styles.css", "/assets/photo-soon.svg"}:

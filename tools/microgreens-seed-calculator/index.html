@@ -12,11 +12,13 @@
 <meta property="og:url" content="https://smallspacegreens.com/tools/microgreens-seed-calculator/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Small Space Greens">
-<meta property="og:image" content="https://smallspacegreens.com/favicon.svg">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://smallspacegreens.com/assets/og/calculator.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Microgreens Seed Calculator for Tray Size and Cost">
 <meta name="twitter:description" content="Estimate microgreen seed in grams and ounces for your tray size and crop, then approximate cost from your own seed price. It works offline. Free.">
-<meta name="twitter:image" content="https://smallspacegreens.com/favicon.svg">
+<meta name="twitter:image" content="https://smallspacegreens.com/assets/og/calculator.jpg">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Small Space Greens" href="/feed.xml">
 <link rel="stylesheet" href="/css/styles.css">
@@ -27,7 +29,7 @@
 <a class="skip" href="#content">Skip to content</a>
 <div class="header-bar">
 <a class="brand" href="/"><img src="/favicon.svg" width="28" height="28" alt="">Small Space Greens</a>
-<nav class="nav" aria-label="Primary"><ul><li><a href="/guides/">Guides</a></li><li><a href="/tools/microgreens-seed-calculator/" aria-current="page">Calculator</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+<nav class="nav" aria-label="Primary"><ul><li><a href="/guides/microgreens-in-a-small-apartment/">Start here</a></li><li><a href="/guides/">Growing guides</a></li><li><a href="/gear/">Gear and comparisons</a></li><li><a href="/tools/microgreens-seed-calculator/" aria-current="page">Tools</a></li><li><a href="/about/">About</a></li></ul></nav>
 </div>
 </header>
 <main id="content" class="wrap wrap-wide">
@@ -36,7 +38,9 @@
 <p class="byline">By <a href="/about/">Ryan Moalemi</a>. Updated November 9, 2026.</p>
 <p>The math uses published starting rates for a nominal 10 by 20 inch (1020) tray, then scales them by area. It does not adjust for germination, and it is not a promise of a perfect canopy. Read the assumptions under the tool before you treat the grams as exact.</p>
 
+<p id="calc-summary" class="calc-summary" tabindex="-1" aria-live="polite"></p>
 <form id="calc-form">
+<div class="tool-layout">
 <div class="tool">
 <div class="grid">
 <fieldset>
@@ -86,8 +90,29 @@
 <label for="trays">Number of trays</label>
 <input id="trays" name="trays" type="number" min="1" step="1" value="1" required>
 </div>
+<div id="rate-box" hidden>
+<p>Mustard, beet, and amaranth are not in the Utah State gram table. Enter a rate, or use the Maryland sample band. That band is a general broadcast example, not a crop trial.</p>
+<input type="hidden" name="useExample" value="0">
 <div class="field">
-<label for="price">Seed price, optional</label>
+<label for="userLow">Your grams per 10 by 20 inch tray</label>
+<input id="userLow" name="userLow" type="number" min="0.1" max="500" step="any" inputmode="decimal">
+</div>
+<div class="field">
+<label for="userHigh">High end, if you want a range (optional)</label>
+<input id="userHigh" name="userHigh" type="number" min="0.1" max="500" step="any" inputmode="decimal">
+</div>
+<button class="button secondary" type="button" id="use-example">Use the 10 to 15 g Maryland example</button>
+<button class="button secondary" type="button" id="clear-example">Clear that example</button>
+</div>
+<fieldset>
+<legend>Seed price, optional</legend>
+<div class="choices">
+<label><input type="radio" name="priceMode" value="unit" checked> Price per pound, ounce, or kilogram</label>
+<label><input type="radio" name="priceMode" value="package"> Price and weight of one package</label>
+</div>
+</fieldset>
+<div class="field">
+<label for="price">Price per unit</label>
 <input id="price" name="price" type="number" min="0" step="0.01" inputmode="decimal">
 </div>
 <div class="field">
@@ -98,9 +123,23 @@
 <option value="kg">Kilogram</option>
 </select>
 </div>
-<button class="calc" type="submit">Calculate seed</button>
+<div class="field">
+<label for="packagePrice">Package price</label>
+<input id="packagePrice" name="packagePrice" type="number" min="0" step="0.01" inputmode="decimal">
 </div>
-<div id="calc-results" class="results" tabindex="-1" aria-live="polite"></div>
+<div class="field">
+<label for="packageGrams">Package weight in grams</label>
+<input id="packageGrams" name="packageGrams" type="number" min="0.1" step="any" inputmode="decimal">
+</div>
+<button class="calc" type="submit">Calculate seed</button>
+<div class="cta-row">
+<button class="button secondary" type="button" id="copy-result">Copy the result summary</button>
+<button class="button secondary" type="button" id="reset-calc">Reset</button>
+<button class="button secondary" type="button" onclick="window.print()">Print this result</button>
+</div>
+</div>
+<div id="calc-results" class="results"></div>
+</div>
 </div>
 </form>
 <noscript><p>The calculator needs JavaScript. It does not need a network connection. The rate table further down still lists every published figure the tool uses.</p></noscript>
@@ -110,7 +149,7 @@
 <h2>Assumptions</h2>
 <p>A 1020 tray is taken as 10 inches by 20 inches, which is 200 square inches. A 10 by 10 inch tray is half of that area, so it gets half the seed. A 5 by 5 inch tray is 25 square inches, one eighth of the reference tray. Custom sizes use the length and width you type. Centimeters are converted with 1 inch = 2.54 centimeters, then the area is calculated in square inches.</p>
 <p>The scale is linear: seed weight changes in proportion to area. That is a planning assumption, not something this site has measured. The inside floor of a purchased tray is often a little smaller than the nominal outside size. If you want the inner floor, choose custom and measure the inside length and width.</p>
-<p>Crop rates with a single gram number come from Utah State University Extension's table of grams per 1020 tray. Mustard, beet, and amaranth are not in that table. For those three, the tool uses the University of Maryland Extension sample broadcast of about 10 to 15 grams per 10 by 20 inch flat, and it shows a range. Maryland presents that band as a sample technique for a flat, not as a weighed rate for each of those crops. Do not read it as a crop trial.</p>
+<p>Crop rates with a single gram number come from Utah State University Extension's table of grams per 1020 tray. Mustard, beet, and amaranth are not in that table. The calculator will not invent a number for them. You can type your own grams per 10 by 20 inch tray, or press the button that fills Maryland's sample broadcast of about 10 to 15 grams. That band is a general example, and the result says so.</p>
 <p>Penn State Extension reports success with a lighter sowing, about 10 to 15 grams on a standard 12 by 20 inch 10-row seeding tray, which is 240 square inches, not 200. The calculator does not use that lighter band, because it is not split by crop. Both approaches are real. If your first tray is too crowded or too thin, change the next one. Penn State also offers its own <a href="https://extension.psu.edu/microgreens-seed-density-calculator">microgreens seed density calculator</a>, which can take germination into account. This page does not.</p>
 <p>Ounces are grams divided by 28.349523125. Cost uses 453.59237 grams per pound, 28.349523125 grams per ounce, or 1000 grams per kilogram. Cost is seed only. It ignores trays, mix, water, and electricity. Leave the price blank if you only want weight.</p>
 <p>Soak times and harvest windows in the result are copied from the same extension notes, so you can see them next to the grams. They are not calculated. More on how to read the charts is in <a href="/guides/microgreens-seed-density-per-tray/">seed density per tray</a>.</p>
@@ -130,6 +169,7 @@
 <footer class="site-footer">
 <div class="footer-bar">
 <nav class="footer-nav" aria-label="Footer">
+<a href="/editorial-method/">Editorial method</a>
 <a href="/privacy/">Privacy</a>
 <a href="/affiliate-disclosure/">Affiliate Disclosure</a>
 <a href="/contact/">Contact</a>

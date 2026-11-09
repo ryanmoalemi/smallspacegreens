@@ -92,6 +92,7 @@
   {
     "id": "mustard",
     "name": "Mustard",
+    "needsRate": true,
     "low": 10,
     "high": 15,
     "kind": "Maryland sample broadcast, not crop-specific",
@@ -103,6 +104,7 @@
   {
     "id": "beet",
     "name": "Beet",
+    "needsRate": true,
     "low": 10,
     "high": 15,
     "kind": "Maryland sample broadcast, not crop-specific",
@@ -114,6 +116,7 @@
   {
     "id": "amaranth",
     "name": "Amaranth",
+    "needsRate": true,
     "low": 10,
     "high": 15,
     "kind": "Maryland sample broadcast, not crop-specific",
