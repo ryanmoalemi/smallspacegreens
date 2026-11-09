@@ -17,8 +17,8 @@ function ssgCompute(input) {
   var maxSide = unit === "cm" ? 120 : 48;
 
   if (tray === "custom") {
-    if (!ssgFinite(length) || !ssgFinite(width) || length <= 0 || width <= 0) {
-      return { ok: false, error: "Enter a length and width greater than zero." };
+    if (!ssgFinite(length) || !ssgFinite(width) || length < 0.1 || width < 0.1) {
+      return { ok: false, error: "Enter a length and width of at least 0.1 in the selected units." };
     }
     if (length > maxSide || width > maxSide) {
       return { ok: false, error: "That side is outside the supported range (up to 48 inches or 120 cm)." };
@@ -75,8 +75,8 @@ function ssgCompute(input) {
       cost = { kind: "blank" };
     } else if (!ssgFinite(packPrice) || packPrice < 0 || packPrice > 10000) {
       return { ok: false, error: "Enter a package price of zero or a positive number up to 10000." };
-    } else if (!ssgFinite(packGrams) || packGrams <= 0 || packGrams > 50000) {
-      return { ok: false, error: "Enter a package weight in grams greater than zero (up to 50000 g)." };
+    } else if (!ssgFinite(packGrams) || packGrams < 0.1 || packGrams > 50000) {
+      return { ok: false, error: "Enter a package weight from 0.1 to 50000 grams." };
     } else {
       cost = ssgPackageCost(perLow, perHigh, trays, packPrice, packGrams);
     }
@@ -127,8 +127,8 @@ function ssgRate(crop, input) {
     }
     var low = input.useExample ? 10 : Number(input.userLow);
     var high = input.useExample ? 15 : (input.userHigh === "" || input.userHigh == null ? low : Number(input.userHigh));
-    if (!ssgFinite(low) || !ssgFinite(high) || low <= 0 || high <= 0 || low > 500 || high > 500) {
-      return { ok: false, error: "Enter a sowing rate between 0 and 500 grams per 10 by 20 inch tray." };
+    if (!ssgFinite(low) || !ssgFinite(high) || low < 0.1 || high < 0.1 || low > 500 || high > 500) {
+      return { ok: false, error: "Enter a sowing rate from 0.1 to 500 grams per 10 by 20 inch tray." };
     }
     if (high < low) {
       var swap = low;
@@ -168,10 +168,10 @@ function ssgUnitCost(grams, price, unit) {
 function ssgPackageCost(perLow, perHigh, trays, price, packGrams) {
   function scenario(per) {
     var needed = per * trays;
-    var complete = Math.floor(packGrams / per);
+    var complete = Math.floor(packGrams / per + 1e-12);
     var packages = Math.ceil(needed / packGrams - 1e-12);
     if (!ssgFinite(packages) || packages < 1) packages = 1;
-    var leftover = packages * packGrams - needed;
+    var leftover = Math.max(0, packages * packGrams - needed);
     return {
       needed: needed,
       completeTrays: complete,
@@ -186,7 +186,8 @@ function ssgPackageCost(perLow, perHigh, trays, price, packGrams) {
 
 function ssgFormatArea(n) {
   if (!ssgFinite(n)) return "";
-  var digits = n >= 100 ? 0 : 1;
+  if (n > 0 && n < 0.01) return "< 0.01";
+  var digits = n >= 100 ? 0 : n >= 1 ? 2 : 3;
   return n.toLocaleString("en-US", { maximumFractionDigits: digits, minimumFractionDigits: 0 });
 }
 

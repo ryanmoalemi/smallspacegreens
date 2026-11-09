@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import re
 from html.parser import HTMLParser
 from pathlib import Path
@@ -21,10 +22,18 @@ SITE_ID = f"{SITE}/#website"
 NAV = [
     ("Start here", f"{SITE}/guides/microgreens-in-a-small-apartment/", "/guides/microgreens-in-a-small-apartment/"),
     ("Growing guides", f"{SITE}/guides/", "/guides/"),
-    ("Gear and comparisons", f"{SITE}/gear/", "/gear/"),
-    ("Tools", f"{SITE}/tools/microgreens-seed-calculator/", "/tools/microgreens-seed-calculator/"),
+    ("Find your setup", f"{SITE}/gear/", "/gear/"),
     ("About", f"{SITE}/about/", "/about/"),
+    ("Seed calculator ↗", f"{SITE}/tools/microgreens-seed-calculator/", "/tools/microgreens-seed-calculator/"),
 ]
+
+BRAND_MARK = '<svg viewBox="0 0 40 48" fill="none" aria-hidden="true"><path d="M20 43V15" stroke="currentColor" stroke-width="1.8"/><path d="M20 29C7 30 3 21 4 13c11 0 16 7 16 16Z" fill="currentColor"/><path d="M20 20C31 21 36 13 35 5c-11 0-15 7-15 15Z" fill="currentColor"/><path d="M7 43h26" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
+BRAND = BRAND_MARK + '<span class="brand-wordmark">small space<small>GREENS</small></span>'
+ARROW_UP = '<svg class="arrow-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 16 16 4M5 4h11v11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+ARROW_RIGHT = '<svg class="arrow-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+
+def asset_version(path: str) -> str:
+    return hashlib.sha256((ROOT / path).read_bytes()).hexdigest()[:12]
 
 GUIDES = [
     {
@@ -264,6 +273,7 @@ gtag('config', 'G-8YDK0NYXM5');
 </script>
 """
     scripts = page.get("scripts", "")
+    scripts += f'<script src="/js/site.js?v={asset_version("js/site.js")}" defer></script>'
     if page.get("signup"):
         scripts += '<script src="/js/signup.js"></script>'
     scripts += """<script>
@@ -307,17 +317,19 @@ if (toc && window.matchMedia("(max-width: 899px)").matches) toc.removeAttribute(
 <meta name="twitter:description" content="{esc(description)}">
 <meta name="twitter:image" content="{esc(image)}">
 <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="/favicon.svg?v={asset_version('favicon.svg')}" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Small Space Greens" href="/feed.xml">
-<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/styles.css?v={asset_version('css/styles.css')}">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
-<body>
+<body class="page-{page['kind']}">
 <header class="site-header">
 <a class="skip" href="#content">Skip to content</a>
 <div class="header-bar">
-<a class="brand" href="/"><img src="/favicon.svg" width="28" height="28" alt="">Small Space Greens</a>
-<nav class="nav" aria-label="Primary"><ul>{''.join(nav_html)}</ul></nav>
+<a class="brand" href="/" aria-label="Small Space Greens home">{BRAND}</a>
+<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden>Menu <span aria-hidden="true">+</span></button>
+<nav id="primary-nav" class="nav" aria-label="Primary"><ul>{''.join(nav_html)}</ul></nav>
 </div>
 </header>
 <main id="content" class="wrap {page.get('wrap', '')}">
@@ -325,19 +337,22 @@ if (toc && window.matchMedia("(max-width: 899px)").matches) toc.removeAttribute(
 </main>
 <footer class="site-footer">
 <div class="footer-bar">
+<div class="footer-top"><div><a class="brand" href="/" aria-label="Small Space Greens home">{BRAND}</a><p class="footer-tagline">A little space. Something good to grow.</p></div>
 <nav class="footer-nav" aria-label="Footer">
+<a href="/guides/">Growing guides</a>
+<a href="/gear/">Find your setup</a>
 <a href="/editorial-method/">Editorial method</a>
 <a href="/privacy/">Privacy</a>
-<a href="/affiliate-disclosure/">Affiliate Disclosure</a>
+<a href="/affiliate-disclosure/">Affiliate disclosure</a>
 <a href="/contact/">Contact</a>
 </nav>
-<p class="copyright">© 2026 Small Space Greens</p>
+</div><div class="footer-bottom"><p class="copyright">© 2026 Small Space Greens</p><p>Independent guidance for smaller growing spaces. <a href="/about/">Meet the editor ↗</a></p></div>
 </div>
 </footer>
 {scripts}
 </body>
 </html>
-"""
+""".replace('↗', ARROW_UP).replace('→', ARROW_RIGHT)
 
 
 def signup_form(compact: bool) -> str:
@@ -440,7 +455,7 @@ def prepare_guide_body(html: str) -> str:
     if idx == -1 or not toc:
         return html
     return (
-        html[:idx]
+        '<div class="guide-intro">' + html[:idx] + '</div>'
         + '<div class="guide-with-toc">'
         + toc
         + '<div class="guide-main">'
@@ -494,7 +509,7 @@ VIDEOS = {
 def video_embed(video_id: str) -> str:
     title, channel = VIDEOS[video_id]
     return (
-        '<figure class="video-embed">'
+        f'<details class="video-panel"><summary>Watch: {esc(title)} · {esc(channel)}</summary><figure class="video-embed">'
         f'<button type="button" class="video-facade" data-id="{video_id}" '
         f'aria-label="Play video: {esc(title)}, {esc(channel)}">'
         f'<img src="/assets/video/{video_id}.jpg" alt="" width="480" height="360" loading="lazy">'
@@ -502,7 +517,7 @@ def video_embed(video_id: str) -> str:
         f'<figcaption class="credit">Video: {esc(channel)} on YouTube. {esc(title)}. '
         "Third-party video. Not filmed for Small Space Greens. "
         f'<a href="https://www.youtube.com/watch?v={video_id}">Opens on YouTube</a>.</figcaption>'
-        "</figure>"
+        "</figure></details>"
     )
 
 
@@ -562,9 +577,9 @@ def write_density_chart() -> None:
 
 def disclosure() -> str:
     return (
-        '<p class="disclosure">This page may later include affiliate links. '
-        'If you buy through one, we may earn a commission at no extra cost to you. '
-        '<a href="/affiliate-disclosure/">Affiliate disclosure</a>.</p>'
+        '<p class="disclosure">Independent, research-based guidance. '
+        '<a href="/editorial-method/">Our editorial method</a> · '
+        '<a href="/affiliate-disclosure/">How product links work</a>.</p>'
     )
 
 
@@ -610,10 +625,11 @@ def article_page(guide: dict, body: str) -> str:
     )
     main = (
         crumbs_html(crumbs)
-        + disclosure()
+        + '<header class="article-header"><p class="eyebrow">The small-space growing guide</p>'
         + f"<h1>{esc(guide['h1'])}</h1>"
         + f"<p class=\"dek\">{esc(guide['dek'])}</p>"
         + f"<p class=\"byline\">By <a href=\"/about/\">Ryan Moalemi</a>. Updated {DATE_LABEL}.</p>"
+        + '</header>'
         + prepare_guide_body(body)
         + related_html(guide["slug"])
         + signup_form(True)
@@ -703,11 +719,15 @@ def check_copy(path: Path, text: str) -> None:
         if bad in text:
             raise SystemExit(f"{path} contains a dash character that is not a hyphen")
     lowered = text.lower()
-    for phrase in ["we tested", "in our tests", "we grew", "gardener's supply", "gardeners supply", "amazon.com", "johnny's", "johnnys selected", "true leaf market"]:
+    for phrase in ["we tested", "in our tests", "we grew", "gardener's supply", "gardeners supply", "amazon.com", "johnny's", "johnnys selected"]:
         if phrase in lowered:
             raise SystemExit(f"{path} contains banned phrase: {phrase}")
+    # Product names are allowed only after their evidence is recorded. A researched
+    # comparison is distinct from a firsthand trial or an affiliate relationship.
     if "True Leaf" in text:
-        raise SystemExit(f"{path} names a seed brand")
+        registry = json.loads((SRC / "products.json").read_text())
+        if not registry.get("products"):
+            raise SystemExit(f"{path} names a product without a researched registry")
     if re.search(r"amazon", lowered):
         raise SystemExit(f"{path} mentions Amazon")
 
@@ -882,24 +902,28 @@ def render_static_pages() -> dict[str, str]:
         "image": f"{SITE}/assets/og/guides.jpg",
     }
     by_slug = {guide["slug"]: guide for guide in GUIDES}
+    visuals = {
+        "microgreens-in-a-small-apartment": ("/assets/photos/countertop-greens-editorial.webp", "First tray · AI illustration"),
+        "windowsill-microgreens": ("/assets/diagrams/window-light.svg", "Light and space"),
+        "microgreens-seed-density-per-tray": ("/assets/diagrams/seed-density.svg", "Seed planning"),
+        "pea-vs-radish-microgreens": ("/assets/diagrams/harvest-windows.svg", "Choose a crop"),
+        "bottom-watering-trays": ("/assets/diagrams/bottom-watering.svg", "Watering"),
+        "apartment-seed-starting": ("/assets/diagrams/window-light.svg", "Seed starting"),
+        "balcony-salad-garden": ("/assets/photos/balcony-greens-editorial.webp", "Balcony growing · AI illustration"),
+        "microgreens-kit-vs-diy-cost": ("/assets/diagrams/kit-vs-diy.svg", "Supplies and cost"),
+    }
     def cards(slugs: list[str]) -> str:
         items = []
         for slug in slugs:
             guide = by_slug[slug]
-            items.append(f'<li><a href="/guides/{slug}/">{esc(guide["h1"])}</a><p>{esc(guide["dek"])}</p></li>')
-        return f'<ul class="guide-list">{"".join(items)}</ul>'
-    guides_body = f"""<h1>Growing guides</h1>
-<p class="dek">Pick the job in front of you. The full method, the sources, and the next step are on each page.</p>
-<p>Growing steps come from university extension publications. This site has not run its own grow trials. The <a href="/tools/microgreens-seed-calculator/">seed calculator</a> turns a published 10 by 20 inch rate into grams for your tray.</p>
-<h2>Microgreens</h2>
-{cards(["microgreens-in-a-small-apartment","windowsill-microgreens","microgreens-seed-density-per-tray","pea-vs-radish-microgreens","bottom-watering-trays"])}
-<h2>Seed starting</h2>
-{cards(["apartment-seed-starting"])}
-<h2>Balcony growing</h2>
-{cards(["balcony-salad-garden"])}
-<h2>Supplies</h2>
-{cards(["microgreens-kit-vs-diy-cost"])}
-<p><a href="/guides/first-tray-checklist/">Print the first-tray checklist</a>. No email is required.</p>
+            img, category = visuals[slug]
+            items.append(f'<a class="library-card" href="/guides/{slug}/"><img src="{img}" alt="" width="120" height="120" loading="lazy"><div><p class="eyebrow">{esc(category)}</p><h2>{esc(guide["h1"])}</h2><p>{esc(guide["dek"])}</p></div></a>')
+        return f'<div class="guide-library-grid">{"".join(items)}</div>'
+    guides_body = f"""<div class="guide-library-intro"><p class="eyebrow">The growing library</p><h1>Small steps.<br>Something good to grow.</h1>
+<p class="dek">Find the guide for the job in front of you, from your first tray to a little balcony harvest.</p>
+<div class="cta-row"><a class="button" href="/guides/microgreens-in-a-small-apartment/">Start with your first tray ↗</a><a class="text-link" href="/guides/first-tray-checklist/">Get the checklist ↗</a></div></div>
+{cards(["microgreens-in-a-small-apartment","windowsill-microgreens","microgreens-seed-density-per-tray","pea-vs-radish-microgreens","bottom-watering-trays","apartment-seed-starting","balcony-salad-garden","microgreens-kit-vs-diy-cost"])}
+<div class="verdict" style="margin-top:40px"><p><strong>Advice you can check.</strong> Growing steps link to university extension and public-agency sources. Our <a href="/editorial-method/">editorial method</a> explains how research, illustrations, and firsthand evidence are kept distinct.</p></div>
 """
     pages["guides/index.html"] = simple_page(guides_page, guides_body)
 
@@ -917,13 +941,12 @@ def render_static_pages() -> dict[str, str]:
             ("Microgreens seed calculator", f"{SITE}/tools/microgreens-seed-calculator/"),
         ],
         "wrap": "wrap-wide",
-        "scripts": '<script src="/js/calculator.js"></script>',
+        "scripts": f'<script src="/js/calculator.js?v={asset_version("js/calculator.js")}"></script>',
         "image": f"{SITE}/assets/og/calculator.jpg",
     }
     tool_body = (SRC / "pages" / "calculator.html").read_text()
     tool_body = tool_body.replace("<!--CROP_OPTIONS-->", calculator_options())
     tool_body = tool_body.replace("<!--RATES_TABLE-->", rates_table())
-    tool_body = disclosure() + tool_body
     tool_graph = [
         {
             "@type": "WebApplication",
@@ -955,7 +978,7 @@ def render_static_pages() -> dict[str, str]:
     pages["404.html"] = simple_page(missing, (SRC / "pages" / "404.html").read_text())
 
     extra_pages = [
-        ("gear/index.html", "Gear and Comparisons for Small-Space Growing", "How Small Space Greens compares a kit, a DIY tray, and a lamp, and why specific product links are not live yet.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
+        ("gear/index.html", "Microgreens Starter Kits and Trays Compared | Small Space Greens", "Compare three compact microgreen options by manufacturer-stated dimensions, included supplies, refill needs, and limitations before choosing your setup.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
         ("editorial-method/index.html", "How Small Space Greens Chooses and Corrects Guides", "How sources are chosen, how product advice will be labeled, and how to send a correction.", f"{SITE}/editorial-method/", "", "Editorial method", f"{SITE}/assets/og/editorial.jpg", "editorial.html", ""),
         ("guides/first-tray-checklist/index.html", "First-Tray Checklist for Apartment Microgreens", "Print the first-tray checklist, or get the same list by email from Ryan after you confirm your address.", f"{SITE}/guides/first-tray-checklist/", "/guides/", "First-tray checklist", f"{SITE}/assets/og/checklist.jpg", "checklist.html", ""),
     ]
@@ -1042,6 +1065,7 @@ def main() -> None:
     signup_js = ROOT / "js" / "signup.js"
     signup_js.parent.mkdir(parents=True, exist_ok=True)
     signup_js.write_text((SRC / "signup.js").read_text())
+    (ROOT / "js" / "site.js").write_text((SRC / "site.js").read_text())
     assets = ROOT / "assets"
     assets.mkdir(parents=True, exist_ok=True)
     (assets / "photo-soon.svg").write_text((SRC / "photo-soon.svg").read_text())
