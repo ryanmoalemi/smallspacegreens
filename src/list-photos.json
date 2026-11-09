@@ -1,0 +1,182 @@
+{
+  "tray": {
+    "thumbnail": "empty-seed-tray-simon-speed.jpg",
+    "alt": "An empty shallow seed tray with drainage holes.",
+    "credit_id": "empty-seed-tray-simon-speed",
+    "author": "Simon Speed"
+  },
+  "mix": {
+    "thumbnail": "potting-mix-neslihan-gunaydin.jpg",
+    "alt": "Loose potting mix with perlite beside a green garden trowel.",
+    "credit_id": "potting-mix-neslihan-gunaydin",
+    "author": "Neslihan Gunaydin"
+  },
+  "seeds": {
+    "thumbnail": "radish-seeds-hugowolf.jpg",
+    "alt": "Loose brown radish seeds on a white background.",
+    "credit_id": "radish-seeds-hugowolf",
+    "author": "Hugowolf"
+  },
+  "scale": {
+    "thumbnail": "digital-kitchen-scale-raimond-spekking.jpg",
+    "alt": "A digital kitchen scale with its display set to zero.",
+    "credit_id": "digital-kitchen-scale-raimond-spekking",
+    "author": "Raimond Spekking"
+  },
+  "scissors": {
+    "thumbnail": "kitchen-scissors-evan-amos.jpg",
+    "alt": "Clean kitchen scissors with black handles on a white background.",
+    "credit_id": "kitchen-scissors-evan-amos",
+    "author": "Evan-Amos"
+  },
+  "sowing": {
+    "thumbnail": "scattering-seeds-thisisengineering.jpg",
+    "alt": "A hand scatters small seeds onto a fiber growing mat in a shallow tray.",
+    "credit_id": "scattering-seeds-thisisengineering",
+    "author": "ThisIsEngineering"
+  },
+  "harvest": {
+    "thumbnail": "harvesting-microgreens-thisisengineering.jpg",
+    "alt": "Hands cut microgreens in a growing tray with black scissors.",
+    "credit_id": "harvesting-microgreens-thisisengineering",
+    "author": "ThisIsEngineering"
+  },
+  "water": {
+    "thumbnail": "misting-seedlings-ron-lach.jpg",
+    "alt": "A hand holds a glass plant mister beside seedlings on an indoor shelf.",
+    "credit_id": "misting-seedlings-ron-lach",
+    "author": "Ron Lach"
+  },
+  "light": {
+    "thumbnail": "grow-lights-erik-mclean.jpg",
+    "alt": "LED grow-light bars illuminate ornamental potted plants on a windowsill.",
+    "credit_id": "grow-lights-erik-mclean",
+    "author": "Erik Mclean"
+  },
+  "seed-starting": {
+    "thumbnail": "sowing-seeds-greta-hoffman.jpg",
+    "alt": "Hands work with potting mix in a divided seed-starting tray.",
+    "credit_id": "sowing-seeds-greta-hoffman",
+    "author": "Greta Hoffman"
+  },
+  "sunflower": {
+    "thumbnail": "sunflower-small-tray.jpg",
+    "alt": "Sunflower microgreens in a small clear growing tray.",
+    "credit_id": "sunflower-small-tray",
+    "author": "Pannet"
+  },
+  "trays": {
+    "thumbnail": "trays-broccoli-radish.jpg",
+    "alt": "Broccoli and radish microgreens growing in two black trays.",
+    "credit_id": "trays-broccoli-radish",
+    "author": "Teogenesis"
+  },
+  "fenugreek": {
+    "thumbnail": "fenugreek-tray-anthony-ievlev.jpg",
+    "alt": "Dewy microgreens with seed husks growing densely in a black tray.",
+    "credit_id": "fenugreek-tray-anthony-ievlev",
+    "author": "Anthony Ievlev"
+  },
+  "lettuce": {
+    "thumbnail": "lettuce-in-pot.jpg",
+    "alt": "Leaf lettuce growing in a white container.",
+    "credit_id": "lettuce-in-pot",
+    "author": "Netha Hussain"
+  },
+  "peas": {
+    "thumbnail": "pea-shoots-counter.jpg",
+    "alt": "Pea shoots growing in a container on a kitchen counter.",
+    "credit_id": "pea-shoots-counter",
+    "author": "Daderot"
+  },
+  "basil-window": {
+    "thumbnail": "basil-window-personal-creations.jpg",
+    "alt": "Mature basil growing in a colorful mosaic pot beside a window.",
+    "credit_id": "basil-window-personal-creations",
+    "author": "Personal Creations"
+  },
+  "balcony": {
+    "thumbnail": "balcony-garden-ruth-hartnup.jpg",
+    "alt": "Leafy greens, pea vines and herbs growing in balcony containers.",
+    "credit_id": "balcony-garden-ruth-hartnup",
+    "author": "Ruth Hartnup"
+  },
+  "basil": {
+    "thumbnail": "basil-by-window.jpg",
+    "alt": "Young basil seedlings growing in a pot beside a window.",
+    "credit_id": "basil-by-window",
+    "author": "Jon Eben Field"
+  },
+  "cover": {
+    "thumbnail": "empty-seed-tray-simon-speed.jpg",
+    "alt": "An empty shallow seed tray with drainage holes.",
+    "credit_id": "empty-seed-tray-simon-speed",
+    "author": "Simon Speed"
+  },
+  "radish": {
+    "thumbnail": "radish-seeds-hugowolf.jpg",
+    "alt": "Loose brown radish seeds on a white background.",
+    "credit_id": "radish-seeds-hugowolf",
+    "author": "Hugowolf"
+  },
+  "broccoli": {
+    "thumbnail": "trays-broccoli-radish.jpg",
+    "alt": "Broccoli and radish microgreens growing in two black trays.",
+    "credit_id": "trays-broccoli-radish",
+    "author": "Teogenesis"
+  },
+  "kale": {
+    "thumbnail": "crop-kale.jpg",
+    "alt": "Mature curly kale leaves growing in a garden.",
+    "credit_id": "crop-kale",
+    "author": "Rasbak"
+  },
+  "arugula": {
+    "thumbnail": "crop-arugula.jpg",
+    "alt": "A mature arugula plant growing outdoors.",
+    "credit_id": "crop-arugula",
+    "author": "Eric Bear Albrecht"
+  },
+  "cilantro": {
+    "thumbnail": "crop-cilantro.jpg",
+    "alt": "A bunch of freshly harvested cilantro leaves and stems.",
+    "credit_id": "crop-cilantro",
+    "author": "Miansari66"
+  },
+  "rutabaga": {
+    "thumbnail": "crop-rutabaga.jpg",
+    "alt": "Harvested rutabaga roots with their green leaves attached.",
+    "credit_id": "crop-rutabaga",
+    "author": "Seedambassadors"
+  },
+  "mustard": {
+    "thumbnail": "crop-mustard.jpg",
+    "alt": "Broad green leaves of a mature mustard plant.",
+    "credit_id": "crop-mustard",
+    "author": "মৌচুমী"
+  },
+  "beet": {
+    "thumbnail": "crop-beet.jpg",
+    "alt": "Harvested dark red beets with purple stems and leaves.",
+    "credit_id": "crop-beet",
+    "author": "BriannaWalther"
+  },
+  "amaranth": {
+    "thumbnail": "crop-amaranth.jpg",
+    "alt": "Green leaves and red flower clusters on a mature amaranth plant.",
+    "credit_id": "crop-amaranth",
+    "author": "Kurt Stüber"
+  },
+  "tomato": {
+    "thumbnail": "crop-tomato.jpg",
+    "alt": "Ripe red tomatoes with green stems on a light background.",
+    "credit_id": "crop-tomato",
+    "author": "Softeis"
+  },
+  "cucumber": {
+    "thumbnail": "crop-cucumber.jpg",
+    "alt": "Green cucumbers growing among leaves and yellow flowers.",
+    "credit_id": "crop-cucumber",
+    "author": "Stephen Ausmus, USDA ARS"
+  }
+}

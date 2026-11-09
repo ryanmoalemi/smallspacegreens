@@ -81,11 +81,260 @@ The original five local JPGs match the corresponding 960-pixel-wide Wikimedia Co
 
 Use a single short caption below each photograph: `Credit: <a href="/photo-credits/#ASSET-STEM">Photographer</a>`. The anchor ID is the exact local image filename without `.jpg`. Keep this credit link outside guide-card links and readable on phones. Do not add source, license, cropping or reference-photo text to the image caption.
 
-Maintain the complete attribution at `/photo-credits/#ASSET-STEM`: original title, creator and profile, original source, license, matching thumbnail, and crop or resize notes. Preserve the original license for thumbnails and social crops; cropped Teogenesis and Netha Hussain photographs remain under CC BY-SA 4.0. The Photo credits page includes all eight assets, including the lettuce photograph retained in social imagery. Do not present these photographs as evidence of a trial conducted by this site.
+Maintain the complete attribution at `/photo-credits/#ASSET-STEM`: original title, creator and profile, original source, license, matching thumbnail, and crop or resize notes. Preserve the original license for thumbnails and social crops; cropped Teogenesis and Netha Hussain photographs remain under CC BY-SA 4.0. The Photo credits page includes every published photograph, including compact list thumbnails and the lettuce photograph retained in social imagery. Do not present these photographs as evidence of a trial conducted by this site.
 
-The eight oversized step illustrations and homepage space-selector drawings have been removed from the rendered site. Growing steps use a compact numbered list. Guide-directory thumbnails use credited photographs. Decorative window, kit-versus-DIY and balcony-layout drawings are no longer shown in their article introductions. Data charts and the two-tray watering diagram remain where they explain measurements or method; they are not photographs or evidence of a site trial.
+The eight oversized step illustrations and homepage space-selector drawings have been removed from the rendered site. Growing steps now use compact photographic rows, with real equipment or action thumbnails and short credits. Supply lists, crop choices and other editorial lists use relevant real photos through the shared `src/list-photos.json` registry. Guide-directory thumbnails use credited photographs. Decorative window, kit-versus-DIY and balcony-layout drawings are no longer shown in their article introductions. Data charts and the two-tray watering diagram remain where they explain measurements or method; they are not photographs or evidence of a site trial.
+
+## Photo-backed list assets
+
+The ten photographs below were added for equipment, sowing, watering, lighting and harvest rows. Each full asset has a longest edge of at most 960 pixels. All list thumbnails are 320 × 320 optimized progressive JPEGs in `assets/photos/thumbs/`. The eight existing photographs also have dedicated thumbnails; their full-size files are unchanged. Existing sunflower and equipment images are framed when needed to retain the complete subject. Other thumbnails use relevant square crops. No AI generation, color replacement or invented objects were used.
+
+The registry maps semantic content keys to a thumbnail filename, a literal image description, a credit anchor and a photographer name. `basil-window` means mature basil in the mosaic pot; `basil` means young seedlings. `radish` uses verified radish seeds. `broccoli` uses the photograph of both broccoli and radish trays, with alt text identifying both crops rather than guessing which tray is which. `cover` reuses the empty-tray equipment photograph.
+
+A supply or equipment thumbnail does not claim to demonstrate every instruction alongside it. The water image shows a glass mister, not bottom watering. The cover image shows an empty tray, not a transparent humidity dome. The sowing image shows a fiber mat; vegetable seed-starting instructions use the separate soil-filled cell-tray photo. The light image shows LED bars over ornamental potted plants and is not a claim about a tested product.
+
+### A shallow growing tray
+
+- Registry key: `tray`.
+- Local photograph: `assets/photos/empty-seed-tray-simon-speed.jpg` (960 × 720).
+- Thumbnail: `assets/photos/thumbs/empty-seed-tray-simon-speed.jpg` (320 × 320).
+- Credit: [Simon Speed](https://commons.wikimedia.org/wiki/User:Simonxag).
+- Original source: [EmptySeedTrayDraining.JPG](https://commons.wikimedia.org/wiki/File:EmptySeedTrayDraining.JPG).
+- License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
+- Processing: Original 4000 × 3000 photograph resized to 960 × 720 and JPEG optimized. The 320 × 320 list thumbnail uses source crop (230, 600, 3160, 2540) contained in a square frame.
+- Alt text: An empty shallow seed tray with drainage holes.
+
+### Potting mix and trowel
+
+- Registry key: `mix`.
+- Local photograph: `assets/photos/potting-mix-neslihan-gunaydin.jpg` (960 × 640).
+- Thumbnail: `assets/photos/thumbs/potting-mix-neslihan-gunaydin.jpg` (320 × 320).
+- Credit: [Neslihan Gunaydin](https://unsplash.com/@neslihangunaydin).
+- Original source: [Trowel.jpg](https://commons.wikimedia.org/wiki/File:Trowel.jpg).
+- License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
+- Processing: Original 4896 × 3264 photograph resized to 960 × 640 and JPEG optimized. The 320 × 320 list thumbnail uses a square crop.
+- Alt text: Loose potting mix with perlite beside a green garden trowel.
+
+### Radish seeds
+
+- Registry key: `seeds`.
+- Local photograph: `assets/photos/radish-seeds-hugowolf.jpg` (960 × 844).
+- Thumbnail: `assets/photos/thumbs/radish-seeds-hugowolf.jpg` (320 × 320).
+- Credit: [Hugowolf at English Wikipedia (photographed by Brian Arthur)](https://en.wikipedia.org/wiki/User:Hugowolf).
+- Original source: [RadishSeeds.jpg](https://commons.wikimedia.org/wiki/File:RadishSeeds.jpg).
+- License: [CC BY 3.0 Unported](https://creativecommons.org/licenses/by/3.0/).
+- Processing: Original 1715 × 1507 photograph resized to 960 × 844 and JPEG optimized. The 320 × 320 list thumbnail uses source crop (0, 0, 1250, 1250).
+- Alt text: Loose brown radish seeds on a white background.
+
+### A digital kitchen scale
+
+- Registry key: `scale`.
+- Local photograph: `assets/photos/digital-kitchen-scale-raimond-spekking.jpg` (720 × 960).
+- Thumbnail: `assets/photos/thumbs/digital-kitchen-scale-raimond-spekking.jpg` (320 × 320).
+- Credit: [© Raimond Spekking / CC BY-SA 4.0 (via Wikimedia Commons)](https://commons.wikimedia.org/wiki/User:Raymond).
+- Original source: [Digital kitchen scale KE 901-0329.jpg](https://commons.wikimedia.org/wiki/File:Digital_kitchen_scale_KE_901-0329.jpg).
+- License: [CC BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/).
+- Processing: Original 2358 × 3144 photograph resized to 720 × 960 and JPEG optimized. The complete photograph is contained in a 320 × 320 list thumbnail. Resized and framed image versions remain under CC BY-SA 4.0.
+- Alt text: A digital kitchen scale with its display set to zero.
+
+### Kitchen scissors
+
+- Registry key: `scissors`.
+- Local photograph: `assets/photos/kitchen-scissors-evan-amos.jpg` (960 × 537).
+- Thumbnail: `assets/photos/thumbs/kitchen-scissors-evan-amos.jpg` (320 × 320).
+- Credit: [Evan-Amos](https://commons.wikimedia.org/wiki/User:Evan-Amos).
+- Original source: [Kitchen-Scissors.jpg](https://commons.wikimedia.org/wiki/File:Kitchen-Scissors.jpg).
+- License: [Public domain (author dedication)](https://commons.wikimedia.org/wiki/File:Kitchen-Scissors.jpg#Summary).
+- Processing: Original 2950 × 1650 photograph resized to 960 × 537 and JPEG optimized. The complete photograph is contained in a 320 × 320 list thumbnail.
+- Alt text: Clean kitchen scissors with black handles on a white background.
+
+### Sowing seeds on a growing mat
+
+- Registry key: `sowing`.
+- Local photograph: `assets/photos/scattering-seeds-thisisengineering.jpg` (640 × 960).
+- Thumbnail: `assets/photos/thumbs/scattering-seeds-thisisengineering.jpg` (320 × 320).
+- Credit: [ThisIsEngineering](https://www.pexels.com/@thisisengineering/).
+- Original source: [Scientist planting seeds](https://www.pexels.com/photo/scientist-planting-seeds-3912512/).
+- License: [Pexels License](https://www.pexels.com/license/).
+- Processing: Original photograph downloaded at 1600 × 2399, resized to 640 × 960 and JPEG optimized. The 320 × 320 list thumbnail uses source crop (70, 500, 1500, 1930). No generated content was added.
+- Alt text: A hand scatters small seeds onto a fiber growing mat in a shallow tray.
+
+### Harvesting microgreens
+
+- Registry key: `harvest`.
+- Local photograph: `assets/photos/harvesting-microgreens-thisisengineering.jpg` (960 × 640).
+- Thumbnail: `assets/photos/thumbs/harvesting-microgreens-thisisengineering.jpg` (320 × 320).
+- Credit: [ThisIsEngineering](https://www.pexels.com/@thisisengineering/).
+- Original source: [Person holding black scissors](https://www.pexels.com/photo/person-holding-black-scissors-3912947/).
+- License: [Pexels License](https://www.pexels.com/license/).
+- Processing: Original photograph downloaded at 1600 × 1067, resized to 960 × 640 and JPEG optimized. The 320 × 320 list thumbnail uses source crop (350, 0, 1417, 1067). No generated content was added.
+- Alt text: Hands cut microgreens in a growing tray with black scissors.
+
+### A hand-held plant mister
+
+- Registry key: `water`.
+- Local photograph: `assets/photos/misting-seedlings-ron-lach.jpg` (640 × 960).
+- Thumbnail: `assets/photos/thumbs/misting-seedlings-ron-lach.jpg` (320 × 320).
+- Credit: [Ron Lach](https://www.pexels.com/@ron-lach/).
+- Original source: [Person watering indoor plants](https://www.pexels.com/photo/person-watering-indoor-plants-8286644/).
+- License: [Pexels License](https://www.pexels.com/license/).
+- Processing: Original photograph downloaded at 1600 × 2400, resized to 640 × 960 and JPEG optimized. The 320 × 320 list thumbnail uses source crop (200, 900, 1450, 2150). No generated content was added.
+- Alt text: A hand holds a glass plant mister beside seedlings on an indoor shelf.
+
+### LED grow lights by a window
+
+- Registry key: `light`.
+- Local photograph: `assets/photos/grow-lights-erik-mclean.jpg` (960 × 640).
+- Thumbnail: `assets/photos/thumbs/grow-lights-erik-mclean.jpg` (320 × 320).
+- Credit: [Erik Mclean](https://www.pexels.com/@introspectivedsgn/).
+- Original source: [Potted plants with led lights](https://www.pexels.com/photo/potted-plants-with-led-lights-12698666/).
+- License: [Pexels License](https://www.pexels.com/license/).
+- Processing: Original photograph downloaded at 1600 × 1067, resized to 960 × 640 and JPEG optimized. The 320 × 320 list thumbnail uses source crop (450, 0, 1517, 1067). No generated content was added.
+- Alt text: LED grow-light bars illuminate ornamental potted plants on a windowsill.
+
+### Starting seeds in potting mix
+
+- Registry key: `seed-starting`.
+- Local photograph: `assets/photos/sowing-seeds-greta-hoffman.jpg` (640 × 960).
+- Thumbnail: `assets/photos/thumbs/sowing-seeds-greta-hoffman.jpg` (320 × 320).
+- Credit: [Greta Hoffman](https://www.pexels.com/@greta-hoffman/).
+- Original source: [Unrecognizable gardener planting seeds in container](https://www.pexels.com/photo/unrecognizable-gardener-planting-seeds-in-container-7728402/).
+- License: [Pexels License](https://www.pexels.com/license/).
+- Processing: Original photograph downloaded at 1600 × 2400, resized to 640 × 960 and JPEG optimized. The 320 × 320 list thumbnail uses source crop (0, 450, 1600, 2050). No generated content was added.
+- Alt text: Hands work with potting mix in a divided seed-starting tray.
 
 ## Fonts
 
 - `assets/fonts/newsreader-latin.woff2`: Newsreader, retrieved from Google Fonts. License: `assets/fonts/Newsreader-OFL.txt`.
 - Inter and the existing locally served font files remain in use.
+
+## Crop identification photographs
+
+Added November 9, 2026. These real photographs show mature crops or harvested produce. Use them to identify crop rows; their alt text describes the actual scene. No AI generation, content replacement or color adjustment was used. Original source files and licences were inspected before integration.
+
+### Curly kale
+
+- Local file: `assets/photos/crop-kale.jpg` (960 × 917).
+- List thumbnail: `assets/photos/thumbs/crop-kale.jpg` (320 × 320).
+- Photographer: [Rasbak](https://commons.wikimedia.org/wiki/User:Rasbak).
+- Original: [Boerenkool.jpg](https://commons.wikimedia.org/wiki/File:Boerenkool.jpg).
+- Direct source image: https://upload.wikimedia.org/wikipedia/commons/2/20/Boerenkool.jpg
+- License: [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+- Source dimensions: 1223 × 1168.
+- Processing: original EXIF orientation applied, converted to RGB, resized without enlargement to a maximum side of 960 pixels with Lanczos resampling, and saved as an optimized progressive JPEG at quality 84. The thumbnail uses the original photograph with a square crop approximately (28, 0, 1196, 1168), centering 50% 50%, then Lanczos resized to 320 × 320 and saved as an optimized progressive JPEG at quality 82. No color changes, generated objects or AI processing.
+- Subject and alt: Mature curly kale leaves growing in a garden.
+- Credit: `Credit: <a href="/photo-credits/#crop-kale">Rasbak</a>`.
+- Reuse: Preserve creator, source and license link in central credits; state cropped/resized and retain the same licence for any adapted image.
+
+### Arugula
+
+- Local file: `assets/photos/crop-arugula.jpg` (602 × 434).
+- List thumbnail: `assets/photos/thumbs/crop-arugula.jpg` (320 × 320).
+- Photographer: [Eric Bear Albrecht](https://en.wikipedia.org/wiki/User:Ebear422).
+- Original: [Arugula.jpg](https://commons.wikimedia.org/wiki/File:Arugula.jpg).
+- Direct source image: https://upload.wikimedia.org/wikipedia/commons/b/be/Arugula.jpg
+- License: [Public domain](https://commons.wikimedia.org/wiki/File:Arugula.jpg).
+- Source dimensions: 602 × 434.
+- Processing: original EXIF orientation applied, converted to RGB, resized without enlargement to a maximum side of 960 pixels with Lanczos resampling, and saved as an optimized progressive JPEG at quality 84. The thumbnail uses the original photograph with a square crop approximately (84, 0, 518, 434), centering 50% 50%, then Lanczos resized to 320 × 320 and saved as an optimized progressive JPEG at quality 82. No color changes, generated objects or AI processing.
+- Subject and alt: A mature arugula plant growing outdoors.
+- Credit: `Credit: <a href="/photo-credits/#crop-arugula">Eric Bear Albrecht</a>`.
+- Reuse: Public domain according to the Commons source page; voluntary named credit included.
+
+### Fresh cilantro
+
+- Local file: `assets/photos/crop-cilantro.jpg` (960 × 720).
+- List thumbnail: `assets/photos/thumbs/crop-cilantro.jpg` (320 × 320).
+- Photographer: [Miansari66](https://commons.wikimedia.org/wiki/User:Miansari66).
+- Original: [Coriander fresh.JPG](https://commons.wikimedia.org/wiki/File:Coriander_fresh.JPG).
+- Direct source image: https://upload.wikimedia.org/wikipedia/commons/e/e0/Coriander_fresh.JPG
+- License: [Public domain](https://commons.wikimedia.org/wiki/File:Coriander_fresh.JPG).
+- Source dimensions: 2816 × 2112.
+- Processing: original EXIF orientation applied, converted to RGB, resized without enlargement to a maximum side of 960 pixels with Lanczos resampling, and saved as an optimized progressive JPEG at quality 84. The thumbnail uses the original photograph with a square crop approximately (507, 0, 2619, 2112), centering 72% 50%, then Lanczos resized to 320 × 320 and saved as an optimized progressive JPEG at quality 82. No color changes, generated objects or AI processing.
+- Subject and alt: A bunch of freshly harvested cilantro leaves and stems.
+- Credit: `Credit: <a href="/photo-credits/#crop-cilantro">Miansari66</a>`.
+- Reuse: Public domain according to the Commons source page; voluntary named credit included.
+
+### Rutabaga roots
+
+- Local file: `assets/photos/crop-rutabaga.jpg` (960 × 720).
+- List thumbnail: `assets/photos/thumbs/crop-rutabaga.jpg` (320 × 320).
+- Photographer: [Seedambassadors](https://commons.wikimedia.org/wiki/File:Rutabaga,_variety_nadmorska.JPG).
+- Original: [Rutabaga, variety nadmorska.JPG](https://commons.wikimedia.org/wiki/File:Rutabaga,_variety_nadmorska.JPG).
+- Direct source image: https://upload.wikimedia.org/wikipedia/commons/a/a7/Rutabaga%2C_variety_nadmorska.JPG
+- License: [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0).
+- Source dimensions: 1600 × 1200.
+- Processing: original EXIF orientation applied, converted to RGB, resized without enlargement to a maximum side of 960 pixels with Lanczos resampling, and saved as an optimized progressive JPEG at quality 84. The thumbnail uses the original photograph with a square crop approximately (200, 0, 1400, 1200), centering 50% 45%, then Lanczos resized to 320 × 320 and saved as an optimized progressive JPEG at quality 82. No color changes, generated objects or AI processing.
+- Subject and alt: Harvested rutabaga roots with their green leaves attached.
+- Credit: `Credit: <a href="/photo-credits/#crop-rutabaga">Seedambassadors</a>`.
+- Reuse: Preserve creator, source and license link in central credits; state cropped/resized and retain the same licence for any adapted image.
+
+### Mustard greens
+
+- Local file: `assets/photos/crop-mustard.jpg` (960 × 861).
+- List thumbnail: `assets/photos/thumbs/crop-mustard.jpg` (320 × 320).
+- Photographer: [মৌচুমী](https://commons.wikimedia.org/wiki/User:%E0%A6%AE%E0%A7%8C%E0%A6%9A%E0%A7%81%E0%A6%AE%E0%A7%80).
+- Original: [Mustard greens.jpg](https://commons.wikimedia.org/wiki/File:Mustard_greens.jpg).
+- Direct source image: https://upload.wikimedia.org/wikipedia/commons/5/50/Mustard_greens.jpg
+- License: [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0).
+- Source dimensions: 1071 × 960.
+- Processing: original EXIF orientation applied, converted to RGB, resized without enlargement to a maximum side of 960 pixels with Lanczos resampling, and saved as an optimized progressive JPEG at quality 84. The thumbnail uses the original photograph with a square crop approximately (56, 0, 1016, 960), centering 50% 50%, then Lanczos resized to 320 × 320 and saved as an optimized progressive JPEG at quality 82. No color changes, generated objects or AI processing.
+- Subject and alt: Broad green leaves of a mature mustard plant.
+- Credit: `Credit: <a href="/photo-credits/#crop-mustard">মৌচুমী</a>`.
+- Reuse: Preserve creator, source and license link in central credits; state cropped/resized and retain the same licence for any adapted image.
+
+### Dark red beets
+
+- Local file: `assets/photos/crop-beet.jpg` (638 × 960).
+- List thumbnail: `assets/photos/thumbs/crop-beet.jpg` (320 × 320).
+- Photographer: [BriannaWalther](https://commons.wikimedia.org/wiki/File:Detroitdarkredbeets.png#Summary).
+- Original: [Detroitdarkredbeets.png](https://commons.wikimedia.org/wiki/File:Detroitdarkredbeets.png).
+- Direct source image: https://upload.wikimedia.org/wikipedia/commons/a/ae/Detroitdarkredbeets.png
+- License: [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0).
+- Source dimensions: 2298 × 3456.
+- Processing: original EXIF orientation applied, converted to RGB, resized without enlargement to a maximum side of 960 pixels with Lanczos resampling, and saved as an optimized progressive JPEG at quality 84. The thumbnail uses the original photograph with a square crop approximately (0, 868, 2298, 3166), centering 50% 75%, then Lanczos resized to 320 × 320 and saved as an optimized progressive JPEG at quality 82. No color changes, generated objects or AI processing.
+- Subject and alt: Harvested dark red beets with purple stems and leaves.
+- Credit: `Credit: <a href="/photo-credits/#crop-beet">BriannaWalther</a>`.
+- Reuse: Preserve creator, source and license link in central credits; state cropped/resized and retain the same licence for any adapted image.
+
+### Amaranth
+
+- Local file: `assets/photos/crop-amaranth.jpg` (640 × 480).
+- List thumbnail: `assets/photos/thumbs/crop-amaranth.jpg` (320 × 320).
+- Photographer: [Kurt Stüber](https://commons.wikimedia.org/wiki/File:Amaranthus_tricolor0.jpg#Summary).
+- Original: [Amaranthus tricolor0.jpg](https://commons.wikimedia.org/wiki/File:Amaranthus_tricolor0.jpg).
+- Direct source image: https://upload.wikimedia.org/wikipedia/commons/9/91/Amaranthus_tricolor0.jpg
+- License: [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+- Source dimensions: 640 × 480.
+- Processing: original EXIF orientation applied, converted to RGB, resized without enlargement to a maximum side of 960 pixels with Lanczos resampling, and saved as an optimized progressive JPEG at quality 84. The thumbnail uses the original photograph with a square crop approximately (80, 0, 560, 480), centering 50% 50%, then Lanczos resized to 320 × 320 and saved as an optimized progressive JPEG at quality 82. No color changes, generated objects or AI processing.
+- Subject and alt: Green leaves and red flower clusters on a mature amaranth plant.
+- Credit: `Credit: <a href="/photo-credits/#crop-amaranth">Kurt Stüber</a>`.
+- Reuse: Choose CC BY-SA 3.0 offered by the Commons source; central credits should identify Kurt Stüber and www.biolib.de source collection, link licence, and retain licence on crop/resize derivative.
+
+### Ripe tomatoes
+
+- Local file: `assets/photos/crop-tomato.jpg` (960 × 798).
+- List thumbnail: `assets/photos/thumbs/crop-tomato.jpg` (320 × 320).
+- Photographer: [Softeis](https://commons.wikimedia.org/wiki/File:Tomato_je.jpg#Summary).
+- Original: [Tomato je.jpg](https://commons.wikimedia.org/wiki/File:Tomato_je.jpg).
+- Direct source image: https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg
+- License: [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+- Source dimensions: 1800 × 1497.
+- Processing: original EXIF orientation applied, converted to RGB, resized without enlargement to a maximum side of 960 pixels with Lanczos resampling, and saved as an optimized progressive JPEG at quality 84. The thumbnail uses the original photograph with a square crop approximately (152, 0, 1649, 1497), centering 50% 50%, then Lanczos resized to 320 × 320 and saved as an optimized progressive JPEG at quality 82. No color changes, generated objects or AI processing.
+- Subject and alt: Ripe red tomatoes with green stems on a light background.
+- Credit: `Credit: <a href="/photo-credits/#crop-tomato">Softeis</a>`.
+- Reuse: Preserve creator, source and license link in central credits; state cropped/resized and retain the same licence for any adapted image.
+
+### Cucumbers
+
+- Local file: `assets/photos/crop-cucumber.jpg` (669 × 960).
+- List thumbnail: `assets/photos/thumbs/crop-cucumber.jpg` (320 × 320).
+- Photographer: [Stephen Ausmus, USDA ARS](https://commons.wikimedia.org/wiki/File:ARS_cucumber.jpg).
+- Original: [ARS cucumber.jpg](https://commons.wikimedia.org/wiki/File:ARS_cucumber.jpg).
+- Direct source image: https://upload.wikimedia.org/wikipedia/commons/9/96/ARS_cucumber.jpg
+- License: [Public domain (USDA Agricultural Research Service)](https://commons.wikimedia.org/wiki/File:ARS_cucumber.jpg).
+- Source dimensions: 1881 × 2700.
+- Processing: original EXIF orientation applied, converted to RGB, resized without enlargement to a maximum side of 960 pixels with Lanczos resampling, and saved as an optimized progressive JPEG at quality 84. The thumbnail uses the original photograph with a square crop approximately (0, 573, 1881, 2454), centering 50% 70%, then Lanczos resized to 320 × 320 and saved as an optimized progressive JPEG at quality 82. No color changes, generated objects or AI processing.
+- Subject and alt: Green cucumbers growing among leaves and yellow flowers.
+- Credit: `Credit: <a href="/photo-credits/#crop-cucumber">Stephen Ausmus, USDA ARS</a>`.
+- Reuse: USDA Agricultural Research Service photo by Stephen Ausmus, public domain US government work according to Commons; voluntary credit included.
+
