@@ -722,12 +722,12 @@ def check_copy(path: Path, text: str) -> None:
     for phrase in ["we tested", "in our tests", "we grew", "gardener's supply", "gardeners supply", "amazon.com", "johnny's", "johnnys selected"]:
         if phrase in lowered:
             raise SystemExit(f"{path} contains banned phrase: {phrase}")
-    # Product names are allowed only after their evidence is recorded. A researched
-    # comparison is distinct from a firsthand trial or an affiliate relationship.
-    if "True Leaf" in text:
-        registry = json.loads((SRC / "products.json").read_text())
-        if not registry.get("products"):
-            raise SystemExit(f"{path} names a product without a researched registry")
+    for banned in ("hamama.com", "bootstrapfarmer.com", "trueleafmarket.com"):
+        if banned in lowered:
+            raise SystemExit(f"{path} links a store that is not approved for the live site")
+    for banned in ("True Leaf", "Bootstrap Farmer", "Hamama"):
+        if banned in text:
+            raise SystemExit(f"{path} names a product that is not approved for the live site")
     if re.search(r"amazon", lowered):
         raise SystemExit(f"{path} mentions Amazon")
 
@@ -978,7 +978,7 @@ def render_static_pages() -> dict[str, str]:
     pages["404.html"] = simple_page(missing, (SRC / "pages" / "404.html").read_text())
 
     extra_pages = [
-        ("gear/index.html", "Microgreens Starter Kits and Trays Compared | Small Space Greens", "Compare three compact microgreen options by manufacturer-stated dimensions, included supplies, refill needs, and limitations before choosing your setup.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
+        ("gear/index.html", "Gear Categories for a Small-Space Greens Setup", "Tray, mix, lamp, mister, scissors, and fan. Categories only, with no store links or prices until an affiliate program is approved.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
         ("editorial-method/index.html", "How Small Space Greens Chooses and Corrects Guides", "How sources are chosen, how product advice will be labeled, and how to send a correction.", f"{SITE}/editorial-method/", "", "Editorial method", f"{SITE}/assets/og/editorial.jpg", "editorial.html", ""),
         ("guides/first-tray-checklist/index.html", "First-Tray Checklist for Apartment Microgreens", "Print the first-tray checklist, or get the same list by email from Ryan after you confirm your address.", f"{SITE}/guides/first-tray-checklist/", "/guides/", "First-tray checklist", f"{SITE}/assets/og/checklist.jpg", "checklist.html", ""),
     ]

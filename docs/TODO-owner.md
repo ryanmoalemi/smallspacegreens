@@ -10,11 +10,9 @@ These items need Ryan Moalemi. They are not on the public pages, because the sit
 
 ## Products and affiliate links
 
-- No affiliate program is connected. The three gear comparisons use ordinary merchant links and earn no commission. Add affiliate tracking only after the program, exact variant, and disclosure are checked; update the link attributes and product registry together.
-- The gear comparison uses published manufacturer and retailer specifications checked November 9, 2026 (UTC). None of the products has been tested side by side by Small Space Greens.
-- Measure outer size, inner growing floor, depth, and nesting before making independent fit or performance claims. Only the Bootstrap Farmer listing explicitly distinguishes outside dimensions from the inside floor. Unknown dimensions must stay unknown.
-- `src/products.json` now contains three sourced product records. Recheck variants, dimensions, and included items when updating them. Do not invent prices, ratings, stock, or test results.
-- Replace the original size illustrations with product photographs only after image rights are secured. The diagrams illustrate published dimensions and are not trial evidence.
+- No affiliate program is connected, and the public site has no store links. The gear page is categories only.
+- `src/products.json` may hold unpublished research. Do not render it until an advertiser is approved. Then recheck the variant, dimensions, and disclosure together.
+- Measure outer size, inner growing floor, depth, and nesting before making independent fit claims. Unknown dimensions must stay unknown.
 - Current kit-versus-DIY shopping baskets are not published. The cost page keeps a dated Utah State snapshot and a labeled recalculation instead.
 
 ## Balcony and gear
