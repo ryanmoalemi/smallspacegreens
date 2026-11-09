@@ -1,0 +1,17 @@
+{
+  "source": "Utah State University Extension",
+  "source_url": "https://extension.usu.edu/yardandgarden/research/grow-your-own-microgreens",
+  "source_table": "Table 1, Estimated time to harvest",
+  "checked": "2026-11-09",
+  "scale_max": 28,
+  "crops": [
+    {"id": "arugula", "name": "Arugula", "photo": "arugula", "low": 6, "high": 8},
+    {"id": "pea", "name": "Pea shoots", "photo": "peas", "low": 8, "high": 10},
+    {"id": "sunflower", "name": "Sunflower", "photo": "sunflower", "low": 9, "high": 10},
+    {"id": "radish", "name": "Radish", "photo": "radish", "low": 8, "high": 12},
+    {"id": "broccoli", "name": "Broccoli", "photo": "broccoli", "low": 8, "high": 12},
+    {"id": "kale", "name": "Kale", "photo": "kale", "low": 8, "high": 12},
+    {"id": "basil", "name": "Basil", "photo": "basil", "low": 12, "high": 16},
+    {"id": "cilantro", "name": "Cilantro", "photo": "cilantro", "low": 21, "high": 28}
+  ]
+}

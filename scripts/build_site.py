@@ -654,6 +654,54 @@ def step_strip() -> str:
     return '<ol class="grow-steps" role="list">' + "".join(items) + '</ol>'
 
 
+def harvest_chart() -> str:
+    data = json.loads((SRC / "harvest-windows.json").read_text())
+    rates = {row["id"]: row for row in json.loads((SRC / "rates.json").read_text())}
+    scale = data["scale_max"]
+    ticks = '<span>0</span><span>7</span><span>14</span><span>21</span><span>28</span>'
+    rows = []
+    for crop in data["crops"]:
+        low, high = crop["low"], crop["high"]
+        if not 0 <= low < high <= scale:
+            raise SystemExit(f'Invalid harvest range for {crop["id"]}')
+        expected = f'Harvest about {low} to {high} days.'
+        if expected not in rates[crop["id"]]["timing"]:
+            raise SystemExit(f'Harvest chart disagrees with calculator guidance for {crop["id"]}')
+        photo = LIST_PHOTOS[crop["photo"]]
+        left = 100 * low / scale
+        width = 100 * (high - low) / scale
+        rows.append(
+            '<li class="harvest-row" role="listitem">'
+            '<div class="harvest-crop">'
+            f'<img src="/assets/photos/thumbs/{esc(photo["thumbnail"])}" width="320" height="320" '
+            f'alt="{esc(photo["alt"])}" loading="lazy" decoding="async">'
+            '<div class="harvest-crop-copy">'
+            f'<a class="harvest-crop-name" href="/tools/microgreens-seed-calculator/?crop={esc(crop["id"])}&amp;tray=10x10">{esc(crop["name"])}</a>'
+            f'<p class="photo-credit">Credit: <a href="/photo-credits/#{esc(photo["credit_id"])}">{esc(photo["author"])}</a></p>'
+            '</div></div>'
+            f'<p class="harvest-value"><strong>{low}<span class="harvest-to"> to </span>{high}</strong><span>days</span></p>'
+            '<div class="harvest-timeline" aria-hidden="true">'
+            '<div class="harvest-track"><span class="harvest-grid"></span>'
+            f'<span class="harvest-range" style="left:{left:.6f}%;width:{width:.6f}%"></span></div>'
+            f'<div class="harvest-mobile-ticks">{ticks}</div></div>'
+            '</li>'
+        )
+    return (
+        '<section class="harvest-chart" aria-labelledby="harvest-times">'
+        '<div class="harvest-heading"><p class="eyebrow">Plan your first harvest</p>'
+        '<h2 id="harvest-times">When can you harvest?</h2>'
+        '<p class="harvest-subtitle">Compare estimated harvest times by crop.</p></div>'
+        '<p class="harvest-legend"><span aria-hidden="true"></span>Dark bar = estimated harvest window</p>'
+        '<div class="harvest-axis" aria-hidden="true"><span>Crop</span>'
+        f'<div class="harvest-desktop-ticks">{ticks}</div><span>Days</span></div>'
+        '<ul class="harvest-rows" role="list">' + ''.join(rows) + '</ul>'
+        '<div class="harvest-footer"><p>Use these ranges to plan, then check your crop before cutting.</p>'
+        f'<p class="harvest-source">Estimates: <a href="{esc(data["source_url"])}">{esc(data["source"])}</a>.</p>'
+        '<p class="harvest-next">Tap a crop name to calculate seed for your tray.</p></div>'
+        '</section>'
+    )
+
+
 VIDEOS = {
     "dtvuMNVLISo": (
         "How to Grow Microgreens from Start to Finish (COMPLETE GUIDE)",
@@ -1338,6 +1386,7 @@ def render_static_pages() -> dict[str, str]:
         check_lengths(guide["title"], guide["description"], guide["slug"])
         body = (SRC / "guides" / f"{guide['slug']}.html").read_text()
         body = body.replace("<!--STEP_STRIP-->", step_strip())
+        body = body.replace("<!--HARVEST_CHART-->", harvest_chart())
         body = body.replace("<!--DENSITY_CHART-->", density_figure())
         for video_id in VIDEOS:
             body = body.replace(f"<!--VIDEO:{video_id}-->", video_embed(video_id))
@@ -1353,7 +1402,7 @@ def main() -> None:
             raise SystemExit(f"Missing photo thumbnail for {key}")
         if f'id="{photo["credit_id"]}"' not in credit_page:
             raise SystemExit(f"Missing photo credit record for {key}")
-    css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css", "photo-lists.css"]))
+    css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css", "photo-lists.css", "harvest-chart.css"]))
     css_path = ROOT / "css" / "styles.css"
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(css + "\n")
