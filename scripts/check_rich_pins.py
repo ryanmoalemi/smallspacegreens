@@ -49,8 +49,10 @@ def check_page(rel: str, og_type: str) -> None:
     html = path.read_text()
     if "\u2014" in html or "\u2013" in html:
         fail(f"{rel} contains an em or en dash")
+    # Approved True Leaf Market links are Awin wrappers. A direct shop URL is still banned.
+    without_awin = re.sub(r"https://www\.awin1\.com/cread\.php\?[^\"\s<]*", "", html, flags=re.I)
     for banned in ("hamama.com", "bootstrapfarmer.com", "trueleafmarket.com"):
-        if banned in html.lower():
+        if banned in without_awin.lower():
             fail(f"{rel} contains a store link")
     if "G-8YDK0NYXM5" not in html:
         fail(f"{rel} is missing gtag")
