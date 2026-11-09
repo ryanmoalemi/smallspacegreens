@@ -1,23 +1,116 @@
 <div class="verdict">
 <p><strong>Start with the whole cost.</strong> A kit may save decisions; reusable trays let you choose your seed and medium. Compare what you pay today, what each later planting needs, and the work you want to do. Neither route is automatically cheaper.</p>
 <p>If you are trying one tray, a suitable clean food container may be enough. You can decide whether to buy a larger setup after your first harvest.</p>
-<p class="next-action"><a href="/gear/#checklist">Check the supplies you need</a> or <a href="/tools/microgreens-seed-calculator/?crop=radish&amp;tray=10x20">price your own radish seed</a>.</p>
+<p class="next-action"><a href="#cost-comparison">Compare your setup costs</a> or <a href="/gear/#choose">choose your setup</a>.</p>
 </div>
 <figure class="photo">
 <img src="/assets/photos/sunflower-small-tray.jpg" width="960" height="810" alt="Sunflower microgreens with black seed hulls still attached, growing in a small clear plastic tray on a white background." loading="lazy">
 <figcaption class="credit photo-credit">Credit: <a href="/photo-credits/#sunflower-small-tray">Pannet</a></figcaption>
 </figure>
-<h2>Compare two complete baskets</h2>
-<p>Use the exact kit or tray variant and today's prices. Cross out supplies you already own. Keep the number of plantings the same when comparing routes.</p>
-<div class="responsive-table" role="region" aria-label="Kit versus DIY shopping worksheet" tabindex="0">
-<table><caption>A worksheet for your prices, not a quoted shopping basket.</caption><thead><tr><th scope="col">Include</th><th scope="col">Kit route</th><th scope="col">DIY route</th></tr></thead><tbody>
+<!--GUIDE_MAIN-->
+<section class="cost-comparison" id="cost-comparison" aria-labelledby="cost-comparison-title">
+<h2 id="cost-comparison-title">Compare your two setups</h2>
+<p>Enter the prices you would pay. Use the same crop and tray size, and check how many complete plantings each basket supplies.</p>
+<p class="cost-instructions" id="cost-input-instructions">All prices are in US dollars. Enter 0 where there is no charge, including supplies you already own.</p>
+<form id="cost-compare-form" novalidate>
+<div class="cost-route-grid">
+  <fieldset>
+    <legend>Kit setup</legend>
+    <p class="cost-route-note">Add any missing seed, medium, lighting or tools under other supplies.</p>
+    <div class="cost-input-grid">
+      <div class="cost-field">
+        <label for="cost-kit-base">Kit price</label>
+        <input id="cost-kit-base" name="kit-base" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" maxlength="16" aria-describedby="cost-input-instructions cost-kit-base-error" required>
+        <p class="cost-field-error" id="cost-kit-base-error" hidden></p>
+      </div>
+      <div class="cost-field">
+        <label for="cost-kit-extras">Other supplies</label>
+        <input id="cost-kit-extras" name="kit-extras" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" maxlength="16" aria-describedby="cost-input-instructions cost-kit-extras-error" required>
+        <p class="cost-field-error" id="cost-kit-extras-error" hidden></p>
+      </div>
+      <div class="cost-field">
+        <label for="cost-kit-delivery">Delivery + tax</label>
+        <input id="cost-kit-delivery" name="kit-delivery" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" maxlength="16" aria-describedby="cost-input-instructions cost-kit-delivery-error" required>
+        <p class="cost-field-error" id="cost-kit-delivery-error" hidden></p>
+      </div>
+      <div class="cost-field">
+        <label for="cost-kit-plantings">Plantings included</label>
+        <input id="cost-kit-plantings" name="kit-plantings" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="16" aria-describedby="cost-count-help cost-kit-plantings-error" value="1" required>
+        <p class="cost-field-error" id="cost-kit-plantings-error" hidden></p>
+      </div>
+      <div class="cost-field cost-field-wide">
+        <label for="cost-kit-refill">Next planting<span>Optional · leave blank if unknown</span></label>
+        <input id="cost-kit-refill" name="kit-refill" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" maxlength="16" aria-describedby="cost-refill-help cost-kit-refill-error">
+        <p class="cost-field-error" id="cost-kit-refill-error" hidden></p>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>DIY setup</legend>
+    <p class="cost-route-note">Include both trays. Add whole packs of seed, medium and tools under other supplies.</p>
+    <div class="cost-input-grid">
+      <div class="cost-field">
+        <label for="cost-diy-base">Trays or containers</label>
+        <input id="cost-diy-base" name="diy-base" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" maxlength="16" aria-describedby="cost-input-instructions cost-diy-base-error" required>
+        <p class="cost-field-error" id="cost-diy-base-error" hidden></p>
+      </div>
+      <div class="cost-field">
+        <label for="cost-diy-extras">Other supplies</label>
+        <input id="cost-diy-extras" name="diy-extras" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" maxlength="16" aria-describedby="cost-input-instructions cost-diy-extras-error" required>
+        <p class="cost-field-error" id="cost-diy-extras-error" hidden></p>
+      </div>
+      <div class="cost-field">
+        <label for="cost-diy-delivery">Delivery + tax</label>
+        <input id="cost-diy-delivery" name="diy-delivery" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" maxlength="16" aria-describedby="cost-input-instructions cost-diy-delivery-error" required>
+        <p class="cost-field-error" id="cost-diy-delivery-error" hidden></p>
+      </div>
+      <div class="cost-field">
+        <label for="cost-diy-plantings">Plantings included</label>
+        <input id="cost-diy-plantings" name="diy-plantings" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="16" aria-describedby="cost-count-help cost-diy-plantings-error" value="1" required>
+        <p class="cost-field-error" id="cost-diy-plantings-error" hidden></p>
+      </div>
+      <div class="cost-field cost-field-wide">
+        <label for="cost-diy-refill">Next planting<span>Optional · leave blank if unknown</span></label>
+        <input id="cost-diy-refill" name="diy-refill" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" maxlength="16" aria-describedby="cost-refill-help cost-diy-refill-error">
+        <p class="cost-field-error" id="cost-diy-refill-error" hidden></p>
+      </div>
+    </div>
+  </fieldset>
+</div>
+<p class="cost-refill-help" id="cost-count-help"><strong>Plantings included:</strong> complete sowings supplied by the seed and medium in today's basket. Change the starting count of 1 to match your supplies.</p>
+<p class="cost-refill-help" id="cost-refill-help"><strong>Next planting:</strong> seed, medium and other consumables for one later sowing. For a refill pack, divide its delivered price by the plantings it supplies. Leave this price blank if you do not know it.</p>
+<div class="cost-actions"><button class="button" type="submit" id="cost-compare-submit" disabled>Compare my costs</button><button class="button secondary" type="reset">Clear prices</button></div>
+<p class="cost-status" id="cost-form-status" role="status" aria-live="polite" aria-atomic="true"></p>
+</form>
+<noscript><p class="cost-no-script">To total the worksheet without JavaScript, add the base price, other supplies, and delivery plus tax for each route. Keep the next-planting cost separate.</p></noscript>
+<div class="cost-results" id="cost-compare-results" hidden>
+<h3 id="cost-results-title" tabindex="-1">Your comparison</h3>
+<table class="cost-result-table">
+<caption>Calculated from your prices. Next-planting costs are separate from the pay-today total.</caption>
+<thead><tr><th scope="col">Cost or quantity</th><th scope="col">Kit</th><th scope="col">DIY</th></tr></thead>
+<tbody>
+<tr class="cost-today"><th scope="row">Pay today</th><td id="cost-kit-today-result">Enter prices</td><td id="cost-diy-today-result">Enter prices</td></tr>
+<tr><th scope="row">Plantings included</th><td id="cost-kit-plantings-result">Enter prices</td><td id="cost-diy-plantings-result">Enter prices</td></tr>
+<tr><th scope="row">Next planting<br>Consumables</th><td id="cost-kit-refill-result">Unknown</td><td id="cost-diy-refill-result">Unknown</td></tr>
+</tbody>
+</table>
+<p class="cost-difference" id="cost-difference"></p>
+<div class="cost-actions"><button class="button secondary" type="button" id="cost-copy" disabled>Copy comparison</button></div>
+<p class="cost-status" id="cost-copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
+<details class="cost-copy-details" id="cost-copy-details"><summary>View comparison text</summary><label for="cost-copy-text">Select this text to copy it manually.</label><textarea id="cost-copy-text" readonly rows="10"></textarea></details>
+</div>
+<details class="cost-help"><summary>What to include in each setup</summary>
+<p>Use the exact kit or tray variant. Include every supplier's delivery charge and tax, and count only complete plantings the basket can supply.</p>
+<div class="responsive-table" role="region" aria-label="What to include in your kit and DIY costs" tabindex="0">
+<table><caption>What belongs in each basket.</caption><thead><tr><th scope="col">Include</th><th scope="col">Kit route</th><th scope="col">DIY route</th></tr></thead><tbody>
 <tr><th scope="row">Container and drainage</th><td data-label="Kit route">Is the tray included? Does it also catch water?</td><td data-label="DIY route">Price the growing tray and solid watering tray, or a suitable container you own.</td></tr>
 <tr><th scope="row">Seeds and medium</th><td data-label="Kit route">Count the included plantings and note the crop.</td><td data-label="DIY route">Include the whole seed packet and pack of mix or mats you must buy.</td></tr>
 <tr><th scope="row">Light and small tools</th><td data-label="Kit route">Check rather than assume that a lamp, timer, or mister is supplied.</td><td data-label="DIY route">Add only what your space needs and you do not already have.</td></tr>
 <tr><th scope="row">Delivery and tax</th><td data-label="Kit route">Use the final checkout amount for your address.</td><td data-label="DIY route">Include delivery from every supplier you use.</td></tr>
 <tr><th scope="row">Next planting</th><td data-label="Kit route">Check refill compatibility, pack size, and shipping.</td><td data-label="DIY route">Calculate seed used and add the medium and other consumables.</td></tr>
 </tbody></table></div>
-<div class="verdict"><p><strong>Your worksheet.</strong> Kit plus missing supplies and delivery: $________. DIY supplies and delivery: $________. Later planting consumables: $________ per planting. Number of plantings included: ________.</p><p>Keep equipment cost separate from consumables. Spreading a tray or lamp purchase over ten crops only makes sense if you actually expect to grow those ten crops.</p></div>
+</details>
+</section>
 <h2>Checkout spend versus seed you actually sow</h2>
 <p>Count three different numbers. Checkout spend is what you pay now for whole packs. Consumed cost is the slice of seed one sowing uses. Equipment spread over many trays only helps if you say how many times you will reuse the tray.</p>
 <p>University of Maryland Extension says seed in a 1/32 ounce packet can cost about 30 times more per seed than a quarter-pound bag. Compare the actual kit contents and refill prices before choosing: that packet example does not establish the cost of every kit. The <a href="/tools/microgreens-seed-calculator/">calculator</a> turns your own price per pound, or a package price plus package weight, into those two seed costs.</p>
@@ -66,7 +159,7 @@
 </details>
 <details>
 <summary>Where do I put my own price?</summary>
-<p>In the <a href="/tools/microgreens-seed-calculator/">calculator</a>. Price per pound estimates seed consumed. Package price plus grams estimates bags at checkout.</p>
+<p>Enter kit and DIY prices in the <a href="#cost-comparison">setup comparison above</a>. For seed quantities, use the <a href="/tools/microgreens-seed-calculator/">seed calculator</a>: price per pound estimates seed consumed, while package price plus grams estimates bags at checkout.</p>
 </details>
 </div>
 <h2>Sources</h2>

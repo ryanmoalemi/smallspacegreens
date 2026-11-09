@@ -22,9 +22,9 @@ SITE_ID = f"{SITE}/#website"
 NAV = [
     ("Start here", f"{SITE}/guides/microgreens-in-a-small-apartment/", "/guides/microgreens-in-a-small-apartment/"),
     ("Growing guides", f"{SITE}/guides/", "/guides/"),
-    ("Find your setup", f"{SITE}/gear/", "/gear/"),
+    ("Seed calculator", f"{SITE}/tools/microgreens-seed-calculator/", "/tools/microgreens-seed-calculator/"),
     ("About", f"{SITE}/about/", "/about/"),
-    ("Seed calculator ↗", f"{SITE}/tools/microgreens-seed-calculator/", "/tools/microgreens-seed-calculator/"),
+    ("Find your setup ↗", f"{SITE}/gear/", "/gear/"),
 ]
 
 BRAND_MARK = '<svg viewBox="0 0 40 48" fill="none" aria-hidden="true"><path d="M20 43V15" stroke="currentColor" stroke-width="1.8"/><path d="M20 29C7 30 3 21 4 13c11 0 16 7 16 16Z" fill="currentColor"/><path d="M20 20C31 21 36 13 35 5c-11 0-15 7-15 15Z" fill="currentColor"/><path d="M7 43h26" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
@@ -50,7 +50,7 @@ GUIDES = [
         "title": "Microgreens Kit vs DIY: Compare Setup and Repeat Costs",
         "description": "Compare microgreens kits and DIY setups by what is included, space needed, upfront spending, and repeat costs. Choose the approach that fits your plans.",
         "h1": "Microgreens kit vs DIY: compare setup and repeat costs",
-        "dek": "Compare the complete setup, refill costs, and daily work. Use a simple worksheet to price the kit or trays you are considering.",
+        "dek": "Compare the complete setup, refill costs, and daily work. Enter your prices to compare what you pay today and what the next planting needs.",
         "og": "cost",
     },
     {
@@ -90,7 +90,7 @@ GUIDES = [
         "title": "How to Bottom Water Microgreens and Seed Trays",
         "description": "Bottom water a microgreen or seed tray: which tray has holes, where the water goes, and when to pour the extra out.",
         "h1": "How to bottom water microgreens and seed trays",
-        "dek": "Wet the mix from below, then empty the reservoir. A moldy crop is discarded, not rescued by a lighter pour.",
+        "dek": "Give roots water from below, let the mix absorb it, then pour out the extra.",
         "og": "watering",
     },
     {
@@ -98,7 +98,7 @@ GUIDES = [
         "title": "Plan a Balcony Salad Garden: Containers, Light, and Layouts",
         "description": "Plan a balcony salad with container sizes, sun hours, drainage, and layouts that match the light you actually have.",
         "h1": "Plan a balcony salad garden",
-        "dek": "Match the crop to the hours of sun. Smaller pots are easier to move. They do not prove the balcony can hold the weight.",
+        "dek": "Choose salad crops for the sun you have, then match the containers to your space.",
         "og": "balcony",
     },
 ]
@@ -243,6 +243,8 @@ def related_html(slug: str) -> str:
             f'<li><a href="/guides/{item}/">{esc(guide["h1"])}</a><p>{esc(guide["dek"])}</p></li>'
         )
     calc = '<li><a href="/tools/microgreens-seed-calculator/">Microgreens seed calculator</a><p>Scale a published 10 by 20 inch rate to your tray and estimate seed cost.</p></li>'
+    if slug in {"balcony-salad-garden", "apartment-seed-starting"}:
+        calc = ""
     return "<h2>Related guides</h2><ul class=\"related-list\">" + calc + "".join(items) + "</ul>"
 
 
@@ -275,7 +277,7 @@ gtag('config', 'G-8YDK0NYXM5');
     scripts = page.get("scripts", "")
     scripts += f'<script src="/js/site.js?v={asset_version("js/site.js")}" defer></script>'
     if page.get("signup"):
-        scripts += '<script src="/js/signup.js"></script>'
+        scripts += f'<script src="/js/signup.js?v={asset_version("js/signup.js")}"></script>'
     scripts += """<script>
 document.querySelectorAll(".video-facade").forEach(function (btn) {
   btn.addEventListener("click", function () {
@@ -372,18 +374,21 @@ def signup_form(compact: bool) -> str:
         )
     return f"""<section class="signup" aria-labelledby="signup-title">
 {lead}
-<form class="signup-form">
+<form class="signup-form" method="post">
+<fieldset data-signup-fields disabled>
 <div class="field">
 <label for="signup-email">Email address</label>
 <input id="signup-email" name="email" type="email" autocomplete="email" required>
 </div>
-<div class="hp">
+<div class="hp" aria-hidden="true">
 <label for="website">Website</label>
 <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
 </div>
 <button class="button" type="submit">Email me the checklist</button>
 <p class="signup-error" role="alert" hidden></p>
+</fieldset>
 </form>
+<p class="signup-direct">Or <a href="/guides/first-tray-checklist/">open the printable checklist</a>.</p>
 </section>
 """
 
@@ -452,15 +457,18 @@ def prepare_guide_body(html: str) -> str:
     html = open_first_faqs(html)
     html = collapse_sources(html)
     toc = guide_toc(html)
-    idx = html.find("<h2")
+    marker = "<!--GUIDE_MAIN-->"
+    idx = html.find(marker) if marker in html else html.find("<h2")
     if idx == -1 or not toc:
-        return html
+        return html.replace(marker, "")
+    intro = html[:idx]
+    content = html[idx:].replace(marker, "", 1)
     return (
-        '<div class="guide-intro">' + html[:idx] + '</div>'
+        '<div class="guide-intro">' + intro + '</div>'
         + '<div class="guide-with-toc">'
         + toc
         + '<div class="guide-main">'
-        + html[idx:]
+        + content
         + "</div></div>"
     )
 
@@ -605,6 +613,7 @@ def disclosure() -> str:
 
 
 def article_page(guide: dict, body: str) -> str:
+    show_signup = guide["slug"] not in {"balcony-salad-garden", "apartment-seed-starting"}
     url = f"{SITE}/guides/{guide['slug']}/"
     crumbs = [
         ("Home", f"{SITE}/"),
@@ -653,7 +662,7 @@ def article_page(guide: dict, body: str) -> str:
         + '</header>'
         + prepare_guide_body(body)
         + related_html(guide["slug"])
-        + signup_form(True)
+        + (signup_form(True) if show_signup else "")
     )
     page = {
         "title": guide["title"],
@@ -662,8 +671,10 @@ def article_page(guide: dict, body: str) -> str:
         "kind": "article",
         "nav": guide.get("nav", "/guides/"),
         "image": page_image,
-        "signup": True,
+        "signup": show_signup,
     }
+    if guide["slug"] == "microgreens-kit-vs-diy-cost":
+        page["scripts"] = f'<script src="/js/cost-compare.js?v={asset_version("js/cost-compare.js")}" defer></script>'
     return layout(page, main, graph)
 
 
@@ -1144,6 +1155,8 @@ def render_static_pages() -> dict[str, str]:
             "signup": filename == "checklist.html",
             "crumbs": [("Home", f"{SITE}/"), (crumb, url)],
         }
+        if filename == "gear.html":
+            page["scripts"] = f'<script src="/js/setup.js?v={asset_version("js/setup.js")}" defer></script>'
         pages[rel] = simple_page(page, body)
 
     subscribe_pages = [
@@ -1199,7 +1212,7 @@ def render_static_pages() -> dict[str, str]:
 
 
 def main() -> None:
-    css = minify_css((SRC / "styles.css").read_text())
+    css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css"]))
     css_path = ROOT / "css" / "styles.css"
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(css + "\n")
@@ -1209,6 +1222,8 @@ def main() -> None:
     signup_js.parent.mkdir(parents=True, exist_ok=True)
     signup_js.write_text((SRC / "signup.js").read_text())
     (ROOT / "js" / "site.js").write_text((SRC / "site.js").read_text())
+    for name in ["setup.js", "cost-compare.js"]:
+        (ROOT / "js" / name).write_text((SRC / name).read_text())
     assets = ROOT / "assets"
     assets.mkdir(parents=True, exist_ok=True)
     (assets / "photo-soon.svg").write_text((SRC / "photo-soon.svg").read_text())

@@ -10,7 +10,7 @@ These items need Ryan Moalemi. They are not on the public pages, because the sit
 
 ## Products and affiliate links
 
-- No affiliate program is connected, and the public site has no store links. The gear page is categories only.
+- No affiliate program is connected, and the public site has no store links. The setup guide compares approaches and builds supply lists; no specific product records are rendered.
 - `src/products.json` may hold unpublished research. Do not render it until an advertiser is approved. Then recheck the variant, dimensions, and disclosure together.
 - Measure outer size, inner growing floor, depth, and nesting before making independent fit claims. Unknown dimensions must stay unknown.
 - Current kit-versus-DIY shopping baskets are not published. The cost page keeps a dated Utah State snapshot and a labeled recalculation instead.

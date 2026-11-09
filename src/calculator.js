@@ -131,10 +131,11 @@
       "<details class='result-method'><summary>Rate and assumptions</summary><p>" + escapeHtml(result.rateNote) + "</p>" +
       "<p>Seed weight scales by tray area. Nominal outer dimensions may differ from the inner growing floor. This estimate does not adjust for germination or predict yield.</p>" +
       (crop().note ? "<p>" + escapeHtml(crop().note) + "</p>" : "") + "</details>" +
-      "<p class='next-action'><a href='/guides/microgreens-seed-density-per-tray/'>How these rates were chosen</a> · <a href='/guides/microgreens-kit-vs-diy-cost/'>Compare setup costs</a></p>";
+      "<div class='cta-row result-next-actions'><a class='button' href='/gear/?setup=tray#seeds'>Build my supply list</a><a href='/guides/microgreens-kit-vs-diy-cost/#cost-comparison'>Compare setup costs</a></div>" +
+      "<p class='next-action'><a href='/guides/microgreens-seed-density-per-tray/'>How these rates were chosen</a></p>";
   }
 
-  function syncShare() {
+  function shareParams() {
     var params = new URLSearchParams();
     params.set("crop", form.crop.value);
     params.set("tray", selectedTray());
@@ -150,7 +151,18 @@
       if (form.userLow.value) params.set("rate", form.userLow.value);
       if (form.userHigh.value) params.set("rateHigh", form.userHigh.value);
     }
-    var next = window.location.pathname + "?" + params.toString();
+    return params;
+  }
+
+  function syncShare() {
+    var params = new URLSearchParams(window.location.search);
+    // Replace calculator state while preserving campaign tags and other page context.
+    ["crop", "tray", "n", "l", "w", "unit", "example", "rate", "rateHigh",
+      "price", "priceUnit", "priceMode", "packagePrice", "packageGrams"].forEach(function (key) {
+      params.delete(key);
+    });
+    shareParams().forEach(function (value, key) { params.set(key, value); });
+    var next = window.location.pathname + "?" + params.toString() + window.location.hash;
     if (window.history && window.history.replaceState) window.history.replaceState(null, "", next);
   }
 
@@ -201,7 +213,11 @@
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     var result = calculate();
-    out.focus();
+    out.focus({ preventScroll: true });
+    if (out.scrollIntoView) {
+      var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      out.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    }
     if (result.ok && typeof gtag === "function") {
       gtag("event", "calculator_result");
     }
@@ -284,7 +300,10 @@
   }
   if (shareBtn) {
     shareBtn.addEventListener("click", function () {
-      if (lastResult && lastResult.ok) return copyText(window.location.href, "Link copied. Tray settings and rates are included; prices are excluded.");
+      if (lastResult && lastResult.ok) {
+        var url = window.location.origin + window.location.pathname + "?" + shareParams().toString();
+        return copyText(url, "Link copied. Tray settings and rates are included; prices are excluded.");
+      }
     });
   }
   if (printBtn) {
@@ -297,7 +316,6 @@
     resetBtn.addEventListener("click", function () {
       form.reset();
       form.useExample.value = "0";
-      if (window.history && window.history.replaceState) window.history.replaceState(null, "", window.location.pathname);
       calculate();
     });
   }
