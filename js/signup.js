@@ -11,7 +11,11 @@
       error.hidden = false;
       error.textContent = message;
     }
-    if (button) button.disabled = false;
+    if (button) {
+      button.disabled = false;
+      button.removeAttribute("aria-busy");
+      if (button.dataset.label) button.textContent = button.dataset.label;
+    }
   }
 
   Array.prototype.forEach.call(forms, function (form) {
@@ -26,7 +30,12 @@
         showError(form, "Enter an email address so Ryan can send the checklist.");
         return;
       }
-      if (button) button.disabled = true;
+      if (button) {
+        button.disabled = true;
+        button.setAttribute("aria-busy", "true");
+        button.dataset.label = button.textContent;
+        button.textContent = "Sending";
+      }
       var error = form.querySelector(".signup-error");
       if (error) error.hidden = true;
       fetch(endpoint, {

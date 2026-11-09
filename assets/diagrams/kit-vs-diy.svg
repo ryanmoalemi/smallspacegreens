@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 380" role="img">
+  <title>Kit compared with a DIY tray setup</title>
+  <rect width="880" height="380" fill="#f6f3ea"/>
+  <text x="24" y="36" font-family="system-ui, Segoe UI, sans-serif" font-size="22" font-weight="700" fill="#1c2420">Two ways to start. Not a product photo.</text>
+  <rect x="24" y="60" width="400" height="290" fill="#fffdf8" stroke="#d7d0c3"/>
+  <text x="44" y="92" font-family="system-ui, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#17382a">Kit</text>
+  <rect x="80" y="120" width="160" height="110" rx="8" fill="#e7efe8" stroke="#17382a" stroke-width="3"/>
+  <rect x="100" y="140" width="120" height="16" fill="#c4a574"/>
+  <circle cx="130" cy="180" r="6" fill="#17382a"/>
+  <circle cx="160" cy="176" r="6" fill="#17382a"/>
+  <circle cx="190" cy="182" r="6" fill="#17382a"/>
+  <text x="44" y="270" font-family="system-ui, Segoe UI, sans-serif" font-size="15" fill="#1c2420">One purchase: a little seed, a tray or mat, and instructions.</text>
+  <text x="44" y="294" font-family="system-ui, Segoe UI, sans-serif" font-size="15" fill="#1c2420">Convenient once. Small packets get expensive if you repeat.</text>
+  <rect x="450" y="60" width="406" height="290" fill="#fffdf8" stroke="#d7d0c3"/>
+  <text x="470" y="92" font-family="system-ui, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#17382a">DIY</text>
+  <rect x="490" y="140" width="140" height="28" rx="4" fill="#245c40"/>
+  <rect x="500" y="180" width="120" height="70" rx="6" fill="#c4a574" stroke="#17382a" stroke-width="3"/>
+  <rect x="650" y="150" width="70" height="90" rx="6" fill="#e7efe8" stroke="#17382a" stroke-width="3"/>
+  <text x="470" y="280" font-family="system-ui, Segoe UI, sans-serif" font-size="15" fill="#1c2420">Reusable trays, a bag of mix, and seed you weigh.</text>
+  <text x="470" y="304" font-family="system-ui, Segoe UI, sans-serif" font-size="15" fill="#1c2420">More cash up front. Less per later tray.</text>
+</svg>

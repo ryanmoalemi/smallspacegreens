@@ -26,6 +26,7 @@ gtag('config', 'G-8YDK0NYXM5');
 <meta name="twitter:title" content="First-Tray Checklist for Apartment Microgreens">
 <meta name="twitter:description" content="Print the first-tray checklist, or get the same list by email from Ryan after you confirm your address.">
 <meta name="twitter:image" content="https://smallspacegreens.com/assets/og/checklist.jpg">
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Small Space Greens" href="/feed.xml">
 <link rel="stylesheet" href="/css/styles.css">
@@ -58,6 +59,8 @@ gtag('config', 'G-8YDK0NYXM5');
 </form>
 </section>
 
+<h2>The same eight steps</h2>
+<ol class="step-strip"><li><figure><img src="/assets/diagrams/steps/01-wash.svg" width="320" height="320" alt="Illustration of washing a shallow planting tray." loading="lazy"><figcaption>1. Wash the tray</figcaption></figure></li><li><figure><img src="/assets/diagrams/steps/02-fill.svg" width="320" height="320" alt="Illustration of a tray filled with about 1 to 1.5 inches of mix." loading="lazy"><figcaption>2. Fill the mix</figcaption></figure></li><li><figure><img src="/assets/diagrams/steps/03-sow.svg" width="320" height="320" alt="Illustration of seed scattered on the mix surface." loading="lazy"><figcaption>3. Sow the seed</figcaption></figure></li><li><figure><img src="/assets/diagrams/steps/04-cover.svg" width="320" height="320" alt="Illustration of a dark cover over a sown tray." loading="lazy"><figcaption>4. Cover in the dark</figcaption></figure></li><li><figure><img src="/assets/diagrams/steps/05-weight.svg" width="320" height="320" alt="Illustration of a weight on pea or sunflower seed." loading="lazy"><figcaption>5. Weight large seed</figcaption></figure></li><li><figure><img src="/assets/diagrams/steps/06-light.svg" width="320" height="320" alt="Illustration of seedlings under light." loading="lazy"><figcaption>6. Uncover into light</figcaption></figure></li><li><figure><img src="/assets/diagrams/steps/07-water.svg" width="320" height="320" alt="Illustration of a drained tray nested in a water tray." loading="lazy"><figcaption>7. Water from below</figcaption></figure></li><li><figure><img src="/assets/diagrams/steps/08-cut.svg" width="320" height="320" alt="Illustration of cutting seedlings above the mix and leaving the roots." loading="lazy"><figcaption>8. Cut above the mix</figcaption></figure></li></ol><p class="credit">Original illustrations of the method. Not photographs of a Small Space Greens tray.</p>
 <p>The steps follow the apartment method on <a href="/guides/microgreens-in-a-small-apartment/">your first tray</a>, which cites University of Maryland Extension, Utah State University Extension, and Penn State Extension. This list is a reminder, not a new rate.</p>
 <div class="checklist"><ul>
 <li>Date sown: ________</li>
@@ -88,6 +91,24 @@ gtag('config', 'G-8YDK0NYXM5');
 <p class="copyright">© 2026 Small Space Greens</p>
 </div>
 </footer>
-<script src="/js/signup.js"></script>
+<script src="/js/signup.js"></script><script>
+document.querySelectorAll(".video-facade").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var id = btn.getAttribute("data-id");
+    var frame = document.createElement("div");
+    frame.className = "video-frame";
+    var iframe = document.createElement("iframe");
+    iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1";
+    iframe.title = btn.getAttribute("aria-label") || "YouTube video";
+    iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+    iframe.allowFullscreen = true;
+    frame.appendChild(iframe);
+    btn.replaceWith(frame);
+    if (typeof gtag === "function") gtag("event", "video_play", { video_id: id });
+  });
+});
+var toc = document.querySelector(".toc-drawer");
+if (toc && window.matchMedia("(max-width: 899px)").matches) toc.removeAttribute("open");
+</script>
 </body>
 </html>

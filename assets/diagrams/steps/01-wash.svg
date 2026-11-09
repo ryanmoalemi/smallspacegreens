@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img">
+<title>Wash the tray</title>
+<rect width="320" height="320" rx="16" fill="#f6f3ea"/>
+<rect x="16" y="16" width="288" height="288" rx="12" fill="#fffdf8" stroke="#d7d0c3"/>
+
+<rect x="70" y="120" width="180" height="70" rx="8" fill="#e7efe8" stroke="#17382a" stroke-width="4"/>
+<path d="M90 110c10-20 20-20 30 0s20 20 30 0 20-20 30 0 20 20 30 0" fill="none" stroke="#245c40" stroke-width="4"/>
+<circle cx="200" cy="100" r="8" fill="#8fb8d6"/>
+<circle cx="230" cy="90" r="6" fill="#8fb8d6"/>
+
+</svg>

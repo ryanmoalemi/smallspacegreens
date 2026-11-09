@@ -266,6 +266,25 @@ gtag('config', 'G-8YDK0NYXM5');
     scripts = page.get("scripts", "")
     if page.get("signup"):
         scripts += '<script src="/js/signup.js"></script>'
+    scripts += """<script>
+document.querySelectorAll(".video-facade").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var id = btn.getAttribute("data-id");
+    var frame = document.createElement("div");
+    frame.className = "video-frame";
+    var iframe = document.createElement("iframe");
+    iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1";
+    iframe.title = btn.getAttribute("aria-label") || "YouTube video";
+    iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+    iframe.allowFullscreen = true;
+    frame.appendChild(iframe);
+    btn.replaceWith(frame);
+    if (typeof gtag === "function") gtag("event", "video_play", { video_id: id });
+  });
+});
+var toc = document.querySelector(".toc-drawer");
+if (toc && window.matchMedia("(max-width: 899px)").matches) toc.removeAttribute("open");
+</script>"""
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -287,6 +306,7 @@ gtag('config', 'G-8YDK0NYXM5');
 <meta name="twitter:title" content="{esc(title)}">
 <meta name="twitter:description" content="{esc(description)}">
 <meta name="twitter:image" content="{esc(image)}">
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Small Space Greens" href="/feed.xml">
 <link rel="stylesheet" href="/css/styles.css">
@@ -352,6 +372,194 @@ def signup_form(compact: bool) -> str:
 """
 
 
+def add_heading_ids(html: str) -> str:
+    used: dict[str, int] = {}
+
+    def repl(match: re.Match) -> str:
+        inner = match.group(1)
+        text = re.sub(r"<[^>]+>", "", inner)
+        slug = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:48] or "section"
+        seen = used.get(slug, 0) + 1
+        used[slug] = seen
+        if seen > 1:
+            slug = f"{slug}-{seen}"
+        return f'<h2 id="{slug}">{inner}</h2>'
+
+    return re.sub(r"<h2>(.*?)</h2>", repl, html, flags=re.S)
+
+
+def open_first_faqs(html: str) -> str:
+    parts = html.split('<div class="faq">', 1)
+    if len(parts) != 2:
+        return html
+    before, after = parts
+    count = {"n": 0}
+
+    def repl(match: re.Match) -> str:
+        count["n"] += 1
+        return "<details open>" if count["n"] <= 2 else "<details>"
+
+    after = re.sub(r"<details>", repl, after)
+    return before + '<div class="faq">' + after
+
+
+def collapse_sources(html: str) -> str:
+    return re.sub(
+        r'<h2 id="sources">Sources</h2>\s*(<ul class="sources">.*?</ul>)',
+        r'<details class="fold" id="sources"><summary>Sources</summary>\1</details>',
+        html,
+        count=1,
+        flags=re.S,
+    )
+
+
+def guide_toc(html: str) -> str:
+    headings = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', html, flags=re.S)
+    if 'id="sources"' in html:
+        headings.append(("sources", "Sources"))
+    if not headings:
+        return ""
+    items = []
+    for slug, inner in headings:
+        label = re.sub(r"<[^>]+>", "", inner)
+        label = " ".join(label.split())
+        items.append(f'<li><a href="#{slug}">{esc(label)}</a></li>')
+    return (
+        '<nav class="guide-toc" aria-label="On this page">'
+        '<details class="toc-drawer" open><summary>On this page</summary>'
+        f'<ol>{"".join(items)}</ol></details></nav>'
+    )
+
+
+def prepare_guide_body(html: str) -> str:
+    html = add_heading_ids(html)
+    html = open_first_faqs(html)
+    html = collapse_sources(html)
+    toc = guide_toc(html)
+    idx = html.find("<h2")
+    if idx == -1 or not toc:
+        return html
+    return (
+        html[:idx]
+        + '<div class="guide-with-toc">'
+        + toc
+        + '<div class="guide-main">'
+        + html[idx:]
+        + "</div></div>"
+    )
+
+
+def step_strip() -> str:
+    frames = [
+        ("01-wash.svg", "1. Wash the tray", "Illustration of washing a shallow planting tray."),
+        ("02-fill.svg", "2. Fill the mix", "Illustration of a tray filled with about 1 to 1.5 inches of mix."),
+        ("03-sow.svg", "3. Sow the seed", "Illustration of seed scattered on the mix surface."),
+        ("04-cover.svg", "4. Cover in the dark", "Illustration of a dark cover over a sown tray."),
+        ("05-weight.svg", "5. Weight large seed", "Illustration of a weight on pea or sunflower seed."),
+        ("06-light.svg", "6. Uncover into light", "Illustration of seedlings under light."),
+        ("07-water.svg", "7. Water from below", "Illustration of a drained tray nested in a water tray."),
+        ("08-cut.svg", "8. Cut above the mix", "Illustration of cutting seedlings above the mix and leaving the roots."),
+    ]
+    items = []
+    for filename, label, alt in frames:
+        items.append(
+            "<li><figure>"
+            f'<img src="/assets/diagrams/steps/{filename}" width="320" height="320" alt="{esc(alt)}" loading="lazy">'
+            f"<figcaption>{esc(label)}</figcaption></figure></li>"
+        )
+    return (
+        '<ol class="step-strip">'
+        + "".join(items)
+        + "</ol>"
+        + '<p class="credit">Original illustrations of the method. Not photographs of a Small Space Greens tray.</p>'
+    )
+
+
+VIDEOS = {
+    "dtvuMNVLISo": (
+        "How to Grow Microgreens from Start to Finish (COMPLETE GUIDE)",
+        "Epic Gardening",
+    ),
+    "TnKe4dowdUk": (
+        "How to grow vegetables and herbs on your windowsill",
+        "Royal Botanic Gardens, Kew",
+    ),
+    "FIhqP_47mfQ": (
+        "How to Plant Microgreens (And What Soil to Use)",
+        "Epic Gardening",
+    ),
+}
+
+
+def video_embed(video_id: str) -> str:
+    title, channel = VIDEOS[video_id]
+    return (
+        '<figure class="video-embed">'
+        f'<button type="button" class="video-facade" data-id="{video_id}" '
+        f'aria-label="Play video: {esc(title)}, {esc(channel)}">'
+        f'<img src="/assets/video/{video_id}.jpg" alt="" width="480" height="360" loading="lazy">'
+        '<span class="play-badge">Play</span></button>'
+        f'<figcaption class="credit">Video: {esc(channel)} on YouTube. {esc(title)}. '
+        "Third-party video. Not filmed for Small Space Greens. "
+        f'<a href="https://www.youtube.com/watch?v={video_id}">Opens on YouTube</a>.</figcaption>'
+        "</figure>"
+    )
+
+
+def density_figure() -> str:
+    return (
+        '<figure class="photo">'
+        '<img src="/assets/diagrams/seed-density.svg" width="880" height="520" loading="lazy" '
+        'alt="Bar chart of Utah State seed grams per 10 by 20 inch tray. A separate bar shows the Maryland 10 to 15 gram example, labeled as not a crop rate.">'
+        '<figcaption class="credit">Same crop rates as the calculator. Illustration, not a grow trial.</figcaption>'
+        "</figure>"
+    )
+
+
+def write_density_chart() -> None:
+    rates = json.loads((SRC / "rates.json").read_text())
+    crops = [row for row in rates if "grams" in row and not row.get("needsRate")]
+    crops.sort(key=lambda row: row["grams"])
+    width = 880
+    row_h = 36
+    top = 78
+    height = top + row_h * (len(crops) + 2) + 70
+    max_g = max(row["grams"] for row in crops)
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img">',
+        "<title>Seed grams per 10 by 20 inch tray</title>",
+        f'<rect width="{width}" height="{height}" fill="#f6f3ea"/>',
+        '<text x="24" y="36" font-family="system-ui, Segoe UI, sans-serif" font-size="22" font-weight="700" fill="#1c2420">Grams per 10 by 20 inch tray</text>',
+        '<text x="24" y="60" font-family="system-ui, Segoe UI, sans-serif" font-size="14" fill="#4e5a52">Utah State crop rates used by the calculator. Illustration, not a trial.</text>',
+    ]
+    for index, row in enumerate(crops):
+        y = top + index * row_h
+        bar = int(520 * row["grams"] / max_g)
+        parts.append(
+            f'<text x="24" y="{y + 16}" font-family="system-ui, Segoe UI, sans-serif" font-size="15" fill="#1c2420">{esc(row["name"])}</text>'
+        )
+        parts.append(f'<rect x="160" y="{y}" width="{bar}" height="20" fill="#245c40"/>')
+        parts.append(
+            f'<text x="{168 + bar}" y="{y + 16}" font-family="system-ui, Segoe UI, sans-serif" font-size="14" fill="#17382a">{row["grams"]} g</text>'
+        )
+    y = top + len(crops) * row_h + 8
+    parts.append(
+        f'<text x="24" y="{y + 18}" font-family="system-ui, Segoe UI, sans-serif" font-size="15" fill="#1c2420">Maryland example</text>'
+    )
+    parts.append(f'<rect x="160" y="{y + 4}" width="{int(520 * 15 / max_g)}" height="20" fill="#e7d7b8" stroke="#8a3e12"/>')
+    parts.append(f'<rect x="160" y="{y + 4}" width="{int(520 * 10 / max_g)}" height="20" fill="#c4a574"/>')
+    parts.append(
+        f'<text x="{176 + int(520 * 15 / max_g)}" y="{y + 18}" font-family="system-ui, Segoe UI, sans-serif" font-size="14" fill="#8a3e12">10 to 15 g, not a crop rate</text>'
+    )
+    parts.append(
+        f'<text x="24" y="{height - 24}" font-family="system-ui, Segoe UI, sans-serif" font-size="13" fill="#4e5a52">Source: Utah State University Extension grams per 1020 tray. The tan bar is University of Maryland Extension\'s general broadcast example for crops without a Utah State rate.</text>'
+    )
+    parts.append("</svg>")
+    path = ROOT / "assets" / "diagrams" / "seed-density.svg"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("".join(parts))
+
+
 def disclosure() -> str:
     return (
         '<p class="disclosure">This page may later include affiliate links. '
@@ -406,7 +614,7 @@ def article_page(guide: dict, body: str) -> str:
         + f"<h1>{esc(guide['h1'])}</h1>"
         + f"<p class=\"dek\">{esc(guide['dek'])}</p>"
         + f"<p class=\"byline\">By <a href=\"/about/\">Ryan Moalemi</a>. Updated {DATE_LABEL}.</p>"
-        + body
+        + prepare_guide_body(body)
         + related_html(guide["slug"])
         + signup_form(True)
     )
@@ -564,7 +772,14 @@ def render_static_pages() -> dict[str, str]:
     home_title = "Small Space Greens | Microgreens and Small-Space Gardening"
     home_desc = "Grow microgreens and salad greens in a small space. Find practical guides, a seed calculator, and help choosing trays, lights, and growing supplies."
     check_lengths(home_title, home_desc, "home")
-    home_body = (SRC / "pages" / "home.html").read_text().replace("<!--GUIDE_LIST-->", guide_list()).replace("<!--SIGNUP-->", signup_form(True))
+    home_body = (
+        (SRC / "pages" / "home.html")
+        .read_text()
+        .replace("<!--GUIDE_LIST-->", guide_list())
+        .replace("<!--SIGNUP-->", signup_form(True))
+        .replace("<!--STEP_STRIP-->", step_strip())
+        .replace("<!--VIDEO_EPIC-->", video_embed("dtvuMNVLISo"))
+    )
     home = {
         "title": home_title,
         "description": home_desc,
@@ -746,7 +961,12 @@ def render_static_pages() -> dict[str, str]:
     ]
     for rel, title, desc, url, nav, crumb, image, filename, wrap in extra_pages:
         check_lengths(title, desc, rel)
-        body = (SRC / "pages" / filename).read_text().replace("<!--SIGNUP-->", signup_form(False))
+        body = (
+            (SRC / "pages" / filename)
+            .read_text()
+            .replace("<!--SIGNUP-->", signup_form(False))
+            .replace("<!--STEP_STRIP-->", step_strip())
+        )
         page = {
             "title": title,
             "description": desc,
@@ -803,6 +1023,10 @@ def render_static_pages() -> dict[str, str]:
     for guide in GUIDES:
         check_lengths(guide["title"], guide["description"], guide["slug"])
         body = (SRC / "guides" / f"{guide['slug']}.html").read_text()
+        body = body.replace("<!--STEP_STRIP-->", step_strip())
+        body = body.replace("<!--DENSITY_CHART-->", density_figure())
+        for video_id in VIDEOS:
+            body = body.replace(f"<!--VIDEO:{video_id}-->", video_embed(video_id))
         pages[f"guides/{guide['slug']}/index.html"] = article_page(guide, body)
 
     return pages
@@ -814,6 +1038,7 @@ def main() -> None:
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(css + "\n")
     write_calculator_js()
+    write_density_chart()
     signup_js = ROOT / "js" / "signup.js"
     signup_js.parent.mkdir(parents=True, exist_ok=True)
     signup_js.write_text((SRC / "signup.js").read_text())

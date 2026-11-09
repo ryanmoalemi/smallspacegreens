@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <symbol id="i-tray" viewBox="0 0 64 64"><rect x="8" y="28" width="48" height="16" rx="3" fill="none" stroke="#17382a" stroke-width="3"/></symbol>
+  <symbol id="i-seed" viewBox="0 0 64 64"><ellipse cx="32" cy="34" rx="10" ry="14" fill="#17382a"/></symbol>
+  <symbol id="i-mix" viewBox="0 0 64 64"><path d="M12 40h40l-6 12H18z" fill="#c4a574" stroke="#17382a" stroke-width="3"/></symbol>
+  <symbol id="i-water" viewBox="0 0 64 64"><path d="M32 10c10 14 16 22 16 30a16 16 0 0 1-32 0c0-8 6-16 16-30z" fill="#245c40"/></symbol>
+  <symbol id="i-light" viewBox="0 0 64 64"><circle cx="32" cy="32" r="10" fill="#c4a574"/><g stroke="#17382a" stroke-width="3"><path d="M32 8v8M32 48v8M8 32h8M48 32h8"/></g></symbol>
+  <symbol id="i-scissors" viewBox="0 0 64 64"><path d="M16 16l32 32M48 16L16 48" stroke="#17382a" stroke-width="3" fill="none"/></symbol>
+  <symbol id="i-fan" viewBox="0 0 64 64"><circle cx="32" cy="32" r="6" fill="#17382a"/><path d="M32 26c8-14 18-8 10 6M32 38c-8 14-18 8-10-6M26 32c-14-8-8-18 6-10M38 32c14 8 8 18-6 10" fill="#245c40"/></symbol>
+  <symbol id="i-mist" viewBox="0 0 64 64"><circle cx="22" cy="40" r="4" fill="#245c40"/><circle cx="34" cy="28" r="4" fill="#245c40"/><circle cx="44" cy="42" r="3" fill="#245c40"/></symbol>
+</svg>

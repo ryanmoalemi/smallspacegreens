@@ -26,6 +26,7 @@ gtag('config', 'G-8YDK0NYXM5');
 <meta name="twitter:title" content="About Small Space Greens and the Editorial Approach">
 <meta name="twitter:description" content="Ryan Moalemi writes Small Space Greens as research-based how-to, with no paid placements and affiliate links explained before they are used.">
 <meta name="twitter:image" content="https://smallspacegreens.com/assets/og/about.jpg">
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Small Space Greens" href="/feed.xml">
 <link rel="stylesheet" href="/css/styles.css">
@@ -68,6 +69,24 @@ gtag('config', 'G-8YDK0NYXM5');
 <p class="copyright">© 2026 Small Space Greens</p>
 </div>
 </footer>
-
+<script>
+document.querySelectorAll(".video-facade").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var id = btn.getAttribute("data-id");
+    var frame = document.createElement("div");
+    frame.className = "video-frame";
+    var iframe = document.createElement("iframe");
+    iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1";
+    iframe.title = btn.getAttribute("aria-label") || "YouTube video";
+    iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+    iframe.allowFullscreen = true;
+    frame.appendChild(iframe);
+    btn.replaceWith(frame);
+    if (typeof gtag === "function") gtag("event", "video_play", { video_id: id });
+  });
+});
+var toc = document.querySelector(".toc-drawer");
+if (toc && window.matchMedia("(max-width: 899px)").matches) toc.removeAttribute("open");
+</script>
 </body>
 </html>

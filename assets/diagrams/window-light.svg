@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 280" role="img">
+  <title>Upright stems versus stems leaning toward a window</title>
+  <rect width="880" height="280" fill="#f6f3ea"/>
+  <text x="24" y="34" font-family="system-ui, Segoe UI, sans-serif" font-size="20" font-weight="700" fill="#1c2420">What the sill is telling you</text>
+  <text x="24" y="58" font-family="system-ui, Segoe UI, sans-serif" font-size="14" fill="#4e5a52">Illustration only. Not a photo and not a diagnosis.</text>
+  <rect x="40" y="80" width="360" height="170" fill="#fffdf8" stroke="#d7d0c3"/>
+  <text x="56" y="108" font-family="system-ui, Segoe UI, sans-serif" font-size="16" font-weight="700" fill="#17382a">Enough light</text>
+  <g stroke="#245c40" stroke-width="4">
+    <path d="M120 210 v-70"/><path d="M180 210 v-80"/><path d="M240 210 v-64"/>
+  </g>
+  <g fill="#2f6a4a">
+    <circle cx="120" cy="136" r="8"/><circle cx="180" cy="124" r="9"/><circle cx="240" cy="142" r="8"/>
+  </g>
+  <rect x="460" y="80" width="380" height="170" fill="#fffdf8" stroke="#d7d0c3"/>
+  <text x="476" y="108" font-family="system-ui, Segoe UI, sans-serif" font-size="16" font-weight="700" fill="#8a3e12">Leaning toward the glass</text>
+  <g stroke="#8a3e12" stroke-width="4" fill="none">
+    <path d="M560 210 q40 -40 70 -80"/><path d="M620 210 q30 -30 50 -70"/><path d="M680 210 q24 -24 40 -60"/>
+  </g>
+  <text x="476" y="230" font-family="system-ui, Segoe UI, sans-serif" font-size="14" fill="#1c2420">Rotate daily. Add a lamp if color stays pale.</text>
+</svg>
