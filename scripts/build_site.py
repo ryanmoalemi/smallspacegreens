@@ -29,8 +29,8 @@ NAV = [
 
 BRAND_MARK = '<svg viewBox="0 0 40 48" fill="none" aria-hidden="true"><path d="M20 43V15" stroke="currentColor" stroke-width="1.8"/><path d="M20 29C7 30 3 21 4 13c11 0 16 7 16 16Z" fill="currentColor"/><path d="M20 20C31 21 36 13 35 5c-11 0-15 7-15 15Z" fill="currentColor"/><path d="M7 43h26" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
 BRAND = BRAND_MARK + '<span class="brand-wordmark">small space<small>GREENS</small></span>'
-ARROW_UP = '<svg class="arrow-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 16 16 4M5 4h11v11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-ARROW_RIGHT = '<svg class="arrow-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+ARROW_UP = '<svg class="arrow-icon" width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 16 16 4M5 4h11v11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+ARROW_RIGHT = '<svg class="arrow-icon" width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
 def asset_version(path: str) -> str:
     return hashlib.sha256((ROOT / path).read_bytes()).hexdigest()[:12]
@@ -465,29 +465,49 @@ def prepare_guide_body(html: str) -> str:
 
 
 def step_strip() -> str:
-    frames = [
-        ("01-wash.svg", "1. Wash the tray", "Illustration of washing a shallow planting tray."),
-        ("02-fill.svg", "2. Fill the mix", "Illustration of a tray filled with about 1 to 1.5 inches of mix."),
-        ("03-sow.svg", "3. Sow the seed", "Illustration of seed scattered on the mix surface."),
-        ("04-cover.svg", "4. Cover in the dark", "Illustration of a dark cover over a sown tray."),
-        ("05-weight.svg", "5. Weight large seed", "Illustration of a weight on pea or sunflower seed."),
-        ("06-light.svg", "6. Uncover into light", "Illustration of seedlings under light."),
-        ("07-water.svg", "7. Water from below", "Illustration of a drained tray nested in a water tray."),
-        ("08-cut.svg", "8. Cut above the mix", "Illustration of cutting seedlings above the mix and leaving the roots."),
+    steps = [
+        (
+            "Clean the tray",
+            "Wash the tray and follow the sanitizer label when reusing it, including any rinse; never mix cleaning products.",
+        ),
+        (
+            "Moisten the medium",
+            "Add moist soilless mix about 1 to 1.5 inches deep, or use the mat specified by your growing method.",
+        ),
+        (
+            "Sow evenly",
+            "Spread the prepared seed over the moist surface and press it into contact, using the amount weighed dry before any soak.",
+        ),
+        (
+            "Cover if directed",
+            "Use a cover for the germination period only if your crop's instructions call for it, and vent it if the surface stays dripping.",
+        ),
+        (
+            "Weight only if needed",
+            "Add weight only when your crop's method specifies it, then remove it at the stage that method gives.",
+        ),
+        (
+            "Move into light",
+            "Uncover into light; Maryland suggests about 16 hours a day, with a lamp if the window falls short.",
+        ),
+        (
+            "Water and drain",
+            "Water from below when the medium needs it, then remove the growing tray from the reservoir so excess water can drain.",
+        ),
+        (
+            "Harvest above the mix",
+            "At your crop's harvest stage, cut above the mix, leave the roots behind, and wash the greens before eating.",
+        ),
     ]
     items = []
-    for filename, label, alt in frames:
+    for number, (title, instruction) in enumerate(steps, start=1):
         items.append(
-            "<li><figure>"
-            f'<img src="/assets/diagrams/steps/{filename}" width="320" height="320" alt="{esc(alt)}" loading="lazy">'
-            f"<figcaption>{esc(label)}</figcaption></figure></li>"
+            '<li class="grow-step">'
+            f'<span class="step-number" aria-hidden="true">{number:02d}</span>'
+            f'<div class="step-copy"><h3>{esc(title)}</h3><p>{esc(instruction)}</p></div>'
+            '</li>'
         )
-    return (
-        '<ol class="step-strip">'
-        + "".join(items)
-        + "</ol>"
-        + '<p class="credit">Original illustrations of the method. Not photographs of a Small Space Greens tray.</p>'
-    )
+    return '<ol class="grow-steps" role="list">' + "".join(items) + '</ol>'
 
 
 VIDEOS = {
@@ -904,13 +924,13 @@ def render_static_pages() -> dict[str, str]:
     by_slug = {guide["slug"]: guide for guide in GUIDES}
     visuals = {
         "microgreens-in-a-small-apartment": ("/assets/photos/sunflower-small-tray.jpg", "First tray"),
-        "windowsill-microgreens": ("/assets/diagrams/window-light.svg", "Light and space"),
-        "microgreens-seed-density-per-tray": ("/assets/diagrams/seed-density.svg", "Seed planning"),
-        "pea-vs-radish-microgreens": ("/assets/diagrams/harvest-windows.svg", "Choose a crop"),
-        "bottom-watering-trays": ("/assets/diagrams/bottom-watering.svg", "Watering"),
-        "apartment-seed-starting": ("/assets/diagrams/window-light.svg", "Seed starting"),
-        "balcony-salad-garden": ("/assets/photos/lettuce-in-pot.jpg", "Balcony growing"),
-        "microgreens-kit-vs-diy-cost": ("/assets/diagrams/kit-vs-diy.svg", "Supplies and cost"),
+        "windowsill-microgreens": ("/assets/photos/basil-window-personal-creations.jpg", "Light and space"),
+        "microgreens-seed-density-per-tray": ("/assets/photos/trays-broccoli-radish.jpg", "Seed planning"),
+        "pea-vs-radish-microgreens": ("/assets/photos/pea-shoots-counter.jpg", "Choose a crop"),
+        "bottom-watering-trays": ("/assets/photos/trays-broccoli-radish.jpg", "Watering"),
+        "apartment-seed-starting": ("/assets/photos/basil-by-window.jpg", "Seed starting"),
+        "balcony-salad-garden": ("/assets/photos/balcony-garden-ruth-hartnup.jpg", "Balcony growing"),
+        "microgreens-kit-vs-diy-cost": ("/assets/photos/sunflower-small-tray.jpg", "Supplies and cost"),
     }
     photo_credits = {
         "microgreens-in-a-small-apartment": {
@@ -922,18 +942,84 @@ def render_static_pages() -> dict[str, str]:
             "source_url": "https://commons.wikimedia.org/wiki/File:Sunflower_microgreens_01.jpg",
             "license": "CC BY 4.0",
             "license_url": "https://creativecommons.org/licenses/by/4.0/",
-            "note": "Reference photo, cropped; not a site trial.",
+            "note": "Cropped.",
         },
-        "balcony-salad-garden": {
-            "alt": "One leaf lettuce plant in a white pot on a table indoors.",
+        "windowsill-microgreens": {
+            "alt": "Mature basil in a colorful mosaic pot beside a sunny window.",
+            "width": 800,
+            "height": 800,
+            "author": "Personal Creations",
+            "author_url": "https://www.flickr.com/people/127294011@N07",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Chalkboard_Plant_Stake_Basil_in_a_window_(14889072919).jpg",
+            "license": "CC BY 2.0",
+            "license_url": "https://creativecommons.org/licenses/by/2.0/",
+            "note": "Cropped.",
+        },
+        "microgreens-seed-density-per-tray": {
+            "alt": "Green and purple broccoli and radish microgreens growing in plastic trays.",
             "width": 960,
-            "height": 1280,
-            "author": "Netha Hussain",
-            "author_url": "https://commons.wikimedia.org/wiki/User:Netha_Hussain",
-            "source_url": "https://commons.wikimedia.org/wiki/File:Leaf_lettuce_plant_in_a_pot_10.jpg",
+            "height": 720,
+            "author": "Teogenesis",
+            "author_url": "https://commons.wikimedia.org/wiki/Special:Contributions/Teogenesis",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Mikrolistki_-_broku%C5%82_i_rzodkiewka_na_tacach_plastikowych.jpg",
             "license": "CC BY-SA 4.0",
             "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-            "note": "Container lettuce reference photo, cropped; not a site trial.",
+            "note": "Cropped.",
+        },
+        "pea-vs-radish-microgreens": {
+            "alt": "Snow pea shoots with long pale stems and small leaves in a round container on a kitchen counter.",
+            "width": 960,
+            "height": 720,
+            "author": "Daderot",
+            "author_url": "https://commons.wikimedia.org/wiki/User:Daderot",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Snow_pea_shoots_-_Massachusetts.jpg",
+            "license": "CC0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "note": "Cropped.",
+        },
+        "bottom-watering-trays": {
+            "alt": "Dense green and purple microgreens growing in black plastic trays.",
+            "width": 960,
+            "height": 720,
+            "author": "Teogenesis",
+            "author_url": "https://commons.wikimedia.org/wiki/Special:Contributions/Teogenesis",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Mikrolistki_-_broku%C5%82_i_rzodkiewka_na_tacach_plastikowych.jpg",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "note": "Cropped.",
+        },
+        "apartment-seed-starting": {
+            "alt": "Young basil seedlings in a pot beside a window.",
+            "width": 960,
+            "height": 720,
+            "author": "Jon Eben Field",
+            "author_url": "https://commons.wikimedia.org/wiki/File:Pot_of_basil_sprouts_(Ocimum_basilicum)_-_20050422.jpg#Summary",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Pot_of_basil_sprouts_(Ocimum_basilicum)_-_20050422.jpg",
+            "license": "CC BY 2.0",
+            "license_url": "https://creativecommons.org/licenses/by/2.0/",
+            "note": "Cropped.",
+        },
+        "balcony-salad-garden": {
+            "alt": "Leafy greens in a terracotta pot, surrounded by pea vines and herbs in balcony planters.",
+            "width": 1200,
+            "height": 750,
+            "author": "Ruth Hartnup",
+            "author_url": "https://www.flickr.com/people/95142644@N00",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Balcony_garden_(9069549775).jpg",
+            "license": "CC BY 2.0",
+            "license_url": "https://creativecommons.org/licenses/by/2.0/",
+            "note": "Cropped.",
+        },
+        "microgreens-kit-vs-diy-cost": {
+            "alt": "Sunflower microgreens growing in a small clear tray on a white background.",
+            "width": 960,
+            "height": 810,
+            "author": "Pannet",
+            "author_url": "https://commons.wikimedia.org/wiki/User:Pannet",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Sunflower_microgreens_01.jpg",
+            "license": "CC BY 4.0",
+            "license_url": "https://creativecommons.org/licenses/by/4.0/",
+            "note": "Cropped.",
         },
     }
     def cards(slugs: list[str]) -> str:
