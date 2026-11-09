@@ -6,6 +6,8 @@ from __future__ import annotations
 import json
 import hashlib
 import re
+import subprocess
+from datetime import datetime
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -39,7 +41,7 @@ GUIDES = [
     {
         "slug": "microgreens-in-a-small-apartment",
         "title": "How to Grow Microgreens in an Apartment: Your First Tray",
-        "description": "Start one edible microgreen tray in an apartment: crop, footprint, supplies, light, and a source-backed harvest window.",
+        "description": "Start one edible microgreen tray in an apartment: crop, footprint, supplies, light, and a source-backed harvest window. Steps cite extension sources.",
         "h1": "How to grow microgreens in an apartment: your first tray",
         "dek": "Pick an edible crop, size the tray, and follow one published method. A lamp is optional until the window falls short.",
         "og": "apartment",
@@ -56,7 +58,7 @@ GUIDES = [
     {
         "slug": "microgreens-seed-density-per-tray",
         "title": "Microgreens Seed Density by Crop and Tray Size",
-        "description": "Look up published microgreen seed rates by crop, see which figures are crop-specific, and scale them to your tray.",
+        "description": "Look up published microgreen seed rates by crop, see which figures are crop-specific, and scale them to your tray. The calculator uses the same rates.",
         "h1": "Microgreens seed density by crop and tray size",
         "dek": "Start with the crop and the tray. The calculator applies a published rate only when that rate is crop-specific.",
         "og": "density",
@@ -64,7 +66,7 @@ GUIDES = [
     {
         "slug": "pea-vs-radish-microgreens",
         "title": "Pea Shoots vs Radish Microgreens: Which Should You Grow?",
-        "description": "Choose between pea shoots and radish microgreens using published seed weight, soak time, harvest window, and flavor notes.",
+        "description": "Choose between pea shoots and radish microgreens using published seed weight, soak time, harvest window, and flavor notes. Seed weights come from Utah State.",
         "h1": "Pea shoots vs radish microgreens: which should you grow?",
         "dek": "Radish is spicy and lighter on the scale. Pea is milder, soaked, and a much heavier sowing.",
         "og": "pea-radish",
@@ -72,7 +74,7 @@ GUIDES = [
     {
         "slug": "windowsill-microgreens",
         "title": "Can You Grow Microgreens on a Windowsill? Light and Space",
-        "description": "Decide whether your windowsill can grow a tray of microgreens, and when the published guidance says to add a lamp.",
+        "description": "Decide whether your windowsill can grow a tray of microgreens, and when the published guidance says to add a lamp. Measure the sill and watch the stems.",
         "h1": "Can you grow microgreens on a windowsill?",
         "dek": "Measure the sill, watch the stems, and add light only if the plants lean or stay pale.",
         "og": "windowsill",
@@ -80,7 +82,7 @@ GUIDES = [
     {
         "slug": "apartment-seed-starting",
         "title": "Starting Vegetable Seeds in an Apartment: Light and Timing",
-        "description": "Raise vegetable transplants in an apartment for a balcony or garden, with light, timing, and crops you should not eat as microgreens.",
+        "description": "Raise vegetable transplants in an apartment for a balcony or garden, with light, timing, and crops you should not eat as microgreens. Check the cited sources.",
         "h1": "Starting vegetable seeds in an apartment",
         "dek": "These plants are transplants. They need more light and more weeks than a tray of microgreens.",
         "og": "seed-starting",
@@ -88,7 +90,7 @@ GUIDES = [
     {
         "slug": "bottom-watering-trays",
         "title": "How to Bottom Water Microgreens and Seed Trays",
-        "description": "Bottom water a microgreen or seed tray: which tray has holes, where the water goes, and when to pour the extra out.",
+        "description": "Bottom water a microgreen or seed tray: which tray has holes, where the water goes, and when to pour the extra out. Then empty the solid tray.",
         "h1": "How to bottom water microgreens and seed trays",
         "dek": "Give roots water from below, let the mix absorb it, then pour out the extra.",
         "og": "watering",
@@ -96,7 +98,7 @@ GUIDES = [
     {
         "slug": "balcony-salad-garden",
         "title": "Plan a Balcony Salad Garden: Containers, Light, and Layouts",
-        "description": "Plan a balcony salad with container sizes, sun hours, drainage, and layouts that match the light you actually have.",
+        "description": "Plan a balcony salad with container sizes, sun hours, drainage, and layouts that match the light you actually have. Match crops to the sun you get.",
         "h1": "Plan a balcony salad garden",
         "dek": "Choose salad crops for the sun you have, then match the containers to your space.",
         "og": "balcony",
@@ -382,6 +384,60 @@ def related_html(slug: str) -> str:
     return "<h2>Related guides</h2><ul class=\"related-list\">" + calc + "".join(items) + "</ul>"
 
 
+def git_times(path: Path) -> tuple[str, str]:
+    """Author dates from git history: first commit, then latest commit."""
+    result = subprocess.run(
+        ["git", "log", "--follow", "--format=%aI", "--", str(path)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    dates = [line.strip() for line in result.stdout.splitlines() if line.strip()]
+    if not dates:
+        raise SystemExit(f"No git history for {path}")
+    published, modified = dates[-1], dates[0]
+    if datetime.fromisoformat(published) > datetime.fromisoformat(modified):
+        published, modified = modified, published
+    return published, modified
+
+
+def image_size(path: Path) -> tuple[int, int] | None:
+    try:
+        from PIL import Image
+    except ImportError:
+        return None
+    with Image.open(path) as im:
+        return im.size
+
+
+def page_share_image(html: str) -> tuple[str, int, int]:
+    """Use a photo already on the page. Fall back to the existing default share image."""
+    default_rel = "assets/og/home.jpg"
+    chosen = None
+    for src in re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', html):
+        if not src.startswith("/assets/photos/"):
+            continue
+        rel = src.lstrip("/")
+        if rel.startswith("assets/photos/thumbs/"):
+            full = "assets/photos/" + Path(rel).name
+            if (ROOT / full).is_file():
+                rel = full
+        path = ROOT / rel
+        if path.is_file() and path.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}:
+            chosen = rel
+            break
+    if chosen is None:
+        chosen = default_rel
+    path = ROOT / chosen
+    if not path.is_file():
+        raise SystemExit(f"Share image is missing: {path}")
+    size = image_size(path)
+    if not size:
+        raise SystemExit(f"Could not read share image size: {path}")
+    return f"{SITE}/{chosen}", size[0], size[1]
+
+
 def layout(page: dict, main: str, graph: list[dict]) -> str:
     main = render_content_photos(main)
     title = page["title"]
@@ -392,8 +448,22 @@ def layout(page: dict, main: str, graph: list[dict]) -> str:
         current = ' aria-current="page"' if page.get("nav") == href else ""
         nav_html.append(f'<li><a href="{href}"{current}>{label}</a></li>')
     robots = page.get("robots", "index,follow")
-    og_type = "article" if page["kind"] == "article" else "website"
-    image = page.get("image", f"{SITE}/assets/og/home.jpg")
+    og_type = page.get("og_type") or ("article" if page["kind"] == "article" else "website")
+    if page.get("rich_pin"):
+        image, image_width, image_height = page_share_image(main)
+        og_description = description
+        if not 140 <= len(og_description) <= 160:
+            raise SystemExit(f"{canonical} og:description length {len(og_description)}")
+    else:
+        image = page.get("image", f"{SITE}/assets/og/home.jpg")
+        image_width, image_height = 1200, 630
+        og_description = description
+    article_times = ""
+    if page.get("published") and page.get("modified"):
+        article_times = (
+            f'<meta property="article:published_time" content="{esc(page["published"])}">\n'
+            f'<meta property="article:modified_time" content="{esc(page["modified"])}">\n'
+        )
     verify = ""
     if page.get("verify"):
         verify = (
@@ -442,16 +512,16 @@ if (toc && window.matchMedia("(max-width: 899px)").matches) toc.removeAttribute(
 <link rel="canonical" href="{esc(canonical)}">
 <meta name="robots" content="{robots}">
 <meta property="og:title" content="{esc(title)}">
-<meta property="og:description" content="{esc(description)}">
+<meta property="og:description" content="{esc(og_description)}">
 <meta property="og:url" content="{esc(canonical)}">
 <meta property="og:type" content="{og_type}">
 <meta property="og:site_name" content="Small Space Greens">
-<meta property="og:image" content="{esc(image)}">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+{article_times}<meta property="og:image" content="{esc(image)}">
+<meta property="og:image:width" content="{image_width}">
+<meta property="og:image:height" content="{image_height}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(title)}">
-<meta name="twitter:description" content="{esc(description)}">
+<meta name="twitter:description" content="{esc(og_description)}">
 <meta name="twitter:image" content="{esc(image)}">
 <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -798,6 +868,7 @@ def disclosure() -> str:
 def article_page(guide: dict, body: str) -> str:
     show_signup = guide["slug"] not in {"balcony-salad-garden", "apartment-seed-starting"}
     url = f"{SITE}/guides/{guide['slug']}/"
+    published, modified = git_times(SRC / "guides" / f"{guide['slug']}.html")
     crumbs = [
         ("Home", f"{SITE}/"),
         ("Guides", f"{SITE}/guides/"),
@@ -814,8 +885,8 @@ def article_page(guide: dict, body: str) -> str:
             "@type": "Article",
             "headline": guide["h1"],
             "description": guide["description"],
-            "datePublished": DATE,
-            "dateModified": DATE,
+            "datePublished": published,
+            "dateModified": modified,
             "author": {"@id": PERSON_ID},
             "publisher": {"@id": ORG_ID},
             "mainEntityOfPage": url,
@@ -855,6 +926,9 @@ def article_page(guide: dict, body: str) -> str:
         "nav": guide.get("nav", "/guides/"),
         "image": page_image,
         "signup": show_signup,
+        "rich_pin": True,
+        "published": published,
+        "modified": modified,
     }
     if guide["slug"] == "microgreens-kit-vs-diy-cost":
         page["scripts"] = f'<script src="/js/cost-compare.js?v={asset_version("js/cost-compare.js")}" defer></script>'
@@ -1280,7 +1354,10 @@ def render_static_pages() -> dict[str, str]:
         "wrap": "wrap-wide",
         "scripts": f'<script src="/js/calculator.js?v={asset_version("js/calculator.js")}"></script>',
         "image": f"{SITE}/assets/og/calculator.jpg",
+        "og_type": "website",
+        "rich_pin": True,
     }
+    tool["published"], tool["modified"] = git_times(SRC / "pages" / "calculator.html")
     tool_body = (SRC / "pages" / "calculator.html").read_text()
     tool_body = tool_body.replace("<!--CROP_OPTIONS-->", calculator_options())
     tool_body = tool_body.replace("<!--RATES_TABLE-->", rates_table())
@@ -1317,7 +1394,7 @@ def render_static_pages() -> dict[str, str]:
     extra_pages = [
         ("gear/index.html", "Microgreens Starter Setup: Kits, Trays and Supplies", "Compare a ready-to-sow kit, reusable trays, or a container you own. Check the full setup, refill costs, light, and daily work before you buy.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
         ("editorial-method/index.html", "How Small Space Greens Chooses and Corrects Guides", "How sources are chosen, how product advice will be labeled, and how to send a correction.", f"{SITE}/editorial-method/", "", "Editorial method", f"{SITE}/assets/og/editorial.jpg", "editorial.html", ""),
-        ("guides/first-tray-checklist/index.html", "First-Tray Checklist for Apartment Microgreens", "Print the first-tray checklist, or get the same list by email from Ryan after you confirm your address.", f"{SITE}/guides/first-tray-checklist/", "/guides/", "First-tray checklist", f"{SITE}/assets/og/checklist.jpg", "checklist.html", ""),
+        ("guides/first-tray-checklist/index.html", "First-Tray Checklist for Apartment Microgreens", "Print the first-tray checklist, or get the same list by email from Ryan after you confirm your address. You can print it without an email address.", f"{SITE}/guides/first-tray-checklist/", "/guides/", "First-tray checklist", f"{SITE}/assets/og/checklist.jpg", "checklist.html", ""),
     ]
     for rel, title, desc, url, nav, crumb, image, filename, wrap in extra_pages:
         check_lengths(title, desc, rel)
@@ -1340,6 +1417,10 @@ def render_static_pages() -> dict[str, str]:
         }
         if filename == "gear.html":
             page["scripts"] = f'<script src="/js/setup.js?v={asset_version("js/setup.js")}" defer></script>'
+        if filename == "checklist.html":
+            page["og_type"] = "article"
+            page["rich_pin"] = True
+            page["published"], page["modified"] = git_times(SRC / "pages" / "checklist.html")
         pages[rel] = simple_page(page, body)
 
     subscribe_pages = [
