@@ -4,7 +4,7 @@ Updated November 9, 2026 (UTC) for Small Space Greens. Photographs are real, lic
 
 ## Photographs
 
-The original five local JPGs match the corresponding 960-pixel-wide Wikimedia Commons thumbnails pixel for pixel. Two additional licensed photographs were added for the compact photo navigation; their local files are optimized as documented below. Their original sources, authors, and licenses were checked on November 8, 2026 (America/Los_Angeles).
+The original five local JPGs match the corresponding 960-pixel-wide Wikimedia Commons thumbnails pixel for pixel. Two additional licensed photographs were added for the compact photo navigation, and an Anthony Ievlev photograph was added for the homepage's featured first-tray guide; their local files are optimized as documented below. The original sources, authors, and licenses were checked on November 9, 2026 (UTC).
 
 ### Sunflower microgreens
 
@@ -12,7 +12,7 @@ The original five local JPGs match the corresponding 960-pixel-wide Wikimedia Co
 - Photographer: [Pannet](https://commons.wikimedia.org/wiki/User:Pannet).
 - Original: [Sunflower microgreens 01](https://commons.wikimedia.org/wiki/File:Sunflower_microgreens_01.jpg).
 - License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-- Use: homepage hero, first-tray guide-directory card, and kit-versus-DIY article. The homepage hero preserves the complete image; the directory thumbnail and social previews use crops. It shows a small clear tray of sunflower microgreens on a white background, not a recommended kit.
+- Use: homepage hero and cost-guide teaser, first-tray guide-directory card, and kit-versus-DIY article. The existing homepage hero remains this Pannet photograph and preserves the complete image; the cost teaser, directory thumbnail and social previews use crops. It shows a small clear tray of sunflower microgreens on a white background, not a recommended kit.
 
 ### Broccoli and radish trays
 
@@ -20,7 +20,19 @@ The original five local JPGs match the corresponding 960-pixel-wide Wikimedia Co
 - Photographer: [Teogenesis](https://commons.wikimedia.org/wiki/Special:Contributions/Teogenesis). The Commons user page is uncreated; the verified contributions page identifies the account.
 - Original: [Mikrolistki - brokuł i rzodkiewka na tacach plastikowych](https://commons.wikimedia.org/wiki/File:Mikrolistki_-_broku%C5%82_i_rzodkiewka_na_tacach_plastikowych.jpg).
 - License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
-- Use: homepage indoor-growing card and featured guide, first-tray article, pea-versus-radish article, gear reference image, and relevant guide-directory thumbnails. Homepage and social previews use crops. The file is titled as broccoli and radish microgreens; it is not a matched-age experiment or a Small Space Greens grow. Cropped versions remain under the same license.
+- Use: homepage indoor-growing card and tray-fit teaser, first-tray article, pea-versus-radish article, gear reference image, and relevant guide-directory thumbnails. The homepage's featured first-tray guide uses the Anthony Ievlev photograph documented below. Homepage and social previews use crops. The file is titled as broccoli and radish microgreens; it is not a matched-age experiment or a Small Space Greens grow. Cropped versions remain under the same license.
+
+### Microgreens tray by Anthony Ievlev
+
+- Local file: `assets/photos/fenugreek-tray-anthony-ievlev.jpg` (1400 × 1050).
+- Photographer: [Anthony Ievlev](https://unsplash.com/@onmywayhome).
+- Original: [A bunch of plants that are in a tray](https://unsplash.com/photos/a-bunch-of-plants-that-are-in-a-tray-cwWk5gZd4_Y).
+- License: [Unsplash License](https://unsplash.com/license), which permits commercial web publication and modification. The source page explicitly identifies this photograph as free under that license. Credit the photographer, original source and license to match the site's attribution practice.
+- Provenance: published December 28, 2021; the source lists Canon EOS 60D and tags including microgreens and fenugreek. The downloaded source rendition is 3000 × 4500.
+- Processing: cropped the source using left/top/right/bottom coordinates (0, 1400, 3000, 3650), producing a 3000 × 2250 crop; resized to 1400 × 1050 with Lanczos resampling and saved as an optimized progressive JPEG at quality 84. No AI, enhancement, generated objects or color changes were applied.
+- Use: homepage featured first-tray guide image. The Pannet sunflower image remains the homepage hero. This is a licensed reference photograph of microgreens in a black tray, not a Small Space Greens growing trial or product test.
+- Suggested alt: “Dewy microgreens with seed husks growing in a black tray beside other seedlings.”
+- Caption: “Photo: Anthony Ievlev / Unsplash. Cropped for display.” Link the photographer, original photo and license separately.
 
 ### Lettuce in a container
 
@@ -36,7 +48,7 @@ The original five local JPGs match the corresponding 960-pixel-wide Wikimedia Co
 - Photographer: [Daderot](https://commons.wikimedia.org/wiki/User:Daderot).
 - Original: [Snow pea shoots - Massachusetts](https://commons.wikimedia.org/wiki/File:Snow_pea_shoots_-_Massachusetts.jpg).
 - License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
-- Use: pea-versus-radish article, its guide-directory thumbnail, and social previews. The photo is a reference scene on a kitchen counter, not part of a matched-age comparison. Social previews crop the photo.
+- Use: homepage pea-versus-radish teaser, pea-versus-radish article, its guide-directory thumbnail, and social previews. The photo is a reference scene on a kitchen counter, not part of a matched-age comparison. The homepage teaser and social previews crop the photo.
 
 ### Basil seedlings
 
