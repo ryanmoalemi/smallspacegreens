@@ -24,6 +24,13 @@
       if (event.target.closest('a')) setMenu(false);
     });
   }
+  document.querySelectorAll('a[data-journey]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'setup_journey_click', { journey_step: link.getAttribute('data-journey') });
+      }
+    });
+  });
   document.querySelectorAll('a[data-product-id]').forEach(function (link) {
     link.addEventListener('click', function () {
       if (typeof window.gtag === 'function') {

@@ -1,0 +1,44 @@
+.cost-comparison{margin:36px 0;padding:26px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);scroll-margin-top:24px}
+.cost-comparison [hidden]{display:none!important}
+.cost-comparison h2{margin:0 0 16px;font-size:34px}
+.cost-comparison h3{margin:0 0 16px;font-size:28px}
+.cost-comparison>p{font-size:14px;margin:0 0 14px}
+.cost-comparison .cost-instructions{color:var(--muted);font-size:13px}
+.cost-comparison .cost-route-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-top:24px}
+.cost-comparison fieldset{min-width:0;margin:0;padding:0;border:0}
+.cost-comparison legend{width:100%;padding:0 0 10px;border-bottom:1px solid var(--line);font-family:Newsreader,Georgia,serif;font-size:28px;font-weight:400;line-height:1.2;letter-spacing:-.025em}
+.cost-comparison .cost-route-note{min-height:3.2em;margin:0 0 16px;font-size:12px;line-height:1.6;color:var(--muted)}
+.cost-comparison .cost-input-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 12px;align-items:start}
+.cost-comparison .cost-field{min-width:0}
+.cost-comparison .cost-field-wide{grid-column:1/-1}
+.cost-comparison .cost-field label{display:block;min-height:2.8em;margin-bottom:6px;font-size:13px;font-weight:600;line-height:1.4}
+.cost-comparison .cost-field label span{display:block;font-size:11px;font-weight:400;color:var(--muted)}
+.cost-comparison .cost-field input{box-sizing:border-box;width:100%;min-height:46px;padding:10px 11px;border:1px solid var(--line);border-radius:3px;background:var(--card);color:var(--ink);font:inherit;font-size:16px;line-height:1.4;font-variant-numeric:tabular-nums}
+.cost-comparison .cost-field input[aria-invalid=true]{border-color:var(--error);border-width:2px;padding:9px 10px}
+.cost-comparison .cost-field-error{margin:6px 0 0;color:var(--error);font-size:12px;line-height:1.5}
+.cost-comparison .cost-refill-help{margin:20px 0 0;font-size:12px;line-height:1.7;color:var(--muted)}
+.cost-comparison .cost-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:20px 0 0}
+.cost-comparison .cost-actions .button{min-height:46px;padding:11px 17px;font-size:13px;cursor:pointer}
+.cost-comparison .cost-status{min-height:1.5em;margin:12px 0 0;font-size:13px;line-height:1.6}
+.cost-comparison .cost-status:empty{min-height:0;margin:0}
+.cost-comparison .cost-status.is-error{color:var(--error);font-weight:600}
+.cost-comparison .cost-results{margin-top:24px;padding-top:24px;border-top:2px solid var(--green)}
+.cost-comparison .cost-result-table{width:100%;table-layout:fixed;border-collapse:collapse;margin:0 0 14px;font-size:14px}
+.cost-comparison .cost-result-table th,.cost-comparison .cost-result-table td{padding:12px 9px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left;overflow-wrap:anywhere}
+.cost-comparison .cost-result-table thead th{background:var(--sage);font-weight:600}
+.cost-comparison .cost-result-table th:first-child{width:38%}
+.cost-comparison .cost-result-table tbody th{background:transparent;font-size:12px;font-weight:500;line-height:1.5}
+.cost-comparison .cost-result-table td{font-variant-numeric:tabular-nums;font-weight:600}
+.cost-comparison .cost-result-table .cost-today td{font-size:18px;color:var(--green)}
+.cost-comparison .cost-result-table caption{font-size:12px;color:var(--muted);text-align:left;margin-bottom:10px}
+.cost-comparison .cost-difference{font-size:13px;line-height:1.7;margin:14px 0 0}
+.cost-comparison .cost-copy-details,.cost-comparison .cost-help{margin:18px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:13px}
+.cost-comparison .cost-copy-details summary,.cost-comparison .cost-help summary{min-height:36px;cursor:pointer;font-weight:600;line-height:1.6}
+.cost-comparison .cost-copy-details label{display:block;margin:8px 0;font-size:12px;color:var(--muted)}
+.cost-comparison .cost-copy-details textarea{box-sizing:border-box;width:100%;min-height:220px;resize:vertical;padding:12px;border:1px solid var(--line);border-radius:3px;background:var(--bg);color:var(--ink);font:inherit;font-size:14px;line-height:1.6}
+.cost-comparison .cost-help p{font-size:13px;margin:0 0 12px}
+.cost-comparison .cost-help table{font-size:12px;margin-bottom:0}
+.cost-comparison .cost-no-script{font-size:13px;padding:12px;background:var(--sage)}
+@media(max-width:620px){.cost-comparison{padding:20px 16px;margin:28px 0}.cost-comparison h2{font-size:30px}.cost-comparison .cost-route-grid{grid-template-columns:1fr;gap:26px}.cost-comparison .cost-route-note{min-height:0}.cost-comparison .cost-input-grid{gap:14px 12px}.cost-comparison .cost-field label{min-height:2.8em}.cost-comparison .cost-result-table{font-size:13px}.cost-comparison .cost-result-table th,.cost-comparison .cost-result-table td{padding:10px 6px}.cost-comparison .cost-result-table .cost-today td{font-size:16px}.cost-comparison .cost-result-table th:first-child{width:36%}.cost-comparison .cost-actions{gap:10px}}
+
+.cost-comparison #cost-results-title{scroll-margin-top:24px}

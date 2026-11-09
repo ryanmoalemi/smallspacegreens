@@ -61,5 +61,7 @@
         showError(form, "The signup did not go through. Check your connection and try again, or email ryan@smallspacegreens.com.");
       });
     });
+    var fields = form.querySelector("fieldset[data-signup-fields]");
+    if (fields) fields.disabled = false;
   });
 })();
