@@ -164,6 +164,140 @@ def esc(value: str) -> str:
     )
 
 
+LIST_PHOTOS = json.loads((SRC / "list-photos.json").read_text())
+GUIDE_PHOTOS = {
+    "microgreens-in-a-small-apartment": "fenugreek",
+    "microgreens-kit-vs-diy-cost": "sunflower",
+    "microgreens-seed-density-per-tray": "seeds",
+    "pea-vs-radish-microgreens": "peas",
+    "windowsill-microgreens": "basil-window",
+    "apartment-seed-starting": "sowing",
+    "bottom-watering-trays": "tray",
+    "balcony-salad-garden": "balcony",
+}
+
+
+def list_photo(key: str) -> str:
+    photo = LIST_PHOTOS[key]
+    return (
+        f'<figure class="list-photo" data-photo-key="{esc(key)}">'
+        f'<img src="/assets/photos/thumbs/{esc(photo["thumbnail"])}" '
+        f'width="320" height="320" alt="{esc(photo["alt"])}" loading="lazy" decoding="async">'
+        f'<figcaption class="photo-credit">Credit: <a href="/photo-credits/#{esc(photo["credit_id"])}">'
+        f'{esc(photo["author"])}</a></figcaption></figure>'
+    )
+
+
+def add_class(attrs: str, name: str) -> str:
+    if re.search(r'\bclass="', attrs):
+        return re.sub(r'\bclass="([^"]*)"', lambda m: f'class="{m.group(1)} {name}"', attrs, count=1)
+    return attrs + f' class="{name}"'
+
+
+def render_content_photos(html: str) -> str:
+    """Give annotated editorial rows real photos without changing their controls."""
+    html = re.sub(r'<!--PHOTO:([a-z-]+)-->', lambda m: list_photo(m.group(1)), html)
+
+    def choice_photo(match: re.Match) -> str:
+        photo = LIST_PHOTOS[match.group(1)]
+        return f'<img class="choice-photo" src="/assets/photos/thumbs/{esc(photo["thumbnail"])}" width="320" height="320" alt="" loading="lazy" decoding="async">'
+
+    def choice_credit(match: re.Match) -> str:
+        photo = LIST_PHOTOS[match.group(1)]
+        return f'<p class="photo-credit">Credit: <a href="/photo-credits/#{esc(photo["credit_id"])}">{esc(photo["author"])}</a></p>'
+
+    html = re.sub(r'<!--CHOICE_PHOTO:([a-z-]+)-->', choice_photo, html)
+    html = re.sub(r'<!--PHOTO_CREDIT:([a-z-]+)-->', choice_credit, html)
+
+    def item(match: re.Match) -> str:
+        attrs, key, content = match.groups()
+        attrs = re.sub(r'\sdata-photo="[^"]+"', '', attrs)
+        attrs = add_class(attrs, 'photo-list-item')
+        attrs += ' role="listitem"'
+        return f'<li{attrs}>{list_photo(key)}<div class="list-item-copy">{content}</div></li>'
+
+    html = re.sub(r'<li([^>]*\bdata-photo="([^"]+)"[^>]*)>(.*?)</li>', item, html, flags=re.S)
+
+    def photo_list(match: re.Match) -> str:
+        tag, attrs, content = match.groups()
+        if 'photo-list-item' in content:
+            attrs = add_class(attrs, 'photo-list')
+            if 'role=' not in attrs:
+                attrs += ' role="list"'
+            if tag == 'ol':
+                number = 0
+
+                def numbered(row: re.Match) -> str:
+                    nonlocal number
+                    number += 1
+                    return row.group(0) + f'<span class="photo-step-number" aria-hidden="true">{number}</span>'
+
+                content = re.sub(r'<li\b[^>]*>', numbered, content)
+        return f'<{tag}{attrs}>{content}</{tag}>'
+
+    html = re.sub(r'<(ul|ol)([^>]*)>(.*?)</\1>', photo_list, html, flags=re.S)
+
+    def table_row(match: re.Match) -> str:
+        attrs, key, content = match.groups()
+        attrs = re.sub(r'\sdata-photo="[^"]+"', '', attrs)
+        content = re.sub(
+            r'<(td|th)([^>]*)>(.*?)</\1>',
+            lambda cell: f'<{cell.group(1)}{add_class(cell.group(2), "photo-cell")}>'
+            f'<div class="photo-cell-content">{list_photo(key)}<span>{cell.group(3)}</span></div></{cell.group(1)}>',
+            content, count=1, flags=re.S,
+        )
+        return f'<tr{attrs}>{content}</tr>'
+
+    return re.sub(r'<tr([^>]*\bdata-photo="([^"]+)"[^>]*)>(.*?)</tr>', table_row, html, flags=re.S)
+
+
+class PhotoListAudit(HTMLParser):
+    """Keep new editorial lists from silently reverting to text-only rows."""
+    VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.stack: list[dict] = []
+        self.items: list[dict] = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        context = [node["tag"] for node in self.stack]
+        is_source = any("sources" in node["attrs"].get("class", "").split() for node in self.stack)
+        node = {"tag": tag, "attrs": attrs}
+        if tag == "li" and "main" in context and "nav" not in context and not is_source:
+            node.update(photo=False, text=[])
+            self.items.append(node)
+        if tag == "img" and attrs.get("src", "").startswith("/assets/photos/"):
+            for parent in self.stack:
+                if "photo" in parent:
+                    parent["photo"] = True
+        if tag not in self.VOID:
+            self.stack.append(node)
+
+    def handle_endtag(self, tag):
+        for index in range(len(self.stack) - 1, -1, -1):
+            if self.stack[index]["tag"] == tag:
+                del self.stack[index:]
+                break
+
+    def handle_data(self, data):
+        for node in self.stack:
+            if "photo" in node:
+                node["text"].append(data)
+
+
+def check_photo_lists(document: str, label: str) -> int:
+    audit = PhotoListAudit()
+    audit.feed(document)
+    missing = [" ".join("".join(item["text"]).split())[:100] for item in audit.items if not item["photo"]]
+    if missing:
+        raise SystemExit(f"{label}: editorial list rows missing photos: {missing}")
+    if re.search(r'<!--(?:PHOTO|CHOICE_PHOTO|PHOTO_CREDIT):|\bdata-photo="', document):
+        raise SystemExit(f"{label}: unresolved photo markup")
+    return len(audit.items)
+
+
 def crumbs_html(items: list[tuple[str, str]]) -> str:
     lis = []
     for name, url in items:
@@ -240,15 +374,16 @@ def related_html(slug: str) -> str:
     for item in links[slug]:
         guide = by_slug[item]
         items.append(
-            f'<li><a href="/guides/{item}/">{esc(guide["h1"])}</a><p>{esc(guide["dek"])}</p></li>'
+            f'<li data-photo="{GUIDE_PHOTOS[item]}"><a href="/guides/{item}/">{esc(guide["h1"])}</a><p>{esc(guide["dek"])}</p></li>'
         )
-    calc = '<li><a href="/tools/microgreens-seed-calculator/">Microgreens seed calculator</a><p>Scale a published 10 by 20 inch rate to your tray and estimate seed cost.</p></li>'
+    calc = '<li data-photo="scale"><a href="/tools/microgreens-seed-calculator/">Microgreens seed calculator</a><p>Scale a published 10 by 20 inch rate to your tray and estimate seed cost.</p></li>'
     if slug in {"balcony-salad-garden", "apartment-seed-starting"}:
         calc = ""
     return "<h2>Related guides</h2><ul class=\"related-list\">" + calc + "".join(items) + "</ul>"
 
 
 def layout(page: dict, main: str, graph: list[dict]) -> str:
+    main = render_content_photos(main)
     title = page["title"]
     description = page["description"]
     canonical = page["url"]
@@ -508,11 +643,11 @@ def step_strip() -> str:
             "At your crop's harvest stage, cut above the mix, leave the roots behind, and wash the greens before eating.",
         ),
     ]
+    photos = ["tray", "mix", "sowing", "cover", "sunflower", "light", "tray", "harvest"]
     items = []
     for number, (title, instruction) in enumerate(steps, start=1):
         items.append(
-            '<li class="grow-step">'
-            f'<span class="step-number" aria-hidden="true">{number:02d}</span>'
+            f'<li class="grow-step" data-photo="{photos[number - 1]}">'
             f'<div class="step-copy"><h3>{esc(title)}</h3><p>{esc(instruction)}</p></div>'
             '</li>'
         )
@@ -699,7 +834,7 @@ def rates_table() -> str:
     rows = []
     for row in rates:
         rows.append(
-            "<tr>"
+            f'<tr data-photo="{"peas" if row["id"] == "pea" else row["id"]}">'
             f"<td data-label=\"Crop\">{esc(row['name'])}</td>"
             f"<td data-label=\"Seed per 10 by 20 inch tray\">{esc(rate_label(row))}</td>"
             f"<td data-label=\"What this number is\">{esc(row['kind'])}</td>"
@@ -742,7 +877,7 @@ def guide_list(include_dek: bool = True) -> str:
     items = []
     for guide in GUIDES:
         dek = f"<p>{esc(guide['dek'])}</p>" if include_dek else ""
-        items.append(f'<li><a href="/guides/{guide["slug"]}/">{esc(guide["h1"])}</a>{dek}</li>')
+        items.append(f'<li data-photo="{GUIDE_PHOTOS[guide["slug"]]}"><a href="/guides/{guide["slug"]}/">{esc(guide["h1"])}</a>{dek}</li>')
     return f'<ul class="guide-list">{"".join(items)}</ul>'
 
 
@@ -1212,7 +1347,13 @@ def render_static_pages() -> dict[str, str]:
 
 
 def main() -> None:
-    css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css"]))
+    credit_page = (SRC / "pages" / "photo-credits.html").read_text()
+    for key, photo in LIST_PHOTOS.items():
+        if not (ROOT / "assets" / "photos" / "thumbs" / photo["thumbnail"]).is_file():
+            raise SystemExit(f"Missing photo thumbnail for {key}")
+        if f'id="{photo["credit_id"]}"' not in credit_page:
+            raise SystemExit(f"Missing photo credit record for {key}")
+    css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css", "photo-lists.css"]))
     css_path = ROOT / "css" / "styles.css"
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(css + "\n")
@@ -1229,8 +1370,10 @@ def main() -> None:
     (assets / "photo-soon.svg").write_text((SRC / "photo-soon.svg").read_text())
     pages = render_static_pages()
     urls = []
+    photographed_items = 0
     for rel, document in pages.items():
         check_copy(Path(rel), document)
+        photographed_items += check_photo_lists(document, rel)
         target = ROOT / rel
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(document)
@@ -1276,6 +1419,7 @@ def main() -> None:
     if missing:
         raise SystemExit("Missing internal targets: " + ", ".join(missing))
     print("built", len(pages), "pages")
+    print("photographed editorial list items", photographed_items)
     print("indexnow", INDEXNOW)
 
 
