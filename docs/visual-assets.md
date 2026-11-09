@@ -1,6 +1,6 @@
 # Editorial visual assets
 
-Updated November 9, 2026 (UTC) for Small Space Greens. Photographs are real, licensed reference images. None documents a Small Space Greens growing trial or product test. Each published use has linked photographer, original-photo, and license credits below the image.
+Updated November 9, 2026 (UTC) for Small Space Greens. Photographs are real, licensed reference images. None documents a Small Space Greens growing trial or product test. Each published image has a short “Credit: Photographer” caption linking to its full attribution record on `/photo-credits/`.
 
 ## Photographs
 
@@ -27,12 +27,12 @@ The original five local JPGs match the corresponding 960-pixel-wide Wikimedia Co
 - Local file: `assets/photos/fenugreek-tray-anthony-ievlev.jpg` (1400 × 1050).
 - Photographer: [Anthony Ievlev](https://unsplash.com/@onmywayhome).
 - Original: [A bunch of plants that are in a tray](https://unsplash.com/photos/a-bunch-of-plants-that-are-in-a-tray-cwWk5gZd4_Y).
-- License: [Unsplash License](https://unsplash.com/license), which permits commercial web publication and modification. The source page explicitly identifies this photograph as free under that license. Credit the photographer, original source and license to match the site's attribution practice.
+- License: [Unsplash License](https://unsplash.com/license), which permits commercial web publication and modification. The source page explicitly identifies this photograph as free under that license. The full attribution record includes the photographer, original source and license.
 - Provenance: published December 28, 2021; the source lists Canon EOS 60D and tags including microgreens and fenugreek. The downloaded source rendition is 3000 × 4500.
 - Processing: cropped the source using left/top/right/bottom coordinates (0, 1400, 3000, 3650), producing a 3000 × 2250 crop; resized to 1400 × 1050 with Lanczos resampling and saved as an optimized progressive JPEG at quality 84. No AI, enhancement, generated objects or color changes were applied.
 - Use: homepage featured first-tray guide image. The Pannet sunflower image remains the homepage hero. This is a licensed reference photograph of microgreens in a black tray, not a Small Space Greens growing trial or product test.
 - Suggested alt: “Dewy microgreens with seed husks growing in a black tray beside other seedlings.”
-- Caption: “Photo: Anthony Ievlev / Unsplash. Cropped for display.” Link the photographer, original photo and license separately.
+- Caption: `Credit: <a href="/photo-credits/#fenugreek-tray-anthony-ievlev">Anthony Ievlev</a>`. The linked record contains the original source, license and crop details.
 
 ### Lettuce in a container
 
@@ -65,7 +65,7 @@ The original five local JPGs match the corresponding 960-pixel-wide Wikimedia Co
 - Title: “Balcony garden.” [Original Flickr photograph](https://www.flickr.com/photos/ruthanddave/9069549775/); [Commons source and license record](https://commons.wikimedia.org/wiki/File:Balcony_garden_(9069549775).jpg).
 - License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/).
 - Original photograph: 4000 × 3000, taken June 14, 2013. Source records a Flickr license review.
-- Processing: cropped source rectangle (0, 0, 4000, 2500) to remove the feet at the bottom; resized to 1200 × 750 and JPEG optimized. Further card framing is marked as cropped. No generated content or objects were added.
+- Processing: cropped source rectangle (0, 0, 4000, 2500) to remove the feet at the bottom; resized to 1200 × 750 and JPEG optimized. Further card framing is documented in the full attribution record. No generated content or objects were added.
 - Use: homepage balcony card, balcony guide-directory thumbnail, and balcony article. It depicts an actual balcony container garden; it does not establish the light, weight or growing conditions of the article's suggested plans.
 
 ### Basil in a window by Personal Creations
@@ -74,12 +74,14 @@ The original five local JPGs match the corresponding 960-pixel-wide Wikimedia Co
 - Creator: [Personal Creations](https://www.flickr.com/people/127294011@N07), the credited organization rather than an identified individual photographer.
 - Title: “Chalkboard Plant Stake Basil in a window.” [Original Flickr photograph](https://www.flickr.com/photos/personalcreations/14889072919/); [Commons source and license record](https://commons.wikimedia.org/wiki/File:Chalkboard_Plant_Stake_Basil_in_a_window_(14889072919).jpg).
 - License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/).
-- Source date: August 29, 2014. Original resolution is 800 × 800. Local JPEG is optimized; card crops are indicated in captions. No generated content was added.
+- Source date: August 29, 2014. Original resolution is 800 × 800. Local JPEG is optimized; card crops are documented in the full attribution record. No generated content was added.
 - Use: homepage windowsill card and windowsill guide-directory thumbnail. This is mature basil in a mosaic pot, not a microgreen crop or site trial. Its resolution is suitable for cards, not a large full-width hero.
 
 ## Presentation and reuse
 
-Keep attribution links outside guide-card links. Display credits below images at a readable size on phones. Preserve the original photographer and license when making thumbnails or social crops; label changes to the framing. Do not present these reference photographs as evidence of yield, product performance, or a trial conducted by this site.
+Use a single short caption below each photograph: `Credit: <a href="/photo-credits/#ASSET-STEM">Photographer</a>`. The anchor ID is the exact local image filename without `.jpg`. Keep this credit link outside guide-card links and readable on phones. Do not add source, license, cropping or reference-photo text to the image caption.
+
+Maintain the complete attribution at `/photo-credits/#ASSET-STEM`: original title, creator and profile, original source, license, matching thumbnail, and crop or resize notes. Preserve the original license for thumbnails and social crops; cropped Teogenesis and Netha Hussain photographs remain under CC BY-SA 4.0. The Photo credits page includes all eight assets, including the lettuce photograph retained in social imagery. Do not present these photographs as evidence of a trial conducted by this site.
 
 The eight oversized step illustrations and homepage space-selector drawings have been removed from the rendered site. Growing steps use a compact numbered list. Guide-directory thumbnails use credited photographs. Decorative window, kit-versus-DIY and balcony-layout drawings are no longer shown in their article introductions. Data charts and the two-tray watering diagram remain where they explain measurements or method; they are not photographs or evidence of a site trial.
 
