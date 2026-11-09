@@ -1658,9 +1658,6 @@ def main() -> None:
     (ROOT / "js" / "site.js").write_text((SRC / "site.js").read_text())
     for name in ["setup.js", "cost-compare.js"]:
         (ROOT / "js" / name).write_text((SRC / name).read_text())
-    assets = ROOT / "assets"
-    assets.mkdir(parents=True, exist_ok=True)
-    (assets / "photo-soon.svg").write_text((SRC / "photo-soon.svg").read_text())
     pages = render_static_pages()
     urls = []
     photographed_items = 0
@@ -1703,7 +1700,7 @@ def main() -> None:
             hrefs.add(href.split("#")[0].split("?")[0])
     missing = []
     for href in sorted(hrefs):
-        if href in {"/", "/feed.xml", "/favicon.svg", "/css/styles.css", "/assets/photo-soon.svg"}:
+        if href in {"/", "/feed.xml", "/favicon.svg", "/css/styles.css"}:
             continue
         candidate = href.strip("/") + "/index.html"
         direct = href.strip("/")
