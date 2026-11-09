@@ -50,7 +50,7 @@ GUIDES = [
         "title": "Microgreens Kit vs DIY: Compare Setup and Repeat Costs",
         "description": "Compare microgreens kits and DIY setups by what is included, space needed, upfront spending, and repeat costs. Choose the approach that fits your plans.",
         "h1": "Microgreens kit vs DIY: compare setup and repeat costs",
-        "dek": "A kit can be the smaller first purchase. Seed is what you buy again. Current shop prices are not listed here.",
+        "dek": "Compare the complete setup, refill costs, and daily work. Use a simple worksheet to price the kit or trays you are considering.",
         "og": "cost",
     },
     {
@@ -903,21 +903,63 @@ def render_static_pages() -> dict[str, str]:
     }
     by_slug = {guide["slug"]: guide for guide in GUIDES}
     visuals = {
-        "microgreens-in-a-small-apartment": ("/assets/photos/countertop-greens-editorial.webp", "First tray · AI illustration"),
+        "microgreens-in-a-small-apartment": ("/assets/photos/sunflower-small-tray.jpg", "First tray"),
         "windowsill-microgreens": ("/assets/diagrams/window-light.svg", "Light and space"),
         "microgreens-seed-density-per-tray": ("/assets/diagrams/seed-density.svg", "Seed planning"),
         "pea-vs-radish-microgreens": ("/assets/diagrams/harvest-windows.svg", "Choose a crop"),
         "bottom-watering-trays": ("/assets/diagrams/bottom-watering.svg", "Watering"),
         "apartment-seed-starting": ("/assets/diagrams/window-light.svg", "Seed starting"),
-        "balcony-salad-garden": ("/assets/photos/balcony-greens-editorial.webp", "Balcony growing · AI illustration"),
+        "balcony-salad-garden": ("/assets/photos/lettuce-in-pot.jpg", "Balcony growing"),
         "microgreens-kit-vs-diy-cost": ("/assets/diagrams/kit-vs-diy.svg", "Supplies and cost"),
+    }
+    photo_credits = {
+        "microgreens-in-a-small-apartment": {
+            "alt": "Sunflower microgreens growing in a small clear tray on a white background.",
+            "width": 960,
+            "height": 810,
+            "author": "Pannet",
+            "author_url": "https://commons.wikimedia.org/wiki/User:Pannet",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Sunflower_microgreens_01.jpg",
+            "license": "CC BY 4.0",
+            "license_url": "https://creativecommons.org/licenses/by/4.0/",
+            "note": "Reference photo, cropped; not a site trial.",
+        },
+        "balcony-salad-garden": {
+            "alt": "One leaf lettuce plant in a white pot on a table indoors.",
+            "width": 960,
+            "height": 1280,
+            "author": "Netha Hussain",
+            "author_url": "https://commons.wikimedia.org/wiki/User:Netha_Hussain",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Leaf_lettuce_plant_in_a_pot_10.jpg",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "note": "Container lettuce reference photo, cropped; not a site trial.",
+        },
     }
     def cards(slugs: list[str]) -> str:
         items = []
         for slug in slugs:
             guide = by_slug[slug]
             img, category = visuals[slug]
-            items.append(f'<a class="library-card" href="/guides/{slug}/"><img src="{img}" alt="" width="120" height="120" loading="lazy"><div><p class="eyebrow">{esc(category)}</p><h2>{esc(guide["h1"])}</h2><p>{esc(guide["dek"])}</p></div></a>')
+            photo = photo_credits.get(slug)
+            caption = ""
+            alt, width, height = "", 120, 120
+            if photo:
+                alt, width, height = photo["alt"], photo["width"], photo["height"]
+                caption = (
+                    '<figcaption class="photo-credit">Photo by '
+                    f'<a href="{esc(photo["author_url"])}">{esc(photo["author"])}</a> · '
+                    f'<a href="{esc(photo["source_url"])}">Original</a> · '
+                    f'<a href="{esc(photo["license_url"])}">{esc(photo["license"])}</a>. '
+                    f'<span>{esc(photo["note"])}</span></figcaption>'
+                )
+            items.append(
+                '<figure class="library-card">'
+                f'<a class="library-card-link" href="/guides/{slug}/">'
+                f'<img src="{esc(img)}" alt="{esc(alt)}" width="{width}" height="{height}" loading="lazy">'
+                f'<div><p class="eyebrow">{esc(category)}</p><h2>{esc(guide["h1"])}</h2>'
+                f'<p>{esc(guide["dek"])}</p></div></a>{caption}</figure>'
+            )
         return f'<div class="guide-library-grid">{"".join(items)}</div>'
     guides_body = f"""<div class="guide-library-intro"><p class="eyebrow">The growing library</p><h1>Small steps.<br>Something good to grow.</h1>
 <p class="dek">Find the guide for the job in front of you, from your first tray to a little balcony harvest.</p>
@@ -978,7 +1020,7 @@ def render_static_pages() -> dict[str, str]:
     pages["404.html"] = simple_page(missing, (SRC / "pages" / "404.html").read_text())
 
     extra_pages = [
-        ("gear/index.html", "Gear Categories for a Small-Space Greens Setup", "Tray, mix, lamp, mister, scissors, and fan. Categories only, with no store links or prices until an affiliate program is approved.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
+        ("gear/index.html", "Microgreens Starter Setup: Kits, Trays and Supplies", "Compare a ready-to-sow kit, reusable trays, or a container you own. Check the full setup, refill costs, light, and daily work before you buy.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
         ("editorial-method/index.html", "How Small Space Greens Chooses and Corrects Guides", "How sources are chosen, how product advice will be labeled, and how to send a correction.", f"{SITE}/editorial-method/", "", "Editorial method", f"{SITE}/assets/og/editorial.jpg", "editorial.html", ""),
         ("guides/first-tray-checklist/index.html", "First-Tray Checklist for Apartment Microgreens", "Print the first-tray checklist, or get the same list by email from Ryan after you confirm your address.", f"{SITE}/guides/first-tray-checklist/", "/guides/", "First-tray checklist", f"{SITE}/assets/og/checklist.jpg", "checklist.html", ""),
     ]

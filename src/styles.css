@@ -65,9 +65,9 @@ svg{flex-shrink:0}
 .hero-utility>span:last-child{margin-left:auto;color:var(--ink);font-size:20px}
 .hero-utility strong{color:var(--ink);font-weight:600}
 .mini-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid #bfcbb4;border-radius:50%;font-size:22px;background:var(--sage);color:var(--ink)}
-.hero-image{margin:0;position:relative;align-self:stretch;min-height:540px;isolation:isolate}
-.hero-image img{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:47% 50%;border-radius:4px}
-.hero-image figcaption{position:absolute;left:22px;bottom:16px;font-size:12px;line-height:1.5;color:#fff;background:#193b2de8;border-radius:2px;padding:5px 8px}
+.home-hero .hero-image{margin:0;min-width:0;width:100%;height:auto;min-height:0;align-self:center}
+.home-hero .hero-image img{display:block;width:100%;height:auto;object-fit:contain;object-position:center;background:#fff;border:1px solid var(--line);border-radius:4px}
+.home-hero .hero-image figcaption{position:static;max-width:none;font-size:12px}
 .editorial-strip{display:flex;align-items:center;gap:24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;font-size:12px}
 .editorial-strip>span{letter-spacing:.1em;font-size:11px;font-weight:600;white-space:nowrap}
 .editorial-strip p{margin:0;color:var(--muted);font-size:14px}
@@ -117,14 +117,16 @@ svg{flex-shrink:0}
 .preview-footnote{font-size:12px;color:var(--muted);margin:0;border-top:1px solid var(--line);padding-top:15px;line-height:1.6}
 .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
 .story-card{text-decoration:none;color:var(--ink)}
-.story-visual{position:relative;height:260px;overflow:hidden;border-radius:4px}
-.story-visual img{width:100%;height:100%;object-fit:cover;object-position:50% 72%;display:block;transition:transform .4s}
+.story-photo{margin:0}
+.story-visual{display:block;position:relative;height:260px;overflow:hidden;border-radius:4px}
+.story-visual img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .4s}
 .story-card:hover img{transform:scale(1.025)}
 .story-label{position:absolute;top:16px;left:16px;padding:5px 10px;border-radius:2px;background:var(--bg);font-size:9px;letter-spacing:.1em;font-weight:650}
-.image-credit-mini{position:absolute;bottom:10px;right:10px;color:white;background:#193b2de8;font-size:9px;padding:3px 6px;border-radius:2px}
 .story-copy{padding-top:24px}
 .story-copy .eyebrow{font-size:10px;display:block;margin:0 0 12px}
 .story-copy h3{font-size:38px;margin:0 0 15px}
+.story-copy h3 a{color:inherit;text-decoration:none}
+.story-copy h3 a:hover{text-decoration:underline}
 .story-copy p{font-size:14px;color:var(--muted);max-width:420px;margin-bottom:12px}
 .story-stack{display:flex;flex-direction:column}
 .story-row{display:flex;align-items:center;gap:22px;flex:1;border-top:1px solid var(--line);padding:28px 0;text-decoration:none}
@@ -188,7 +190,11 @@ svg{flex-shrink:0}
 .photo{margin:28px 0;background:transparent}
 .photo img{display:block;width:100%;border-radius:4px}
 .photo img[src$='.jpg'],.photo img[src$='.webp']{max-height:440px;object-fit:cover}
-.credit,.photo figcaption{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.7}
+.credit,.photo figcaption{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.7}
+.photo-credit{font-size:12px;color:var(--muted);margin:12px 0 0;line-height:1.7;overflow-wrap:anywhere}
+.photo-credit a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.photo-credit a:hover{color:var(--green)}
+.photo-credit span{display:block}
 ol.steps{list-style:none;counter-reset:steps;padding:0}
 ol.steps li{counter-increment:steps;position:relative;padding:0 0 24px 46px;margin-bottom:20px;border-bottom:1px solid var(--line);font-size:15px}
 ol.steps li::before{content:counter(steps);position:absolute;left:0;top:0;border:1px solid #b7c6ac;background:var(--sage);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}
@@ -222,11 +228,15 @@ ol.steps li::before{content:counter(steps);position:absolute;left:0;top:0;border
 .page-article>.site-footer{margin-top:0}
 .guide-library-intro{max-width:780px;margin-bottom:44px}
 .guide-library-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.library-card{border-top:1px solid var(--line);padding:24px 0;display:grid;grid-template-columns:120px 1fr;gap:24px;text-decoration:none;color:var(--ink)}
+.library-card{border-top:1px solid var(--line);padding:24px 0;margin:0;color:var(--ink)}
+.library-card-link{display:grid;grid-template-columns:120px minmax(0,1fr);gap:24px;text-decoration:none;color:var(--ink)}
+.library-card-link:hover{color:var(--ink)}
+.library-card-link:hover h2{text-decoration:underline;text-underline-offset:4px}
 .library-card img{width:120px;height:120px;object-fit:cover;border-radius:4px;background:var(--sage)}
 .library-card h2{font-size:27px;line-height:1.15;margin:0 0 14px}
 .library-card p{font-size:12px;line-height:1.7;color:var(--muted);margin:0}
 .library-card .eyebrow{font-size:9px;margin-bottom:10px}
+.library-card .photo-credit{margin-top:12px}
 .page-intro{max-width:880px;margin:0 0 32px}
 .page-intro h1{max-width:850px}
 .jump-links{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 38px}
@@ -315,3 +325,7 @@ input:disabled,select:disabled{opacity:.55}
 
 @media(max-width:620px){input[type=number],input[type=email],input[type=text],select,textarea{font-size:16px}}
 @media(max-width:620px){.gear-grid{grid-template-columns:1fr}.gear-card h2{font-size:22px;margin:0 0 8px}}
+@media(max-width:820px){.library-card-link{grid-template-columns:90px minmax(0,1fr);gap:16px}}
+@media(max-width:620px){.library-card-link{grid-template-columns:95px minmax(0,1fr);gap:20px}.credit,.photo figcaption,.photo-credit{font-size:12px;line-height:1.7}.responsive-table caption{display:block;width:100%;margin-bottom:12px}}
+
+.route-card{display:flex;flex-direction:column}.route-card .text-link{margin-top:auto}.route-card p{font-size:14px;line-height:1.75}
