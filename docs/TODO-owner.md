@@ -22,8 +22,8 @@ These items need Ryan Moalemi. They are not on the public pages, because the sit
 
 ## Measurement
 
-- Analytics are not installed. The privacy policy says so. Pick a tool, then update the policy in the same change.
-- Email signup is not installed. The first-tray checklist is printable without an address. Add a provider only when the welcome sequence can actually be sent.
+- Google Analytics 4 (G-8YDK0NYXM5) and the checklist email signup are installed. The privacy policy matches that. Confirm the GA4 property and the Resend messages look right in your own accounts.
+- Search Console indexing checks are still yours to do.
 
 ## Search Console
 

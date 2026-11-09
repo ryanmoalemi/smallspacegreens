@@ -255,10 +255,21 @@ def layout(page: dict, main: str, graph: list[dict]) -> str:
             '<meta name="p:domain_verify" content="d5bc7d789b70d72abe4b445f09611c3c"/>\n'
         )
     ld = {"@context": "https://schema.org", "@graph": graph}
+    gtag = """<script async src="https://www.googletagmanager.com/gtag/js?id=G-8YDK0NYXM5"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-8YDK0NYXM5');
+</script>
+"""
+    scripts = page.get("scripts", "")
+    if page.get("signup"):
+        scripts += '<script src="/js/signup.js"></script>'
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-{verify}<meta charset="utf-8">
+{verify}{gtag}<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
@@ -303,9 +314,41 @@ def layout(page: dict, main: str, graph: list[dict]) -> str:
 <p class="copyright">© 2026 Small Space Greens</p>
 </div>
 </footer>
-{page.get("scripts", "")}
+{scripts}
 </body>
 </html>
+"""
+
+
+def signup_form(compact: bool) -> str:
+    if compact:
+        lead = (
+            "<h2 id=\"signup-title\">Checklist by email</h2>"
+            "<p>Get the first-tray checklist by email from Ryan Moalemi. "
+            "Confirm your address first. Unsubscribe any time.</p>"
+        )
+    else:
+        lead = (
+            "<h2 id=\"signup-title\">Get the checklist by email</h2>"
+            "<p>Get the first-tray checklist by email from Ryan Moalemi. "
+            "Confirm your address first. Unsubscribe any time. "
+            "You can still print the list on this page without signing up.</p>"
+        )
+    return f"""<section class="signup" aria-labelledby="signup-title">
+{lead}
+<form class="signup-form">
+<div class="field">
+<label for="signup-email">Email address</label>
+<input id="signup-email" name="email" type="email" autocomplete="email" required>
+</div>
+<div class="hp">
+<label for="website">Website</label>
+<input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+</div>
+<button class="button" type="submit">Email me the checklist</button>
+<p class="signup-error" role="alert" hidden></p>
+</form>
+</section>
 """
 
 
@@ -365,6 +408,7 @@ def article_page(guide: dict, body: str) -> str:
         + f"<p class=\"byline\">By <a href=\"/about/\">Ryan Moalemi</a>. Updated {DATE_LABEL}.</p>"
         + body
         + related_html(guide["slug"])
+        + signup_form(True)
     )
     page = {
         "title": guide["title"],
@@ -373,6 +417,7 @@ def article_page(guide: dict, body: str) -> str:
         "kind": "article",
         "nav": guide.get("nav", "/guides/"),
         "image": page_image,
+        "signup": True,
     }
     return layout(page, main, graph)
 
@@ -519,7 +564,7 @@ def render_static_pages() -> dict[str, str]:
     home_title = "Small Space Greens | Microgreens and Small-Space Gardening"
     home_desc = "Grow microgreens and salad greens in a small space. Find practical guides, a seed calculator, and help choosing trays, lights, and growing supplies."
     check_lengths(home_title, home_desc, "home")
-    home_body = (SRC / "pages" / "home.html").read_text().replace("<!--GUIDE_LIST-->", guide_list())
+    home_body = (SRC / "pages" / "home.html").read_text().replace("<!--GUIDE_LIST-->", guide_list()).replace("<!--SIGNUP-->", signup_form(True))
     home = {
         "title": home_title,
         "description": home_desc,
@@ -527,6 +572,7 @@ def render_static_pages() -> dict[str, str]:
         "kind": "home",
         "nav": "",
         "verify": True,
+        "signup": True,
         "image": f"{SITE}/assets/og/home.jpg",
         "crumbs": [("Home", f"{SITE}/")],
         "wrap": "wrap-wide",
@@ -578,7 +624,7 @@ def render_static_pages() -> dict[str, str]:
     pages["contact/index.html"] = simple_page(contact, (SRC / "pages" / "contact.html").read_text(), contact_graph)
 
     privacy_title = "Small Space Greens Privacy Policy, Updated Nov 2026"
-    privacy_desc = "How Small Space Greens handles analytics, cookies, affiliate tracking cookies, and email sent to ryan@smallspacegreens.com. Dated November 2026."
+    privacy_desc = "How Small Space Greens uses Google Analytics 4, cookies, and the checklist email list. Contact ryan@smallspacegreens.com. Updated November 2026."
     check_lengths(privacy_title, privacy_desc, "privacy")
     privacy = {
         "title": privacy_title,
@@ -696,10 +742,11 @@ def render_static_pages() -> dict[str, str]:
     extra_pages = [
         ("gear/index.html", "Gear and Comparisons for Small-Space Growing", "How Small Space Greens compares a kit, a DIY tray, and a lamp, and why specific product links are not live yet.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
         ("editorial-method/index.html", "How Small Space Greens Chooses and Corrects Guides", "How sources are chosen, how product advice will be labeled, and how to send a correction.", f"{SITE}/editorial-method/", "", "Editorial method", f"{SITE}/assets/og/editorial.jpg", "editorial.html", ""),
-        ("guides/first-tray-checklist/index.html", "First-Tray Checklist for Apartment Microgreens", "A printable checklist for one microgreen tray: crop, tray, seed weight, water, light, and harvest. No email required.", f"{SITE}/guides/first-tray-checklist/", "/guides/", "First-tray checklist", f"{SITE}/assets/og/checklist.jpg", "checklist.html", ""),
+        ("guides/first-tray-checklist/index.html", "First-Tray Checklist for Apartment Microgreens", "Print the first-tray checklist, or get the same list by email from Ryan after you confirm your address.", f"{SITE}/guides/first-tray-checklist/", "/guides/", "First-tray checklist", f"{SITE}/assets/og/checklist.jpg", "checklist.html", ""),
     ]
     for rel, title, desc, url, nav, crumb, image, filename, wrap in extra_pages:
         check_lengths(title, desc, rel)
+        body = (SRC / "pages" / filename).read_text().replace("<!--SIGNUP-->", signup_form(False))
         page = {
             "title": title,
             "description": desc,
@@ -708,6 +755,47 @@ def render_static_pages() -> dict[str, str]:
             "nav": nav,
             "image": image,
             "wrap": wrap,
+            "signup": filename == "checklist.html",
+            "crumbs": [("Home", f"{SITE}/"), (crumb, url)],
+        }
+        pages[rel] = simple_page(page, body)
+
+    subscribe_pages = [
+        (
+            "subscribe/check-email/index.html",
+            "Check Your Email to Confirm the Checklist",
+            "Open the message from Small Space Greens and confirm your address. The first-tray checklist is sent after you confirm.",
+            f"{SITE}/subscribe/check-email/",
+            "Check your email",
+            "check-email.html",
+        ),
+        (
+            "subscribe/confirmed/index.html",
+            "You Are Confirmed for the Checklist Email",
+            "Your address is confirmed. The first-tray checklist is on its way, and you can also open the same list on this site.",
+            f"{SITE}/subscribe/confirmed/",
+            "Subscription confirmed",
+            "confirmed.html",
+        ),
+        (
+            "subscribe/unsubscribed/index.html",
+            "You Are Unsubscribed from Checklist Email",
+            "You will not get more checklist email from Small Space Greens. The checklist page on the site is still available.",
+            f"{SITE}/subscribe/unsubscribed/",
+            "Unsubscribed",
+            "unsubscribed.html",
+        ),
+    ]
+    for rel, title, desc, url, crumb, filename in subscribe_pages:
+        check_lengths(title, desc, rel)
+        page = {
+            "title": title,
+            "description": desc,
+            "url": url,
+            "kind": "page",
+            "nav": "",
+            "robots": "noindex,follow",
+            "image": f"{SITE}/assets/og/checklist.jpg",
             "crumbs": [("Home", f"{SITE}/"), (crumb, url)],
         }
         pages[rel] = simple_page(page, (SRC / "pages" / filename).read_text())
@@ -726,6 +814,9 @@ def main() -> None:
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(css + "\n")
     write_calculator_js()
+    signup_js = ROOT / "js" / "signup.js"
+    signup_js.parent.mkdir(parents=True, exist_ok=True)
+    signup_js.write_text((SRC / "signup.js").read_text())
     assets = ROOT / "assets"
     assets.mkdir(parents=True, exist_ok=True)
     (assets / "photo-soon.svg").write_text((SRC / "photo-soon.svg").read_text())
@@ -736,7 +827,7 @@ def main() -> None:
         target = ROOT / rel
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(document)
-        if rel != "404.html":
+        if rel != "404.html" and 'content="noindex' not in document:
             if rel == "index.html":
                 urls.append(f"{SITE}/")
             else:

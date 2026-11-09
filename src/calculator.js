@@ -158,6 +158,9 @@
     event.preventDefault();
     calculate();
     summary.focus();
+    if (!out.querySelector(".error") && typeof gtag === "function") {
+      gtag("event", "calculator_result");
+    }
   });
   var exampleBtn = document.getElementById("use-example");
   if (exampleBtn) {
