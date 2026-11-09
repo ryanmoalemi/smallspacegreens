@@ -1,5 +1,101 @@
 {
   "updated": "2026-11-09",
+  "checked_timezone": "UTC",
   "editor": "Ryan Moalemi",
-  "products": []
+  "affiliate_program": null,
+  "products": [
+    {
+      "id": "hamama",
+      "name": "The Microgreens Grow Kit",
+      "brand": "Hamama",
+      "variant": "3 Seed Quilts / Ceramic",
+      "sku": "nonsub-tr-cr-1-sq-cust-3",
+      "type": "kit",
+      "evidence_status": "manufacturer_specifications",
+      "tested": false,
+      "checked": "2026-11-09",
+      "merchant": "hamama",
+      "merchant_url": "https://www.hamama.com/products/microgreens-kit",
+      "affiliate": false,
+      "dimensions": {
+        "shape": "rectangle",
+        "length_in": 12.5,
+        "width_in": 6.5,
+        "depth_in": 2,
+        "basis": "Published ceramic tray dimensions; listing does not distinguish outside edge from inside growing floor.",
+        "independently_measured": false,
+        "source_url": "https://www.hamama.com/products/ceramic-grow-tray"
+      },
+      "included": ["Ceramic grow tray", "Three Seed Quilts", "Instructions"],
+      "extras": ["Optional bamboo frame sold separately", "Grow light not listed among included items"],
+      "refills": "Fresh Hamama Seed Quilts for subsequent plantings; tray designed for the Seed Quilt system.",
+      "limitation": "Published specifications only. No firsthand trial or independent measurement.",
+      "sources": [
+        {"url": "https://www.hamama.com/products/microgreens-kit", "supports": "Current ceramic kit option and included items"},
+        {"url": "https://www.hamama.com/products/ceramic-grow-tray", "supports": "Published ceramic tray size"},
+        {"url": "https://www.hamama.com/products/single-grow-tray", "supports": "Tray compatibility with Hamama Seed Quilts"}
+      ]
+    },
+    {
+      "id": "bootstrap",
+      "name": "1010 Extra Strength Shallow Seed Trays",
+      "brand": "Bootstrap Farmer",
+      "variant": "Black / With Holes; choose tray quantity at merchant",
+      "type": "tray_only",
+      "evidence_status": "manufacturer_specifications",
+      "tested": false,
+      "checked": "2026-11-09",
+      "merchant": "bootstrap-farmer",
+      "merchant_url": "https://www.bootstrapfarmer.com/products/1010-shallow-trays",
+      "affiliate": false,
+      "dimensions": {
+        "shape": "rectangle",
+        "length_in": 10.635,
+        "width_in": 10.385,
+        "depth_in": 1.25,
+        "inside_floor_length_in": 9.5,
+        "inside_floor_width_in": 9.375,
+        "basis": "Manufacturer explicitly labels outside-edge dimensions and inside-bottom dimensions for one tray.",
+        "independently_measured": false,
+        "source_url": "https://www.bootstrapfarmer.com/products/1010-shallow-trays"
+      },
+      "included": ["Trays in the selected quantity and hole configuration"],
+      "extras": ["Seeds", "Growing medium", "Solid watering tray for the with-holes configuration", "Lighting as required by the growing space"],
+      "refills": "Choose seeds and growing medium separately; no pre-seeded refill system specified.",
+      "compatibility_note": "Maker recommends matching tray depths for nesting. An assembled pair has not been measured by Small Space Greens.",
+      "limitation": "Tray only. Published specifications are per tray, not the assembled setup footprint.",
+      "sources": [
+        {"url": "https://www.bootstrapfarmer.com/products/1010-shallow-trays", "supports": "Product name, options, outside and inside dimensions, and nesting guidance"}
+      ]
+    },
+    {
+      "id": "trueleaf",
+      "name": "Mini Microgreens Growing Kits (Organic)",
+      "brand": "Mountain Valley Seed Company",
+      "variant": "Arugula",
+      "sku": "20517",
+      "type": "kit",
+      "evidence_status": "retailer_specifications",
+      "tested": false,
+      "checked": "2026-11-09",
+      "merchant": "true-leaf-market",
+      "merchant_url": "https://trueleafmarket.com/products/mini-microgreens-growing-kits",
+      "affiliate": false,
+      "dimensions": {
+        "shape": "circle",
+        "diameter_in": 4.5,
+        "depth_in": 1.5,
+        "basis": "Retailer publishes container diameter and depth without explicitly distinguishing outside from inside measurements.",
+        "independently_measured": false,
+        "source_url": "https://trueleafmarket.com/products/mini-microgreens-growing-kits"
+      },
+      "included": ["Growing container", "Humidity lid", "Soil puck", "Mist sprayer", "Organic seed packet", "Instructions"],
+      "extras": ["Seed and growing medium for later plantings", "Grow light not listed among included items"],
+      "refills": "Retailer describes a single-serve starter; additional seed and growing medium are separate. Container reuse performance has not been tested.",
+      "limitation": "Published retailer specifications only. No firsthand trial or independent measurement.",
+      "sources": [
+        {"url": "https://trueleafmarket.com/products/mini-microgreens-growing-kits", "supports": "Arugula option, brand, SKU, container size, included items, and single-serve description"}
+      ]
+    }
+  ]
 }
