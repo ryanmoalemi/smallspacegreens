@@ -17,7 +17,7 @@ For a source list item, add data-photo="KEY" to the li element. The builder gene
 
 Keep credit links outside checkbox labels and outside guide-card links. Preserve checkbox data-supply values, radio setup-route values, form IDs and existing calculator behavior when editing the design.
 
-Build using python3 scripts/build_site.py. The build rejects editorial list items without photographs, unresolved photo tokens, missing thumbnail files and missing central credit records. The November 9 photo update covers 111 editorial list-item occurrences across the 23 generated pages.
+Build using python3 scripts/build_site.py. The build rejects editorial list items without photographs, unresolved photo tokens, missing thumbnail files and missing central credit records. The November 9 updates cover 119 editorial list-item occurrences across the 23 generated pages, including eight crop rows in the responsive harvest chart.
 
 Before publishing, inspect the first-tray supplies, growing steps, setup choices, shopping checklist, crop comparisons and related guides at 320 and 390 pixels, plus a desktop layout. Check for horizontal overflow, illegible credits, incorrect crops and broken image loading. Check that the supply list still counts and copies only unchecked essentials.
 

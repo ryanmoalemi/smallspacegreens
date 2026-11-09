@@ -1,0 +1,21 @@
+SMALL SPACE GREENS: RESPONSIVE HARVEST CHART
+Updated November 9, 2026
+
+The harvest comparison is built as responsive HTML and CSS, so labels do not shrink with an image. Its source placeholder is HARVEST_CHART in the first-tray guide. The builder renders the component from src/harvest-windows.json; presentation is in src/harvest-chart.css.
+
+On phones, each crop has a real photograph, a readable name and simple linked credit, and a prominent numeric range. The timeline sits beneath that row and spans the available width. On desktop, crop, timeline and number columns align across all eight rows.
+
+All bars use the same 0 to 28 day scale. A 6 to 8 day window begins at day 6 and ends at day 8. It is not drawn from zero. Use one green color throughout: every estimate comes from the same source. Preserve the exact endpoints for short windows such as sunflower at 9 to 10 days.
+
+The verified data are from Utah State University Extension, Grow Your Own Microgreens, Table 1, Estimated time to harvest:
+https://extension.usu.edu/yardandgarden/research/grow-your-own-microgreens
+
+The source lists arugula 6 to 8 days, pea 8 to 10, sunflower 9 to 10, radish 8 to 12, broccoli 8 to 12, kale 8 to 12, basil 12 to 16 and cilantro 21 to 28. Broccoli and kale have separate photo rows. The builder checks that these ranges still agree with the existing calculator guidance.
+
+Label the chart as estimated harvest times. The source table does not explicitly define the clock origin, so do not add a sowing-date-to-harvest-date calculator without further source verification. Keep Maryland's general 7 to 21 day statement outside this crop-specific comparison.
+
+Keep the source and short planning note below the chart as normal wrapping text. Do not put small footnotes inside an SVG or raster image. Numeric labels remain readable independently of the decorative bars. Crop-name links open the seed calculator with that crop selected.
+
+Use the existing licensed photographs and credits. Photos depict the actual subject stated in their alt text; some show seeds or mature plants rather than a microgreen harvest stage. Do not replace these with AI imagery.
+
+Check 320-pixel and 390-pixel phone views and a desktop view before publishing. No horizontal scrolling, clipped range labels, or required zoom. Retain the photo on every row and a source link below the chart.
