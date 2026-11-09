@@ -1,0 +1,125 @@
+[
+  {
+    "id": "radish",
+    "name": "Radish",
+    "grams": 42,
+    "kind": "Utah State crop rate for a 1020 tray",
+    "presoak": "No presoak in the Utah State table",
+    "timing": "Cover 1 to 2 days. Harvest about 8 to 12 days.",
+    "source": "Utah State University Extension, 42 g per 1020 tray.",
+    "note": "No presoak in the Utah State table. Covered about 1 to 2 days. Harvest about 8 to 12 days. Mississippi State University Extension gives a volume example of 2 to 3 tablespoons of radish seed per 10 by 20 inch tray, which is a different way of measuring the same job."
+  },
+  {
+    "id": "pea",
+    "name": "Pea",
+    "grams": 150,
+    "kind": "Utah State crop rate for a 1020 tray",
+    "presoak": "About 6 hours (Utah State). Maryland also lists 6 to 12 hours.",
+    "timing": "Cover about 3 days. Harvest about 8 to 10 days.",
+    "source": "Utah State University Extension, 150 g per 1020 tray.",
+    "note": "Utah State presoaks pea seed about 6 hours. University of Maryland Extension lists pea among seeds often soaked 6 to 12 hours. Covered about 3 days. Harvest about 8 to 10 days."
+  },
+  {
+    "id": "sunflower",
+    "name": "Sunflower",
+    "grams": 48,
+    "kind": "Utah State crop rate for a 1020 tray",
+    "presoak": "About 12 hours (Utah State)",
+    "timing": "Cover about 3 days. Harvest about 9 to 10 days.",
+    "source": "Utah State University Extension, 48 g per 1020 tray.",
+    "note": "Utah State presoaks sunflower about 12 hours. Covered about 3 days. Harvest about 9 to 10 days. Penn State Extension recommends weight on sunflower seed during germination so hulls release from the cotyledons."
+  },
+  {
+    "id": "broccoli",
+    "name": "Broccoli",
+    "grams": 28,
+    "kind": "Utah State crop rate for a 1020 tray",
+    "presoak": "No presoak in the Utah State table",
+    "timing": "Cover 2 to 4 days. Harvest about 8 to 12 days.",
+    "source": "Utah State University Extension, 28 g per 1020 tray.",
+    "note": "No presoak in the Utah State table. Covered about 2 to 4 days. Harvest about 8 to 12 days."
+  },
+  {
+    "id": "kale",
+    "name": "Kale",
+    "grams": 28,
+    "kind": "Utah State crop rate for a 1020 tray",
+    "presoak": "No presoak in the Utah State table",
+    "timing": "Cover 1 to 2 days. Harvest about 8 to 12 days.",
+    "source": "Utah State University Extension, 28 g per 1020 tray.",
+    "note": "No presoak in the Utah State table. Covered about 1 to 2 days. Harvest about 8 to 12 days."
+  },
+  {
+    "id": "arugula",
+    "name": "Arugula",
+    "grams": 10,
+    "kind": "Utah State crop rate for a 1020 tray",
+    "presoak": "No presoak in the Utah State table",
+    "timing": "Cover 1 to 2 days. Harvest about 6 to 8 days.",
+    "source": "Utah State University Extension, 10 g per 1020 tray.",
+    "note": "No presoak in the Utah State table. Covered about 1 to 2 days. Harvest about 6 to 8 days."
+  },
+  {
+    "id": "cilantro",
+    "name": "Cilantro",
+    "grams": 28,
+    "kind": "Utah State crop rate for a 1020 tray",
+    "presoak": "Utah State: no. Maryland: 6 to 12 hours may help.",
+    "timing": "Cover 7 to 14 days. Harvest about 21 to 28 days.",
+    "source": "Utah State University Extension, 28 g per 1020 tray.",
+    "note": "Utah State lists no presoak. University of Maryland Extension includes cilantro among seeds that may be soaked 6 to 12 hours. Covered about 7 to 14 days. Harvest about 21 to 28 days."
+  },
+  {
+    "id": "basil",
+    "name": "Basil",
+    "grams": 28,
+    "kind": "Utah State crop rate for a 1020 tray",
+    "presoak": "No presoak in the Utah State table",
+    "timing": "Cover 4 to 7 days. Harvest about 12 to 16 days.",
+    "source": "Utah State University Extension, 28 g per 1020 tray.",
+    "note": "No presoak in the Utah State table. Covered about 4 to 7 days. Harvest about 12 to 16 days."
+  },
+  {
+    "id": "rutabaga",
+    "name": "Rutabaga",
+    "grams": 28,
+    "kind": "Utah State crop rate for a 1020 tray",
+    "presoak": "No presoak in the Utah State table",
+    "timing": "Cover 1 to 2 days. Harvest about 8 to 12 days.",
+    "source": "Utah State University Extension, 28 g per 1020 tray.",
+    "note": "No presoak in the Utah State table. Covered about 1 to 2 days. Harvest about 8 to 12 days."
+  },
+  {
+    "id": "mustard",
+    "name": "Mustard",
+    "low": 10,
+    "high": 15,
+    "kind": "Maryland sample broadcast, not crop-specific",
+    "presoak": "Not specified as a mustard-only step",
+    "timing": "Mississippi State groups mustard at about 10 to 15 days.",
+    "source": "No crop-specific gram rate was published in the Utah State table. This band is the University of Maryland Extension sample broadcast of about 10 to 15 g (about 1 tablespoon) per 10 by 20 inch flat. It is not a mustard-only weighed rate.",
+    "note": "Mustard is a small brassica seed. Mississippi State University Extension groups mustard with crops often ready about 10 to 15 days after sowing. Treat 10 to 15 g as a starting band for a nominal 10 by 20 inch flat, then adjust the next tray."
+  },
+  {
+    "id": "beet",
+    "name": "Beet",
+    "low": 10,
+    "high": 15,
+    "kind": "Maryland sample broadcast, not crop-specific",
+    "presoak": "Maryland lists beet among seeds soaked 6 to 12 hours.",
+    "timing": "Illinois: slower to germinate. Mississippi State: about 16 to 25 days.",
+    "source": "No crop-specific gram rate was published in the Utah State table. This band is the University of Maryland Extension sample broadcast of about 10 to 15 g per 10 by 20 inch flat. Beet is listed in that publication's seed-count examples, not as its own weighed tray rate.",
+    "note": "University of Maryland Extension lists beet among seeds that may be soaked 6 to 12 hours. Illinois Extension groups beet with slower-to-germinate choices. Mississippi State University Extension groups beets at about 16 to 25 days."
+  },
+  {
+    "id": "amaranth",
+    "name": "Amaranth",
+    "low": 10,
+    "high": 15,
+    "kind": "Maryland sample broadcast, not crop-specific",
+    "presoak": "Illinois suggests a 6 to 24 hour soak can speed slower seeds.",
+    "timing": "Illinois: slower to germinate. Mississippi State: red amaranth about 16 to 25 days.",
+    "source": "No crop-specific gram rate was published in the Utah State table. This band is the University of Maryland Extension sample broadcast of about 10 to 15 g per 10 by 20 inch flat. Amaranth is named as a suitable crop there, not given its own gram rate.",
+    "note": "Illinois Extension groups amaranth with slower-to-germinate choices. Mississippi State University Extension groups red amaranth at about 16 to 25 days. The 10 to 15 g band is a general small-seed starting point, not an amaranth trial result."
+  }
+]

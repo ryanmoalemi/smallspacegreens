@@ -1,0 +1,83 @@
+<h1>Microgreens seed calculator</h1>
+<p class="dek">Enter a tray and a crop. The page returns seed weight for one tray and for the number of trays you are sowing, plus a seed cost if you type a price.</p>
+<p class="byline">By <a href="/about/">Ryan Moalemi</a>. Updated November 9, 2026.</p>
+<p>The math uses published starting rates for a nominal 10 by 20 inch (1020) tray, then scales them by area. It does not adjust for germination, and it is not a promise of a perfect canopy. Read the assumptions under the tool before you treat the grams as exact.</p>
+
+<form id="calc-form">
+<div class="tool">
+<div class="grid">
+<fieldset>
+<legend>Tray size</legend>
+<div class="choices">
+<label><input type="radio" name="tray" value="10x20" checked> 10 by 20 inches</label>
+<label><input type="radio" name="tray" value="10x10"> 10 by 10 inches</label>
+<label><input type="radio" name="tray" value="5x5"> 5 by 5 inches</label>
+<label><input type="radio" name="tray" value="custom"> Custom length and width</label>
+</div>
+</fieldset>
+<div id="custom-dims" class="custom-dims" hidden>
+<div class="field">
+<label for="sideLength">Length</label>
+<input id="sideLength" name="sideLength" type="number" min="0.1" step="any" inputmode="decimal" value="10">
+</div>
+<div class="field">
+<label for="sideWidth">Width</label>
+<input id="sideWidth" name="sideWidth" type="number" min="0.1" step="any" inputmode="decimal" value="20">
+</div>
+<div class="field">
+<label for="unit">Units</label>
+<select id="unit" name="unit">
+<option value="in">Inches</option>
+<option value="cm">Centimeters</option>
+</select>
+</div>
+</div>
+<div class="field">
+<label for="crop">Crop</label>
+<select id="crop" name="crop">
+<!--CROP_OPTIONS-->
+</select>
+</div>
+<div class="field">
+<label for="trays">Number of trays</label>
+<input id="trays" name="trays" type="number" min="1" step="1" value="1" required>
+</div>
+<div class="field">
+<label for="price">Seed price, optional</label>
+<input id="price" name="price" type="number" min="0" step="0.01" inputmode="decimal">
+</div>
+<div class="field">
+<label for="priceUnit">That price is per</label>
+<select id="priceUnit" name="priceUnit">
+<option value="lb">Pound</option>
+<option value="oz">Ounce</option>
+<option value="kg">Kilogram</option>
+</select>
+</div>
+<button class="calc" type="submit">Calculate seed</button>
+</div>
+<div id="calc-results" class="results" tabindex="-1" aria-live="polite"></div>
+</div>
+</form>
+<noscript><p>The calculator needs JavaScript. It does not need a network connection. The rate table further down still lists every published figure the tool uses.</p></noscript>
+
+<!-- affiliate:seed-supplier -->
+
+<h2>Assumptions</h2>
+<p>A 1020 tray is taken as 10 inches by 20 inches, which is 200 square inches. A 10 by 10 inch tray is half of that area, so it gets half the seed. A 5 by 5 inch tray is 25 square inches, one eighth of the reference tray. Custom sizes use the length and width you type. Centimeters are converted with 1 inch = 2.54 centimeters, then the area is calculated in square inches.</p>
+<p>The scale is linear: seed weight changes in proportion to area. That is a planning assumption, not something this site has measured. The inside floor of a purchased tray is often a little smaller than the nominal outside size. If you want the inner floor, choose custom and measure the inside length and width.</p>
+<p>Crop rates with a single gram number come from Utah State University Extension's table of grams per 1020 tray. Mustard, beet, and amaranth are not in that table. For those three, the tool uses the University of Maryland Extension sample broadcast of about 10 to 15 grams per 10 by 20 inch flat, and it shows a range. Maryland presents that band as a sample technique for a flat, not as a weighed rate for each of those crops. Do not read it as a crop trial.</p>
+<p>Penn State Extension reports success with a lighter sowing, about 10 to 15 grams on a standard 12 by 20 inch 10-row seeding tray, which is 240 square inches, not 200. The calculator does not use that lighter band, because it is not split by crop. Both approaches are real. If your first tray is too crowded or too thin, change the next one. Penn State also offers its own <a href="https://extension.psu.edu/microgreens-seed-density-calculator">microgreens seed density calculator</a>, which can take germination into account. This page does not.</p>
+<p>Ounces are grams divided by 28.349523125. Cost uses 453.59237 grams per pound, 28.349523125 grams per ounce, or 1000 grams per kilogram. Cost is seed only. It ignores trays, mix, water, and electricity. Leave the price blank if you only want weight.</p>
+<p>Soak times and harvest windows in the result are copied from the same extension notes, so you can see them next to the grams. They are not calculated. More on how to read the charts is in <a href="/guides/microgreens-seed-density-per-tray/">seed density per tray</a>.</p>
+
+<h2>Rates used for a 10 by 20 inch tray</h2>
+<!--RATES_TABLE-->
+
+<h2>Sources</h2>
+<ul class="sources">
+<li>Stephen Beck, <a href="https://extension.usu.edu/yardandgarden/research/grow-your-own-microgreens">Grow Your Own Microgreens</a>, Utah State University Extension, updated January 2026. Crop grams per 1020 tray, presoak, covered time, and harvest window.</li>
+<li>Jon Traunfeld, <a href="https://www.extension.umd.edu/resource/growing-microgreens-and-baby-greens-indoors">Growing Microgreens and Baby Greens Indoors</a>, University of Maryland Extension, revised March 2026. Sample broadcast of about 10 to 15 grams per 10 by 20 inch flat.</li>
+<li>Elsa Sánchez and Robert Berghage, <a href="https://extension.psu.edu/growing-microgreens">Growing Microgreens</a>, Penn State Extension, updated December 16, 2025. The 10 to 15 gram band for a 12 by 20 inch 10-row tray.</li>
+<li>Francesco Di Gioia, <a href="https://extension.psu.edu/microgreens-seed-density-calculator">Microgreens Seed Density Calculator</a>, Penn State Extension. A separate tool that can include germination.</li>
+</ul>

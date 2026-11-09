@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microgreens Seed Calculator for Tray Size and Cost</title>
+<meta name="description" content="Estimate microgreen seed in grams and ounces for your tray size and crop, then approximate cost from your own seed price. It works offline. Free.">
+<link rel="canonical" href="https://smallspacegreens.com/tools/microgreens-seed-calculator/">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="Microgreens Seed Calculator for Tray Size and Cost">
+<meta property="og:description" content="Estimate microgreen seed in grams and ounces for your tray size and crop, then approximate cost from your own seed price. It works offline. Free.">
+<meta property="og:url" content="https://smallspacegreens.com/tools/microgreens-seed-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Small Space Greens">
+<meta property="og:image" content="https://smallspacegreens.com/favicon.svg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Microgreens Seed Calculator for Tray Size and Cost">
+<meta name="twitter:description" content="Estimate microgreen seed in grams and ounces for your tray size and crop, then approximate cost from your own seed price. It works offline. Free.">
+<meta name="twitter:image" content="https://smallspacegreens.com/favicon.svg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="Small Space Greens" href="/feed.xml">
+<link rel="stylesheet" href="/css/styles.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://smallspacegreens.com/#organization", "name": "Small Space Greens", "url": "https://smallspacegreens.com/", "email": "ryan@smallspacegreens.com", "logo": {"@type": "ImageObject", "url": "https://smallspacegreens.com/favicon.svg"}}, {"@type": "WebSite", "@id": "https://smallspacegreens.com/#website", "name": "Small Space Greens", "url": "https://smallspacegreens.com/", "publisher": {"@id": "https://smallspacegreens.com/#organization"}, "inLanguage": "en"}, {"@type": "Person", "@id": "https://smallspacegreens.com/#ryan-moalemi", "name": "Ryan Moalemi", "email": "ryan@smallspacegreens.com", "url": "https://smallspacegreens.com/about/", "jobTitle": "Author", "affiliation": {"@id": "https://smallspacegreens.com/#organization"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://smallspacegreens.com/"}, {"@type": "ListItem", "position": 2, "name": "Microgreens seed calculator", "item": "https://smallspacegreens.com/tools/microgreens-seed-calculator/"}]}, {"@type": "WebApplication", "name": "Microgreens seed calculator", "url": "https://smallspacegreens.com/tools/microgreens-seed-calculator/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "browserRequirements": "Requires JavaScript. No network connection required.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "provider": {"@id": "https://smallspacegreens.com/#organization"}, "author": {"@id": "https://smallspacegreens.com/#ryan-moalemi"}}]}</script>
+</head>
+<body>
+<header class="site-header">
+<a class="skip" href="#content">Skip to content</a>
+<div class="header-bar">
+<a class="brand" href="/"><img src="/favicon.svg" width="28" height="28" alt="">Small Space Greens</a>
+<nav class="nav" aria-label="Primary"><ul><li><a href="/guides/">Guides</a></li><li><a href="/tools/microgreens-seed-calculator/" aria-current="page">Calculator</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+</div>
+</header>
+<main id="content" class="wrap wrap-wide">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li>Microgreens seed calculator</li></ol></nav><p class="disclosure">This page may later include affiliate links. If you buy through one, we may earn a commission at no extra cost to you. <a href="/affiliate-disclosure/">Affiliate disclosure</a>.</p><h1>Microgreens seed calculator</h1>
+<p class="dek">Enter a tray and a crop. The page returns seed weight for one tray and for the number of trays you are sowing, plus a seed cost if you type a price.</p>
+<p class="byline">By <a href="/about/">Ryan Moalemi</a>. Updated November 9, 2026.</p>
+<p>The math uses published starting rates for a nominal 10 by 20 inch (1020) tray, then scales them by area. It does not adjust for germination, and it is not a promise of a perfect canopy. Read the assumptions under the tool before you treat the grams as exact.</p>
+
+<form id="calc-form">
+<div class="tool">
+<div class="grid">
+<fieldset>
+<legend>Tray size</legend>
+<div class="choices">
+<label><input type="radio" name="tray" value="10x20" checked> 10 by 20 inches</label>
+<label><input type="radio" name="tray" value="10x10"> 10 by 10 inches</label>
+<label><input type="radio" name="tray" value="5x5"> 5 by 5 inches</label>
+<label><input type="radio" name="tray" value="custom"> Custom length and width</label>
+</div>
+</fieldset>
+<div id="custom-dims" class="custom-dims" hidden>
+<div class="field">
+<label for="sideLength">Length</label>
+<input id="sideLength" name="sideLength" type="number" min="0.1" step="any" inputmode="decimal" value="10">
+</div>
+<div class="field">
+<label for="sideWidth">Width</label>
+<input id="sideWidth" name="sideWidth" type="number" min="0.1" step="any" inputmode="decimal" value="20">
+</div>
+<div class="field">
+<label for="unit">Units</label>
+<select id="unit" name="unit">
+<option value="in">Inches</option>
+<option value="cm">Centimeters</option>
+</select>
+</div>
+</div>
+<div class="field">
+<label for="crop">Crop</label>
+<select id="crop" name="crop">
+<option value="radish">Radish</option>
+<option value="pea">Pea</option>
+<option value="sunflower">Sunflower</option>
+<option value="broccoli">Broccoli</option>
+<option value="kale">Kale</option>
+<option value="arugula">Arugula</option>
+<option value="cilantro">Cilantro</option>
+<option value="basil">Basil</option>
+<option value="rutabaga">Rutabaga</option>
+<option value="mustard">Mustard</option>
+<option value="beet">Beet</option>
+<option value="amaranth">Amaranth</option>
+</select>
+</div>
+<div class="field">
+<label for="trays">Number of trays</label>
+<input id="trays" name="trays" type="number" min="1" step="1" value="1" required>
+</div>
+<div class="field">
+<label for="price">Seed price, optional</label>
+<input id="price" name="price" type="number" min="0" step="0.01" inputmode="decimal">
+</div>
+<div class="field">
+<label for="priceUnit">That price is per</label>
+<select id="priceUnit" name="priceUnit">
+<option value="lb">Pound</option>
+<option value="oz">Ounce</option>
+<option value="kg">Kilogram</option>
+</select>
+</div>
+<button class="calc" type="submit">Calculate seed</button>
+</div>
+<div id="calc-results" class="results" tabindex="-1" aria-live="polite"></div>
+</div>
+</form>
+<noscript><p>The calculator needs JavaScript. It does not need a network connection. The rate table further down still lists every published figure the tool uses.</p></noscript>
+
+<!-- affiliate:seed-supplier -->
+
+<h2>Assumptions</h2>
+<p>A 1020 tray is taken as 10 inches by 20 inches, which is 200 square inches. A 10 by 10 inch tray is half of that area, so it gets half the seed. A 5 by 5 inch tray is 25 square inches, one eighth of the reference tray. Custom sizes use the length and width you type. Centimeters are converted with 1 inch = 2.54 centimeters, then the area is calculated in square inches.</p>
+<p>The scale is linear: seed weight changes in proportion to area. That is a planning assumption, not something this site has measured. The inside floor of a purchased tray is often a little smaller than the nominal outside size. If you want the inner floor, choose custom and measure the inside length and width.</p>
+<p>Crop rates with a single gram number come from Utah State University Extension's table of grams per 1020 tray. Mustard, beet, and amaranth are not in that table. For those three, the tool uses the University of Maryland Extension sample broadcast of about 10 to 15 grams per 10 by 20 inch flat, and it shows a range. Maryland presents that band as a sample technique for a flat, not as a weighed rate for each of those crops. Do not read it as a crop trial.</p>
+<p>Penn State Extension reports success with a lighter sowing, about 10 to 15 grams on a standard 12 by 20 inch 10-row seeding tray, which is 240 square inches, not 200. The calculator does not use that lighter band, because it is not split by crop. Both approaches are real. If your first tray is too crowded or too thin, change the next one. Penn State also offers its own <a href="https://extension.psu.edu/microgreens-seed-density-calculator">microgreens seed density calculator</a>, which can take germination into account. This page does not.</p>
+<p>Ounces are grams divided by 28.349523125. Cost uses 453.59237 grams per pound, 28.349523125 grams per ounce, or 1000 grams per kilogram. Cost is seed only. It ignores trays, mix, water, and electricity. Leave the price blank if you only want weight.</p>
+<p>Soak times and harvest windows in the result are copied from the same extension notes, so you can see them next to the grams. They are not calculated. More on how to read the charts is in <a href="/guides/microgreens-seed-density-per-tray/">seed density per tray</a>.</p>
+
+<h2>Rates used for a 10 by 20 inch tray</h2>
+<div class="responsive-table"><table><thead><tr><th>Crop</th><th>Seed per 10 by 20 inch tray</th><th>What this number is</th><th>Soak and timing</th></tr></thead><tbody><tr><td data-label="Crop">Radish</td><td data-label="Seed per 10 by 20 inch tray">42 g</td><td data-label="What this number is">Utah State crop rate for a 1020 tray</td><td data-label="Soak and timing">No presoak in the Utah State table Cover 1 to 2 days. Harvest about 8 to 12 days.</td></tr><tr><td data-label="Crop">Pea</td><td data-label="Seed per 10 by 20 inch tray">150 g</td><td data-label="What this number is">Utah State crop rate for a 1020 tray</td><td data-label="Soak and timing">About 6 hours (Utah State). Maryland also lists 6 to 12 hours. Cover about 3 days. Harvest about 8 to 10 days.</td></tr><tr><td data-label="Crop">Sunflower</td><td data-label="Seed per 10 by 20 inch tray">48 g</td><td data-label="What this number is">Utah State crop rate for a 1020 tray</td><td data-label="Soak and timing">About 12 hours (Utah State) Cover about 3 days. Harvest about 9 to 10 days.</td></tr><tr><td data-label="Crop">Broccoli</td><td data-label="Seed per 10 by 20 inch tray">28 g</td><td data-label="What this number is">Utah State crop rate for a 1020 tray</td><td data-label="Soak and timing">No presoak in the Utah State table Cover 2 to 4 days. Harvest about 8 to 12 days.</td></tr><tr><td data-label="Crop">Kale</td><td data-label="Seed per 10 by 20 inch tray">28 g</td><td data-label="What this number is">Utah State crop rate for a 1020 tray</td><td data-label="Soak and timing">No presoak in the Utah State table Cover 1 to 2 days. Harvest about 8 to 12 days.</td></tr><tr><td data-label="Crop">Arugula</td><td data-label="Seed per 10 by 20 inch tray">10 g</td><td data-label="What this number is">Utah State crop rate for a 1020 tray</td><td data-label="Soak and timing">No presoak in the Utah State table Cover 1 to 2 days. Harvest about 6 to 8 days.</td></tr><tr><td data-label="Crop">Cilantro</td><td data-label="Seed per 10 by 20 inch tray">28 g</td><td data-label="What this number is">Utah State crop rate for a 1020 tray</td><td data-label="Soak and timing">Utah State: no. Maryland: 6 to 12 hours may help. Cover 7 to 14 days. Harvest about 21 to 28 days.</td></tr><tr><td data-label="Crop">Basil</td><td data-label="Seed per 10 by 20 inch tray">28 g</td><td data-label="What this number is">Utah State crop rate for a 1020 tray</td><td data-label="Soak and timing">No presoak in the Utah State table Cover 4 to 7 days. Harvest about 12 to 16 days.</td></tr><tr><td data-label="Crop">Rutabaga</td><td data-label="Seed per 10 by 20 inch tray">28 g</td><td data-label="What this number is">Utah State crop rate for a 1020 tray</td><td data-label="Soak and timing">No presoak in the Utah State table Cover 1 to 2 days. Harvest about 8 to 12 days.</td></tr><tr><td data-label="Crop">Mustard</td><td data-label="Seed per 10 by 20 inch tray">10 to 15 g</td><td data-label="What this number is">Maryland sample broadcast, not crop-specific</td><td data-label="Soak and timing">Not specified as a mustard-only step Mississippi State groups mustard at about 10 to 15 days.</td></tr><tr><td data-label="Crop">Beet</td><td data-label="Seed per 10 by 20 inch tray">10 to 15 g</td><td data-label="What this number is">Maryland sample broadcast, not crop-specific</td><td data-label="Soak and timing">Maryland lists beet among seeds soaked 6 to 12 hours. Illinois: slower to germinate. Mississippi State: about 16 to 25 days.</td></tr><tr><td data-label="Crop">Amaranth</td><td data-label="Seed per 10 by 20 inch tray">10 to 15 g</td><td data-label="What this number is">Maryland sample broadcast, not crop-specific</td><td data-label="Soak and timing">Illinois suggests a 6 to 24 hour soak can speed slower seeds. Illinois: slower to germinate. Mississippi State: red amaranth about 16 to 25 days.</td></tr></tbody></table></div>
+
+<h2>Sources</h2>
+<ul class="sources">
+<li>Stephen Beck, <a href="https://extension.usu.edu/yardandgarden/research/grow-your-own-microgreens">Grow Your Own Microgreens</a>, Utah State University Extension, updated January 2026. Crop grams per 1020 tray, presoak, covered time, and harvest window.</li>
+<li>Jon Traunfeld, <a href="https://www.extension.umd.edu/resource/growing-microgreens-and-baby-greens-indoors">Growing Microgreens and Baby Greens Indoors</a>, University of Maryland Extension, revised March 2026. Sample broadcast of about 10 to 15 grams per 10 by 20 inch flat.</li>
+<li>Elsa Sánchez and Robert Berghage, <a href="https://extension.psu.edu/growing-microgreens">Growing Microgreens</a>, Penn State Extension, updated December 16, 2025. The 10 to 15 gram band for a 12 by 20 inch 10-row tray.</li>
+<li>Francesco Di Gioia, <a href="https://extension.psu.edu/microgreens-seed-density-calculator">Microgreens Seed Density Calculator</a>, Penn State Extension. A separate tool that can include germination.</li>
+</ul>
+
+</main>
+<footer class="site-footer">
+<div class="footer-bar">
+<nav class="footer-nav" aria-label="Footer">
+<a href="/privacy/">Privacy</a>
+<a href="/affiliate-disclosure/">Affiliate Disclosure</a>
+<a href="/contact/">Contact</a>
+</nav>
+<p class="copyright">© 2026 Small Space Greens</p>
+</div>
+</footer>
+<script src="/js/calculator.js"></script>
+</body>
+</html>
