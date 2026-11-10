@@ -1,0 +1,129 @@
+{
+  "images": {
+    "sunflower-tray": {
+      "slug": "sunflower-tray",
+      "title": "Sunflower microgreens in a small tray",
+      "alt": "Sunflower microgreens with black seed hulls in a small clear tray.",
+      "credit_id": "product-sunflower-tray",
+      "author": "Pannet",
+      "author_url": "https://commons.wikimedia.org/wiki/User:Pannet",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Sunflower_microgreens_02.jpg",
+      "source_label": "Sunflower microgreens 02",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "note": "Square crop. Example photo of a small tray of microgreens, not a specific kit."
+    },
+    "broccoli-sprouts": {
+      "slug": "broccoli-sprouts",
+      "title": "A dense stand of small green sprouts",
+      "alt": "A dense stand of small green sprouts with rounded leaves.",
+      "credit_id": "product-broccoli-sprouts",
+      "author": "Julie Gibbons",
+      "author_url": "https://commons.wikimedia.org/wiki/File:Broccoli_sprouts.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Broccoli_sprouts.jpg",
+      "source_label": "Broccoli sprouts",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "note": "Square crop. Example photo, not a seed packet."
+    },
+    "basil-seedlings": {
+      "slug": "basil-window-seedlings",
+      "title": "Basil seedlings by a window",
+      "alt": "Young basil seedlings in a pot beside a window.",
+      "credit_id": "product-basil-window-seedlings",
+      "author": "Jon Eben Field",
+      "author_url": "https://commons.wikimedia.org/wiki/File:Pot_of_basil_sprouts_(Ocimum_basilicum)_-_20050422.jpg#Summary",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Pot_of_basil_sprouts_(Ocimum_basilicum)_-_20050422.jpg",
+      "source_label": "Basil",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "note": "Square crop. Example photo of a small plant by a window, not the LetPot unit."
+    },
+    "lettuce-pot": {
+      "slug": "lettuce-container",
+      "title": "Lettuce in a container",
+      "alt": "Leaf lettuce growing in a container.",
+      "credit_id": "product-lettuce-container",
+      "author": "Netha Hussain",
+      "author_url": "https://commons.wikimedia.org/wiki/User:Netha_Hussain",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Leaf_lettuce_plant_in_a_pot_10.jpg",
+      "source_label": "Leaf lettuce plant in a pot 10",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "note": "Square crop. Example photo of container lettuce, not the LetPot unit. Cropped versions remain under CC BY-SA 4.0."
+    },
+    "mixed-greens": {
+      "slug": "microgreens-mixed",
+      "title": "Mixed small greens in a container",
+      "alt": "Small green leaves and pink stems in a clear plastic container.",
+      "credit_id": "product-microgreens-mixed",
+      "author": "Stacy Spensley",
+      "author_url": "https://commons.wikimedia.org/wiki/File:11_microgreens.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:11_microgreens.jpg",
+      "source_label": "11 microgreens",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "note": "Square crop. Example photo of small greens, not the ceramic kit."
+    }
+  },
+  "cards": {
+    "tl-kits": {
+      "kind": "trueleaf",
+      "href_key": "micro-kits",
+      "brand": "True Leaf Market",
+      "short": "Microgreens kits and supplies",
+      "badge": "Kit",
+      "why": "True Leaf lists mini kits and other supplies in this collection.",
+      "cta": "See at True Leaf",
+      "image": "sunflower-tray"
+    },
+    "tl-seed": {
+      "kind": "trueleaf",
+      "href_key": "micro-seed",
+      "brand": "True Leaf Market",
+      "short": "Microgreens seed",
+      "badge": "Seed",
+      "why": "Loose microgreen seed for a tray you reuse. Check the crop on the bag.",
+      "cta": "See at True Leaf",
+      "image": "broccoli-sprouts"
+    },
+    "letpot-mini": {
+      "kind": "letpot",
+      "href_key": "mini",
+      "brand": "LetPot",
+      "short": "LPH-Mini indoor garden",
+      "badge": "No-soil option",
+      "why": "LetPot lists a 5-pod garden, app control, and a schedulable light.",
+      "cta": "See at LetPot",
+      "image": "basil-seedlings"
+    },
+    "letpot-air": {
+      "kind": "letpot",
+      "href_key": "air",
+      "brand": "LetPot",
+      "short": "LPH-Air indoor garden",
+      "badge": "No-soil option",
+      "why": "LetPot lists a 10-pod garden with app-controlled light and water flow.",
+      "cta": "See at LetPot",
+      "image": "lettuce-pot"
+    },
+    "mizuna-ceramic": {
+      "kind": "amazon",
+      "asin": "B0DGF8Z1Z6",
+      "brand": "mizuna",
+      "short": "Ceramic microgreens kit, 2 trays",
+      "badge": "Windowsill",
+      "why": "Two ceramic trays with coir and seeds, listed for a kitchen sill.",
+      "cta": "View on Amazon",
+      "image": "mixed-greens"
+    }
+  },
+  "sections": [
+    {
+      "id": "growing-kits",
+      "title": "Microgreens growing kits",
+      "lead": "True Leaf and LetPot lead. A countertop garden is not a tray of mix. This site has not grown these products.",
+      "cards": ["tl-kits", "tl-seed", "letpot-mini", "letpot-air", "mizuna-ceramic"]
+    }
+  ]
+}

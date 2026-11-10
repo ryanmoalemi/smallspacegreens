@@ -60,6 +60,15 @@ GUIDES = [
         "updated_label": "November 10, 2026",
     },
     {
+        "slug": "microgreen-seeds-for-beginners",
+        "title": "Microgreen Seeds for Beginners: Which to Buy First",
+        "description": "Microgreen seeds for a first tray: radish, pea, broccoli, and sunflower from True Leaf Market, plus how a sprouting seed collection differs.",
+        "h1": "Microgreen seeds for beginners: which to buy first",
+        "dek": "Start with one named crop, match the bag to your tray, and do not confuse sprouting seed with microgreens.",
+        "og": "density",
+        "updated_label": "November 10, 2026",
+    },
+    {
         "slug": "microgreens-kit-vs-diy-cost",
         "title": "Microgreens Kit vs DIY: Compare Setup and Repeat Costs",
         "description": "Compare microgreens kits and DIY setups by what is included, space needed, upfront spending, and repeat costs. Choose the approach that fits your plans.",
@@ -182,6 +191,7 @@ LIST_PHOTOS = json.loads((SRC / "list-photos.json").read_text())
 GUIDE_PHOTOS = {
     "microgreens-in-a-small-apartment": "fenugreek",
     "gifts-for-indoor-gardeners": "lettuce",
+    "microgreen-seeds-for-beginners": "scale",
     "microgreens-kit-vs-diy-cost": "sunflower",
     "microgreens-seed-density-per-tray": "seeds",
     "pea-vs-radish-microgreens": "peas",
@@ -478,6 +488,7 @@ def related_html(slug: str) -> str:
     links = {
         "microgreens-in-a-small-apartment": ["windowsill-microgreens", "microgreens-seed-density-per-tray", "bottom-watering-trays", "microgreens-kit-vs-diy-cost"],
         "gifts-for-indoor-gardeners": ["microgreens-in-a-small-apartment", "microgreens-kit-vs-diy-cost", "microgreens-seed-density-per-tray", "bottom-watering-trays"],
+        "microgreen-seeds-for-beginners": ["microgreens-in-a-small-apartment", "microgreens-seed-density-per-tray", "windowsill-microgreens", "bottom-watering-trays"],
         "microgreens-kit-vs-diy-cost": ["microgreens-in-a-small-apartment", "microgreens-seed-density-per-tray", "pea-vs-radish-microgreens"],
         "microgreens-seed-density-per-tray": ["pea-vs-radish-microgreens", "microgreens-in-a-small-apartment", "microgreens-kit-vs-diy-cost"],
         "pea-vs-radish-microgreens": ["microgreens-seed-density-per-tray", "windowsill-microgreens", "microgreens-in-a-small-apartment"],
@@ -1519,6 +1530,7 @@ def render_static_pages() -> dict[str, str]:
         "gifts-for-indoor-gardeners": ("/assets/photos/lettuce-in-pot.jpg", "Gift ideas"),
         "windowsill-microgreens": ("/assets/photos/basil-window-personal-creations.jpg", "Light and space"),
         "microgreens-seed-density-per-tray": ("/assets/photos/trays-broccoli-radish.jpg", "Seed planning"),
+        "microgreen-seeds-for-beginners": ("/assets/photos/radish-seeds-hugowolf.jpg", "Microgreen seeds"),
         "pea-vs-radish-microgreens": ("/assets/photos/pea-shoots-counter.jpg", "Choose a crop"),
         "bottom-watering-trays": ("/assets/photos/seedling-trays-nested-kvdp.jpg", "Watering"),
         "apartment-seed-starting": ("/assets/photos/basil-by-window.jpg", "Seed starting"),
@@ -1557,6 +1569,17 @@ def render_static_pages() -> dict[str, str]:
             "source_url": "https://commons.wikimedia.org/wiki/File:Chalkboard_Plant_Stake_Basil_in_a_window_(14889072919).jpg",
             "license": "CC BY 2.0",
             "license_url": "https://creativecommons.org/licenses/by/2.0/",
+            "note": "Cropped.",
+        },
+        "microgreen-seeds-for-beginners": {
+            "alt": "Loose brown radish seeds on a white background.",
+            "width": 960,
+            "height": 844,
+            "author": "Hugowolf",
+            "author_url": "https://en.wikipedia.org/wiki/User:Hugowolf",
+            "source_url": "https://commons.wikimedia.org/wiki/File:RadishSeeds.jpg",
+            "license": "CC BY 3.0",
+            "license_url": "https://creativecommons.org/licenses/by/3.0/",
             "note": "Cropped.",
         },
         "microgreens-seed-density-per-tray": {
@@ -1652,7 +1675,7 @@ def render_static_pages() -> dict[str, str]:
     guides_body = f"""<div class="guide-library-intro"><p class="eyebrow">The growing library</p><h1>Small steps.<br>Something good to grow.</h1>
 <p class="dek">Find the guide for the job in front of you, from your first tray to a little balcony harvest.</p>
 <div class="cta-row"><a class="button" href="/guides/microgreens-in-a-small-apartment/">Start with your first tray ↗</a><a class="text-link" href="/guides/first-tray-checklist/">Get the checklist ↗</a></div></div>
-{cards(["microgreens-in-a-small-apartment","gifts-for-indoor-gardeners","windowsill-microgreens","microgreens-seed-density-per-tray","pea-vs-radish-microgreens","bottom-watering-trays","apartment-seed-starting","balcony-salad-garden","microgreens-kit-vs-diy-cost"])}
+{cards(["microgreens-in-a-small-apartment","gifts-for-indoor-gardeners","microgreen-seeds-for-beginners","windowsill-microgreens","microgreens-seed-density-per-tray","pea-vs-radish-microgreens","bottom-watering-trays","apartment-seed-starting","balcony-salad-garden","microgreens-kit-vs-diy-cost"])}
 <div class="verdict" style="margin-top:40px"><p><strong>Advice you can check.</strong> Growing steps link to university extension and public-agency sources. Our <a href="/editorial-method/">editorial method</a> explains how research, illustrations, and firsthand evidence are kept distinct.</p></div>
 """
     pages["guides/index.html"] = simple_page(guides_page, guides_body)
@@ -1711,7 +1734,7 @@ def render_static_pages() -> dict[str, str]:
     pages["404.html"] = simple_page(missing, (SRC / "pages" / "404.html").read_text())
 
     extra_pages = [
-        ("gear/index.html", "Microgreens Starter Setup: Kits, Trays and Supplies", "Compare a ready-to-sow kit, reusable trays, or a container you own. Check the full setup, refill costs, light, and daily work before you buy.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
+        ("gear/index.html", "Microgreens Growing Kits and Supplies for Small Spaces", "A microgreens growing kit for a small space, plus reusable trays, seed, and a no-soil indoor garden. Check what is included before you buy.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
         ("editorial-method/index.html", "How Small Space Greens Chooses and Corrects Guides", "How sources are chosen, how product advice will be labeled, and how to send a correction.", f"{SITE}/editorial-method/", "", "Editorial method", f"{SITE}/assets/og/editorial.jpg", "editorial.html", ""),
         ("guides/first-tray-checklist/index.html", "First-Tray Checklist for Apartment Microgreens", "Print the first-tray checklist, or get the same list by email from Ryan after you confirm your address. You can print it without an email address.", f"{SITE}/guides/first-tray-checklist/", "/guides/", "First-tray checklist", f"{SITE}/assets/og/checklist.jpg", "checklist.html", ""),
     ]
