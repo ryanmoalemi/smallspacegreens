@@ -98,6 +98,31 @@ The eight oversized step illustrations and homepage space-selector drawings have
 - Credit: `Credit: <a href="/photo-credits/#seedling-trays-nested-kvdp">KVDP</a>`.
 - Use: bottom-watering guide, in place of the three-view drawing. The photograph is not a Small Space Greens grow.
 
+## Illustrative step photos
+
+Added for the bottom-watering steps. These are AI-generated images owned by Small Space Greens. They illustrate the method. They are not a Small Space Greens grow and not a growing trial. Each step caption reads `Illustrative photo (AI-generated)` and links to the record below. A page may use each image file only once. The site build removes a later copy and fails if any duplicate file name remains.
+
+### Setting a tray into water
+
+- Local file: `assets/photos/bw-step2-set-in-water.jpg` (1200 × 675).
+- Credit id: `bw-step2-set-in-water`.
+- Shows: a hand setting a drained tray of seedlings into a solid tray with shallow water.
+- Processing: resized from 1280 × 720 to 1200 × 675 and saved as an optimized progressive JPEG at quality 84.
+
+### A tray soaking from below
+
+- Local file: `assets/photos/bw-step3-soaking.jpg` (1200 × 675).
+- Credit id: `bw-step3-soaking`.
+- Shows: a drained tray sitting in water, with darker soil where water has wicked up.
+- Processing: resized from 1280 × 720 to 1200 × 675 and saved as an optimized progressive JPEG at quality 84.
+
+### Lifting a tray out to drain
+
+- Local file: `assets/photos/bw-step4-lift-out.jpg` (1200 × 675).
+- Credit id: `bw-step4-lift-out`.
+- Shows: hands lifting a drained tray while water drips from the holes.
+- Processing: resized from 1280 × 720 to 1200 × 675 and saved as an optimized progressive JPEG at quality 84.
+
 ## Photo-backed list assets
 
 The ten photographs below were added for equipment, sowing, watering, lighting and harvest rows. Each full asset has a longest edge of at most 960 pixels. All list thumbnails are 320 × 320 optimized progressive JPEGs in `assets/photos/thumbs/`. The eight existing photographs also have dedicated thumbnails; their full-size files are unchanged. Existing sunflower and equipment images are framed when needed to retain the complete subject. Other thumbnails use relevant square crops. No AI generation, color replacement or invented objects were used.

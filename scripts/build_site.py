@@ -182,12 +182,29 @@ GUIDE_PHOTOS = {
 
 def list_photo(key: str) -> str:
     photo = LIST_PHOTOS[key]
+    if photo.get("src"):
+        src = photo["src"]
+        width, height = photo["width"], photo["height"]
+        wide = ' list-photo-wide' if width >= height else ''
+    else:
+        src = f'/assets/photos/thumbs/{photo["thumbnail"]}'
+        width, height = 320, 320
+        wide = ''
+    if photo.get("illustrative"):
+        caption = (
+            f'<figcaption class="photo-credit"><a href="/photo-credits/#{esc(photo["credit_id"])}">'
+            'Illustrative photo (AI-generated)</a></figcaption>'
+        )
+    else:
+        caption = (
+            f'<figcaption class="photo-credit">Credit: <a href="/photo-credits/#{esc(photo["credit_id"])}">'
+            f'{esc(photo["author"])}</a></figcaption>'
+        )
     return (
-        f'<figure class="list-photo" data-photo-key="{esc(key)}">'
-        f'<img src="/assets/photos/thumbs/{esc(photo["thumbnail"])}" '
-        f'width="320" height="320" alt="{esc(photo["alt"])}" loading="lazy" decoding="async">'
-        f'<figcaption class="photo-credit">Credit: <a href="/photo-credits/#{esc(photo["credit_id"])}">'
-        f'{esc(photo["author"])}</a></figcaption></figure>'
+        f'<figure class="list-photo{wide}" data-photo-key="{esc(key)}">'
+        f'<img src="{esc(src)}" width="{width}" height="{height}" alt="{esc(photo["alt"])}" '
+        'loading="lazy" decoding="async">'
+        f'{caption}</figure>'
     )
 
 
@@ -289,6 +306,88 @@ class PhotoListAudit(HTMLParser):
         for node in self.stack:
             if "photo" in node:
                 node["text"].append(data)
+
+
+def content_image_key(src: str) -> str:
+    """Same file name means the same photo, including a full image and its thumbnail."""
+    path = src.split("?")[0].split("#")[0]
+    name = Path(path).name.lower()
+    if name in {"favicon.svg"}:
+        return ""
+    return name
+
+
+def image_context(html: str, start: int) -> tuple[bool, bool]:
+    """Whether an image sits in a small list photo, and whether that list is a numbered step."""
+    figure_start = html.rfind("<figure", 0, start)
+    in_list_photo = False
+    if figure_start != -1 and "</figure>" not in html[figure_start:start]:
+        if "list-photo" in html[figure_start:figure_start + 180]:
+            in_list_photo = True
+    ol_start = html.rfind("<ol", 0, start)
+    in_step = False
+    if ol_start != -1 and "</ol>" not in html[ol_start:start]:
+        if re.search(r'class="[^"]*\b(?:steps|grow-steps)\b', html[ol_start:ol_start + 240]):
+            in_step = True
+    return in_list_photo, in_step
+
+
+def removal_span(html: str, start: int, end: int) -> tuple[int, int]:
+    figure_start = html.rfind("<figure", 0, start)
+    figure_end = html.find("</figure>", end)
+    if figure_start != -1 and figure_end != -1:
+        between = html[figure_start:start]
+        window = html[figure_start:figure_end + len("</figure>")]
+        if "</figure>" not in between and "list-photo" in window:
+            return figure_start, figure_end + len("</figure>")
+    return start, end
+
+
+def dedupe_content_images(html: str) -> str:
+    """One photo file per page. A numbered step keeps the photo over an earlier list thumbnail."""
+    found = []
+    for match in re.finditer(r"<img\b[^>]*>", html):
+        src_match = re.search(r'\bsrc="([^"]+)"', match.group(0))
+        if not src_match:
+            continue
+        key = content_image_key(src_match.group(1))
+        if not key:
+            continue
+        in_list_photo, in_step = image_context(html, match.start())
+        found.append((key, match.start(), match.end(), in_list_photo, in_step))
+    keeper: dict[str, int] = {}
+    for index, (key, _start, _end, in_list_photo, in_step) in enumerate(found):
+        if key not in keeper:
+            keeper[key] = index
+            continue
+        kept = found[keeper[key]]
+        kept_is_earlier_list = kept[3] and not kept[4]
+        if in_step and kept_is_earlier_list:
+            keeper[key] = index
+    removals = []
+    for index, (_key, start, end, _in_list_photo, _in_step) in enumerate(found):
+        if keeper[_key] == index:
+            continue
+        removals.append(removal_span(html, start, end))
+    for start, end in reversed(removals):
+        html = html[:start] + html[end:]
+    return html
+
+
+def check_duplicate_images(document: str, label: str) -> None:
+    seen: dict[str, str] = {}
+    duplicates: list[str] = []
+    for src in re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', document):
+        key = content_image_key(src)
+        if not key:
+            continue
+        if key in seen:
+            duplicates.append(key)
+        else:
+            seen[key] = src
+    if duplicates:
+        names = ", ".join(sorted(set(duplicates)))
+        raise SystemExit(f"{label}: duplicate content images: {names}")
 
 
 def check_photo_lists(document: str, label: str) -> int:
@@ -887,7 +986,7 @@ def step_strip() -> str:
             "At your crop's harvest stage, cut above the mix, leave the roots behind, and wash the greens before eating.",
         ),
     ]
-    photos = ["tray", "mix", "sowing", "cover", "sunflower", "light", "tray", "harvest"]
+    photos = ["tray", "mix", "sowing", "cover", "sunflower", "light", "water", "harvest"]
     items = []
     for number, (title, instruction) in enumerate(steps, start=1):
         items.append(
@@ -1375,10 +1474,10 @@ def render_static_pages() -> dict[str, str]:
         "windowsill-microgreens": ("/assets/photos/basil-window-personal-creations.jpg", "Light and space"),
         "microgreens-seed-density-per-tray": ("/assets/photos/trays-broccoli-radish.jpg", "Seed planning"),
         "pea-vs-radish-microgreens": ("/assets/photos/pea-shoots-counter.jpg", "Choose a crop"),
-        "bottom-watering-trays": ("/assets/photos/trays-broccoli-radish.jpg", "Watering"),
+        "bottom-watering-trays": ("/assets/photos/seedling-trays-nested-kvdp.jpg", "Watering"),
         "apartment-seed-starting": ("/assets/photos/basil-by-window.jpg", "Seed starting"),
         "balcony-salad-garden": ("/assets/photos/balcony-garden-ruth-hartnup.jpg", "Balcony growing"),
-        "microgreens-kit-vs-diy-cost": ("/assets/photos/sunflower-small-tray.jpg", "Supplies and cost"),
+        "microgreens-kit-vs-diy-cost": ("/assets/photos/fenugreek-tray-anthony-ievlev.jpg", "Supplies and cost"),
     }
     photo_credits = {
         "microgreens-in-a-small-apartment": {
@@ -1426,15 +1525,15 @@ def render_static_pages() -> dict[str, str]:
             "note": "Cropped.",
         },
         "bottom-watering-trays": {
-            "alt": "Dense green and purple microgreens growing in black plastic trays.",
-            "width": 960,
-            "height": 720,
-            "author": "Teogenesis",
-            "author_url": "https://commons.wikimedia.org/wiki/Special:Contributions/Teogenesis",
-            "source_url": "https://commons.wikimedia.org/wiki/File:Mikrolistki_-_broku%C5%82_i_rzodkiewka_na_tacach_plastikowych.jpg",
-            "license": "CC BY-SA 4.0",
-            "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-            "note": "Cropped.",
+            "alt": "Young seedlings in a cell tray nested inside a solid black tray on a windowsill.",
+            "width": 1200,
+            "height": 714,
+            "author": "KVDP",
+            "author_url": "https://en.wikipedia.org/wiki/User:KVDP",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Horticulture_Tray1.jpg",
+            "license": "Public domain",
+            "license_url": "https://commons.wikimedia.org/wiki/Template:PD-user-en",
+            "note": "Resized.",
         },
         "apartment-seed-starting": {
             "alt": "Young basil seedlings in a pot beside a window.",
@@ -1459,14 +1558,14 @@ def render_static_pages() -> dict[str, str]:
             "note": "Cropped.",
         },
         "microgreens-kit-vs-diy-cost": {
-            "alt": "Sunflower microgreens growing in a small clear tray on a white background.",
-            "width": 960,
-            "height": 810,
-            "author": "Pannet",
-            "author_url": "https://commons.wikimedia.org/wiki/User:Pannet",
-            "source_url": "https://commons.wikimedia.org/wiki/File:Sunflower_microgreens_01.jpg",
-            "license": "CC BY 4.0",
-            "license_url": "https://creativecommons.org/licenses/by/4.0/",
+            "alt": "Dewy microgreens with seed husks growing in a black tray beside other seedlings.",
+            "width": 1400,
+            "height": 1050,
+            "author": "Anthony Ievlev",
+            "author_url": "https://unsplash.com/@onmywayhome",
+            "source_url": "https://unsplash.com/photos/a-bunch-of-plants-that-are-in-a-tray-cwWk5gZd4_Y",
+            "license": "Unsplash License",
+            "license_url": "https://unsplash.com/license",
             "note": "Cropped.",
         },
     }
@@ -1642,7 +1741,10 @@ def render_static_pages() -> dict[str, str]:
 def main() -> None:
     credit_page = (SRC / "pages" / "photo-credits.html").read_text()
     for key, photo in LIST_PHOTOS.items():
-        if not (ROOT / "assets" / "photos" / "thumbs" / photo["thumbnail"]).is_file():
+        if photo.get("src"):
+            if not (ROOT / photo["src"].lstrip("/")).is_file():
+                raise SystemExit(f"Missing photo file for {key}")
+        elif not (ROOT / "assets" / "photos" / "thumbs" / photo["thumbnail"]).is_file():
             raise SystemExit(f"Missing photo thumbnail for {key}")
         if f'id="{photo["credit_id"]}"' not in credit_page:
             raise SystemExit(f"Missing photo credit record for {key}")
@@ -1664,6 +1766,9 @@ def main() -> None:
     for rel, document in pages.items():
         check_copy(Path(rel), document)
         photographed_items += check_photo_lists(document, rel)
+        document = dedupe_content_images(document)
+        check_duplicate_images(document, rel)
+        pages[rel] = document
         target = ROOT / rel
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(document)

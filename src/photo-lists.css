@@ -7,6 +7,11 @@
 .list-item-copy>p:last-child{margin-bottom:0}
 .list-photo{margin:0;width:100%;min-width:0;max-width:160px}
 .list-photo>img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:4px;background:#f1f0e9}
+.list-photo-wide>img{aspect-ratio:16/9}
+.photo-list>.photo-list-item:not(:has(img)),.guide-main .icon-row>.photo-list-item:not(:has(img)),.grow-steps>.photo-list-item:not(:has(img)),.photo-content:not(:has(img)),.supply-detail-grid section:not(:has(img)){grid-template-columns:minmax(0,1fr)}
+.photo-cell-content:not(:has(img)){display:block}
+ol.steps.photo-list>li::before{content:none;display:none}
+.guide-main ol.steps.photo-list>li,ol.steps.photo-list>li{padding-left:0}
 .list-photo .photo-credit,.related-list .list-photo .photo-credit{font-size:11px;line-height:1.35;font-weight:400;letter-spacing:0;margin:5px 0 0;color:var(--muted);overflow-wrap:anywhere}
 .list-photo .photo-credit a,.related-list .list-photo .photo-credit a,.guide-list .list-photo .photo-credit a{font-size:inherit;font-weight:400;color:inherit;text-underline-offset:2px}
 .guide-main .icon-row.photo-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 26px}
