@@ -49,6 +49,15 @@ GUIDES = [
         "nav": "/guides/microgreens-in-a-small-apartment/",
     },
     {
+        "slug": "microgreen-seeds-for-beginners",
+        "title": "Microgreen Seeds for Beginners: Which to Buy First",
+        "description": "Microgreen seeds for a first tray: radish, pea, broccoli, and sunflower from True Leaf Market, plus how a sprouting seed collection differs.",
+        "h1": "Microgreen seeds for beginners: which to buy first",
+        "dek": "Start with one named crop, match the bag to your tray, and do not confuse sprouting seed with microgreens.",
+        "og": "density",
+        "updated_label": "November 10, 2026",
+    },
+    {
         "slug": "microgreens-kit-vs-diy-cost",
         "title": "Microgreens Kit vs DIY: Compare Setup and Repeat Costs",
         "description": "Compare microgreens kits and DIY setups by what is included, space needed, upfront spending, and repeat costs. Choose the approach that fits your plans.",
@@ -170,6 +179,7 @@ def esc(value: str) -> str:
 LIST_PHOTOS = json.loads((SRC / "list-photos.json").read_text())
 GUIDE_PHOTOS = {
     "microgreens-in-a-small-apartment": "fenugreek",
+    "microgreen-seeds-for-beginners": "scale",
     "microgreens-kit-vs-diy-cost": "sunflower",
     "microgreens-seed-density-per-tray": "seeds",
     "pea-vs-radish-microgreens": "peas",
@@ -285,8 +295,9 @@ class PhotoListAudit(HTMLParser):
         context = [node["tag"] for node in self.stack]
         is_source = any("sources" in node["attrs"].get("class", "").split() for node in self.stack)
         is_affiliate = any("affiliate-box" in node["attrs"].get("class", "").split() for node in self.stack)
+        is_pick = any("pick-grid" in node["attrs"].get("class", "").split() for node in self.stack)
         node = {"tag": tag, "attrs": attrs}
-        if tag == "li" and "main" in context and "nav" not in context and not is_source and not is_affiliate:
+        if tag == "li" and "main" in context and "nav" not in context and not is_source and not is_affiliate and not is_pick:
             node.update(photo=False, text=[])
             self.items.append(node)
         if tag == "img" and attrs.get("src", "").startswith("/assets/photos/"):
@@ -464,6 +475,7 @@ def base_graph() -> list[dict]:
 def related_html(slug: str) -> str:
     links = {
         "microgreens-in-a-small-apartment": ["windowsill-microgreens", "microgreens-seed-density-per-tray", "bottom-watering-trays", "microgreens-kit-vs-diy-cost"],
+        "microgreen-seeds-for-beginners": ["microgreens-in-a-small-apartment", "microgreens-seed-density-per-tray", "windowsill-microgreens", "bottom-watering-trays"],
         "microgreens-kit-vs-diy-cost": ["microgreens-in-a-small-apartment", "microgreens-seed-density-per-tray", "pea-vs-radish-microgreens"],
         "microgreens-seed-density-per-tray": ["pea-vs-radish-microgreens", "microgreens-in-a-small-apartment", "microgreens-kit-vs-diy-cost"],
         "pea-vs-radish-microgreens": ["microgreens-seed-density-per-tray", "windowsill-microgreens", "microgreens-in-a-small-apartment"],
@@ -517,7 +529,7 @@ def page_share_image(html: str) -> tuple[str, int, int]:
     default_rel = "assets/og/home.jpg"
     chosen = None
     for src in re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', html):
-        if not src.startswith("/assets/photos/"):
+        if not (src.startswith("/assets/photos/") or src.startswith("/assets/products/")):
             continue
         rel = src.lstrip("/")
         if rel.startswith("assets/photos/thumbs/"):
@@ -710,6 +722,9 @@ def apply_trueleaf(html: str) -> str:
 
 
 def layout(page: dict, main: str, graph: list[dict]) -> str:
+    from product_cards import apply_placeholders
+
+    main = apply_placeholders(main, LETPOT_URLS, TRUELEAF_URLS)
     main = apply_letpot(main)
     main = apply_trueleaf(main)
     main = render_content_photos(main)
@@ -931,6 +946,9 @@ def guide_toc(html: str) -> str:
 
 
 def prepare_guide_body(html: str) -> str:
+    from product_cards import apply_placeholders
+
+    html = apply_placeholders(html, LETPOT_URLS, TRUELEAF_URLS)
     html = add_heading_ids(html)
     html = open_first_faqs(html)
     html = collapse_sources(html)
@@ -1174,7 +1192,7 @@ def article_page(guide: dict, body: str) -> str:
         + '<header class="article-header"><p class="eyebrow">The small-space growing guide</p>'
         + f"<h1>{esc(guide['h1'])}</h1>"
         + f"<p class=\"dek\">{esc(guide['dek'])}</p>"
-        + f"<p class=\"byline\">By <a href=\"/about/\">Ryan Moalemi</a>. Updated {DATE_LABEL}.</p>"
+        + f"<p class=\"byline\">By <a href=\"/about/\">Ryan Moalemi</a>. Updated {esc(guide.get('updated_label', DATE_LABEL))}.</p>"
         + '</header>'
         + prepare_guide_body(body)
         + related_html(guide["slug"])
@@ -1270,7 +1288,7 @@ def check_copy(path: Path, text: str) -> None:
         if bad in text:
             raise SystemExit(f"{path} contains a dash character that is not a hyphen")
     lowered = text.lower()
-    for phrase in ["we tested", "in our tests", "we grew", "gardener's supply", "gardeners supply", "amazon.com", "johnny's", "johnnys selected"]:
+    for phrase in ["we tested", "in our tests", "we grew", "gardener's supply", "gardeners supply", "johnny's", "johnnys selected"]:
         if phrase in lowered:
             raise SystemExit(f"{path} contains banned phrase: {phrase}")
     for banned in ("hamama.com", "bootstrapfarmer.com"):
@@ -1279,8 +1297,9 @@ def check_copy(path: Path, text: str) -> None:
     for banned in ("Bootstrap Farmer", "Hamama"):
         if banned in text:
             raise SystemExit(f"{path} names a product that is not approved for the live site")
-    if re.search(r"amazon", lowered):
-        raise SystemExit(f"{path} mentions Amazon")
+    from product_cards import check_document
+
+    check_document(str(path), text)
 
 
 def check_lengths(title: str, description: str, label: str) -> None:
@@ -1473,6 +1492,7 @@ def render_static_pages() -> dict[str, str]:
         "microgreens-in-a-small-apartment": ("/assets/photos/sunflower-small-tray.jpg", "First tray"),
         "windowsill-microgreens": ("/assets/photos/basil-window-personal-creations.jpg", "Light and space"),
         "microgreens-seed-density-per-tray": ("/assets/photos/trays-broccoli-radish.jpg", "Seed planning"),
+        "microgreen-seeds-for-beginners": ("/assets/photos/radish-seeds-hugowolf.jpg", "Microgreen seeds"),
         "pea-vs-radish-microgreens": ("/assets/photos/pea-shoots-counter.jpg", "Choose a crop"),
         "bottom-watering-trays": ("/assets/photos/seedling-trays-nested-kvdp.jpg", "Watering"),
         "apartment-seed-starting": ("/assets/photos/basil-by-window.jpg", "Seed starting"),
@@ -1500,6 +1520,17 @@ def render_static_pages() -> dict[str, str]:
             "source_url": "https://commons.wikimedia.org/wiki/File:Chalkboard_Plant_Stake_Basil_in_a_window_(14889072919).jpg",
             "license": "CC BY 2.0",
             "license_url": "https://creativecommons.org/licenses/by/2.0/",
+            "note": "Cropped.",
+        },
+        "microgreen-seeds-for-beginners": {
+            "alt": "Loose brown radish seeds on a white background.",
+            "width": 960,
+            "height": 844,
+            "author": "Hugowolf",
+            "author_url": "https://en.wikipedia.org/wiki/User:Hugowolf",
+            "source_url": "https://commons.wikimedia.org/wiki/File:RadishSeeds.jpg",
+            "license": "CC BY 3.0",
+            "license_url": "https://creativecommons.org/licenses/by/3.0/",
             "note": "Cropped.",
         },
         "microgreens-seed-density-per-tray": {
@@ -1595,7 +1626,7 @@ def render_static_pages() -> dict[str, str]:
     guides_body = f"""<div class="guide-library-intro"><p class="eyebrow">The growing library</p><h1>Small steps.<br>Something good to grow.</h1>
 <p class="dek">Find the guide for the job in front of you, from your first tray to a little balcony harvest.</p>
 <div class="cta-row"><a class="button" href="/guides/microgreens-in-a-small-apartment/">Start with your first tray ↗</a><a class="text-link" href="/guides/first-tray-checklist/">Get the checklist ↗</a></div></div>
-{cards(["microgreens-in-a-small-apartment","windowsill-microgreens","microgreens-seed-density-per-tray","pea-vs-radish-microgreens","bottom-watering-trays","apartment-seed-starting","balcony-salad-garden","microgreens-kit-vs-diy-cost"])}
+{cards(["microgreens-in-a-small-apartment","microgreen-seeds-for-beginners","windowsill-microgreens","microgreens-seed-density-per-tray","pea-vs-radish-microgreens","bottom-watering-trays","apartment-seed-starting","balcony-salad-garden","microgreens-kit-vs-diy-cost"])}
 <div class="verdict" style="margin-top:40px"><p><strong>Advice you can check.</strong> Growing steps link to university extension and public-agency sources. Our <a href="/editorial-method/">editorial method</a> explains how research, illustrations, and firsthand evidence are kept distinct.</p></div>
 """
     pages["guides/index.html"] = simple_page(guides_page, guides_body)
@@ -1654,7 +1685,7 @@ def render_static_pages() -> dict[str, str]:
     pages["404.html"] = simple_page(missing, (SRC / "pages" / "404.html").read_text())
 
     extra_pages = [
-        ("gear/index.html", "Microgreens Starter Setup: Kits, Trays and Supplies", "Compare a ready-to-sow kit, reusable trays, or a container you own. Check the full setup, refill costs, light, and daily work before you buy.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
+        ("gear/index.html", "Microgreens Growing Kits and Supplies for Small Spaces", "A microgreens growing kit for a small space, plus reusable trays, seed, and a no-soil indoor garden. Check what is included before you buy.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
         ("editorial-method/index.html", "How Small Space Greens Chooses and Corrects Guides", "How sources are chosen, how product advice will be labeled, and how to send a correction.", f"{SITE}/editorial-method/", "", "Editorial method", f"{SITE}/assets/og/editorial.jpg", "editorial.html", ""),
         ("guides/first-tray-checklist/index.html", "First-Tray Checklist for Apartment Microgreens", "Print the first-tray checklist, or get the same list by email from Ryan after you confirm your address. You can print it without an email address.", f"{SITE}/guides/first-tray-checklist/", "/guides/", "First-tray checklist", f"{SITE}/assets/og/checklist.jpg", "checklist.html", ""),
     ]
