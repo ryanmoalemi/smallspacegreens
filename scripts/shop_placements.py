@@ -70,7 +70,7 @@ KIT_SUN = "SunBlaster microgreen kit with trays, heat mat, vented domes, coco co
 TRAY_1010_SOLID_5 = "Living Whole Foods 1010 trays, no drain holes, 5 pack"
 KIT_MIZUNA = "mizuna microgreens kit with 2 ceramic trays, coconut coir, and seeds"
 SANSI_BULB = "SANSI LED grow light bulb, A17, E26 base, 10W"
-HEAT_SILL = "JumpStart JS6120 windowsill seed-starting heat mat and tray kit"
+HEAT_SILL = "AC Infinity SUNCORE A1 seedling heat mat, 3 by 20 in"
 KIT_CELLS = "Bootstrap Farmer extra-strength seed starter kit, 2 pack: 1020 tray, humidity dome, and 50-cell plug tray"
 SUNPACK = "SUNPACK 1020 tray with no drain holes, humidity dome, and 72-cell insert, 1 set"
 TRAY_DEEP = "TO Plastics heavy duty 1020 trays with holes, 10 pack"
@@ -177,7 +177,7 @@ SHOP_PAGES: dict[str, dict] = {
             seed(RADISH_SMALL, "Radish is the suggested first sill crop. A 1-tray test needs less than a full 1020."),
             amazon("B0CHDBY2PD", SANSI_CLIP, "A clip-on lamp with a timer for the add-a-lamp step."),
             amazon("B0D1XJ3H19", SANSI_BULB, "A 10W plant bulb if you already have an E26 desk or clamp lamp."),
-            amazon("B00G92W16Y", HEAT_SILL, "A windowsill heat mat and tray, if you germinate off a cold pane."),
+            amazon("B08KTXTNR7", HEAT_SILL, "A 3 by 20 in seedling heat mat, if you germinate off a cold pane."),
         ],
     },
     "seed-starting": {
