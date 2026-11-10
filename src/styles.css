@@ -186,6 +186,18 @@ svg{flex-shrink:0}
 .guide-main .affiliate-box h2{font-size:22px;line-height:1.3;margin:0 0 10px}
 .affiliate-box ul{margin:12px 0 0;padding-left:1.15em}
 .affiliate-box li+li{margin-top:8px}
+.shop-offer{margin:8px 0 28px}
+.shop-offer>p,.shop-offer .affiliate-disclosure{max-width:720px}
+.shop-table table{margin-top:12px}
+.shop-table .button{width:100%;min-height:44px;padding:10px 12px;gap:8px;font-size:13px;white-space:normal;text-align:center}
+.shop-table td,.shop-table th{overflow-wrap:anywhere}
+@media(max-width:700px){
+.shop-table{overflow-x:visible}
+.shop-table thead{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}
+.shop-table tr{display:block;border-bottom:1px solid var(--line);padding:14px 0}
+.shop-table td{display:block;width:auto;border:0;padding:4px 0}
+.shop-table td::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+}
 .verdict{border-left:3px solid #66804f}
 .verdict p:last-child,.note p:last-child{margin-bottom:0}
 .verdict{font-size:15px}

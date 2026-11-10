@@ -12,12 +12,14 @@ from datetime import datetime
 from html.parser import HTMLParser
 from pathlib import Path
 
+import shop_placements
+
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
 INDEXNOW = "b4f866681f35e865697f0a735d534c00"
 SITE = "https://smallspacegreens.com"
-DATE = "2026-11-09"
-DATE_LABEL = "November 9, 2026"
+DATE = "2026-11-10"
+DATE_LABEL = "November 10, 2026"
 ORG_ID = f"{SITE}/#organization"
 PERSON_ID = f"{SITE}/#ryan-moalemi"
 SITE_ID = f"{SITE}/#website"
@@ -693,6 +695,28 @@ def trueleaf_box(name: str) -> str:
     return affiliate_box("trueleaf-choice", "If you need seed or a kit", lead, items)
 
 
+def apply_shop(html: str) -> str:
+    html = re.sub(r"<!--SHOP:([a-z0-9-]+)-->", lambda match: shop_placements.render_shop(match.group(1)), html)
+    if "<!--SHOP" in html:
+        raise SystemExit("Unresolved shop placeholder")
+    return html
+
+
+def ensure_amazon_disclosure(html: str) -> str:
+    if "https://www.amazon.com/dp/" not in html:
+        return html
+    if shop_placements.AMAZON_DISCLOSURE in html:
+        return html
+    needle = '<p class="affiliate-disclosure">'
+    start = html.find(needle)
+    if start == -1:
+        raise SystemExit("Amazon links are missing a disclosure block")
+    close = html.find("</p>", start)
+    if close == -1:
+        raise SystemExit("Amazon disclosure block is not closed")
+    return html[:close] + " " + shop_placements.AMAZON_DISCLOSURE + html[close:]
+
+
 def apply_letpot(html: str) -> str:
     html = re.sub(r"<!--LETPOT:([a-z-]+)-->", lambda match: letpot_box(match.group(1)), html)
     html = html.replace("<!--LETPOT_HOME-->", letpot_link("home", "LetPot"))
@@ -710,8 +734,10 @@ def apply_trueleaf(html: str) -> str:
 
 
 def layout(page: dict, main: str, graph: list[dict]) -> str:
+    main = apply_shop(main)
     main = apply_letpot(main)
     main = apply_trueleaf(main)
+    main = ensure_amazon_disclosure(main)
     main = render_content_photos(main)
     title = page["title"]
     description = page["description"]
@@ -931,6 +957,7 @@ def guide_toc(html: str) -> str:
 
 
 def prepare_guide_body(html: str) -> str:
+    html = apply_shop(html)
     html = add_heading_ids(html)
     html = open_first_faqs(html)
     html = collapse_sources(html)
@@ -1270,17 +1297,14 @@ def check_copy(path: Path, text: str) -> None:
         if bad in text:
             raise SystemExit(f"{path} contains a dash character that is not a hyphen")
     lowered = text.lower()
-    for phrase in ["we tested", "in our tests", "we grew", "gardener's supply", "gardeners supply", "amazon.com", "johnny's", "johnnys selected"]:
+    for phrase in ["we tested", "in our tests", "we grew", "gardener's supply", "gardeners supply", "johnny's", "johnnys selected"]:
         if phrase in lowered:
             raise SystemExit(f"{path} contains banned phrase: {phrase}")
     for banned in ("hamama.com", "bootstrapfarmer.com"):
         if banned in lowered:
             raise SystemExit(f"{path} links a store that is not approved for the live site")
-    for banned in ("Bootstrap Farmer", "Hamama"):
-        if banned in text:
-            raise SystemExit(f"{path} names a product that is not approved for the live site")
-    if re.search(r"amazon", lowered):
-        raise SystemExit(f"{path} mentions Amazon")
+    if "Hamama" in text:
+        raise SystemExit(f"{path} names a product that is not approved for the live site")
 
 
 def check_lengths(title: str, description: str, label: str) -> None:
@@ -1306,7 +1330,7 @@ def build_feed() -> str:
 <title>{esc(guide['h1'])}</title>
 <link>{url}</link>
 <guid>{url}</guid>
-<pubDate>Mon, 09 Nov 2026 00:00:00 GMT</pubDate>
+<pubDate>Tue, 10 Nov 2026 00:00:00 GMT</pubDate>
 <description>{esc(guide['description'])}</description>
 <author>ryan@smallspacegreens.com (Ryan Moalemi)</author>
 </item>"""
@@ -1318,7 +1342,7 @@ def build_feed() -> str:
 <link>{SITE}/</link>
 <description>How-to guides for small-space gardening and microgreens.</description>
 <language>en-us</language>
-<lastBuildDate>Mon, 09 Nov 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 10 Nov 2026 00:00:00 GMT</lastBuildDate>
 {''.join(items)}
 </channel>
 </rss>
@@ -1814,6 +1838,11 @@ def main() -> None:
     if missing:
         raise SystemExit("Missing internal targets: " + ", ".join(missing))
     print("built", len(pages), "pages")
+    for key, bucket in shop_placements.placement_counts().items():
+        print(
+            f"placements {key}: amazon {bucket['amazon']}, "
+            f"trueleaf {bucket['trueleaf']}, letpot {bucket['letpot']}"
+        )
     print("photographed editorial list items", photographed_items)
     print("indexnow", INDEXNOW)
     check = subprocess.run([sys.executable, str(ROOT / "scripts" / "check_affiliate_links.py")], check=False)
