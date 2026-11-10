@@ -178,5 +178,29 @@
     "alt": "Green cucumbers growing among leaves and yellow flowers.",
     "credit_id": "crop-cucumber",
     "author": "Stephen Ausmus, USDA ARS"
+  },
+  "bw-set": {
+    "src": "/assets/photos/bw-step2-set-in-water.jpg",
+    "width": 1200,
+    "height": 675,
+    "alt": "A hand sets a black drained tray of green seedlings into a solid black tray that holds a shallow layer of water.",
+    "credit_id": "bw-step2-set-in-water",
+    "illustrative": true
+  },
+  "bw-soak": {
+    "src": "/assets/photos/bw-step3-soaking.jpg",
+    "width": 1200,
+    "height": 675,
+    "alt": "A white drained tray of purple and green seedlings sits in a black tray of water, with darker soil where the water has wicked up.",
+    "credit_id": "bw-step3-soaking",
+    "illustrative": true
+  },
+  "bw-lift": {
+    "src": "/assets/photos/bw-step4-lift-out.jpg",
+    "width": 1200,
+    "height": 675,
+    "alt": "Hands lift a white drained tray of seedlings while water drips from the drainage holes.",
+    "credit_id": "bw-step4-lift-out",
+    "illustrative": true
   }
 }
