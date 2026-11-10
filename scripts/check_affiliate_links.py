@@ -59,8 +59,9 @@ def check_amazon(path: Path, text: str) -> int:
             fail(f"{path} Amazon link is missing rel sponsored nofollow")
         if 'target="_blank"' not in attrs:
             fail(f"{path} Amazon link is missing target _blank")
-        if link_text(match.end(), text) != "Check price on Amazon":
-            fail(f"{path} Amazon link text is not Check price on Amazon")
+        label = link_text(match.end(), text).replace(" (opens in a new tab)", "")
+        if label not in {"Check price on Amazon", "View on Amazon"}:
+            fail(f"{path} Amazon link text is not an approved label")
     if re.search(r"amazon\.com(?!/dp/)", text, re.I):
         # Tagged /dp/ links are the only allowed amazon.com URLs.
         bare = re.findall(r"https://www\.amazon\.com/[^\"'\s<]*", text)
