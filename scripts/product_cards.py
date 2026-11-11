@@ -10,8 +10,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PLACEMENTS = ROOT / "src" / "placements"
 AMAZON_HREF = re.compile(r"https://www\.amazon\.com/dp/([A-Z0-9]{10})\?tag=smallspaceg04-20\Z")
-AMAZON_SENTENCE = "As an Amazon Associate I earn from qualifying purchases."
-GENERAL_SENTENCE = "We earn a commission if you buy through these links, at no extra cost to you."
 
 
 def esc(value: str) -> str:
@@ -68,7 +66,6 @@ def href_for(card: dict, letpot: dict[str, str], trueleaf: dict[str, str]) -> st
 
 def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) -> str:
     data = load_placement(name)
-    page_has_amazon = any(card["kind"] == "amazon" for card in data["cards"].values())
     blocks = []
     seen_images: set[str] = set()
     for section in data["sections"]:
@@ -92,7 +89,7 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
                 'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
                 'width="600" height="600" loading="lazy" decoding="async" '
                 f'alt="{esc(image["alt"])}">'
-                f'<figcaption class="pick-credit">Example photo · Credit: '
+                f'<figcaption class="pick-credit">Example photo · '
                 f'<a href="/photo-credits/#{esc(image["credit_id"])}">{esc(image["author"])}</a>'
                 "</figcaption></figure>"
                 f'<p class="pick-badge">{esc(card["badge"])}</p>'
@@ -103,13 +100,9 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
                 f'{esc(card["cta"])}<span class="sr-only"> (opens in a new tab)</span></a>'
                 "</li>"
             )
-        disclosure = GENERAL_SENTENCE
-        if page_has_amazon:
-            disclosure = f"{GENERAL_SENTENCE} {AMAZON_SENTENCE}"
         blocks.append(
             f'<section class="picks" id="{esc(section["id"])}" aria-labelledby="{esc(section["id"])}-title">'
             f'<h2 id="{esc(section["id"])}-title">{esc(section["title"])}</h2>'
-            f'<p class="picks-disclosure">{esc(disclosure)}</p>'
             f'<p class="picks-lead">{esc(section["lead"])}</p>'
             '<ul class="pick-grid" role="list">'
             + "".join(cards_html)
@@ -141,6 +134,13 @@ def render_credits() -> str:
                 f'<p><strong>Image use:</strong> {esc(image["note"])}</p>'
                 "</div></section>"
             )
+    try:
+        import shop_placements
+        extra = shop_placements.supply_credit_html()
+    except Exception:
+        extra = ""
+    if extra:
+        blocks.append(extra)
     return "\n".join(blocks)
 
 

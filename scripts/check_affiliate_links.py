@@ -68,8 +68,24 @@ def check_amazon(path: Path, text: str) -> int:
         for url in bare:
             if not AMAZON_HREF.match(html.unescape(url)):
                 fail(f"{path} has a non-product Amazon URL")
-    if count and AMAZON_DISCLOSURE not in text:
-        fail(f"{path} is missing the Amazon Associates disclosure")
+    if count and text.count(AMAZON_DISCLOSURE) != 1:
+        fail(f"{path} must contain the Amazon Associates disclosure exactly once")
+    if count:
+        block = (
+            '<p class="affiliate-disclosure">We earn a commission from purchases through this page. '
+            + AMAZON_DISCLOSURE
+            + "</p>"
+        )
+        if text.count(block) != 1:
+            fail(f"{path} is missing the single top commission line")
+        disclosure_at = text.find(block)
+        first_store = min(
+            index
+            for index in (text.find("https://www.amazon.com/dp/"), text.find("awin1.com"))
+            if index != -1
+        )
+        if disclosure_at > first_store:
+            fail(f"{path} commission line is below the first store link")
     if re.search(r"<img\b[^>]*amazon", text, re.I):
         fail(f"{path} hotlinks an Amazon image")
     return count

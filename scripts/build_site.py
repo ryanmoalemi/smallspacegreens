@@ -691,7 +691,6 @@ def trueleaf_link(key: str, label: str) -> str:
 def affiliate_box(heading_id: str, heading: str, lead: str, items: str) -> str:
     return (
         '<section class="affiliate-offer">'
-        '<p class="affiliate-disclosure">We earn a commission if you buy through these links, at no extra cost to you.</p>'
         f'<aside class="note affiliate-box" aria-labelledby="{heading_id}">'
         f'<h2 id="{heading_id}">{heading}</h2>'
         f"<p>{esc(lead)}</p>"
@@ -725,19 +724,64 @@ def apply_shop(html: str) -> str:
     return html
 
 
-def ensure_amazon_disclosure(html: str) -> str:
-    if "https://www.amazon.com/dp/" not in html:
+def disclosure_sentence(html: str) -> str | None:
+    has_store = "https://www.amazon.com/dp/" in html or "awin1.com" in html
+    if not has_store:
+        return None
+    sentence = shop_placements.COMMISSION_SENTENCE
+    if "https://www.amazon.com/dp/" in html or "Amazon Associates" in html:
+        sentence = f"{sentence} {shop_placements.AMAZON_DISCLOSURE}"
+    return sentence
+
+
+def insert_after_intro(html: str, block: str) -> str:
+    header = re.search(r"<header\b[^>]*>.*?</header>", html, flags=re.S)
+    if header and "<h1" in header.group(0):
+        end = header.end()
+        return html[:end] + block + html[end:]
+    h1 = html.find("</h1>")
+    h2 = html.find("<h2")
+    for pattern in (r'<p class="byline">.*?</p>', r'<p class="dek">.*?</p>'):
+        match = re.search(pattern, html, flags=re.S)
+        if not match or (h1 != -1 and match.start() < h1):
+            continue
+        if h2 != -1 and match.end() > h2:
+            continue
+        return html[: match.end()] + block + html[match.end() :]
+    if h1 != -1:
+        end = h1 + len("</h1>")
+        return html[:end] + block + html[end:]
+    raise SystemExit("No place under the title for the commission line")
+
+
+def place_single_disclosure(html: str) -> str:
+    html = re.sub(
+        r'<p class="(?:affiliate-disclosure|picks-disclosure)">.*?</p>',
+        "",
+        html,
+        flags=re.S,
+    )
+    sentence = disclosure_sentence(html)
+    if sentence is None:
         return html
-    if shop_placements.AMAZON_DISCLOSURE in html:
-        return html
-    needle = '<p class="affiliate-disclosure">'
-    start = html.find(needle)
-    if start == -1:
-        raise SystemExit("Amazon links are missing a disclosure block")
-    close = html.find("</p>", start)
-    if close == -1:
-        raise SystemExit("Amazon disclosure block is not closed")
-    return html[:close] + " " + shop_placements.AMAZON_DISCLOSURE + html[close:]
+    block = f'<p class="affiliate-disclosure">{esc(sentence)}</p>'
+    placed = insert_after_intro(html, block)
+    first_store = min(
+        index
+        for index in (
+            placed.find("https://www.amazon.com/dp/"),
+            placed.find("awin1.com"),
+        )
+        if index != -1
+    )
+    if placed.find(block) > first_store:
+        raise SystemExit("Commission line is below the first store link")
+    if placed.count(block) != 1:
+        raise SystemExit("Commission line is not exactly once")
+    if "https://www.amazon.com/dp/" in placed:
+        if placed.count(shop_placements.AMAZON_DISCLOSURE) != 1:
+            raise SystemExit("Amazon disclosure sentence is not exactly once")
+    return placed
 
 
 def apply_letpot(html: str) -> str:
@@ -763,7 +807,7 @@ def layout(page: dict, main: str, graph: list[dict]) -> str:
     main = apply_shop(main)
     main = apply_letpot(main)
     main = apply_trueleaf(main)
-    main = ensure_amazon_disclosure(main)
+    main = place_single_disclosure(main)
     main = render_content_photos(main)
     title = page["title"]
     description = page["description"]
