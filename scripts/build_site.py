@@ -450,6 +450,23 @@ def _css_color(body: str, prop: str) -> str:
     return colors[-1].lower()
 
 
+CHROME_SELECTOR = re.compile(r"\.(?:site-header|header-bar|brand|brand-wordmark|nav|nav-toggle|crumbs|site-footer|footer-[a-z-]+|copyright|skip)\b")
+
+
+def check_chrome_text_size(css: str) -> None:
+    """Fail the build when header, nav, breadcrumb, or footer text is set below 12px at any width."""
+    failures = []
+    for selector, body in re.findall(r"([^{}]+)\{([^{}]*)\}", css):
+        selector = selector.strip()
+        if selector.startswith("@") or not CHROME_SELECTOR.search(selector):
+            continue
+        for size in re.findall(r"(?:^|;)font-size:([\d.]+)px", body):
+            if float(size) < 12:
+                failures.append(f"{selector} font-size:{size}px")
+    if failures:
+        raise SystemExit("header, breadcrumb, or footer text under 12px:\n" + "\n".join(failures))
+
+
 def check_card_contrast(css: str) -> None:
     """Fail the build when a product-card text pair drops below WCAG AA."""
     failures: list[str] = []
@@ -2156,6 +2173,7 @@ def main() -> None:
             raise SystemExit(f"Missing photo credit record for {key}")
     css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css", "photo-lists.css", "harvest-chart.css"]))
     check_card_contrast(css)
+    check_chrome_text_size(css)
     css_path = ROOT / "css" / "styles.css"
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(css + "\n")
