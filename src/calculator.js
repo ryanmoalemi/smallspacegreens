@@ -9,7 +9,6 @@
   var unitPriceBox = document.getElementById("unit-price-fields");
   var packagePriceBox = document.getElementById("package-price-fields");
   var copyBtn = document.getElementById("copy-result");
-  var shareBtn = document.getElementById("copy-link");
   var printBtn = document.getElementById("print-result");
   var actionStatus = document.getElementById("calc-action-status");
   var copyFallback = document.getElementById("calc-copy-fallback");
@@ -90,7 +89,7 @@
   }
 
   function render(result) {
-    [copyBtn, shareBtn, printBtn].forEach(function (button) {
+    [copyBtn, printBtn].forEach(function (button) {
       if (button) button.disabled = !result.ok;
     });
     if (!result.ok) {
@@ -145,29 +144,75 @@
     return "about " + Math.round(n).toLocaleString("en-US") + " g";
   }
 
-  // Which listed True Leaf size covers this batch, shown before the click.
+  // Which listed size covers this batch, shown before the click. True Leaf first; a matching
+  // Amazon offer only when the True Leaf size is out of stock at the last check.
+  function packagePhoto(packs, choice) {
+    var embed = choice.merchant === "amazon" ? choice.size.imageEmbed : null;
+    if (embed) {
+      // Amazon-served product image, never rehosted. Set per offer in trueleaf-packages.json (image_embed).
+      return "<figure class='result-pack-photo'><img src='" + escapeHtml(embed) + "' alt='" + escapeHtml(choice.size.title) + "' width='96' height='96' loading='lazy' decoding='async'></figure>";
+    }
+    var photo = packs.photo;
+    if (!photo) return "";
+    return "<figure class='result-pack-photo'><img src='" + escapeHtml(photo.src) + "' alt='" + escapeHtml(photo.alt) + "' width='96' height='96' loading='lazy' decoding='async'></figure>";
+  }
+
+  function packageCredit(packs, choice) {
+    var photo = packs.photo;
+    if (!photo || (choice.merchant === "amazon" && choice.size.imageEmbed)) return "";
+    var license = photo.license ? ", " + photo.license : "";
+    return (
+      "<p class='photo-credit credit-line result-pack-credit' title='" + escapeHtml("Photo by " + photo.author + license + ". Full credit on the Photo credits page.") + "'>" +
+      "Photo: <a href='" + escapeHtml(photo.credit) + "'>" + escapeHtml(photo.author) + "</a></p>"
+    );
+  }
+
+  function rateUsed(result, perTray) {
+    if (!crop().needsRate) return "";
+    var which = result.evidence === "general-example"
+      ? "Sized with the Maryland example rate, using its upper end of " + perTray + " per tray."
+      : Math.abs(result.perLow - result.perHigh) < 1e-9
+        ? "Sized with your rate, " + perTray + " per tray."
+        : "Sized with the upper end of your rate, " + perTray + " per tray.";
+    return "<p class='result-pack-rate'>" + escapeHtml(which) + "</p>";
+  }
+
   function packageHtml(result, seedOffer) {
     var fallback = "<p class='result-seed'><a href='" + seedOffer[0] + "' rel='sponsored nofollow' target='_blank'>" + seedOffer[1] + "</a></p>";
     var packs = (window.SSG_PACKS || {})[form.crop.value];
     if (!packs || typeof ssgPickPackage !== "function") return fallback;
-    var choice = ssgPickPackage(packs.sizes, result.perHigh, result.totalHigh);
+    var choice = ssgPickPackage(packs.sizes, result.perHigh, result.totalHigh, packs.amazon);
     if (!choice) return fallback;
     var size = choice.size;
+    var amazon = choice.merchant === "amazon";
     var perTray = ssgFormatGrams(result.perHigh);
     var line = size.unit === "g" ? size.label : size.label + " (" + gramsLabel(size.grams) + ")";
+    var largest = amazon ? packs.amazon[packs.amazon.length - 1] : packs.sizes[packs.sizes.length - 1];
+    var bags = choice.sowings === 1 ? "" : "s";
     var cover = choice.coversBatch
-      ? "At " + perTray + " per tray, that is about " + choice.sowings + " sowing" + (choice.sowings === 1 ? "" : "s") + "."
-      : (size === packs.sizes[packs.sizes.length - 1] ? "The largest listed size. " : "") + "At " + perTray + " per tray, that is about " + choice.sowings + " sowing" + (choice.sowings === 1 ? "" : "s") + ", so this batch needs more than one bag.";
-    var short = choice.smallerShort.length
-      ? " The " + choice.smallerShort.map(function (s) { return s.label; }).join(" and ") + " is less than one tray at this rate."
+      ? "At " + perTray + " per tray, that is about " + choice.sowings + " sowing" + bags + "."
+      : (size === largest ? "The largest listed size. " : "") + "At " + perTray + " per tray, that is about " + choice.sowings + " sowing" + bags + ", so this batch needs more than one bag.";
+    // No packet sentence on Amazon picks or on radish (Ryan, Nov 10, 2026).
+    var short = choice.smallerShort.length && !amazon && form.crop.value !== "radish"
+      ? " The True Leaf " + choice.smallerShort.map(function (s) { return s.label; }).join(" and ") + " is less than one tray at this rate."
       : "";
     var sizes = packs.sizes.map(function (s) { return s.label; }).join(", ");
+    var product = amazon
+      ? "<p class='result-pack-product'>" + escapeHtml(size.title) + "</p>"
+      : "<p class='result-pack-product'>" + escapeHtml(packs.product) + ", True Leaf Market</p>";
+    var action = amazon
+      ? "<p class='result-pack-link'><a href='" + escapeHtml(size.url) + "' rel='sponsored nofollow' target='_blank'>View on Amazon</a></p>"
+      : "<p class='result-pack-link'><a href='" + escapeHtml(size.url) + "' rel='sponsored nofollow' target='_blank'>See " + escapeHtml(packs.product) + ", " + escapeHtml(size.label) + "</a></p>";
+    var fine = amazon
+      ? "True Leaf's " + choice.replaced.label + " was sold out on " + packs.stockDate + ". Check size and stock on Amazon."
+      : "True Leaf lists " + sizes + ". This opens with " + size.label + " selected. Check the size and stock on the seller page.";
     return (
-      "<div class='result-pack'><p class='result-pack-label'>Package to consider</p>" +
-      "<p class='result-pack-size'><strong>" + escapeHtml(line) + "</strong></p>" +
+      "<div class='result-pack'>" + packagePhoto(packs, choice) + "<div class='result-pack-body'><p class='result-pack-label'>Package to consider</p>" +
+      "<p class='result-pack-size'><strong>" + escapeHtml(line) + "</strong></p>" + product +
+      rateUsed(result, perTray) +
       "<p class='result-pack-note'>" + escapeHtml(cover + short) + "</p>" +
-      "<p class='result-pack-link'><a href='" + escapeHtml(size.url) + "' rel='sponsored nofollow' target='_blank'>See " + escapeHtml(packs.product) + ", " + escapeHtml(size.label) + "</a></p>" +
-      "<p class='result-pack-sizes'>True Leaf lists " + escapeHtml(sizes) + ". The link opens with " + escapeHtml(size.label) + " selected. Check the size and stock on the seller page.</p></div>"
+      action +
+      "<p class='result-pack-sizes'>" + escapeHtml(fine) + "</p></div>" + packageCredit(packs, choice) + "</div>"
     );
   }
 
@@ -332,14 +377,6 @@
   if (copyBtn) {
     copyBtn.addEventListener("click", function () {
       if (lastResult && lastResult.ok) return copyText(resultText(), "Seed estimate copied, including your cost inputs.");
-    });
-  }
-  if (shareBtn) {
-    shareBtn.addEventListener("click", function () {
-      if (lastResult && lastResult.ok) {
-        var url = window.location.origin + window.location.pathname + "?" + shareParams().toString();
-        return copyText(url, "Link copied. Tray settings and rates are included; prices are excluded.");
-      }
     });
   }
   if (printBtn) {

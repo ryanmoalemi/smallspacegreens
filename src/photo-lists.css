@@ -12,7 +12,7 @@
 .photo-cell-content:not(:has(img)){display:block}
 ol.steps.photo-list>li::before{content:none;display:none}
 .guide-main ol.steps.photo-list>li,ol.steps.photo-list>li{padding-left:0}
-.list-photo .photo-credit,.related-list .list-photo .photo-credit{font-size:11px;line-height:1.35;font-weight:400;letter-spacing:0;margin:5px 0 0;color:var(--muted);overflow-wrap:anywhere}
+.list-photo .photo-credit,.related-list .list-photo .photo-credit{font-size:12px;line-height:1.35;font-weight:400;letter-spacing:0;margin:5px 0 0;color:var(--muted);overflow-wrap:anywhere}
 .list-photo .photo-credit a,.related-list .list-photo .photo-credit a,.guide-list .list-photo .photo-credit a{font-size:inherit;font-weight:400;color:inherit;text-underline-offset:2px}
 .guide-main .icon-row.photo-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 26px}
 .guide-main .icon-row.photo-list>.photo-list-item{grid-template-columns:84px minmax(0,1fr);gap:15px;border-top:1px solid var(--line);border-bottom:0}
@@ -40,7 +40,7 @@ ol.steps.photo-list>li::before{content:none;display:none}
 .setup-choice-card .choice-photo{flex:0 0 68px;width:68px;height:68px;border-radius:3px;object-fit:cover}
 .setup-choice-card .setup-choice>span{flex:1;min-width:0}
 .setup-choice-card .setup-choice strong{font-size:15px}
-.setup-choice-card .photo-credit{margin:0 16px 12px;font-size:11px;line-height:1.4}
+.setup-choice-card .photo-credit{margin:0 16px 12px;font-size:12px;line-height:1.4}
 .supply-detail-grid section{display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px}
 .supply-detail-grid section>.list-photo{grid-column:1;grid-row:1/5}
 .supply-detail-grid section>:not(.list-photo){grid-column:2}
@@ -52,7 +52,7 @@ ol.steps.photo-list>li::before{content:none;display:none}
 .photo-cell-content{display:flex;align-items:center;gap:12px;min-width:145px}
 .photo-cell-content>.list-photo{flex:0 0 65px;width:65px}
 .photo-cell-content>span{min-width:0;font-weight:600;line-height:1.5}
-table .list-photo .photo-credit{font-size:10px;line-height:1.3;text-transform:none;letter-spacing:0}
+table .list-photo .photo-credit{font-size:12px;line-height:1.3;text-transform:none;letter-spacing:0}
 thead .list-photo{width:72px;margin-bottom:9px}
 .crop-compare th>.list-photo{margin-top:10px}
 .cost-comparison fieldset>.list-photo{float:right;width:72px;margin:12px 0 14px 12px}
@@ -64,7 +64,7 @@ thead .list-photo{width:72px;margin-bottom:9px}
 .photo-list>.photo-list-item:not(:has(img)),.supply-checks.photo-list>.photo-list-item:not(:has(img)),.checklist .photo-list>.photo-list-item:not(:has(img)),.related-list.photo-list>.photo-list-item:not(:has(img)),.guide-main .icon-row.photo-list>.photo-list-item:not(:has(img)),.grow-steps>.photo-list-item:not(:has(img)),.supply-detail-grid section:not(:has(img)){grid-template-columns:minmax(0,1fr)}
 .checklist .photo-list>.photo-list-item:first-child{border-top:0}
 .checklist .photo-list>.photo-list-item:last-child{border-bottom:0}
-.checklist .list-photo .photo-credit{font-size:10px}
+.checklist .list-photo .photo-credit{font-size:12px}
 @media(max-width:1000px){.setup-choice-card .setup-choice{flex-wrap:wrap;align-content:start}.setup-choice-card .choice-photo{order:-1;flex-basis:100%;width:100%;height:90px}.setup-choice-card .setup-choice>span{flex-basis:calc(100% - 28px)}}
 @media(max-width:700px){.supply-checks.photo-list{grid-template-columns:1fr}.supply-detail-grid{grid-template-columns:1fr}}
 @media(max-width:620px){
@@ -72,7 +72,7 @@ thead .list-photo{width:72px;margin-bottom:9px}
   .photo-list .list-item-copy{align-self:start;padding-top:1px}
   .guide-main .icon-row.photo-list{display:block}
   .guide-main .icon-row.photo-list strong{font-size:15px}
-  .list-photo .photo-credit{font-size:10px;line-height:1.4}
+  .list-photo .photo-credit{font-size:12px;line-height:1.4}
   .photo-step-number{top:14px}
   .grow-steps .step-copy h3{font-size:16px}
   .guide-main .grow-steps .step-copy p{font-size:14px;line-height:1.65}
@@ -84,7 +84,7 @@ thead .list-photo{width:72px;margin-bottom:9px}
   .setup-choice-card .setup-choice>span{flex-basis:auto}
   .setup-choice-card .setup-choice strong{font-size:14px}
   .setup-choice-card .setup-choice small{font-size:11px}
-  .setup-choice-card .photo-credit{margin:0 12px 9px 40px;font-size:10px}
+  .setup-choice-card .photo-credit{margin:0 12px 9px 40px;font-size:12px}
   .supply-checks.photo-list>.photo-list-item{grid-template-columns:74px minmax(0,1fr);gap:12px;padding:14px 0}
   .supply-checks.photo-list strong{font-size:14px;line-height:1.4}
   .supply-checks.photo-list small{font-size:12px;line-height:1.6;margin-top:5px}

@@ -208,5 +208,17 @@
     "alt": "A white seedling cell tray nested inside a solid black tray, with young seedlings.",
     "credit_id": "seedling-trays-nested-kvdp",
     "author": "KVDP"
+  },
+  "pea-lufa": {
+    "thumbnail": "pea-shoots-lufa.jpg",
+    "alt": "Pea shoots growing in long greenhouse trays.",
+    "credit_id": "pea-shoots-lufa",
+    "author": "Lufa Farms"
+  },
+  "amaranth-micro": {
+    "thumbnail": "crop-amaranth-microgreens.jpg",
+    "alt": "Red-stemmed amaranth microgreens with small seed leaves.",
+    "credit_id": "crop-amaranth-microgreens",
+    "author": "USDA"
   }
 }

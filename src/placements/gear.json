@@ -11,7 +11,7 @@
       "source_label": "Sunflower microgreens 02",
       "license": "CC BY 4.0",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
-      "note": "Square crop. Example photo of a small tray of microgreens, not a specific kit."
+      "note": "Square crop. Shows a small tray of microgreens, not a specific kit."
     },
     "broccoli-sprouts": {
       "slug": "broccoli-sprouts",
@@ -24,7 +24,7 @@
       "source_label": "Broccoli sprouts",
       "license": "CC BY 2.0",
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
-      "note": "Square crop. Example photo, not a seed packet."
+      "note": "Square crop. Not a seed packet."
     },
     "basil-seedlings": {
       "slug": "basil-window-seedlings",
@@ -37,7 +37,7 @@
       "source_label": "Basil",
       "license": "CC BY 2.0",
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
-      "note": "Square crop. Example photo of a small plant by a window, not the LetPot unit."
+      "note": "Square crop. Shows a small plant by a window, not the LetPot unit."
     },
     "lettuce-pot": {
       "slug": "lettuce-container",
@@ -50,7 +50,7 @@
       "source_label": "Leaf lettuce plant in a pot 10",
       "license": "CC BY-SA 4.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "note": "Square crop. Example photo of container lettuce, not the LetPot unit. Cropped versions remain under CC BY-SA 4.0."
+      "note": "Square crop. Shows container lettuce, not the LetPot unit. Cropped versions remain under CC BY-SA 4.0."
     },
     "letpot-mini": {
       "slug": "letpot-mini",
@@ -91,7 +91,7 @@
       "source_label": "11 microgreens",
       "license": "CC BY 2.0",
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
-      "note": "Square crop. Example photo of small greens, not the ceramic kit."
+      "note": "Square crop. Shows small greens, not the ceramic kit."
     }
   },
   "cards": {

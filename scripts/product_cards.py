@@ -88,7 +88,7 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
                 caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
             else:
                 caption = (
-                    f'<figcaption class="pick-credit">Example photo · '
+                    f'<figcaption class="pick-credit">Credit: '
                     f'<a href="/photo-credits/#{esc(image["credit_id"])}">{esc(image["author"])}</a>'
                     "</figcaption>"
                 )
