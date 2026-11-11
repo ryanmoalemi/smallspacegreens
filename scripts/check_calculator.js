@@ -81,7 +81,7 @@ r = compute({ tray: "10x20", trays: 3, crop: mustard, userLow: 20, userHigh: 60,
 assert("rate-range package scenarios remain separate", r.ok && r.cost.low.packages === 1 && r.cost.low.leftover === 40 && r.cost.high.packages === 2 && r.cost.high.leftover === 20, r.cost);
 
 // Exercise the actual form event handlers without a browser or third-party DOM library.
-function mountCalculator(search) {
+function mountCalculator(search, packs) {
   function element(value) {
     return {
       value: value == null ? "" : value, hidden: false, disabled: false,
@@ -113,6 +113,7 @@ function mountCalculator(search) {
   nodes["unit-price-fields"].querySelectorAll = () => [form.price, form.priceUnit];
   nodes["package-price-fields"].querySelectorAll = () => [form.packagePrice, form.packageGrams];
   const win = { location: new URL("https://smallspacegreens.com/tools/microgreens-seed-calculator/" + (search || "")), SSG_CROPS: { radish: { ...radish, name: "Radish" }, mustard } };
+  if (packs) win.SSG_PACKS = packs;
   win.history = { replaceState(_state, _title, next) { win.location = new URL(next, win.location.href); } };
   win.print = () => { win.printed = true; };
   const clipboard = { text: null, fail: false, async writeText(text) { if (this.fail) throw new Error("Permission denied"); this.text = text; } };
@@ -215,3 +216,49 @@ for (const per of [5, 10, 20, 40]) {
 assert("arugula never recommends the out-of-stock 5 lb", !chose5lb);
 p = pick(arugulaStock, 10, 10 * 60);
 assert("arugula batch past 1 lb falls back to 1 lb, not 5 lb", p && p.size.label === "1 lb" && !p.coversBatch, p);
+
+// Amazon offer only when the True Leaf pick is out of stock, closest quantity, in stock.
+const radishAmazon = [
+  { label: "16 oz", grams: 453.6, inStock: true, url: "https://www.amazon.com/dp/B08V1ZMGFX?tag=smallspaceg04-20", title: "Country Creek Rambo radish seed, 16 oz", match: "Same variety (Rambo).", imageEmbed: null },
+  { label: "5 lb", grams: 2268, inStock: true, url: "https://www.amazon.com/dp/B088MJWC7S?tag=smallspaceg04-20", title: "Purple radish seed, 5 lb", match: "Purple radish.", imageEmbed: null }
+];
+p = pick(radishStock, 42, 42, radishAmazon);
+assert("radish 10x20 with 1 lb out shows the Amazon 16 oz", p && p.merchant === "amazon" && p.size.label === "16 oz" && p.replaced.label === "1 lb" && p.sowings === 10 && p.coversBatch, p);
+p = pick(radishStock, 42, 42 * 20, radishAmazon);
+assert("radish 5 lb out shows the Amazon 5 lb", p && p.merchant === "amazon" && p.size.label === "5 lb" && p.replaced.label === "5 lb", p);
+p = pick(radishStock, 21, 21, radishAmazon);
+assert("an in-stock True Leaf pick never uses Amazon", p && p.merchant === "trueleaf" && p.size.label === "4 oz", p);
+p = pick(radishStock, 42, 42, [{ label: "16 oz", grams: 453.6, inStock: false }]);
+assert("an out-of-stock Amazon offer is skipped, True Leaf fallback stays", p && p.merchant === "trueleaf" && p.size.label === "4 oz", p);
+const amaranthStock = [
+  { label: "1 oz", grams: 28.3 }, { label: "4 oz", grams: 113.4, inStock: false }, { label: "1 lb", grams: 453.6, inStock: false },
+  { label: "5 lb", grams: 2268, inStock: false }, { label: "25 lb", grams: 11339.8, inStock: false }
+];
+const amaranthAmazon = [{ label: "0.25 lb", grams: 113.4 }, { label: "1 lb", grams: 453.6 }, { label: "5 lb", grams: 2268 }];
+p = pick(amaranthStock, 15, 15, amaranthAmazon);
+assert("amaranth 10x20 at the Maryland example shows the Amazon 0.25 lb", p && p.merchant === "amazon" && p.size.label === "0.25 lb" && p.sowings === 7, p);
+p = pick(amaranthStock, 15, 15 * 900, amaranthAmazon);
+assert("amaranth 25 lb out falls to the largest Amazon offer, flagged", p && p.merchant === "amazon" && p.size.label === "5 lb" && !p.coversBatch, p);
+p = pick(amaranthStock, 5, 5, amaranthAmazon);
+assert("amaranth small batch keeps the in-stock True Leaf 1 oz", p && p.merchant === "trueleaf" && p.size.label === "1 oz", p);
+
+const photo = { src: "/assets/photos/thumbs/radish-seeds-hugowolf.jpg", alt: "Loose brown radish seeds.", credit: "/photo-credits/#radish-seeds-hugowolf", author: "Hugowolf" };
+const boxPacks = {
+  radish: { product: "Organic Rambo Radish microgreens seed", stockDate: "November 10, 2026", amazonDate: "November 10, 2026", photo, amazon: radishAmazon,
+    sizes: radishStock.map(s => ({ ...s, unit: s.label.split(" ")[1], url: "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=x" })) },
+  mustard: { product: "Green Mustard microgreens seed", stockDate: "November 10, 2026", amazonDate: null, photo: { ...photo, author: "M" }, amazon: [],
+    sizes: [{ label: "1 oz", unit: "oz", grams: 28.3, url: "u1" }, { label: "4 oz", unit: "oz", grams: 113.4, url: "u4" }] }
+};
+const amz = mountCalculator("?crop=radish&tray=10x20&n=1", boxPacks);
+const amzHtml = amz.nodes["calc-results"].innerHTML;
+assert("Amazon box shows the tagged /dp/ URL with rel sponsored nofollow", /href='https:\/\/www\.amazon\.com\/dp\/B08V1ZMGFX\?tag=smallspaceg04-20' rel='sponsored nofollow' target='_blank'>View on Amazon</.test(amzHtml), amzHtml);
+assert("Amazon box has an example photo, not an Amazon image, while image_embed is empty", /Example photo/.test(amzHtml) && /radish-seeds-hugowolf/.test(amzHtml) && !/amazon-adsystem|media-amazon/.test(amzHtml));
+assert("Amazon box says why it left True Leaf", /True Leaf(?:'|&#39;|&#x27;)s 1 lb was out of stock at our November 10, 2026 check/.test(amzHtml));
+assert("package copy never says link", !/\blink\b/i.test(amzHtml.replace(/class='result-pack-link'/g, "")));
+boxPacks.radish.amazon = radishAmazon.map(o => ({ ...o, imageEmbed: "https://m.media-amazon.com/images/I/test._SL250_.jpg" }));
+const emb = mountCalculator("?crop=radish&tray=10x20&n=1", boxPacks).nodes["calc-results"].innerHTML;
+assert("image_embed swaps in the Amazon-served image for that offer only", /src='https:\/\/m\.media-amazon\.com\/images\/I\/test\._SL250_\.jpg'/.test(emb) && /Amazon product photo/.test(emb) && !/Example photo/.test(emb));
+const mus = mountCalculator("?crop=mustard&tray=10x20&n=1&example=1", boxPacks).nodes["calc-results"].innerHTML;
+assert("mustard box sizes from the Maryland example and says so", /Sized with the Maryland example rate, using its upper end of 15 g per tray/.test(mus) && /4 oz/.test(mus) && /Example photo/.test(mus), mus);
+const mus2 = mountCalculator("?crop=mustard&tray=10x20&n=1&rate=20", boxPacks).nodes["calc-results"].innerHTML;
+assert("mustard box at a typed rate says it used your rate", /Sized with your rate, 20 g per tray/.test(mus2), mus2);

@@ -1608,12 +1608,70 @@ def trueleaf_awin(url: str) -> str:
     return "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=" + quote(url, safe="")
 
 
+AMAZON_TAG = "smallspaceg04-20"
+# Images already shown elsewhere on the calculator page, and list photos that are the same
+# original picture under another file name. A package-box photo may not repeat any of them.
+CALCULATOR_PAGE_PHOTO_SOURCES = {
+    "pea-shoots-counter.jpg": "supply-pea-shoots",
+    "supply-pea-shoots": "supply-pea-shoots",
+}
+
+
+def calculator_box_photo(crop_id: str, key: str) -> dict:
+    photos = json.loads((SRC / "list-photos.json").read_text())
+    if key not in photos or "thumbnail" not in photos[key]:
+        raise SystemExit(f"Package box photo {key} for {crop_id} is not a list photo with a thumbnail")
+    photo = photos[key]
+    if not (ROOT / "assets" / "photos" / "thumbs" / photo["thumbnail"]).exists():
+        raise SystemExit(f"Package box photo file missing: {photo['thumbnail']}")
+    return {
+        "src": f"/assets/photos/thumbs/{photo['thumbnail']}",
+        "alt": photo["alt"],
+        "credit": f"/photo-credits/#{photo['credit_id']}",
+        "author": photo["author"],
+    }
+
+
+def calculator_check_date(stamp: str) -> str:
+    """'2026-11-10 22:29 PT' -> 'November 10, 2026' for the package box."""
+    day = datetime.strptime(stamp[:10], "%Y-%m-%d")
+    return f"{day.strftime('%B')} {day.day}, {day.year}"
+
+
+def amazon_offer(crop_id: str, offer: dict) -> dict:
+    asin = offer["asin"]
+    if len(asin) != 10 or not asin.isalnum() or not asin.isupper():
+        raise SystemExit(f"Bad ASIN for {crop_id}: {asin}")
+    if not offer["label"].startswith(f'{offer["amount"]:g} {offer["unit"]}'):
+        raise SystemExit(f"Amazon size label disagrees with its amount for {crop_id}: {offer['label']}")
+    embed = offer.get("image_embed")
+    if embed is not None and not re.fullmatch(
+        r"https://(ws-na\.amazon-adsystem\.com/widgets/q\?[^\s\"'<>]+|m\.media-amazon\.com/images/I/[A-Za-z0-9%+._-]+)", embed
+    ):
+        raise SystemExit(f"image_embed for {crop_id} {asin} must be an Amazon-served image URL")
+    return {
+        "label": offer["label"],
+        "unit": offer["unit"],
+        "inStock": offer.get("in_stock", True) is not False,
+        "grams": round(offer["amount"] * TRUELEAF_UNIT_GRAMS[offer["unit"]], 1),
+        "url": f"https://www.amazon.com/dp/{asin}?tag={AMAZON_TAG}",
+        "title": offer["title"],
+        "match": offer["match"],
+        "imageEmbed": embed,
+    }
+
+
 def trueleaf_packages(crops: dict) -> dict:
-    """Package sizes verified on True Leaf's product pages, converted to grams for the calculator."""
+    """Package sizes verified on True Leaf's product pages, converted to grams for the calculator.
+
+    Crops with no crop rate (needsRate) are sized from the rate the visitor chose, so they only
+    need to exist in rates.json. Amazon offers are shown only when the picked True Leaf size is
+    out of stock at the last check.
+    """
     data = json.loads((SRC / "trueleaf-packages.json").read_text())
     packs = {}
     for crop_id, entry in data["crops"].items():
-        if crop_id not in crops or "grams" not in crops[crop_id]:
+        if crop_id not in crops or not ("grams" in crops[crop_id] or crops[crop_id].get("needsRate")):
             raise SystemExit(f"True Leaf packages listed for {crop_id}, which has no crop rate")
         sizes = []
         for size in entry["sizes"]:
@@ -1633,11 +1691,36 @@ def trueleaf_packages(crops: dict) -> dict:
             )
         if [s["grams"] for s in sizes] != sorted(s["grams"] for s in sizes):
             raise SystemExit(f"True Leaf sizes for {crop_id} must run small to large")
-        packs[crop_id] = {"product": entry["product"], "checked": data["checked"], "sizes": sizes}
+        amazon = [amazon_offer(crop_id, offer) for offer in entry.get("amazon", [])]
+        if [s["grams"] for s in amazon] != sorted(s["grams"] for s in amazon):
+            raise SystemExit(f"Amazon offers for {crop_id} must run small to large")
+        if "photo" not in entry:
+            raise SystemExit(f"Package box for {crop_id} needs an example photo")
+        photo = calculator_box_photo(crop_id, entry["photo"])
+        packs[crop_id] = {
+            "product": entry["product"],
+            "checked": data["checked"],
+            "stockDate": calculator_check_date(data["stock_checked"]),
+            "amazonDate": calculator_check_date(data["amazon_checked"]) if amazon else None,
+            "sizes": sizes,
+            "amazon": amazon,
+            "photo": photo,
+        }
     return packs
 
 
-def write_calculator_js() -> None:
+def check_calculator_box_photos(page_html: str, packs: dict) -> None:
+    """Every package box has a photo, and none repeats an image already on the calculator page."""
+    on_page = set(re.findall(r"/assets/[a-z]+/(?:thumbs/)?([a-z0-9-]+?)(?:-\d+)?\.(?:webp|jpg|png)", page_html))
+    for crop_id, pack in packs.items():
+        name = pack["photo"]["src"].rsplit("/", 1)[1]
+        stem = name.rsplit(".", 1)[0]
+        source = CALCULATOR_PAGE_PHOTO_SOURCES.get(name, stem)
+        if stem in on_page or source in on_page:
+            raise SystemExit(f"Package box photo for {crop_id} repeats an image already on the calculator page: {name}")
+
+
+def write_calculator_js() -> dict:
     rates = json.loads((SRC / "rates.json").read_text())
     crops = {}
     for row in rates:
@@ -1650,10 +1733,12 @@ def write_calculator_js() -> None:
     core = (SRC / "calc-core.js").read_text()
     logic = (SRC / "calculator.js").read_text()
     payload = "window.SSG_CROPS = " + json.dumps(crops, ensure_ascii=False) + ";\n"
-    payload += "window.SSG_PACKS = " + json.dumps(trueleaf_packages(crops), ensure_ascii=False) + ";\n"
+    packs = trueleaf_packages(crops)
+    payload += "window.SSG_PACKS = " + json.dumps(packs, ensure_ascii=False) + ";\n"
     target = ROOT / "js" / "calculator.js"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(core + "\n" + payload + logic)
+    return packs
 
 
 def guide_list(include_dek: bool = True) -> str:
@@ -2178,7 +2263,7 @@ def main() -> None:
     css_path = ROOT / "css" / "styles.css"
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(css + "\n")
-    write_calculator_js()
+    calculator_packs = write_calculator_js()
     signup_js = ROOT / "js" / "signup.js"
     signup_js.parent.mkdir(parents=True, exist_ok=True)
     signup_js.write_text((SRC / "signup.js").read_text())
@@ -2186,6 +2271,7 @@ def main() -> None:
     for name in ["setup.js", "cost-compare.js"]:
         (ROOT / "js" / name).write_text((SRC / name).read_text())
     pages = render_static_pages()
+    check_calculator_box_photos(pages["tools/microgreens-seed-calculator/index.html"], calculator_packs)
     urls = []
     photographed_items = 0
     for rel, document in pages.items():

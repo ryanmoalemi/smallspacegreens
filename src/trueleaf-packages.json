@@ -1,10 +1,11 @@
 {
   "checked": "2026-11-10",
-  "note": "Sizes and variant IDs read from the live True Leaf Market product pages. Each ?variant= URL was opened in a browser and opened with that size selected. No prices are stored or shown.",
+  "note": "Sizes and variant IDs read from the live True Leaf Market product pages. Each ?variant= URL was opened in a browser and opened with that size selected. No prices are stored or shown. Amazon offers are shown only when the True Leaf size the calculator would pick is out of stock. Each ASIN page was opened and read as in stock with an add-to-cart button at amazon_checked. image_embed is the single per-offer field for an Amazon-permitted product image (for example a Creators API image URL). While it is null the box shows the crop's licensed example photo. photo is a key in list-photos.json for that crop's example photo.",
   "crops": {
     "radish": {
       "product": "Organic Rambo Radish microgreens seed",
       "url": "https://trueleafmarket.com/products/radish-rambo-seeds",
+      "photo": "radish",
       "sizes": [
         {
           "label": "4 g packet",
@@ -38,11 +39,34 @@
           "unit": "lb",
           "variant": "39483221448"
         }
+      ],
+      "amazon": [
+        {
+          "label": "16 oz",
+          "amount": 16,
+          "unit": "oz",
+          "asin": "B08V1ZMGFX",
+          "title": "Country Creek Rambo radish seed, 16 oz",
+          "in_stock": true,
+          "match": "Same variety (Rambo). Same quantity as True Leaf's 1 lb.",
+          "image_embed": null
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "asin": "B088MJWC7S",
+          "title": "Mountain Valley Seed Co purple radish microgreens seed, 5 lb",
+          "in_stock": true,
+          "match": "Purple radish for microgreens; the listing does not name the variety. Same quantity as True Leaf's 5 lb.",
+          "image_embed": null
+        }
       ]
     },
     "pea": {
       "product": "Dun Pea microgreens seed",
       "url": "https://trueleafmarket.com/products/dun-pea-seeds",
+      "photo": "pea-lufa",
       "sizes": [
         {
           "label": "1 lb",
@@ -67,6 +91,7 @@
     "sunflower": {
       "product": "Black Oil Sunflower microgreens seed",
       "url": "https://trueleafmarket.com/products/sunflower-black-oil-microgreens-seeds",
+      "photo": "sunflower",
       "sizes": [
         {
           "label": "5 g packet",
@@ -103,6 +128,7 @@
     "broccoli": {
       "product": "Waltham 29 Broccoli microgreens seed",
       "url": "https://trueleafmarket.com/products/broccoli-waltham-29-microgreens-seeds",
+      "photo": "broccoli",
       "sizes": [
         {
           "label": "1 oz",
@@ -139,6 +165,7 @@
     "kale": {
       "product": "Red Russian Kale microgreens seed",
       "url": "https://trueleafmarket.com/products/kale-red-russian-microgreens-seeds",
+      "photo": "kale",
       "sizes": [
         {
           "label": "1 oz",
@@ -175,6 +202,7 @@
     "arugula": {
       "product": "Slow Bolt Arugula microgreens seed",
       "url": "https://trueleafmarket.com/products/arugula-slow-bolt-microgreens-seeds",
+      "photo": "arugula",
       "sizes": [
         {
           "label": "1 oz",
@@ -207,11 +235,24 @@
           "unit": "lb",
           "variant": "45198169416"
         }
+      ],
+      "amazon": [
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "asin": "B0833D25Y5",
+          "title": "Country Creek arugula microgreen seed, 5 lb",
+          "in_stock": true,
+          "match": "Arugula for microgreens; the listing does not name Slow Bolt. Same quantity as True Leaf's 5 lb.",
+          "image_embed": null
+        }
       ]
     },
     "cilantro": {
       "product": "Leisure Split Cilantro microgreens seed",
       "url": "https://trueleafmarket.com/products/cilantro-seeds-leisure-splits-microgreens-seeds",
+      "photo": "cilantro",
       "sizes": [
         {
           "label": "1 oz",
@@ -248,6 +289,7 @@
     "basil": {
       "product": "Genovese Basil microgreens seed",
       "url": "https://trueleafmarket.com/products/basil-genovese-microgreens-seeds",
+      "photo": "basil",
       "sizes": [
         {
           "label": "1 oz",
@@ -284,6 +326,7 @@
     "rutabaga": {
       "product": "American Purple Top Rutabaga microgreens seed",
       "url": "https://trueleafmarket.com/products/rutabaga-american-purple-top-microgreens-seeds",
+      "photo": "rutabaga",
       "sizes": [
         {
           "label": "1 oz",
@@ -316,7 +359,149 @@
           "variant": "46593645704"
         }
       ]
+    },
+    "mustard": {
+      "product": "Green Mustard microgreens seed",
+      "url": "https://trueleafmarket.com/products/green-mustard-microgreens-seeds",
+      "photo": "mustard",
+      "sizes": [
+        {
+          "label": "1 oz",
+          "amount": 1,
+          "unit": "oz",
+          "variant": "31865074024563"
+        },
+        {
+          "label": "4 oz",
+          "amount": 4,
+          "unit": "oz",
+          "variant": "31865074057331"
+        },
+        {
+          "label": "1 lb",
+          "amount": 1,
+          "unit": "lb",
+          "variant": "31865074090099"
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "variant": "31865074122867"
+        },
+        {
+          "label": "25 lb",
+          "amount": 25,
+          "unit": "lb",
+          "variant": "31865074155635"
+        }
+      ]
+    },
+    "beet": {
+      "product": "Detroit Dark Red beet microgreens seed",
+      "url": "https://trueleafmarket.com/products/beet-detroit-dark-red-microgreens-seeds",
+      "photo": "beet",
+      "sizes": [
+        {
+          "label": "4 oz",
+          "amount": 4,
+          "unit": "oz",
+          "variant": "45187194376"
+        },
+        {
+          "label": "1 lb",
+          "amount": 1,
+          "unit": "lb",
+          "variant": "45187194440"
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "variant": "45187194504"
+        },
+        {
+          "label": "25 lb",
+          "amount": 25,
+          "unit": "lb",
+          "variant": "45187194568"
+        }
+      ]
+    },
+    "amaranth": {
+      "product": "All Red Leaf amaranth microgreens seed",
+      "url": "https://trueleafmarket.com/products/amaranth-seeds-all-red-leaf-microgreens-seeds",
+      "photo": "amaranth",
+      "sizes": [
+        {
+          "label": "1 oz",
+          "amount": 1,
+          "unit": "oz",
+          "variant": "40961686044787"
+        },
+        {
+          "label": "4 oz",
+          "amount": 4,
+          "unit": "oz",
+          "variant": "40961686077555",
+          "in_stock": false
+        },
+        {
+          "label": "1 lb",
+          "amount": 1,
+          "unit": "lb",
+          "variant": "40961686110323",
+          "in_stock": false
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "variant": "40961686143091",
+          "in_stock": false
+        },
+        {
+          "label": "25 lb",
+          "amount": 25,
+          "unit": "lb",
+          "variant": "40961686175859",
+          "in_stock": false
+        }
+      ],
+      "amazon": [
+        {
+          "label": "0.25 lb",
+          "amount": 0.25,
+          "unit": "lb",
+          "asin": "B00YDBJ9W2",
+          "title": "Mountain Valley Seed Co Red Garnet amaranth microgreens seed, 0.25 lb",
+          "in_stock": true,
+          "match": "Red amaranth (Red Garnet, not All Red Leaf). Same quantity as True Leaf's 4 oz.",
+          "image_embed": null
+        },
+        {
+          "label": "1 lb",
+          "amount": 1,
+          "unit": "lb",
+          "asin": "B00YDBJAYE",
+          "title": "Mountain Valley Seed Co Red Garnet amaranth microgreens seed, 1 lb",
+          "in_stock": true,
+          "match": "Red amaranth (Red Garnet, not All Red Leaf). Same quantity as True Leaf's 1 lb.",
+          "image_embed": null
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "asin": "B00YDBJ9FE",
+          "title": "Mountain Valley Seed Co Red Garnet amaranth microgreens seed, 5 lb",
+          "in_stock": true,
+          "match": "Red amaranth (Red Garnet, not All Red Leaf). Same quantity as True Leaf's 5 lb. Closest for True Leaf's 25 lb too.",
+          "image_embed": null
+        }
+      ]
     }
   },
-  "stock_checked": "2026-11-10 22:22 PT"
+  "stock_checked": "2026-11-10 22:29 PT",
+  "amazon_checked": "2026-11-10 22:27 PT"
 }

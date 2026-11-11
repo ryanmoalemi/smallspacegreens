@@ -204,28 +204,45 @@ function ssgFormatGrams(n) {
 // at the higher rate. Falls back to the smallest that covers the batch, then to the largest.
 // sizes: [{label, grams, ...}] sorted small to large. Returns null when nothing is listed.
 var SSG_MIN_SOWINGS = 3;
-function ssgPickPackage(sizes, perTray, batch) {
+function ssgPickPackage(sizes, perTray, batch, amazon) {
   if (!sizes || !sizes.length || !ssgFinite(perTray) || perTray <= 0) return null;
   function smallestAtLeast(grams) {
     for (var i = 0; i < sizes.length; i++) if (sizes[i].grams >= grams) return sizes[i];
     return null;
   }
-  var pick = smallestAtLeast(Math.max(batch, perTray * SSG_MIN_SOWINGS)) || smallestAtLeast(batch) || sizes[sizes.length - 1];
-  // Never recommend a size marked out of stock at the last True Leaf check:
-  // fall back to the next smaller in-stock size, else the next larger one.
+  var wanted = smallestAtLeast(Math.max(batch, perTray * SSG_MIN_SOWINGS)) || smallestAtLeast(batch) || sizes[sizes.length - 1];
+  var pick = wanted;
+  var merchant = "trueleaf";
+  // Never recommend a size marked out of stock at the last True Leaf check.
+  // First choice: an in-stock Amazon offer of the closest quantity to that size.
+  // Otherwise fall back to the next smaller in-stock True Leaf size, else the next larger one.
   if (pick.inStock === false) {
-    var at = sizes.indexOf(pick);
-    var alt = null;
-    for (var k = at - 1; k >= 0 && !alt; k--) if (sizes[k].inStock !== false) alt = sizes[k];
-    for (var m = at + 1; m < sizes.length && !alt; m++) if (sizes[m].inStock !== false) alt = sizes[m];
-    if (!alt) return null;
-    pick = alt;
+    var best = null;
+    (amazon || []).forEach(function (offer) {
+      if (offer.inStock === false || !(offer.grams > 0)) return;
+      var gap = Math.abs(Math.log(offer.grams / wanted.grams));
+      if (!best || gap < best.gap - 1e-9 || (Math.abs(gap - best.gap) < 1e-9 && offer.grams > best.offer.grams)) best = { offer: offer, gap: gap };
+    });
+    if (best) {
+      pick = best.offer;
+      merchant = "amazon";
+    } else {
+      var at = sizes.indexOf(pick);
+      var alt = null;
+      for (var k = at - 1; k >= 0 && !alt; k--) if (sizes[k].inStock !== false) alt = sizes[k];
+      for (var m = at + 1; m < sizes.length && !alt; m++) if (sizes[m].inStock !== false) alt = sizes[m];
+      if (!alt) return null;
+      pick = alt;
+    }
   }
   var covers = pick.grams >= batch;
   var smaller = [];
-  for (var j = 0; j < sizes.length && sizes[j] !== pick; j++) smaller.push(sizes[j]);
+  var stopAt = merchant === "amazon" ? wanted : pick;
+  for (var j = 0; j < sizes.length && sizes[j] !== stopAt; j++) smaller.push(sizes[j]);
   return {
     size: pick,
+    merchant: merchant,
+    replaced: merchant === "amazon" ? wanted : null,
     sowings: Math.floor(pick.grams / perTray + 1e-9),
     coversBatch: covers,
     smallerShort: smaller.filter(function (s) { return s.grams < perTray; })

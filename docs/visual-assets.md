@@ -376,3 +376,12 @@ Added November 9, 2026. These real photographs show mature crops or harvested pr
 - Credit: `Credit: <a href="/photo-credits/#crop-cucumber">Stephen Ausmus, USDA ARS</a>`.
 - Reuse: USDA Agricultural Research Service photo by Stephen Ausmus, public domain US government work according to Commons; voluntary credit included.
 
+
+### Pea shoots in greenhouse trays (calculator package box)
+
+- Local file: `assets/photos/thumbs/pea-shoots-lufa.jpg` (320 × 320), resized from `assets/products/supply-lufa-600.webp`.
+- Photographer: Lufa Farms.
+- Original: [Lufa Farms Microgreens in Trays.jpg](https://commons.wikimedia.org/wiki/File:Lufa_Farms_Microgreens_in_Trays.jpg).
+- License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).
+- Use: example photo in the seed calculator's pea package box. The pea list photo (`pea-shoots-counter.jpg`) is the same Daderot picture already shown on the calculator page as `supply-pea-shoots`, so the box uses this one instead.
+- Credit: `Credit: <a href="/photo-credits/#pea-shoots-lufa">Lufa Farms</a>`.
