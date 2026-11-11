@@ -370,5 +370,53 @@
     "alt": "Sprouted garden peas in a cloth sack.",
     "credit_id": "pea-sprouts-sack-yarzaryeni",
     "author": "Yarzaryeni"
+  },
+  "presoak-jars": {
+    "thumbnail": "seeds-soaking-jars-mike-steinhoff.jpg",
+    "alt": "Three glass jars of seeds soaking in water on a counter.",
+    "credit_id": "seeds-soaking-jars-mike-steinhoff",
+    "author": "Mike Steinhoff"
+  },
+  "uncovered-sprouts": {
+    "thumbnail": "emerging-sprouts-nrcs.jpg",
+    "alt": "Pale yellow sprouts pushing up between black seed hulls.",
+    "credit_id": "emerging-sprouts-nrcs",
+    "author": "NRCS Pacific Islands Area"
+  },
+  "daily-check": {
+    "thumbnail": "microgreens-check-peggy-greb.jpg",
+    "alt": "A researcher checks trays of red and green microgreens on a lit shelf.",
+    "credit_id": "microgreens-check-peggy-greb",
+    "author": "Peggy Greb"
+  },
+  "leggy-seedlings": {
+    "thumbnail": "leggy-seedlings-matthew-bellemare.jpg",
+    "alt": "Tall thin seedlings leaning in a cell tray.",
+    "credit_id": "leggy-seedlings-matthew-bellemare",
+    "author": "Matthew Bellemare"
+  },
+  "harvest-cut": {
+    "thumbnail": "cutting-microgreens-usda.jpg",
+    "alt": "A gloved hand cuts microgreens with a knife just above the tray.",
+    "credit_id": "cutting-microgreens-usda",
+    "author": "USDA"
+  },
+  "harvest-weigh": {
+    "thumbnail": "microgreens-scale-usda.jpg",
+    "alt": "A grower handles cut microgreens next to a digital scale.",
+    "credit_id": "microgreens-scale-usda",
+    "author": "USDA"
+  },
+  "time-timer": {
+    "thumbnail": "kitchen-timer-douglas-perkins.jpg",
+    "alt": "A small white kitchen timer with a blue display panel.",
+    "credit_id": "kitchen-timer-douglas-perkins",
+    "author": "Douglas Paul Perkins"
+  },
+  "planting-notes": {
+    "thumbnail": "garden-notebook-danak.jpg",
+    "alt": "Handwritten garden planning pages beside a bag of seed packets.",
+    "credit_id": "garden-notebook-danak",
+    "author": "DanaK~WaterPenny"
   }
 }
