@@ -1144,10 +1144,9 @@ def page_share_image(html: str) -> tuple[str, int, int]:
     """Use a photo already on the page. Fall back to the existing default share image."""
     default_rel = "assets/og/home.jpg"
     chosen = None
-    srcs = re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', html)
-    # Prefer a licensed photo; a store product image is the last resort.
-    srcs = [x for x in srcs if x.startswith("/assets/photos/")] + [x for x in srcs if x.startswith("/assets/products/")]
-    for src in srcs:
+    for src in re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', html):
+        if not (src.startswith("/assets/photos/") or src.startswith("/assets/products/")):
+            continue
         rel = src.lstrip("/")
         if rel.startswith("assets/photos/thumbs/"):
             full = "assets/photos/" + Path(rel).name
