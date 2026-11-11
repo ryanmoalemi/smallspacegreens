@@ -48,6 +48,12 @@ def amazon_url(asin: str) -> str:
     return f"https://www.amazon.com/dp/{asin}?tag={AMAZON_TAG}"
 
 
+def routed(row: dict, routes: str) -> dict:
+    """Tag a /gear/ example with the chooser routes (kit, tray, reuse) whose list it belongs to."""
+    row["routes"] = routes
+    return row
+
+
 def amazon(asin: str, item: str, note: str) -> dict:
     return {"kind": "amazon", "asin": asin, "item": item, "note": note, "label": AMAZON_LABEL}
 
@@ -218,17 +224,18 @@ SHOP_PAGES: dict[str, dict] = {
         ],
     },
     "gear": {
-        "heading": "Example supplies for these lists",
-        "lead": "One example for each line on the lists above. A kit, reusable trays, or a container you own are still different approaches. This site has not used these products.",
+        "heading": "Example supplies for this list",
+        "lead": "One example for each line on the list you picked. This site has not used these products.",
+        "chooser": True,
         "rows": [
-            amazon("B07KRMP93C", KIT_SPONGE, "A ready-to-sow kit with trays, seed, and coir."),
-            amazon("B06XZFLY9P", BF_1020_HOLES, "A reusable growing tray with holes."),
-            amazon("B07DT72V6H", BF_1020_SOLID, "The matching solid tray."),
-            seed(MIXED_SEED, "Loose seed for a reusable tray."),
-            amazon("B01N38GBTM", ESPOMA_SEED, "Soilless mix for a DIY tray."),
-            amazon("B08BPTXK4L", SCALE, "For weighing loose seed."),
-            amazon("B07FV7TZVH", SCISSORS, "For a cut above the mix."),
-            amazon("B0CHDBY2PD", SANSI_CLIP, "If the window falls short."),
+            routed(amazon("B07KRMP93C", KIT_SPONGE, "A ready-to-sow kit with trays, seed, and coir."), "kit"),
+            routed(amazon("B06XZFLY9P", BF_1020_HOLES, "A reusable growing tray with holes."), "tray"),
+            routed(amazon("B07DT72V6H", BF_1020_SOLID, "The matching solid tray."), "tray"),
+            routed(seed(MIXED_SEED, "Loose seed for a tray or a container."), "tray reuse"),
+            routed(amazon("B01N38GBTM", ESPOMA_SEED, "Soilless mix for a tray or a container."), "tray reuse"),
+            routed(amazon("B08BPTXK4L", SCALE, "For weighing loose seed."), "tray reuse"),
+            routed(amazon("B07FV7TZVH", SCISSORS, "For a cut above the mix."), "kit tray reuse"),
+            routed(amazon("B0CHDBY2PD", SANSI_CLIP, "If the window falls short."), "kit tray reuse"),
         ],
     },
     "calculator": {
@@ -399,8 +406,9 @@ def render_shop(key: str) -> str:
                 f'<a href="/photo-credits/#supply-{slug}">{esc(author)}</a></figcaption>'
             )
         button = BUTTON[row["kind"]] if row["kind"] == "amazon" else row["label"]
+        routes_attr = f' data-routes="{esc(row["routes"])}"' if row.get("routes") else ""
         cards.append(
-            '<li class="pick">'
+            f'<li class="pick"{routes_attr}>'
             f'<figure class="pick-media{" pick-media-letpot" if official else ""}">'
             f'<img{img_class} src="{src}" srcset="{srcset}" '
             'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
@@ -413,6 +421,16 @@ def render_shop(key: str) -> str:
             f'<a class="pick-cta" href="{esc(row_url(row))}" rel="sponsored nofollow noopener" target="_blank">'
             f'{esc(button)}<span class="sr-only"> (opens in a new tab)</span></a>'
             "</li>"
+        )
+    if page.get("chooser"):
+        return (
+            '<section class="picks route-picks" id="matching-supplies" aria-labelledby="matching-supplies-title">'
+            f'<h3 id="matching-supplies-title">{esc(page["heading"])}</h3>'
+            f'<p class="picks-lead">{esc(page["lead"])}</p>'
+            '<p class="route-picks-status" id="route-picks-status" role="status" hidden></p>'
+            '<ul class="pick-grid" role="list">'
+            + "".join(cards)
+            + "</ul></section>"
         )
     return (
         '<section class="picks" id="matching-supplies">'
