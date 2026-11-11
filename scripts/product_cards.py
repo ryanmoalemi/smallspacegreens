@@ -141,6 +141,13 @@ def render_credits() -> str:
                 f'<p><strong>Image use:</strong> {esc(image["note"])}</p>'
                 "</div></section>"
             )
+    try:
+        import shop_placements
+        extra = shop_placements.supply_credit_html()
+    except Exception:
+        extra = ""
+    if extra:
+        blocks.append(extra)
     return "\n".join(blocks)
 
 

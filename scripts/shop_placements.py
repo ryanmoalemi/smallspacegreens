@@ -7,6 +7,8 @@ The LetPot garden uses the approved LPH-Air Awin link, not Amazon.
 
 from __future__ import annotations
 
+from pathlib import Path
+
 AMAZON_TAG = "smallspaceg04-20"
 AMAZON_DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 TRUELEAF_SEED = (
@@ -113,7 +115,7 @@ SHOP_PAGES: dict[str, dict] = {
     },
     "apartment": {
         "heading": "Supplies for a first tray",
-        "lead": "Examples for the list above. This site has not used them. Confirm the variant and the current price on the seller page.",
+        "lead": "Examples for the list above. This site has not used them.",
         "rows": [
             amazon("B07KRMP93C", KIT_SPONGE, "Trays, seed, and coir in one kit."),
             amazon("B07NKSKMCN", BF_1010_HOLES, "A smaller tray when a 10 by 20 in flat does not fit."),
@@ -257,6 +259,96 @@ def row_url(row: dict) -> str:
     return row["url"]
 
 
+# Example photos. stand_in means the picture is the closest real product type, not that exact item.
+SUPPLY_IMAGES = {
+    "pepper-trays": ("Nursery cell trays in black flats", "Furkan Akkurt", "https://commons.wikimedia.org/wiki/File:Pepper_and_tomato_seedling_trays_at_Bo%C4%9Fazi%C3%A7i_University_2026.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Cell trays in nursery flats. Closest photo for a holed seed tray.", False),
+    "farm-trays": ("Seed trays at a nursery", "Judgefloro", "https://commons.wikimedia.org/wiki/File:5670Farm_Ready_Seedling_Facility_East_West_Seed_Philippines_20.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "Nursery seed trays. Stand-in where the listing is a solid tray or a heat mat.", True),
+    "lufa": ("Pea shoots in long greenhouse trays", "Lufa Farms", "https://commons.wikimedia.org/wiki/File:Lufa_Farms_Microgreens_in_Trays.jpg", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "Greenhouse trays. Stand-in for a home kit or a half tray of pea.", True),
+    "sunflower": ("Sunflower microgreens in a small clear tray", "Pannet", "https://commons.wikimedia.org/wiki/File:Sunflower_microgreens_02.jpg", "CC BY 4.0", "https://creativecommons.org/licenses/by/4.0/", "A small tray of microgreens. Stand-in for a small or solid tray and for a bamboo kit.", True),
+    "mixed": ("Small green leaves and pink stems in a clear container", "Stacy Spensley", "https://commons.wikimedia.org/wiki/File:11_microgreens.jpg", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Mixed small greens. Stand-in for a seed mix or a small radish tray.", True),
+    "radish": ("A young chonggak radish seedling", "이태수", "https://commons.wikimedia.org/wiki/File:Sprouting_chonggakmu(chonggak_radish).jpg", "CC BY 4.0", "https://creativecommons.org/licenses/by/4.0/", "A radish seedling. Stand-in for radish seed, and for a heat mat on the seed-starting page.", True),
+    "pea-sack": ("Sprouted garden peas in a cloth sack", "Yarzaryeni", "https://commons.wikimedia.org/wiki/File:Garden_pea_sprouts.jpg", "CC BY 3.0", "https://creativecommons.org/licenses/by/3.0/", "Sprouted peas. Stand-in for a bag of pea seed.", True),
+    "pea-shoots": ("Snow pea shoots in a container on a counter", "Daderot", "https://commons.wikimedia.org/wiki/File:Snow_pea_shoots_-_Massachusetts.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "Pea shoots in a container. Stand-in for a small holed tray and for a deep 1020.", True),
+    "broccoli": ("A dense stand of small green sprouts", "Julie Gibbons", "https://commons.wikimedia.org/wiki/File:Broccoli_sprouts.jpg", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Broccoli sprouts, as titled by the photographer.", False),
+    "basil": ("Young basil seedlings beside a window", "Jon Eben Field", "https://commons.wikimedia.org/wiki/File:Pot_of_basil_sprouts_(Ocimum_basilicum)_-_20050422.jpg", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Seedlings by a window. Stand-in for a dome kit and for the full SunBlaster kit.", True),
+    "lettuce-pot": ("Leaf lettuce growing in a container", "Netha Hussain", "https://commons.wikimedia.org/wiki/File:Leaf_lettuce_plant_in_a_pot_10.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Container lettuce. Stand-in for the LetPot garden and for buttercrunch seed.", True),
+    "basil-mosaic": ("Basil in a mosaic pot by a window", "Personal Creations", "https://commons.wikimedia.org/wiki/File:Chalkboard_Plant_Stake_Basil_in_a_window_(14889072919).jpg", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "A second pot. Stand-in for the 8 and 10 in ceramic pot pair.", True),
+    "lettuce-leaves": ("Frilly green lettuce leaves, close up", "Leon Brooks", "https://commons.wikimedia.org/wiki/File:Hydroponic_lettuce_leaves_green.jpg", "Public domain", "https://commons.wikimedia.org/wiki/File:Hydroponic_lettuce_leaves_green.jpg", "Lettuce leaves. Stand-in for mixed microgreen seed on the setup page, where the mixed-greens photo is already used.", True),
+    "promix": ("A bag of Pro-Mix potting soil", "Unknown", "https://commons.wikimedia.org/wiki/File:Pro-Mix_Potting_Soil.jpg", "Public domain", "https://commons.wikimedia.org/wiki/File:Pro-Mix_Potting_Soil.jpg", "A potting-mix bag. Stand-in for Espoma potting mix and Miracle-Gro mix.", True),
+    "coir-pile": ("Loose coco coir", "Victor M. Vicente Selvas", "https://commons.wikimedia.org/wiki/File:Horticulture_coir1310.JPG", "Public domain", "https://commons.wikimedia.org/wiki/File:Horticulture_coir1310.JPG", "Loose coir. Stand-in for seed-starting mix.", True),
+    "coco-brick": ("A compressed brick of coco coir", "MatiasMiika", "https://commons.wikimedia.org/wiki/File:Brick_of_coco_coir.JPG", "CC BY 3.0", "https://creativecommons.org/licenses/by/3.0/", "A coir brick.", False),
+    "coir-fiber": ("Loose coconut coir fiber", "Fotokannan", "https://commons.wikimedia.org/wiki/File:Coir_fibery.jpg", "CC BY-SA 3.0", "https://creativecommons.org/licenses/by-sa/3.0/", "Coir fiber. Stand-in for a hemp grow mat.", True),
+    "scale": ("A digital kitchen scale on a counter", "Ser Amantio di Nicolao", "https://commons.wikimedia.org/wiki/File:Escali_digital_kitchen_scale.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "A digital kitchen scale. Not the Etekcity model.", True),
+    "scissors": ("Herb scissors on a white background", "Raimond Spekking", "https://commons.wikimedia.org/wiki/File:Kr%C3%A4uterschere-0836.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Herb scissors. Not the Fiskars model.", True),
+    "spray": ("A plastic bottle with a hose spray head", "Rlsheehan", "https://commons.wikimedia.org/wiki/File:Plastic_bottle_with_hose_spray_attachment.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "A spray bottle. Stand-in for a plant mister.", True),
+    "grow-light": ("Potted plants under a grow light", "Asdfjrjjj", "https://commons.wikimedia.org/wiki/File:Potted_plants_succulents_under_grow_light_Nov_2016.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Plants under a grow light. Stand-in for a clip-on lamp.", True),
+    "led-bulb": ("An LED light bulb", "Tommaso.sansone91", "https://commons.wikimedia.org/wiki/File:Led_light_bulb_-_led_lamp_2.png", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "An LED bulb. Stand-in for a plant bulb.", True),
+    "ceramic": ("A leafy plant in a ceramic pot", "W.carter", "https://commons.wikimedia.org/wiki/File:Plectranthus_verticillatus_in_a_ceramic_pot.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "A ceramic pot. Stand-in for the ceramic microgreens kit and for 8 in pots.", True),
+    "windowbox": ("A planted window box", "litchick_1", "https://commons.wikimedia.org/wiki/File:2009_windowbox_2463967211.jpg", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "A window box. Stand-in for a balcony rail planter.", True),
+    "grow-bag": ("A plant growing in a fabric grow bag", "Clintacc", "https://commons.wikimedia.org/wiki/File:Brinjal_plant_with_fruits_in_grow_bag.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "A fabric grow bag with a plant. Stand-in for empty grow bags.", True),
+}
+
+ITEM_IMAGE = {
+    BF_1020_HOLES: "pepper-trays",
+    BF_1020_SOLID: "farm-trays",
+    BF_1010_HOLES: "pea-shoots",
+    TRAY_1010_SOLID_10: "sunflower",
+    TRAY_1010_SOLID_5: "sunflower",
+    ESPOMA_SEED: "coir-pile",
+    HEMP: "coir-fiber",
+    SCALE: "scale",
+    SCISSORS: "scissors",
+    MISTER: "spray",
+    KIT_SPONGE: "lufa",
+    COCO: "coco-brick",
+    SANSI_CLIP: "grow-light",
+    KIT_BUDDY: "sunflower",
+    KIT_GREEN: "mixed",
+    KIT_SUN: "basil",
+    KIT_MIZUNA: "ceramic",
+    SANSI_BULB: "led-bulb",
+    HEAT_SILL: "farm-trays",
+    KIT_CELLS: "pepper-trays",
+    SUNPACK: "farm-trays",
+    TRAY_DEEP: "pea-shoots",
+    DOMES: "basil",
+    MIRACLE: "promix",
+    HEAT_1020: "radish",
+    POTS_8: "ceramic",
+    POTS_8_10: "basil-mosaic",
+    RAIL: "windowbox",
+    ESPOMA_POT: "promix",
+    LETTUCE: "lettuce-pot",
+    BAGS: "grow-bag",
+    RADISH: "radish",
+    RADISH_SMALL: "mixed",
+    PEA: "pea-sack",
+    PEA_HALF: "lufa",
+    BROCCOLI: "broccoli",
+    MIXED_SEED: "mixed",
+    AIR: "lettuce-pot",
+}
+
+# Same photo cannot appear twice on /gear/, which already uses the mixed-greens file.
+PAGE_IMAGE = {
+    "gear": {MIXED_SEED: "lettuce-leaves"},
+    "windowsill": {RADISH_SMALL: "broccoli"},
+    "density": {BF_1010_HOLES: "lufa"},
+    "calculator": {BF_1010_HOLES: "sunflower"},
+    "cost": {KIT_GREEN: "broccoli"},
+    "bottom": {SUNPACK: "basil"},
+}
+
+BUTTON = {"amazon": "View on Amazon", "trueleaf": "See at True Leaf", "letpot": "See at LetPot"}
+
+
+def image_for(key: str, item: str) -> str:
+    slug = PAGE_IMAGE.get(key, {}).get(item, ITEM_IMAGE[item])
+    if slug not in SUPPLY_IMAGES:
+        raise SystemExit(f"No supply photo for {item}")
+    return slug
+
+
 def render_shop(key: str) -> str:
     page = SHOP_PAGES[key]
     rows = page["rows"]
@@ -266,30 +358,62 @@ def render_shop(key: str) -> str:
     disclosure = "We earn a commission if you buy through these links, at no extra cost to you."
     if has_amazon:
         disclosure = f"{disclosure} {AMAZON_DISCLOSURE}"
-    body = []
+    seen = []
+    cards = []
     for row in rows:
-        button = (
-            f'<a class="button" href="{esc(row_url(row))}" rel="sponsored nofollow" target="_blank">'
-            f"{esc(row['label'])}</a>"
-        )
-        body.append(
-            "<tr>"
-            f'<td data-label="Item">{esc(row["item"])}</td>'
-            f'<td data-label="Why it is here">{esc(row["note"])}</td>'
-            f'<td data-label="Link">{button}</td>'
-            "</tr>"
+        slug = image_for(key, row["item"])
+        photo_dir = Path(__file__).resolve().parents[1] / "assets" / "products"
+        if not (photo_dir / f"supply-{slug}-600.webp").is_file() or not (photo_dir / f"supply-{slug}-300.webp").is_file():
+            raise SystemExit(f"Missing supply photo files for {slug}")
+        if slug in seen:
+            raise SystemExit(f"{key} repeats supply photo {slug}")
+        seen.append(slug)
+        alt, author, _source, _license, _license_url, _note, _stand_in = SUPPLY_IMAGES[slug]
+        src = f"/assets/products/supply-{slug}-600.webp"
+        srcset = f"/assets/products/supply-{slug}-300.webp 300w, /assets/products/supply-{slug}-600.webp 600w"
+        cards.append(
+            '<li class="pick">'
+            '<figure class="pick-media">'
+            f'<img src="{src}" srcset="{srcset}" '
+            'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
+            'width="600" height="600" loading="lazy" decoding="async" '
+            f'alt="{esc(alt)}">'
+            f'<figcaption class="pick-credit">Example photo · Credit: '
+            f'<a href="/photo-credits/#supply-{slug}">{esc(author)}</a></figcaption>'
+            "</figure>"
+            f'<h3 class="pick-name">{esc(row["item"])}</h3>'
+            f'<p class="pick-why">{esc(row["note"])}</p>'
+            f'<a class="pick-cta" href="{esc(row_url(row))}" rel="sponsored nofollow noopener" target="_blank">'
+            f'{BUTTON[row["kind"]]}<span class="sr-only"> (opens in a new tab)</span></a>'
+            "</li>"
         )
     return (
-        '<section class="affiliate-offer shop-offer" id="matching-supplies">'
+        '<section class="picks" id="matching-supplies">'
         f"<h2>{esc(page['heading'])}</h2>"
         f'<p class="affiliate-disclosure">{esc(disclosure)}</p>'
-        f"<p>{esc(page['lead'])}</p>"
-        '<div class="responsive-table shop-table"><table>'
-        f"<caption>{esc(page['heading'])}. Not a ranking. Confirm the current listing before you buy.</caption>"
-        "<thead><tr><th>Item</th><th>Why it is here</th><th>Link</th></tr></thead>"
-        f"<tbody>{''.join(body)}</tbody></table></div>"
-        "</section>"
+        f'<p class="picks-lead">{esc(page["lead"])}</p>'
+        '<ul class="pick-grid" role="list">'
+        + "".join(cards)
+        + "</ul></section>"
     )
+
+
+def supply_credit_html() -> str:
+    blocks = []
+    for slug, (alt, author, source, license_name, license_url, note, _stand_in) in SUPPLY_IMAGES.items():
+        src = f"/assets/products/supply-{slug}-600.webp"
+        blocks.append(
+            f'<section class="photo-credit-entry" id="supply-{slug}">'
+            f'<img src="{src}" width="600" height="600" alt="{esc(alt)}" loading="lazy" decoding="async">'
+            "<div>"
+            f"<h2>{esc(alt)}</h2>"
+            f'<p><strong>Photographer:</strong> <a href="{esc(source)}">{esc(author)}</a>.</p>'
+            f'<p><strong>Original:</strong> <a href="{esc(source)}">Wikimedia Commons</a>.</p>'
+            f'<p><strong>License:</strong> <a href="{esc(license_url)}">{esc(license_name)}</a>.</p>'
+            f"<p><strong>Image use:</strong> {esc(note)} Square crop for a product card. Example photo, not the listed product.</p>"
+            "</div></section>"
+        )
+    return "\n".join(blocks)
 
 
 def placement_counts() -> dict[str, dict[str, int]]:
