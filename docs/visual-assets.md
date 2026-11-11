@@ -175,6 +175,68 @@ A supply or equipment thumbnail does not claim to demonstrate every instruction 
 - Processing: resized from 768 × 1024; square crop of both trays for the thumbnail.
 - Alt text: Two plastic cell trays filled with mix, set on a towel.
 
+### Sunflower microgreens
+
+- Registry key: `sunflower-micro`.
+- Local photograph: `assets/photos/sunflower-microgreens-ark-aes.jpg` (960 × 640).
+- Thumbnail: `assets/photos/thumbs/sunflower-microgreens-ark-aes.jpg` (320 × 320).
+- Credit: [Ark. Agricultural Experiment Station](https://www.flickr.com/photos/89175420@N02/).
+- Original source: [Microgreen Food Safety Research](https://www.flickr.com/photos/89175420@N02/52200131093).
+- License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).
+- Processing: resized from 1024 × 683; centered square thumbnail. Harvest chart sunflower row.
+- Alt text: Sunflower microgreens with black seed hulls still on some leaves.
+
+### Broccoli microgreens
+
+- Registry key: `broccoli-micro`.
+- Local photograph: `assets/photos/broccoli-microgreens-anotherdaysjourney.jpg` (932 × 960).
+- Thumbnail: `assets/photos/thumbs/broccoli-microgreens-anotherdaysjourney.jpg` (320 × 320).
+- Credit: [anotherdaysjourney](https://www.flickr.com/photos/27560524@N03/).
+- Original source: [Tray of broccoli microgreens](https://www.flickr.com/photos/27560524@N03/52541632995).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/).
+- Processing: resized from 994 × 1024; centered square thumbnail. Harvest chart broccoli row.
+- Alt text: A dense tray of broccoli microgreens.
+
+### Radish microgreens
+
+- Registry key: `radish-micro`.
+- Local photograph: `assets/photos/radish-microgreens-apapac.jpg` (960 × 768).
+- Thumbnail: `assets/photos/thumbs/radish-microgreens-apapac.jpg` (320 × 320).
+- Credit: [apapac](https://www.flickr.com/photos/146235256@N06/).
+- Original source: [microgreens radish DSCN3640 b](https://www.flickr.com/photos/146235256@N06/37066916501).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/).
+- Processing: resized from 1024 × 819; centered square thumbnail. Harvest chart radish row (replaces the radish seed photo).
+- Alt text: Green radish microgreens, close up.
+
+### Hands in moist potting mix
+
+- Registry key: `moisture`.
+- Local photograph: `assets/photos/hands-in-mix-m-tullottes.jpg` (960 × 720).
+- Thumbnail: `assets/photos/thumbs/hands-in-mix-m-tullottes.jpg` (320 × 320).
+- Credit: [M Tullottes](https://commons.wikimedia.org/wiki/User:M_Tullottes).
+- Original source: [HandsInSoil.jpg](https://commons.wikimedia.org/wiki/File:HandsInSoil.jpg).
+- License: [Public domain](https://commons.wikimedia.org/wiki/File:HandsInSoil.jpg).
+- Processing: resized; centered square thumbnail. Daily check, moisture row.
+- Alt text: Hands feeling moist potting mix with perlite.
+
+### Seedlings in a tray on a windowsill
+
+- Registry key: `window-tray`.
+- Local photograph: `assets/photos/windowsill-seedlings-psd.jpg` (960 × 640).
+- Thumbnail: `assets/photos/thumbs/windowsill-seedlings-psd.jpg` (320 × 320).
+- Credit: [psd](https://www.flickr.com/photos/45581782@N00/).
+- Original source: [Verdant Windowsill](https://www.flickr.com/photos/45581782@N00/4592223046).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/).
+- Processing: resized from 1023 × 682; centered square thumbnail. Daily check, light and cover row.
+- Alt text: Seedlings coming up in a cell tray on a sunny windowsill.
+
+### Microgreens in a small tray (list thumbnail)
+
+- Registry key: `kit-tray`.
+- Thumbnail: `assets/photos/thumbs/microgreens-tray-zenyrgarden.jpg` (320 × 320), made from `assets/products/supply-microgreens-tray-600.webp`.
+- Credit: [Zenyrgarden](https://commons.wikimedia.org/wiki/User:Zenyrgarden). Original: [Microgreen growing.jpg](https://commons.wikimedia.org/wiki/File:Microgreen_growing.jpg). License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+- Use: /gear/ kit list starter-kit row, and a fallback for related-guide cards.
+
 ### Potting mix and trowel
 
 - Registry key: `mix`.
@@ -449,3 +511,12 @@ Shop and fact cards use square webp crops in `assets/products/supply-*-{300,600}
 | supply-microgreens-tray | Microgreens in a small black tray | Kit result card on the cost guide | [Zenyrgarden](https://commons.wikimedia.org/wiki/File:Microgreen_growing.jpg) | CC BY-SA 4.0 |
 | supply-pea-sack | Sprouted garden peas in a cloth sack | Pea seed, half tray on the pea vs radish guide | [Yarzaryeni](https://commons.wikimedia.org/wiki/File:Garden_pea_sprouts.jpg) | CC BY 3.0 |
 | supply-coir-pile | A compressed coir brick | Espoma seed starter | Victor M. Vicente Selvas | Public domain |
+
+## Photo rules the build enforces
+
+- One photo file per page view. When a photo repeats, the later copy is removed, and the build then fails if that leaves any list row, chart row, or step without a photo. Pick another photo instead of relying on removal. The three /gear/ supply panels are shown one at a time, so they may share photos with each other but not with anything else on the page.
+- Related-guide cards try the photos in `RELATED_PHOTO_CHOICES` (scripts/build_site.py) in order and use the first one not already on the page.
+- Every image (src and srcset) must load: the file exists and is not empty, or a remote URL returns 200 with an image content type.
+- A photo credit with no image in the same row, card, or figure fails the build.
+- The printable tray record on /guides/first-tray-checklist/ is a plain fill-in list (`plain-list`) with no photos. It is the only plain list that is exempt.
+- The small apartment guide's step 1 ("Clean the tray") now uses the `cells` photo, so the daily check's drainage row can use the draining-tray photo.

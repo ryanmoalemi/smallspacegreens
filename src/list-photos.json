@@ -232,5 +232,41 @@
     "alt": "Two plastic cell trays filled with mix, set on a towel.",
     "credit_id": "cell-trays-aprilskiver",
     "author": "aprilskiver"
+  },
+  "kit-tray": {
+    "thumbnail": "microgreens-tray-zenyrgarden.jpg",
+    "alt": "Young red and green microgreens in a small black tray.",
+    "credit_id": "microgreens-tray-zenyrgarden",
+    "author": "Zenyrgarden"
+  },
+  "sunflower-micro": {
+    "thumbnail": "sunflower-microgreens-ark-aes.jpg",
+    "alt": "Sunflower microgreens with black seed hulls still on some leaves.",
+    "credit_id": "sunflower-microgreens-ark-aes",
+    "author": "Ark. Agricultural Experiment Station"
+  },
+  "broccoli-micro": {
+    "thumbnail": "broccoli-microgreens-anotherdaysjourney.jpg",
+    "alt": "A dense tray of broccoli microgreens.",
+    "credit_id": "broccoli-microgreens-anotherdaysjourney",
+    "author": "anotherdaysjourney"
+  },
+  "radish-micro": {
+    "thumbnail": "radish-microgreens-apapac.jpg",
+    "alt": "Green radish microgreens, close up.",
+    "credit_id": "radish-microgreens-apapac",
+    "author": "apapac"
+  },
+  "moisture": {
+    "thumbnail": "hands-in-mix-m-tullottes.jpg",
+    "alt": "Hands feeling moist potting mix with perlite.",
+    "credit_id": "hands-in-mix-m-tullottes",
+    "author": "M Tullottes"
+  },
+  "window-tray": {
+    "thumbnail": "windowsill-seedlings-psd.jpg",
+    "alt": "Seedlings coming up in a cell tray on a sunny windowsill.",
+    "credit_id": "windowsill-seedlings-psd",
+    "author": "psd"
   }
 }
