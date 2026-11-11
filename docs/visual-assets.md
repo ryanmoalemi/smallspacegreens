@@ -697,6 +697,94 @@ Shop and fact cards use square webp crops in `assets/products/supply-*-{300,600}
 - Processing: Thumbnail made from the 600 × 600 supply WebP. Pea line of the calculator chart. The same photo serves as a supply stand-in on other pages.
 - Alt text: Sprouted garden peas in a cloth sack.
 
+### Seeds soaking in jars
+
+- Registry key: `presoak-jars`.
+- Local photograph: `assets/photos/seeds-soaking-jars-mike-steinhoff.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/seeds-soaking-jars-mike-steinhoff.jpg` (320 × 320).
+- Credit: [Mike Steinhoff](https://www.flickr.com/photos/-aismist/).
+- Original source: [pre-plants on Flickr](https://www.flickr.com/photos/-aismist/39245276161/).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 2048 × 1357. Presoak line of the tray record.
+- Alt text: Three glass jars of seeds soaking in water on a counter.
+
+### Sprouts emerging after the cover comes off
+
+- Registry key: `uncovered-sprouts`.
+- Local photograph: `assets/photos/emerging-sprouts-nrcs.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/emerging-sprouts-nrcs.jpg` (320 × 320).
+- Credit: [NRCS Pacific Islands Area](https://www.flickr.com/photos/194676499@N06/).
+- Original source: [Microgreen Emerging - Urban Agriculture on Flickr](https://www.flickr.com/photos/194676499@N06/52272915426/).
+- License: [Public Domain Mark 1.0](https://creativecommons.org/publicdomain/mark/1.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 2048 × 946. Covered and uncovered line of the tray record. A U.S. Department of Agriculture (Natural Resources Conservation Service) photo.
+- Alt text: Pale yellow sprouts pushing up between black seed hulls.
+
+### Checking trays of microgreens
+
+- Registry key: `daily-check`.
+- Local photograph: `assets/photos/microgreens-check-peggy-greb.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/microgreens-check-peggy-greb.jpg` (320 × 320).
+- Credit: [Peggy Greb](https://commons.wikimedia.org/wiki/File:Liping_Kou_observes_microgreens.jpg).
+- Original source: [Liping Kou observes microgreens on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Liping_Kou_observes_microgreens.jpg).
+- License: [Public domain (USDA Agricultural Research Service)](https://commons.wikimedia.org/wiki/File:Liping_Kou_observes_microgreens.jpg), checked on the source page on 2026-11-11.
+- Processing: square crop from 1920 × 1280. Daily check line of the tray record.
+- Alt text: A researcher checks trays of red and green microgreens on a lit shelf.
+
+### Leggy seedlings
+
+- Registry key: `leggy-seedlings`.
+- Local photograph: `assets/photos/leggy-seedlings-matthew-bellemare.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/leggy-seedlings-matthew-bellemare.jpg` (320 × 320).
+- Credit: [Matthew Bellemare](https://www.flickr.com/photos/bellemarematt/).
+- Original source: [leggy seedlings on Flickr](https://www.flickr.com/photos/bellemarematt/9842157264/).
+- License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 2048 × 1530. Leaning or pale stems line of the tray record.
+- Alt text: Tall thin seedlings leaning in a cell tray.
+
+### Cutting microgreens above the tray
+
+- Registry key: `harvest-cut`.
+- Local photograph: `assets/photos/cutting-microgreens-usda.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/cutting-microgreens-usda.jpg` (320 × 320).
+- Credit: [U.S. Department of Agriculture](https://www.flickr.com/photos/usdagov/).
+- Original source: [20201021-NRCS-LSC-0495 on Flickr](https://www.flickr.com/photos/usdagov/50534944143/).
+- License: [Public Domain Mark 1.0](https://creativecommons.org/publicdomain/mark/1.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 1638 × 2048. Harvest line of the tray record. U.S. Department of Agriculture photo.
+- Alt text: A gloved hand cuts microgreens with a knife just above the tray.
+
+### Cut microgreens beside a scale
+
+- Registry key: `harvest-weigh`.
+- Local photograph: `assets/photos/microgreens-scale-usda.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/microgreens-scale-usda.jpg` (320 × 320).
+- Credit: [U.S. Department of Agriculture](https://www.flickr.com/photos/usdagov/).
+- Original source: [20201021-NRCS-LSC-0488 on Flickr](https://www.flickr.com/photos/usdagov/50535663591/).
+- License: [Public Domain Mark 1.0](https://creativecommons.org/publicdomain/mark/1.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 2048 × 1365. Harvest weight line of the tray record. U.S. Department of Agriculture photo.
+- Alt text: A grower handles cut microgreens next to a digital scale.
+
+### Kitchen timer
+
+- Registry key: `time-timer`.
+- Local photograph: `assets/photos/kitchen-timer-douglas-perkins.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/kitchen-timer-douglas-perkins.jpg` (320 × 320).
+- Credit: [Douglas Paul Perkins](https://commons.wikimedia.org/wiki/File:Small_kitchen_timer.jpg).
+- Original source: [Small kitchen timer on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Small_kitchen_timer.jpg).
+- License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 1920 × 1440. Time spent line of the tray record.
+- Alt text: A small white kitchen timer with a blue display panel.
+
+### Garden planning notebook
+
+- Registry key: `planting-notes`.
+- Local photograph: `assets/photos/garden-notebook-danak.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/garden-notebook-danak.jpg` (320 × 320).
+- Credit: [DanaK~WaterPenny](https://www.flickr.com/photos/dana-k/).
+- Original source: [Garden Planning Notebook on Flickr](https://www.flickr.com/photos/dana-k/6806944374/).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 2048 × 1365. Next planting line of the tray record.
+- Alt text: Handwritten garden planning pages beside a bag of seed packets.
+
 ## Photo rules the build enforces
 
 - One photo file per page view. When a photo repeats, the later copy is removed, and the build then fails if that leaves any list row, chart row, or step without a photo. Pick another photo instead of relying on removal. The three /gear/ supply panels are shown one at a time, so they may share photos with each other but not with anything else on the page.
@@ -704,10 +792,10 @@ Shop and fact cards use square webp crops in `assets/products/supply-*-{300,600}
 - The same picture may not appear twice on a page under different file names or URLs (a thumbnail and a WebP product copy, a crop, a resize). The build compares image content with ORB keypoints (`check_same_photo_content`); a pair that lines up with 60 or more matching points counts as the same photo. Results are kept in `scripts/photo-match-cache.json`, so OpenCV (`pip install opencv-python-headless numpy`) is only needed when a photo is added or changed. Separate frames from one session that look alike, such as Pannet's two sunflower tray photos, are listed in `SAME_PHOTO_SETS`. The /photo-credits/ page is exempt because it shows every photo.
 - Every image (src and srcset) must load: the file exists and is not empty, or a remote URL returns 200 with an image content type.
 - A photo credit with no image in the same row, card, or figure fails the build.
-- Every content list item, table row, card, and step inside `<main>` needs a loaded photo (rows on the tray record, both seed charts, related guides, breadcrumbs, and On this page menus included). The only exemptions, in `PhotoListAudit`: the photo credits, privacy, and affiliate disclosure pages; lists inside `site-nav`, `sources`, or `footnotes`; and the site header and footer.
+- Every content list item, table row, card, and step inside `<main>` needs a loaded photo (rows on the tray record, the seed charts, related guides, breadcrumbs, and On this page menus included). The only exemptions, in `PhotoListAudit`: the photo credits, privacy, and affiliate disclosure pages; lists inside `site-nav`, `sources`, or `footnotes`; and the site header and footer.
 - Breadcrumbs and the On this page menu get small decorative thumbnails (`alt=""`, since the text names the target) picked by `add_nav_photos`. Each menu carries one 12px "Photos:" credit line naming every photographer, with the full credit on /photo-credits/.
 - Every page under /guides/ and /tools/ must end with a Related guides block of at least 3 photo cards (`check_ends_with_related`). The email signup box may follow it. Source pages add one with `<!--RELATED:slug-->`.
-- The seed charts on the calculator and the seed density guide use one crop photo per row (`CALC_CHART_PHOTOS`, `RATES_CHART_PHOTOS`, and the density chart list), each different from the calculator's package box photos.
+- The calculator has one seed chart (Ryan, 2026-11-11: "Merge the seed charts into one"): every crop, with its grams or the Maryland sample band and its presoak and timing notes. It and the seed density chart use one crop photo per row (`CALC_CHART_PHOTOS` and the density chart list), each different from the calculator's package box photos.
 - The small apartment guide's step 1 ("Clean the tray") now uses the `cells` photo, so the daily check's drainage row can use the draining-tray photo.
 
 ## Card rules the build enforces

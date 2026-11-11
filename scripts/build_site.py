@@ -1202,23 +1202,23 @@ LETPOT_MODELS = {
 
 LETPOT_BOXES = {
     "apartment": (
-        "A countertop hydroponic garden is a different setup from a tray of mix. These notes come from LetPot's product pages.",
+        "A countertop hydroponic garden is a different setup from a tray of mix.",
         ["mini", "lite", "max"],
     ),
     "windowsill": (
-        "If a tray of mix is a poor fit for the sill, a small countertop garden keeps the water and light in one unit. This note comes from LetPot's product page.",
+        "If a tray of mix is a poor fit for the sill, a small countertop garden keeps the water and light in one unit.",
         ["mini"],
     ),
     "seed-starting": (
-        "These gardens grow plants in the unit. They do not raise transplants for a balcony. These notes come from LetPot's product pages.",
+        "These gardens grow plants in the unit. They do not raise transplants for a balcony.",
         ["mini", "lite"],
     ),
     "cost": (
-        "A hydroponic countertop garden is a different purchase from a microgreen tray kit or a stack of trays. Prices are not listed here. These notes come from LetPot's product pages.",
+        "A hydroponic countertop garden is a different purchase from a microgreen tray kit or a stack of trays.",
         ["mini", "se", "max"],
     ),
     "balcony": (
-        "If the balcony is too dark, or you would rather grow inside, a countertop garden is a different project from an outdoor pot. These notes come from LetPot's product pages.",
+        "If the balcony is too dark, or you would rather grow inside, a countertop garden is a different project from an outdoor pot.",
         ["mini", "air"],
     ),
 }
@@ -1255,27 +1255,27 @@ TRUELEAF_LINKS = {
 
 TRUELEAF_BOXES = {
     "apartment": (
-        "A first tray needs microgreen seed, and some people start with a kit. Sprouting seed is a different food from the microgreens on this page. These notes describe True Leaf Market collections.",
+        "A first tray needs microgreen seed, and some people start with a kit. Sprouting seed is a different food from the microgreens on this page.",
         ["micro-seed", "micro-kits", "sprout-seed"],
     ),
     "windowsill": (
-        "A windowsill tray needs microgreen seed. A kit is a separate choice. These notes describe True Leaf Market collections.",
+        "A windowsill tray needs microgreen seed. A kit is a separate choice.",
         ["micro-seed", "micro-kits"],
     ),
     "seed-starting": (
-        "The collection below is microgreens seed. It is not seed for the vegetable transplants on this page. This note describes a True Leaf Market collection.",
+        "The collection below is microgreens seed. It is not seed for the vegetable transplants on this page.",
         ["micro-seed"],
     ),
     "density": (
-        "After you have a gram amount, the seed still has to be for an edible microgreen crop. This note describes a True Leaf Market collection.",
+        "After you have a gram amount, the seed still has to be for an edible microgreen crop.",
         ["micro-seed"],
     ),
     "pea": (
-        "Radish and pea are different seed. This note describes a True Leaf Market collection.",
+        "Radish and pea are different seed.",
         ["micro-seed"],
     ),
     "cost": (
-        "A kit and a bag of seed are different purchases. Prices are not listed here. These notes describe True Leaf Market collections.",
+        "A kit and a bag of seed are different purchases.",
         ["micro-kits", "micro-seed", "sprout-kits"],
     ),
 }
@@ -1954,16 +1954,11 @@ def rate_label(row: dict) -> str:
 
 
 # One photo per chart line, each used once on its page (see docs/visual-assets.md).
+# None of these repeat the calculator's package box photos.
 CALC_CHART_PHOTOS = {
     "arugula": "arugula-sprouts", "broccoli": "broccoli-micro", "kale": "kale-mix", "cilantro": "cilantro-seedlings",
     "basil": "basil-window", "rutabaga": "rutabaga-seedlings", "radish": "radish-micro", "sunflower": "sunflower-micro",
-    "pea": "pea-basket", "sample": "kit-tray",
-}
-# The calculator's package boxes already use the plain crop photos, so its second chart uses a third set.
-RATES_CHART_PHOTOS = {
-    "radish": "radish-seedling", "pea": "pea-sack", "sunflower": "sunflower-sprouts", "broccoli": "broccoli-sprouts",
-    "kale": "young-kale", "arugula": "rucola-seedlings", "cilantro": "coriander-sprouts", "basil": "basil-seedlings",
-    "rutabaga": "rutabaga-pots", "mustard": "mustard-seedlings", "beet": "beet-micro", "amaranth": "amaranth",
+    "pea": "pea-basket", "mustard": "mustard-seedlings", "beet": "beet-micro", "amaranth": "amaranth",
 }
 
 
@@ -2007,42 +2002,44 @@ def slug_id(text: str) -> str:
 
 
 def seed_chart() -> str:
-    """Calculator chart: every Utah State crop rate, sorted by grams, plus Maryland's sample band."""
+    """The calculator's one seed chart (Ryan, 2026-11-11: "Merge the seed charts into one").
+
+    Every crop the calculator offers, Utah State crop rates lightest to heaviest, then the crops
+    that only have Maryland's sample band. Each line carries the presoak and timing notes.
+    """
     rates = json.loads((SRC / "rates.json").read_text())
     crops = sorted((row for row in rates if "grams" in row and not row.get("needsRate")), key=lambda row: row["grams"])
+    sample = [row for row in rates if row.get("needsRate")]
     max_g = max(row["grams"] for row in crops)
-    items = [
-        seed_row(
+    items = []
+    for row in crops:
+        detail = f"{row['presoak'].rstrip('.')}. {row['timing']}"
+        items.append(seed_row(
             CALC_CHART_PHOTOS[row["id"]],
             f'<span class="seed-name">{esc(row["name"])}</span>'
             f'<span class="seed-grams">{row["grams"]} g</span>'
-            f'<span class="seed-bar" aria-hidden="true"><span style="width:{max(4, round(100 * row["grams"] / max_g, 1))}%"></span></span>',
-        )
-        for row in crops
-    ]
-    sample = [row for row in rates if row.get("needsRate")]
-    lows = {row["low"] for row in sample}
-    highs = {row["high"] for row in sample}
-    if len(lows) != 1 or len(highs) != 1:
-        raise SystemExit("seed chart expects one Maryland sample band")
-    low, high = lows.pop(), highs.pop()
-    names = ", ".join(row["name"].lower() for row in sample)
-    items.append(
-        f'<li class="seed-photo-row seed-row-sample">{list_photo(CALC_CHART_PHOTOS["sample"])}<div class="seed-row">'
-        '<span class="seed-name">Maryland setup</span>'
-        f'<span class="seed-grams">{low} to {high} g</span>'
-        '<span class="seed-bar seed-bar-sample" aria-hidden="true">'
-        f'<span style="width:{round(100 * high / max_g, 1)}%"><span style="width:{round(100 * low / high, 1)}%"></span></span></span>'
-        f'<span class="seed-detail">Not a crop rate. A general broadcast rate the calculator offers for {esc(names)}.</span>'
-        '</div></li>'
-    )
+            f'<span class="seed-bar" aria-hidden="true"><span style="width:{max(4, round(100 * row["grams"] / max_g, 1))}%"></span></span>'
+            f'<span class="seed-detail">{esc(detail)}</span>',
+        ))
+    for row in sample:
+        low, high = row["low"], row["high"]
+        detail = f"Maryland sample band, not a crop rate. {row['timing']}"
+        items.append(seed_row(
+            CALC_CHART_PHOTOS[row["id"]],
+            f'<span class="seed-name">{esc(row["name"])}</span>'
+            f'<span class="seed-grams">{low} to {high} g</span>'
+            '<span class="seed-bar seed-bar-sample" aria-hidden="true">'
+            f'<span style="width:{round(100 * high / max_g, 1)}%"><span style="width:{round(100 * low / high, 1)}%"></span></span></span>'
+            f'<span class="seed-detail">{esc(detail)}</span>',
+            " seed-row-sample",
+        ))
     return (
         '<figure class="seed-chart" aria-labelledby="chart-grams-per-tray">'
-        '<p class="seed-chart-title" id="chart-grams-per-tray">Grams per 10 by 20 inch tray</p>'
-        '<p class="seed-chart-sub">Utah State crop rates used by the calculator, lightest to heaviest.</p>'
+        '<p class="seed-chart-title" id="chart-grams-per-tray">Seed per 10 by 20 inch tray</p>'
+        '<p class="seed-chart-sub">Every figure the calculator uses. Utah State crop rates, lightest to heaviest, then the crops with only a sample band.</p>'
         '<ul class="seed-rows" role="list">' + "".join(items) + '</ul>'
         '<figcaption class="fact-credit">Source: Utah State University Extension grams per 1020 tray. '
-        "The tan bar is University of Maryland Extension's general broadcast rate for crops without a Utah State rate.</figcaption>"
+        "The tan bars are University of Maryland Extension's general broadcast band of 10 to 15 g, used only if you choose it.</figcaption>"
         '</figure>'
     )
 
@@ -2061,21 +2058,6 @@ def density_bars() -> str:
         "Each bar uses the figure printed for that crop.",
         rows,
         "Source: Utah State University Extension grams per 1020 tray. Mustard, beet, and amaranth have no Utah State crop rate. The 10 to 15 g line is University of Maryland Extension's sample, only if you choose it.",
-    )
-
-
-def rates_table() -> str:
-    rates = json.loads((SRC / "rates.json").read_text())
-    rows = []
-    for row in rates:
-        grams = row["grams"] if "grams" in row else None
-        detail = f"{row['kind']}. {row['presoak'].rstrip('.')}. {row['timing']}"
-        rows.append((row["name"], rate_label(row), detail, grams, RATES_CHART_PHOTOS[row["id"]]))
-    return bar_chart(
-        "Seed per 10 by 20 inch tray",
-        "Every published figure the calculator uses.",
-        rows,
-        "Utah State University Extension grams per 1020 tray. Mustard, beet, and amaranth use the University of Maryland Extension sample of 10 to 15 g, not a crop rate.",
     )
 
 
@@ -2795,7 +2777,6 @@ def render_static_pages() -> dict[str, str]:
     tool["published"], tool["modified"] = git_times(SRC / "pages" / "calculator.html")
     tool_body = (SRC / "pages" / "calculator.html").read_text()
     tool_body = tool_body.replace("<!--CROP_OPTIONS-->", calculator_options())
-    tool_body = tool_body.replace("<!--RATES_TABLE-->", rates_table())
     tool_body = tool_body.replace("<!--SEED_CHART-->", seed_chart())
     tool_graph = [
         {

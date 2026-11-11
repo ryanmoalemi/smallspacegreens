@@ -131,7 +131,7 @@ SHOP_PAGES: dict[str, dict] = {
     },
     "cost": {
         "heading": "Kits and tray supplies to price",
-        "lead": "Options for the comparison above, not a ranking. Prices are not listed here. Enter the price you would actually pay.",
+        "lead": "Enter the price you would actually pay.",
         "rows": [
             amazon("B07KRMP93C", KIT_SPONGE, "Trays, seed, and coir in one kit."),
             amazon("B087RQWPBK", KIT_BUDDY, "A 15 by 7 in counter kit."),
@@ -159,7 +159,7 @@ SHOP_PAGES: dict[str, dict] = {
     },
     "pea": {
         "heading": "Trays and seed for this comparison",
-        "lead": "Radish at 42 g with no presoak, and pea at 150 g after a soak, on the same 10 by 20 in tray. Each card opens that crop's True Leaf page.",
+        "lead": "Radish at 42 g with no presoak, and pea at 150 g after a soak, on the same 10 by 20 in tray.",
         "rows": [
             seed_product(RADISH, "42 g on a 10 by 20 in tray. About 21 g on a 10 by 10.", TRUELEAF_RADISH, "See radish seed"),
             seed_product(PEA, "150 g on a 10 by 20 in tray. About 75 g on a 10 by 10. Weigh dry, then soak.", TRUELEAF_PEA, "See pea seed"),
@@ -240,7 +240,7 @@ SHOP_PAGES: dict[str, dict] = {
     },
     "calculator": {
         "heading": "A scale, trays, and seed",
-        "lead": "The result is a dry gram weight. These are ways to measure it, hold it, and buy seed that can cover it. Check bag weight on True Leaf Market.",
+        "lead": "The result is a dry gram weight. Check bag weight on True Leaf Market.",
         "rows": [
             amazon("B08BPTXK4L", SCALE, "Weighs the gram result."),
             amazon("B06XZFLY9P", BF_1020_HOLES, "The tool's default 10 by 20 in tray."),
