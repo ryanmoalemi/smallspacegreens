@@ -308,8 +308,10 @@ class PhotoListAudit(HTMLParser):
         is_source = any("sources" in node["attrs"].get("class", "").split() for node in self.stack)
         is_affiliate = any("affiliate-box" in node["attrs"].get("class", "").split() for node in self.stack)
         is_pick = any("pick-grid" in node["attrs"].get("class", "").split() for node in self.stack)
+        # Seed charts are data bars (crop, grams, bar), not editorial lists.
+        is_chart = any("seed-chart" in node["attrs"].get("class", "").split() for node in self.stack)
         node = {"tag": tag, "attrs": attrs}
-        if tag == "li" and "main" in context and "nav" not in context and not is_source and not is_affiliate and not is_pick:
+        if tag == "li" and "main" in context and "nav" not in context and not is_source and not is_affiliate and not is_pick and not is_chart:
             node.update(photo=False, text=[])
             self.items.append(node)
         if tag == "img" and attrs.get("src", "").startswith("/assets/photos/"):
@@ -474,6 +476,15 @@ def check_card_contrast(css: str) -> None:
     credit_size = re.search(r"font-size:(\d+)px", credit.group(1) if credit else "")
     if not credit_size or int(credit_size.group(1)) < 12:
         failures.append("photo credit is smaller than 12px")
+
+    seed_none = re.search(r"\.seed-grams-none\{([^}]*)\}", css)
+    if not seed_none:
+        raise SystemExit("contrast check missing seed chart styles")
+    require("seed chart no-rate label", _css_color(seed_none.group(1), "color"), card)
+    for selector in ("seed-chart-sub", "seed-detail", "seed-row"):
+        size = re.search(rf"\.{selector}[^{{]*\{{[^}}]*font-size:(\d+)px", css)
+        if not size or int(size.group(1)) < 12:
+            failures.append(f"seed chart .{selector} text is smaller than 12px")
 
     dark_at = css.find("@media(prefers-color-scheme:dark){")
     if dark_at < 0:
@@ -1339,60 +1350,6 @@ def video_embed(video_id: str) -> str:
     )
 
 
-def density_figure() -> str:
-    return (
-        '<figure class="photo">'
-        '<img src="/assets/diagrams/seed-density.svg" width="880" height="520" loading="lazy" '
-        'alt="Bar chart of Utah State seed grams per 10 by 20 inch tray. A separate bar shows the Maryland 10 to 15 gram example, labeled as not a crop rate.">'
-        '<figcaption class="credit">Same crop rates as the calculator. Illustration, not a grow trial.</figcaption>'
-        "</figure>"
-    )
-
-
-def write_density_chart() -> None:
-    rates = json.loads((SRC / "rates.json").read_text())
-    crops = [row for row in rates if "grams" in row and not row.get("needsRate")]
-    crops.sort(key=lambda row: row["grams"])
-    width = 880
-    row_h = 36
-    top = 78
-    height = top + row_h * (len(crops) + 2) + 70
-    max_g = max(row["grams"] for row in crops)
-    parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img">',
-        "<title>Seed grams per 10 by 20 inch tray</title>",
-        f'<rect width="{width}" height="{height}" fill="#f6f3ea"/>',
-        '<text x="24" y="36" font-family="system-ui, Segoe UI, sans-serif" font-size="22" font-weight="700" fill="#1c2420">Grams per 10 by 20 inch tray</text>',
-        '<text x="24" y="60" font-family="system-ui, Segoe UI, sans-serif" font-size="14" fill="#4e5a52">Utah State crop rates used by the calculator. Illustration, not a trial.</text>',
-    ]
-    for index, row in enumerate(crops):
-        y = top + index * row_h
-        bar = int(520 * row["grams"] / max_g)
-        parts.append(
-            f'<text x="24" y="{y + 16}" font-family="system-ui, Segoe UI, sans-serif" font-size="15" fill="#1c2420">{esc(row["name"])}</text>'
-        )
-        parts.append(f'<rect x="160" y="{y}" width="{bar}" height="20" fill="#245c40"/>')
-        parts.append(
-            f'<text x="{168 + bar}" y="{y + 16}" font-family="system-ui, Segoe UI, sans-serif" font-size="14" fill="#17382a">{row["grams"]} g</text>'
-        )
-    y = top + len(crops) * row_h + 8
-    parts.append(
-        f'<text x="24" y="{y + 18}" font-family="system-ui, Segoe UI, sans-serif" font-size="15" fill="#1c2420">Maryland example</text>'
-    )
-    parts.append(f'<rect x="160" y="{y + 4}" width="{int(520 * 15 / max_g)}" height="20" fill="#e7d7b8" stroke="#8a3e12"/>')
-    parts.append(f'<rect x="160" y="{y + 4}" width="{int(520 * 10 / max_g)}" height="20" fill="#c4a574"/>')
-    parts.append(
-        f'<text x="{176 + int(520 * 15 / max_g)}" y="{y + 18}" font-family="system-ui, Segoe UI, sans-serif" font-size="14" fill="#8a3e12">10 to 15 g, not a crop rate</text>'
-    )
-    parts.append(
-        f'<text x="24" y="{height - 24}" font-family="system-ui, Segoe UI, sans-serif" font-size="13" fill="#4e5a52">Source: Utah State University Extension grams per 1020 tray. The tan bar is University of Maryland Extension\'s general broadcast example for crops without a Utah State rate.</text>'
-    )
-    parts.append("</svg>")
-    path = ROOT / "assets" / "diagrams" / "seed-density.svg"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text("".join(parts))
-
-
 def disclosure() -> str:
     return (
         '<p class="disclosure">Independent, research-based guidance. '
@@ -1487,60 +1444,79 @@ def rate_label(row: dict) -> str:
     return f"{row['low']} to {row['high']} g"
 
 
-def wrap_words(text: str, limit: int = 78) -> list[str]:
-    lines: list[str] = []
-    current = ""
-    for word in text.split():
-        trial = f"{current} {word}".strip()
-        if current and len(trial) > limit:
-            lines.append(current)
-            current = word
-        else:
-            current = trial
-    if current:
-        lines.append(current)
-    return lines
-
-
 def bar_chart(title: str, subtitle: str, rows: list[tuple[str, str, str, int | None]], source: str) -> str:
-    """Inline SVG bars. rows are (label, value text, detail, bar grams or None)."""
-    width = 880
-    top = 72
-    wrapped = [(label, value, wrap_words(detail), grams) for label, value, detail, grams in rows]
-    row_heights = [78 + 16 * (len(lines) - 1) for _label, _value, lines, _grams in wrapped]
-    height = top + sum(row_heights) + 36
+    """Responsive HTML bars. rows are (label, value text, detail, bar grams or None).
+
+    Text stays live HTML so it never shrinks below the page type on phones. Bar widths
+    are percentages of the largest published figure in the same chart.
+    """
     magnitudes = [grams for *_rest, grams in rows if grams]
     max_g = max(magnitudes) if magnitudes else 1
-    parts = [
-        f'<figure class="rate-chart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="group" aria-label="{esc(title)}">',
-        f"<title>{esc(title)}</title>",
-        f'<rect width="{width}" height="{height}" fill="#f6f3ea"/>',
-        f'<text x="24" y="34" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#1c2420">{esc(title)}</text>',
-        f'<text x="24" y="56" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#536056">{esc(subtitle)}</text>',
-    ]
-    y = top
-    for label, value, lines, grams in wrapped:
-        parts.append(
-            f'<text x="24" y="{y + 18}" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="700" fill="#1c2420">{esc(label)}</text>'
-        )
+    items = []
+    for label, value, detail, grams in rows:
         if grams:
-            bar = max(8, int(460 * grams / max_g))
-            parts.append(f'<rect x="24" y="{y + 28}" width="{bar}" height="16" rx="3" fill="#245c40"/>')
-            parts.append(
-                f'<text x="{32 + bar}" y="{y + 41}" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#17382a">{esc(value)}</text>'
-            )
+            bar = f'<span class="seed-bar" aria-hidden="true"><span style="width:{max(4, round(100 * grams / max_g, 1))}%"></span></span>'
+            value_html = f'<span class="seed-grams">{esc(value)}</span>'
         else:
-            parts.append(
-                f'<text x="24" y="{y + 41}" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#8a3e12">{esc(value)}</text>'
-            )
-        for line_index, line in enumerate(lines):
-            parts.append(
-                f'<text x="24" y="{y + 64 + line_index * 16}" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#536056">{esc(line)}</text>'
-            )
-        y += 78 + 16 * (len(lines) - 1)
-    parts.append("</svg>")
-    parts.append(f'<figcaption class="fact-credit">{esc(source)}</figcaption></figure>')
-    return "".join(parts)
+            bar = ""
+            value_html = f'<span class="seed-grams seed-grams-none">{esc(value)}</span>'
+        detail_html = f'<span class="seed-detail">{esc(detail)}</span>' if detail else ""
+        items.append(
+            '<li class="seed-row">'
+            f'<span class="seed-name">{esc(label)}</span>{value_html}{bar}{detail_html}'
+            '</li>'
+        )
+    return (
+        f'<figure class="seed-chart" aria-labelledby="{slug_id(title)}">'
+        f'<p class="seed-chart-title" id="{slug_id(title)}">{esc(title)}</p>'
+        f'<p class="seed-chart-sub">{esc(subtitle)}</p>'
+        '<ul class="seed-rows" role="list">' + "".join(items) + '</ul>'
+        f'<figcaption class="fact-credit">{esc(source)}</figcaption></figure>'
+    )
+
+
+def slug_id(text: str) -> str:
+    return "chart-" + re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+
+
+def seed_chart() -> str:
+    """Calculator chart: every Utah State crop rate, sorted by grams, plus Maryland's sample band."""
+    rates = json.loads((SRC / "rates.json").read_text())
+    crops = sorted((row for row in rates if "grams" in row and not row.get("needsRate")), key=lambda row: row["grams"])
+    max_g = max(row["grams"] for row in crops)
+    items = [
+        '<li class="seed-row">'
+        f'<span class="seed-name">{esc(row["name"])}</span>'
+        f'<span class="seed-grams">{row["grams"]} g</span>'
+        f'<span class="seed-bar" aria-hidden="true"><span style="width:{max(4, round(100 * row["grams"] / max_g, 1))}%"></span></span>'
+        '</li>'
+        for row in crops
+    ]
+    sample = [row for row in rates if row.get("needsRate")]
+    lows = {row["low"] for row in sample}
+    highs = {row["high"] for row in sample}
+    if len(lows) != 1 or len(highs) != 1:
+        raise SystemExit("seed chart expects one Maryland sample band")
+    low, high = lows.pop(), highs.pop()
+    names = ", ".join(row["name"].lower() for row in sample)
+    items.append(
+        '<li class="seed-row seed-row-sample">'
+        '<span class="seed-name">Maryland example</span>'
+        f'<span class="seed-grams">{low} to {high} g</span>'
+        '<span class="seed-bar seed-bar-sample" aria-hidden="true">'
+        f'<span style="width:{round(100 * high / max_g, 1)}%"><span style="width:{round(100 * low / high, 1)}%"></span></span></span>'
+        f'<span class="seed-detail">Not a crop rate. A general broadcast example the calculator offers for {esc(names)}.</span>'
+        '</li>'
+    )
+    return (
+        '<figure class="seed-chart" aria-labelledby="chart-grams-per-tray">'
+        '<p class="seed-chart-title" id="chart-grams-per-tray">Grams per 10 by 20 inch tray</p>'
+        '<p class="seed-chart-sub">Utah State crop rates used by the calculator, lightest to heaviest.</p>'
+        '<ul class="seed-rows" role="list">' + "".join(items) + '</ul>'
+        '<figcaption class="fact-credit">Source: Utah State University Extension grams per 1020 tray. '
+        "The tan bar is University of Maryland Extension's general broadcast example for crops without a Utah State rate.</figcaption>"
+        '</figure>'
+    )
 
 
 def density_bars() -> str:
@@ -1565,7 +1541,7 @@ def rates_table() -> str:
     rows = []
     for row in rates:
         grams = row["grams"] if "grams" in row else None
-        detail = f"{row['kind']}. {row['presoak']} {row['timing']}"
+        detail = f"{row['kind']}. {row['presoak'].rstrip('.')}. {row['timing']}"
         rows.append((row["name"], rate_label(row), detail, grams))
     return bar_chart(
         "Seed per 10 by 20 inch tray",
@@ -1990,6 +1966,7 @@ def render_static_pages() -> dict[str, str]:
     tool_body = (SRC / "pages" / "calculator.html").read_text()
     tool_body = tool_body.replace("<!--CROP_OPTIONS-->", calculator_options())
     tool_body = tool_body.replace("<!--RATES_TABLE-->", rates_table())
+    tool_body = tool_body.replace("<!--SEED_CHART-->", seed_chart())
     tool_graph = [
         {
             "@type": "WebApplication",
@@ -2097,7 +2074,6 @@ def render_static_pages() -> dict[str, str]:
         body = (SRC / "guides" / f"{guide['slug']}.html").read_text()
         body = body.replace("<!--STEP_STRIP-->", step_strip())
         body = body.replace("<!--HARVEST_CHART-->", harvest_chart())
-        body = body.replace("<!--DENSITY_CHART-->", density_figure())
         body = body.replace("<!--DENSITY_BARS-->", density_bars())
         for video_id in VIDEOS:
             body = body.replace(f"<!--VIDEO:{video_id}-->", video_embed(video_id))
@@ -2122,7 +2098,6 @@ def main() -> None:
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(css + "\n")
     write_calculator_js()
-    write_density_chart()
     signup_js = ROOT / "js" / "signup.js"
     signup_js.parent.mkdir(parents=True, exist_ok=True)
     signup_js.write_text((SRC / "signup.js").read_text())
