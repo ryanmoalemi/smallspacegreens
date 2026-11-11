@@ -397,6 +397,118 @@ def dedupe_content_images(html: str) -> str:
     return html
 
 
+def _hex_channels(hex_color: str) -> str:
+    value = hex_color.lstrip("#")
+    if len(value) == 3:
+        value = "".join(channel * 2 for channel in value)
+    return value
+
+
+def _luminance(hex_color: str) -> float:
+    value = _hex_channels(hex_color)
+    red, green, blue = int(value[0:2], 16), int(value[2:4], 16), int(value[4:6], 16)
+
+    def channel(component: int) -> float:
+        scaled = component / 255
+        if scaled <= 0.04045:
+            return scaled / 12.92
+        return ((scaled + 0.055) / 1.055) ** 2.4
+
+    return 0.2126 * channel(red) + 0.7152 * channel(green) + 0.0722 * channel(blue)
+
+
+def _contrast_ratio(foreground: str, background: str) -> float:
+    lighter = max(_luminance(foreground), _luminance(background))
+    darker = min(_luminance(foreground), _luminance(background))
+    return (lighter + 0.05) / (darker + 0.05)
+
+
+def _css_blocks(segment: str) -> dict[str, str]:
+    blocks: dict[str, str] = {}
+    cursor = 0
+    while True:
+        opening = segment.find("{", cursor)
+        if opening < 0:
+            return blocks
+        closing = segment.find("}", opening)
+        if closing < 0:
+            raise SystemExit("contrast check found an unclosed CSS rule")
+        for selector in segment[cursor:opening].split(","):
+            selector = selector.strip()
+            if selector and not selector.startswith("@"):
+                blocks[selector] = segment[opening + 1 : closing]
+        cursor = closing + 1
+
+
+def _css_color(body: str, prop: str) -> str:
+    match = re.search(rf"(?:^|;){prop}:([^;]+)", body)
+    colors = re.findall(r"#[0-9a-fA-F]{6}", match.group(1) if match else "")
+    if not colors:
+        raise SystemExit(f"contrast check missing {prop} in '{body}'")
+    return colors[-1].lower()
+
+
+def check_card_contrast(css: str) -> None:
+    """Fail the build when a product-card text pair drops below WCAG AA."""
+    failures: list[str] = []
+
+    def require(label: str, foreground: str, background: str, minimum: float = 4.5) -> None:
+        ratio = _contrast_ratio(foreground, background)
+        if ratio < minimum:
+            failures.append(f"{label}: {foreground} on {background} is {ratio:.2f}, need {minimum:.1f}")
+
+    root = re.search(r":root\{([^}]*)\}", css)
+    if not root:
+        raise SystemExit("contrast check missing :root colors")
+    variables = dict(re.findall(r"(--[a-z0-9-]+):(#[0-9a-fA-F]{3,6})", root.group(1)))
+    card = variables["--card"]
+    require("light product name", variables["--ink"], card)
+    require("light body and credit", variables["--muted"], card)
+    require("light credit link", variables["--green-2"], card)
+    require("light credit link hover", variables["--accent"], card)
+    require("light badge", variables["--ink"], variables["--sage"])
+    require("light stat label", variables["--muted"], variables["--sage"])
+    require("light button", "#ffffff", variables["--green"])
+
+    credit = re.search(r"\.pick-credit\{([^}]*)\}", css)
+    credit_size = re.search(r"font-size:(\d+)px", credit.group(1) if credit else "")
+    if not credit_size or int(credit_size.group(1)) < 12:
+        failures.append("photo credit is smaller than 12px")
+
+    dark_at = css.find("@media(prefers-color-scheme:dark){")
+    if dark_at < 0:
+        raise SystemExit("contrast check missing dark-mode card styles")
+    depth = 0
+    dark_end = dark_at
+    for index, character in enumerate(css[dark_at:], dark_at):
+        if character == "{":
+            depth += 1
+        elif character == "}":
+            depth -= 1
+            if depth == 0:
+                dark_end = index
+                break
+    dark = _css_blocks(css[css.find("{", dark_at) + 1 : dark_end])
+    card_bg = _css_color(dark[".pick"], "background")
+    require("dark product name", _css_color(dark[".pick h3.pick-name"], "color"), card_bg)
+    require("dark brand, body, and credit", _css_color(dark[".pick-brand"], "color"), card_bg)
+    require("dark credit link", _css_color(dark[".pick-credit a"], "color"), card_bg)
+    require("dark credit link hover", _css_color(dark[".pick-credit a:hover"], "color"), card_bg)
+    require("dark badge", _css_color(dark[".pick-badge"], "color"), _css_color(dark[".pick-badge"], "background"))
+    require("dark button", _css_color(dark[".pick-cta"], "color"), _css_color(dark[".pick-cta"], "background"))
+    require("dark button hover", _css_color(dark[".pick-cta:hover"], "color"), _css_color(dark[".pick-cta:hover"], "background"))
+    require("dark button focus", _css_color(dark[".pick-cta:focus-visible"], "color"), _css_color(dark[".pick-cta:focus-visible"], "background"))
+    require("dark focus ring on card", _css_color(dark[".pick a:focus-visible"], "outline"), card_bg, 3.0)
+    require(
+        "dark button focus ring",
+        _css_color(dark[".pick a.pick-cta:focus-visible"], "box-shadow"),
+        _css_color(dark[".pick-cta"], "background"),
+        3.0,
+    )
+    if failures:
+        raise SystemExit("card contrast check failed:\n" + "\n".join(failures))
+
+
 def check_duplicate_images(document: str, label: str) -> None:
     seen: dict[str, str] = {}
     duplicates: list[str] = []
@@ -2005,6 +2117,7 @@ def main() -> None:
         if f'id="{photo["credit_id"]}"' not in credit_page:
             raise SystemExit(f"Missing photo credit record for {key}")
     css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css", "photo-lists.css", "harvest-chart.css"]))
+    check_card_contrast(css)
     css_path = ROOT / "css" / "styles.css"
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(css + "\n")
