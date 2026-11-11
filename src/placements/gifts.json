@@ -1,5 +1,87 @@
 {
   "images": {
+    "letpot-mini": {
+      "slug": "letpot-mini",
+      "title": "LetPot LPH-Mini indoor garden",
+      "alt": "LetPot LPH-Mini indoor garden",
+      "credit_id": "supply-letpot-mini",
+      "author": "LetPot",
+      "author_url": "https://letpot.com/products/mini-hydroponics-growing-system",
+      "source_url": "https://cdn.shopify.com/s/files/1/0597/9376/8608/files/LPHMINIBK.jpg",
+      "source_label": "LPH-Mini featured image",
+      "license": "LetPot promotional materials",
+      "license_url": "https://letpot.com/products/mini-hydroponics-growing-system",
+      "official": "letpot",
+      "note": "Official product photo from LetPot's product page. Converted to WebP at the same aspect. Not cropped or recolored."
+    },
+    "letpot-air": {
+      "slug": "letpot-air",
+      "title": "LetPot LPH-Air indoor garden",
+      "alt": "LetPot LPH-Air indoor garden",
+      "credit_id": "supply-letpot-air",
+      "author": "LetPot",
+      "author_url": "https://letpot.com/products/lph-air-indoor-hydroponic-gardening-system",
+      "source_url": "https://cdn.shopify.com/s/files/1/0597/9376/8608/files/LPG-LetPot_Air.jpg",
+      "source_label": "LPH-Air featured image",
+      "license": "LetPot promotional materials",
+      "license_url": "https://letpot.com/products/lph-air-indoor-hydroponic-gardening-system",
+      "official": "letpot",
+      "note": "Official product photo from LetPot's product page. Converted to WebP at the same aspect. Not cropped or recolored."
+    },
+    "letpot-lite": {
+      "slug": "letpot-lite",
+      "title": "LetPot LPH-Lite indoor garden",
+      "alt": "LetPot LPH-Lite indoor garden",
+      "credit_id": "supply-letpot-lite",
+      "author": "LetPot",
+      "author_url": "https://letpot.com/products/letpot-lph-lite-hydroponics-growing-system-12-pods",
+      "source_url": "https://cdn.shopify.com/s/files/1/0597/9376/8608/files/LetPot_LPH-Lite_Hydroponics_Growing_System_12_Pods_Smart_Herb_Garden_Kit_Indoor.jpg",
+      "source_label": "LPH-Lite featured image",
+      "license": "LetPot promotional materials",
+      "license_url": "https://letpot.com/products/letpot-lph-lite-hydroponics-growing-system-12-pods",
+      "official": "letpot",
+      "note": "Official product photo from LetPot's product page. Converted to WebP at the same aspect. Not cropped or recolored."
+    },
+    "letpot-max": {
+      "slug": "letpot-max",
+      "title": "LetPot LPH-Max indoor garden",
+      "alt": "LetPot LPH-Max indoor garden",
+      "credit_id": "supply-letpot-max",
+      "author": "LetPot",
+      "author_url": "https://letpot.com/products/lph-max-21-pod-hydroponics-system-with-app-control",
+      "source_url": "https://cdn.shopify.com/s/files/1/0597/9376/8608/files/LetPot_Max_Hydroponics_Latest_version.jpg",
+      "source_label": "LPH-Max featured image",
+      "license": "LetPot promotional materials",
+      "license_url": "https://letpot.com/products/lph-max-21-pod-hydroponics-system-with-app-control",
+      "official": "letpot",
+      "note": "Official product photo from LetPot's product page. Converted to WebP at the same aspect. Not cropped or recolored."
+    },
+    "radish-packet": {
+      "slug": "supply-radish-packet",
+      "title": "A packet of radish seed",
+      "alt": "A printed packet of radish seed.",
+      "credit_id": "supply-radish-packet",
+      "author": "U.S. Department of Agriculture",
+      "author_url": "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg",
+      "source_label": "Radish Seed Packet",
+      "license": "Public domain",
+      "license_url": "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg",
+      "note": "A radish seed packet. Example photo, not the True Leaf bag."
+    },
+    "home-microgreens": {
+      "slug": "supply-home-microgreens",
+      "title": "Young microgreens in a small pot",
+      "alt": "Young microgreens growing in a small white pot.",
+      "credit_id": "supply-home-microgreens",
+      "author": "Zenyrgarden",
+      "author_url": "https://commons.wikimedia.org/wiki/File:Microgreen_in_a_pot.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Microgreen_in_a_pot.jpg",
+      "source_label": "Microgreen in a pot",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "note": "Microgreens in a small pot. Example photo, not a listed kit."
+    },
     "hero-mixed": {
       "slug": "microgreens-mixed",
       "title": "Mixed small greens in a container",
@@ -127,7 +209,7 @@
       "badge": "Beginner",
       "why": "LetPot lists a 5-pod garden, app control, and a schedulable light.",
       "cta": "See at LetPot",
-      "image": "basil-seedlings"
+      "image": "letpot-mini"
     },
     "mizuna-ceramic": {
       "kind": "amazon",
@@ -147,7 +229,7 @@
       "badge": "Foodie",
       "why": "LetPot lists a 10-pod garden with app-controlled light and water flow.",
       "cta": "See at LetPot",
-      "image": "lettuce-pot"
+      "image": "letpot-air"
     },
     "letpot-lite": {
       "kind": "letpot",
@@ -157,7 +239,7 @@
       "badge": "Apartment cook",
       "why": "LetPot lists a 12-pod herb garden with a growing LED and a timer.",
       "cta": "See at LetPot",
-      "image": "basil-mosaic"
+      "image": "letpot-lite"
     },
     "letpot-max": {
       "kind": "letpot",
@@ -167,17 +249,17 @@
       "badge": "Larger kitchen",
       "why": "LetPot lists a 21-pod system with app control and automatic watering.",
       "cta": "See at LetPot",
-      "image": "pea-counter"
+      "image": "letpot-max"
     },
     "tl-radish": {
       "kind": "trueleaf",
-      "href_key": "micro-seed",
+      "href_key": "radish",
       "brand": "True Leaf Market",
       "short": "Radish microgreen seed",
       "badge": "Beginner",
-      "why": "Rambo radish is in the microgreens seed collection. Check the bag.",
-      "cta": "See at True Leaf",
-      "image": "radish-seedling"
+      "why": "42 g on a 1020 tray. About 21 g on a 10 by 10.",
+      "cta": "See radish seed",
+      "image": "radish-packet"
     },
     "tl-broccoli": {
       "kind": "trueleaf",
@@ -185,8 +267,8 @@
       "brand": "True Leaf Market",
       "short": "Broccoli microgreen seed",
       "badge": "Beginner",
-      "why": "Waltham 29 broccoli is in that seed collection. Check the bag.",
-      "cta": "See at True Leaf",
+      "why": "Waltham 29 broccoli is in the seed collection. Check the bag.",
+      "cta": "Browse microgreen seeds",
       "image": "broccoli-sprouts"
     },
     "tl-kits": {
@@ -195,9 +277,9 @@
       "brand": "True Leaf Market",
       "short": "Microgreens kits and supplies",
       "badge": "Beginner",
-      "why": "Mini kits are in this collection. The photo shows a greenhouse tray.",
-      "cta": "See at True Leaf",
-      "image": "lufa-trays"
+      "why": "Mini kits are in this collection. Check what the kit includes.",
+      "cta": "Browse microgreen kits",
+      "image": "home-microgreens"
     }
   },
   "sections": [

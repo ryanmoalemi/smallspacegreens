@@ -16,11 +16,19 @@ TRUELEAF_SEED = (
     "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328"
     "&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fmicro-greens-planting-seed"
 )
+TRUELEAF_RADISH = (
+    "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328"
+    "&ued=https%3A%2F%2Ftrueleafmarket.com%2Fproducts%2Fradish-rambo-seeds"
+)
+TRUELEAF_PEA = (
+    "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328"
+    "&ued=https%3A%2F%2Ftrueleafmarket.com%2Fproducts%2Fdun-pea-seeds"
+)
 LETPOT_AIR = (
     "https://www.awin1.com/cread.php?awinmid=47605&awinaffid=3149328"
     "&ued=https%3A%2F%2Fletpot.com%2Fproducts%2Flph-air-indoor-hydroponic-gardening-system"
 )
-SEED_LABEL = "See microgreens seed"
+SEED_LABEL = "Browse microgreen seeds"
 AIR_LABEL = "See LPH-Air at LetPot"
 AMAZON_LABEL = "Check price on Amazon"
 
@@ -46,6 +54,10 @@ def amazon(asin: str, item: str, note: str) -> dict:
 
 def seed(item: str, note: str) -> dict:
     return {"kind": "trueleaf", "item": item, "note": note, "label": SEED_LABEL, "url": TRUELEAF_SEED}
+
+
+def seed_product(item: str, note: str, url: str, label: str) -> dict:
+    return {"kind": "trueleaf", "item": item, "note": note, "label": label, "url": url}
 
 
 def letpot_air(item: str, note: str) -> dict:
@@ -155,12 +167,10 @@ SHOP_PAGES: dict[str, dict] = {
     },
     "pea": {
         "heading": "Trays and seed for this comparison",
-        "lead": "Radish at 42 g with no presoak, and pea at 150 g after a soak, on the same 10 by 20 in tray. Seed links go to True Leaf Market's microgreens collection. Check the bag weight there. This site has not used these products.",
+        "lead": "Radish at 42 g with no presoak, and pea at 150 g after a soak, on the same 10 by 20 in tray. Each card opens that crop's True Leaf page. This site has not used these products.",
         "rows": [
-            seed(RADISH, "For the 42 g rate on a 1020."),
-            seed(RADISH_SMALL, "About 21 g on a 10 by 10 tray."),
-            seed(PEA, "150 g on a full tray, weighed dry."),
-            seed(PEA_HALF, "About 75 g for a half tray, dry."),
+            seed_product(RADISH, "42 g on a 10 by 20 in tray. About 21 g on a 10 by 10.", TRUELEAF_RADISH, "See radish seed"),
+            seed_product(PEA, "150 g on a 10 by 20 in tray. About 75 g on a 10 by 10. Weigh dry, then soak.", TRUELEAF_PEA, "See pea seed"),
             amazon("B06XZFLY9P", BF_1020_HOLES, "The shared 10 by 20 in tray."),
             amazon("B07DT72V6H", BF_1020_SOLID, "A catch tray for either crop."),
             amazon("B08BPTXK4L", SCALE, "Weigh pea dry, then soak."),
@@ -276,7 +286,7 @@ SUPPLY_IMAGES = {
     "coir-pile": ("Loose coco coir", "Victor M. Vicente Selvas", "https://commons.wikimedia.org/wiki/File:Horticulture_coir1310.JPG", "Public domain", "https://commons.wikimedia.org/wiki/File:Horticulture_coir1310.JPG", "Loose coir. Stand-in for seed-starting mix.", True),
     "coco-brick": ("A compressed brick of coco coir", "MatiasMiika", "https://commons.wikimedia.org/wiki/File:Brick_of_coco_coir.JPG", "CC BY 3.0", "https://creativecommons.org/licenses/by/3.0/", "A coir brick.", False),
     "coir-fiber": ("Loose coconut coir fiber", "Fotokannan", "https://commons.wikimedia.org/wiki/File:Coir_fibery.jpg", "CC BY-SA 3.0", "https://creativecommons.org/licenses/by-sa/3.0/", "Coir fiber. Stand-in for a hemp grow mat.", True),
-    "scale": ("A digital kitchen scale on a counter", "Ser Amantio di Nicolao", "https://commons.wikimedia.org/wiki/File:Escali_digital_kitchen_scale.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "A digital kitchen scale. Not the Etekcity model.", True),
+    "scale": ("A plain digital pocket scale", "TBBSC", "https://commons.wikimedia.org/wiki/File:TBBSC_Digital_Scale.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "A plain digital pocket scale with no brand name on the face. Not the Etekcity model.", True),
     "scissors": ("Herb scissors on a white background", "Raimond Spekking", "https://commons.wikimedia.org/wiki/File:Kr%C3%A4uterschere-0836.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Herb scissors. Not the Fiskars model.", True),
     "spray": ("A plastic bottle with a hose spray head", "Rlsheehan", "https://commons.wikimedia.org/wiki/File:Plastic_bottle_with_hose_spray_attachment.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "A spray bottle. Stand-in for a plant mister.", True),
     "grow-light": ("Potted plants under a grow light", "Asdfjrjjj", "https://commons.wikimedia.org/wiki/File:Potted_plants_succulents_under_grow_light_Nov_2016.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Plants under a grow light. Stand-in for a clip-on lamp.", True),
@@ -284,6 +294,14 @@ SUPPLY_IMAGES = {
     "ceramic": ("A leafy plant in a ceramic pot", "W.carter", "https://commons.wikimedia.org/wiki/File:Plectranthus_verticillatus_in_a_ceramic_pot.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "A ceramic pot. Stand-in for the ceramic microgreens kit and for 8 in pots.", True),
     "windowbox": ("A planted window box", "litchick_1", "https://commons.wikimedia.org/wiki/File:2009_windowbox_2463967211.jpg", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "A window box. Stand-in for a balcony rail planter.", True),
     "grow-bag": ("A plant growing in a fabric grow bag", "Clintacc", "https://commons.wikimedia.org/wiki/File:Brinjal_plant_with_fruits_in_grow_bag.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "A fabric grow bag with a plant. Stand-in for empty grow bags.", True),
+    "radish-packet": ("A packet of radish seed", "U.S. Department of Agriculture", "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg", "Public domain", "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg", "A radish seed packet. Stand-in for microgreen radish seed.", True),
+    "home-microgreens": ("Young microgreens in a small pot", "Zenyrgarden", "https://commons.wikimedia.org/wiki/File:Microgreen_in_a_pot.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Microgreens in a small pot. Stand-in for a home kit.", True),
+    "alfalfa-jar": ("Alfalfa sprouts in a glass jar", "Sproutable", "https://commons.wikimedia.org/wiki/File:AlfalfaSproutsJar1.jpg", "Public domain", "https://commons.wikimedia.org/wiki/File:AlfalfaSproutsJar1.jpg", "A jar of sprouts. Stand-in for sprouting seed, not microgreens.", True),
+    "letpot-mini": ("LetPot LPH-Mini indoor garden", "LetPot", "https://letpot.com/products/mini-hydroponics-growing-system", "LetPot promotional materials", "https://letpot.com/products/mini-hydroponics-growing-system", "Official product photo, converted to WebP at the same aspect. Not cropped or recolored.", False),
+    "letpot-air": ("LetPot LPH-Air indoor garden", "LetPot", "https://letpot.com/products/lph-air-indoor-hydroponic-gardening-system", "LetPot promotional materials", "https://letpot.com/products/lph-air-indoor-hydroponic-gardening-system", "Official product photo, converted to WebP at the same aspect. Not cropped or recolored.", False),
+    "letpot-se": ("LetPot LPH-SE indoor garden", "LetPot", "https://letpot.com/products/letpot-senior-12-pod-hydroponic-growing-system-with-app-control", "LetPot promotional materials", "https://letpot.com/products/letpot-senior-12-pod-hydroponic-growing-system-with-app-control", "Official product photo, converted to WebP at the same aspect. Not cropped or recolored.", False),
+    "letpot-lite": ("LetPot LPH-Lite indoor garden", "LetPot", "https://letpot.com/products/letpot-lph-lite-hydroponics-growing-system-12-pods", "LetPot promotional materials", "https://letpot.com/products/letpot-lph-lite-hydroponics-growing-system-12-pods", "Official product photo, converted to WebP at the same aspect. Not cropped or recolored.", False),
+    "letpot-max": ("LetPot LPH-Max indoor garden", "LetPot", "https://letpot.com/products/lph-max-21-pod-hydroponics-system-with-app-control", "LetPot promotional materials", "https://letpot.com/products/lph-max-21-pod-hydroponics-system-with-app-control", "Official product photo, converted to WebP at the same aspect. Not cropped or recolored.", False),
 }
 
 ITEM_IMAGE = {
@@ -318,13 +336,13 @@ ITEM_IMAGE = {
     ESPOMA_POT: "promix",
     LETTUCE: "lettuce-pot",
     BAGS: "grow-bag",
-    RADISH: "radish",
+    RADISH: "radish-packet",
     RADISH_SMALL: "mixed",
-    PEA: "pea-sack",
+    PEA: "pea-shoots",
     PEA_HALF: "lufa",
     BROCCOLI: "broccoli",
     MIXED_SEED: "mixed",
-    AIR: "lettuce-pot",
+    AIR: "letpot-air",
 }
 
 # Same photo cannot appear twice on /gear/, which already uses the mixed-greens file.
@@ -334,7 +352,7 @@ PAGE_IMAGE = {
     "density": {BF_1010_HOLES: "lufa"},
     "calculator": {BF_1010_HOLES: "sunflower"},
     "cost": {KIT_GREEN: "broccoli", KIT_BUDDY: "basil-mosaic"},
-    "pea": {RADISH: "sunflower", PEA_HALF: "lettuce-leaves"},
+    "pea": {PEA_HALF: "lettuce-leaves"},
     "bottom": {SUNPACK: "basil"},
 }
 
@@ -348,6 +366,12 @@ def image_for(key: str, item: str) -> str:
     return slug
 
 
+def photo_stem(slug: str) -> str:
+    if slug.startswith("letpot-") or slug == "alfalfa-jar":
+        return slug
+    return f"supply-{slug}"
+
+
 def render_shop(key: str) -> str:
     page = SHOP_PAGES[key]
     rows = page["rows"]
@@ -358,28 +382,38 @@ def render_shop(key: str) -> str:
     for row in rows:
         slug = image_for(key, row["item"])
         photo_dir = Path(__file__).resolve().parents[1] / "assets" / "products"
-        if not (photo_dir / f"supply-{slug}-600.webp").is_file() or not (photo_dir / f"supply-{slug}-300.webp").is_file():
+        stem = photo_stem(slug)
+        if not (photo_dir / f"{stem}-600.webp").is_file() or not (photo_dir / f"{stem}-300.webp").is_file():
             raise SystemExit(f"Missing supply photo files for {slug}")
         if slug in seen:
             raise SystemExit(f"{key} repeats supply photo {slug}")
         seen.append(slug)
         alt, author, _source, _license, _license_url, _note, _stand_in = SUPPLY_IMAGES[slug]
-        src = f"/assets/products/supply-{slug}-600.webp"
-        srcset = f"/assets/products/supply-{slug}-300.webp 300w, /assets/products/supply-{slug}-600.webp 600w"
+        src = f"/assets/products/{stem}-600.webp"
+        srcset = f"/assets/products/{stem}-300.webp 300w, /assets/products/{stem}-600.webp 600w"
+        official = slug.startswith("letpot-")
+        img_class = ' class="letpot-photo"' if official else ""
+        if official:
+            caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
+        else:
+            caption = (
+                f'<figcaption class="pick-credit">Example photo · '
+                f'<a href="/photo-credits/#supply-{slug}">{esc(author)}</a></figcaption>'
+            )
+        button = BUTTON[row["kind"]] if row["kind"] == "amazon" else row["label"]
         cards.append(
             '<li class="pick">'
             '<figure class="pick-media">'
-            f'<img src="{src}" srcset="{srcset}" '
+            f'<img{img_class} src="{src}" srcset="{srcset}" '
             'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
             'width="600" height="600" loading="lazy" decoding="async" '
             f'alt="{esc(alt)}">'
-            f'<figcaption class="pick-credit">Example photo · '
-            f'<a href="/photo-credits/#supply-{slug}">{esc(author)}</a></figcaption>'
+            f"{caption}"
             "</figure>"
             f'<h3 class="pick-name">{esc(row["item"])}</h3>'
             f'<p class="pick-why">{esc(row["note"])}</p>'
             f'<a class="pick-cta" href="{esc(row_url(row))}" rel="sponsored nofollow noopener" target="_blank">'
-            f'{BUTTON[row["kind"]]}<span class="sr-only"> (opens in a new tab)</span></a>'
+            f'{esc(button)}<span class="sr-only"> (opens in a new tab)</span></a>'
             "</li>"
         )
     return (
@@ -395,16 +429,24 @@ def render_shop(key: str) -> str:
 def supply_credit_html() -> str:
     blocks = []
     for slug, (alt, author, source, license_name, license_url, note, _stand_in) in SUPPLY_IMAGES.items():
-        src = f"/assets/products/supply-{slug}-600.webp"
+        stem = photo_stem(slug)
+        src = f"/assets/products/{stem}-600.webp"
+        official = slug.startswith("letpot-")
+        if official:
+            origin = "LetPot product page"
+            use = f"{esc(note)} Shown with the full frame on a light background."
+        else:
+            origin = "Wikimedia Commons"
+            use = f"{esc(note)} Square crop for a product card. Example photo, not the listed product."
         blocks.append(
             f'<section class="photo-credit-entry" id="supply-{slug}">'
             f'<img src="{src}" width="600" height="600" alt="{esc(alt)}" loading="lazy" decoding="async">'
             "<div>"
             f"<h2>{esc(alt)}</h2>"
             f'<p><strong>Photographer:</strong> <a href="{esc(source)}">{esc(author)}</a>.</p>'
-            f'<p><strong>Original:</strong> <a href="{esc(source)}">Wikimedia Commons</a>.</p>'
+            f'<p><strong>Original:</strong> <a href="{esc(source)}">{origin}</a>.</p>'
             f'<p><strong>License:</strong> <a href="{esc(license_url)}">{esc(license_name)}</a>.</p>'
-            f"<p><strong>Image use:</strong> {esc(note)} Square crop for a product card. Example photo, not the listed product.</p>"
+            f"<p><strong>Image use:</strong> {use}</p>"
             "</div></section>"
         )
     return "\n".join(blocks)

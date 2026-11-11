@@ -121,6 +121,11 @@
       if (!same) costHtml += scenarioBlock("Higher rate scenario", result.cost.high);
     }
 
+    var seedLinks = {
+      radish: ["https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fproducts%2Fradish-rambo-seeds", "See radish seed"],
+      pea: ["https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fproducts%2Fdun-pea-seeds", "See pea seed"]
+    };
+    var seedOffer = seedLinks[form.crop.value] || ["https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fmicro-greens-planting-seed", "Browse microgreen seeds"];
     out.innerHTML =
       "<p class='eyebrow'>Your seed estimate</p><h2>" + escapeHtml(crop().name) + "</h2>" +
       "<div class='result-metrics'><div class='result-metric'><span>Dry seed per tray</span><strong>" + escapeHtml(weight) + "</strong><span>" + escapeHtml(ounces) + "</span></div>" +
@@ -131,6 +136,7 @@
       "<details class='result-method'><summary>Rate and assumptions</summary><p>" + escapeHtml(result.rateNote) + "</p>" +
       "<p>Seed weight scales by tray area. Nominal outer dimensions may differ from the inner growing floor. This estimate does not adjust for germination or predict yield.</p>" +
       (crop().note ? "<p>" + escapeHtml(crop().note) + "</p>" : "") + "</details>" +
+      "<p class='result-seed'><a href='" + seedOffer[0] + "' rel='sponsored nofollow' target='_blank'>" + seedOffer[1] + "</a></p>" +
       "<div class='cta-row result-next-actions'><a class='button' href='/gear/?setup=tray#seeds'>Build my supply list</a><a href='/guides/microgreens-kit-vs-diy-cost/#cost-comparison'>Compare setup costs</a></div>" +
       "<p class='next-action'><a href='/guides/microgreens-seed-density-per-tray/'>How these rates were chosen</a></p>";
   }

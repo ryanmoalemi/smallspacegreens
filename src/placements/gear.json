@@ -52,6 +52,34 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
       "note": "Square crop. Example photo of container lettuce, not the LetPot unit. Cropped versions remain under CC BY-SA 4.0."
     },
+    "letpot-mini": {
+      "slug": "letpot-mini",
+      "title": "LetPot LPH-Mini indoor garden",
+      "alt": "LetPot LPH-Mini indoor garden",
+      "credit_id": "supply-letpot-mini",
+      "author": "LetPot",
+      "author_url": "https://letpot.com/products/mini-hydroponics-growing-system",
+      "source_url": "https://cdn.shopify.com/s/files/1/0597/9376/8608/files/LPHMINIBK.jpg",
+      "source_label": "LPH-Mini featured image",
+      "license": "LetPot promotional materials",
+      "license_url": "https://letpot.com/products/mini-hydroponics-growing-system",
+      "official": "letpot",
+      "note": "Official product photo from LetPot's product page. Converted to WebP at the same aspect. Not cropped or recolored."
+    },
+    "letpot-air": {
+      "slug": "letpot-air",
+      "title": "LetPot LPH-Air indoor garden",
+      "alt": "LetPot LPH-Air indoor garden",
+      "credit_id": "supply-letpot-air",
+      "author": "LetPot",
+      "author_url": "https://letpot.com/products/lph-air-indoor-hydroponic-gardening-system",
+      "source_url": "https://cdn.shopify.com/s/files/1/0597/9376/8608/files/LPG-LetPot_Air.jpg",
+      "source_label": "LPH-Air featured image",
+      "license": "LetPot promotional materials",
+      "license_url": "https://letpot.com/products/lph-air-indoor-hydroponic-gardening-system",
+      "official": "letpot",
+      "note": "Official product photo from LetPot's product page. Converted to WebP at the same aspect. Not cropped or recolored."
+    },
     "mixed-greens": {
       "slug": "microgreens-mixed",
       "title": "Mixed small greens in a container",
@@ -74,7 +102,7 @@
       "short": "Microgreens kits and supplies",
       "badge": "Kit",
       "why": "True Leaf lists mini kits and other supplies in this collection.",
-      "cta": "See at True Leaf",
+      "cta": "Browse microgreen kits",
       "image": "sunflower-tray"
     },
     "tl-seed": {
@@ -84,7 +112,7 @@
       "short": "Microgreens seed",
       "badge": "Seed",
       "why": "Loose microgreen seed for a tray you reuse. Check the crop on the bag.",
-      "cta": "See at True Leaf",
+      "cta": "Browse microgreen seeds",
       "image": "broccoli-sprouts"
     },
     "letpot-mini": {
@@ -95,7 +123,7 @@
       "badge": "No-soil option",
       "why": "LetPot lists a 5-pod garden, app control, and a schedulable light.",
       "cta": "See at LetPot",
-      "image": "basil-seedlings"
+      "image": "letpot-mini"
     },
     "letpot-air": {
       "kind": "letpot",
@@ -105,7 +133,7 @@
       "badge": "No-soil option",
       "why": "LetPot lists a 10-pod garden with app-controlled light and water flow.",
       "cta": "See at LetPot",
-      "image": "lettuce-pot"
+      "image": "letpot-air"
     },
     "mizuna-ceramic": {
       "kind": "amazon",
