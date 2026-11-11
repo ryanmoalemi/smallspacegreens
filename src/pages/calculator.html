@@ -49,7 +49,7 @@
 <input id="trays" name="trays" type="number" min="1" max="200" step="1" value="1" required>
 </div>
 <div id="rate-box" hidden>
-<p>Mustard, beet, and amaranth are not in the Utah State gram table. Enter a rate, or use the Maryland sample band. That band is a general broadcast example, not a crop trial.</p>
+<p>Mustard, beet, and amaranth are not in the Utah State gram table. Enter a rate, or use the Maryland sample band. That band is a general broadcast rate, not a crop trial.</p>
 <input type="hidden" name="useExample" value="0">
 <div class="field">
 <label for="userLow">Your grams per 10 by 20 inch tray</label>
@@ -59,8 +59,8 @@
 <label for="userHigh">High end, if you want a range (optional)</label>
 <input id="userHigh" name="userHigh" type="number" min="0.1" max="500" step="any" inputmode="decimal">
 </div>
-<button class="button secondary" type="button" id="use-example">Use the 10 to 15 g Maryland example</button>
-<button class="button secondary" type="button" id="clear-example">Clear that example</button>
+<button class="button secondary" type="button" id="use-example">Use the 10 to 15 g Maryland setup</button>
+<button class="button secondary" type="button" id="clear-example">Clear the Maryland setup</button>
 </div>
 <fieldset>
 <legend>Seed price, optional</legend>
@@ -123,7 +123,7 @@
 <summary id="calculator-assumptions">Assumptions</summary>
 <p>A 1020 tray is taken as 10 inches by 20 inches, which is 200 square inches. A 10 by 10 inch tray is half of that area, so it gets half the seed. A 5 by 5 inch tray is 25 square inches, one eighth of the reference tray. Custom sizes use the length and width you type. Centimeters are converted with 1 inch = 2.54 centimeters, then the area is calculated in square inches.</p>
 <p>The scale is linear: seed weight changes in proportion to area. That is a planning assumption, not something this site has measured. The inside floor of a purchased tray is often a little smaller than the nominal outside size. If you want the inner floor, choose custom and measure the inside length and width.</p>
-<p>Crop rates with a single gram number come from Utah State University Extension's table of grams per 1020 tray. Mustard, beet, and amaranth are not in that table. The calculator will not invent a number for them. You can type your own grams per 10 by 20 inch tray, or press the button that fills Maryland's sample broadcast of about 10 to 15 grams. That band is a general example, and the result says so.</p>
+<p>Crop rates with a single gram number come from Utah State University Extension's table of grams per 1020 tray. Mustard, beet, and amaranth are not in that table. The calculator will not invent a number for them. You can type your own grams per 10 by 20 inch tray, or press the button that fills Maryland's sample broadcast of about 10 to 15 grams. That band is a general rate, and the result says so.</p>
 <p>Penn State Extension reports success with a lighter sowing, about 10 to 15 grams on a standard 12 by 20 inch 10-row seeding tray, which is 240 square inches, not 200. The calculator does not use that lighter band, because it is not split by crop. Both approaches are real. If your first tray is too crowded or too thin, change the next one. Penn State also offers its own <a href="https://extension.psu.edu/microgreens-seed-density-calculator">microgreens seed density calculator</a>, which can take germination into account. This page does not.</p>
 <p>Ounces are grams divided by 28.349523125. Cost uses 453.59237 grams per pound, 28.349523125 grams per ounce, or 1000 grams per kilogram. Cost is seed only. It ignores trays, mix, water, and electricity. Leave the price blank if you only want weight.</p>
 <p>Soak times and harvest windows in the result are copied from the same extension notes, so you can see them next to the grams. They are not calculated. More on how to read the charts is in <a href="/guides/microgreens-seed-density-per-tray/">seed density per tray</a>.</p>

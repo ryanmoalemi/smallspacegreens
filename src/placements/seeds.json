@@ -184,7 +184,7 @@
     {
       "id": "first-seeds",
       "title": "Microgreen seeds to start with",
-      "lead": "These crops are listed in True Leaf Market's microgreens seed collection. This site has not grown seed from it.",
+      "lead": "These crops are listed in True Leaf Market's microgreens seed collection.",
       "cards": [
         "tl-radish",
         "tl-pea",
@@ -195,7 +195,7 @@
     {
       "id": "starter-kit",
       "title": "A kit instead of loose seed",
-      "lead": "A kit is a different purchase from a bag of seed. This site has not grown these products.",
+      "lead": "A kit is a different purchase from a bag of seed.",
       "cards": [
         "tl-kits"
       ]
@@ -203,7 +203,7 @@
     {
       "id": "more-options",
       "title": "More options",
-      "lead": "Jar sprouts are eaten whole. Microgreens are cut above the mix. This site has not grown this seed.",
+      "lead": "Jar sprouts are eaten whole. Microgreens are cut above the mix.",
       "cards": [
         "tl-sprouts"
       ]

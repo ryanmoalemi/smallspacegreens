@@ -299,7 +299,7 @@
     {
       "id": "seed-and-kits",
       "title": "Seed and kits",
-      "lead": "True Leaf Market leads this group. A small packet and a larger bag are different prices, so these cards are not sorted into a dollar group. This site has not grown these products.",
+      "lead": "True Leaf Market leads this group. A small packet and a larger bag are different prices, so these cards are not sorted into a dollar group.",
       "cards": [
         "tl-radish",
         "tl-broccoli",
@@ -309,7 +309,7 @@
     {
       "id": "band-25-60",
       "title": "$25 to $60",
-      "lead": "LetPot leads this group. The current price stays on the store page. This site has not grown these products.",
+      "lead": "LetPot leads this group. The current price stays on the store page.",
       "cards": [
         "letpot-mini",
         "mizuna-ceramic"
@@ -318,7 +318,7 @@
     {
       "id": "splurge",
       "title": "Splurge",
-      "lead": "Larger LetPot gardens. The current price stays on the store page. This site has not grown these products.",
+      "lead": "Larger LetPot gardens. The current price stays on the store page.",
       "cards": [
         "letpot-air",
         "letpot-lite",

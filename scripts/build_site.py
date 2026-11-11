@@ -1202,23 +1202,23 @@ LETPOT_MODELS = {
 
 LETPOT_BOXES = {
     "apartment": (
-        "A countertop hydroponic garden is a different setup from a tray of mix. These notes come from LetPot's product pages. This site has not grown these units.",
+        "A countertop hydroponic garden is a different setup from a tray of mix. These notes come from LetPot's product pages.",
         ["mini", "lite", "max"],
     ),
     "windowsill": (
-        "If a tray of mix is a poor fit for the sill, a small countertop garden keeps the water and light in one unit. This note comes from LetPot's product page. This site has not grown this unit.",
+        "If a tray of mix is a poor fit for the sill, a small countertop garden keeps the water and light in one unit. This note comes from LetPot's product page.",
         ["mini"],
     ),
     "seed-starting": (
-        "These gardens grow plants in the unit. They do not raise transplants for a balcony. These notes come from LetPot's product pages. This site has not grown these units.",
+        "These gardens grow plants in the unit. They do not raise transplants for a balcony. These notes come from LetPot's product pages.",
         ["mini", "lite"],
     ),
     "cost": (
-        "A hydroponic countertop garden is a different purchase from a microgreen tray kit or a stack of trays. Prices are not listed here. These notes come from LetPot's product pages. This site has not grown these units.",
+        "A hydroponic countertop garden is a different purchase from a microgreen tray kit or a stack of trays. Prices are not listed here. These notes come from LetPot's product pages.",
         ["mini", "se", "max"],
     ),
     "balcony": (
-        "If the balcony is too dark, or you would rather grow inside, a countertop garden is a different project from an outdoor pot. These notes come from LetPot's product pages. This site has not grown these units.",
+        "If the balcony is too dark, or you would rather grow inside, a countertop garden is a different project from an outdoor pot. These notes come from LetPot's product pages.",
         ["mini", "air"],
     ),
 }
@@ -1255,27 +1255,27 @@ TRUELEAF_LINKS = {
 
 TRUELEAF_BOXES = {
     "apartment": (
-        "A first tray needs microgreen seed, and some people start with a kit. Sprouting seed is a different food from the microgreens on this page. These notes describe True Leaf Market collections. This site has not grown seed from them.",
+        "A first tray needs microgreen seed, and some people start with a kit. Sprouting seed is a different food from the microgreens on this page. These notes describe True Leaf Market collections.",
         ["micro-seed", "micro-kits", "sprout-seed"],
     ),
     "windowsill": (
-        "A windowsill tray needs microgreen seed. A kit is a separate choice. These notes describe True Leaf Market collections. This site has not grown seed from them.",
+        "A windowsill tray needs microgreen seed. A kit is a separate choice. These notes describe True Leaf Market collections.",
         ["micro-seed", "micro-kits"],
     ),
     "seed-starting": (
-        "The collection below is microgreens seed. It is not seed for the vegetable transplants on this page. This note describes a True Leaf Market collection. This site has not grown seed from it.",
+        "The collection below is microgreens seed. It is not seed for the vegetable transplants on this page. This note describes a True Leaf Market collection.",
         ["micro-seed"],
     ),
     "density": (
-        "After you have a gram amount, the seed still has to be for an edible microgreen crop. This note describes a True Leaf Market collection. This site has not grown seed from it.",
+        "After you have a gram amount, the seed still has to be for an edible microgreen crop. This note describes a True Leaf Market collection.",
         ["micro-seed"],
     ),
     "pea": (
-        "Radish and pea are different seed. This note describes a True Leaf Market collection. This site has not grown seed from it.",
+        "Radish and pea are different seed. This note describes a True Leaf Market collection.",
         ["micro-seed"],
     ),
     "cost": (
-        "A kit and a bag of seed are different purchases. Prices are not listed here. These notes describe True Leaf Market collections. This site has not grown seed from them.",
+        "A kit and a bag of seed are different purchases. Prices are not listed here. These notes describe True Leaf Market collections.",
         ["micro-kits", "micro-seed", "sprout-kits"],
     ),
 }
@@ -1311,26 +1311,50 @@ def take_slug(used: set[str], choices: list[str]) -> str:
     raise SystemExit(f"No unused photo left for {choices}")
 
 
-def supply_fact_card(slug: str, title_html: str, note: str) -> str:
+# One short line per card, cut down from the store's own product or collection page wording.
+LETPOT_SHORT = {
+    "mini": "5 pods, app control, a 1.5L tank, and a scheduled light.",
+    "lite": "12 pods, app control, a 24W LED, and a 5.5L tank.",
+    "se": "12 pods, a 21-inch adjustable LED, and a 5.5L tank.",
+    "air": "10 pods, full-spectrum LEDs, and adjustable height.",
+    "max": "21 pods, app control, and automatic water refilling.",
+}
+TRUELEAF_SHORT = {
+    "micro-seed": "Organic and conventional seed, bulk sizes too.",
+    "micro-kits": "Kits and supplies for growing at home.",
+    "sprout-seed": "Organic and conventional seed for sprouting.",
+    "sprout-kits": "Sprouting seed, sprouters, and supplies.",
+}
+
+
+def supply_pick_card(slug: str, brand: str, name: str, line: str, url: str, button: str) -> str:
+    """The shared product card: photo, one-line credit, name, one short line, store button."""
     alt, author, *_rest = shop_placements.SUPPLY_IMAGES[slug]
     stem = shop_placements.photo_stem(slug)
     official = slug.startswith("letpot-")
     img_class = ' class="letpot-photo"' if official else ""
     if official:
-        credit = '<p class="fact-credit">Photo: LetPot</p>'
+        caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
     else:
-        credit = (
-            f'<p class="fact-credit">Credit: '
-            f'<a href="/photo-credits/#supply-{slug}">{esc(author)}</a></p>'
+        caption = (
+            f'<figcaption class="pick-credit">Credit: '
+            f'<a href="/photo-credits/#supply-{slug}">{esc(author)}</a></figcaption>'
         )
+    if len(line) > 70:
+        raise SystemExit(f"Card line for {name} is {len(line)} characters; keep it to a few words")
     return (
-        '<article class="fact-card">'
-        f'<img{img_class} src="/assets/products/{stem}-600.webp" width="600" height="600" '
-        f'alt="{esc(alt)}" loading="lazy" decoding="async">'
-        f"{credit}"
-        f"<h3>{title_html}</h3>"
-        f'<p class="fact-note">{esc(note)}</p>'
-        "</article>"
+        '<li class="pick">'
+        f'<figure class="pick-media{" pick-media-letpot" if official else ""}">'
+        f'<img{img_class} src="/assets/products/{stem}-600.webp" '
+        f'srcset="/assets/products/{stem}-300.webp 300w, /assets/products/{stem}-600.webp 600w" '
+        'sizes="(min-width: 1024px) 240px, (min-width: 600px) 30vw, 92vw" '
+        f'width="600" height="600" alt="{esc(alt)}" loading="lazy" decoding="async">'
+        f"{caption}</figure>"
+        f'<h3 class="pick-name"><span class="pick-brand">{esc(brand)}</span> {esc(name)}</h3>'
+        f'<p class="pick-why">{esc(line)}</p>'
+        f'<a class="pick-cta" href="{esc(url)}" rel="sponsored nofollow noopener" target="_blank">'
+        f'{esc(button)}<span class="sr-only"> (opens in a new tab)</span></a>'
+        "</li>"
     )
 
 
@@ -1340,7 +1364,7 @@ def affiliate_box(heading_id: str, heading: str, lead: str, cards: str) -> str:
         f'<aside class="note affiliate-box" aria-labelledby="{heading_id}">'
         f'<h2 id="{heading_id}">{heading}</h2>'
         f"<p>{esc(lead)}</p>"
-        f'<div class="fact-grid fact-grid-2">{cards}</div>'
+        f'<ul class="pick-grid" role="list">{cards}</ul>'
         "</aside></section>"
     )
 
@@ -1358,8 +1382,8 @@ def letpot_box(name: str, used: set[str]) -> str:
     lead, keys = LETPOT_BOXES[name]
     cards = []
     for key in keys:
-        label, blurb = LETPOT_MODELS[key]
-        cards.append(supply_fact_card(take_slug(used, [f"letpot-{key}"]), letpot_link(key, label), blurb))
+        label, _blurb = LETPOT_MODELS[key]
+        cards.append(supply_pick_card(take_slug(used, [f"letpot-{key}"]), "LetPot", label, LETPOT_SHORT[key], LETPOT_URLS[key], "See at LetPot"))
     return affiliate_box("letpot-choice", "If you'd rather not deal with trays and soil", lead, "".join(cards))
 
 
@@ -1367,8 +1391,8 @@ def trueleaf_box(name: str, used: set[str]) -> str:
     lead, keys = TRUELEAF_BOXES[name]
     cards = []
     for key in keys:
-        label, blurb = TRUELEAF_LINKS[key]
-        cards.append(supply_fact_card(take_slug(used, TRUELEAF_CARD_PHOTOS[key]), trueleaf_link(key, label), blurb))
+        label, _blurb = TRUELEAF_LINKS[key]
+        cards.append(supply_pick_card(take_slug(used, TRUELEAF_CARD_PHOTOS[key]), "True Leaf Market", label, TRUELEAF_SHORT[key], TRUELEAF_URLS[key], "See at True Leaf"))
     return affiliate_box("trueleaf-choice", "If you need seed or a kit", lead, "".join(cards))
 
 
@@ -2005,11 +2029,11 @@ def seed_chart() -> str:
     names = ", ".join(row["name"].lower() for row in sample)
     items.append(
         f'<li class="seed-photo-row seed-row-sample">{list_photo(CALC_CHART_PHOTOS["sample"])}<div class="seed-row">'
-        '<span class="seed-name">Maryland example</span>'
+        '<span class="seed-name">Maryland setup</span>'
         f'<span class="seed-grams">{low} to {high} g</span>'
         '<span class="seed-bar seed-bar-sample" aria-hidden="true">'
         f'<span style="width:{round(100 * high / max_g, 1)}%"><span style="width:{round(100 * low / high, 1)}%"></span></span></span>'
-        f'<span class="seed-detail">Not a crop rate. A general broadcast example the calculator offers for {esc(names)}.</span>'
+        f'<span class="seed-detail">Not a crop rate. A general broadcast rate the calculator offers for {esc(names)}.</span>'
         '</div></li>'
     )
     return (
@@ -2018,7 +2042,7 @@ def seed_chart() -> str:
         '<p class="seed-chart-sub">Utah State crop rates used by the calculator, lightest to heaviest.</p>'
         '<ul class="seed-rows" role="list">' + "".join(items) + '</ul>'
         '<figcaption class="fact-credit">Source: Utah State University Extension grams per 1020 tray. '
-        "The tan bar is University of Maryland Extension's general broadcast example for crops without a Utah State rate.</figcaption>"
+        "The tan bar is University of Maryland Extension's general broadcast rate for crops without a Utah State rate.</figcaption>"
         '</figure>'
     )
 
@@ -2133,9 +2157,83 @@ def short_credit_name(author: str) -> str:
     return SHORT_CREDIT_NAMES.get(author, author)
 
 
-def check_no_example_photo(document: str, rel: str) -> None:
-    if re.search(r"example photo", document, re.I):
-        raise SystemExit(f'{rel}: contains "Example photo" text, which Ryan asked never to show')
+# Ryan (2026-11-11): "Rename them, no Example wording anywhere". Visible text and the
+# alt, aria-label, title, placeholder, and meta description text may not use the word.
+# Code (script, style, code, pre, ids, classes, names) and URLs (href, src, srcset,
+# action) are not visible and are skipped. Any phrase added here is printed as a flag
+# on every build so it is never silently allowed.
+EXAMPLE_ALLOWLIST: list[str] = []
+EXAMPLE_WORD = re.compile(r"\bexamples?\b", re.I)
+VISIBLE_ATTRS = {"alt", "aria-label", "title", "placeholder", "value", "label"}
+
+
+class VisibleTextAudit(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.code_depth = 0
+        self.hits: list[str] = []
+
+    def _check(self, text: str, where: str) -> None:
+        if EXAMPLE_WORD.search(text) and not any(a in text for a in EXAMPLE_ALLOWLIST):
+            self.hits.append(f"{where}: {' '.join(text.split())[:120]}")
+
+    def handle_starttag(self, tag, attrs):
+        if tag in {"script", "style", "code", "pre", "template"}:
+            self.code_depth += 1
+        values = dict(attrs)
+        for name, value in attrs:
+            if value and name in VISIBLE_ATTRS and not (tag == "input" and values.get("type") == "hidden"):
+                self._check(value, f"<{tag} {name}>")
+        if tag == "meta" and values.get("content") and (values.get("name") or values.get("property") or "").endswith(("description", "title")):
+            self._check(values["content"], f"<meta {values.get('name') or values.get('property')}>")
+
+    def handle_endtag(self, tag):
+        if tag in {"script", "style", "code", "pre", "template"} and self.code_depth:
+            self.code_depth -= 1
+
+    def handle_data(self, data):
+        if not self.code_depth and data.strip():
+            self._check(data, "text")
+
+
+
+CARD_HEADINGS = (".pick h3.pick-name", ".fact-card h3", ".route-picks .pick h3.pick-name")
+
+
+def check_card_heading_margin(css: str) -> None:
+    """Card names always keep at least 6px below them (Ryan, 2026-11-11). The browser check
+    scripts/check_cards.py measures the real gap; this catches a CSS edit before it ships."""
+    for heading in CARD_HEADINGS:
+        bottom = None
+        for selectors, body in re.findall(r"([^{}]+)\{([^{}]*)\}", css):
+            if heading not in [x.strip() for x in selectors.split(",")]:
+                continue
+            for prop, value in re.findall(r"(margin(?:-bottom)?):([^;}]+)", body):
+                if prop == "margin-bottom":
+                    bottom = value.strip()
+                else:
+                    parts = value.split()
+                    bottom = parts[2] if len(parts) >= 3 else parts[0]
+        px = float(re.sub(r"px$", "", bottom)) if bottom and re.match(r"^[\d.]+(px)?$", bottom) else 0.0
+        if px < 6:
+            raise SystemExit(f"Card heading {heading} has {bottom or 'no'} bottom margin; keep at least 6px")
+
+def check_no_example_word(document: str, rel: str) -> None:
+    audit = VisibleTextAudit()
+    audit.feed(document)
+    if audit.hits:
+        raise SystemExit(f'{rel}: visible "example" wording, which Ryan asked never to show:\n  ' + "\n  ".join(audit.hits))
+
+
+def check_no_example_in_scripts() -> None:
+    """Strings the site's own scripts write onto the page (sentences, not ids) follow the same rule."""
+    for path in sorted((ROOT / "src").glob("*.js")):
+        for literal in re.findall(r'"((?:[^"\\\n]|\\.)*)"|\'((?:[^\'\\\n]|\\.)*)\'', path.read_text()):
+            text = literal[0] or literal[1]
+            if " " in text and EXAMPLE_WORD.search(text) and not any(a in text for a in EXAMPLE_ALLOWLIST):
+                raise SystemExit(f'{path.relative_to(ROOT)}: visible "example" wording in a script string: {text[:120]}')
+    for phrase in EXAMPLE_ALLOWLIST:
+        print(f'FLAG: "example" allowlist entry in use, review it: {phrase}')
 
 
 def check_step_photos(document: str, rel: str) -> None:
@@ -2828,6 +2926,8 @@ def main() -> None:
     check_card_contrast(css)
     check_chrome_text_size(css)
     check_credit_line_css(css)
+    check_no_example_in_scripts()
+    check_card_heading_margin(css)
     css_path = ROOT / "css" / "styles.css"
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(css + "\n")
@@ -2848,7 +2948,7 @@ def main() -> None:
         document = choose_related_photos(document)
         document = add_nav_photos(document, rel)
         document = normalize_photo_credits(document, credit_licenses, rel)
-        check_no_example_photo(document, rel)
+        check_no_example_word(document, rel)
         check_copy(Path(rel), document)
         if re.search(r"<\s*table\b", document, flags=re.I):
             raise SystemExit(f"{rel}: page outputs a table")

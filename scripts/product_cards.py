@@ -111,8 +111,8 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
         blocks.append(
             f'<section class="picks" id="{esc(section["id"])}" aria-labelledby="{esc(section["id"])}-title">'
             f'<h2 id="{esc(section["id"])}-title">{esc(section["title"])}</h2>'
-            f'<p class="picks-lead">{esc(section["lead"])}</p>'
-            '<ul class="pick-grid" role="list">'
+            + (f'<p class="picks-lead">{esc(section["lead"])}</p>' if section.get("lead") else "")
+            + '<ul class="pick-grid" role="list">'
             + "".join(cards_html)
             + "</ul></section>"
         )

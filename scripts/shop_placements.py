@@ -117,7 +117,7 @@ AIR_NOTE = "A 10-pod garden with its own light."
 SHOP_PAGES: dict[str, dict] = {
     "apartment": {
         "heading": "Supplies for a first tray",
-        "lead": "Examples for the list above. This site has not used them.",
+        "lead": "",
         "rows": [
             amazon("B07KRMP93C", KIT_SPONGE, "Trays, seed, and coir in one kit."),
             amazon("B07NKSKMCN", BF_1010_HOLES, "A smaller tray when a 1020 does not fit."),
@@ -131,7 +131,7 @@ SHOP_PAGES: dict[str, dict] = {
     },
     "cost": {
         "heading": "Kits and tray supplies to price",
-        "lead": "Options for the comparison above, not a ranking. Prices are not listed here. This site has not used these products. Enter the price you would actually pay.",
+        "lead": "Options for the comparison above, not a ranking. Prices are not listed here. Enter the price you would actually pay.",
         "rows": [
             amazon("B07KRMP93C", KIT_SPONGE, "Trays, seed, and coir in one kit."),
             amazon("B087RQWPBK", KIT_BUDDY, "A 15 by 7 in counter kit."),
@@ -145,11 +145,11 @@ SHOP_PAGES: dict[str, dict] = {
     },
     "density": {
         "heading": "A scale, trays, and seed",
-        "lead": "The rates above are dry grams. This site has not used these products. On True Leaf Market, check the bag weight against the rate. Confirm other prices on the seller page.",
+        "lead": "The rates above are dry grams. On True Leaf Market, check the bag weight against the rate. Confirm other prices on the seller page.",
         "rows": [
             amazon("B08BPTXK4L", SCALE, "Reads to 0.1 g for a small tray."),
             amazon("B06XZFLY9P", BF_1020_HOLES, "The 10 by 20 in reference tray."),
-            amazon("B07NKSKMCN", BF_1010_HOLES, "The half-area 10 by 10 in example."),
+            amazon("B07NKSKMCN", BF_1010_HOLES, "The half-area 10 by 10 in tray."),
             amazon("B00VOEQTPG", TRAY_1010_SOLID_5, "A solid tray under the one with holes."),
             seed(RADISH, "Radish is 42 g on a 1020."),
             seed(PEA, "Pea is 150 g on a 1020, weighed dry."),
@@ -159,7 +159,7 @@ SHOP_PAGES: dict[str, dict] = {
     },
     "pea": {
         "heading": "Trays and seed for this comparison",
-        "lead": "Radish at 42 g with no presoak, and pea at 150 g after a soak, on the same 10 by 20 in tray. Each card opens that crop's True Leaf page. This site has not used these products.",
+        "lead": "Radish at 42 g with no presoak, and pea at 150 g after a soak, on the same 10 by 20 in tray. Each card opens that crop's True Leaf page.",
         "rows": [
             seed_product(RADISH, "42 g on a 10 by 20 in tray. About 21 g on a 10 by 10.", TRUELEAF_RADISH, "See radish seed"),
             seed_product(PEA, "150 g on a 10 by 20 in tray. About 75 g on a 10 by 10. Weigh dry, then soak.", TRUELEAF_PEA, "See pea seed"),
@@ -170,7 +170,7 @@ SHOP_PAGES: dict[str, dict] = {
     },
     "windowsill": {
         "heading": "Supplies that fit a sill",
-        "lead": "A 5 by 5 or 10 by 10 in tray often fits when a 10 by 20 in flat does not. Add a lamp only if stems lean or stay pale. This site has not used these products.",
+        "lead": "A 5 by 5 or 10 by 10 in tray often fits when a 10 by 20 in flat does not. Add a lamp only if stems lean or stay pale.",
         "rows": [
             amazon("B0DGF8Z1Z6", KIT_MIZUNA, "Two ceramic trays with coir and seeds."),
             amazon("B07D7JDST2", KIT_GREEN, "Three 10 by 10 trays for a sill."),
@@ -184,7 +184,7 @@ SHOP_PAGES: dict[str, dict] = {
     },
     "seed-starting": {
         "heading": "Supplies for indoor transplants",
-        "lead": "These are for transplants, not a microgreens harvest. Sterile mix, pots with holes, and light close to the leaves. This site has not used these products.",
+        "lead": "These are for transplants, not a microgreens harvest. Sterile mix, pots with holes, and light close to the leaves.",
         "rows": [
             amazon("B075PV83JQ", KIT_CELLS, "Tray, dome, and cells, two sets."),
             amazon("B089KDN3HS", SUNPACK, "A solid tray, dome, and 72 cells."),
@@ -198,7 +198,7 @@ SHOP_PAGES: dict[str, dict] = {
     },
     "bottom": {
         "heading": "Trays and medium for this method",
-        "lead": "Nest a tray with holes in a tray without holes, add a shallow layer of water, then pour off the extra. This site has not used these products.",
+        "lead": "Nest a tray with holes in a tray without holes, add a shallow layer of water, then pour off the extra.",
         "rows": [
             amazon("B06XZFLY9P", BF_1020_HOLES, "The drained growing tray."),
             amazon("B07DT72V6H", BF_1020_SOLID, "The solid tray that catches water."),
@@ -212,7 +212,7 @@ SHOP_PAGES: dict[str, dict] = {
     },
     "balcony": {
         "heading": "Pots and mix for these layouts",
-        "lead": "Layout A is two 8 in pots of lettuce plus a small herb pot. Layout B adds a 10 in pot if you have about 4 hours of sun. Every pot needs a hole. This site has not used these products. Check balcony load before adding wet mix.",
+        "lead": "Layout A is two 8 in pots of lettuce plus a small herb pot. Layout B adds a 10 in pot if you have about 4 hours of sun. Every pot needs a hole. Check balcony load before adding wet mix.",
         "rows": [
             amazon("B0DCSH7T1R", POTS_8, "Two pots with saucers, one lettuce each."),
             amazon("B07W31GG31", POTS_8_10, "An 8 in pot and a 10 in pot."),
@@ -240,7 +240,7 @@ SHOP_PAGES: dict[str, dict] = {
     },
     "calculator": {
         "heading": "A scale, trays, and seed",
-        "lead": "The result is a dry gram weight. These are ways to measure it, hold it, and buy seed that can cover it. This site has not used these products. Check bag weight on True Leaf Market.",
+        "lead": "The result is a dry gram weight. These are ways to measure it, hold it, and buy seed that can cover it. Check bag weight on True Leaf Market.",
         "rows": [
             amazon("B08BPTXK4L", SCALE, "Weighs the gram result."),
             amazon("B06XZFLY9P", BF_1020_HOLES, "The tool's default 10 by 20 in tray."),
@@ -436,8 +436,8 @@ def render_shop(key: str) -> str:
     return (
         '<section class="picks" id="matching-supplies">'
         f"<h2>{esc(page['heading'])}</h2>"
-        f'<p class="picks-lead">{esc(page["lead"])}</p>'
-        '<ul class="pick-grid" role="list">'
+        + (f'<p class="picks-lead">{esc(page["lead"])}</p>' if page["lead"] else "")
+        + '<ul class="pick-grid" role="list">'
         + "".join(cards)
         + "</ul></section>"
     )
