@@ -120,3 +120,6 @@ thead .list-photo{width:72px;margin-bottom:9px}
 .checklist-print{margin:0 0 28px}
 .checklist-supplies{font-size:14px;color:var(--muted);margin:24px 0 0}
 @media print{.crumbs,.skip,.checklist-page .dek,.checklist-print,.checklist-note,.checklist-supplies,.checklist-page .signup{display:none!important}.checklist-page .list-photo .photo-credit,.checklist-page .checklist .list-photo .photo-credit{font-size:9pt!important}.checklist-page .photo-step-number{font-size:9pt}.checklist-page .checklist .photo-list>.photo-list-item:has(img){grid-template-columns:52px minmax(0,1fr)}.checklist-page h1{font-size:22pt;margin:0 0 8pt}.checklist-page h2{font-size:15pt;margin:14pt 0 6pt;break-after:avoid}}
+/* Setup guide supply lists: photo credits stay at 12px on phones. */
+.supply-checks .list-photo .photo-credit{font-size:12px;line-height:1.35}
+@media print{.supply-checks .list-photo .photo-credit{font-size:9pt!important}}
