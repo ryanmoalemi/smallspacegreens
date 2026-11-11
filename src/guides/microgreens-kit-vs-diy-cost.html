@@ -87,15 +87,29 @@
 <noscript><p class="cost-no-script">To total the worksheet without JavaScript, add the base price, other supplies, and delivery plus tax for each route. Keep the next-planting cost separate.</p></noscript>
 <div class="cost-results" id="cost-compare-results" hidden>
 <h3 id="cost-results-title" tabindex="-1">Your comparison</h3>
-<table class="cost-result-table">
-<caption>Calculated from your prices. Next-planting costs are separate from the pay-today total.</caption>
-<thead><tr><th scope="col">Cost or quantity</th><th scope="col">Kit</th><th scope="col">DIY</th></tr></thead>
-<tbody>
-<tr class="cost-today"><th scope="row">Pay today</th><td id="cost-kit-today-result">Enter prices</td><td id="cost-diy-today-result">Enter prices</td></tr>
-<tr><th scope="row">Plantings included</th><td id="cost-kit-plantings-result">Enter prices</td><td id="cost-diy-plantings-result">Enter prices</td></tr>
-<tr><th scope="row">Next planting<br>Consumables</th><td id="cost-kit-refill-result">Unknown</td><td id="cost-diy-refill-result">Unknown</td></tr>
-</tbody>
-</table>
+<p class="fact-credit">Calculated from your prices. Next-planting costs are separate from the pay-today total.</p>
+<div class="fact-grid fact-grid-2 cost-result-cards">
+<article class="fact-card">
+<img src="/assets/products/supply-ceramic-600.webp" width="600" height="600" alt="A leafy plant in a ceramic pot" loading="lazy" decoding="async">
+<p class="fact-credit">Example photo · <a href="/photo-credits/#supply-ceramic">W.carter</a></p>
+<h3>Kit</h3>
+<div class="stat-tiles">
+<p class="stat-tile cost-today"><span class="stat-label">Pay today</span><strong id="cost-kit-today-result">Enter prices</strong></p>
+<p class="stat-tile"><span class="stat-label">Plantings included</span><strong id="cost-kit-plantings-result">Enter prices</strong></p>
+<p class="stat-tile"><span class="stat-label">Next planting, consumables</span><strong id="cost-kit-refill-result">Unknown</strong></p>
+</div>
+</article>
+<article class="fact-card">
+<img src="/assets/products/supply-coir-pile-600.webp" width="600" height="600" alt="Loose coco coir" loading="lazy" decoding="async">
+<p class="fact-credit">Example photo · <a href="/photo-credits/#supply-coir-pile">Victor M. Vicente Selvas</a></p>
+<h3>DIY</h3>
+<div class="stat-tiles">
+<p class="stat-tile cost-today"><span class="stat-label">Pay today</span><strong id="cost-diy-today-result">Enter prices</strong></p>
+<p class="stat-tile"><span class="stat-label">Plantings included</span><strong id="cost-diy-plantings-result">Enter prices</strong></p>
+<p class="stat-tile"><span class="stat-label">Next planting, consumables</span><strong id="cost-diy-refill-result">Unknown</strong></p>
+</div>
+</article>
+</div>
 <p class="cost-difference" id="cost-difference"></p>
 <div class="cost-actions"><button class="button secondary" type="button" id="cost-copy" disabled>Copy comparison</button></div>
 <p class="cost-status" id="cost-copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
@@ -103,14 +117,54 @@
 </div>
 <details class="cost-help"><summary>What to include in each setup</summary>
 <p>Use the exact kit or tray variant. Include every supplier's delivery charge and tax, and count only complete plantings the basket can supply.</p>
-<div class="responsive-table" role="region" aria-label="What to include in your kit and DIY costs" tabindex="0">
-<table><caption>What belongs in each basket.</caption><thead><tr><th scope="col">Include</th><th scope="col">Kit route</th><th scope="col">DIY route</th></tr></thead><tbody>
-<tr data-photo="tray"><th scope="row">Container and drainage</th><td data-label="Kit route">Is the tray included? Does it also catch water?</td><td data-label="DIY route">Price the growing tray and solid watering tray, or a suitable container you own.</td></tr>
-<tr data-photo="seeds"><th scope="row">Seeds and medium</th><td data-label="Kit route">Count the included plantings and note the crop.</td><td data-label="DIY route">Include the whole seed packet and pack of mix or mats you must buy.</td></tr>
-<tr data-photo="light"><th scope="row">Light and small tools</th><td data-label="Kit route">Check rather than assume that a lamp, timer, or mister is supplied.</td><td data-label="DIY route">Add only what your space needs and you do not already have.</td></tr>
-<tr data-photo="trays"><th scope="row">Delivery and tax</th><td data-label="Kit route">Use the final checkout amount for your address.</td><td data-label="DIY route">Include delivery from every supplier you use.</td></tr>
-<tr data-photo="sowing"><th scope="row">Next planting</th><td data-label="Kit route">Check refill compatibility, pack size, and shipping.</td><td data-label="DIY route">Calculate seed used and add the medium and other consumables.</td></tr>
-</tbody></table></div>
+<p class="fact-credit">What belongs in each basket.</p>
+<div class="fact-grid">
+<article class="fact-card">
+<img src="/assets/products/supply-pea-shoots-600.webp" width="600" height="600" alt="Snow pea shoots in a container on a counter" loading="lazy" decoding="async">
+<p class="fact-credit">Example photo · <a href="/photo-credits/#supply-pea-shoots">Daderot</a></p>
+<h3>Container and drainage</h3>
+<div class="stat-tiles">
+<p class="stat-tile"><span class="stat-label">Kit route</span><strong>Is the tray included? Does it also catch water?</strong></p>
+<p class="stat-tile"><span class="stat-label">DIY route</span><strong>Price the growing tray and solid watering tray, or a suitable container you own.</strong></p>
+</div>
+</article>
+<article class="fact-card">
+<img src="/assets/products/supply-promix-600.webp" width="600" height="600" alt="A bag of Pro-Mix potting soil" loading="lazy" decoding="async">
+<p class="fact-credit">Example photo · <a href="/photo-credits/#supply-promix">Unknown</a></p>
+<h3>Seeds and medium</h3>
+<div class="stat-tiles">
+<p class="stat-tile"><span class="stat-label">Kit route</span><strong>Count the included plantings and note the crop.</strong></p>
+<p class="stat-tile"><span class="stat-label">DIY route</span><strong>Include the whole seed packet and pack of mix or mats you must buy.</strong></p>
+</div>
+</article>
+<article class="fact-card">
+<img src="/assets/products/supply-grow-light-600.webp" width="600" height="600" alt="Potted plants under a grow light" loading="lazy" decoding="async">
+<p class="fact-credit">Example photo · <a href="/photo-credits/#supply-grow-light">Asdfjrjjj</a></p>
+<h3>Light and small tools</h3>
+<div class="stat-tiles">
+<p class="stat-tile"><span class="stat-label">Kit route</span><strong>Check rather than assume that a lamp, timer, or mister is supplied.</strong></p>
+<p class="stat-tile"><span class="stat-label">DIY route</span><strong>Add only what your space needs and you do not already have.</strong></p>
+</div>
+</article>
+<article class="fact-card">
+<img src="/assets/products/supply-scale-600.webp" width="600" height="600" alt="A digital kitchen scale on a counter" loading="lazy" decoding="async">
+<p class="fact-credit">Example photo · <a href="/photo-credits/#supply-scale">Ser Amantio di Nicolao</a></p>
+<h3>Delivery and tax</h3>
+<div class="stat-tiles">
+<p class="stat-tile"><span class="stat-label">Kit route</span><strong>Use the final checkout amount for your address.</strong></p>
+<p class="stat-tile"><span class="stat-label">DIY route</span><strong>Include delivery from every supplier you use.</strong></p>
+</div>
+</article>
+<article class="fact-card">
+<img src="/assets/products/supply-spray-600.webp" width="600" height="600" alt="A plastic bottle with a hose spray head" loading="lazy" decoding="async">
+<p class="fact-credit">Example photo · <a href="/photo-credits/#supply-spray">Rlsheehan</a></p>
+<h3>Next planting</h3>
+<div class="stat-tiles">
+<p class="stat-tile"><span class="stat-label">Kit route</span><strong>Check refill compatibility, pack size, and shipping.</strong></p>
+<p class="stat-tile"><span class="stat-label">DIY route</span><strong>Calculate seed used and add the medium and other consumables.</strong></p>
+</div>
+</article>
+</div>
 </details>
 </section>
 <h2>Checkout spend versus seed you actually sow</h2>
@@ -122,18 +176,51 @@
 <details class="evidence"><summary>Dated seed-cost example and calculation notes</summary>
 <h3>Published snapshot, and a recalculation</h3>
 <p>Utah State printed seed cost per pound and per 1020 tray as of January 8, 2026, at a bulk rate of 5 pounds or more. The per-tray column below is what that page printed. It is not this site's math, and it is not a current offer.</p>
-<div class="responsive-table">
-<table>
-<thead>
-<tr><th>Crop</th><th>Grams</th><th>Printed price per pound</th><th>Printed cost per tray</th><th>This site's arithmetic</th></tr>
-</thead>
-<tbody>
-<tr data-photo="peas"><td data-label="Crop">Pea</td><td data-label="Grams">150</td><td data-label="Printed price per pound">$3.78</td><td data-label="Printed cost per tray">$1.16</td><td data-label="This site's arithmetic">$1.25</td></tr>
-<tr data-photo="radish"><td data-label="Crop">Radish, the $10.19 line</td><td data-label="Grams">42</td><td data-label="Printed price per pound">$10.19</td><td data-label="Printed cost per tray">$0.88</td><td data-label="This site's arithmetic">$0.94</td></tr>
-<tr data-photo="arugula"><td data-label="Crop">Arugula</td><td data-label="Grams">10</td><td data-label="Printed price per pound">$8.22</td><td data-label="Printed cost per tray">$0.17</td><td data-label="This site's arithmetic">$0.18</td></tr>
-<tr data-photo="sunflower"><td data-label="Crop">Sunflower</td><td data-label="Grams">48</td><td data-label="Printed price per pound">$4.54</td><td data-label="Printed cost per tray">$0.45</td><td data-label="This site's arithmetic">$0.48</td></tr>
-</tbody>
-</table>
+<div class="fact-grid fact-grid-2">
+<article class="fact-card">
+<img src="/assets/products/supply-pea-sack-600.webp" width="600" height="600" alt="Sprouted garden peas in a cloth sack" loading="lazy" decoding="async">
+<p class="fact-credit">Example photo · <a href="/photo-credits/#supply-pea-sack">Yarzaryeni</a></p>
+<h3>Pea</h3>
+<div class="stat-tiles">
+<p class="stat-tile"><span class="stat-label">Grams</span><strong>150</strong></p>
+<p class="stat-tile"><span class="stat-label">Printed price per pound</span><strong>$3.78</strong></p>
+<p class="stat-tile"><span class="stat-label">Printed cost per tray</span><strong>$1.16</strong></p>
+<p class="stat-tile"><span class="stat-label">This site's arithmetic</span><strong>$1.25</strong></p>
+</div>
+</article>
+<article class="fact-card">
+<img src="/assets/products/supply-radish-600.webp" width="600" height="600" alt="A young chonggak radish seedling" loading="lazy" decoding="async">
+<p class="fact-credit">Example photo · <a href="/photo-credits/#supply-radish">이태수</a></p>
+<h3>Radish, the $10.19 line</h3>
+<div class="stat-tiles">
+<p class="stat-tile"><span class="stat-label">Grams</span><strong>42</strong></p>
+<p class="stat-tile"><span class="stat-label">Printed price per pound</span><strong>$10.19</strong></p>
+<p class="stat-tile"><span class="stat-label">Printed cost per tray</span><strong>$0.88</strong></p>
+<p class="stat-tile"><span class="stat-label">This site's arithmetic</span><strong>$0.94</strong></p>
+</div>
+</article>
+<article class="fact-card">
+<img src="/assets/photos/thumbs/crop-arugula.jpg" width="320" height="320" alt="A mature arugula plant growing outdoors." loading="lazy" decoding="async">
+<p class="fact-credit">Example photo · <a href="/photo-credits/#crop-arugula">Eric Bear Albrecht</a></p>
+<h3>Arugula</h3>
+<div class="stat-tiles">
+<p class="stat-tile"><span class="stat-label">Grams</span><strong>10</strong></p>
+<p class="stat-tile"><span class="stat-label">Printed price per pound</span><strong>$8.22</strong></p>
+<p class="stat-tile"><span class="stat-label">Printed cost per tray</span><strong>$0.17</strong></p>
+<p class="stat-tile"><span class="stat-label">This site's arithmetic</span><strong>$0.18</strong></p>
+</div>
+</article>
+<article class="fact-card">
+<img src="/assets/products/supply-sunflower-600.webp" width="600" height="600" alt="Sunflower microgreens in a small clear tray" loading="lazy" decoding="async">
+<p class="fact-credit">Example photo · <a href="/photo-credits/#supply-sunflower">Pannet</a></p>
+<h3>Sunflower</h3>
+<div class="stat-tiles">
+<p class="stat-tile"><span class="stat-label">Grams</span><strong>48</strong></p>
+<p class="stat-tile"><span class="stat-label">Printed price per pound</span><strong>$4.54</strong></p>
+<p class="stat-tile"><span class="stat-label">Printed cost per tray</span><strong>$0.45</strong></p>
+<p class="stat-tile"><span class="stat-label">This site's arithmetic</span><strong>$0.48</strong></p>
+</div>
+</article>
 </div>
 <p>The arithmetic is grams times the printed price per pound, divided by 453.59237. Pea is 150 times 3.78 divided by 453.59237, about $1.25. The $10.19 radish line is 42 times 10.19 divided by 453.59237, about $0.94. Utah State printed $1.16 and $0.88. This site does not change those printed figures. The gap is in the source table, not in the calculator. Pea does not automatically cost more per tray than every radish once you use your own price.</p>
 <details class="evidence">
