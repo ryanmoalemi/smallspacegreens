@@ -200,14 +200,17 @@ function ssgFormatGrams(n) {
   return text + " g";
 }
 
-// Smallest listed package that covers the whole batch at the higher rate.
+// Smallest listed package that covers several sowings (SSG_MIN_SOWINGS) and the whole batch
+// at the higher rate. Falls back to the smallest that covers the batch, then to the largest.
 // sizes: [{label, grams, ...}] sorted small to large. Returns null when nothing is listed.
+var SSG_MIN_SOWINGS = 3;
 function ssgPickPackage(sizes, perTray, batch) {
   if (!sizes || !sizes.length || !ssgFinite(perTray) || perTray <= 0) return null;
-  var pick = null;
-  for (var i = 0; i < sizes.length; i++) {
-    if (sizes[i].grams >= batch) { pick = sizes[i]; break; }
+  function smallestAtLeast(grams) {
+    for (var i = 0; i < sizes.length; i++) if (sizes[i].grams >= grams) return sizes[i];
+    return null;
   }
+  var pick = smallestAtLeast(Math.max(batch, perTray * SSG_MIN_SOWINGS)) || smallestAtLeast(batch);
   var covers = Boolean(pick);
   if (!pick) pick = sizes[sizes.length - 1];
   var smaller = [];
