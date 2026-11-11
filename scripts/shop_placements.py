@@ -11,6 +11,7 @@ from pathlib import Path
 
 AMAZON_TAG = "smallspaceg04-20"
 AMAZON_DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+COMMISSION_SENTENCE = "We earn a commission from purchases through this page."
 TRUELEAF_SEED = (
     "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328"
     "&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fmicro-greens-planting-seed"
@@ -351,10 +352,6 @@ def render_shop(key: str) -> str:
     rows = page["rows"]
     if len(rows) < 3:
         raise SystemExit(f"{key} shop table needs at least 3 rows")
-    has_amazon = any(row["kind"] == "amazon" for row in rows)
-    disclosure = "We earn a commission if you buy through these links, at no extra cost to you."
-    if has_amazon:
-        disclosure = f"{disclosure} {AMAZON_DISCLOSURE}"
     seen = []
     cards = []
     for row in rows:
@@ -387,7 +384,6 @@ def render_shop(key: str) -> str:
     return (
         '<section class="picks" id="matching-supplies">'
         f"<h2>{esc(page['heading'])}</h2>"
-        f'<p class="affiliate-disclosure">{esc(disclosure)}</p>'
         f'<p class="picks-lead">{esc(page["lead"])}</p>'
         '<ul class="pick-grid" role="list">'
         + "".join(cards)

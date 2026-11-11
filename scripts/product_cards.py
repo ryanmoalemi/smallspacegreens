@@ -10,8 +10,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PLACEMENTS = ROOT / "src" / "placements"
 AMAZON_HREF = re.compile(r"https://www\.amazon\.com/dp/([A-Z0-9]{10})\?tag=smallspaceg04-20\Z")
-AMAZON_SENTENCE = "As an Amazon Associate I earn from qualifying purchases."
-GENERAL_SENTENCE = "We earn a commission if you buy through these links, at no extra cost to you."
 
 
 def esc(value: str) -> str:
@@ -68,7 +66,6 @@ def href_for(card: dict, letpot: dict[str, str], trueleaf: dict[str, str]) -> st
 
 def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) -> str:
     data = load_placement(name)
-    page_has_amazon = any(card["kind"] == "amazon" for card in data["cards"].values())
     blocks = []
     seen_images: set[str] = set()
     for section in data["sections"]:
@@ -103,13 +100,9 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
                 f'{esc(card["cta"])}<span class="sr-only"> (opens in a new tab)</span></a>'
                 "</li>"
             )
-        disclosure = GENERAL_SENTENCE
-        if page_has_amazon:
-            disclosure = f"{GENERAL_SENTENCE} {AMAZON_SENTENCE}"
         blocks.append(
             f'<section class="picks" id="{esc(section["id"])}" aria-labelledby="{esc(section["id"])}-title">'
             f'<h2 id="{esc(section["id"])}-title">{esc(section["title"])}</h2>'
-            f'<p class="picks-disclosure">{esc(disclosure)}</p>'
             f'<p class="picks-lead">{esc(section["lead"])}</p>'
             '<ul class="pick-grid" role="list">'
             + "".join(cards_html)
