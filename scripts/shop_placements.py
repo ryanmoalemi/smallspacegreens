@@ -224,8 +224,8 @@ SHOP_PAGES: dict[str, dict] = {
         ],
     },
     "gear": {
-        "heading": "Example supplies for this list",
-        "lead": "One example for each line on the list you picked. This site has not used these products.",
+        "heading": "Supplies for this list",
+        "lead": "",
         "chooser": True,
         "rows": [
             routed(amazon("B07KRMP93C", KIT_SPONGE, "A ready-to-sow kit with trays, seed, and coir."), "kit"),
@@ -426,7 +426,8 @@ def render_shop(key: str) -> str:
         return (
             '<section class="picks route-picks" id="matching-supplies" aria-labelledby="matching-supplies-title">'
             f'<h3 id="matching-supplies-title">{esc(page["heading"])}</h3>'
-            f'<p class="picks-lead">{esc(page["lead"])}</p>'
+            + (f'<p class="picks-lead">{esc(page["lead"])}</p>' if page["lead"] else "")
+            +
             '<p class="route-picks-status" id="route-picks-status" role="status" hidden></p>'
             '<ul class="pick-grid" role="list">'
             + "".join(cards)

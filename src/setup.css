@@ -76,3 +76,5 @@
 /* Text in the chooser stays at 12px or larger on phones. */
 .setup-builder .eyebrow,.setup-intro .eyebrow,.setup-builder .setup-next .eyebrow{font-size:12px}
 .setup-builder .setup-choice-card .setup-choice small{font-size:12px}
+/* Room between the last supply card and the "Before you buy" block. */
+.route-picks+.setup-next{margin-top:36px;padding-top:26px;border-top:1px solid var(--line)}
