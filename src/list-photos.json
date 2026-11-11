@@ -214,5 +214,11 @@
     "alt": "Pea shoots growing in long greenhouse trays.",
     "credit_id": "pea-shoots-lufa",
     "author": "Lufa Farms"
+  },
+  "amaranth-micro": {
+    "thumbnail": "crop-amaranth-microgreens.jpg",
+    "alt": "Red-stemmed amaranth microgreens with small seed leaves.",
+    "credit_id": "crop-amaranth-microgreens",
+    "author": "USDA"
   }
 }

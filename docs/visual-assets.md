@@ -383,5 +383,18 @@ Added November 9, 2026. These real photographs show mature crops or harvested pr
 - Photographer: Lufa Farms.
 - Original: [Lufa Farms Microgreens in Trays.jpg](https://commons.wikimedia.org/wiki/File:Lufa_Farms_Microgreens_in_Trays.jpg).
 - License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).
-- Use: example photo in the seed calculator's pea package box. The pea list photo (`pea-shoots-counter.jpg`) is the same Daderot picture already shown on the calculator page as `supply-pea-shoots`, so the box uses this one instead.
+- Use: photo in the seed calculator's pea package box. The pea list photo (`pea-shoots-counter.jpg`) is the same Daderot picture already shown on the calculator page as `supply-pea-shoots`, so the box uses this one instead.
 - Credit: `Credit: <a href="/photo-credits/#pea-shoots-lufa">Lufa Farms</a>`.
+
+### Amaranth microgreens (calculator package box)
+
+- Local file: `assets/photos/crop-amaranth-microgreens.jpg` (960 × 640).
+- List thumbnail: `assets/photos/thumbs/crop-amaranth-microgreens.jpg` (320 × 320, center crop).
+- Photographer: U.S. Department of Agriculture ([Flickr original](https://www.flickr.com/photos/usdagov/50535790872/)).
+- Original: [Amaranth sprouts at Green Bexar Farm in Saint Hedwig Texas.jpg](https://commons.wikimedia.org/wiki/File:Amaranth_sprouts_at_Green_Bexar_Farm_in_Saint_Hedwig_Texas.jpg).
+- License: Public domain (work of the U.S. federal government).
+- Source dimensions: 8256 × 5504.
+- Processing: Commons 960-pixel thumbnail saved as an optimized progressive JPEG at quality 84; thumbnail is a centered square crop resized to 320 × 320 at quality 82. No color changes, generated objects or AI processing.
+- Subject and alt: Red-stemmed amaranth microgreens with small seed leaves.
+- Use: photo in the seed calculator's amaranth package box, replacing the flowering adult plant.
+- Credit: `Photo: <a href="/photo-credits/#crop-amaranth-microgreens">U.S. Department of Agriculture</a>, Public domain`.

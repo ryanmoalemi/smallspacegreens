@@ -253,7 +253,7 @@ def row_url(row: dict) -> str:
     return row["url"]
 
 
-# Example photos. stand_in means the picture is the closest real product type, not that exact item.
+# Product card photos. stand_in means the picture is the closest real product type, not that exact item.
 SUPPLY_IMAGES = {
     "pepper-trays": ("Nursery cell trays in black flats", "Furkan Akkurt", "https://commons.wikimedia.org/wiki/File:Pepper_and_tomato_seedling_trays_at_Bo%C4%9Fazi%C3%A7i_University_2026.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Cell trays in nursery flats. Closest photo for a holed seed tray.", False),
     "farm-trays": ("Seed trays at a nursery", "Judgefloro", "https://commons.wikimedia.org/wiki/File:5670Farm_Ready_Seedling_Facility_East_West_Seed_Philippines_20.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "Nursery seed trays. Stand-in where the listing is a solid tray or a heat mat.", True),
@@ -383,7 +383,7 @@ def render_shop(key: str) -> str:
             caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
         else:
             caption = (
-                f'<figcaption class="pick-credit">Example photo · '
+                f'<figcaption class="pick-credit">Credit: '
                 f'<a href="/photo-credits/#supply-{slug}">{esc(author)}</a></figcaption>'
             )
         button = BUTTON[row["kind"]] if row["kind"] == "amazon" else row["label"]
@@ -423,7 +423,7 @@ def supply_credit_html() -> str:
             use = f"{esc(note)} Shown with the full frame on a light background."
         else:
             origin = "Wikimedia Commons"
-            use = f"{esc(note)} Square crop for a product card. Example photo, not the listed product."
+            use = f"{esc(note)} Square crop for a product card. Not the listed product."
         blocks.append(
             f'<section class="photo-credit-entry" id="supply-{slug}">'
             f'<img src="{src}" width="600" height="600" alt="{esc(alt)}" loading="lazy" decoding="async">'

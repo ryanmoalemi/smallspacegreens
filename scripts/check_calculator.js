@@ -107,7 +107,7 @@ function mountCalculator(search, packs) {
   };
   form.reset = () => { Object.keys(defaults).forEach(key => { form[key].value = defaults[key]; }); tray = "10x20"; };
   const nodes = { "calc-form": form };
-  ["calc-results", "calc-summary", "custom-dims", "rate-box", "unit-price-fields", "package-price-fields", "copy-result", "copy-link", "print-result", "calc-action-status", "calc-copy-fallback", "use-example", "clear-example", "reset-calc"].forEach(id => { nodes[id] = element(); });
+  ["calc-results", "calc-summary", "custom-dims", "rate-box", "unit-price-fields", "package-price-fields", "copy-result", "print-result", "calc-action-status", "calc-copy-fallback", "use-example", "clear-example", "reset-calc"].forEach(id => { nodes[id] = element(); });
   nodes["custom-dims"].querySelectorAll = () => [form.sideLength, form.sideWidth, form.unit];
   nodes["rate-box"].querySelectorAll = () => [form.useExample, form.userLow, form.userHigh, nodes["use-example"], nodes["clear-example"]];
   nodes["unit-price-fields"].querySelectorAll = () => [form.price, form.priceUnit];
@@ -143,8 +143,8 @@ async function checkFormBehavior() {
   await ui.click("copy-result");
   assert("copied result includes crop, tray and package costs", /Crop: Radish/.test(ui.clipboard.text) && /Tray: 10 by 20/.test(ui.clipboard.text) && /126 g/.test(ui.clipboard.text) && /checkout spend: \$12.00/.test(ui.clipboard.text), ui.clipboard.text);
   assert("copy success is announced", !ui.nodes["calc-action-status"].hidden && /copied/.test(ui.nodes["calc-action-status"].textContent));
-  await ui.click("copy-link");
-  assert("shared URL excludes price inputs", ui.clipboard.text.includes("crop=radish") && !/price|package|500/.test(ui.clipboard.text), ui.clipboard.text);
+  assert("page address keeps tray settings but excludes price inputs", ui.win.location.search.includes("crop=radish") && !/price|package|500/.test(ui.win.location.search), ui.win.location.search);
+  assert("there is no share button", !/copy-link|Copy link/.test(fs.readFileSync(path.join(__dirname, "../src/pages/calculator.html"), "utf8") + fs.readFileSync(path.join(__dirname, "../src/calculator.js"), "utf8")));
 
   ui.clipboard.fail = true;
   await ui.click("copy-result");
@@ -153,7 +153,7 @@ async function checkFormBehavior() {
   ui.click("reset-calc");
   assert("reset restores valid defaults", ui.form.crop.value === "radish" && ui.form.trays.value === "1" && ui.form.priceMode.value === "unit" && ui.form.packagePrice.value === "" && ui.nodes["calc-copy-fallback"].hidden);
   ui.edit("trays", "1.5");
-  assert("invalid results cannot be copied or printed", ui.nodes["copy-result"].disabled && ui.nodes["copy-link"].disabled && ui.nodes["print-result"].disabled);
+  assert("invalid results cannot be copied or printed", ui.nodes["copy-result"].disabled && ui.nodes["print-result"].disabled);
 
   const malformed = mountCalculator("?tray=%22%5D&crop=radish");
   assert("malformed shared tray does not break initialization", /42 g/.test(malformed.nodes["calc-summary"].textContent));
@@ -244,21 +244,22 @@ assert("amaranth small batch keeps the in-stock True Leaf 1 oz", p && p.merchant
 
 const photo = { src: "/assets/photos/thumbs/radish-seeds-hugowolf.jpg", alt: "Loose brown radish seeds.", credit: "/photo-credits/#radish-seeds-hugowolf", author: "Hugowolf" };
 const boxPacks = {
-  radish: { product: "Organic Rambo Radish microgreens seed", stockDate: "November 10, 2026", amazonDate: "November 10, 2026", photo, amazon: radishAmazon,
+  radish: { product: "Organic Rambo Radish microgreens seed", stockDate: "Nov 10, 2026", amazonDate: "Nov 10, 2026", photo, amazon: radishAmazon,
     sizes: radishStock.map(s => ({ ...s, unit: s.label.split(" ")[1], url: "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=x" })) },
-  mustard: { product: "Green Mustard microgreens seed", stockDate: "November 10, 2026", amazonDate: null, photo: { ...photo, author: "M" }, amazon: [],
+  mustard: { product: "Green Mustard microgreens seed", stockDate: "Nov 10, 2026", amazonDate: null, photo: { ...photo, author: "M" }, amazon: [],
     sizes: [{ label: "1 oz", unit: "oz", grams: 28.3, url: "u1" }, { label: "4 oz", unit: "oz", grams: 113.4, url: "u4" }] }
 };
 const amz = mountCalculator("?crop=radish&tray=10x20&n=1", boxPacks);
 const amzHtml = amz.nodes["calc-results"].innerHTML;
 assert("Amazon box shows the tagged /dp/ URL with rel sponsored nofollow", /href='https:\/\/www\.amazon\.com\/dp\/B08V1ZMGFX\?tag=smallspaceg04-20' rel='sponsored nofollow' target='_blank'>View on Amazon</.test(amzHtml), amzHtml);
-assert("Amazon box has an example photo, not an Amazon image, while image_embed is empty", /Example photo/.test(amzHtml) && /radish-seeds-hugowolf/.test(amzHtml) && !/amazon-adsystem|media-amazon/.test(amzHtml));
-assert("Amazon box says why it left True Leaf", /True Leaf(?:'|&#39;|&#x27;)s 1 lb was out of stock at our November 10, 2026 check/.test(amzHtml));
+assert("Amazon box has the crop photo and a one-line credit, not an Amazon image, while image_embed is empty", !/example photo/i.test(amzHtml) && /radish-seeds-hugowolf/.test(amzHtml) && /class='photo-credit credit-line result-pack-credit'[^>]*>Photo: <a/.test(amzHtml) && !/amazon-adsystem|media-amazon/.test(amzHtml));
+assert("Amazon small print is one short line", (amzHtml.match(/<p class='result-pack-sizes'>([^<]*)</) || [])[1].split(". ").length === 2, amzHtml);
+assert("Amazon box says why it left True Leaf", /True Leaf(?:'|&#39;|&#x27;)s 1 lb was sold out on Nov 10, 2026\. Check size and stock on Amazon\./.test(amzHtml));
 assert("package copy never says link", !/\blink\b/i.test(amzHtml.replace(/class='result-pack-link'/g, "")));
 boxPacks.radish.amazon = radishAmazon.map(o => ({ ...o, imageEmbed: "https://m.media-amazon.com/images/I/test._SL250_.jpg" }));
 const emb = mountCalculator("?crop=radish&tray=10x20&n=1", boxPacks).nodes["calc-results"].innerHTML;
-assert("image_embed swaps in the Amazon-served image for that offer only", /src='https:\/\/m\.media-amazon\.com\/images\/I\/test\._SL250_\.jpg'/.test(emb) && /Amazon product photo/.test(emb) && !/Example photo/.test(emb));
+assert("image_embed swaps in the Amazon-served image for that offer only", /src='https:\/\/m\.media-amazon\.com\/images\/I\/test\._SL250_\.jpg'/.test(emb) && !/result-pack-credit/.test(emb) && !/example photo/i.test(emb));
 const mus = mountCalculator("?crop=mustard&tray=10x20&n=1&example=1", boxPacks).nodes["calc-results"].innerHTML;
-assert("mustard box sizes from the Maryland example and says so", /Sized with the Maryland example rate, using its upper end of 15 g per tray/.test(mus) && /4 oz/.test(mus) && /Example photo/.test(mus), mus);
+assert("mustard box sizes from the Maryland example and says so", /Sized with the Maryland example rate, using its upper end of 15 g per tray/.test(mus) && /4 oz/.test(mus) && !/example photo/i.test(mus), mus);
 const mus2 = mountCalculator("?crop=mustard&tray=10x20&n=1&rate=20", boxPacks).nodes["calc-results"].innerHTML;
 assert("mustard box at a typed rate says it used your rate", /Sized with your rate, 20 g per tray/.test(mus2), mus2);

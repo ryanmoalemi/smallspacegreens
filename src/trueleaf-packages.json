@@ -1,6 +1,6 @@
 {
   "checked": "2026-11-10",
-  "note": "Sizes and variant IDs read from the live True Leaf Market product pages. Each ?variant= URL was opened in a browser and opened with that size selected. No prices are stored or shown. Amazon offers are shown only when the True Leaf size the calculator would pick is out of stock. Each ASIN page was opened and read as in stock with an add-to-cart button at amazon_checked. image_embed is the single per-offer field for an Amazon-permitted product image (for example a Creators API image URL). While it is null the box shows the crop's licensed example photo. photo is a key in list-photos.json for that crop's example photo.",
+  "note": "Sizes and variant IDs read from the live True Leaf Market product pages. Each ?variant= URL was opened in a browser and opened with that size selected. No prices are stored or shown. Amazon offers are shown only when the True Leaf size the calculator would pick is out of stock. Each ASIN page was opened and read as in stock with an add-to-cart button at amazon_checked. image_embed is the single per-offer field for an Amazon-permitted product image (for example a Creators API image URL). While it is null the box shows the crop's licensed photo. photo is a key in list-photos.json for that crop's photo.",
   "crops": {
     "radish": {
       "product": "Organic Rambo Radish microgreens seed",
@@ -431,7 +431,7 @@
     "amaranth": {
       "product": "All Red Leaf amaranth microgreens seed",
       "url": "https://trueleafmarket.com/products/amaranth-seeds-all-red-leaf-microgreens-seeds",
-      "photo": "amaranth",
+      "photo": "amaranth-micro",
       "sizes": [
         {
           "label": "1 oz",

@@ -11,7 +11,7 @@
       "source_label": "Radish Seed Packet",
       "license": "Public domain",
       "license_url": "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg",
-      "note": "A radish seed packet. Example photo, not the True Leaf bag."
+      "note": "A radish seed packet. Not the True Leaf bag."
     },
     "home-microgreens": {
       "slug": "supply-home-microgreens",
@@ -24,7 +24,7 @@
       "source_label": "Microgreen in a pot",
       "license": "CC BY-SA 4.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "note": "Microgreens in a small pot. Example photo, not a listed kit."
+      "note": "Microgreens in a small pot. Not a listed kit."
     },
     "hero-mixed": {
       "slug": "microgreens-mixed",
@@ -37,7 +37,7 @@
       "source_label": "11 microgreens",
       "license": "CC BY 2.0",
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
-      "note": "Square crop. Example photo, not a seed packet. Used as the page hero."
+      "note": "Square crop. Not a seed packet. Used as the page hero."
     },
     "radish-seedling": {
       "slug": "radish-seedling",
@@ -50,7 +50,7 @@
       "source_label": "Sprouting chonggakmu (chonggak radish)",
       "license": "CC BY 4.0",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
-      "note": "Square crop enlarged from a 550 by 376 pixel original. Example photo of a radish seedling, not a True Leaf packet."
+      "note": "Square crop enlarged from a 550 by 376 pixel original. Shows a radish seedling, not a True Leaf packet."
     },
     "pea-counter": {
       "slug": "pea-shoots-counter",
@@ -63,7 +63,7 @@
       "source_label": "Snow pea shoots - Massachusetts",
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "note": "Square crop. Example photo of pea shoots, not a True Leaf packet."
+      "note": "Square crop. Shows pea shoots, not a True Leaf packet."
     },
     "broccoli-sprouts": {
       "slug": "broccoli-sprouts",
@@ -76,7 +76,7 @@
       "source_label": "Broccoli sprouts",
       "license": "CC BY 2.0",
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
-      "note": "Square crop. The photographer titled this broccoli sprouts. Example photo, not a True Leaf packet."
+      "note": "Square crop. The photographer titled this broccoli sprouts. Not a True Leaf packet."
     },
     "sunflower-tray": {
       "slug": "sunflower-tray",
@@ -89,7 +89,7 @@
       "source_label": "Sunflower microgreens 02",
       "license": "CC BY 4.0",
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
-      "note": "Square crop. Example photo of sunflower microgreens, not a True Leaf packet."
+      "note": "Square crop. Shows sunflower microgreens, not a True Leaf packet."
     },
     "lufa-trays": {
       "slug": "lufa-trays",
@@ -102,7 +102,7 @@
       "source_label": "Lufa Farms Microgreens in Trays",
       "license": "CC BY-SA 2.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
-      "note": "Square crop of a commercial greenhouse. Example photo, not a home kit. Cropped versions remain under CC BY-SA 2.0."
+      "note": "Square crop of a commercial greenhouse. Not a home kit. Cropped versions remain under CC BY-SA 2.0."
     },
     "alfalfa-jar": {
       "slug": "alfalfa-jar",
@@ -115,7 +115,7 @@
       "source_label": "AlfalfaSproutsJar1",
       "license": "Public domain",
       "license_url": "https://commons.wikimedia.org/wiki/File:AlfalfaSproutsJar1.jpg",
-      "note": "Square crop enlarged from a 480 by 640 pixel original. Example photo of jar sprouts, which are a different food from microgreens."
+      "note": "Square crop enlarged from a 480 by 640 pixel original. Shows jar sprouts, which are a different food from microgreens."
     }
   },
   "cards": {

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import hashlib
+import html as html_lib
 import re
 import subprocess
 import sys
@@ -873,7 +874,7 @@ def supply_fact_card(slug: str, title_html: str, note: str) -> str:
         credit = '<p class="fact-credit">Photo: LetPot</p>'
     else:
         credit = (
-            f'<p class="fact-credit">Example photo · '
+            f'<p class="fact-credit">Credit: '
             f'<a href="/photo-credits/#supply-{slug}">{esc(author)}</a></p>'
         )
     return (
@@ -1608,6 +1609,87 @@ def trueleaf_awin(url: str) -> str:
     return "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=" + quote(url, safe="")
 
 
+CREDIT_ELEMENT = re.compile(
+    r'<(p|figcaption)\s+class="((?:credit )?(?:photo-credit|fact-credit|pick-credit))"([^>]*)>(.*?)</\1>', re.S
+)
+
+
+def credit_records(credits_html: str) -> dict:
+    """Author and short license for each entry on /photo-credits/, keyed by anchor id."""
+    records = {}
+    for anchor, body in re.findall(r'<section class="photo-credit-entry" id="([^"]+)">(.*?)</section>', credits_html, re.S):
+        lic = re.search(r"<strong>License:</strong>\s*(.*?)</p>", body, re.S)
+        license_text = html_lib.unescape(re.sub(r"<[^>]+>", "", lic.group(1))).strip().rstrip(".") if lic else ""
+        records[anchor] = license_text
+    return records
+
+
+def normalize_photo_credits(document: str, licenses: dict, rel: str) -> str:
+    """Every photo credit reads 'Photo: Author, License' on one line, with the full credit in a title.
+
+    Only captions that credit a photo are touched: a /photo-credits/ link, or 'Photo: LetPot'.
+    """
+
+    def fix(match: re.Match) -> str:
+        tag, cls, attrs, inner = match.groups()
+        link = re.search(r'<a href="/photo-credits/#([^"]+)">([^<]*)</a>', inner)
+        plain = " ".join(html_lib.unescape(re.sub(r"<[^>]+>", "", inner)).split())
+        if link:
+            rest = re.sub(r'<a href="/photo-credits/#[^"]+">[^<]*</a>', "", inner)
+            rest = html_lib.unescape(re.sub(r"<[^>]+>", "", rest)).replace("Credit:", "").replace("Photo:", "").strip(" ·.")
+            if rest:
+                raise SystemExit(f"{rel}: photo credit has extra text: {plain}")
+            anchor, author = link.group(1), html_lib.unescape(link.group(2))
+            if anchor not in licenses:
+                raise SystemExit(f"{rel}: photo credit points at a missing /photo-credits/ entry: {anchor}")
+            license_text = licenses[anchor]
+            tail = f", {license_text}" if license_text else ""
+            title = f"Photo by {author}{tail}. Full credit on the Photo credits page."
+            # Under a small list thumbnail the photo is obvious, so the credit is just the name.
+            figure_at = document.rfind("<figure", 0, match.start())
+            in_list_thumb = tag == "figcaption" and figure_at != -1 and "list-photo" in document[figure_at : document.find(">", figure_at)]
+            prefix = "" if in_list_thumb else "Photo: "
+            body = f'{prefix}<a href="/photo-credits/#{anchor}">{esc(short_credit_name(author))}</a>'
+        elif plain.startswith("Photo: ") and "<a" not in inner:
+            title = f"{plain}. Promotional photo from the seller."
+            body = esc(plain)
+        else:
+            return match.group(0)
+        attrs = re.sub(r'\s+title="[^"]*"', "", attrs)
+        return f'<{tag} class="{cls} credit-line"{attrs} title="{esc(title)}">{body}</{tag}>'
+
+    return CREDIT_ELEMENT.sub(fix, document)
+
+
+SHORT_CREDIT_NAMES = {"U.S. Department of Agriculture": "USDA", "Stephen Ausmus, USDA ARS": "USDA ARS"}
+
+
+def short_credit_name(author: str) -> str:
+    return SHORT_CREDIT_NAMES.get(author, author)
+
+
+def check_no_example_photo(document: str, rel: str) -> None:
+    if re.search(r"example photo", document, re.I):
+        raise SystemExit(f'{rel}: contains "Example photo" text, which Ryan asked never to show')
+
+
+def check_credit_line_css(css: str) -> None:
+    """Credits stay on one line at 12px or more: the shared .credit-line rule must keep nowrap and ellipsis."""
+    rule = re.search(r"\.credit-line\{([^}]*)\}", css)
+    if not rule:
+        raise SystemExit("css: missing the .credit-line rule for one-line photo credits")
+    body = rule.group(1)
+    for need in ["white-space:nowrap", "text-overflow:ellipsis", "overflow:hidden", "font-size:12px"]:
+        if need not in body:
+            raise SystemExit(f"css: .credit-line must include {need}")
+    for sel, size in re.findall(r"([^{}]*credit[^{}]*)\{[^}]*font-size:(\d+(?:\.\d+)?)px", css):
+        if "photo-credit-entry" in sel and "credit-line" not in sel:
+            continue
+        if float(size) < 12 and "@media print" not in sel:
+            raise SystemExit(f"css: a credit rule sets {size}px, under the 12px minimum: {sel.strip()[:80]}")
+
+
+
 AMAZON_TAG = "smallspaceg04-20"
 # Images already shown elsewhere on the calculator page, and list photos that are the same
 # original picture under another file name. A package-box photo may not repeat any of them.
@@ -1624,18 +1706,22 @@ def calculator_box_photo(crop_id: str, key: str) -> dict:
     photo = photos[key]
     if not (ROOT / "assets" / "photos" / "thumbs" / photo["thumbnail"]).exists():
         raise SystemExit(f"Package box photo file missing: {photo['thumbnail']}")
+    licenses = credit_records((SRC / "pages" / "photo-credits.html").read_text())
+    if photo["credit_id"] not in licenses:
+        raise SystemExit(f"Package box photo {key} has no /photo-credits/ entry")
     return {
         "src": f"/assets/photos/thumbs/{photo['thumbnail']}",
         "alt": photo["alt"],
         "credit": f"/photo-credits/#{photo['credit_id']}",
         "author": photo["author"],
+        "license": licenses[photo["credit_id"]],
     }
 
 
 def calculator_check_date(stamp: str) -> str:
-    """'2026-11-10 22:29 PT' -> 'November 10, 2026' for the package box."""
+    """'2026-11-10 22:29 PT' -> 'Nov 10, 2026' for the package box."""
     day = datetime.strptime(stamp[:10], "%Y-%m-%d")
-    return f"{day.strftime('%B')} {day.day}, {day.year}"
+    return f"{day.strftime('%b')} {day.day}, {day.year}"
 
 
 def amazon_offer(crop_id: str, offer: dict) -> dict:
@@ -1695,7 +1781,7 @@ def trueleaf_packages(crops: dict) -> dict:
         if [s["grams"] for s in amazon] != sorted(s["grams"] for s in amazon):
             raise SystemExit(f"Amazon offers for {crop_id} must run small to large")
         if "photo" not in entry:
-            raise SystemExit(f"Package box for {crop_id} needs an example photo")
+            raise SystemExit(f"Package box for {crop_id} needs a photo")
         photo = calculator_box_photo(crop_id, entry["photo"])
         packs[crop_id] = {
             "product": entry["product"],
@@ -1778,7 +1864,9 @@ def word_count_main(document: str) -> int:
     main = re.search(r"<main.*?>(.*)</main>", document, flags=re.S)
     if not main:
         return 0
-    return len(strip_tags(main.group(1)).split())
+    # Photo credits are attribution, not body copy.
+    body = re.sub(r'<(p|figcaption) class="[^"]*credit-line"[^>]*>.*?</\1>', " ", main.group(1), flags=re.S)
+    return len(strip_tags(body).split())
 
 
 def build_feed() -> str:
@@ -2260,6 +2348,7 @@ def main() -> None:
     css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css", "photo-lists.css", "harvest-chart.css"]))
     check_card_contrast(css)
     check_chrome_text_size(css)
+    check_credit_line_css(css)
     css_path = ROOT / "css" / "styles.css"
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(css + "\n")
@@ -2274,7 +2363,10 @@ def main() -> None:
     check_calculator_box_photos(pages["tools/microgreens-seed-calculator/index.html"], calculator_packs)
     urls = []
     photographed_items = 0
+    credit_licenses = credit_records(pages["photo-credits/index.html"])
     for rel, document in pages.items():
+        document = normalize_photo_credits(document, credit_licenses, rel)
+        check_no_example_photo(document, rel)
         check_copy(Path(rel), document)
         if re.search(r"<\s*table\b", document, flags=re.I):
             raise SystemExit(f"{rel}: page outputs a table")

@@ -9,7 +9,6 @@
   var unitPriceBox = document.getElementById("unit-price-fields");
   var packagePriceBox = document.getElementById("package-price-fields");
   var copyBtn = document.getElementById("copy-result");
-  var shareBtn = document.getElementById("copy-link");
   var printBtn = document.getElementById("print-result");
   var actionStatus = document.getElementById("calc-action-status");
   var copyFallback = document.getElementById("calc-copy-fallback");
@@ -90,7 +89,7 @@
   }
 
   function render(result) {
-    [copyBtn, shareBtn, printBtn].forEach(function (button) {
+    [copyBtn, printBtn].forEach(function (button) {
       if (button) button.disabled = !result.ok;
     });
     if (!result.ok) {
@@ -151,16 +150,20 @@
     var embed = choice.merchant === "amazon" ? choice.size.imageEmbed : null;
     if (embed) {
       // Amazon-served product image, never rehosted. Set per offer in trueleaf-packages.json (image_embed).
-      return (
-        "<figure class='result-pack-photo'><img src='" + escapeHtml(embed) + "' alt='" + escapeHtml("Amazon product photo: " + choice.size.title) + "' width='96' height='96' loading='lazy' decoding='async' referrerpolicy='no-referrer-when-downgrade'>" +
-        "<figcaption>Amazon product photo</figcaption></figure>"
-      );
+      return "<figure class='result-pack-photo'><img src='" + escapeHtml(embed) + "' alt='" + escapeHtml(choice.size.title) + "' width='96' height='96' loading='lazy' decoding='async'></figure>";
     }
     var photo = packs.photo;
     if (!photo) return "";
+    return "<figure class='result-pack-photo'><img src='" + escapeHtml(photo.src) + "' alt='" + escapeHtml(photo.alt) + "' width='96' height='96' loading='lazy' decoding='async'></figure>";
+  }
+
+  function packageCredit(packs, choice) {
+    var photo = packs.photo;
+    if (!photo || (choice.merchant === "amazon" && choice.size.imageEmbed)) return "";
+    var license = photo.license ? ", " + photo.license : "";
     return (
-      "<figure class='result-pack-photo'><img src='" + escapeHtml(photo.src) + "' alt='" + escapeHtml(photo.alt) + "' width='96' height='96' loading='lazy' decoding='async'>" +
-      "<figcaption><span class='result-pack-photo-label'>Example photo</span> Credit: <a href='" + escapeHtml(photo.credit) + "'>" + escapeHtml(photo.author) + "</a></figcaption></figure>"
+      "<p class='photo-credit credit-line result-pack-credit' title='" + escapeHtml("Photo by " + photo.author + license + ". Full credit on the Photo credits page.") + "'>" +
+      "Photo: <a href='" + escapeHtml(photo.credit) + "'>" + escapeHtml(photo.author) + "</a></p>"
     );
   }
 
@@ -200,7 +203,7 @@
       ? "<p class='result-pack-link'><a href='" + escapeHtml(size.url) + "' rel='sponsored nofollow' target='_blank'>View on Amazon</a></p>"
       : "<p class='result-pack-link'><a href='" + escapeHtml(size.url) + "' rel='sponsored nofollow' target='_blank'>See " + escapeHtml(packs.product) + ", " + escapeHtml(size.label) + "</a></p>";
     var fine = amazon
-      ? "True Leaf's " + choice.replaced.label + " was out of stock at our " + packs.stockDate + " check, so this is a similar Amazon listing. " + size.match + " It showed in stock on Amazon at our " + packs.amazonDate + " check. Check the size and stock on Amazon."
+      ? "True Leaf's " + choice.replaced.label + " was sold out on " + packs.stockDate + ". Check size and stock on Amazon."
       : "True Leaf lists " + sizes + ". This opens with " + size.label + " selected. Check the size and stock on the seller page.";
     return (
       "<div class='result-pack'>" + packagePhoto(packs, choice) + "<div class='result-pack-body'><p class='result-pack-label'>Package to consider</p>" +
@@ -208,7 +211,7 @@
       rateUsed(result, perTray) +
       "<p class='result-pack-note'>" + escapeHtml(cover + short) + "</p>" +
       action +
-      "<p class='result-pack-sizes'>" + escapeHtml(fine) + "</p></div></div>"
+      "<p class='result-pack-sizes'>" + escapeHtml(fine) + "</p></div>" + packageCredit(packs, choice) + "</div>"
     );
   }
 
@@ -373,14 +376,6 @@
   if (copyBtn) {
     copyBtn.addEventListener("click", function () {
       if (lastResult && lastResult.ok) return copyText(resultText(), "Seed estimate copied, including your cost inputs.");
-    });
-  }
-  if (shareBtn) {
-    shareBtn.addEventListener("click", function () {
-      if (lastResult && lastResult.ok) {
-        var url = window.location.origin + window.location.pathname + "?" + shareParams().toString();
-        return copyText(url, "Link copied. Tray settings and rates are included; prices are excluded.");
-      }
     });
   }
   if (printBtn) {
