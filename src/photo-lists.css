@@ -123,3 +123,6 @@ thead .list-photo{width:72px;margin-bottom:9px}
 /* Setup guide supply lists: photo credits stay at 12px on phones. */
 .supply-checks .list-photo .photo-credit{font-size:12px;line-height:1.35}
 @media print{.supply-checks .list-photo .photo-credit{font-size:9pt!important}}
+
+/* A numbered row with no photo keeps its text clear of the number badge. */
+ol.photo-list>.photo-list-item:not(:has(img))>.list-item-copy,.guide-main ol.photo-list>.photo-list-item:not(:has(img))>.list-item-copy{padding-left:36px;min-height:23px}

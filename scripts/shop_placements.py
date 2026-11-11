@@ -280,6 +280,8 @@ SUPPLY_IMAGES = {
     "ceramic": ("A leafy plant in a ceramic pot", "W.carter", "https://commons.wikimedia.org/wiki/File:Plectranthus_verticillatus_in_a_ceramic_pot.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "A ceramic pot. Stand-in for the ceramic microgreens kit and for 8 in pots.", True),
     "windowbox": ("A planted window box", "litchick_1", "https://commons.wikimedia.org/wiki/File:2009_windowbox_2463967211.jpg", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "A window box. Stand-in for a balcony rail planter.", True),
     "grow-bag": ("A plant growing in a fabric grow bag", "Clintacc", "https://commons.wikimedia.org/wiki/File:Brinjal_plant_with_fruits_in_grow_bag.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "A fabric grow bag with a plant. Stand-in for empty grow bags.", True),
+    "dome-trays": ("Seedling cell trays on a rack, one under a clear humidity dome", "F. D. Richards", "https://www.flickr.com/photos/50697352@N00/4464904926", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "Cell trays with a clear humidity dome, square crop. Stand-in for trays sold with domes and cells.", True),
+    "microgreens-tray": ("Young red and green microgreens in a small black tray", "Zenyrgarden", "https://commons.wikimedia.org/wiki/File:Microgreen_growing.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Microgreens growing in a small tray, square crop. Stand-in for a microgreens kit.", True),
     "radish-bowl": ("Purple radish microgreens in a steel bowl", "jonny.hunter", "https://www.flickr.com/photos/51931594@N00/461461364", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Harvested purple-stemmed radish microgreens, enlarged from a 500 by 375 pixel original. Stand-in for Rambo radish microgreen seed.", True),
     "mixed-seed": ("Mixed seeds just sprouting, in purple, tan and green", "Br3nda", "https://www.flickr.com/photos/36251685@N00/6778605865", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "A mix of seeds starting to sprout. Stand-in for a mixed microgreens seed collection.", True),
     "microgreens-plate": ("Green microgreens on a white ceramic plate", "apapac", "https://www.flickr.com/photos/146235256@N06/37037208672", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Microgreens on a ceramic plate. Stand-in for a ceramic microgreens kit.", True),
@@ -314,11 +316,11 @@ ITEM_IMAGE = {
     KIT_SUN: "heat-propagator",
     KIT_MIZUNA: "microgreens-plate",
     SANSI_BULB: "led-bulb",
-    HEAT_SILL: "farm-trays",
+    HEAT_SILL: "electric-propagator",
     KIT_CELLS: "pepper-trays",
     SUNPACK: "farm-trays",
     TRAY_DEEP: "pea-shoots",
-    DOMES: "basil",
+    DOMES: "dome-trays",
     MIRACLE: "potting-soil",
     HEAT_1020: "electric-propagator",
     POTS_8: "ceramic",
@@ -343,8 +345,8 @@ PAGE_IMAGE = {
     "density": {BF_1010_HOLES: "lufa"},
     "calculator": {BF_1010_HOLES: "sunflower"},
     "cost": {KIT_GREEN: "broccoli", KIT_BUDDY: "microgreens-dense"},
-    "pea": {PEA_HALF: "lettuce-leaves"},
-    "bottom": {SUNPACK: "basil"},
+    "pea": {PEA_HALF: "pea-sack"},
+    "bottom": {SUNPACK: "dome-trays"},
 }
 
 BUTTON = {"amazon": "View on Amazon", "trueleaf": "See at True Leaf", "letpot": "See at LetPot"}
