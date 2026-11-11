@@ -1626,6 +1626,7 @@ def trueleaf_packages(crops: dict) -> dict:
                 {
                     "label": label,
                     "unit": size["unit"],
+                    "inStock": size.get("in_stock", True) is not False,
                     "grams": round(size["amount"] * TRUELEAF_UNIT_GRAMS[size["unit"]], 1),
                     "url": trueleaf_awin(f'{entry["url"]}?variant={size["variant"]}'),
                 }

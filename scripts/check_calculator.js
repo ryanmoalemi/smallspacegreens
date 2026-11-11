@@ -187,3 +187,31 @@ assert("arugula 10x10 keeps 1 oz with five sowings", p && p.size.label === "1 oz
 p = pick([{ label: "1 lb", grams: 453.6 }], 150, 150 * 4);
 assert("batch above largest size is flagged", p && !p.coversBatch && p.sowings === 3, p);
 assert("no sizes gives no suggestion", pick([], 21, 21) === null);
+
+// Out-of-stock sizes are never recommended (stock from src/trueleaf-packages.json).
+const radishStock = [
+  { label: "4 g packet", grams: 4 }, { label: "4 oz", grams: 113.4 }, { label: "1 lb", grams: 453.6, inStock: false },
+  { label: "5 lb", grams: 2268, inStock: false }, { label: "25 lb", grams: 11339.8 }
+];
+p = pick(radishStock, 42, 42);
+assert("radish 10x20 falls back to 4 oz while 1 lb is out", p && p.size.label === "4 oz" && p.sowings === 2 && p.coversBatch, p);
+p = pick(radishStock, 21, 21);
+assert("radish 10x10 still 4 oz", p && p.size.label === "4 oz" && p.sowings === 5, p);
+p = pick(radishStock, 450, 450);
+assert("out-of-stock 1 lb with nothing usable smaller falls back below, flagged", p && p.size.label === "4 oz" && !p.coversBatch, p);
+p = pick([{ label: "1 lb", grams: 453.6, inStock: false }, { label: "5 lb", grams: 2268 }], 150, 150);
+assert("no smaller in-stock size moves to the next larger", p && p.size.label === "5 lb", p);
+const arugulaStock = [
+  { label: "1 oz", grams: 28.3 }, { label: "4 oz", grams: 113.4 }, { label: "1 lb", grams: 453.6 },
+  { label: "5 lb", grams: 2268, inStock: false }, { label: "25 lb", grams: 11339.8 }
+];
+let chose5lb = false;
+for (const per of [5, 10, 20, 40]) {
+  for (let n = 1; n <= 300; n++) {
+    const r = pick(arugulaStock, per, per * n);
+    if (!r || r.size.inStock === false || r.size.label === "5 lb") chose5lb = true;
+  }
+}
+assert("arugula never recommends the out-of-stock 5 lb", !chose5lb);
+p = pick(arugulaStock, 10, 10 * 60);
+assert("arugula batch past 1 lb falls back to 1 lb, not 5 lb", p && p.size.label === "1 lb" && !p.coversBatch, p);

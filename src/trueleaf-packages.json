@@ -22,13 +22,15 @@
           "label": "1 lb",
           "amount": 1,
           "unit": "lb",
-          "variant": "39483221256"
+          "variant": "39483221256",
+          "in_stock": false
         },
         {
           "label": "5 lb",
           "amount": 5,
           "unit": "lb",
-          "variant": "39483221320"
+          "variant": "39483221320",
+          "in_stock": false
         },
         {
           "label": "25 lb",
@@ -196,7 +198,8 @@
           "label": "5 lb",
           "amount": 5,
           "unit": "lb",
-          "variant": "45198169352"
+          "variant": "45198169352",
+          "in_stock": false
         },
         {
           "label": "25 lb",
@@ -314,5 +317,6 @@
         }
       ]
     }
-  }
+  },
+  "stock_checked": "2026-11-10 22:22 PT"
 }

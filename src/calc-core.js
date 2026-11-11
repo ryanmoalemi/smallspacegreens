@@ -210,9 +210,18 @@ function ssgPickPackage(sizes, perTray, batch) {
     for (var i = 0; i < sizes.length; i++) if (sizes[i].grams >= grams) return sizes[i];
     return null;
   }
-  var pick = smallestAtLeast(Math.max(batch, perTray * SSG_MIN_SOWINGS)) || smallestAtLeast(batch);
-  var covers = Boolean(pick);
-  if (!pick) pick = sizes[sizes.length - 1];
+  var pick = smallestAtLeast(Math.max(batch, perTray * SSG_MIN_SOWINGS)) || smallestAtLeast(batch) || sizes[sizes.length - 1];
+  // Never recommend a size marked out of stock at the last True Leaf check:
+  // fall back to the next smaller in-stock size, else the next larger one.
+  if (pick.inStock === false) {
+    var at = sizes.indexOf(pick);
+    var alt = null;
+    for (var k = at - 1; k >= 0 && !alt; k--) if (sizes[k].inStock !== false) alt = sizes[k];
+    for (var m = at + 1; m < sizes.length && !alt; m++) if (sizes[m].inStock !== false) alt = sizes[m];
+    if (!alt) return null;
+    pick = alt;
+  }
+  var covers = pick.grams >= batch;
   var smaller = [];
   for (var j = 0; j < sizes.length && sizes[j] !== pick; j++) smaller.push(sizes[j]);
   return {
