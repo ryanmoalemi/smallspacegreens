@@ -230,7 +230,8 @@ def choose_related_photos(document: str) -> str:
     if not block:
         return document
     outside = document[:block.start()] + document[block.end():]
-    used = {content_image_key(src) for src in re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', outside)}
+    # Compare by picture, not file name, so a WebP copy of the same photo also counts as used.
+    used = {photo_group(src) for src in re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', outside)}
     new_block = block.group(0)
     for item in re.findall(r'<li\b[^>]*>.*?</li>', block.group(0), flags=re.S):
         figure = re.search(r'<figure class="list-photo[^"]*" data-photo-key="([^"]+)">.*?</figure>', item, flags=re.S)
@@ -239,10 +240,10 @@ def choose_related_photos(document: str) -> str:
             continue
         slug = target.group(1) or "calculator"
         choices = RELATED_PHOTO_CHOICES.get(slug, [figure.group(1)])
-        pick = next((key for key in choices if photo_file(key) not in used), None)
+        pick = next((key for key in choices if photo_group(photo_file(key)) not in used), None)
         if pick is None:
             raise SystemExit(f"Related card for {slug}: every photo choice is already on the page; add another choice")
-        used.add(photo_file(pick))
+        used.add(photo_group(photo_file(pick)))
         if pick != figure.group(1):
             new_block = new_block.replace(item, item.replace(figure.group(0), list_photo(pick)), 1)
     return document[:block.start()] + new_block + document[block.end():]
@@ -713,6 +714,144 @@ def check_duplicate_images(document: str, label: str) -> None:
     if duplicates:
         names = ", ".join(sorted(set(duplicates)))
         raise SystemExit(f"{label}: duplicate content images: {names}")
+
+
+# Same picture under a different file name or URL. Matched by image content (ORB keypoints that
+# line up under one affine transform), so crops, resizes, stretches, WebP copies and thumbnails all count.
+# Different LetPot product renders share a phone overlay and score up to 46; true copies score 74 and up.
+PHOTO_MATCH_CACHE = ROOT / "scripts" / "photo-match-cache.json"
+PHOTO_MATCH_INLIERS = 60
+# Separate frames from one photo session that look the same at thumbnail size. Content matching
+# cannot see these, so they are listed by hand. Each set may appear at most once per page.
+SAME_PHOTO_SETS = [
+    # Pannet, Sunflower microgreens 01 and 02: the same clear tray from two angles.
+    {"sunflower-small-tray.jpg", "supply-sunflower", "sunflower-tray"},
+]
+_photo_groups: dict[str, str] | None = None
+
+
+def photo_stem_key(name: str) -> str:
+    return re.sub(r"-(?:300|600)\.webp$", "", name.lower())
+
+
+def _image_sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()[:16]
+
+
+def photo_groups() -> dict[str, str]:
+    """Map each local photo's stem key to a group id shared by every copy of the same picture."""
+    global _photo_groups
+    if _photo_groups is not None:
+        return _photo_groups
+    files = sorted(
+        {p for p in (ROOT / "assets" / "photos").rglob("*") if p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}}
+        | {p for p in (ROOT / "assets" / "products").glob("*-600.webp")}
+    )
+    shas = {f: _image_sha(f) for f in files}
+    # The cache lists every photo already compared and only the pairs that share keypoints,
+    # so a build without OpenCV still works when no photo is new or changed.
+    stored = json.loads(PHOTO_MATCH_CACHE.read_text()) if PHOTO_MATCH_CACHE.exists() else {}
+    checked = set(stored.get("checked", []))
+    cache = dict(stored.get("matches", {}))
+    keys = sorted(set(shas.values()))
+    pairs_needed = [(a, b) for i, a in enumerate(keys) for b in keys[i + 1:] if a not in checked or b not in checked]
+    if pairs_needed:
+        try:
+            import cv2  # noqa: F401
+            import numpy as np
+        except ImportError:
+            raise SystemExit(
+                "New or changed photos need the image-content duplicate check, which needs OpenCV: "
+                "pip install opencv-python-headless numpy, then build again."
+            )
+        orb = cv2.ORB_create(800)
+        matcher = cv2.BFMatcher(cv2.NORM_HAMMING)
+        feats = {}
+        for f, sha in shas.items():
+            if sha in feats:
+                continue
+            image = cv2.imread(str(f), cv2.IMREAD_GRAYSCALE)
+            if image is None:
+                feats[sha] = (None, None)
+                continue
+            h, w = image.shape
+            scale = 400 / max(h, w)
+            image = cv2.resize(image, (max(1, int(w * scale)), max(1, int(h * scale))))
+            feats[sha] = orb.detectAndCompute(image, None)
+        for a, b in pairs_needed:
+            (ka, da), (kb, db) = feats[a], feats[b]
+            inliers = 0
+            if da is not None and db is not None and len(ka) >= 10 and len(kb) >= 10:
+                good = [m[0] for m in matcher.knnMatch(da, db, k=2) if len(m) == 2 and m[0].distance < 0.75 * m[1].distance]
+                if len(good) >= 12:
+                    pa = np.float32([ka[g.queryIdx].pt for g in good])
+                    pb = np.float32([kb[g.trainIdx].pt for g in good])
+                    _m, mask = cv2.estimateAffine2D(pa, pb, method=cv2.RANSAC, ransacReprojThreshold=4)
+                    inliers = int(mask.sum()) if mask is not None else 0
+            if inliers >= 12:
+                cache[f"{a}:{b}"] = inliers
+        live = set(keys)
+        cache = {k: v for k, v in sorted(cache.items()) if set(k.split(":")) <= live}
+        PHOTO_MATCH_CACHE.write_text(json.dumps({"checked": keys, "matches": cache}, indent=1, sort_keys=True) + "\n")
+    parent: dict[str, str] = {}
+
+    def find(x: str) -> str:
+        parent.setdefault(x, x)
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def union(x: str, y: str) -> None:
+        parent[find(x)] = find(y)
+
+    by_sha: dict[str, list[str]] = {}
+    for f, sha in shas.items():
+        by_sha.setdefault(sha, []).append(photo_stem_key(f.name))
+    for names in by_sha.values():
+        for name in names:
+            union(name, names[0])
+    for pair, inliers in cache.items():
+        if inliers >= PHOTO_MATCH_INLIERS:
+            a, b = pair.split(":")
+            if a in by_sha and b in by_sha:
+                union(by_sha[a][0], by_sha[b][0])
+    for same in SAME_PHOTO_SETS:
+        names = sorted(same)
+        for name in names[1:]:
+            union(name, names[0])
+    _photo_groups = {name: find(name) for names in by_sha.values() for name in names}
+    for same in SAME_PHOTO_SETS:
+        for name in same:
+            _photo_groups.setdefault(name, find(name))
+    return _photo_groups
+
+
+def photo_group(src: str) -> str:
+    name = photo_stem_key(Path(src.split("?")[0].split("#")[0]).name)
+    return photo_groups().get(name, name)
+
+
+def check_same_photo_content(document: str, label: str) -> None:
+    """Fail when one picture appears twice on a page under different file names or URLs."""
+    groups = photo_groups()
+    seen: dict[str, list[tuple[str, str]]] = {}
+    repeats: set[str] = set()
+    main_start = document.find("<main")
+    for match in re.finditer(r'<img\b[^>]*\bsrc="(/assets/[^"?#]+)', document):
+        if match.start() < main_start:
+            continue
+        name = photo_stem_key(Path(match.group(1)).name)
+        group = groups.get(name)
+        if not group:
+            continue
+        panel = setup_panel_at(document, match.start())
+        for other_name, other_panel in seen.get(group, []):
+            if other_name != name and images_conflict(other_panel, panel):
+                repeats.add(" = ".join(sorted({other_name, name})))
+        seen.setdefault(group, []).append((name, panel))
+    if repeats:
+        raise SystemExit(f"{label}: the same photo appears twice under different files: {sorted(repeats)}")
 
 
 def check_photo_lists(document: str, label: str) -> int:
@@ -2533,6 +2672,8 @@ def main() -> None:
         photographed_items += check_photo_lists(document, rel)
         document = dedupe_content_images(document)
         check_duplicate_images(document, rel)
+        if not rel.startswith("photo-credits/"):
+            check_same_photo_content(document, rel)
         # Removing a repeated photo must never leave a row, chart line, or card without one.
         check_photo_lists(document, rel + " (after removing repeated photos)")
         check_credits_have_images(document, rel)

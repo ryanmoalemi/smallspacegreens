@@ -345,7 +345,12 @@ PAGE_IMAGE = {
     "density": {BF_1010_HOLES: "lufa"},
     "calculator": {BF_1010_HOLES: "sunflower"},
     "cost": {KIT_GREEN: "broccoli", KIT_BUDDY: "microgreens-dense"},
-    "pea": {PEA_HALF: "pea-sack"},
+    # Pea page: the hero is the Daderot pea photo, so the pea seed row uses the sprouted-pea sack.
+    "pea": {PEA: "pea-sack", PEA_HALF: "microgreens-tray"},
+    # Apartment guide: the step photo is Pannet's sunflower tray, so the solid tray uses nursery trays.
+    "apartment": {TRAY_1010_SOLID_10: "farm-trays"},
+    # Balcony guide: the layout list already shows the potted lettuce photo.
+    "balcony": {LETTUCE: "lettuce-leaves"},
     "bottom": {SUNPACK: "dome-trays"},
 }
 

@@ -512,10 +512,33 @@ Shop and fact cards use square webp crops in `assets/products/supply-*-{300,600}
 | supply-pea-sack | Sprouted garden peas in a cloth sack | Pea seed, half tray on the pea vs radish guide | [Yarzaryeni](https://commons.wikimedia.org/wiki/File:Garden_pea_sprouts.jpg) | CC BY 3.0 |
 | supply-coir-pile | A compressed coir brick | Espoma seed starter | Victor M. Vicente Selvas | Public domain |
 
+### Pea shoots in a basket
+
+- Registry key: `pea-basket`.
+- Local photograph: `assets/photos/pea-shoots-basket-susan-slater.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/pea-shoots-basket-susan-slater.jpg` (320 × 320).
+- Credit: [Susan Slater](https://commons.wikimedia.org/wiki/User:Susan_Slater).
+- Original source: [Dao miao, snow pea shoots-sprouts on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Dao_miao,_snow_pea_shoots-sprouts.jpg).
+- License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 2291 × 2464. Pea line of the seed charts.
+- Alt text: Dense pea shoots growing from a mat of seeds in a woven basket.
+
+### Sunflower sprouts
+
+- Registry key: `sunflower-sprouts`.
+- Local photograph: `assets/photos/sunflower-sprouts-starr.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/sunflower-sprouts-starr.jpg` (320 × 320).
+- Credit: [Forest and Kim Starr](https://www.flickr.com/photos/25869955@N05/).
+- Original source: [Homegrown Sunflower Sprouts on Flickr](https://www.flickr.com/photos/25869955@N05/8564403008).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 1024 × 768. Sunflower line of the seed chart.
+- Alt text: Harvested sunflower sprouts with round green seed leaves on a plate.
+
 ## Photo rules the build enforces
 
 - One photo file per page view. When a photo repeats, the later copy is removed, and the build then fails if that leaves any list row, chart row, or step without a photo. Pick another photo instead of relying on removal. The three /gear/ supply panels are shown one at a time, so they may share photos with each other but not with anything else on the page.
-- Related-guide cards try the photos in `RELATED_PHOTO_CHOICES` (scripts/build_site.py) in order and use the first one not already on the page.
+- Related-guide cards try the photos in `RELATED_PHOTO_CHOICES` (scripts/build_site.py) in order and use the first one whose picture is not already on the page.
+- The same picture may not appear twice on a page under different file names or URLs (a thumbnail and a WebP product copy, a crop, a resize). The build compares image content with ORB keypoints (`check_same_photo_content`); a pair that lines up with 60 or more matching points counts as the same photo. Results are kept in `scripts/photo-match-cache.json`, so OpenCV (`pip install opencv-python-headless numpy`) is only needed when a photo is added or changed. Separate frames from one session that look alike, such as Pannet's two sunflower tray photos, are listed in `SAME_PHOTO_SETS`. The /photo-credits/ page is exempt because it shows every photo.
 - Every image (src and srcset) must load: the file exists and is not empty, or a remote URL returns 200 with an image content type.
 - A photo credit with no image in the same row, card, or figure fails the build.
 - The printable tray record on /guides/first-tray-checklist/ is a plain fill-in list (`plain-list`) with no photos. It is the only plain list that is exempt.

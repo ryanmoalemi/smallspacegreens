@@ -268,5 +268,17 @@
     "alt": "Seedlings coming up in a cell tray on a sunny windowsill.",
     "credit_id": "windowsill-seedlings-psd",
     "author": "psd"
+  },
+  "pea-basket": {
+    "thumbnail": "pea-shoots-basket-susan-slater.jpg",
+    "alt": "Dense pea shoots growing from a mat of seeds in a woven basket.",
+    "credit_id": "pea-shoots-basket-susan-slater",
+    "author": "Susan Slater"
+  },
+  "sunflower-sprouts": {
+    "thumbnail": "sunflower-sprouts-starr.jpg",
+    "alt": "Harvested sunflower sprouts with round green seed leaves on a plate.",
+    "credit_id": "sunflower-sprouts-starr",
+    "author": "Forest and Kim Starr"
   }
 }
