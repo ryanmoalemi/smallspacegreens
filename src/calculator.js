@@ -192,7 +192,8 @@
     var cover = choice.coversBatch
       ? "At " + perTray + " per tray, that is about " + choice.sowings + " sowing" + bags + "."
       : (size === largest ? "The largest listed size. " : "") + "At " + perTray + " per tray, that is about " + choice.sowings + " sowing" + bags + ", so this batch needs more than one bag.";
-    var short = choice.smallerShort.length
+    // No packet sentence on Amazon picks or on radish (Ryan, Nov 10, 2026).
+    var short = choice.smallerShort.length && !amazon && form.crop.value !== "radish"
       ? " The True Leaf " + choice.smallerShort.map(function (s) { return s.label; }).join(" and ") + " is less than one tray at this rate."
       : "";
     var sizes = packs.sizes.map(function (s) { return s.label; }).join(", ");

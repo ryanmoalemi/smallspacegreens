@@ -214,10 +214,8 @@ def list_photo(key: str) -> str:
         width, height = 320, 320
         wide = ''
     if photo.get("illustrative"):
-        caption = (
-            f'<figcaption class="photo-credit"><a href="/photo-credits/#{esc(photo["credit_id"])}">'
-            'Illustrative photo (AI-generated)</a></figcaption>'
-        )
+        # Owned by Small Space Greens, so there is no one to credit on the page; the record stays on /photo-credits/.
+        caption = ""
     else:
         caption = (
             f'<figcaption class="photo-credit">Credit: <a href="/photo-credits/#{esc(photo["credit_id"])}">'

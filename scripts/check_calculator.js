@@ -263,3 +263,6 @@ const mus = mountCalculator("?crop=mustard&tray=10x20&n=1&example=1", boxPacks).
 assert("mustard box sizes from the Maryland example and says so", /Sized with the Maryland example rate, using its upper end of 15 g per tray/.test(mus) && /4 oz/.test(mus) && !/example photo/i.test(mus), mus);
 const mus2 = mountCalculator("?crop=mustard&tray=10x20&n=1&rate=20", boxPacks).nodes["calc-results"].innerHTML;
 assert("mustard box at a typed rate says it used your rate", /Sized with your rate, 20 g per tray/.test(mus2), mus2);
+assert("Amazon radish box has no packet sentence", !/less than one tray|4 g packet/.test(amzHtml), amzHtml);
+const r10 = mountCalculator("?crop=radish&tray=10x10&n=1", boxPacks).nodes["calc-results"].innerHTML;
+assert("True Leaf radish box has no packet sentence", /4 oz/.test(r10) && !/less than one tray|4 g packet is/.test(r10), r10);
