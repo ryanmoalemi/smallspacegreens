@@ -453,14 +453,14 @@ input:disabled,select:disabled{opacity:.55}
 .pick-grid{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-3);grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(min-width:720px){.pick-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4)}}
 @media(min-width:1024px){.pick-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.pick{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:var(--space-2);min-width:0;overflow:hidden}
+.pick{display:flex;flex-direction:column;height:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:var(--space-2);min-width:0}
 .pick-media{margin:0}
 .pick-media img{display:block;width:100%;height:auto;aspect-ratio:1/1;border-radius:8px;object-fit:cover;background:var(--sage)}
-.pick-credit{font-size:11px;line-height:1.4;color:var(--muted);margin-top:var(--space-1)}
+.pick-credit{font-size:9px;line-height:1.2;letter-spacing:-0.03em;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pick-badge{align-self:flex-start;margin:var(--space-2) 0 0;padding:2px var(--space-2);border-radius:999px;background:var(--sage);color:var(--ink);font-size:12px;font-weight:600;line-height:20px}
-.pick-name{font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:20px;letter-spacing:0;font-weight:600;margin:var(--space-2) 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pick h3.pick-name,.guide-main h3.pick-name{font-family:Inter,system-ui,sans-serif;font-size:15px;font-weight:700;line-height:1.25;letter-spacing:0;text-wrap:wrap;margin:8px 0 0;display:block;overflow:visible;word-break:normal;overflow-wrap:normal}
 .pick-brand{display:block;font-size:12px;font-weight:500;color:var(--muted)}
-.pick-why{font-size:14px;line-height:20px;color:var(--muted);margin:var(--space-1) 0 var(--space-3);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pick-why{font-size:14px;line-height:1.35;color:var(--muted);margin:4px 0 12px;display:block;overflow:visible}
 .pick-cta{margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px 10px;border-radius:8px;background:var(--green);color:#fff;font-weight:600;font-size:15px;line-height:1.2;text-align:center;text-decoration:none}
 .pick-cta:hover{color:#fff;background:#163a2a}
 .pick-cta:focus-visible{outline:3px solid var(--focus);outline-offset:2px}

@@ -92,7 +92,7 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
                 'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
                 'width="600" height="600" loading="lazy" decoding="async" '
                 f'alt="{esc(image["alt"])}">'
-                f'<figcaption class="pick-credit">Example photo · Credit: '
+                f'<figcaption class="pick-credit">Example photo · '
                 f'<a href="/photo-credits/#{esc(image["credit_id"])}">{esc(image["author"])}</a>'
                 "</figcaption></figure>"
                 f'<p class="pick-badge">{esc(card["badge"])}</p>'
