@@ -510,6 +510,15 @@ def check_card_contrast(css: str) -> None:
     require("dark button hover", _css_color(dark[".pick-cta:hover"], "color"), _css_color(dark[".pick-cta:hover"], "background"))
     require("dark button focus", _css_color(dark[".pick-cta:focus-visible"], "color"), _css_color(dark[".pick-cta:focus-visible"], "background"))
     require("dark focus ring on card", _css_color(dark[".pick a:focus-visible"], "outline"), card_bg, 3.0)
+    # LetPot photo panels keep their cream background in dark mode, so measure their
+    # captions against that panel, not against the dark card.
+    panel = re.search(r"(?:^|[},])\.pick-media-letpot[,{][^{]*\{([^}]*)\}", css[:dark_at])
+    if not panel:
+        raise SystemExit("contrast check missing the LetPot photo panel background")
+    panel_bg = _css_color(panel.group(1), "background")
+    require("light LetPot panel credit", variables["--muted"], panel_bg)
+    require("dark LetPot panel credit", _css_color(dark[".pick-media-letpot .pick-credit"], "color"), panel_bg)
+    require("dark LetPot panel credit link", _css_color(dark[".pick-media-letpot .pick-credit a"], "color"), panel_bg)
     require(
         "dark button focus ring",
         _css_color(dark[".pick a.pick-cta:focus-visible"], "box-shadow"),
@@ -518,6 +527,13 @@ def check_card_contrast(css: str) -> None:
     )
     if failures:
         raise SystemExit("card contrast check failed:\n" + "\n".join(failures))
+
+
+def check_letpot_panels(document: str, label: str) -> None:
+    """A LetPot photo needs the panel class that scopes its dark-mode caption color."""
+    for figure in re.findall(r'<figure class="pick-media[^"]*">.*?</figure>', document, flags=re.S):
+        if 'class="letpot-photo"' in figure and "pick-media-letpot" not in figure.split(">", 1)[0]:
+            raise SystemExit(f"{label}: LetPot photo panel is missing pick-media-letpot")
 
 
 def check_duplicate_images(document: str, label: str) -> None:
@@ -2160,6 +2176,7 @@ def main() -> None:
         photographed_items += check_photo_lists(document, rel)
         document = dedupe_content_images(document)
         check_duplicate_images(document, rel)
+        check_letpot_panels(document, rel)
         pages[rel] = document
         target = ROOT / rel
         target.parent.mkdir(parents=True, exist_ok=True)
