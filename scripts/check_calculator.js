@@ -260,7 +260,7 @@ boxPacks.radish.amazon = radishAmazon.map(o => ({ ...o, imageEmbed: "https://m.m
 const emb = mountCalculator("?crop=radish&tray=10x20&n=1", boxPacks).nodes["calc-results"].innerHTML;
 assert("image_embed swaps in the Amazon-served image for that offer only", /src='https:\/\/m\.media-amazon\.com\/images\/I\/test\._SL250_\.jpg'/.test(emb) && !/result-pack-credit/.test(emb) && !/example photo/i.test(emb));
 const mus = mountCalculator("?crop=mustard&tray=10x20&n=1&example=1", boxPacks).nodes["calc-results"].innerHTML;
-assert("mustard box sizes from the Maryland example and says so", /Sized with the Maryland example rate, using its upper end of 15 g per tray/.test(mus) && /4 oz/.test(mus) && !/example photo/i.test(mus), mus);
+assert("mustard box sizes from the Maryland example and says so", /Sized with the Maryland setup rate, using its upper end of 15 g per tray/.test(mus) && /4 oz/.test(mus) && !/example photo/i.test(mus), mus);
 const mus2 = mountCalculator("?crop=mustard&tray=10x20&n=1&rate=20", boxPacks).nodes["calc-results"].innerHTML;
 assert("mustard box at a typed rate says it used your rate", /Sized with your rate, 20 g per tray/.test(mus2), mus2);
 assert("Amazon radish box has no packet sentence", !/less than one tray|4 g packet/.test(amzHtml), amzHtml);

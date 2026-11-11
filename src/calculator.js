@@ -67,7 +67,7 @@
     return result.evidence === "crop-rate"
       ? "Published crop rate"
       : result.evidence === "general-example"
-        ? "General example, not a crop-specific rate"
+        ? "General Maryland rate, not a crop-specific rate"
         : "Your rate, not a published crop rate";
   }
 
@@ -170,7 +170,7 @@
   function rateUsed(result, perTray) {
     if (!crop().needsRate) return "";
     var which = result.evidence === "general-example"
-      ? "Sized with the Maryland example rate, using its upper end of " + perTray + " per tray."
+      ? "Sized with the Maryland setup rate, using its upper end of " + perTray + " per tray."
       : Math.abs(result.perLow - result.perHigh) < 1e-9
         ? "Sized with your rate, " + perTray + " per tray."
         : "Sized with the upper end of your rate, " + perTray + " per tray.";

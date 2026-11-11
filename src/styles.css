@@ -526,3 +526,40 @@ input:disabled,select:disabled{opacity:.55}
 .pick-cta:hover,.pick-cta:focus-visible{background:#b7dcc0;color:#0f1a14}
 .pick a.pick-cta:focus-visible{outline:3px solid #f4f7f2;outline-offset:3px;box-shadow:0 0 0 3px #0f1a14}
 }
+/* Shared card standard (Ryan, 2026-11-11): photo, a one-line credit with room around it,
+   the name with space below, one short line, then the store button. One card per row on phones.
+   Every card heading keeps a bottom margin so it never sits on the text under it. */
+.pick-media .pick-credit{margin:6px 0 0}
+.pick h3.pick-name,.guide-main h3.pick-name{margin:12px 0 6px}
+.pick-badge+h3.pick-name,.guide-main .pick-badge+h3.pick-name{margin-top:8px}
+.pick-why{margin:0 0 14px}
+.pick-brand{margin:0 0 2px}
+.fact-credit{margin:6px 0 0}
+.guide-main .fact-card h3,.fact-card h3{margin:12px 0 6px}
+.guide-main .fact-card p.fact-note,.fact-note{margin:0}
+.pick h2,.pick h3,.pick h4,.fact-card h2,.fact-card h3,.fact-card h4,.library-card h2,.library-card h3,.story-card h2,.story-card h3,.space-photo-card h3,.story-teaser h3,.setup-choice-card strong{margin-bottom:6px}
+.affiliate-box .pick-grid{margin:14px 0 0}
+@media(max-width:599px){
+.pick-grid,.affiliate-box .pick-grid,.fact-grid-2{grid-template-columns:1fr;gap:14px}
+.pick,.fact-card{padding:12px}
+.pick-media img,.fact-card img{aspect-ratio:3/2}
+.pick-media img.letpot-photo,.fact-card img.letpot-photo{aspect-ratio:3/2}
+.pick-cta{width:100%}
+}
+/* 12px floor for small labels (Ryan's text-size rule). */
+.eyebrow,.harvest-heading .eyebrow,.setup-next .eyebrow,.setup-intro .eyebrow,.setup-option .eyebrow,.calculator-feature .eyebrow,.story-label,.story-copy .eyebrow,.story-row .eyebrow,.about-band .eyebrow,.library-card .eyebrow,.home-hero .eyebrow,.section-head .eyebrow,.setup-copy .eyebrow,.story-teaser-copy .eyebrow,.stat-tile .stat-label,.calculator-feature .calculator-example .example-label,.setup-choice-card .setup-choice small{font-size:12px}
+.affiliate-box ul.pick-grid{padding:0}
+.affiliate-box .pick-grid>li+li{margin-top:0}
+.library-card p{font-size:12px}
+.guide-main .fact-card p.fact-credit,.fact-card p.fact-credit{margin:6px 0 0}
+/* Calculator package box follows the shared card: store button, and on phones photo, credit, then text. */
+.results .result-pack-link a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:10px 12px;border-radius:8px;background:var(--green);color:#fff;font-weight:600;text-decoration:none;text-align:center}
+.results .result-pack-link a:hover{background:#163a2a;color:#fff}
+.results .result-pack-link a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.results .result-pack-label{margin:0 0 4px}
+@media(max-width:599px){.result-pack{flex-direction:column;flex-wrap:nowrap;gap:0;padding:12px}
+.result-pack-photo{flex:none;width:100%}
+.result-pack-photo img{width:100%;height:auto;aspect-ratio:3/2;border-radius:8px}
+.results .result-pack p.result-pack-credit{order:1;flex:none;align-self:stretch;width:100%;margin:6px 0 0}
+.result-pack-body{order:2;flex:none;width:100%;margin-top:12px}
+.results .result-pack p.result-pack-link{margin-top:14px}}

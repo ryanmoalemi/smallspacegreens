@@ -122,7 +122,7 @@ function ssgRate(crop, input) {
     if (!input.useExample && (input.userLow === "" || input.userLow == null)) {
       return {
         ok: false,
-        error: "This crop has no crop-specific gram rate in the Utah State table. Enter your own grams per 10 by 20 inch tray, or choose the labeled Maryland example."
+        error: "This crop has no crop-specific gram rate in the Utah State table. Enter your own grams per 10 by 20 inch tray, or choose the labeled Maryland setup."
       };
     }
     var low = input.useExample ? 10 : Number(input.userLow);
