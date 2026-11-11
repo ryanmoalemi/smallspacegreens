@@ -202,5 +202,11 @@
     "alt": "Hands lift a white drained tray of seedlings while water drips from the drainage holes.",
     "credit_id": "bw-step4-lift-out",
     "illustrative": true
+  },
+  "tray-pair": {
+    "thumbnail": "seedling-trays-nested-kvdp.jpg",
+    "alt": "A white seedling cell tray nested inside a solid black tray, with young seedlings.",
+    "credit_id": "seedling-trays-nested-kvdp",
+    "author": "KVDP"
   }
 }

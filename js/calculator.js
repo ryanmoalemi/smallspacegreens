@@ -340,7 +340,7 @@ window.SSG_CROPS = {"radish": {"name": "Radish", "source": "Utah State Universit
       "<p>Seed weight scales by tray area. Nominal outer dimensions may differ from the inner growing floor. This estimate does not adjust for germination or predict yield.</p>" +
       (crop().note ? "<p>" + escapeHtml(crop().note) + "</p>" : "") + "</details>" +
       "<p class='result-seed'><a href='" + seedOffer[0] + "' rel='sponsored nofollow' target='_blank'>" + seedOffer[1] + "</a></p>" +
-      "<div class='cta-row result-next-actions'><a class='button' href='/gear/?setup=tray#seeds'>Build my supply list</a><a href='/guides/microgreens-kit-vs-diy-cost/#cost-comparison'>Compare setup costs</a></div>" +
+      "<div class='cta-row result-next-actions'><a class='button' href='/gear/?setup=tray#setup-list'>Build my supply list</a><a href='/guides/microgreens-kit-vs-diy-cost/#cost-comparison'>Compare setup costs</a></div>" +
       "<p class='next-action'><a href='/guides/microgreens-seed-density-per-tray/'>How these rates were chosen</a></p>";
   }
 
