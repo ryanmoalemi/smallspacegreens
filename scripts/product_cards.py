@@ -82,16 +82,24 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
             url = href_for(card, letpot, trueleaf)
             src = f"/assets/products/{slug}-600.webp"
             srcset = f"/assets/products/{slug}-300.webp 300w, /assets/products/{slug}-600.webp 600w"
+            official = image.get("official") == "letpot"
+            img_class = ' class="letpot-photo"' if official else ""
+            if official:
+                caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
+            else:
+                caption = (
+                    f'<figcaption class="pick-credit">Example photo · '
+                    f'<a href="/photo-credits/#{esc(image["credit_id"])}">{esc(image["author"])}</a>'
+                    "</figcaption>"
+                )
             cards_html.append(
                 "<li class=\"pick\">"
                 "<figure class=\"pick-media\">"
-                f'<img src="{esc(src)}" srcset="{esc(srcset)}" '
+                f'<img{img_class} src="{esc(src)}" srcset="{esc(srcset)}" '
                 'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
                 'width="600" height="600" loading="lazy" decoding="async" '
                 f'alt="{esc(image["alt"])}">'
-                f'<figcaption class="pick-credit">Example photo · '
-                f'<a href="/photo-credits/#{esc(image["credit_id"])}">{esc(image["author"])}</a>'
-                "</figcaption></figure>"
+                f"{caption}</figure>"
                 f'<p class="pick-badge">{esc(card["badge"])}</p>'
                 f'<h3 class="pick-name"><span class="pick-brand">{esc(card["brand"])}</span> '
                 f'{esc(card["short"])}</h3>'
@@ -114,10 +122,15 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
 def render_credits() -> str:
     blocks = []
     seen: set[str] = set()
+    try:
+        import shop_placements
+        shop_credit_ids = {f"supply-{slug}" for slug in shop_placements.SUPPLY_IMAGES}
+    except Exception:
+        shop_credit_ids = set()
     for data in all_placements():
         for image in data["images"].values():
             credit_id = image["credit_id"]
-            if credit_id in seen:
+            if credit_id in seen or credit_id in shop_credit_ids:
                 continue
             seen.add(credit_id)
             slug = image["slug"]

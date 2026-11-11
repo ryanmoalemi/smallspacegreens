@@ -455,6 +455,8 @@ input:disabled,select:disabled{opacity:.55}
 .pick{display:flex;flex-direction:column;height:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:var(--space-2);min-width:0}
 .pick-media{margin:0}
 .pick-media img{display:block;width:100%;height:auto;aspect-ratio:1/1;border-radius:8px;object-fit:cover;background:var(--sage)}
+.pick-media:has(.letpot-photo),.fact-card:has(.letpot-photo){background:#f7f6f2}
+.pick-media img.letpot-photo,.fact-card img.letpot-photo{object-fit:contain;background:#f7f6f2;aspect-ratio:1/1}
 .pick-credit{font-size:9px;line-height:1.2;letter-spacing:-0.03em;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pick-badge{align-self:flex-start;margin:var(--space-2) 0 0;padding:2px var(--space-2);border-radius:999px;background:var(--sage);color:var(--ink);font-size:12px;font-weight:600;line-height:20px}
 .pick h3.pick-name,.guide-main h3.pick-name{font-family:Inter,system-ui,sans-serif;font-size:15px;font-weight:700;line-height:1.25;letter-spacing:0;text-wrap:wrap;margin:8px 0 0;display:block;overflow:visible;word-break:normal;overflow-wrap:normal}

@@ -624,6 +624,8 @@ LETPOT_BOXES = {
 TRUELEAF_URLS = {
     "home": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2F",
     "micro-seed": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fmicro-greens-planting-seed",
+    "radish": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fproducts%2Fradish-rambo-seeds",
+    "pea": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fproducts%2Fdun-pea-seeds",
     "micro-kits": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fmicrogreens-kits-and-supplies",
     "sprout-seed": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fwholesale-sprouting-seed",
     "sprout-kits": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fsprouting-kits-and-supplies",
@@ -688,22 +690,41 @@ def trueleaf_link(key: str, label: str) -> str:
     return affiliate_link(TRUELEAF_URLS[key], label)
 
 
-def spare_supply_slug(used: set[str]) -> str:
-    for slug in shop_placements.SUPPLY_IMAGES:
-        name = f"supply-{slug}-600.webp"
+TRUELEAF_CARD_PHOTOS = {
+    "micro-seed": ["radish-packet", "radish"],
+    "micro-kits": ["home-microgreens", "sunflower"],
+    "sprout-seed": ["alfalfa-jar", "pea-sack"],
+    "sprout-kits": ["alfalfa-jar", "pea-sack", "sunflower"],
+}
+
+
+def take_slug(used: set[str], choices: list[str]) -> str:
+    for slug in choices:
+        stem = shop_placements.photo_stem(slug)
+        name = f"{stem}-600.webp"
         if name not in used:
             used.add(name)
             return slug
-    raise SystemExit("No unused example photo left for a product card")
+    raise SystemExit(f"No unused photo left for {choices}")
 
 
 def supply_fact_card(slug: str, title_html: str, note: str) -> str:
     alt, author, *_rest = shop_placements.SUPPLY_IMAGES[slug]
+    stem = shop_placements.photo_stem(slug)
+    official = slug.startswith("letpot-")
+    img_class = ' class="letpot-photo"' if official else ""
+    if official:
+        credit = '<p class="fact-credit">Photo: LetPot</p>'
+    else:
+        credit = (
+            f'<p class="fact-credit">Example photo · '
+            f'<a href="/photo-credits/#supply-{slug}">{esc(author)}</a></p>'
+        )
     return (
         '<article class="fact-card">'
-        f'<img src="/assets/products/supply-{slug}-600.webp" width="600" height="600" '
+        f'<img{img_class} src="/assets/products/{stem}-600.webp" width="600" height="600" '
         f'alt="{esc(alt)}" loading="lazy" decoding="async">'
-        f'<p class="fact-credit">Example photo · <a href="/photo-credits/#supply-{slug}">{esc(author)}</a></p>'
+        f"{credit}"
         f"<h3>{title_html}</h3>"
         f'<p class="fact-note">{esc(note)}</p>'
         "</article>"
@@ -735,7 +756,7 @@ def letpot_box(name: str, used: set[str]) -> str:
     cards = []
     for key in keys:
         label, blurb = LETPOT_MODELS[key]
-        cards.append(supply_fact_card(spare_supply_slug(used), letpot_link(key, label), blurb))
+        cards.append(supply_fact_card(take_slug(used, [f"letpot-{key}"]), letpot_link(key, label), blurb))
     return affiliate_box("letpot-choice", "If you'd rather not deal with trays and soil", lead, "".join(cards))
 
 
@@ -744,7 +765,7 @@ def trueleaf_box(name: str, used: set[str]) -> str:
     cards = []
     for key in keys:
         label, blurb = TRUELEAF_LINKS[key]
-        cards.append(supply_fact_card(spare_supply_slug(used), trueleaf_link(key, label), blurb))
+        cards.append(supply_fact_card(take_slug(used, TRUELEAF_CARD_PHOTOS[key]), trueleaf_link(key, label), blurb))
     return affiliate_box("trueleaf-choice", "If you need seed or a kit", lead, "".join(cards))
 
 
