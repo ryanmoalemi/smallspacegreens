@@ -19,7 +19,7 @@ ol.steps.photo-list>li::before{content:none;display:none}
 .guide-main .icon-row.photo-list .list-item-copy{align-self:start}
 .guide-main .icon-row.photo-list strong{display:block;margin:0 0 4px;font-size:16px}
 .guide-main ol.photo-list{max-width:760px}
-.photo-step-number{position:absolute;top:15px;left:0;min-width:23px;height:23px;display:grid;place-items:center;padding:0 5px;border-radius:4px 0 4px 0;background:var(--green);color:white;font-size:11px;font-weight:600;line-height:1}
+.photo-step-number{position:absolute;top:15px;left:0;min-width:23px;height:23px;display:grid;place-items:center;padding:0 5px;border-radius:4px 0 4px 0;background:var(--green);color:white;font-size:12px;font-weight:600;line-height:1}
 .grow-steps .step-copy h3{font-size:17px;line-height:1.4;margin:0 0 6px}
 .grow-steps .step-copy p{font-size:14px;line-height:1.7;margin:0}
 .related-list.photo-list{gap:0 32px}
@@ -126,3 +126,19 @@ thead .list-photo{width:72px;margin-bottom:9px}
 
 /* A numbered row with no photo keeps its text clear of the number badge. */
 ol.photo-list>.photo-list-item:not(:has(img))>.list-item-copy,.guide-main ol.photo-list>.photo-list-item:not(:has(img))>.list-item-copy{padding-left:36px;min-height:23px}
+/* Seed charts: each line gets a photo, laid out like the daily check rows. */
+.seed-rows>.seed-photo-row{display:grid;grid-template-columns:88px minmax(0,1fr);gap:18px;align-items:center;margin:0;padding:12px 0;border-top:1px solid var(--line)}
+.seed-photo-row>.seed-row,.guide-main .seed-photo-row>.seed-row{padding:0;border-top:0}
+/* The tray record uses the same photo rows as the daily check. */
+.checklist .photo-list>.photo-list-item{grid-template-columns:88px minmax(0,1fr);gap:18px;padding:15px 0;font-size:15px}
+@media print{.checklist .photo-list>.photo-list-item{grid-template-columns:64px minmax(0,1fr);gap:12px;padding:8px 0}}
+/* Small photos on breadcrumbs and the On this page menu (Ryan, 2026-11-11). */
+.crumbs li{display:inline-flex;align-items:center}
+.crumbs a,.crumbs .crumb-current{display:inline-flex;align-items:center;gap:6px}
+.crumbs .nav-photo{width:22px;height:22px;border-radius:50%;object-fit:cover;flex:0 0 22px;background:#f1f0e9}
+.crumbs .nav-credit,.guide-toc .nav-credit{font-size:12px;line-height:1.35;color:var(--muted);margin:6px 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crumbs .nav-credit a,.guide-toc .nav-credit a{display:inline;min-height:0;padding:0;color:inherit;text-decoration:underline;text-underline-offset:2px}
+.guide-toc li>a{display:flex;align-items:center;gap:10px}
+.guide-toc .nav-photo{width:32px;height:32px;border-radius:4px;object-fit:cover;flex:0 0 32px;background:#f1f0e9}
+.guide-toc .nav-credit{margin:8px 0 4px}
+@media print{.crumbs .nav-photo,.crumbs .nav-credit{display:none}}

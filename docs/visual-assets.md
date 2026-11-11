@@ -534,6 +534,169 @@ Shop and fact cards use square webp crops in `assets/products/supply-*-{300,600}
 - Processing: square crop from 1024 × 768. Sunflower line of the seed chart.
 - Alt text: Harvested sunflower sprouts with round green seed leaves on a plate.
 
+### Arugula sprouts
+
+- Registry key: `arugula-sprouts`.
+- Local photograph: `assets/photos/arugula-sprouts-elizaraxi.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/arugula-sprouts-elizaraxi.jpg` (320 × 320).
+- Credit: [elizaraxi](https://www.flickr.com/photos/65186679@N07/).
+- Original source: [Arugula sprouts on Flickr](https://www.flickr.com/photos/65186679@N07/8702454480).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 1024 × 683. Arugula line of the seed chart.
+- Alt text: Young arugula sprouts in dark soil with white perlite.
+
+### Coriander seedlings
+
+- Registry key: `cilantro-seedlings`.
+- Local photograph: `assets/photos/cilantro-seedlings-jason-sandeman.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/cilantro-seedlings-jason-sandeman.jpg` (320 × 320).
+- Credit: [Jason Sandeman](https://www.flickr.com/photos/8853180@N02/).
+- Original source: [True Leaves on Flickr](https://www.flickr.com/photos/8853180@N02/5689867383).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 1024 × 683. Cilantro line of the seed chart.
+- Alt text: Young coriander seedlings showing their first true leaves.
+
+### Mixed brassica microgreens, including kale
+
+- Registry key: `kale-mix`.
+- Local photograph: `assets/photos/kale-mix-microgreens-kate-ter-haar.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/kale-mix-microgreens-kate-ter-haar.jpg` (320 × 320).
+- Credit: [Kate Ter Haar](https://www.flickr.com/photos/8489692@N03/).
+- Original source: [Microgreens on a kitchen windowsill, on Flickr](https://www.flickr.com/photos/8489692@N03/49879739643).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 1024 × 1024. Kale line of the seed chart. The photographer describes a mix of broccoli, kale, purple kohlrabi and red cabbage.
+- Alt text: A windowsill tray of broccoli, kale, kohlrabi and red cabbage microgreens.
+
+### White growth on soil
+
+- Registry key: `mold-check`.
+- Local photograph: `assets/photos/white-growth-on-soil-max-aberg.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/white-growth-on-soil-max-aberg.jpg` (320 × 320).
+- Credit: [Max Aberg](https://www.flickr.com/photos/190177179@N02/).
+- Original source: [Unknown white growth on Flickr](https://www.flickr.com/photos/190177179@N02/50607463703).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 1024 × 575. Mold line of the tray record. The photographer was unsure whether it is mold or mycelium, so the alt text describes only what is visible.
+- Alt text: White fuzzy growth on the soil surface beside a seedling.
+
+### Rutabaga (swede) seedlings in a cell tray
+
+- Registry key: `rutabaga-seedlings`.
+- Local photograph: `assets/photos/swede-seedlings-kolforn.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/swede-seedlings-kolforn.jpg` (320 × 320).
+- Credit: [Kolforn](https://commons.wikimedia.org/wiki/User:Kolforn).
+- Original source: [Swede seedlings, Trimingham, on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:-2020-06-25_Swede_seedlings_(Brassica_napus_subsp._rapifera),_Trimingham.JPG).
+- License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 3757 × 4667. Rutabaga line of the seed chart. Swede is the British name for rutabaga.
+- Alt text: Small rutabaga seedlings in a black cell tray of dark mix.
+
+### Beet microgreens
+
+- Registry key: `beet-micro`.
+- Local photograph: `assets/photos/beet-microgreens-katygreen4.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/beet-microgreens-katygreen4.jpg` (320 × 320).
+- Credit: [Katygreen4](https://commons.wikimedia.org/wiki/User:Katygreen4).
+- Original source: [Beet microgreens on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Beet_microgreens.jpg).
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), checked on the source page on 2026-11-11.
+- Processing: Original 540 × 540 photograph cropped to a square and resized to 450 × 450 and a 320 × 320 thumbnail. Beet line of the calculator chart.
+- Alt text: Red-stemmed beet microgreens in a clear dish.
+
+### Broccoli sprouts in a bowl
+
+- Registry key: `broccoli-sprouts`.
+- Local photograph: `assets/photos/broccoli-sprouts-bowl-thorsten-mueller.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/broccoli-sprouts-bowl-thorsten-mueller.jpg` (320 × 320).
+- Credit: [Thorsten Müller](https://commons.wikimedia.org/wiki/User:Thorsten_M%C3%BCller).
+- Original source: [Brokkolisprossen on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Brokkolisprossen-schale-knolle.jpg).
+- License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), checked on the source page on 2026-11-11.
+- Processing: Original 3008 × 2000 photograph cropped to a square and resized to 450 × 450 and a 320 × 320 thumbnail. Broccoli line of the calculator chart.
+- Alt text: A bowl of broccoli sprouts beside a head of broccoli.
+
+### Coriander sprouts
+
+- Registry key: `coriander-sprouts`.
+- Local photograph: `assets/photos/coriander-sprouts-joybot.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/coriander-sprouts-joybot.jpg` (320 × 320).
+- Credit: [Joybot](https://www.flickr.com/people/62559061@N06).
+- Original source: [Coriander sprouts on Wikimedia Commons, from Flickr](https://commons.wikimedia.org/wiki/File:Coriander_sprouts_(5893242387).jpg).
+- License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), checked on the source page on 2026-11-11.
+- Processing: Original 5184 × 3456 photograph cropped to a square and resized to 450 × 450 and a 320 × 320 thumbnail. Cilantro line of the calculator chart.
+- Alt text: Young coriander sprouts in a terracotta pot.
+
+### Mustard seedlings
+
+- Registry key: `mustard-seedlings`.
+- Local photograph: `assets/photos/mustard-seedlings-tess-watson.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/mustard-seedlings-tess-watson.jpg` (320 × 320).
+- Credit: [Tess Watson](https://www.flickr.com/people/63603238@N00).
+- Original source: [Mustard seedlings on Wikimedia Commons, from Flickr](https://commons.wikimedia.org/wiki/File:Mustard_seedlings.jpg).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), checked on the source page on 2026-11-11.
+- Processing: Original 1280 × 960 photograph cropped to a square and resized to 450 × 450 and a 320 × 320 thumbnail. Mustard line of the calculator chart.
+- Alt text: Four mustard seedlings with long white roots on a grey surface.
+
+### Basil seedlings
+
+- Registry key: `basil-seedlings`.
+- Local photograph: `assets/photos/basil-seedlings-eiku.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/basil-seedlings-eiku.jpg` (320 × 320).
+- Credit: [Eiku en exil](https://commons.wikimedia.org/wiki/User:Eiku_en_exil).
+- Original source: [Ocimum basilicum seedlings on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Ocimum_basilicum_-_seedlings_1.jpg).
+- License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), checked on the source page on 2026-11-11.
+- Processing: Original 1836 × 1804 photograph cropped to a square and resized to 450 × 450 and a 320 × 320 thumbnail. Basil line of the calculator chart.
+- Alt text: Green and purple basil seedlings coming up in a pot.
+
+### Arugula (rucola) seedlings
+
+- Registry key: `rucola-seedlings`.
+- Local photograph: `assets/photos/rucola-seedlings-sungmin-yun.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/rucola-seedlings-sungmin-yun.jpg` (320 × 320).
+- Credit: [Sungmin Yun](https://www.flickr.com/photos/flyshoe/).
+- Original source: [Rucola seedlings on Wikimedia Commons, from Flickr](https://commons.wikimedia.org/wiki/File:Rucola_seedlings.jpg).
+- License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), checked on the source page on 2026-11-11.
+- Processing: Original 4032 × 2272 photograph cropped to a square and resized to 450 × 450 and a 320 × 320 thumbnail. Arugula line of the calculator chart.
+- Alt text: A dense row of young arugula seedlings in soil.
+
+### Young kale plants
+
+- Registry key: `young-kale`.
+- Local photograph: `assets/photos/young-kale-blokenearexeter.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/young-kale-blokenearexeter.jpg` (320 × 320).
+- Credit: [Blokenearexeter](https://commons.wikimedia.org/wiki/User:Blokenearexeter).
+- Original source: [Young Kale plants on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Young_Kale_plants.jpg).
+- License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), checked on the source page on 2026-11-11.
+- Processing: Original 3264 × 2448 photograph cropped to a square and resized to 450 × 450 and a 320 × 320 thumbnail. Kale line of the calculator chart.
+- Alt text: Young kale plants in a pot of dark compost.
+
+### Rutabaga (swede) seedlings in pots
+
+- Registry key: `rutabaga-pots`.
+- Local photograph: `assets/photos/swede-seedlings-pots-kolforn.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/swede-seedlings-pots-kolforn.jpg` (320 × 320).
+- Credit: [Kolforn](https://commons.wikimedia.org/wiki/User:Kolforn).
+- Original source: [Swede seedlings in pots, Trimingham, on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:-2020-06-30_Swede_seedlings_(Brassica_napus_subsp._rapifera),_Trimingham.JPG).
+- License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), checked on the source page on 2026-11-11.
+- Processing: Original 5152 × 3864 photograph cropped to a square and resized to 450 × 450 and a 320 × 320 thumbnail. Rutabaga line of the calculator chart. Swede is the British name for rutabaga.
+- Alt text: Labeled rutabaga seedlings in small red pots.
+
+### A young radish seedling
+
+- Registry key: `radish-seedling`.
+- Thumbnail: `assets/photos/thumbs/radish-seedling-taesu.jpg` (320 × 320).
+- Credit: [이태수](https://commons.wikimedia.org/wiki/File:Sprouting_chonggakmu(chonggak_radish).jpg).
+- Original source: [Sprouting chonggakmu on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sprouting_chonggakmu(chonggak_radish).jpg).
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), checked on the source page on 2026-11-11.
+- Processing: Thumbnail made from the 600 × 600 supply WebP. Radish line of the calculator chart. The same photo serves as a supply stand-in on other pages.
+- Alt text: A young radish seedling with round seed leaves in gravelly soil.
+
+### Sprouted peas in a sack
+
+- Registry key: `pea-sack`.
+- Thumbnail: `assets/photos/thumbs/pea-sprouts-sack-yarzaryeni.jpg` (320 × 320).
+- Credit: [Yarzaryeni](https://commons.wikimedia.org/wiki/File:Garden_pea_sprouts.jpg).
+- Original source: [Garden pea sprouts on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Garden_pea_sprouts.jpg).
+- License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), checked on the source page on 2026-11-11.
+- Processing: Thumbnail made from the 600 × 600 supply WebP. Pea line of the calculator chart. The same photo serves as a supply stand-in on other pages.
+- Alt text: Sprouted garden peas in a cloth sack.
+
 ## Photo rules the build enforces
 
 - One photo file per page view. When a photo repeats, the later copy is removed, and the build then fails if that leaves any list row, chart row, or step without a photo. Pick another photo instead of relying on removal. The three /gear/ supply panels are shown one at a time, so they may share photos with each other but not with anything else on the page.
@@ -541,5 +704,8 @@ Shop and fact cards use square webp crops in `assets/products/supply-*-{300,600}
 - The same picture may not appear twice on a page under different file names or URLs (a thumbnail and a WebP product copy, a crop, a resize). The build compares image content with ORB keypoints (`check_same_photo_content`); a pair that lines up with 60 or more matching points counts as the same photo. Results are kept in `scripts/photo-match-cache.json`, so OpenCV (`pip install opencv-python-headless numpy`) is only needed when a photo is added or changed. Separate frames from one session that look alike, such as Pannet's two sunflower tray photos, are listed in `SAME_PHOTO_SETS`. The /photo-credits/ page is exempt because it shows every photo.
 - Every image (src and srcset) must load: the file exists and is not empty, or a remote URL returns 200 with an image content type.
 - A photo credit with no image in the same row, card, or figure fails the build.
-- The printable tray record on /guides/first-tray-checklist/ is a plain fill-in list (`plain-list`) with no photos. It is the only plain list that is exempt.
+- Every content list item, table row, card, and step inside `<main>` needs a loaded photo (rows on the tray record, both seed charts, related guides, breadcrumbs, and On this page menus included). The only exemptions, in `PhotoListAudit`: the photo credits, privacy, and affiliate disclosure pages; lists inside `site-nav`, `sources`, or `footnotes`; and the site header and footer.
+- Breadcrumbs and the On this page menu get small decorative thumbnails (`alt=""`, since the text names the target) picked by `add_nav_photos`. Each menu carries one 12px "Photos:" credit line naming every photographer, with the full credit on /photo-credits/.
+- Every page under /guides/ and /tools/ must end with a Related guides block of at least 3 photo cards (`check_ends_with_related`). The email signup box may follow it. Source pages add one with `<!--RELATED:slug-->`.
+- The seed charts on the calculator and the seed density guide use one crop photo per row (`CALC_CHART_PHOTOS`, `RATES_CHART_PHOTOS`, and the density chart list), each different from the calculator's package box photos.
 - The small apartment guide's step 1 ("Clean the tray") now uses the `cells` photo, so the daily check's drainage row can use the draining-tray photo.

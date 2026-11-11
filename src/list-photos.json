@@ -280,5 +280,95 @@
     "alt": "Harvested sunflower sprouts with round green seed leaves on a plate.",
     "credit_id": "sunflower-sprouts-starr",
     "author": "Forest and Kim Starr"
+  },
+  "arugula-sprouts": {
+    "thumbnail": "arugula-sprouts-elizaraxi.jpg",
+    "alt": "Young arugula sprouts in dark soil with white perlite.",
+    "credit_id": "arugula-sprouts-elizaraxi",
+    "author": "elizaraxi"
+  },
+  "cilantro-seedlings": {
+    "thumbnail": "cilantro-seedlings-jason-sandeman.jpg",
+    "alt": "Young coriander seedlings showing their first true leaves.",
+    "credit_id": "cilantro-seedlings-jason-sandeman",
+    "author": "Jason Sandeman"
+  },
+  "kale-mix": {
+    "thumbnail": "kale-mix-microgreens-kate-ter-haar.jpg",
+    "alt": "A windowsill tray of broccoli, kale, kohlrabi and red cabbage microgreens.",
+    "credit_id": "kale-mix-microgreens-kate-ter-haar",
+    "author": "Kate Ter Haar"
+  },
+  "mold-check": {
+    "thumbnail": "white-growth-on-soil-max-aberg.jpg",
+    "alt": "White fuzzy growth on the soil surface beside a seedling.",
+    "credit_id": "white-growth-on-soil-max-aberg",
+    "author": "Max Aberg"
+  },
+  "rutabaga-seedlings": {
+    "thumbnail": "swede-seedlings-kolforn.jpg",
+    "alt": "Small rutabaga seedlings in a black cell tray of dark mix.",
+    "credit_id": "swede-seedlings-kolforn",
+    "author": "Kolforn"
+  },
+  "beet-micro": {
+    "thumbnail": "beet-microgreens-katygreen4.jpg",
+    "alt": "Red-stemmed beet microgreens in a clear dish.",
+    "credit_id": "beet-microgreens-katygreen4",
+    "author": "Katygreen4"
+  },
+  "broccoli-sprouts": {
+    "thumbnail": "broccoli-sprouts-bowl-thorsten-mueller.jpg",
+    "alt": "A bowl of broccoli sprouts beside a head of broccoli.",
+    "credit_id": "broccoli-sprouts-bowl-thorsten-mueller",
+    "author": "Thorsten Müller"
+  },
+  "coriander-sprouts": {
+    "thumbnail": "coriander-sprouts-joybot.jpg",
+    "alt": "Young coriander sprouts in a terracotta pot.",
+    "credit_id": "coriander-sprouts-joybot",
+    "author": "Joybot"
+  },
+  "mustard-seedlings": {
+    "thumbnail": "mustard-seedlings-tess-watson.jpg",
+    "alt": "Four mustard seedlings with long white roots on a grey surface.",
+    "credit_id": "mustard-seedlings-tess-watson",
+    "author": "Tess Watson"
+  },
+  "basil-seedlings": {
+    "thumbnail": "basil-seedlings-eiku.jpg",
+    "alt": "Green and purple basil seedlings coming up in a pot.",
+    "credit_id": "basil-seedlings-eiku",
+    "author": "Eiku en exil"
+  },
+  "rucola-seedlings": {
+    "thumbnail": "rucola-seedlings-sungmin-yun.jpg",
+    "alt": "A dense row of young arugula seedlings in soil.",
+    "credit_id": "rucola-seedlings-sungmin-yun",
+    "author": "Sungmin Yun"
+  },
+  "young-kale": {
+    "thumbnail": "young-kale-blokenearexeter.jpg",
+    "alt": "Young kale plants in a pot of dark compost.",
+    "credit_id": "young-kale-blokenearexeter",
+    "author": "Blokenearexeter"
+  },
+  "rutabaga-pots": {
+    "thumbnail": "swede-seedlings-pots-kolforn.jpg",
+    "alt": "Labeled rutabaga seedlings in small red pots.",
+    "credit_id": "swede-seedlings-pots-kolforn",
+    "author": "Kolforn"
+  },
+  "radish-seedling": {
+    "thumbnail": "radish-seedling-taesu.jpg",
+    "alt": "A young radish seedling with round seed leaves in gravelly soil.",
+    "credit_id": "radish-seedling-taesu",
+    "author": "이태수"
+  },
+  "pea-sack": {
+    "thumbnail": "pea-sprouts-sack-yarzaryeni.jpg",
+    "alt": "Sprouted garden peas in a cloth sack.",
+    "credit_id": "pea-sprouts-sack-yarzaryeni",
+    "author": "Yarzaryeni"
   }
 }

@@ -210,13 +210,16 @@ RELATED_PHOTO_CHOICES = {
     "microgreen-seeds-for-beginners": ["scale", "radish-micro", "seeds"],
     "microgreens-kit-vs-diy-cost": ["sunflower", "kit-tray", "sunflower-micro"],
     "microgreens-seed-density-per-tray": ["seeds", "radish-micro", "amaranth-micro"],
-    "pea-vs-radish-microgreens": ["peas", "pea-lufa", "radish-micro"],
+    "pea-vs-radish-microgreens": ["peas", "pea-lufa", "radish-micro", "pea-sack", "radish-seedling"],
     "windowsill-microgreens": ["basil-window", "window-tray", "basil"],
     "apartment-seed-starting": ["sowing", "seed-starting", "thin"],
     "bottom-watering-trays": ["tray", "tray-pair", "bw-set"],
     "balcony-salad-garden": ["balcony", "lettuce"],
     "calculator": ["scale", "seeds", "radish-micro"],
 }
+
+# General microgreen photos for a related card whose own choices are all already on the page.
+RELATED_PHOTO_FALLBACKS = ["fenugreek", "kit-tray", "trays", "sunflower-sprouts", "broccoli-sprouts", "seed-starting"]
 
 
 def photo_file(key: str) -> str:
@@ -239,7 +242,7 @@ def choose_related_photos(document: str) -> str:
         if not figure or not target:
             continue
         slug = target.group(1) or "calculator"
-        choices = RELATED_PHOTO_CHOICES.get(slug, [figure.group(1)])
+        choices = RELATED_PHOTO_CHOICES.get(slug, [figure.group(1)]) + RELATED_PHOTO_FALLBACKS
         pick = next((key for key in choices if photo_group(photo_file(key)) not in used), None)
         if pick is None:
             raise SystemExit(f"Related card for {slug}: every photo choice is already on the page; add another choice")
@@ -338,8 +341,24 @@ def render_content_photos(html: str) -> str:
     return re.sub(r'<tr([^>]*\bdata-photo="([^"]+)"[^>]*)>(.*?)</tr>', table_row, html, flags=re.S)
 
 
+# Ryan, 2026-11-10: no plain-text lists or tables on this site; every list item, row, card
+# and step needs a photo. These are the only places a text-only list is allowed.
+TEXT_LIST_PAGES = {
+    "photo-credits/index.html": "photo credits page (the records themselves)",
+    "privacy/index.html": "legal page",
+    "affiliate-disclosure/index.html": "legal page",
+}
+TEXT_LIST_CONTAINERS = {
+    "site-nav": "the site menu in the header",
+    "sources": "sources list",
+    "footnotes": "footnotes",
+}
+# Repeated content blocks that must carry a photo, besides list items and table rows.
+PHOTO_CARD_CLASSES = {"fact-card", "pick", "harvest-row", "seed-photo-row", "setup-choice-card"}
+
+
 class PhotoListAudit(HTMLParser):
-    """Keep new editorial lists from silently reverting to text-only rows."""
+    """Every content list item, table row, card and step needs an image, outside the allowlist above."""
     VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 
     def __init__(self) -> None:
@@ -347,21 +366,28 @@ class PhotoListAudit(HTMLParser):
         self.stack: list[dict] = []
         self.items: list[dict] = []
 
+    def allowed(self) -> bool:
+        for node in self.stack:
+            if node["tag"] in {"header", "footer"}:
+                return True
+            classes = node["attrs"].get("class", "").split()
+            if any(name in TEXT_LIST_CONTAINERS for name in classes) or node["attrs"].get("role") == "doc-endnotes":
+                return True
+        return False
+
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        attrs.setdefault("class", "")
         context = [node["tag"] for node in self.stack]
-        is_source = any("sources" in node["attrs"].get("class", "").split() for node in self.stack)
-        is_affiliate = any("affiliate-box" in node["attrs"].get("class", "").split() for node in self.stack)
-        is_pick = any("pick-grid" in node["attrs"].get("class", "").split() for node in self.stack)
-        # Seed charts are data bars (crop, grams, bar), not editorial lists.
-        is_chart = any("seed-chart" in node["attrs"].get("class", "").split() for node in self.stack)
-        # A fill-in record (the printable checklist) is a plain list on purpose; see docs/visual-assets.md.
-        is_plain = any("plain-list" in node["attrs"].get("class", "").split() for node in self.stack)
+        classes = set((attrs.get("class") or "").split())
         node = {"tag": tag, "attrs": attrs}
-        if tag == "li" and "main" in context and "nav" not in context and not is_source and not is_affiliate and not is_pick and not is_chart and not is_plain:
-            node.update(photo=False, text=[])
+        in_main = "main" in context
+        is_row = tag == "tr" and "thead" not in context
+        is_card = bool(classes & PHOTO_CARD_CLASSES)
+        if in_main and (tag == "li" or is_row or is_card) and not self.allowed():
+            node.update(photo=False, text=[], kind=tag if not is_card else "card")
             self.items.append(node)
-        if tag == "img" and attrs.get("src", "").startswith("/assets/photos/"):
+        if tag == "img" and attrs.get("src"):
             for parent in self.stack:
                 if "photo" in parent:
                     parent["photo"] = True
@@ -832,6 +858,137 @@ def photo_group(src: str) -> str:
     return photo_groups().get(name, name)
 
 
+# Ryan, 2026-11-11: small photos on breadcrumbs and the On this page menu. Each photo is used once per
+# page; the first photo whose picture is not already on the page wins. Keywords match the link text.
+NAV_PHOTO_KEYWORDS = [
+    (("home",), ["balcony", "basil-window", "lettuce", "fenugreek", "trays"]),
+    (("guides",), ["seed-starting", "sowing", "cells", "tray-pair", "mix"]),
+    (("mold",), ["mold-check"]),
+    (("pea",), ["pea-basket", "peas", "pea-sack", "pea-lufa"]),
+    (("radish",), ["radish-micro", "radish-seedling", "seeds"]),
+    (("seed", "grams", "rate", "density", "crop"), ["seeds", "radish-seedling", "scale", "mustard-seedlings", "seed-starting"]),
+    (("light", "lamp", "window", "sill"), ["light", "window-tray", "basil-window", "basil", "basil-seedlings"]),
+    (("water", "drain", "soak"), ["water", "tray-pair", "moisture", "tray"]),
+    (("harvest", "cut"), ["harvest", "broccoli-micro", "radish-micro", "sunflower-sprouts"]),
+    (("cost", "price", "buy", "suppl", "gear", "kit", "gift"), ["kit-tray", "scale", "scissors", "trays", "cells"]),
+    (("tray", "step", "start", "sow", "first"), ["sowing", "cells", "tray", "tray-pair", "seed-starting"]),
+    (("pot", "balcony", "container", "layout", "salad", "lettuce"), ["balcony", "lettuce", "basil-window", "cucumber"]),
+    (("tomato", "pepper", "transplant", "seedling"), ["thin", "tomato", "cells", "window-tray"]),
+    (("faq", "question", "side by side", "compare", "which"), ["fenugreek", "sunflower-sprouts", "pea-basket", "kale-mix"]),
+    (("source",), ["mix", "cells", "seed-starting", "moisture"]),
+]
+NAV_PHOTO_FALLBACKS = [
+    "fenugreek", "kit-tray", "sunflower-micro", "broccoli-micro", "radish-micro", "kale-mix", "arugula-sprouts",
+    "cilantro-seedlings", "rutabaga-seedlings", "amaranth-micro", "young-kale", "rucola-seedlings", "coriander-sprouts",
+    "basil-seedlings", "beet-micro", "mustard-seedlings", "broccoli-sprouts", "sunflower-sprouts", "pea-basket",
+    "lettuce", "balcony", "cucumber", "tomato", "kale", "arugula", "cilantro", "rutabaga", "mustard", "beet", "amaranth",
+]
+
+
+def nav_photo_candidates(label: str, page_slug: str, current: bool) -> list[str]:
+    text = label.lower()
+    picks: list[str] = []
+    if current and page_slug in RELATED_PHOTO_CHOICES:
+        picks += RELATED_PHOTO_CHOICES[page_slug]
+    for words, keys in NAV_PHOTO_KEYWORDS:
+        if any(word in text for word in words):
+            picks += keys
+    return picks + NAV_PHOTO_FALLBACKS
+
+
+def add_nav_photos(document: str, rel: str) -> str:
+    """Put a small photo on each breadcrumb and On this page link, with one credit line per menu."""
+    used = {photo_group(src) for src in re.findall(r'<img\b[^>]*\bsrc="(/assets/[^"]+)"', document)}
+    if rel.startswith("photo-credits/"):
+        used = set()  # This page shows every photo on purpose.
+    slug = rel.split("/")[-2] if rel.count("/") >= 2 else ""
+    if rel.startswith("tools/microgreens-seed-calculator/"):
+        slug = "calculator"
+
+    def pick(label: str, current: bool = False) -> str:
+        for key in nav_photo_candidates(label, slug, current):
+            photo = LIST_PHOTOS.get(key)
+            if not photo or "thumbnail" not in photo:
+                continue
+            group = photo_group(photo["thumbnail"])
+            if group in used:
+                continue
+            used.add(group)
+            return key
+        raise SystemExit(f"{rel}: no unused photo left for the menu link {label!r}")
+
+    def photo_img(key: str) -> str:
+        photo = LIST_PHOTOS[key]
+        return (
+            f'<img class="nav-photo" src="/assets/photos/thumbs/{esc(photo["thumbnail"])}" width="320" height="320" '
+            'alt="" loading="lazy" decoding="async">'
+        )
+
+    def credit(keys: list[str]) -> str:
+        names = ", ".join(LIST_PHOTOS[k]["author"] for k in keys)
+        links = ", ".join(
+            f'<a href="/photo-credits/#{esc(LIST_PHOTOS[k]["credit_id"])}">{esc(LIST_PHOTOS[k]["author"])}</a>' for k in keys
+        )
+        return (
+            f'<p class="nav-credit credit-line" title="Menu photos by {esc(names)}. Full credits on the Photo credits page.">'
+            f"Photos: {links}</p>"
+        )
+
+    def crumbs(match: re.Match) -> str:
+        block = match.group(0)
+        items = re.findall(r"<li>(.*?)</li>", block, flags=re.S)
+        keys = []
+        new_items = []
+        for index, inner in enumerate(items):
+            label = re.sub(r"<[^>]+>", "", inner)
+            key = pick(label, current=index == len(items) - 1 and index > 0)
+            keys.append(key)
+            if inner.startswith("<a "):
+                inner = re.sub(r"^(<a [^>]*>)", lambda m: m.group(1) + photo_img(key), inner, count=1)
+            else:
+                inner = f'<span class="crumb-current">{photo_img(key)}{inner}</span>'
+            new_items.append(f"<li>{inner}</li>")
+        return (
+            '<nav class="crumbs" aria-label="Breadcrumb"><ol>' + "".join(new_items) + "</ol>" + credit(keys) + "</nav>"
+        )
+
+    def toc(match: re.Match) -> str:
+        block = match.group(0)
+        keys = []
+
+        def link(m: re.Match) -> str:
+            key = pick(re.sub(r"<[^>]+>", "", m.group(2)))
+            keys.append(key)
+            return f"{m.group(1)}{photo_img(key)}{m.group(2)}</a>"
+
+        block = re.sub(r'(<li><a href="#[^"]+">)(.*?)</a>', link, block, flags=re.S)
+        return block.replace("</ol></details>", "</ol>" + credit(keys) + "</details>", 1)
+
+    document = re.sub(r'<nav class="crumbs" aria-label="Breadcrumb"><ol>.*?</ol></nav>', crumbs, document, count=1, flags=re.S)
+    document = re.sub(r'<nav class="guide-toc" aria-label="On this page">.*?</nav>', toc, document, count=1, flags=re.S)
+    return document
+
+
+def render_related_placeholders(document: str) -> str:
+    return re.sub(r"<!--RELATED:([a-z-]+)-->", lambda m: render_content_photos(related_html(m.group(1))), document)
+
+
+def check_ends_with_related(document: str, rel: str) -> None:
+    """Every guide and tool page ends with a Related guides block of photo cards."""
+    if not re.match(r"(guides|tools)/[^/]+/index\.html$", rel):
+        return
+    main = document[document.find("<main"):document.find("</main>")]
+    # The email signup box may follow; it is a form, not page content.
+    main = re.sub(r'<section class="signup".*?</section>', "", main, flags=re.S)
+    headings = [re.sub(r"<[^>]+>", "", h).strip() for h in re.findall(r"<h2\b[^>]*>(.*?)</h2>", main, flags=re.S)]
+    if not headings or headings[-1] != "Related guides":
+        raise SystemExit(f"{rel}: the page must end with a Related guides block (last heading is {headings[-1:]})")
+    block = re.search(r'<ul class="related-list[^"]*"[^>]*>(.*?)</ul>', main, flags=re.S)
+    cards = re.findall(r"<li\b.*?</li>", block.group(1), flags=re.S) if block else []
+    if len(cards) < 3 or any("<img" not in card for card in cards):
+        raise SystemExit(f"{rel}: Related guides needs at least 3 cards, each with a photo")
+
+
 def check_same_photo_content(document: str, label: str) -> None:
     """Fail when one picture appears twice on a page under different file names or URLs."""
     groups = photo_groups()
@@ -855,11 +1012,14 @@ def check_same_photo_content(document: str, label: str) -> None:
 
 
 def check_photo_lists(document: str, label: str) -> int:
+    rel = label.split(" ")[0]
+    if rel in TEXT_LIST_PAGES:
+        return 0
     audit = PhotoListAudit()
     audit.feed(document)
-    missing = [" ".join("".join(item["text"]).split())[:100] for item in audit.items if not item["photo"]]
+    missing = [f'{item["kind"]}: ' + " ".join("".join(item["text"]).split())[:100] for item in audit.items if not item["photo"]]
     if missing:
-        raise SystemExit(f"{label}: editorial list rows missing photos: {missing}")
+        raise SystemExit(f"{label}: list items, rows, cards or steps missing photos: {missing}")
     if re.search(r'<!--(?:PHOTO|CHOICE_PHOTO|PHOTO_CREDIT):|\bdata-photo="', document):
         raise SystemExit(f"{label}: unresolved photo markup")
     return len(audit.items)
@@ -937,6 +1097,8 @@ def related_html(slug: str) -> str:
         "apartment-seed-starting": ["bottom-watering-trays", "balcony-salad-garden", "windowsill-microgreens"],
         "bottom-watering-trays": ["microgreens-in-a-small-apartment", "apartment-seed-starting", "windowsill-microgreens"],
         "balcony-salad-garden": ["apartment-seed-starting", "windowsill-microgreens", "microgreens-in-a-small-apartment"],
+        "calculator": ["microgreens-seed-density-per-tray", "microgreens-in-a-small-apartment", "pea-vs-radish-microgreens", "microgreens-kit-vs-diy-cost"],
+        "first-tray-checklist": ["microgreens-in-a-small-apartment", "windowsill-microgreens", "bottom-watering-trays"],
     }
     by_slug = {guide["slug"]: guide for guide in GUIDES}
     items = []
@@ -946,7 +1108,7 @@ def related_html(slug: str) -> str:
             f'<li data-photo="{GUIDE_PHOTOS[item]}"><a href="/guides/{item}/">{esc(guide["h1"])}</a><p>{esc(guide["dek"])}</p></li>'
         )
     calc = '<li data-photo="scale"><a href="/tools/microgreens-seed-calculator/">Microgreens seed calculator</a><p>Scale a published 10 by 20 inch rate to your tray and estimate seed cost.</p></li>'
-    if slug in {"balcony-salad-garden", "apartment-seed-starting"}:
+    if slug in {"balcony-salad-garden", "apartment-seed-starting", "calculator"}:
         calc = ""
     return "<h2>Related guides</h2><ul class=\"related-list\">" + calc + "".join(items) + "</ul>"
 
@@ -1767,16 +1929,38 @@ def rate_label(row: dict) -> str:
     return f"{row['low']} to {row['high']} g"
 
 
-def bar_chart(title: str, subtitle: str, rows: list[tuple[str, str, str, int | None]], source: str) -> str:
-    """Responsive HTML bars. rows are (label, value text, detail, bar grams or None).
+# One photo per chart line, each used once on its page (see docs/visual-assets.md).
+CALC_CHART_PHOTOS = {
+    "arugula": "arugula-sprouts", "broccoli": "broccoli-micro", "kale": "kale-mix", "cilantro": "cilantro-seedlings",
+    "basil": "basil-window", "rutabaga": "rutabaga-seedlings", "radish": "radish-micro", "sunflower": "sunflower-micro",
+    "pea": "pea-basket", "sample": "kit-tray",
+}
+# The calculator's package boxes already use the plain crop photos, so its second chart uses a third set.
+RATES_CHART_PHOTOS = {
+    "radish": "radish-seedling", "pea": "pea-sack", "sunflower": "sunflower-sprouts", "broccoli": "broccoli-sprouts",
+    "kale": "young-kale", "arugula": "rucola-seedlings", "cilantro": "coriander-sprouts", "basil": "basil-seedlings",
+    "rutabaga": "rutabaga-pots", "mustard": "mustard-seedlings", "beet": "beet-micro", "amaranth": "amaranth",
+}
+
+
+def seed_row(photo_key: str, inner: str, extra_class: str = "") -> str:
+    """A chart line laid out like the daily check rows: photo and credit on the left, the figures on the right."""
+    return (
+        f'<li class="seed-photo-row{extra_class}">' + list_photo(photo_key)
+        + f'<div class="seed-row">{inner}</div></li>'
+    )
+
+
+def bar_chart(title: str, subtitle: str, rows: list[tuple[str, str, str, int | None, str]], source: str) -> str:
+    """Responsive HTML bars. rows are (label, value text, detail, bar grams or None, photo key).
 
     Text stays live HTML so it never shrinks below the page type on phones. Bar widths
     are percentages of the largest published figure in the same chart.
     """
-    magnitudes = [grams for *_rest, grams in rows if grams]
+    magnitudes = [row[3] for row in rows if row[3]]
     max_g = max(magnitudes) if magnitudes else 1
     items = []
-    for label, value, detail, grams in rows:
+    for label, value, detail, grams, photo_key in rows:
         if grams:
             bar = f'<span class="seed-bar" aria-hidden="true"><span style="width:{max(4, round(100 * grams / max_g, 1))}%"></span></span>'
             value_html = f'<span class="seed-grams">{esc(value)}</span>'
@@ -1784,11 +1968,7 @@ def bar_chart(title: str, subtitle: str, rows: list[tuple[str, str, str, int | N
             bar = ""
             value_html = f'<span class="seed-grams seed-grams-none">{esc(value)}</span>'
         detail_html = f'<span class="seed-detail">{esc(detail)}</span>' if detail else ""
-        items.append(
-            '<li class="seed-row">'
-            f'<span class="seed-name">{esc(label)}</span>{value_html}{bar}{detail_html}'
-            '</li>'
-        )
+        items.append(seed_row(photo_key, f'<span class="seed-name">{esc(label)}</span>{value_html}{bar}{detail_html}'))
     return (
         f'<figure class="seed-chart" aria-labelledby="{slug_id(title)}">'
         f'<p class="seed-chart-title" id="{slug_id(title)}">{esc(title)}</p>'
@@ -1808,11 +1988,12 @@ def seed_chart() -> str:
     crops = sorted((row for row in rates if "grams" in row and not row.get("needsRate")), key=lambda row: row["grams"])
     max_g = max(row["grams"] for row in crops)
     items = [
-        '<li class="seed-row">'
-        f'<span class="seed-name">{esc(row["name"])}</span>'
-        f'<span class="seed-grams">{row["grams"]} g</span>'
-        f'<span class="seed-bar" aria-hidden="true"><span style="width:{max(4, round(100 * row["grams"] / max_g, 1))}%"></span></span>'
-        '</li>'
+        seed_row(
+            CALC_CHART_PHOTOS[row["id"]],
+            f'<span class="seed-name">{esc(row["name"])}</span>'
+            f'<span class="seed-grams">{row["grams"]} g</span>'
+            f'<span class="seed-bar" aria-hidden="true"><span style="width:{max(4, round(100 * row["grams"] / max_g, 1))}%"></span></span>',
+        )
         for row in crops
     ]
     sample = [row for row in rates if row.get("needsRate")]
@@ -1823,13 +2004,13 @@ def seed_chart() -> str:
     low, high = lows.pop(), highs.pop()
     names = ", ".join(row["name"].lower() for row in sample)
     items.append(
-        '<li class="seed-row seed-row-sample">'
+        f'<li class="seed-photo-row seed-row-sample">{list_photo(CALC_CHART_PHOTOS["sample"])}<div class="seed-row">'
         '<span class="seed-name">Maryland example</span>'
         f'<span class="seed-grams">{low} to {high} g</span>'
         '<span class="seed-bar seed-bar-sample" aria-hidden="true">'
         f'<span style="width:{round(100 * high / max_g, 1)}%"><span style="width:{round(100 * low / high, 1)}%"></span></span></span>'
         f'<span class="seed-detail">Not a crop rate. A general broadcast example the calculator offers for {esc(names)}.</span>'
-        '</li>'
+        '</div></li>'
     )
     return (
         '<figure class="seed-chart" aria-labelledby="chart-grams-per-tray">'
@@ -1844,12 +2025,12 @@ def seed_chart() -> str:
 
 def density_bars() -> str:
     rows = [
-        ("Radish", "42 g", "Utah State crop rate", 42),
-        ("Pea", "150 g", "Utah State crop rate", 150),
-        ("Sunflower", "48 g", "Utah State crop rate", 48),
-        ("Broccoli, kale, cilantro, basil, rutabaga", "28 g", "Utah State crop rate for each", 28),
-        ("Arugula", "10 g", "Utah State crop rate", 10),
-        ("Mustard, beet, amaranth", "No crop rate", "Maryland sample of 10 to 15 g only if you choose it", None),
+        ("Radish", "42 g", "Utah State crop rate", 42, "radish-micro"),
+        ("Pea", "150 g", "Utah State crop rate", 150, "pea-basket"),
+        ("Sunflower", "48 g", "Utah State crop rate", 48, "sunflower-micro"),
+        ("Broccoli, kale, cilantro, basil, rutabaga", "28 g", "Utah State crop rate for each", 28, "broccoli-micro"),
+        ("Arugula", "10 g", "Utah State crop rate", 10, "arugula"),
+        ("Mustard, beet, amaranth", "No crop rate", "Maryland sample of 10 to 15 g only if you choose it", None, "amaranth-micro"),
     ]
     return bar_chart(
         "Published grams",
@@ -1865,7 +2046,7 @@ def rates_table() -> str:
     for row in rates:
         grams = row["grams"] if "grams" in row else None
         detail = f"{row['kind']}. {row['presoak'].rstrip('.')}. {row['timing']}"
-        rows.append((row["name"], rate_label(row), detail, grams))
+        rows.append((row["name"], rate_label(row), detail, grams, RATES_CHART_PHOTOS[row["id"]]))
     return bar_chart(
         "Seed per 10 by 20 inch tray",
         "Every published figure the calculator uses.",
@@ -2663,7 +2844,9 @@ def main() -> None:
     photographed_items = 0
     credit_licenses = credit_records(pages["photo-credits/index.html"])
     for rel, document in pages.items():
+        document = render_related_placeholders(document)
         document = choose_related_photos(document)
+        document = add_nav_photos(document, rel)
         document = normalize_photo_credits(document, credit_licenses, rel)
         check_no_example_photo(document, rel)
         check_copy(Path(rel), document)
@@ -2679,6 +2862,7 @@ def main() -> None:
         check_credits_have_images(document, rel)
         check_images_load(document, rel)
         check_step_photos(document, rel)
+        check_ends_with_related(document, rel)
         check_letpot_panels(document, rel)
         pages[rel] = document
         target = ROOT / rel
