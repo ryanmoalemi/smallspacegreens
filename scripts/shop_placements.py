@@ -268,8 +268,8 @@ SUPPLY_IMAGES = {
     "lettuce-pot": ("Leaf lettuce growing in a container", "Netha Hussain", "https://commons.wikimedia.org/wiki/File:Leaf_lettuce_plant_in_a_pot_10.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Container lettuce. Stand-in for the LetPot garden and for buttercrunch seed.", True),
     "basil-mosaic": ("Basil in a mosaic pot by a window", "Personal Creations", "https://commons.wikimedia.org/wiki/File:Chalkboard_Plant_Stake_Basil_in_a_window_(14889072919).jpg", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "A second pot. Stand-in for the 8 and 10 in ceramic pot pair.", True),
     "lettuce-leaves": ("Frilly green lettuce leaves, close up", "Leon Brooks", "https://commons.wikimedia.org/wiki/File:Hydroponic_lettuce_leaves_green.jpg", "Public domain", "https://commons.wikimedia.org/wiki/File:Hydroponic_lettuce_leaves_green.jpg", "Lettuce leaves. Stand-in for mixed microgreen seed on the setup page, where the mixed-greens photo is already used.", True),
-    "promix": ("A bag of Pro-Mix potting soil", "Unknown", "https://commons.wikimedia.org/wiki/File:Pro-Mix_Potting_Soil.jpg", "Public domain", "https://commons.wikimedia.org/wiki/File:Pro-Mix_Potting_Soil.jpg", "A potting-mix bag. Stand-in for Espoma potting mix and Miracle-Gro mix.", True),
-    "coir-pile": ("Loose coco coir", "Victor M. Vicente Selvas", "https://commons.wikimedia.org/wiki/File:Horticulture_coir1310.JPG", "Public domain", "https://commons.wikimedia.org/wiki/File:Horticulture_coir1310.JPG", "Loose coir. Stand-in for seed-starting mix.", True),
+    "potting-soil": ("Potting mix with white perlite in a round pot", "Chris Radcliff", "https://commons.wikimedia.org/wiki/File:Potting_soil.jpg", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "Potting mix with perlite, color-corrected and cropped on Commons by Daniel Case. Stand-in for bagged potting and seed-starting mix.", True),
+    "coir-pile": ("A compressed brick of coco coir", "Victor M. Vicente Selvas", "https://commons.wikimedia.org/wiki/File:Horticulture_coir1310.JPG", "Public domain", "https://commons.wikimedia.org/wiki/File:Horticulture_coir1310.JPG", "A dry, compressed coir brick before soaking. Stand-in for seed-starting mix.", True),
     "coco-brick": ("A compressed brick of coco coir", "MatiasMiika", "https://commons.wikimedia.org/wiki/File:Brick_of_coco_coir.JPG", "CC BY 3.0", "https://creativecommons.org/licenses/by/3.0/", "A coir brick.", False),
     "coir-fiber": ("Loose coconut coir fiber", "Fotokannan", "https://commons.wikimedia.org/wiki/File:Coir_fibery.jpg", "CC BY-SA 3.0", "https://creativecommons.org/licenses/by-sa/3.0/", "Coir fiber. Stand-in for a hemp grow mat.", True),
     "scale": ("A plain digital pocket scale", "TBBSC", "https://commons.wikimedia.org/wiki/File:TBBSC_Digital_Scale.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "A plain digital pocket scale with no brand name on the face. Not the Etekcity model.", True),
@@ -280,7 +280,14 @@ SUPPLY_IMAGES = {
     "ceramic": ("A leafy plant in a ceramic pot", "W.carter", "https://commons.wikimedia.org/wiki/File:Plectranthus_verticillatus_in_a_ceramic_pot.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "A ceramic pot. Stand-in for the ceramic microgreens kit and for 8 in pots.", True),
     "windowbox": ("A planted window box", "litchick_1", "https://commons.wikimedia.org/wiki/File:2009_windowbox_2463967211.jpg", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "A window box. Stand-in for a balcony rail planter.", True),
     "grow-bag": ("A plant growing in a fabric grow bag", "Clintacc", "https://commons.wikimedia.org/wiki/File:Brinjal_plant_with_fruits_in_grow_bag.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "A fabric grow bag with a plant. Stand-in for empty grow bags.", True),
-    "radish-packet": ("A packet of radish seed", "U.S. Department of Agriculture", "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg", "Public domain", "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg", "A radish seed packet. Stand-in for microgreen radish seed.", True),
+    "dome-trays": ("Seedling cell trays on a rack, one under a clear humidity dome", "F. D. Richards", "https://www.flickr.com/photos/50697352@N00/4464904926", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "Cell trays with a clear humidity dome, square crop. Stand-in for trays sold with domes and cells.", True),
+    "microgreens-tray": ("Young red and green microgreens in a small black tray", "Zenyrgarden", "https://commons.wikimedia.org/wiki/File:Microgreen_growing.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Microgreens growing in a small tray, square crop. Stand-in for a microgreens kit.", True),
+    "radish-bowl": ("Purple radish microgreens in a steel bowl", "jonny.hunter", "https://www.flickr.com/photos/51931594@N00/461461364", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Harvested purple-stemmed radish microgreens, enlarged from a 500 by 375 pixel original. Stand-in for Rambo radish microgreen seed.", True),
+    "mixed-seed": ("Mixed seeds just sprouting, in purple, tan and green", "Br3nda", "https://www.flickr.com/photos/36251685@N00/6778605865", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "A mix of seeds starting to sprout. Stand-in for a mixed microgreens seed collection.", True),
+    "microgreens-plate": ("Green microgreens on a white ceramic plate", "apapac", "https://www.flickr.com/photos/146235256@N06/37037208672", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Microgreens on a ceramic plate. Stand-in for a ceramic microgreens kit.", True),
+    "microgreens-dense": ("A dense stand of young microgreens", "Rosmarie Voegtli", "https://www.flickr.com/photos/94212497@N00/51830064936", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Young microgreens growing close together. Stand-in for a small counter kit.", True),
+    "heat-propagator": ("A heated seed tray with three clear domes and a thermostat", "Home Garden Labs", "https://www.flickr.com/photos/98760644@N06/15471637569", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "An X-Stream heated propagator by Nutriculture, padded to a square on white. Stand-in for a kit with trays, a heat mat, and domes.", True),
+    "electric-propagator": ("Seedlings in cells under a clear lid on a heated base", "Simon Speed", "https://commons.wikimedia.org/wiki/File:ElectricPropagator.JPG", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "An electric propagator that warms seedlings from below. Closest licensed photo for a seedling heat mat.", True),
     "home-microgreens": ("Young microgreens in a small pot", "Zenyrgarden", "https://commons.wikimedia.org/wiki/File:Microgreen_in_a_pot.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Microgreens in a small pot. Stand-in for a home kit.", True),
     "alfalfa-jar": ("Alfalfa sprouts in a glass jar", "Sproutable", "https://commons.wikimedia.org/wiki/File:AlfalfaSproutsJar1.jpg", "Public domain", "https://commons.wikimedia.org/wiki/File:AlfalfaSproutsJar1.jpg", "A jar of sprouts. Stand-in for sprouting seed, not microgreens.", True),
     "letpot-mini": ("LetPot LPH-Mini indoor garden", "LetPot", "https://letpot.com/products/mini-hydroponics-growing-system", "LetPot promotional materials", "https://letpot.com/products/mini-hydroponics-growing-system", "Official product photo, converted to WebP at the same aspect. Not cropped or recolored.", False),
@@ -306,23 +313,23 @@ ITEM_IMAGE = {
     SANSI_CLIP: "grow-light",
     KIT_BUDDY: "sunflower",
     KIT_GREEN: "mixed",
-    KIT_SUN: "basil",
-    KIT_MIZUNA: "ceramic",
+    KIT_SUN: "heat-propagator",
+    KIT_MIZUNA: "microgreens-plate",
     SANSI_BULB: "led-bulb",
-    HEAT_SILL: "farm-trays",
+    HEAT_SILL: "electric-propagator",
     KIT_CELLS: "pepper-trays",
     SUNPACK: "farm-trays",
     TRAY_DEEP: "pea-shoots",
-    DOMES: "basil",
-    MIRACLE: "promix",
-    HEAT_1020: "radish",
+    DOMES: "dome-trays",
+    MIRACLE: "potting-soil",
+    HEAT_1020: "electric-propagator",
     POTS_8: "ceramic",
     POTS_8_10: "basil-mosaic",
     RAIL: "windowbox",
-    ESPOMA_POT: "promix",
+    ESPOMA_POT: "potting-soil",
     LETTUCE: "lettuce-pot",
     BAGS: "grow-bag",
-    RADISH: "radish-packet",
+    RADISH: "radish-bowl",
     RADISH_SMALL: "mixed",
     PEA: "pea-shoots",
     PEA_HALF: "lufa",
@@ -333,13 +340,13 @@ ITEM_IMAGE = {
 
 # Same photo cannot appear twice on /gear/, which already uses the mixed-greens file.
 PAGE_IMAGE = {
-    "gear": {MIXED_SEED: "lettuce-leaves"},
+    "gear": {MIXED_SEED: "mixed-seed"},
     "windowsill": {RADISH_SMALL: "broccoli"},
     "density": {BF_1010_HOLES: "lufa"},
     "calculator": {BF_1010_HOLES: "sunflower"},
-    "cost": {KIT_GREEN: "broccoli", KIT_BUDDY: "basil-mosaic"},
-    "pea": {PEA_HALF: "lettuce-leaves"},
-    "bottom": {SUNPACK: "basil"},
+    "cost": {KIT_GREEN: "broccoli", KIT_BUDDY: "microgreens-dense"},
+    "pea": {PEA_HALF: "pea-sack"},
+    "bottom": {SUNPACK: "dome-trays"},
 }
 
 BUTTON = {"amazon": "View on Amazon", "trueleaf": "See at True Leaf", "letpot": "See at LetPot"}
@@ -422,7 +429,7 @@ def supply_credit_html() -> str:
             origin = "LetPot product page"
             use = f"{esc(note)} Shown with the full frame on a light background."
         else:
-            origin = "Wikimedia Commons"
+            origin = "Flickr" if "flickr.com" in source else "Wikimedia Commons"
             use = f"{esc(note)} Square crop for a product card. Not the listed product."
         blocks.append(
             f'<section class="photo-credit-entry" id="supply-{slug}">'

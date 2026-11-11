@@ -127,9 +127,9 @@ Added for the bottom-watering steps. These are AI-generated images owned by Smal
 
 The ten photographs below were added for equipment, sowing, watering, lighting and harvest rows. Each full asset has a longest edge of at most 960 pixels. All list thumbnails are 320 × 320 optimized progressive JPEGs in `assets/photos/thumbs/`. The eight existing photographs also have dedicated thumbnails; their full-size files are unchanged. Existing sunflower and equipment images are framed when needed to retain the complete subject. Other thumbnails use relevant square crops. No AI generation, color replacement or invented objects were used.
 
-The registry maps semantic content keys to a thumbnail filename, a literal image description, a credit anchor and a photographer name. `basil-window` means mature basil in the mosaic pot; `basil` means young seedlings. `radish` uses verified radish seeds. `broccoli` uses the photograph of both broccoli and radish trays, with alt text identifying both crops rather than guessing which tray is which. `cover` reuses the empty-tray equipment photograph.
+The registry maps semantic content keys to a thumbnail filename, a literal image description, a credit anchor and a photographer name. `basil-window` means mature basil in the mosaic pot; `basil` means young seedlings. `radish` uses verified radish seeds. `broccoli` uses the photograph of both broccoli and radish trays, with alt text identifying both crops rather than guessing which tray is which. `cover` uses a clear seed-tray dome photograph of its own, so it never collides with the `tray` step photo on the same page. `thin` shows tomato seedlings with true leaves, and `cells` shows filled cell trays.
 
-A supply or equipment thumbnail does not claim to demonstrate every instruction alongside it. The water image shows a glass mister, not bottom watering. The cover image shows an empty tray, not a transparent humidity dome. The sowing image shows a fiber mat; vegetable seed-starting instructions use the separate soil-filled cell-tray photo. The light image shows LED bars over ornamental potted plants and is not a claim about a tested product.
+A supply or equipment thumbnail does not claim to demonstrate every instruction alongside it. The water image shows a glass mister, not bottom watering. The cover image shows a Jiffy brand clear dome over a seed tray, not a tested product. The sowing image shows a fiber mat; vegetable seed-starting instructions use the separate soil-filled cell-tray photo. The light image shows LED bars over ornamental potted plants and is not a claim about a tested product.
 
 ### A shallow growing tray
 
@@ -141,6 +141,39 @@ A supply or equipment thumbnail does not claim to demonstrate every instruction 
 - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
 - Processing: Original 4000 × 3000 photograph resized to 960 × 720 and JPEG optimized. The 320 × 320 list thumbnail uses source crop (230, 600, 3160, 2540) contained in a square frame.
 - Alt text: An empty shallow seed tray with drainage holes.
+
+### A clear dome over a seed tray
+
+- Registry key: `cover`.
+- Local photograph: `assets/photos/humidity-dome-gregor-y.jpg` (800 × 640).
+- Thumbnail: `assets/photos/thumbs/humidity-dome-gregor-y.jpg` (320 × 320).
+- Credit: [gregor_y](https://www.flickr.com/photos/96552722@N00/).
+- Original source: [GYpix874_jiffygreenhouse](https://www.flickr.com/photos/96552722@N00/2452999101).
+- License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).
+- Processing: centered square crop for the thumbnail.
+- Alt text: A clear plastic dome over a seed tray, with small seedlings under it.
+
+### Tomato seedlings with true leaves
+
+- Registry key: `thin`.
+- Local photograph: `assets/photos/tomato-seedlings-amandabhslater.jpg` (960 × 720).
+- Thumbnail: `assets/photos/thumbs/tomato-seedlings-amandabhslater.jpg` (320 × 320).
+- Credit: [amandabhslater](https://www.flickr.com/photos/15181848@N02/).
+- Original source: [Tomato Plants](https://www.flickr.com/photos/15181848@N02/49809256802).
+- License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).
+- Processing: resized from 1024 × 768; centered square crop for the thumbnail.
+- Alt text: Young tomato seedlings with true leaves in square pots on a windowsill.
+
+### Two cell trays filled with mix
+
+- Registry key: `cells`.
+- Local photograph: `assets/photos/cell-trays-aprilskiver.jpg` (720 × 960).
+- Thumbnail: `assets/photos/thumbs/cell-trays-aprilskiver.jpg` (320 × 320).
+- Credit: [aprilskiver](https://www.flickr.com/photos/22146930@N07/).
+- Original source: [Starting seeds indoors](https://www.flickr.com/photos/22146930@N07/4481609150).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/).
+- Processing: resized from 768 × 1024; square crop of both trays for the thumbnail.
+- Alt text: Two plastic cell trays filled with mix, set on a towel.
 
 ### Potting mix and trowel
 
@@ -398,3 +431,21 @@ Added November 9, 2026. These real photographs show mature crops or harvested pr
 - Subject and alt: Red-stemmed amaranth microgreens with small seed leaves.
 - Use: photo in the seed calculator's amaranth package box, replacing the flowering adult plant.
 - Credit: `Photo: <a href="/photo-credits/#crop-amaranth-microgreens">U.S. Department of Agriculture</a>, Public domain`.
+
+## Product card stand-in photos
+
+Shop and fact cards use square webp crops in `assets/products/supply-*-{300,600}.webp`. Each is a licensed photo of the same kind of product, not the listed product, with its full record on `/photo-credits/` under `#supply-{name}`. The build fails if a numbered step on a guide has no photo.
+
+| File | Shows | Used for | Credit | License |
+|---|---|---|---|---|
+| supply-radish-bowl | Purple radish microgreens in a steel bowl | Rambo radish seed | [jonny.hunter](https://www.flickr.com/photos/51931594@N00/461461364) | CC BY 2.0 |
+| supply-mixed-seed | Mixed seeds sprouting | Mixed microgreens seed on /gear/ | [Br3nda](https://www.flickr.com/photos/36251685@N00/6778605865) | CC BY 2.0 |
+| supply-microgreens-plate | Microgreens on a white ceramic plate | Ceramic microgreens kit | [apapac](https://www.flickr.com/photos/146235256@N06/37037208672) | CC BY 2.0 |
+| supply-microgreens-dense | Dense young microgreens | Plant Buddy bamboo kit on the cost guide | [Rosmarie Voegtli](https://www.flickr.com/photos/94212497@N00/51830064936) | CC BY 2.0 |
+| supply-heat-propagator | Heated tray with three domes and a thermostat | SunBlaster kit with heat mat | [Home Garden Labs](https://www.flickr.com/photos/98760644@N06/15471637569) | CC BY-SA 2.0 |
+| supply-electric-propagator | Seedlings on a heated propagator base | Heat mat, 10 by 20 in; AC Infinity mat, 3 by 20 in | [Simon Speed](https://commons.wikimedia.org/wiki/File:ElectricPropagator.JPG) | CC0 1.0 |
+| supply-potting-soil | Potting mix with perlite in a pot | Miracle-Gro and Espoma mixes; cost guide seeds and medium card | [Chris Radcliff](https://commons.wikimedia.org/wiki/File:Potting_soil.jpg) | CC BY-SA 2.0 |
+| supply-dome-trays | Cell trays on a rack, one under a clear dome | Trays with humidity domes; Tray, dome, and 72 cells on bottom watering | [F. D. Richards](https://www.flickr.com/photos/50697352@N00/4464904926) | CC BY-SA 2.0 |
+| supply-microgreens-tray | Microgreens in a small black tray | Kit result card on the cost guide | [Zenyrgarden](https://commons.wikimedia.org/wiki/File:Microgreen_growing.jpg) | CC BY-SA 4.0 |
+| supply-pea-sack | Sprouted garden peas in a cloth sack | Pea seed, half tray on the pea vs radish guide | [Yarzaryeni](https://commons.wikimedia.org/wiki/File:Garden_pea_sprouts.jpg) | CC BY 3.0 |
+| supply-coir-pile | A compressed coir brick | Espoma seed starter | Victor M. Vicente Selvas | Public domain |

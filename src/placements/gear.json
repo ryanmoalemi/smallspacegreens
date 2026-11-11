@@ -92,6 +92,19 @@
       "license": "CC BY 2.0",
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
       "note": "Square crop. Shows small greens, not the ceramic kit."
+    },
+    "microgreens-plate": {
+      "slug": "supply-microgreens-plate",
+      "title": "Green microgreens on a white ceramic plate",
+      "alt": "Green microgreens on a white ceramic plate.",
+      "credit_id": "supply-microgreens-plate",
+      "author": "apapac",
+      "author_url": "https://www.flickr.com/photos/146235256@N06/37037208672",
+      "source_url": "https://www.flickr.com/photos/146235256@N06/37037208672",
+      "source_label": "Green microgreens on a white ceramic plate",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "note": "Stand-in for a ceramic microgreens kit."
     }
   },
   "cards": {
@@ -143,7 +156,7 @@
       "badge": "Windowsill",
       "why": "Two ceramic trays with coir and seeds, listed for a kitchen sill.",
       "cta": "View on Amazon",
-      "image": "mixed-greens"
+      "image": "microgreens-plate"
     }
   },
   "sections": [
@@ -151,7 +164,13 @@
       "id": "growing-kits",
       "title": "Microgreens growing kits",
       "lead": "True Leaf and LetPot lead. A countertop garden is not a tray of mix. This site has not grown these products.",
-      "cards": ["tl-kits", "tl-seed", "letpot-mini", "letpot-air", "mizuna-ceramic"]
+      "cards": [
+        "tl-kits",
+        "tl-seed",
+        "letpot-mini",
+        "letpot-air",
+        "mizuna-ceramic"
+      ]
     }
   ]
 }

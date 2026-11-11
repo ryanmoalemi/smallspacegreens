@@ -108,10 +108,10 @@
     "author": "Jon Eben Field"
   },
   "cover": {
-    "thumbnail": "empty-seed-tray-simon-speed.jpg",
-    "alt": "An empty shallow seed tray with drainage holes.",
-    "credit_id": "empty-seed-tray-simon-speed",
-    "author": "Simon Speed"
+    "thumbnail": "humidity-dome-gregor-y.jpg",
+    "alt": "A clear plastic dome over a seed tray, with small seedlings under it.",
+    "credit_id": "humidity-dome-gregor-y",
+    "author": "gregor_y"
   },
   "radish": {
     "thumbnail": "radish-seeds-hugowolf.jpg",
@@ -220,5 +220,17 @@
     "alt": "Red-stemmed amaranth microgreens with small seed leaves.",
     "credit_id": "crop-amaranth-microgreens",
     "author": "USDA"
+  },
+  "thin": {
+    "thumbnail": "tomato-seedlings-amandabhslater.jpg",
+    "alt": "Young tomato seedlings with true leaves in square pots on a windowsill.",
+    "credit_id": "tomato-seedlings-amandabhslater",
+    "author": "amandabhslater"
+  },
+  "cells": {
+    "thumbnail": "cell-trays-aprilskiver.jpg",
+    "alt": "Two plastic cell trays filled with mix, set on a towel.",
+    "credit_id": "cell-trays-aprilskiver",
+    "author": "aprilskiver"
   }
 }

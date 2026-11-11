@@ -56,19 +56,6 @@
       "official": "letpot",
       "note": "Official product photo from LetPot's product page. Converted to WebP at the same aspect. Not cropped or recolored."
     },
-    "radish-packet": {
-      "slug": "supply-radish-packet",
-      "title": "A packet of radish seed",
-      "alt": "A printed packet of radish seed.",
-      "credit_id": "supply-radish-packet",
-      "author": "U.S. Department of Agriculture",
-      "author_url": "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg",
-      "source_label": "Radish Seed Packet",
-      "license": "Public domain",
-      "license_url": "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg",
-      "note": "A radish seed packet. Not the True Leaf bag."
-    },
     "home-microgreens": {
       "slug": "supply-home-microgreens",
       "title": "Young microgreens in a small pot",
@@ -198,6 +185,32 @@
       "license": "CC BY-SA 2.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
       "note": "Square crop of a commercial greenhouse. Not a home kit. Cropped versions remain under CC BY-SA 2.0."
+    },
+    "microgreens-plate": {
+      "slug": "supply-microgreens-plate",
+      "title": "Green microgreens on a white ceramic plate",
+      "alt": "Green microgreens on a white ceramic plate.",
+      "credit_id": "supply-microgreens-plate",
+      "author": "apapac",
+      "author_url": "https://www.flickr.com/photos/146235256@N06/37037208672",
+      "source_url": "https://www.flickr.com/photos/146235256@N06/37037208672",
+      "source_label": "Green microgreens on a white ceramic plate",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "note": "Stand-in for a ceramic microgreens kit."
+    },
+    "radish-bowl": {
+      "slug": "supply-radish-bowl",
+      "title": "Purple radish microgreens in a steel bowl",
+      "alt": "Purple-stemmed radish microgreens in a steel bowl.",
+      "credit_id": "supply-radish-bowl",
+      "author": "jonny.hunter",
+      "author_url": "https://www.flickr.com/photos/51931594@N00/461461364",
+      "source_url": "https://www.flickr.com/photos/51931594@N00/461461364",
+      "source_label": "Purple radish microgreens in a steel bowl",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "note": "Stand-in for Rambo radish microgreen seed."
     }
   },
   "cards": {
@@ -219,7 +232,7 @@
       "badge": "Apartment cook",
       "why": "Two ceramic trays with coir and seeds, listed for a kitchen sill.",
       "cta": "View on Amazon",
-      "image": "sunflower-tray"
+      "image": "microgreens-plate"
     },
     "letpot-air": {
       "kind": "letpot",
@@ -259,7 +272,7 @@
       "badge": "Beginner",
       "why": "42 g on a 1020 tray. About 21 g on a 10 by 10.",
       "cta": "See radish seed",
-      "image": "radish-packet"
+      "image": "radish-bowl"
     },
     "tl-broccoli": {
       "kind": "trueleaf",
@@ -287,19 +300,30 @@
       "id": "seed-and-kits",
       "title": "Seed and kits",
       "lead": "True Leaf Market leads this group. A small packet and a larger bag are different prices, so these cards are not sorted into a dollar group. This site has not grown these products.",
-      "cards": ["tl-radish", "tl-broccoli", "tl-kits"]
+      "cards": [
+        "tl-radish",
+        "tl-broccoli",
+        "tl-kits"
+      ]
     },
     {
       "id": "band-25-60",
       "title": "$25 to $60",
       "lead": "LetPot leads this group. The current price stays on the store page. This site has not grown these products.",
-      "cards": ["letpot-mini", "mizuna-ceramic"]
+      "cards": [
+        "letpot-mini",
+        "mizuna-ceramic"
+      ]
     },
     {
       "id": "splurge",
       "title": "Splurge",
       "lead": "Larger LetPot gardens. The current price stays on the store page. This site has not grown these products.",
-      "cards": ["letpot-air", "letpot-lite", "letpot-max"]
+      "cards": [
+        "letpot-air",
+        "letpot-lite",
+        "letpot-max"
+      ]
     }
   ]
 }

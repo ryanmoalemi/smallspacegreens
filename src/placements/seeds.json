@@ -1,18 +1,5 @@
 {
   "images": {
-    "radish-packet": {
-      "slug": "supply-radish-packet",
-      "title": "A packet of radish seed",
-      "alt": "A printed packet of radish seed.",
-      "credit_id": "supply-radish-packet",
-      "author": "U.S. Department of Agriculture",
-      "author_url": "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg",
-      "source_label": "Radish Seed Packet",
-      "license": "Public domain",
-      "license_url": "https://commons.wikimedia.org/wiki/File:Radish_Seed_Packet_-_NARA_-_5721324.jpg",
-      "note": "A radish seed packet. Not the True Leaf bag."
-    },
     "home-microgreens": {
       "slug": "supply-home-microgreens",
       "title": "Young microgreens in a small pot",
@@ -116,6 +103,19 @@
       "license": "Public domain",
       "license_url": "https://commons.wikimedia.org/wiki/File:AlfalfaSproutsJar1.jpg",
       "note": "Square crop enlarged from a 480 by 640 pixel original. Shows jar sprouts, which are a different food from microgreens."
+    },
+    "radish-bowl": {
+      "slug": "supply-radish-bowl",
+      "title": "Purple radish microgreens in a steel bowl",
+      "alt": "Purple-stemmed radish microgreens in a steel bowl.",
+      "credit_id": "supply-radish-bowl",
+      "author": "jonny.hunter",
+      "author_url": "https://www.flickr.com/photos/51931594@N00/461461364",
+      "source_url": "https://www.flickr.com/photos/51931594@N00/461461364",
+      "source_label": "Purple radish microgreens in a steel bowl",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "note": "Stand-in for Rambo radish microgreen seed."
     }
   },
   "cards": {
@@ -127,7 +127,7 @@
       "badge": "Beginner",
       "why": "42 g on a 1020 tray. About 21 g on a 10 by 10.",
       "cta": "See radish seed",
-      "image": "radish-packet"
+      "image": "radish-bowl"
     },
     "tl-pea": {
       "kind": "trueleaf",
@@ -185,19 +185,28 @@
       "id": "first-seeds",
       "title": "Microgreen seeds to start with",
       "lead": "These crops are listed in True Leaf Market's microgreens seed collection. This site has not grown seed from it.",
-      "cards": ["tl-radish", "tl-pea", "tl-broccoli", "tl-sunflower"]
+      "cards": [
+        "tl-radish",
+        "tl-pea",
+        "tl-broccoli",
+        "tl-sunflower"
+      ]
     },
     {
       "id": "starter-kit",
       "title": "A kit instead of loose seed",
       "lead": "A kit is a different purchase from a bag of seed. This site has not grown these products.",
-      "cards": ["tl-kits"]
+      "cards": [
+        "tl-kits"
+      ]
     },
     {
       "id": "more-options",
       "title": "More options",
       "lead": "Jar sprouts are eaten whole. Microgreens are cut above the mix. This site has not grown this seed.",
-      "cards": ["tl-sprouts"]
+      "cards": [
+        "tl-sprouts"
+      ]
     }
   ]
 }

@@ -846,7 +846,7 @@ def trueleaf_link(key: str, label: str) -> str:
 
 
 TRUELEAF_CARD_PHOTOS = {
-    "micro-seed": ["radish-packet", "radish"],
+    "micro-seed": ["radish-bowl", "radish"],
     "micro-kits": ["home-microgreens", "sunflower"],
     "sprout-seed": ["alfalfa-jar", "pea-sack"],
     "sprout-kits": ["alfalfa-jar", "pea-sack", "sunflower"],
@@ -1671,6 +1671,20 @@ def check_no_example_photo(document: str, rel: str) -> None:
         raise SystemExit(f'{rel}: contains "Example photo" text, which Ryan asked never to show')
 
 
+def check_step_photos(document: str, rel: str) -> None:
+    """Every numbered step on a step-list guide carries its photo, so no badge sits on bare text."""
+    if not rel.startswith("guides/"):
+        return
+    for match in re.finditer(r"<ol([^>]*)>(.*?)</ol>", document, flags=re.S):
+        attrs, body = match.groups()
+        if not re.search(r'class="[^"]*\b(?:steps|grow-steps)\b', attrs) and "photo-step-number" not in body:
+            continue
+        for number, item in enumerate(re.findall(r"<li\b[^>]*>(.*?)</li>", body, flags=re.S), start=1):
+            if "<img" not in item:
+                text = " ".join(re.sub(r"<[^>]+>", " ", item).split())[:60]
+                raise SystemExit(f"{rel}: step {number} has no photo ({text})")
+
+
 def check_credit_line_css(css: str) -> None:
     """Credits stay on one line at 12px or more: the shared .credit-line rule must keep nowrap and ellipsis."""
     rule = re.search(r"\.credit-line\{([^}]*)\}", css)
@@ -2371,6 +2385,7 @@ def main() -> None:
         photographed_items += check_photo_lists(document, rel)
         document = dedupe_content_images(document)
         check_duplicate_images(document, rel)
+        check_step_photos(document, rel)
         check_letpot_panels(document, rel)
         pages[rel] = document
         target = ROOT / rel
