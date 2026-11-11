@@ -1423,7 +1423,7 @@ def density_bars() -> str:
         "Published grams",
         "Each bar uses the figure printed for that crop.",
         rows,
-        "Source: Utah State University Extension grams per 1020 tray. Mustard, beet, and amaranth have no crop rate there. The 10 to 15 g line is University of Maryland Extension's sample, only if you choose it.",
+        "Source: Utah State University Extension grams per 1020 tray. Mustard, beet, and amaranth have no Utah State crop rate. The 10 to 15 g line is University of Maryland Extension's sample, only if you choose it.",
     )
 
 
