@@ -389,7 +389,7 @@ def render_shop(key: str) -> str:
         button = BUTTON[row["kind"]] if row["kind"] == "amazon" else row["label"]
         cards.append(
             '<li class="pick">'
-            '<figure class="pick-media">'
+            f'<figure class="pick-media{" pick-media-letpot" if official else ""}">'
             f'<img{img_class} src="{src}" srcset="{srcset}" '
             'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
             'width="600" height="600" loading="lazy" decoding="async" '
