@@ -6,21 +6,317 @@
       "product": "Organic Rambo Radish microgreens seed",
       "url": "https://trueleafmarket.com/products/radish-rambo-seeds",
       "sizes": [
-        {"label": "4 g packet", "amount": 4, "unit": "g", "variant": "31963540095091"},
-        {"label": "4 oz", "amount": 4, "unit": "oz", "variant": "39483221192"},
-        {"label": "1 lb", "amount": 1, "unit": "lb", "variant": "39483221256"},
-        {"label": "5 lb", "amount": 5, "unit": "lb", "variant": "39483221320"},
-        {"label": "25 lb", "amount": 25, "unit": "lb", "variant": "39483221448"}
+        {
+          "label": "4 g packet",
+          "amount": 4,
+          "unit": "g",
+          "variant": "31963540095091"
+        },
+        {
+          "label": "4 oz",
+          "amount": 4,
+          "unit": "oz",
+          "variant": "39483221192"
+        },
+        {
+          "label": "1 lb",
+          "amount": 1,
+          "unit": "lb",
+          "variant": "39483221256",
+          "in_stock": false
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "variant": "39483221320",
+          "in_stock": false
+        },
+        {
+          "label": "25 lb",
+          "amount": 25,
+          "unit": "lb",
+          "variant": "39483221448"
+        }
       ]
     },
     "pea": {
       "product": "Dun Pea microgreens seed",
       "url": "https://trueleafmarket.com/products/dun-pea-seeds",
       "sizes": [
-        {"label": "1 lb", "amount": 1, "unit": "lb", "variant": "38827792328"},
-        {"label": "5 lb", "amount": 5, "unit": "lb", "variant": "38827792392"},
-        {"label": "25 lb", "amount": 25, "unit": "lb", "variant": "38827792456"}
+        {
+          "label": "1 lb",
+          "amount": 1,
+          "unit": "lb",
+          "variant": "38827792328"
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "variant": "38827792392"
+        },
+        {
+          "label": "25 lb",
+          "amount": 25,
+          "unit": "lb",
+          "variant": "38827792456"
+        }
+      ]
+    },
+    "sunflower": {
+      "product": "Black Oil Sunflower microgreens seed",
+      "url": "https://trueleafmarket.com/products/sunflower-black-oil-microgreens-seeds",
+      "sizes": [
+        {
+          "label": "5 g packet",
+          "amount": 5,
+          "unit": "g",
+          "variant": "31753024405619"
+        },
+        {
+          "label": "4 oz",
+          "amount": 4,
+          "unit": "oz",
+          "variant": "31753010872435"
+        },
+        {
+          "label": "1 lb",
+          "amount": 1,
+          "unit": "lb",
+          "variant": "31752991473779"
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "variant": "31752991506547"
+        },
+        {
+          "label": "25 lb",
+          "amount": 25,
+          "unit": "lb",
+          "variant": "31752991539315"
+        }
+      ]
+    },
+    "broccoli": {
+      "product": "Waltham 29 Broccoli microgreens seed",
+      "url": "https://trueleafmarket.com/products/broccoli-waltham-29-microgreens-seeds",
+      "sizes": [
+        {
+          "label": "1 oz",
+          "amount": 1,
+          "unit": "oz",
+          "variant": "46365822152"
+        },
+        {
+          "label": "4 oz",
+          "amount": 4,
+          "unit": "oz",
+          "variant": "46365822344"
+        },
+        {
+          "label": "1 lb",
+          "amount": 1,
+          "unit": "lb",
+          "variant": "46365822472"
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "variant": "46365822728"
+        },
+        {
+          "label": "25 lb",
+          "amount": 25,
+          "unit": "lb",
+          "variant": "46365822792"
+        }
+      ]
+    },
+    "kale": {
+      "product": "Red Russian Kale microgreens seed",
+      "url": "https://trueleafmarket.com/products/kale-red-russian-microgreens-seeds",
+      "sizes": [
+        {
+          "label": "1 oz",
+          "amount": 1,
+          "unit": "oz",
+          "variant": "46592014600"
+        },
+        {
+          "label": "4 oz",
+          "amount": 4,
+          "unit": "oz",
+          "variant": "46592014664"
+        },
+        {
+          "label": "1 lb",
+          "amount": 1,
+          "unit": "lb",
+          "variant": "46592014728"
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "variant": "46592014792"
+        },
+        {
+          "label": "25 lb",
+          "amount": 25,
+          "unit": "lb",
+          "variant": "46592014856"
+        }
+      ]
+    },
+    "arugula": {
+      "product": "Slow Bolt Arugula microgreens seed",
+      "url": "https://trueleafmarket.com/products/arugula-slow-bolt-microgreens-seeds",
+      "sizes": [
+        {
+          "label": "1 oz",
+          "amount": 1,
+          "unit": "oz",
+          "variant": "45198169160"
+        },
+        {
+          "label": "4 oz",
+          "amount": 4,
+          "unit": "oz",
+          "variant": "45198169224"
+        },
+        {
+          "label": "1 lb",
+          "amount": 1,
+          "unit": "lb",
+          "variant": "45198169288"
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "variant": "45198169352",
+          "in_stock": false
+        },
+        {
+          "label": "25 lb",
+          "amount": 25,
+          "unit": "lb",
+          "variant": "45198169416"
+        }
+      ]
+    },
+    "cilantro": {
+      "product": "Leisure Split Cilantro microgreens seed",
+      "url": "https://trueleafmarket.com/products/cilantro-seeds-leisure-splits-microgreens-seeds",
+      "sizes": [
+        {
+          "label": "1 oz",
+          "amount": 1,
+          "unit": "oz",
+          "variant": "18650820149363"
+        },
+        {
+          "label": "4 oz",
+          "amount": 4,
+          "unit": "oz",
+          "variant": "18650820182131"
+        },
+        {
+          "label": "1 lb",
+          "amount": 1,
+          "unit": "lb",
+          "variant": "18650820214899"
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "variant": "18650820247667"
+        },
+        {
+          "label": "25 lb",
+          "amount": 25,
+          "unit": "lb",
+          "variant": "18650820280435"
+        }
+      ]
+    },
+    "basil": {
+      "product": "Genovese Basil microgreens seed",
+      "url": "https://trueleafmarket.com/products/basil-genovese-microgreens-seeds",
+      "sizes": [
+        {
+          "label": "1 oz",
+          "amount": 1,
+          "unit": "oz",
+          "variant": "45197500168"
+        },
+        {
+          "label": "4 oz",
+          "amount": 4,
+          "unit": "oz",
+          "variant": "45197500232"
+        },
+        {
+          "label": "1 lb",
+          "amount": 1,
+          "unit": "lb",
+          "variant": "45197500296"
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "variant": "45197500360"
+        },
+        {
+          "label": "25 lb",
+          "amount": 25,
+          "unit": "lb",
+          "variant": "45197500424"
+        }
+      ]
+    },
+    "rutabaga": {
+      "product": "American Purple Top Rutabaga microgreens seed",
+      "url": "https://trueleafmarket.com/products/rutabaga-american-purple-top-microgreens-seeds",
+      "sizes": [
+        {
+          "label": "1 oz",
+          "amount": 1,
+          "unit": "oz",
+          "variant": "39365860360307"
+        },
+        {
+          "label": "4 oz",
+          "amount": 4,
+          "unit": "oz",
+          "variant": "46593645512"
+        },
+        {
+          "label": "1 lb",
+          "amount": 1,
+          "unit": "lb",
+          "variant": "46593645576"
+        },
+        {
+          "label": "5 lb",
+          "amount": 5,
+          "unit": "lb",
+          "variant": "46593645640"
+        },
+        {
+          "label": "25 lb",
+          "amount": 25,
+          "unit": "lb",
+          "variant": "46593645704"
+        }
       ]
     }
-  }
+  },
+  "stock_checked": "2026-11-10 22:22 PT"
 }

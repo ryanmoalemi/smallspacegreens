@@ -157,7 +157,7 @@
     var line = size.unit === "g" ? size.label : size.label + " (" + gramsLabel(size.grams) + ")";
     var cover = choice.coversBatch
       ? "At " + perTray + " per tray, that is about " + choice.sowings + " sowing" + (choice.sowings === 1 ? "" : "s") + "."
-      : "The largest listed size. At " + perTray + " per tray, that is about " + choice.sowings + " sowings, so this batch needs more than one bag.";
+      : (size === packs.sizes[packs.sizes.length - 1] ? "The largest listed size. " : "") + "At " + perTray + " per tray, that is about " + choice.sowings + " sowing" + (choice.sowings === 1 ? "" : "s") + ", so this batch needs more than one bag.";
     var short = choice.smallerShort.length
       ? " The " + choice.smallerShort.map(function (s) { return s.label; }).join(" and ") + " is less than one tray at this rate."
       : "";

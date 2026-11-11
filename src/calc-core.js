@@ -200,16 +200,28 @@ function ssgFormatGrams(n) {
   return text + " g";
 }
 
-// Smallest listed package that covers the whole batch at the higher rate.
+// Smallest listed package that covers several sowings (SSG_MIN_SOWINGS) and the whole batch
+// at the higher rate. Falls back to the smallest that covers the batch, then to the largest.
 // sizes: [{label, grams, ...}] sorted small to large. Returns null when nothing is listed.
+var SSG_MIN_SOWINGS = 3;
 function ssgPickPackage(sizes, perTray, batch) {
   if (!sizes || !sizes.length || !ssgFinite(perTray) || perTray <= 0) return null;
-  var pick = null;
-  for (var i = 0; i < sizes.length; i++) {
-    if (sizes[i].grams >= batch) { pick = sizes[i]; break; }
+  function smallestAtLeast(grams) {
+    for (var i = 0; i < sizes.length; i++) if (sizes[i].grams >= grams) return sizes[i];
+    return null;
   }
-  var covers = Boolean(pick);
-  if (!pick) pick = sizes[sizes.length - 1];
+  var pick = smallestAtLeast(Math.max(batch, perTray * SSG_MIN_SOWINGS)) || smallestAtLeast(batch) || sizes[sizes.length - 1];
+  // Never recommend a size marked out of stock at the last True Leaf check:
+  // fall back to the next smaller in-stock size, else the next larger one.
+  if (pick.inStock === false) {
+    var at = sizes.indexOf(pick);
+    var alt = null;
+    for (var k = at - 1; k >= 0 && !alt; k--) if (sizes[k].inStock !== false) alt = sizes[k];
+    for (var m = at + 1; m < sizes.length && !alt; m++) if (sizes[m].inStock !== false) alt = sizes[m];
+    if (!alt) return null;
+    pick = alt;
+  }
+  var covers = pick.grams >= batch;
   var smaller = [];
   for (var j = 0; j < sizes.length && sizes[j] !== pick; j++) smaller.push(sizes[j]);
   return {
