@@ -129,7 +129,7 @@ The ten photographs below were added for equipment, sowing, watering, lighting a
 
 The registry maps semantic content keys to a thumbnail filename, a literal image description, a credit anchor and a photographer name. `basil-window` means mature basil in the mosaic pot; `basil` means young seedlings. `radish` uses verified radish seeds. `broccoli` uses the photograph of both broccoli and radish trays, with alt text identifying both crops rather than guessing which tray is which. `cover` uses a clear seed-tray dome photograph of its own, so it never collides with the `tray` step photo on the same page. `thin` shows tomato seedlings with true leaves, and `cells` shows filled cell trays.
 
-A supply or equipment thumbnail does not claim to demonstrate every instruction alongside it. The water image shows a glass mister, not bottom watering. The cover image shows a Jiffy brand clear dome over a seed tray, not a tested product. The sowing image shows a fiber mat; vegetable seed-starting instructions use the separate soil-filled cell-tray photo. The light image shows LED bars over ornamental potted plants and is not a claim about a tested product.
+A supply or equipment thumbnail does not claim to demonstrate every instruction alongside it. The water image shows a glass mister, not bottom watering. The cover image shows a clear vented dome over a seed tray, not a tested product. The sowing image shows a fiber mat; vegetable seed-starting instructions use the separate soil-filled cell-tray photo. The light image shows LED bars over ornamental potted plants and is not a claim about a tested product.
 
 ### A shallow growing tray
 
@@ -145,13 +145,13 @@ A supply or equipment thumbnail does not claim to demonstrate every instruction 
 ### A clear dome over a seed tray
 
 - Registry key: `cover`.
-- Local photograph: `assets/photos/humidity-dome-gregor-y.jpg` (800 × 640).
-- Thumbnail: `assets/photos/thumbs/humidity-dome-gregor-y.jpg` (320 × 320).
-- Credit: [gregor_y](https://www.flickr.com/photos/96552722@N00/).
-- Original source: [GYpix874_jiffygreenhouse](https://www.flickr.com/photos/96552722@N00/2452999101).
+- Local photograph: `assets/photos/humidity-dome-fd-richards.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/humidity-dome-fd-richards.jpg` (320 × 320).
+- Credit: [F. D. Richards](https://www.flickr.com/photos/50697352@N00/).
+- Original source: [About 200 dahlias started indoors](https://www.flickr.com/photos/50697352@N00/4464904926).
 - License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).
-- Processing: centered square crop for the thumbnail.
-- Alt text: A clear plastic dome over a seed tray, with small seedlings under it.
+- Processing: square crop (410, 30, 860, 480) of the 1024 × 742 original showing one domed tray; no logo in frame. Replaced the earlier Jiffy dome photo by gregor_y, whose logo filled the thumbnail. The same original, cropped wider, is `supply-dome-trays`; the two never appear on the same page.
+- Alt text: A clear vented plastic dome over a seed tray filled with mix.
 
 ### Tomato seedlings with true leaves
 
