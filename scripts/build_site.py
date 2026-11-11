@@ -1117,7 +1117,7 @@ if (toc && window.matchMedia("(max-width: 899px)").matches) toc.removeAttribute(
 """.replace('↗', ARROW_UP).replace('→', ARROW_RIGHT)
 
 
-def signup_form(compact: bool) -> str:
+def signup_form(compact: bool, direct_link: bool = True) -> str:
     if compact:
         lead = (
             "<h2 id=\"signup-title\">Checklist by email</h2>"
@@ -1131,6 +1131,12 @@ def signup_form(compact: bool) -> str:
             "Confirm your address first. Unsubscribe any time. "
             "You can still print the list on this page without signing up.</p>"
         )
+    # The checklist page is the printable list, so a link back to itself would go nowhere.
+    direct = (
+        '<p class="signup-direct">Or <a href="/guides/first-tray-checklist/">open the printable checklist</a>.</p>\n'
+        if direct_link
+        else ""
+    )
     return f"""<section class="signup" aria-labelledby="signup-title">
 {lead}
 <form class="signup-form" method="post">
@@ -1147,8 +1153,7 @@ def signup_form(compact: bool) -> str:
 <p class="signup-error" role="alert" hidden></p>
 </fieldset>
 </form>
-<p class="signup-direct">Or <a href="/guides/first-tray-checklist/">open the printable checklist</a>.</p>
-</section>
+{direct}</section>
 """
 
 
@@ -2007,7 +2012,7 @@ def render_static_pages() -> dict[str, str]:
         body = (
             (SRC / "pages" / filename)
             .read_text()
-            .replace("<!--SIGNUP-->", signup_form(False))
+            .replace("<!--SIGNUP-->", signup_form(False, direct_link=filename != "checklist.html"))
             .replace("<!--STEP_STRIP-->", step_strip())
         )
         page = {
