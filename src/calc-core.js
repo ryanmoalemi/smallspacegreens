@@ -199,3 +199,23 @@ function ssgFormatGrams(n) {
   if (text === "0" && n > 0) return "< 0.01 g";
   return text + " g";
 }
+
+// Smallest listed package that covers the whole batch at the higher rate.
+// sizes: [{label, grams, ...}] sorted small to large. Returns null when nothing is listed.
+function ssgPickPackage(sizes, perTray, batch) {
+  if (!sizes || !sizes.length || !ssgFinite(perTray) || perTray <= 0) return null;
+  var pick = null;
+  for (var i = 0; i < sizes.length; i++) {
+    if (sizes[i].grams >= batch) { pick = sizes[i]; break; }
+  }
+  var covers = Boolean(pick);
+  if (!pick) pick = sizes[sizes.length - 1];
+  var smaller = [];
+  for (var j = 0; j < sizes.length && sizes[j] !== pick; j++) smaller.push(sizes[j]);
+  return {
+    size: pick,
+    sowings: Math.floor(pick.grams / perTray + 1e-9),
+    coversBatch: covers,
+    smallerShort: smaller.filter(function (s) { return s.grams < perTray; })
+  };
+}

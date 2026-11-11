@@ -163,3 +163,20 @@ async function checkFormBehavior() {
   console.log("calculator checks passed");
 }
 checkFormBehavior().catch(error => { console.error(error); process.exitCode = 1; });
+
+// Package suggestion before the seller click (sizes from src/trueleaf-packages.json).
+vm.runInContext("this.ssgPickPackage = ssgPickPackage;", context);
+const pick = context.ssgPickPackage;
+const radishSizes = [
+  { label: "4 g packet", grams: 4 }, { label: "4 oz", grams: 113.4 }, { label: "1 lb", grams: 453.6 },
+  { label: "5 lb", grams: 2268 }, { label: "25 lb", grams: 11339.8 }
+];
+let p = pick(radishSizes, 21, 21);
+assert("radish 10x10 suggests 4 oz, 5 sowings", p && p.size.label === "4 oz" && p.sowings === 5 && p.coversBatch && p.smallerShort.length === 1, p);
+p = pick(radishSizes, 21, 21 * 6);
+assert("six radish trays move up to 1 lb", p && p.size.label === "1 lb" && p.sowings === 21, p);
+p = pick(radishSizes, 2.625, 2.625);
+assert("radish 5x5 fits the 4 g packet", p && p.size.label === "4 g packet" && p.sowings === 1, p);
+p = pick([{ label: "1 lb", grams: 453.6 }], 150, 150 * 4);
+assert("batch above largest size is flagged", p && !p.coversBatch && p.sowings === 3, p);
+assert("no sizes gives no suggestion", pick([], 21, 21) === null);

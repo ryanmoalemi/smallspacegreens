@@ -136,9 +136,39 @@
       "<details class='result-method'><summary>Rate and assumptions</summary><p>" + escapeHtml(result.rateNote) + "</p>" +
       "<p>Seed weight scales by tray area. Nominal outer dimensions may differ from the inner growing floor. This estimate does not adjust for germination or predict yield.</p>" +
       (crop().note ? "<p>" + escapeHtml(crop().note) + "</p>" : "") + "</details>" +
-      "<p class='result-seed'><a href='" + seedOffer[0] + "' rel='sponsored nofollow' target='_blank'>" + seedOffer[1] + "</a></p>" +
+      packageHtml(result, seedOffer) +
       "<div class='cta-row result-next-actions'><a class='button' href='/gear/?setup=tray#setup-list'>Build my supply list</a><a href='/guides/microgreens-kit-vs-diy-cost/#cost-comparison'>Compare setup costs</a></div>" +
       "<p class='next-action'><a href='/guides/microgreens-seed-density-per-tray/'>How these rates were chosen</a></p>";
+  }
+
+  function gramsLabel(n) {
+    return "about " + Math.round(n).toLocaleString("en-US") + " g";
+  }
+
+  // Which listed True Leaf size covers this batch, shown before the click.
+  function packageHtml(result, seedOffer) {
+    var fallback = "<p class='result-seed'><a href='" + seedOffer[0] + "' rel='sponsored nofollow' target='_blank'>" + seedOffer[1] + "</a></p>";
+    var packs = (window.SSG_PACKS || {})[form.crop.value];
+    if (!packs || typeof ssgPickPackage !== "function") return fallback;
+    var choice = ssgPickPackage(packs.sizes, result.perHigh, result.totalHigh);
+    if (!choice) return fallback;
+    var size = choice.size;
+    var perTray = ssgFormatGrams(result.perHigh);
+    var line = size.unit === "g" ? size.label : size.label + " (" + gramsLabel(size.grams) + ")";
+    var cover = choice.coversBatch
+      ? "At " + perTray + " per tray, that is about " + choice.sowings + " sowing" + (choice.sowings === 1 ? "" : "s") + "."
+      : "The largest listed size. At " + perTray + " per tray, that is about " + choice.sowings + " sowings, so this batch needs more than one bag.";
+    var short = choice.smallerShort.length
+      ? " The " + choice.smallerShort.map(function (s) { return s.label; }).join(" and ") + " is less than one tray at this rate."
+      : "";
+    var sizes = packs.sizes.map(function (s) { return s.label; }).join(", ");
+    return (
+      "<div class='result-pack'><p class='result-pack-label'>Package to consider</p>" +
+      "<p class='result-pack-size'><strong>" + escapeHtml(line) + "</strong></p>" +
+      "<p class='result-pack-note'>" + escapeHtml(cover + short) + "</p>" +
+      "<p class='result-pack-link'><a href='" + escapeHtml(size.url) + "' rel='sponsored nofollow' target='_blank'>See " + escapeHtml(packs.product) + ", " + escapeHtml(size.label) + "</a></p>" +
+      "<p class='result-pack-sizes'>True Leaf lists " + escapeHtml(sizes) + ". The link opens with " + escapeHtml(size.label) + " selected. Check the size and stock on the seller page.</p></div>"
+    );
   }
 
   function shareParams() {

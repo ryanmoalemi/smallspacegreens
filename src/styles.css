@@ -312,6 +312,14 @@ input:disabled,select:disabled{opacity:.55}
 .result-evidence{font-size:11px;border-radius:3px;padding:7px 10px;background:#fff8}
 .result-cost{padding-top:20px;border-top:1px solid #c2cfb6}
 .result-cost p,.result-area{font-size:12px}
+.result-pack{margin:20px 0 0;padding:16px 18px;background:var(--card);border:1px solid #c2cfb6;border-radius:6px;color:var(--ink)}
+.results .result-pack p{margin:0}
+.results .result-pack-label{font-size:12px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.results .result-pack-size{font-size:20px;line-height:1.3;margin-top:4px}
+.results .result-pack-note{font-size:14px;line-height:1.5;margin-top:6px}
+.results .result-pack-link{font-size:15px;font-weight:600;margin-top:10px}
+.results .result-pack-sizes{font-size:12px;line-height:1.5;color:var(--muted);margin-top:8px}
+@media print{.result-pack-link{display:none}}
 .result-method{border-top:1px solid #c2cfb6;padding-top:12px;font-size:11px}
 .result-method summary{cursor:pointer;min-height:40px;font-weight:600}
 .result-method p{font-size:12px}
