@@ -846,7 +846,7 @@ def trueleaf_link(key: str, label: str) -> str:
 
 
 TRUELEAF_CARD_PHOTOS = {
-    "micro-seed": ["radish-packet", "radish"],
+    "micro-seed": ["radish-bowl", "radish"],
     "micro-kits": ["home-microgreens", "sunflower"],
     "sprout-seed": ["alfalfa-jar", "pea-sack"],
     "sprout-kits": ["alfalfa-jar", "pea-sack", "sunflower"],
