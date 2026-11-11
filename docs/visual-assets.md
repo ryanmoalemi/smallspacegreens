@@ -129,7 +129,7 @@ The ten photographs below were added for equipment, sowing, watering, lighting a
 
 The registry maps semantic content keys to a thumbnail filename, a literal image description, a credit anchor and a photographer name. `basil-window` means mature basil in the mosaic pot; `basil` means young seedlings. `radish` uses verified radish seeds. `broccoli` uses the photograph of both broccoli and radish trays, with alt text identifying both crops rather than guessing which tray is which. `cover` uses a clear seed-tray dome photograph of its own, so it never collides with the `tray` step photo on the same page. `thin` shows tomato seedlings with true leaves, and `cells` shows filled cell trays.
 
-A supply or equipment thumbnail does not claim to demonstrate every instruction alongside it. The water image shows a glass mister, not bottom watering. The cover image shows a Jiffy brand clear dome over a seed tray, not a tested product. The sowing image shows a fiber mat; vegetable seed-starting instructions use the separate soil-filled cell-tray photo. The light image shows LED bars over ornamental potted plants and is not a claim about a tested product.
+A supply or equipment thumbnail does not claim to demonstrate every instruction alongside it. The water image shows a glass mister, not bottom watering. The cover image shows a clear vented dome over a seed tray, not a tested product. The sowing image shows a fiber mat; vegetable seed-starting instructions use the separate soil-filled cell-tray photo. The light image shows LED bars over ornamental potted plants and is not a claim about a tested product.
 
 ### A shallow growing tray
 
@@ -145,13 +145,13 @@ A supply or equipment thumbnail does not claim to demonstrate every instruction 
 ### A clear dome over a seed tray
 
 - Registry key: `cover`.
-- Local photograph: `assets/photos/humidity-dome-gregor-y.jpg` (800 × 640).
-- Thumbnail: `assets/photos/thumbs/humidity-dome-gregor-y.jpg` (320 × 320).
-- Credit: [gregor_y](https://www.flickr.com/photos/96552722@N00/).
-- Original source: [GYpix874_jiffygreenhouse](https://www.flickr.com/photos/96552722@N00/2452999101).
+- Local photograph: `assets/photos/humidity-dome-fd-richards.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/humidity-dome-fd-richards.jpg` (320 × 320).
+- Credit: [F. D. Richards](https://www.flickr.com/photos/50697352@N00/).
+- Original source: [About 200 dahlias started indoors](https://www.flickr.com/photos/50697352@N00/4464904926).
 - License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).
-- Processing: centered square crop for the thumbnail.
-- Alt text: A clear plastic dome over a seed tray, with small seedlings under it.
+- Processing: square crop (410, 30, 860, 480) of the 1024 × 742 original showing one domed tray; no logo in frame. Replaced the earlier Jiffy dome photo by gregor_y, whose logo filled the thumbnail. The same original, cropped wider, is `supply-dome-trays`; the two never appear on the same page.
+- Alt text: A clear vented plastic dome over a seed tray filled with mix.
 
 ### Tomato seedlings with true leaves
 
@@ -174,6 +174,68 @@ A supply or equipment thumbnail does not claim to demonstrate every instruction 
 - License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/).
 - Processing: resized from 768 × 1024; square crop of both trays for the thumbnail.
 - Alt text: Two plastic cell trays filled with mix, set on a towel.
+
+### Sunflower microgreens
+
+- Registry key: `sunflower-micro`.
+- Local photograph: `assets/photos/sunflower-microgreens-ark-aes.jpg` (960 × 640).
+- Thumbnail: `assets/photos/thumbs/sunflower-microgreens-ark-aes.jpg` (320 × 320).
+- Credit: [Ark. Agricultural Experiment Station](https://www.flickr.com/photos/89175420@N02/).
+- Original source: [Microgreen Food Safety Research](https://www.flickr.com/photos/89175420@N02/52200131093).
+- License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).
+- Processing: resized from 1024 × 683; centered square thumbnail. Harvest chart sunflower row.
+- Alt text: Sunflower microgreens with black seed hulls still on some leaves.
+
+### Broccoli microgreens
+
+- Registry key: `broccoli-micro`.
+- Local photograph: `assets/photos/broccoli-microgreens-anotherdaysjourney.jpg` (932 × 960).
+- Thumbnail: `assets/photos/thumbs/broccoli-microgreens-anotherdaysjourney.jpg` (320 × 320).
+- Credit: [anotherdaysjourney](https://www.flickr.com/photos/27560524@N03/).
+- Original source: [Tray of broccoli microgreens](https://www.flickr.com/photos/27560524@N03/52541632995).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/).
+- Processing: resized from 994 × 1024; centered square thumbnail. Harvest chart broccoli row.
+- Alt text: A dense tray of broccoli microgreens.
+
+### Radish microgreens
+
+- Registry key: `radish-micro`.
+- Local photograph: `assets/photos/radish-microgreens-apapac.jpg` (960 × 768).
+- Thumbnail: `assets/photos/thumbs/radish-microgreens-apapac.jpg` (320 × 320).
+- Credit: [apapac](https://www.flickr.com/photos/146235256@N06/).
+- Original source: [microgreens radish DSCN3640 b](https://www.flickr.com/photos/146235256@N06/37066916501).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/).
+- Processing: resized from 1024 × 819; centered square thumbnail. Harvest chart radish row (replaces the radish seed photo).
+- Alt text: Green radish microgreens, close up.
+
+### Hands in moist potting mix
+
+- Registry key: `moisture`.
+- Local photograph: `assets/photos/hands-in-mix-m-tullottes.jpg` (960 × 720).
+- Thumbnail: `assets/photos/thumbs/hands-in-mix-m-tullottes.jpg` (320 × 320).
+- Credit: [M Tullottes](https://commons.wikimedia.org/wiki/User:M_Tullottes).
+- Original source: [HandsInSoil.jpg](https://commons.wikimedia.org/wiki/File:HandsInSoil.jpg).
+- License: [Public domain](https://commons.wikimedia.org/wiki/File:HandsInSoil.jpg).
+- Processing: resized; centered square thumbnail. Daily check, moisture row.
+- Alt text: Hands feeling moist potting mix with perlite.
+
+### Seedlings in a tray on a windowsill
+
+- Registry key: `window-tray`.
+- Local photograph: `assets/photos/windowsill-seedlings-psd.jpg` (960 × 640).
+- Thumbnail: `assets/photos/thumbs/windowsill-seedlings-psd.jpg` (320 × 320).
+- Credit: [psd](https://www.flickr.com/photos/45581782@N00/).
+- Original source: [Verdant Windowsill](https://www.flickr.com/photos/45581782@N00/4592223046).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/).
+- Processing: resized from 1023 × 682; centered square thumbnail. Daily check, light and cover row.
+- Alt text: Seedlings coming up in a cell tray on a sunny windowsill.
+
+### Microgreens in a small tray (list thumbnail)
+
+- Registry key: `kit-tray`.
+- Thumbnail: `assets/photos/thumbs/microgreens-tray-zenyrgarden.jpg` (320 × 320), made from `assets/products/supply-microgreens-tray-600.webp`.
+- Credit: [Zenyrgarden](https://commons.wikimedia.org/wiki/User:Zenyrgarden). Original: [Microgreen growing.jpg](https://commons.wikimedia.org/wiki/File:Microgreen_growing.jpg). License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+- Use: /gear/ kit list starter-kit row, and a fallback for related-guide cards.
 
 ### Potting mix and trowel
 
@@ -449,3 +511,35 @@ Shop and fact cards use square webp crops in `assets/products/supply-*-{300,600}
 | supply-microgreens-tray | Microgreens in a small black tray | Kit result card on the cost guide | [Zenyrgarden](https://commons.wikimedia.org/wiki/File:Microgreen_growing.jpg) | CC BY-SA 4.0 |
 | supply-pea-sack | Sprouted garden peas in a cloth sack | Pea seed, half tray on the pea vs radish guide | [Yarzaryeni](https://commons.wikimedia.org/wiki/File:Garden_pea_sprouts.jpg) | CC BY 3.0 |
 | supply-coir-pile | A compressed coir brick | Espoma seed starter | Victor M. Vicente Selvas | Public domain |
+
+### Pea shoots in a basket
+
+- Registry key: `pea-basket`.
+- Local photograph: `assets/photos/pea-shoots-basket-susan-slater.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/pea-shoots-basket-susan-slater.jpg` (320 × 320).
+- Credit: [Susan Slater](https://commons.wikimedia.org/wiki/User:Susan_Slater).
+- Original source: [Dao miao, snow pea shoots-sprouts on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Dao_miao,_snow_pea_shoots-sprouts.jpg).
+- License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 2291 × 2464. Pea line of the seed charts.
+- Alt text: Dense pea shoots growing from a mat of seeds in a woven basket.
+
+### Sunflower sprouts
+
+- Registry key: `sunflower-sprouts`.
+- Local photograph: `assets/photos/sunflower-sprouts-starr.jpg` (450 × 450).
+- Thumbnail: `assets/photos/thumbs/sunflower-sprouts-starr.jpg` (320 × 320).
+- Credit: [Forest and Kim Starr](https://www.flickr.com/photos/25869955@N05/).
+- Original source: [Homegrown Sunflower Sprouts on Flickr](https://www.flickr.com/photos/25869955@N05/8564403008).
+- License: [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), checked on the source page on 2026-11-11.
+- Processing: square crop from 1024 × 768. Sunflower line of the seed chart.
+- Alt text: Harvested sunflower sprouts with round green seed leaves on a plate.
+
+## Photo rules the build enforces
+
+- One photo file per page view. When a photo repeats, the later copy is removed, and the build then fails if that leaves any list row, chart row, or step without a photo. Pick another photo instead of relying on removal. The three /gear/ supply panels are shown one at a time, so they may share photos with each other but not with anything else on the page.
+- Related-guide cards try the photos in `RELATED_PHOTO_CHOICES` (scripts/build_site.py) in order and use the first one whose picture is not already on the page.
+- The same picture may not appear twice on a page under different file names or URLs (a thumbnail and a WebP product copy, a crop, a resize). The build compares image content with ORB keypoints (`check_same_photo_content`); a pair that lines up with 60 or more matching points counts as the same photo. Results are kept in `scripts/photo-match-cache.json`, so OpenCV (`pip install opencv-python-headless numpy`) is only needed when a photo is added or changed. Separate frames from one session that look alike, such as Pannet's two sunflower tray photos, are listed in `SAME_PHOTO_SETS`. The /photo-credits/ page is exempt because it shows every photo.
+- Every image (src and srcset) must load: the file exists and is not empty, or a remote URL returns 200 with an image content type.
+- A photo credit with no image in the same row, card, or figure fails the build.
+- The printable tray record on /guides/first-tray-checklist/ is a plain fill-in list (`plain-list`) with no photos. It is the only plain list that is exempt.
+- The small apartment guide's step 1 ("Clean the tray") now uses the `cells` photo, so the daily check's drainage row can use the draining-tray photo.

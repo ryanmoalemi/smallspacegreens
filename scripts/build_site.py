@@ -203,6 +203,52 @@ GUIDE_PHOTOS = {
 }
 
 
+# Related-guide cards try these photos in order and take the first one not already shown on the page.
+RELATED_PHOTO_CHOICES = {
+    "microgreens-in-a-small-apartment": ["fenugreek", "harvest", "kit-tray"],
+    "gifts-for-indoor-gardeners": ["lettuce", "basil"],
+    "microgreen-seeds-for-beginners": ["scale", "radish-micro", "seeds"],
+    "microgreens-kit-vs-diy-cost": ["sunflower", "kit-tray", "sunflower-micro"],
+    "microgreens-seed-density-per-tray": ["seeds", "radish-micro", "amaranth-micro"],
+    "pea-vs-radish-microgreens": ["peas", "pea-lufa", "radish-micro"],
+    "windowsill-microgreens": ["basil-window", "window-tray", "basil"],
+    "apartment-seed-starting": ["sowing", "seed-starting", "thin"],
+    "bottom-watering-trays": ["tray", "tray-pair", "bw-set"],
+    "balcony-salad-garden": ["balcony", "lettuce"],
+    "calculator": ["scale", "seeds", "radish-micro"],
+}
+
+
+def photo_file(key: str) -> str:
+    photo = LIST_PHOTOS[key]
+    return Path(photo.get("src") or photo["thumbnail"]).name.lower()
+
+
+def choose_related_photos(document: str) -> str:
+    """Swap a related-guide card photo that already appears elsewhere on the page for the next choice."""
+    block = re.search(r'<ul class="related-list[^"]*"[^>]*>.*?</ul>', document, flags=re.S)
+    if not block:
+        return document
+    outside = document[:block.start()] + document[block.end():]
+    # Compare by picture, not file name, so a WebP copy of the same photo also counts as used.
+    used = {photo_group(src) for src in re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', outside)}
+    new_block = block.group(0)
+    for item in re.findall(r'<li\b[^>]*>.*?</li>', block.group(0), flags=re.S):
+        figure = re.search(r'<figure class="list-photo[^"]*" data-photo-key="([^"]+)">.*?</figure>', item, flags=re.S)
+        target = re.search(r'href="/(?:guides/([^/"]+)|tools/microgreens-seed-calculator)/"', item)
+        if not figure or not target:
+            continue
+        slug = target.group(1) or "calculator"
+        choices = RELATED_PHOTO_CHOICES.get(slug, [figure.group(1)])
+        pick = next((key for key in choices if photo_group(photo_file(key)) not in used), None)
+        if pick is None:
+            raise SystemExit(f"Related card for {slug}: every photo choice is already on the page; add another choice")
+        used.add(photo_group(photo_file(pick)))
+        if pick != figure.group(1):
+            new_block = new_block.replace(item, item.replace(figure.group(0), list_photo(pick)), 1)
+    return document[:block.start()] + new_block + document[block.end():]
+
+
 def list_photo(key: str) -> str:
     photo = LIST_PHOTOS[key]
     if photo.get("src"):
@@ -309,8 +355,10 @@ class PhotoListAudit(HTMLParser):
         is_pick = any("pick-grid" in node["attrs"].get("class", "").split() for node in self.stack)
         # Seed charts are data bars (crop, grams, bar), not editorial lists.
         is_chart = any("seed-chart" in node["attrs"].get("class", "").split() for node in self.stack)
+        # A fill-in record (the printable checklist) is a plain list on purpose; see docs/visual-assets.md.
+        is_plain = any("plain-list" in node["attrs"].get("class", "").split() for node in self.stack)
         node = {"tag": tag, "attrs": attrs}
-        if tag == "li" and "main" in context and "nav" not in context and not is_source and not is_affiliate and not is_pick and not is_chart:
+        if tag == "li" and "main" in context and "nav" not in context and not is_source and not is_affiliate and not is_pick and not is_chart and not is_plain:
             node.update(photo=False, text=[])
             self.items.append(node)
         if tag == "img" and attrs.get("src", "").startswith("/assets/photos/"):
@@ -367,8 +415,26 @@ def removal_span(html: str, start: int, end: int) -> tuple[int, int]:
     return start, end
 
 
+PANEL_OPEN = re.compile(r'<section\b[^>]*\bdata-setup-panel="([^"]+)"')
+
+
+def setup_panel_at(html: str, start: int) -> str:
+    """The /gear/ chooser shows one supply panel at a time, so panels may share photos with each other."""
+    found = None
+    for match in PANEL_OPEN.finditer(html, 0, start):
+        found = match
+    if not found or "</section>" in html[found.end():start]:
+        return ""
+    return found.group(1)
+
+
+def images_conflict(panel_a: str, panel_b: str) -> bool:
+    return not (panel_a and panel_b and panel_a != panel_b)
+
+
 def dedupe_content_images(html: str) -> str:
-    """One photo file per page. A numbered step keeps the photo over an earlier list thumbnail."""
+    """One photo file per page view. A numbered step keeps the photo over an earlier list thumbnail.
+    Photos in different /gear/ supply panels never show together, so they do not collide."""
     found = []
     for match in re.finditer(r"<img\b[^>]*>", html):
         src_match = re.search(r'\bsrc="([^"]+)"', match.group(0))
@@ -378,21 +444,24 @@ def dedupe_content_images(html: str) -> str:
         if not key:
             continue
         in_list_photo, in_step = image_context(html, match.start())
-        found.append((key, match.start(), match.end(), in_list_photo, in_step))
-    keeper: dict[str, int] = {}
-    for index, (key, _start, _end, in_list_photo, in_step) in enumerate(found):
-        if key not in keeper:
-            keeper[key] = index
+        found.append((key, match.start(), match.end(), in_list_photo, in_step, setup_panel_at(html, match.start())))
+    removed: set[int] = set()
+    for index, (key, _start, _end, in_list_photo, in_step, panel) in enumerate(found):
+        if index in removed:
             continue
-        kept = found[keeper[key]]
-        kept_is_earlier_list = kept[3] and not kept[4]
-        if in_step and kept_is_earlier_list:
-            keeper[key] = index
-    removals = []
-    for index, (_key, start, end, _in_list_photo, _in_step) in enumerate(found):
-        if keeper[_key] == index:
-            continue
-        removals.append(removal_span(html, start, end))
+        for earlier in range(index):
+            if earlier in removed:
+                continue
+            other = found[earlier]
+            if other[0] != key or not images_conflict(other[5], panel):
+                continue
+            kept_is_earlier_list = other[3] and not other[4]
+            if in_step and kept_is_earlier_list:
+                removed.add(earlier)
+            else:
+                removed.add(index)
+                break
+    removals = [removal_span(html, found[i][1], found[i][2]) for i in sorted(removed)]
     for start, end in reversed(removals):
         html = html[:start] + html[end:]
     return html
@@ -552,20 +621,237 @@ def check_letpot_panels(document: str, label: str) -> None:
             raise SystemExit(f"{label}: LetPot photo panel is missing pick-media-letpot")
 
 
+REMOTE_IMAGE_OK: dict[str, bool] = {}
+
+
+def check_images_load(document: str, label: str) -> None:
+    """Every image (src and srcset) must load: a non-empty file in the built site, or a remote URL that answers 200 with an image."""
+    import urllib.request
+
+    urls = re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', document)
+    for srcset in re.findall(r'<img\b[^>]*\bsrcset="([^"]+)"', document):
+        urls += [part.strip().split(" ")[0] for part in srcset.split(",") if part.strip()]
+    for url in urls:
+        if url.startswith("data:"):
+            continue
+        if url.startswith(("http://", "https://")):
+            if url not in REMOTE_IMAGE_OK:
+                try:
+                    request = urllib.request.Request(url, method="HEAD", headers={"User-Agent": "SSG-build/1.0"})
+                    with urllib.request.urlopen(request, timeout=20) as response:
+                        REMOTE_IMAGE_OK[url] = response.status == 200 and response.headers.get("Content-Type", "").startswith("image/")
+                except Exception:
+                    REMOTE_IMAGE_OK[url] = False
+            if not REMOTE_IMAGE_OK[url]:
+                raise SystemExit(f"{label}: image does not load: {url}")
+            continue
+        path = ROOT / url.split("?")[0].split("#")[0].lstrip("/")
+        if not path.is_file() or path.stat().st_size == 0:
+            raise SystemExit(f"{label}: image does not load (missing file): {url}")
+
+
+class CreditImageAudit(HTMLParser):
+    """A photo credit must sit in a row, card, or figure that shows its image."""
+    VOID = PhotoListAudit.VOID
+    CONTAINERS = {"li", "figure", "article", "tr"}
+    CREDIT_CLASSES = {"photo-credit", "pick-credit", "credit-line", "fact-credit", "result-pack-credit"}
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.stack: list[dict] = []
+        self.credits: list[dict] = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        classes = set(attrs.get("class", "").split())
+        node = {"tag": tag, "classes": classes, "img": False, "text": []}
+        if tag == "img":
+            for parent in self.stack:
+                parent["img"] = True
+        if tag == "a" and attrs.get("href", "").startswith("/photo-credits/#"):
+            credit = next((n for n in reversed(self.stack) if n["classes"] & self.CREDIT_CLASSES), None)
+            if credit is not None and not credit.get("counted"):
+                credit["counted"] = True
+                box = next((n for n in reversed(self.stack) if n["tag"] in self.CONTAINERS or "harvest-crop" in n["classes"] or "fact-card" in n["classes"]), None)
+                if box is not None:
+                    self.credits.append({"box": box, "credit": credit})
+        if tag not in self.VOID:
+            self.stack.append(node)
+
+    def handle_endtag(self, tag):
+        for index in range(len(self.stack) - 1, -1, -1):
+            if self.stack[index]["tag"] == tag:
+                del self.stack[index:]
+                break
+
+    def handle_data(self, data):
+        for node in self.stack:
+            node["text"].append(data)
+
+
+def check_credits_have_images(document: str, label: str) -> None:
+    main = document.split("<main", 1)[-1]
+    if label.startswith("photo-credits/"):
+        return
+    audit = CreditImageAudit()
+    audit.feed(main)
+    bare = [" ".join("".join(entry["box"]["text"]).split())[:80] for entry in audit.credits if not entry["box"]["img"]]
+    if bare:
+        raise SystemExit(f"{label}: photo credit with no image: {bare}")
+
+
 def check_duplicate_images(document: str, label: str) -> None:
-    seen: dict[str, str] = {}
+    seen: dict[str, list[str]] = {}
     duplicates: list[str] = []
-    for src in re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', document):
-        key = content_image_key(src)
+    for match in re.finditer(r'<img\b[^>]*\bsrc="([^"]+)"', document):
+        key = content_image_key(match.group(1))
         if not key:
             continue
-        if key in seen:
+        panel = setup_panel_at(document, match.start())
+        if any(images_conflict(other, panel) for other in seen.get(key, [])):
             duplicates.append(key)
-        else:
-            seen[key] = src
+        seen.setdefault(key, []).append(panel)
     if duplicates:
         names = ", ".join(sorted(set(duplicates)))
         raise SystemExit(f"{label}: duplicate content images: {names}")
+
+
+# Same picture under a different file name or URL. Matched by image content (ORB keypoints that
+# line up under one affine transform), so crops, resizes, stretches, WebP copies and thumbnails all count.
+# Different LetPot product renders share a phone overlay and score up to 46; true copies score 74 and up.
+PHOTO_MATCH_CACHE = ROOT / "scripts" / "photo-match-cache.json"
+PHOTO_MATCH_INLIERS = 60
+# Separate frames from one photo session that look the same at thumbnail size. Content matching
+# cannot see these, so they are listed by hand. Each set may appear at most once per page.
+SAME_PHOTO_SETS = [
+    # Pannet, Sunflower microgreens 01 and 02: the same clear tray from two angles.
+    {"sunflower-small-tray.jpg", "supply-sunflower", "sunflower-tray"},
+]
+_photo_groups: dict[str, str] | None = None
+
+
+def photo_stem_key(name: str) -> str:
+    return re.sub(r"-(?:300|600)\.webp$", "", name.lower())
+
+
+def _image_sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()[:16]
+
+
+def photo_groups() -> dict[str, str]:
+    """Map each local photo's stem key to a group id shared by every copy of the same picture."""
+    global _photo_groups
+    if _photo_groups is not None:
+        return _photo_groups
+    files = sorted(
+        {p for p in (ROOT / "assets" / "photos").rglob("*") if p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}}
+        | {p for p in (ROOT / "assets" / "products").glob("*-600.webp")}
+    )
+    shas = {f: _image_sha(f) for f in files}
+    # The cache lists every photo already compared and only the pairs that share keypoints,
+    # so a build without OpenCV still works when no photo is new or changed.
+    stored = json.loads(PHOTO_MATCH_CACHE.read_text()) if PHOTO_MATCH_CACHE.exists() else {}
+    checked = set(stored.get("checked", []))
+    cache = dict(stored.get("matches", {}))
+    keys = sorted(set(shas.values()))
+    pairs_needed = [(a, b) for i, a in enumerate(keys) for b in keys[i + 1:] if a not in checked or b not in checked]
+    if pairs_needed:
+        try:
+            import cv2  # noqa: F401
+            import numpy as np
+        except ImportError:
+            raise SystemExit(
+                "New or changed photos need the image-content duplicate check, which needs OpenCV: "
+                "pip install opencv-python-headless numpy, then build again."
+            )
+        orb = cv2.ORB_create(800)
+        matcher = cv2.BFMatcher(cv2.NORM_HAMMING)
+        feats = {}
+        for f, sha in shas.items():
+            if sha in feats:
+                continue
+            image = cv2.imread(str(f), cv2.IMREAD_GRAYSCALE)
+            if image is None:
+                feats[sha] = (None, None)
+                continue
+            h, w = image.shape
+            scale = 400 / max(h, w)
+            image = cv2.resize(image, (max(1, int(w * scale)), max(1, int(h * scale))))
+            feats[sha] = orb.detectAndCompute(image, None)
+        for a, b in pairs_needed:
+            (ka, da), (kb, db) = feats[a], feats[b]
+            inliers = 0
+            if da is not None and db is not None and len(ka) >= 10 and len(kb) >= 10:
+                good = [m[0] for m in matcher.knnMatch(da, db, k=2) if len(m) == 2 and m[0].distance < 0.75 * m[1].distance]
+                if len(good) >= 12:
+                    pa = np.float32([ka[g.queryIdx].pt for g in good])
+                    pb = np.float32([kb[g.trainIdx].pt for g in good])
+                    _m, mask = cv2.estimateAffine2D(pa, pb, method=cv2.RANSAC, ransacReprojThreshold=4)
+                    inliers = int(mask.sum()) if mask is not None else 0
+            if inliers >= 12:
+                cache[f"{a}:{b}"] = inliers
+        live = set(keys)
+        cache = {k: v for k, v in sorted(cache.items()) if set(k.split(":")) <= live}
+        PHOTO_MATCH_CACHE.write_text(json.dumps({"checked": keys, "matches": cache}, indent=1, sort_keys=True) + "\n")
+    parent: dict[str, str] = {}
+
+    def find(x: str) -> str:
+        parent.setdefault(x, x)
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def union(x: str, y: str) -> None:
+        parent[find(x)] = find(y)
+
+    by_sha: dict[str, list[str]] = {}
+    for f, sha in shas.items():
+        by_sha.setdefault(sha, []).append(photo_stem_key(f.name))
+    for names in by_sha.values():
+        for name in names:
+            union(name, names[0])
+    for pair, inliers in cache.items():
+        if inliers >= PHOTO_MATCH_INLIERS:
+            a, b = pair.split(":")
+            if a in by_sha and b in by_sha:
+                union(by_sha[a][0], by_sha[b][0])
+    for same in SAME_PHOTO_SETS:
+        names = sorted(same)
+        for name in names[1:]:
+            union(name, names[0])
+    _photo_groups = {name: find(name) for names in by_sha.values() for name in names}
+    for same in SAME_PHOTO_SETS:
+        for name in same:
+            _photo_groups.setdefault(name, find(name))
+    return _photo_groups
+
+
+def photo_group(src: str) -> str:
+    name = photo_stem_key(Path(src.split("?")[0].split("#")[0]).name)
+    return photo_groups().get(name, name)
+
+
+def check_same_photo_content(document: str, label: str) -> None:
+    """Fail when one picture appears twice on a page under different file names or URLs."""
+    groups = photo_groups()
+    seen: dict[str, list[tuple[str, str]]] = {}
+    repeats: set[str] = set()
+    main_start = document.find("<main")
+    for match in re.finditer(r'<img\b[^>]*\bsrc="(/assets/[^"?#]+)', document):
+        if match.start() < main_start:
+            continue
+        name = photo_stem_key(Path(match.group(1)).name)
+        group = groups.get(name)
+        if not group:
+            continue
+        panel = setup_panel_at(document, match.start())
+        for other_name, other_panel in seen.get(group, []):
+            if other_name != name and images_conflict(other_panel, panel):
+                repeats.add(" = ".join(sorted({other_name, name})))
+        seen.setdefault(group, []).append((name, panel))
+    if repeats:
+        raise SystemExit(f"{label}: the same photo appears twice under different files: {sorted(repeats)}")
 
 
 def check_photo_lists(document: str, label: str) -> int:
@@ -1308,7 +1594,7 @@ def step_strip() -> str:
             "At your crop's harvest stage, cut above the mix, leave the roots behind, and wash the greens before eating.",
         ),
     ]
-    photos = ["tray", "mix", "sowing", "cover", "sunflower", "light", "water", "harvest"]
+    photos = ["cells", "mix", "sowing", "cover", "sunflower", "light", "water", "harvest"]
     items = []
     for number, (title, instruction) in enumerate(steps, start=1):
         items.append(
@@ -2377,6 +2663,7 @@ def main() -> None:
     photographed_items = 0
     credit_licenses = credit_records(pages["photo-credits/index.html"])
     for rel, document in pages.items():
+        document = choose_related_photos(document)
         document = normalize_photo_credits(document, credit_licenses, rel)
         check_no_example_photo(document, rel)
         check_copy(Path(rel), document)
@@ -2385,6 +2672,12 @@ def main() -> None:
         photographed_items += check_photo_lists(document, rel)
         document = dedupe_content_images(document)
         check_duplicate_images(document, rel)
+        if not rel.startswith("photo-credits/"):
+            check_same_photo_content(document, rel)
+        # Removing a repeated photo must never leave a row, chart line, or card without one.
+        check_photo_lists(document, rel + " (after removing repeated photos)")
+        check_credits_have_images(document, rel)
+        check_images_load(document, rel)
         check_step_photos(document, rel)
         check_letpot_panels(document, rel)
         pages[rel] = document

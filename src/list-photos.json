@@ -108,10 +108,10 @@
     "author": "Jon Eben Field"
   },
   "cover": {
-    "thumbnail": "humidity-dome-gregor-y.jpg",
-    "alt": "A clear plastic dome over a seed tray, with small seedlings under it.",
-    "credit_id": "humidity-dome-gregor-y",
-    "author": "gregor_y"
+    "thumbnail": "humidity-dome-fd-richards.jpg",
+    "alt": "A clear vented plastic dome over a seed tray filled with mix.",
+    "credit_id": "humidity-dome-fd-richards",
+    "author": "F. D. Richards"
   },
   "radish": {
     "thumbnail": "radish-seeds-hugowolf.jpg",
@@ -232,5 +232,53 @@
     "alt": "Two plastic cell trays filled with mix, set on a towel.",
     "credit_id": "cell-trays-aprilskiver",
     "author": "aprilskiver"
+  },
+  "kit-tray": {
+    "thumbnail": "microgreens-tray-zenyrgarden.jpg",
+    "alt": "Young red and green microgreens in a small black tray.",
+    "credit_id": "microgreens-tray-zenyrgarden",
+    "author": "Zenyrgarden"
+  },
+  "sunflower-micro": {
+    "thumbnail": "sunflower-microgreens-ark-aes.jpg",
+    "alt": "Sunflower microgreens with black seed hulls still on some leaves.",
+    "credit_id": "sunflower-microgreens-ark-aes",
+    "author": "Ark. Agricultural Experiment Station"
+  },
+  "broccoli-micro": {
+    "thumbnail": "broccoli-microgreens-anotherdaysjourney.jpg",
+    "alt": "A dense tray of broccoli microgreens.",
+    "credit_id": "broccoli-microgreens-anotherdaysjourney",
+    "author": "anotherdaysjourney"
+  },
+  "radish-micro": {
+    "thumbnail": "radish-microgreens-apapac.jpg",
+    "alt": "Green radish microgreens, close up.",
+    "credit_id": "radish-microgreens-apapac",
+    "author": "apapac"
+  },
+  "moisture": {
+    "thumbnail": "hands-in-mix-m-tullottes.jpg",
+    "alt": "Hands feeling moist potting mix with perlite.",
+    "credit_id": "hands-in-mix-m-tullottes",
+    "author": "M Tullottes"
+  },
+  "window-tray": {
+    "thumbnail": "windowsill-seedlings-psd.jpg",
+    "alt": "Seedlings coming up in a cell tray on a sunny windowsill.",
+    "credit_id": "windowsill-seedlings-psd",
+    "author": "psd"
+  },
+  "pea-basket": {
+    "thumbnail": "pea-shoots-basket-susan-slater.jpg",
+    "alt": "Dense pea shoots growing from a mat of seeds in a woven basket.",
+    "credit_id": "pea-shoots-basket-susan-slater",
+    "author": "Susan Slater"
+  },
+  "sunflower-sprouts": {
+    "thumbnail": "sunflower-sprouts-starr.jpg",
+    "alt": "Harvested sunflower sprouts with round green seed leaves on a plate.",
+    "credit_id": "sunflower-sprouts-starr",
+    "author": "Forest and Kim Starr"
   }
 }
