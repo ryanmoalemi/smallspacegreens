@@ -688,33 +688,64 @@ def trueleaf_link(key: str, label: str) -> str:
     return affiliate_link(TRUELEAF_URLS[key], label)
 
 
-def affiliate_box(heading_id: str, heading: str, lead: str, items: str) -> str:
+def spare_supply_slug(used: set[str]) -> str:
+    for slug in shop_placements.SUPPLY_IMAGES:
+        name = f"supply-{slug}-600.webp"
+        if name not in used:
+            used.add(name)
+            return slug
+    raise SystemExit("No unused example photo left for a product card")
+
+
+def supply_fact_card(slug: str, title_html: str, note: str) -> str:
+    alt, author, *_rest = shop_placements.SUPPLY_IMAGES[slug]
+    return (
+        '<article class="fact-card">'
+        f'<img src="/assets/products/supply-{slug}-600.webp" width="600" height="600" '
+        f'alt="{esc(alt)}" loading="lazy" decoding="async">'
+        f'<p class="fact-credit">Example photo · <a href="/photo-credits/#supply-{slug}">{esc(author)}</a></p>'
+        f"<h3>{title_html}</h3>"
+        f'<p class="fact-note">{esc(note)}</p>'
+        "</article>"
+    )
+
+
+def affiliate_box(heading_id: str, heading: str, lead: str, cards: str) -> str:
     return (
         '<section class="affiliate-offer">'
         f'<aside class="note affiliate-box" aria-labelledby="{heading_id}">'
         f'<h2 id="{heading_id}">{heading}</h2>'
         f"<p>{esc(lead)}</p>"
-        f"<ul>{items}</ul>"
+        f'<div class="fact-grid fact-grid-2">{cards}</div>'
         "</aside></section>"
     )
 
 
-def letpot_box(name: str) -> str:
+def used_image_names(html: str) -> set[str]:
+    names = set()
+    for src in re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', html):
+        key = content_image_key(src)
+        if key:
+            names.add(key)
+    return names
+
+
+def letpot_box(name: str, used: set[str]) -> str:
     lead, keys = LETPOT_BOXES[name]
-    items = "".join(
-        f"<li>{letpot_link(key, LETPOT_MODELS[key][0])}. {esc(LETPOT_MODELS[key][1])}</li>"
-        for key in keys
-    )
-    return affiliate_box("letpot-choice", "If you'd rather not deal with trays and soil", lead, items)
+    cards = []
+    for key in keys:
+        label, blurb = LETPOT_MODELS[key]
+        cards.append(supply_fact_card(spare_supply_slug(used), letpot_link(key, label), blurb))
+    return affiliate_box("letpot-choice", "If you'd rather not deal with trays and soil", lead, "".join(cards))
 
 
-def trueleaf_box(name: str) -> str:
+def trueleaf_box(name: str, used: set[str]) -> str:
     lead, keys = TRUELEAF_BOXES[name]
-    items = "".join(
-        f"<li>{trueleaf_link(key, TRUELEAF_LINKS[key][0])}. {esc(TRUELEAF_LINKS[key][1])}</li>"
-        for key in keys
-    )
-    return affiliate_box("trueleaf-choice", "If you need seed or a kit", lead, items)
+    cards = []
+    for key in keys:
+        label, blurb = TRUELEAF_LINKS[key]
+        cards.append(supply_fact_card(spare_supply_slug(used), trueleaf_link(key, label), blurb))
+    return affiliate_box("trueleaf-choice", "If you need seed or a kit", lead, "".join(cards))
 
 
 def apply_shop(html: str) -> str:
@@ -785,7 +816,12 @@ def place_single_disclosure(html: str) -> str:
 
 
 def apply_letpot(html: str) -> str:
-    html = re.sub(r"<!--LETPOT:([a-z-]+)-->", lambda match: letpot_box(match.group(1)), html)
+    used = used_image_names(html)
+
+    def repl(match: re.Match) -> str:
+        return letpot_box(match.group(1), used)
+
+    html = re.sub(r"<!--LETPOT:([a-z-]+)-->", repl, html)
     html = html.replace("<!--LETPOT_HOME-->", letpot_link("home", "LetPot"))
     if "<!--LETPOT" in html:
         raise SystemExit("Unresolved LetPot placeholder")
@@ -793,7 +829,12 @@ def apply_letpot(html: str) -> str:
 
 
 def apply_trueleaf(html: str) -> str:
-    html = re.sub(r"<!--TRUELEAF:([a-z-]+)-->", lambda match: trueleaf_box(match.group(1)), html)
+    used = used_image_names(html)
+
+    def repl(match: re.Match) -> str:
+        return trueleaf_box(match.group(1), used)
+
+    html = re.sub(r"<!--TRUELEAF:([a-z-]+)-->", repl, html)
     html = html.replace("<!--TRUELEAF_HOME-->", trueleaf_link("home", "True Leaf Market"))
     if "<!--TRUELEAF" in html:
         raise SystemExit("Unresolved True Leaf placeholder")
@@ -1313,22 +1354,91 @@ def rate_label(row: dict) -> str:
     return f"{row['low']} to {row['high']} g"
 
 
+def wrap_words(text: str, limit: int = 78) -> list[str]:
+    lines: list[str] = []
+    current = ""
+    for word in text.split():
+        trial = f"{current} {word}".strip()
+        if current and len(trial) > limit:
+            lines.append(current)
+            current = word
+        else:
+            current = trial
+    if current:
+        lines.append(current)
+    return lines
+
+
+def bar_chart(title: str, subtitle: str, rows: list[tuple[str, str, str, int | None]], source: str) -> str:
+    """Inline SVG bars. rows are (label, value text, detail, bar grams or None)."""
+    width = 880
+    top = 72
+    wrapped = [(label, value, wrap_words(detail), grams) for label, value, detail, grams in rows]
+    row_heights = [78 + 16 * (len(lines) - 1) for _label, _value, lines, _grams in wrapped]
+    height = top + sum(row_heights) + 36
+    magnitudes = [grams for *_rest, grams in rows if grams]
+    max_g = max(magnitudes) if magnitudes else 1
+    parts = [
+        f'<figure class="rate-chart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="group" aria-label="{esc(title)}">',
+        f"<title>{esc(title)}</title>",
+        f'<rect width="{width}" height="{height}" fill="#f6f3ea"/>',
+        f'<text x="24" y="34" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#1c2420">{esc(title)}</text>',
+        f'<text x="24" y="56" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#536056">{esc(subtitle)}</text>',
+    ]
+    y = top
+    for label, value, lines, grams in wrapped:
+        parts.append(
+            f'<text x="24" y="{y + 18}" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="700" fill="#1c2420">{esc(label)}</text>'
+        )
+        if grams:
+            bar = max(8, int(460 * grams / max_g))
+            parts.append(f'<rect x="24" y="{y + 28}" width="{bar}" height="16" rx="3" fill="#245c40"/>')
+            parts.append(
+                f'<text x="{32 + bar}" y="{y + 41}" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#17382a">{esc(value)}</text>'
+            )
+        else:
+            parts.append(
+                f'<text x="24" y="{y + 41}" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#8a3e12">{esc(value)}</text>'
+            )
+        for line_index, line in enumerate(lines):
+            parts.append(
+                f'<text x="24" y="{y + 64 + line_index * 16}" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#536056">{esc(line)}</text>'
+            )
+        y += 78 + 16 * (len(lines) - 1)
+    parts.append("</svg>")
+    parts.append(f'<figcaption class="fact-credit">{esc(source)}</figcaption></figure>')
+    return "".join(parts)
+
+
+def density_bars() -> str:
+    rows = [
+        ("Radish", "42 g", "Utah State crop rate", 42),
+        ("Pea", "150 g", "Utah State crop rate", 150),
+        ("Sunflower", "48 g", "Utah State crop rate", 48),
+        ("Broccoli, kale, cilantro, basil, rutabaga", "28 g", "Utah State crop rate for each", 28),
+        ("Arugula", "10 g", "Utah State crop rate", 10),
+        ("Mustard, beet, amaranth", "No crop rate", "Maryland sample of 10 to 15 g only if you choose it", None),
+    ]
+    return bar_chart(
+        "Published grams",
+        "Each bar uses the figure printed for that crop.",
+        rows,
+        "Source: Utah State University Extension grams per 1020 tray. Mustard, beet, and amaranth have no Utah State crop rate. The 10 to 15 g line is University of Maryland Extension's sample, only if you choose it.",
+    )
+
+
 def rates_table() -> str:
     rates = json.loads((SRC / "rates.json").read_text())
     rows = []
     for row in rates:
-        rows.append(
-            f'<tr data-photo="{"peas" if row["id"] == "pea" else row["id"]}">'
-            f"<td data-label=\"Crop\">{esc(row['name'])}</td>"
-            f"<td data-label=\"Seed per 10 by 20 inch tray\">{esc(rate_label(row))}</td>"
-            f"<td data-label=\"What this number is\">{esc(row['kind'])}</td>"
-            f"<td data-label=\"Soak and timing\">{esc(row['presoak'])} {esc(row['timing'])}</td>"
-            "</tr>"
-        )
-    return (
-        "<div class=\"responsive-table\"><table>"
-        "<thead><tr><th>Crop</th><th>Seed per 10 by 20 inch tray</th><th>What this number is</th><th>Soak and timing</th></tr></thead>"
-        f"<tbody>{''.join(rows)}</tbody></table></div>"
+        grams = row["grams"] if "grams" in row else None
+        detail = f"{row['kind']}. {row['presoak']} {row['timing']}"
+        rows.append((row["name"], rate_label(row), detail, grams))
+    return bar_chart(
+        "Seed per 10 by 20 inch tray",
+        "Every published figure the calculator uses.",
+        rows,
+        "Utah State University Extension grams per 1020 tray. Mustard, beet, and amaranth use the University of Maryland Extension sample of 10 to 15 g, not a crop rate.",
     )
 
 
@@ -1855,6 +1965,7 @@ def render_static_pages() -> dict[str, str]:
         body = body.replace("<!--STEP_STRIP-->", step_strip())
         body = body.replace("<!--HARVEST_CHART-->", harvest_chart())
         body = body.replace("<!--DENSITY_CHART-->", density_figure())
+        body = body.replace("<!--DENSITY_BARS-->", density_bars())
         for video_id in VIDEOS:
             body = body.replace(f"<!--VIDEO:{video_id}-->", video_embed(video_id))
         pages[f"guides/{guide['slug']}/index.html"] = article_page(guide, body)
@@ -1889,6 +2000,8 @@ def main() -> None:
     photographed_items = 0
     for rel, document in pages.items():
         check_copy(Path(rel), document)
+        if re.search(r"<\s*table\b", document, flags=re.I):
+            raise SystemExit(f"{rel}: page outputs a table")
         photographed_items += check_photo_lists(document, rel)
         document = dedupe_content_images(document)
         check_duplicate_images(document, rel)

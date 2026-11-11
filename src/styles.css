@@ -462,6 +462,21 @@ input:disabled,select:disabled{opacity:.55}
 .pick-why{font-size:14px;line-height:1.35;color:var(--muted);margin:4px 0 12px;display:block;overflow:visible}
 .pick-cta{margin-top:auto;display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px 10px;border-radius:8px;background:var(--green);color:#fff;font-weight:600;font-size:15px;line-height:1.2;text-align:center;text-decoration:none}
 .pick-cta:hover{color:#fff;background:#163a2a}
+.fact-grid{display:grid;gap:12px;margin:0 0 20px}
+.fact-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fact-card{display:flex;flex-direction:column;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px}
+.fact-card img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:8px;background:var(--sage)}
+.fact-credit{font-size:10px;line-height:1.3;color:var(--muted);margin:6px 0 0}
+.guide-main .fact-card h3,.fact-card h3{font-family:Inter,system-ui,sans-serif;font-size:15px;font-weight:700;line-height:1.25;letter-spacing:0;margin:6px 0 0}
+.guide-main .fact-card p,.fact-card p{font-size:13px;line-height:1.35;margin:0}
+.fact-note{color:var(--muted);margin-top:6px}
+.stat-tiles{display:grid;gap:6px;margin-top:8px}
+.stat-tile{background:var(--sage);border-radius:8px;padding:6px 8px}
+.stat-tile .stat-label{display:block;font-size:11px;line-height:1.3;color:var(--muted);font-weight:500}
+.stat-tile strong{display:block;margin-top:2px;font-size:13px;line-height:1.3;font-weight:700}
+.rate-chart{margin:0 0 20px;max-width:100%}
+.rate-chart svg{display:block;width:100%;height:auto}
+.cost-result-cards{margin-top:8px}
 .pick-cta:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 @media(prefers-color-scheme:dark){
 .pick{background:#16231b;border-color:#2a3a30}

@@ -333,7 +333,8 @@ PAGE_IMAGE = {
     "windowsill": {RADISH_SMALL: "broccoli"},
     "density": {BF_1010_HOLES: "lufa"},
     "calculator": {BF_1010_HOLES: "sunflower"},
-    "cost": {KIT_GREEN: "broccoli"},
+    "cost": {KIT_GREEN: "broccoli", KIT_BUDDY: "basil-mosaic"},
+    "pea": {RADISH: "sunflower", PEA_HALF: "lettuce-leaves"},
     "bottom": {SUNPACK: "basil"},
 }
 
