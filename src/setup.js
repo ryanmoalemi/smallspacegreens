@@ -6,27 +6,40 @@
   var panels = Array.from(builder.querySelectorAll('[data-setup-panel]'));
   var tools = builder.querySelector('.supply-tools');
   var count = document.getElementById('supply-count');
-  var status = document.getElementById('supply-status');
-  var fallback = document.getElementById('supply-copy-fallback');
   var current = 'kit';
 
   function activePanel() {
     return panels.find(function (panel) { return panel.dataset.setupPanel === current; });
   }
-  function clearStatus() {
-    status.hidden = true;
-    fallback.hidden = true;
-  }
   function updateCount() {
     var missing = activePanel().querySelectorAll('[data-supply]:not(:checked)').length;
     count.textContent = missing ? missing + ' essential' + (missing === 1 ? '' : 's') + ' left to gather' : 'You have the essentials on this list.';
+  }
+  var routePicks = Array.from(builder.querySelectorAll('[data-routes]'));
+  var routeStatus = document.getElementById('route-picks-status');
+  var routeNames = { kit: 'kit', tray: 'reusable-tray', reuse: 'reused-container' };
+  function showRoutePicks(route) {
+    var shown = 0;
+    routePicks.forEach(function (card) {
+      var match = card.dataset.routes.split(' ').indexOf(route) !== -1;
+      card.hidden = !match;
+      if (match) {
+        shown += 1;
+        // A card that was hidden at load may still hold a deferred lazy image; fetch it now that it shows.
+        Array.from(card.querySelectorAll('img[loading="lazy"]')).forEach(function (img) { img.loading = 'eager'; });
+      }
+    });
+    if (routeStatus && routePicks.length) {
+      routeStatus.textContent = shown + ' supplies for your ' + routeNames[route] + ' list.';
+      routeStatus.hidden = false;
+    }
   }
   function selectRoute(route, updateUrl) {
     if (!radios.some(function (radio) { return radio.value === route; })) route = 'kit';
     current = route;
     radios.forEach(function (radio) { radio.checked = radio.value === route; });
     panels.forEach(function (panel) { panel.hidden = panel.dataset.setupPanel !== route; });
-    clearStatus();
+    showRoutePicks(route);
     updateCount();
     if (updateUrl && window.history && window.history.replaceState) {
       var url = new URL(window.location.href);
@@ -46,40 +59,12 @@
     });
   });
   builder.addEventListener('change', function (event) {
-    if (event.target.matches('[data-supply]')) { clearStatus(); updateCount(); }
+    if (event.target.matches('[data-supply]')) updateCount();
   });
   window.addEventListener('hashchange', function () {
     var route = routeFromLocation();
     if (route && route !== current) selectRoute(route, false);
   });
-  document.getElementById('copy-supplies').addEventListener('click', async function () {
-    var panel = activePanel();
-    var missing = Array.from(panel.querySelectorAll('[data-supply]:not(:checked)'));
-    var lines = ['Small Space Greens | ' + panel.querySelector('h3').textContent];
-    lines.push(missing.length ? 'Still to gather:' : 'All listed essentials are ready.');
-    missing.forEach(function (input) { lines.push('- ' + input.dataset.supply); });
-    lines.push('', panel.querySelector('.supply-optional').textContent, '', 'https://smallspacegreens.com/gear/?setup=' + current + '#setup-list');
-    var text = lines.join('\n');
-    clearStatus();
-    try {
-      if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Clipboard unavailable');
-      await navigator.clipboard.writeText(text);
-      status.textContent = 'Your supply list is copied.';
-    } catch (error) {
-      fallback.value = text;
-      fallback.hidden = false;
-      fallback.focus();
-      fallback.select();
-      status.textContent = 'Select and copy your supply list below.';
-    }
-    status.hidden = false;
-    if (typeof window.gtag === 'function') window.gtag('event', 'supply_list_copy', { setup_route: current });
-  });
-  document.getElementById('print-supplies').addEventListener('click', function () {
-    document.body.classList.add('printing-supply-list');
-    window.print();
-  });
-  window.addEventListener('afterprint', function () { document.body.classList.remove('printing-supply-list'); });
   selectRoute(routeFromLocation(), false);
   tools.hidden = false;
 })();
