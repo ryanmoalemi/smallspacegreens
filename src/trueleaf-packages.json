@@ -1,0 +1,26 @@
+{
+  "checked": "2026-11-10",
+  "note": "Sizes and variant IDs read from the live True Leaf Market product pages. Each ?variant= URL was opened in a browser and opened with that size selected. No prices are stored or shown.",
+  "crops": {
+    "radish": {
+      "product": "Organic Rambo Radish microgreens seed",
+      "url": "https://trueleafmarket.com/products/radish-rambo-seeds",
+      "sizes": [
+        {"label": "4 g packet", "amount": 4, "unit": "g", "variant": "31963540095091"},
+        {"label": "4 oz", "amount": 4, "unit": "oz", "variant": "39483221192"},
+        {"label": "1 lb", "amount": 1, "unit": "lb", "variant": "39483221256"},
+        {"label": "5 lb", "amount": 5, "unit": "lb", "variant": "39483221320"},
+        {"label": "25 lb", "amount": 25, "unit": "lb", "variant": "39483221448"}
+      ]
+    },
+    "pea": {
+      "product": "Dun Pea microgreens seed",
+      "url": "https://trueleafmarket.com/products/dun-pea-seeds",
+      "sizes": [
+        {"label": "1 lb", "amount": 1, "unit": "lb", "variant": "38827792328"},
+        {"label": "5 lb", "amount": 5, "unit": "lb", "variant": "38827792392"},
+        {"label": "25 lb", "amount": 25, "unit": "lb", "variant": "38827792456"}
+      ]
+    }
+  }
+}

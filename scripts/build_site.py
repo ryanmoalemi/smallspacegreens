@@ -1563,6 +1563,46 @@ def calculator_options() -> str:
     )
 
 
+TRUELEAF_UNIT_GRAMS = {"g": 1.0, "oz": 28.349523125, "lb": 453.59237}
+
+
+def trueleaf_awin(url: str) -> str:
+    """Same Awin deep-link format as the other True Leaf links (merchant 124042, publisher 3149328)."""
+    from urllib.parse import quote
+
+    if not url.startswith("https://trueleafmarket.com/products/"):
+        raise SystemExit(f"True Leaf package link is not a product page: {url}")
+    return "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=" + quote(url, safe="")
+
+
+def trueleaf_packages(crops: dict) -> dict:
+    """Package sizes verified on True Leaf's product pages, converted to grams for the calculator."""
+    data = json.loads((SRC / "trueleaf-packages.json").read_text())
+    packs = {}
+    for crop_id, entry in data["crops"].items():
+        if crop_id not in crops or "grams" not in crops[crop_id]:
+            raise SystemExit(f"True Leaf packages listed for {crop_id}, which has no crop rate")
+        sizes = []
+        for size in entry["sizes"]:
+            label = size["label"]
+            if not re.fullmatch(r"\d+", size["variant"]):
+                raise SystemExit(f"Bad True Leaf variant id for {crop_id} {label}")
+            if not label.startswith(f'{size["amount"]:g} {size["unit"]}'):
+                raise SystemExit(f"True Leaf size label disagrees with its amount for {crop_id}: {label}")
+            sizes.append(
+                {
+                    "label": label,
+                    "unit": size["unit"],
+                    "grams": round(size["amount"] * TRUELEAF_UNIT_GRAMS[size["unit"]], 1),
+                    "url": trueleaf_awin(f'{entry["url"]}?variant={size["variant"]}'),
+                }
+            )
+        if [s["grams"] for s in sizes] != sorted(s["grams"] for s in sizes):
+            raise SystemExit(f"True Leaf sizes for {crop_id} must run small to large")
+        packs[crop_id] = {"product": entry["product"], "checked": data["checked"], "sizes": sizes}
+    return packs
+
+
 def write_calculator_js() -> None:
     rates = json.loads((SRC / "rates.json").read_text())
     crops = {}
@@ -1576,6 +1616,7 @@ def write_calculator_js() -> None:
     core = (SRC / "calc-core.js").read_text()
     logic = (SRC / "calculator.js").read_text()
     payload = "window.SSG_CROPS = " + json.dumps(crops, ensure_ascii=False) + ";\n"
+    payload += "window.SSG_PACKS = " + json.dumps(trueleaf_packages(crops), ensure_ascii=False) + ";\n"
     target = ROOT / "js" / "calculator.js"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(core + "\n" + payload + logic)
