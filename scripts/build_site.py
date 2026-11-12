@@ -2592,7 +2592,7 @@ def render_static_pages() -> dict[str, str]:
     pages["about/index.html"] = simple_page(about, (SRC / "pages" / "about.html").read_text(), about_graph)
 
     contact_title = "Contact Small Space Greens About These Garden Guides"
-    contact_desc = "Email Ryan Moalemi at ryan@smallspacegreens.com about corrections, source questions, or notes on these small-space gardening guides. We reply."
+    contact_desc = "Email Ryan Moalemi at ryan@smallspacegreens.com about a growing question, a broken link, or a product that is no longer available. Include the page link."
     check_lengths(contact_title, contact_desc, "contact")
     contact = {
         "title": contact_title,
