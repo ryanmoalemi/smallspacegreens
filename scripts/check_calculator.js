@@ -266,3 +266,10 @@ assert("mustard box at a typed rate says it used your rate", /Sized with your ra
 assert("Amazon radish box has no packet sentence", !/less than one tray|4 g packet/.test(amzHtml), amzHtml);
 const r10 = mountCalculator("?crop=radish&tray=10x10&n=1", boxPacks).nodes["calc-results"].innerHTML;
 assert("True Leaf radish box has no packet sentence", /4 oz/.test(r10) && !/less than one tray|4 g packet is/.test(r10), r10);
+
+const radishTen = mountCalculator("?crop=radish&tray=10x10&n=3", boxPacks);
+const supplyHref = (radishTen.nodes["calc-results"].innerHTML.match(/href='([^']*#setup-list)'/) || [])[1] || "";
+assert("Build my supply list keeps the radish grow", /setup=tray/.test(supplyHref) && /crop=radish/.test(supplyHref) && /tray=10x10/.test(supplyHref) && /n=3/.test(supplyHref) && /basis=nominal/.test(supplyHref) && !/price=/.test(supplyHref), supplyHref);
+const customGrow = mountCalculator("?crop=radish&tray=custom&l=8&w=8&unit=in&n=1", boxPacks);
+const customHref = (customGrow.nodes["calc-results"].innerHTML.match(/href='([^']*#setup-list)'/) || [])[1] || "";
+assert("custom grow keeps measured size and marks the basis", /tray=custom/.test(customHref) && /l=8/.test(customHref) && /w=8/.test(customHref) && /basis=custom/.test(customHref) && !/packagePrice=/.test(customHref), customHref);

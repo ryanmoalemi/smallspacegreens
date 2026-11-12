@@ -233,7 +233,11 @@ SHOP_PAGES: dict[str, dict] = {
             routed(amazon("B07KRMP93C", KIT_SPONGE, "A ready-to-sow kit with trays, seed, and coir."), "kit"),
             routed(amazon("B06XZFLY9P", BF_1020_HOLES, "A reusable growing tray with holes."), "tray"),
             routed(amazon("B07DT72V6H", BF_1020_SOLID, "The matching solid tray."), "tray"),
-            routed(seed(MIXED_SEED, "Loose seed for a tray or a container."), "tray reuse"),
+            routed(amazon("B07NKSKMCN", BF_1010_HOLES, "A reusable 10 by 10 in growing tray."), "tray"),
+            routed(amazon("B07MYNVP8G", TRAY_1010_SOLID_10, "A solid 10 by 10 in catch tray."), "tray"),
+            routed(seed_product(RADISH, "Loose radish seed, with package size chosen for your batch.", TRUELEAF_RADISH, "See radish seed"), "tray reuse"),
+            routed(seed_product(PEA, "Loose pea seed, weighed dry, then soaked.", TRUELEAF_PEA, "See pea seed"), "tray reuse"),
+            routed(seed(MIXED_SEED, "Loose seed for a tray or a container, when you have not chosen a crop."), "tray reuse"),
             routed(amazon("B01N38GBTM", ESPOMA_SEED, "Soilless mix for a tray or a container."), "tray reuse"),
             routed(amazon("B08BPTXK4L", SCALE, "For weighing loose seed."), "tray reuse"),
             routed(amazon("B07FV7TZVH", SCISSORS, "For a cut above the mix."), "kit tray reuse"),
@@ -848,11 +852,17 @@ def render_shop(key: str) -> str:
             )
         button = BUTTON[row["kind"]] if row["kind"] == "amazon" else row["label"]
         routes_attr = f' data-routes="{esc(row["routes"])}"' if row.get("routes") else ""
-        role = (product.get("fits") or {}).get("role") or ""
+        fits = product.get("fits") or {}
+        role = fits.get("role") or ""
         role_attr = f' data-role="{esc(role)}"' if role else ""
         product_attr = f' data-product="{esc(product["id"])}"'
+        nominal = fits.get("nominal") or ""
+        nominal_attr = f' data-nominal="{esc(nominal)}"' if nominal else ""
+        crop = fits.get("crop") or ""
+        crop_attr = f' data-crop="{esc(crop)}"' if crop else ""
+        optional_attr = ' data-optional="1"' if role.startswith("optional-") else ""
         cards.append(
-            f'<li class="pick"{routes_attr}{product_attr}{role_attr}>'
+            f'<li class="pick"{routes_attr}{product_attr}{role_attr}{nominal_attr}{crop_attr}{optional_attr}>'
             f'<figure class="{media_class}">'
             f'<img{img_class} src="{src}" srcset="{srcset}" '
             'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '

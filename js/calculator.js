@@ -389,7 +389,7 @@ window.SSG_PACKS = {"radish": {"product": "Organic Rambo Radish microgreens seed
       "<p>Seed weight scales by tray area. Nominal outer dimensions may differ from the inner growing floor. This estimate does not adjust for germination or predict yield.</p>" +
       (crop().note ? "<p>" + escapeHtml(crop().note) + "</p>" : "") + "</details>" +
       packageHtml(result, seedOffer) +
-      "<div class='cta-row result-next-actions'><a class='button' href='/gear/?setup=tray#setup-list'>Build my supply list</a><a href='/guides/microgreens-kit-vs-diy-cost/#cost-comparison'>Compare setup costs</a></div>" +
+      "<div class='cta-row result-next-actions'><a class='button' href='" + supplyListHref() + "'>Build my supply list</a><a href='/guides/microgreens-kit-vs-diy-cost/#cost-comparison'>Compare setup costs</a></div>" +
       "<p class='next-action'><a href='/guides/microgreens-seed-density-per-tray/'>How these rates were chosen</a></p>";
   }
 
@@ -467,6 +467,18 @@ window.SSG_PACKS = {"radish": {"product": "Organic Rambo Radish microgreens seed
       action +
       "<p class='result-pack-sizes'>" + escapeHtml(fine) + "</p></div>" + packageCredit(packs, choice) + "</div>"
     );
+  }
+
+
+  function supplyListHref() {
+    var params = shareParams();
+    params.set("setup", "tray");
+    if (selectedTray() === "custom") params.set("basis", "custom");
+    else params.set("basis", "nominal");
+    ["price", "priceUnit", "priceMode", "packagePrice", "packageGrams"].forEach(function (key) {
+      params.delete(key);
+    });
+    return "/gear/?" + params.toString() + "#setup-list";
   }
 
   function shareParams() {

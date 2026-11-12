@@ -10,12 +10,19 @@
 <div class="setup-choice-card setup-choice-reuse"><label class="setup-choice"><input type="radio" name="setup-route" value="reuse"><!--CHOICE_PHOTO:sunflower-micro--><span><strong>Use a container I own</strong><small>Try one small grow first.</small></span></label><!--PHOTO_CREDIT:sunflower-micro--></div>
 </fieldset>
 <div id="checklist" class="setup-list-wrap"><div id="setup-list" tabindex="-1">
+<aside class="grow-handoff" id="grow-handoff" hidden>
+<p class="eyebrow">Your selected grow</p>
+<p class="grow-summary" data-grow-summary></p>
+<p class="grow-setup" data-grow-setup></p>
+<p class="grow-note" data-grow-note hidden></p>
+<p><a class="text-link" data-grow-edit href="/tools/microgreens-seed-calculator/">Edit my grow</a></p>
+</aside>
 <section class="supply-panel" id="kit" data-setup-panel="kit" aria-labelledby="kit-title">
 <p class="eyebrow">For an easier first start</p><h3 id="kit-title">Your kit supply list</h3><p class="setup-fit">Choose a kit that includes a growing tray, seeds, growing medium, and instructions. Check how many plantings are supplied and what the refills cost.</p>
 <p class="supply-instruction">Tick anything you already have.</p>
 <ul class="supply-checks">
-<li data-photo="kit-tray"><label><input type="checkbox" data-supply="A microgreens starter kit with tray, seed, medium, and instructions"><span><strong>A microgreens starter kit</strong><small>Check the crop, tray dimensions, included plantings, and refill compatibility.</small></span></label></li>
-<li data-photo="scissors"><label><input type="checkbox" data-supply="Clean, sharp scissors"><span><strong>Clean, sharp scissors</strong><small>Use a pair you own to cut the greens above the growing medium.</small></span></label></li>
+<li data-photo="kit-tray"><label><input type="checkbox" data-supply="A microgreens starter kit with tray, seed, medium, and instructions" data-role="kit"><span><strong>A microgreens starter kit</strong><small>Check the crop, tray dimensions, included plantings, and refill compatibility.</small></span></label></li>
+<li data-photo="scissors"><label><input type="checkbox" data-supply="Clean, sharp scissors" data-role="scissors"><span><strong>Clean, sharp scissors</strong><small>Use a pair you own to cut the greens above the growing medium.</small></span></label></li>
 </ul>
 <p class="supply-optional"><strong>Check your kit:</strong> If its container drains, check whether a catch tray is included. Check for any cover, mister, scale, or lamp required by its instructions and your space. Add only what is missing.</p>
 </section>
@@ -23,11 +30,11 @@
 <p class="eyebrow">For more crop choice</p><h3 id="tray-title">Your reusable-tray supply list</h3><p class="setup-fit">Start with one tray pair and one crop. Measure your growing space before choosing a tray size.</p>
 <p class="supply-instruction">Tick anything you already have.</p>
 <ul class="supply-checks">
-<li data-photo="tray-pair"><label><input type="checkbox" data-supply="One growing tray with drainage holes and one compatible solid watering tray"><span><strong>A matching pair of trays</strong><small>One growing tray with drainage holes, plus one solid tray to catch water.</small></span></label></li>
-<li data-photo="seeds"><label><input type="checkbox" data-supply="One packet of seed intended for edible microgreens"><span><strong>One crop of microgreen seed</strong><small>Choose untreated seed intended for edible microgreens, with growing instructions.</small></span></label></li>
-<li data-photo="mix"><label><input type="checkbox" data-supply="Fresh soilless growing mix or a suitable mat sized for the tray"><span><strong>Growing mix or a suitable mat</strong><small>Check that the medium suits your crop and fills the tray you chose.</small></span></label></li>
-<li data-photo="scale"><label><input type="checkbox" data-supply="A kitchen scale suitable for measuring the seed amount"><span><strong>A kitchen scale</strong><small>Weigh loose seed for your tray. Reuse a suitable scale from your kitchen.</small></span></label></li>
-<li data-photo="scissors"><label><input type="checkbox" data-supply="Clean, sharp scissors"><span><strong>Clean, sharp scissors</strong><small>For harvesting above the mix.</small></span></label></li>
+<li data-photo="tray-pair"><label><input type="checkbox" data-supply="One growing tray with drainage holes and one compatible solid watering tray" data-role="trays"><span><strong>A matching pair of trays</strong><small>One growing tray with drainage holes, plus one solid tray to catch water.</small></span></label></li>
+<li data-photo="seeds"><label><input type="checkbox" data-supply="One packet of seed intended for edible microgreens" data-role="seed"><span><strong>One crop of microgreen seed</strong><small>Choose untreated seed intended for edible microgreens, with growing instructions.</small></span></label></li>
+<li data-photo="mix"><label><input type="checkbox" data-supply="Fresh soilless growing mix or a suitable mat sized for the tray" data-role="medium-mix"><span><strong>Growing mix or a suitable mat</strong><small>Check that the medium suits your crop and fills the tray you chose.</small></span></label></li>
+<li data-photo="scale"><label><input type="checkbox" data-supply="A kitchen scale suitable for measuring the seed amount" data-role="scale"><span><strong>A kitchen scale</strong><small>Weigh loose seed for your tray. Reuse a suitable scale from your kitchen.</small></span></label></li>
+<li data-photo="scissors"><label><input type="checkbox" data-supply="Clean, sharp scissors" data-role="scissors"><span><strong>Clean, sharp scissors</strong><small>For harvesting above the mix.</small></span></label></li>
 </ul>
 <p class="supply-optional"><strong>Also check:</strong> Your crop may need a cover, a clean mister, or a lamp. Follow the crop instructions and check your available light below.</p>
 </section>
@@ -35,12 +42,12 @@
 <p class="eyebrow">For a small first try</p><h3 id="reuse-title">Your reused-container supply list</h3><p class="setup-fit">A suitable clean food container can be a place to start. Match the seed amount to its usable growing area.</p>
 <p class="supply-instruction">Tick anything you already have.</p>
 <ul class="supply-checks">
-<li data-photo="lettuce"><label><input type="checkbox" data-supply="A clean food container with drainage"><span><strong>A clean food container with drainage</strong><small>Choose a stable container that fits your growing space.</small></span></label></li>
-<li data-photo="tray-pair"><label><input type="checkbox" data-supply="A solid catch tray that fits beneath the container"><span><strong>A solid catch tray</strong><small>Catch the drainage and protect the surface beneath your grow.</small></span></label></li>
-<li data-photo="seeds"><label><input type="checkbox" data-supply="One packet of seed intended for edible microgreens"><span><strong>One crop of microgreen seed</strong><small>Choose untreated seed intended for edible microgreens, with growing instructions.</small></span></label></li>
-<li data-photo="mix"><label><input type="checkbox" data-supply="Fresh soilless growing mix"><span><strong>Fresh growing mix</strong><small>Use a suitable soilless mix. The container can be reused; start with fresh medium.</small></span></label></li>
-<li data-photo="scale"><label><input type="checkbox" data-supply="A kitchen scale suitable for measuring the seed amount"><span><strong>A kitchen scale</strong><small>Check your kitchen before adding a scale to your list.</small></span></label></li>
-<li data-photo="scissors"><label><input type="checkbox" data-supply="Clean, sharp scissors"><span><strong>Clean, sharp scissors</strong><small>Use a pair you own for harvesting above the mix.</small></span></label></li>
+<li data-photo="lettuce"><label><input type="checkbox" data-supply="A clean food container with drainage" data-role="container"><span><strong>A clean food container with drainage</strong><small>Choose a stable container that fits your growing space.</small></span></label></li>
+<li data-photo="tray-pair"><label><input type="checkbox" data-supply="A solid catch tray that fits beneath the container" data-role="catch-solid"><span><strong>A solid catch tray</strong><small>Catch the drainage and protect the surface beneath your grow.</small></span></label></li>
+<li data-photo="seeds"><label><input type="checkbox" data-supply="One packet of seed intended for edible microgreens" data-role="seed"><span><strong>One crop of microgreen seed</strong><small>Choose untreated seed intended for edible microgreens, with growing instructions.</small></span></label></li>
+<li data-photo="mix"><label><input type="checkbox" data-supply="Fresh soilless growing mix" data-role="medium-mix"><span><strong>Fresh growing mix</strong><small>Use a suitable soilless mix. The container can be reused; start with fresh medium.</small></span></label></li>
+<li data-photo="scale"><label><input type="checkbox" data-supply="A kitchen scale suitable for measuring the seed amount" data-role="scale"><span><strong>A kitchen scale</strong><small>Check your kitchen before adding a scale to your list.</small></span></label></li>
+<li data-photo="scissors"><label><input type="checkbox" data-supply="Clean, sharp scissors" data-role="scissors"><span><strong>Clean, sharp scissors</strong><small>Use a pair you own for harvesting above the mix.</small></span></label></li>
 </ul>
 <p class="supply-optional"><strong>Also check:</strong> Follow your crop's cover and watering instructions. Add a light only when your growing space needs one.</p>
 </section>
