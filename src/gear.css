@@ -1,0 +1,159 @@
+/* /gear/ T02 setup builder (handoff boards, pdf pages 3 and 8). */
+.page-page .setup-intro{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:var(--space-8);
+  align-items:center;
+  margin:0 0 var(--space-8);
+}
+.page-page .setup-intro .dek{font-size:16px;line-height:1.6;max-width:34rem}
+.page-page .setup-photo{margin:0;min-width:0}
+.page-page .setup-photo img{
+  display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;
+  border-radius:var(--radius-card);background:var(--sage);
+}
+.page-page .setup-photo .photo-credit{margin-top:var(--space-2);font-size:12px}
+
+.setup-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4);margin:0 0 var(--space-6)}
+.setup-choice-card{min-width:0}
+.setup-choice{
+  display:grid;
+  grid-template-columns:auto 72px minmax(0,1fr);
+  align-items:start;
+  gap:var(--space-3);
+  padding:var(--space-4);
+  min-height:48px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-card);
+  background:var(--card);
+  cursor:pointer;
+}
+.setup-choice-kit .setup-choice{background:#edf0df}
+.setup-choice-tray .setup-choice{background:#f3eddc}
+.setup-choice-reuse .setup-choice{background:#f1e6dc}
+.setup-choice:has(input:checked){border-color:var(--forest);box-shadow:inset 0 0 0 2px var(--forest)}
+.setup-choice .choice-photo{
+  width:72px;height:72px;object-fit:cover;border-radius:var(--radius-card);background:var(--sage);
+  grid-column:2;
+}
+.setup-choice input{grid-column:1;grid-row:1 / span 2;margin-top:6px}
+.setup-choice>span{grid-column:3}
+
+
+.setup-builder .setup-section-heading h2{font-family:var(--serif);font-size:clamp(28px,3vw,40px);color:var(--forest)}
+.setup-builder .setup-list-wrap{border:0;background:transparent;padding:0;border-radius:0}
+.supply-panel .eyebrow{text-transform:none;letter-spacing:0;font-family:var(--serif);font-size:clamp(28px,3vw,36px);color:var(--forest);font-weight:500;letter-spacing:0;margin:0 0 var(--space-2)}
+.supply-panel h3{font-size:18px;line-height:1.35;margin:0 0 var(--space-3);color:var(--ink)}
+.supply-instruction{font-size:15px;color:var(--muted)}
+.supply-optional{background:var(--sage);border-radius:var(--radius-card);padding:var(--space-4);font-size:15px}
+.setup-builder .setup-choice small{font-size:15px;line-height:1.45;color:var(--muted)}
+@media(min-width:1100px){
+  .setup-builder:has(#grow-handoff:not([hidden])){display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,320px);column-gap:var(--space-6);align-items:start}
+  .setup-builder:has(#grow-handoff:not([hidden])) .setup-section-heading,
+  .setup-builder:has(#grow-handoff:not([hidden])) .setup-choices{grid-column:1 / -1}
+  .setup-builder:has(#grow-handoff:not([hidden])) .setup-list-wrap{grid-column:1}
+  .setup-builder:has(#grow-handoff:not([hidden])) #grow-handoff{grid-column:2;grid-row:3 / span 8;position:sticky;top:var(--space-4);align-self:start}
+}
+
+
+#grow-handoff{
+  margin:0 0 var(--space-6);
+  padding:var(--space-5);
+  background:var(--sage);
+  border-radius:var(--radius-card);
+}
+#grow-handoff .button{width:100%;margin-top:var(--space-3)}
+
+/* Requirement rows: photo + specification + I have this + See options. */
+.setup-builder .supply-checks.photo-list,
+.setup-builder ul.supply-checks{
+  list-style:none;margin:0 0 var(--space-5);padding:0;
+  display:flex;flex-direction:column;gap:var(--space-3);
+}
+.setup-builder .supply-checks>li.photo-list-item,
+.setup-builder .supply-checks>li{
+  display:grid;
+  grid-template-columns:88px minmax(0,1fr);
+  gap:var(--space-3) var(--space-4);
+  align-items:center;
+  margin:0;
+  padding:var(--space-3);
+  border:1px solid var(--line);
+  border-radius:var(--radius-card);
+  background:var(--card);
+}
+.setup-builder .supply-checks .list-photo{margin:0}
+.setup-builder .supply-checks .list-photo img{
+  width:88px;height:88px;object-fit:cover;border-radius:var(--radius-card);
+}
+.setup-builder .supply-checks .list-item-copy{
+  display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3);
+  font-size:16px;line-height:1.5;min-width:0;
+}
+.setup-builder .supply-checks label{
+  display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3);
+  flex:1 1 12rem;margin:0;font-size:16px;
+}
+.setup-builder .supply-checks label>span:not(.have-this){flex:1 1 12rem}
+.setup-builder .supply-checks .have-this{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:15px;font-weight:600;color:var(--ink);
+  min-height:48px;white-space:nowrap;flex:0 0 auto;
+}
+.setup-builder .supply-checks .have-this input[type="checkbox"]{
+  width:18px;height:18px;margin:0;accent-color:var(--forest);flex:0 0 18px;
+}
+.setup-builder .supply-checks strong{display:block;font-size:16px;line-height:1.3}
+.setup-builder .supply-checks small{display:block;font-size:15px;line-height:1.45;color:var(--muted);margin-top:2px}
+.setup-builder .supply-checks .see-options{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:48px;padding:0 14px;margin-left:auto;
+  border:1px solid var(--line);border-radius:var(--radius-control);
+  text-decoration:none;font-size:15px;font-weight:600;color:var(--ink);
+  white-space:nowrap;background:var(--paper);
+}
+.setup-builder .supply-checks .see-options:hover{background:var(--sage);color:var(--ink)}
+.setup-builder .supply-checks .photo-credit{display:block;font-size:12px;margin-top:4px}
+
+
+.supply-group{margin:0 0 var(--space-6)}
+.supply-group h4{font-size:22px;margin:0 0 var(--space-3)}
+.setup-steps-cta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4);margin:var(--space-6) 0 0}
+.setup-steps-cta .button{min-height:48px}
+
+@media(max-width:959px){
+  .page-page .setup-intro{display:flex;flex-direction:column;gap:var(--space-5);margin-bottom:var(--space-6)}
+  .setup-choices{grid-template-columns:1fr}
+  .setup-builder{display:block}
+  .setup-builder #grow-handoff{position:static;margin-bottom:var(--space-5)}
+  .setup-builder .supply-checks .see-options{width:100%;margin-left:0}
+}
+@media(max-width:599px){
+  .setup-choice{grid-template-columns:auto minmax(0,1fr);padding:var(--space-3)}
+  .setup-choice .choice-photo{grid-column:2;grid-row:1;width:64px;height:64px;justify-self:end}
+  .setup-choice>span{grid-column:1 / 2;grid-row:2}
+  .setup-builder .supply-checks>li.photo-list-item,
+  .setup-builder .supply-checks>li{
+    grid-template-columns:72px minmax(0,1fr);
+    padding:var(--space-3);
+  }
+  .setup-builder .supply-checks .list-photo img{width:72px;height:72px}
+  .setup-builder .supply-checks .have-this{width:100%}
+}
+
+#matching-supplies > ul.pick-grid:not(:has(.pick:not([hidden]))){display:none}
+.supply-group[hidden]{display:none!important}
+.supply-group:not([hidden]):not(:has(.pick:not([hidden]))){display:none}
+
+/* Credits sit on a full row under the requirement so a one-line credit has room. */
+.setup-builder .supply-checks .list-photo{display:contents}
+.setup-builder .supply-checks .list-photo img{grid-column:1;grid-row:1}
+.setup-builder .supply-checks .list-item-copy{grid-column:2;grid-row:1;min-width:0}
+.setup-builder .supply-checks .list-photo .photo-credit,
+.setup-builder .supply-checks .photo-credit{
+  grid-column:1 / -1;
+  grid-row:2;
+  margin:0;
+  max-width:100%;
+}
+.setup-choice-card .photo-credit{max-width:100%}
