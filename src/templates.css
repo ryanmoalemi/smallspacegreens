@@ -1,0 +1,146 @@
+/* T04-T11 shared templates (handoff boards, pdf pages 4, 6, and 9).
+   Below 960px: one column. At 1100px+: a quiet article contents rail may sit beside the body. */
+
+/* Readable type that earlier breakpoints had shrunk below the foundation. */
+body .affiliate-disclosure,
+body .disclosure,
+body .article-header .disclosure,
+.guide-main .affiliate-disclosure{
+  font-size:12px;
+  line-height:1.45;
+  color:var(--muted);
+}
+.jump-links a,
+.article-header .next-action a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:0 16px;
+  font-size:15px;
+  font-weight:600;
+  line-height:1.3;
+  background:var(--sage);
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:var(--radius-control);
+  text-decoration:none;
+}
+.jump-links a:hover,
+.article-header .next-action a:hover{background:var(--forest);color:var(--paper)}
+.jump-links{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3);margin:var(--space-5) 0 var(--space-6)}
+.article-header .next-action{
+  display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3);
+  margin:var(--space-4) 0 0;
+}
+.article-header .next-action::before{
+  content:"Quick start";
+  font-size:15px;font-weight:600;line-height:1.3;color:var(--ink);
+  margin-right:var(--space-2);white-space:nowrap;
+}
+.article-header .verdict{font-size:16px;line-height:1.6;background:var(--sage);border-radius:var(--radius-card);padding:var(--space-5)}
+.article-header .verdict p{font-size:16px;line-height:1.6}
+.article-header .byline{font-size:15px;margin-top:var(--space-4)}
+.guide-intro .photo img,
+.guide-intro figure.photo img{
+  display:block;width:100%;height:auto;max-height:none;
+  object-fit:cover;border-radius:var(--radius-card);background:var(--sage);
+}
+.guide-main h2{font-family:Newsreader,Georgia,serif;color:var(--forest)}
+
+/* Quiet contents rail at 1100px+. One column below that. */
+@media(min-width:1100px){
+  body.page-article main.wrap{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(160px,220px);
+    column-gap:var(--space-8);
+    align-items:start;
+  }
+  body.page-article .crumbs{grid-column:1 / -1}
+  body.page-article .article-header,
+  body.page-article .affiliate-disclosure,
+  body.page-article .guide-intro,
+  body.page-article .related,
+  body.page-article .related-list,
+  body.page-article .signup{grid-column:1}
+  body.page-article .guide-with-toc{display:contents}
+  body.page-article .guide-main{grid-column:1;min-width:0}
+  body.page-article .guide-toc{
+    grid-column:2;
+    grid-row:2 / span 16;
+    position:sticky;top:var(--space-4);
+    align-self:start;
+    padding:0;
+    font-size:15px;line-height:1.45;
+    background:transparent;border:0;
+  }
+  body.page-article .guide-toc .nav-photo,
+  body.page-article .guide-toc .nav-credit{display:none}
+  body.page-article .guide-toc .toc-drawer{border:0;background:transparent;padding:0}
+  body.page-article .guide-toc .toc-drawer>summary{
+    font-size:15px;font-weight:600;color:var(--muted);list-style:none;
+    cursor:default;margin:0 0 var(--space-3);
+  }
+  body.page-article .guide-toc .toc-drawer>summary::-webkit-details-marker{display:none}
+  body.page-article .guide-toc ol{margin:0;padding:0}
+  body.page-article .guide-toc ol a{
+    min-height:48px;display:flex;align-items:center;
+    font-size:15px;color:var(--ink);padding:8px 0;
+  }
+}
+@media(max-width:1099px){
+  body.page-article .guide-with-toc{display:block}
+  body.page-article .guide-toc{
+    position:static;
+    padding:var(--space-4);
+    margin:0 0 var(--space-6);
+    border:1px solid var(--line);
+    border-radius:var(--radius-card);
+    background:var(--sage);
+    font-size:15px;
+  }
+  body.page-article .guide-toc ol a{min-height:48px;font-size:15px;display:flex;align-items:center;gap:var(--space-3)}
+  body.page-article .guide-toc .nav-photo{width:40px;height:40px;border-radius:var(--radius-control);object-fit:cover}
+}
+
+/* Guide index: photo-led rows, one column below 960px. */
+.library-card p{font-size:16px;line-height:1.6}
+.library-card img{border-radius:var(--radius-card)}
+.guide-library-grid h2{font-family:Newsreader,Georgia,serif;color:var(--forest)}
+@media(max-width:959px){
+  .guide-library-grid{grid-template-columns:1fr}
+}
+
+/* Calculator: form and result side by side from 960px, one column below. */
+@media(max-width:959px){
+  .page-tool .tool-layout{display:block}
+  .page-tool .calculator-result-panel{position:static;margin-top:var(--space-6)}
+}
+.page-tool .tool label,
+.page-tool .choices label{font-size:15px}
+.page-tool .result-metric>span{font-size:15px}
+
+/* Information and credits: a readable narrow column. */
+body.template-info main.wrap{max-width:40rem}
+body.template-info main.wrap h2{font-family:Newsreader,Georgia,serif;color:var(--forest)}
+body.template-info main.wrap p,
+body.template-info main.wrap li{font-size:16px;line-height:1.6}
+body.template-info .credit-list .photo-credit,
+body.template-info .credit-line{font-size:12px}
+
+/* Comparisons: stack with readable labels; do not shrink the table to fit. */
+@media(max-width:959px){
+  .responsive-table td,
+  .responsive-table th{font-size:16px}
+  .responsive-table td::before{font-size:12px;letter-spacing:0;text-transform:none}
+}
+
+/* Checklist stays a readable column; controls stay at least 48px. */
+.checklist-page .button,
+.checklist-print .button{min-height:48px}
+.checklist-page p,
+.checklist-page li{font-size:16px;line-height:1.6}
+
+/* Cost comparison and article cards keep 16px body text on small screens. */
+.page-article .guide-main p,
+.page-article .guide-main li{font-size:16px;line-height:1.6}
