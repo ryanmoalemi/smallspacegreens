@@ -142,3 +142,6 @@ ol.photo-list>.photo-list-item:not(:has(img))>.list-item-copy,.guide-main ol.pho
 .guide-toc .nav-photo{width:32px;height:32px;border-radius:4px;object-fit:cover;flex:0 0 32px;background:#f1f0e9}
 .guide-toc .nav-credit{margin:8px 0 4px}
 @media print{.crumbs .nav-photo,.crumbs .nav-credit{display:none}}
+
+.step-note{margin:0 0 18px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:var(--sage);color:var(--ink);font-size:14px;line-height:1.7}
+.step-note strong{font-weight:600}
