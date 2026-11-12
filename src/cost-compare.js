@@ -241,4 +241,32 @@
       copyStatus.textContent = "Automatic copying is unavailable. Select and copy the comparison text below.";
     }
   });
+
+  var loadButton = document.getElementById("cost-load-example");
+  if (loadButton) {
+    loadButton.addEventListener("click", function () {
+      var keys = ["base", "extras", "delivery", "plantings", "refill"];
+      routes.forEach(function (route) {
+        keys.forEach(function (name) {
+          var input = field(route + "-" + name);
+          if (!input) return;
+          var attr = "data-" + route + "-" + name;
+          var value = loadButton.getAttribute(attr);
+          input.value = value == null ? "" : value;
+        });
+      });
+      clearErrors();
+      hideResults();
+      status.classList.remove("is-error");
+      status.textContent = "Loaded the 12 November 2026 prices. Compare or edit them.";
+      if (typeof form.requestSubmit === "function") {
+        form.requestSubmit();
+      } else {
+        form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+      }
+      if (lastResult && lastResult.ok) {
+        status.textContent = "Comparison updated from the 12 November 2026 prices. Edit any field and compare again.";
+      }
+    });
+  }
 })(typeof window !== "undefined" ? window : globalThis);
