@@ -60,7 +60,11 @@ def check_amazon(path: Path, text: str) -> int:
         if 'target="_blank"' not in attrs:
             fail(f"{path} Amazon link is missing target _blank")
         label = link_text(match.end(), text).replace(" (opens in a new tab)", "")
-        if label not in {"Check price on Amazon", "View on Amazon"}:
+        is_photo = 'class="pick-photo-link"' in match.group(0)
+        if is_photo:
+            if label not in {"View on Amazon", "Check price on Amazon"}:
+                fail(f"{path} Amazon photo link text is not an approved label")
+        elif label not in {"Check price on Amazon", "View on Amazon"}:
             fail(f"{path} Amazon link text is not an approved label")
     if re.search(r"amazon\.com(?!/dp/)", text, re.I):
         # Tagged /dp/ links are the only allowed amazon.com URLs.
@@ -86,8 +90,13 @@ def check_amazon(path: Path, text: str) -> int:
         )
         if disclosure_at > first_store:
             fail(f"{path} commission line is below the first store link")
-    if re.search(r"<img\b[^>]*amazon", text, re.I):
-        fail(f"{path} hotlinks an Amazon image")
+    for tag in re.findall(r"<img\b[^>]*>", text, flags=re.I):
+        if re.search(r"amazon", tag, re.I):
+            src = re.search(r"\bsrc=[\"']([^\"']+)[\"']", tag)
+            src_url = src.group(1) if src else ""
+            if 'class="amazon-photo"' in tag and "m.media-amazon.com/images/I/" in src_url:
+                continue
+            fail(f"{path} hotlinks an Amazon image")
     return count
 
 

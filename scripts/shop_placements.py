@@ -825,32 +825,58 @@ def render_shop(key: str) -> str:
         product = product_for(key, row)
         image = product["image"]
         slug = image["slug"]
-        stem = catalog.require_photo_files(slug)
         if slug in seen:
             raise SystemExit(f"{key} repeats supply photo {slug}")
         seen.append(slug)
-        src = f"/assets/products/{stem}-600.webp"
-        srcset = f"/assets/products/{stem}-300.webp 300w, /assets/products/{stem}-600.webp 600w"
         treatment = image["treatment"]
         official = treatment == "official"
         plain = treatment == "neutral"
-        img_class = ' class="letpot-photo"' if official else (' class="plain-photo"' if plain else "")
-        media_class = "pick-media"
-        if official:
-            media_class += " pick-media-letpot"
-        if plain:
-            media_class += " pick-media-plain"
-        if official:
-            caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
-        elif plain:
-            caption = ""
-        else:
-            credit_id = image.get("credit_id") or f"supply-{slug}"
+        amazon = treatment == "amazon"
+        button = BUTTON[row["kind"]] if row["kind"] == "amazon" else row["label"]
+        href = row_url(row)
+        if amazon:
+            src, srcset = catalog.amazon_srcset(image.get("image_embed") or "")
+            img_class = ' class="amazon-photo"'
+            media_class = "pick-media pick-media-amazon"
+            credit_id = image.get("credit_id") or "credit-amazon-listing"
+            photo = (
+                f'<a class="pick-photo-link" href="{esc(href)}" rel="sponsored nofollow noopener" target="_blank">'
+                f'<img{img_class} src="{esc(src)}" srcset="{esc(srcset)}" '
+                'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
+                'width="600" height="600" loading="lazy" decoding="async" '
+                f'alt="{esc(image["alt"])}">'
+                '<span class="sr-only">View on Amazon (opens in a new tab)</span></a>'
+            )
             caption = (
                 f'<figcaption class="pick-credit">Photo: '
-                f'<a href="/photo-credits/#{esc(credit_id)}">{esc(image["author"])}</a></figcaption>'
+                f'<a href="/photo-credits/#{esc(credit_id)}">Amazon</a></figcaption>'
             )
-        button = BUTTON[row["kind"]] if row["kind"] == "amazon" else row["label"]
+        else:
+            stem = catalog.require_photo_files(slug)
+            src = f"/assets/products/{stem}-600.webp"
+            srcset = f"/assets/products/{stem}-300.webp 300w, /assets/products/{stem}-600.webp 600w"
+            img_class = ' class="letpot-photo"' if official else (' class="plain-photo"' if plain else "")
+            media_class = "pick-media"
+            if official:
+                media_class += " pick-media-letpot"
+            if plain:
+                media_class += " pick-media-plain"
+            photo = (
+                f'<img{img_class} src="{src}" srcset="{srcset}" '
+                'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
+                'width="600" height="600" loading="lazy" decoding="async" '
+                f'alt="{esc(image["alt"])}">'
+            )
+            if official:
+                caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
+            elif plain:
+                caption = ""
+            else:
+                credit_id = image.get("credit_id") or f"supply-{slug}"
+                caption = (
+                    f'<figcaption class="pick-credit">Photo: '
+                    f'<a href="/photo-credits/#{esc(credit_id)}">{esc(image["author"])}</a></figcaption>'
+                )
         routes_attr = f' data-routes="{esc(row["routes"])}"' if row.get("routes") else ""
         fits = product.get("fits") or {}
         role = fits.get("role") or ""
@@ -864,10 +890,7 @@ def render_shop(key: str) -> str:
         cards.append(
             f'<li class="pick"{routes_attr}{product_attr}{role_attr}{nominal_attr}{crop_attr}{optional_attr}>'
             f'<figure class="{media_class}">'
-            f'<img{img_class} src="{src}" srcset="{srcset}" '
-            'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
-            'width="600" height="600" loading="lazy" decoding="async" '
-            f'alt="{esc(image["alt"])}">'
+            f"{photo}"
             f"{caption}"
             "</figure>"
             f'<h3 class="pick-name">{esc(row["item"])}</h3>'
@@ -901,15 +924,30 @@ def supply_credit_html() -> str:
     blocks = []
     seen: set[str] = set()
     records = []
+    amazon_credit = False
     for product in catalog.products().values():
         image = product["image"]
         if image["treatment"] == "neutral":
+            continue
+        if image["treatment"] == "amazon":
+            amazon_credit = True
             continue
         slug = image["slug"]
         if slug in seen:
             continue
         seen.add(slug)
         records.append(image)
+    if amazon_credit:
+        blocks.append(
+            '<section class="photo-credit-entry" id="credit-amazon-listing">'
+            "<div>"
+            "<h2>Amazon product photographs</h2>"
+            "<p><strong>Photographer:</strong> Amazon.</p>"
+            "<p>Each Amazon pick uses the main product photograph from that ASIN's Amazon listing. "
+            "The photograph is hotlinked from Amazon's image CDN (m.media-amazon.com) and is not downloaded or rehosted here.</p>"
+            "<p><strong>Image use:</strong> Shown on the product card, wrapped in the tagged Amazon associate link, until Amazon asks that it be taken down.</p>"
+            "</div></section>"
+        )
     for image in list(LEGACY_IMAGES.values()) + list(EDITORIAL_IMAGES.values()):
         if image["slug"] not in seen:
             records.append(image)
