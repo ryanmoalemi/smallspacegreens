@@ -53,7 +53,13 @@ def all_placements() -> list[dict]:
     return [load_placement(path.stem) for path in sorted(PLACEMENTS.glob("*.json"))]
 
 
-def href_for(card: dict, letpot: dict[str, str], trueleaf: dict[str, str]) -> str:
+def href_for(
+    card: dict,
+    letpot: dict[str, str],
+    trueleaf: dict[str, str],
+    highmowing: dict[str, str] | None = None,
+    plantaddicts: dict[str, str] | None = None,
+) -> str:
     kind = card["kind"]
     if kind == "amazon":
         asin = card["asin"]
@@ -65,10 +71,20 @@ def href_for(card: dict, letpot: dict[str, str], trueleaf: dict[str, str]) -> st
         return letpot[card["href_key"]]
     if kind == "trueleaf":
         return trueleaf[card["href_key"]]
+    if kind == "highmowing":
+        return (highmowing or {})[card["href_key"]]
+    if kind == "plantaddicts":
+        return (plantaddicts or {})[card["href_key"]]
     raise SystemExit(f"Unknown card kind: {kind}")
 
 
-def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) -> str:
+def render_picks(
+    name: str,
+    letpot: dict[str, str],
+    trueleaf: dict[str, str],
+    highmowing: dict[str, str] | None = None,
+    plantaddicts: dict[str, str] | None = None,
+) -> str:
     data = load_placement(name)
     blocks = []
     seen_images: set[str] = set()
@@ -87,8 +103,8 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
             seen_images.add(slug)
             if len(card["why"]) > 70:
                 raise SystemExit(f"{name}: why line for {card_id} is {len(card['why'])} characters")
-            url = href_for(card, letpot, trueleaf)
-            official = image.get("official") == "letpot"
+            url = href_for(card, letpot, trueleaf, highmowing, plantaddicts)
+            official = bool(image.get("official")) or image.get("treatment") == "official"
             plain = image.get("treatment") == "neutral"
             amazon = image.get("treatment") == "amazon"
             if amazon:
@@ -124,7 +140,7 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
                     f'alt="{esc(image["alt"])}">'
                 )
                 if official:
-                    caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
+                    caption = f'<figcaption class="pick-credit">Photo: {esc(image.get("author") or "merchant")}</figcaption>'
                 elif plain:
                     caption = ""
                 else:
@@ -138,8 +154,8 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
                 f'<figure class="{media_class}">'
                 f"{photo}"
                 f"{caption}</figure>"
-                f'<p class="pick-badge">{esc(card["badge"])}</p>'
-                f'<h3 class="pick-name"><span class="pick-brand">{esc(card["brand"])}</span> '
+                + (f'<p class="pick-badge">{esc(card["badge"])}</p>' if card.get("badge") else "")
+                + f'<h3 class="pick-name"><span class="pick-brand">{esc(card["brand"])}</span> '
                 f'{esc(card["short"])}</h3>'
                 f'<p class="pick-why">{esc(card["why"])}</p>'
                 f'<a class="pick-cta" href="{esc(url)}" rel="sponsored nofollow noopener" target="_blank">'
@@ -207,9 +223,15 @@ def render_credits() -> str:
     return "\n".join(blocks)
 
 
-def apply_placeholders(html: str, letpot: dict[str, str], trueleaf: dict[str, str]) -> str:
+def apply_placeholders(
+    html: str,
+    letpot: dict[str, str],
+    trueleaf: dict[str, str],
+    highmowing: dict[str, str] | None = None,
+    plantaddicts: dict[str, str] | None = None,
+) -> str:
     def repl(match: re.Match) -> str:
-        return render_picks(match.group(1), letpot, trueleaf)
+        return render_picks(match.group(1), letpot, trueleaf, highmowing, plantaddicts)
 
     html = re.sub(r"<!--PICKS:([a-z0-9-]+)-->", repl, html)
     if "<!--PICKS:" in html:

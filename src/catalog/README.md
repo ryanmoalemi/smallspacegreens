@@ -6,7 +6,7 @@ This file is the shared record of every product card on the site: the display na
 
 ## Image treatments
 
-- `official`: a merchant-permitted product photograph (currently LetPot promotional images).
+- `official`: a merchant-permitted product photograph (LetPot, High Mowing, and Plant Addicts listing photos, converted to WebP and shown full frame).
 - `licensed-exact`: a third-party licensed photograph of the same product type (currently the coir brick used for the Verdana coir brick).
 - `crop`: a licensed photograph of the named crop. It identifies the crop, not the merchant packet. Use this only for seed and collection cards.
 - `amazon`: the main product photograph from that ASIN's Amazon listing, stored in `image.image_embed` as an `m.media-amazon.com` URL. The photograph is hotlinked, never downloaded or rehosted, and is wrapped in the tagged associate link (`smallspaceg04-20`). Future Amazon picks always use this treatment.
@@ -18,3 +18,5 @@ Awin affiliates may use product images from the advertiser's Awin data feed. Thi
 ## What changed on 12 November 2026
 
 Typographic cards for named Amazon products were replaced with that ASIN's own Amazon listing photograph, except Etekcity 0.1 g scale (B08BPTXK4L), which stays typographic because the listing is currently unavailable and no main product photograph was found. Crop photos on seed and collection cards, official LetPot photos, and the licensed Verdana coir brick photograph are unchanged.
+
+High Mowing Organic Seeds and Plant Addicts official photographs were added as catalog products with Awin deep links (publisher 3149328, merchants 95143 and 123910).

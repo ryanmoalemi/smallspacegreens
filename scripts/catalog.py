@@ -49,7 +49,7 @@ def by_name(name: str) -> dict | None:
 
 
 def photo_stem(slug: str) -> str:
-    if slug.startswith("letpot-") or slug.startswith("plain-") or slug == "alfalfa-jar":
+    if slug.startswith(("letpot-", "plain-", "hm-", "pa-")) or slug == "alfalfa-jar":
         return slug
     return f"supply-{slug}"
 

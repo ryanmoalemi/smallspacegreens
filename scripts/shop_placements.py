@@ -3,6 +3,7 @@
 Amazon rows use https://www.amazon.com/dp/ASIN?tag=smallspaceg04-20.
 Microgreen seed rows use the approved True Leaf Market collection.
 The LetPot garden uses the approved LPH-Air Awin link, not Amazon.
+High Mowing and Plant Addicts rows use Awin deep links (publisher 3149328).
 """
 
 from __future__ import annotations
@@ -29,6 +30,34 @@ TRUELEAF_PEA = (
 LETPOT_AIR = (
     "https://www.awin1.com/cread.php?awinmid=47605&awinaffid=3149328"
     "&ued=https%3A%2F%2Fletpot.com%2Fproducts%2Flph-air-indoor-hydroponic-gardening-system"
+)
+HIGHMOWING_DAIKON = (
+    "https://www.awin1.com/cread.php?awinmid=95143&awinaffid=3149328"
+    "&ued=https%3A%2F%2Fwww.highmowingseeds.com%2Forganic-non-gmo-daikon-radish-microgreens.html"
+)
+HIGHMOWING_BROCCOLI = (
+    "https://www.awin1.com/cread.php?awinmid=95143&awinaffid=3149328"
+    "&ued=https%3A%2F%2Fwww.highmowingseeds.com%2Forganic-non-gmo-broccoli-micro-greens.html"
+)
+HIGHMOWING_ARUGULA = (
+    "https://www.awin1.com/cread.php?awinmid=95143&awinaffid=3149328"
+    "&ued=https%3A%2F%2Fwww.highmowingseeds.com%2Forganic-non-gmo-arugula-microgreens-1.html"
+)
+HIGHMOWING_BLAZE = (
+    "https://www.awin1.com/cread.php?awinmid=95143&awinaffid=3149328"
+    "&ued=https%3A%2F%2Fwww.highmowingseeds.com%2Forganic-non-gmo-blaze-mix-microgreens.html"
+)
+PLANTADDICTS_CUBE = (
+    "https://www.awin1.com/cread.php?awinmid=123910&awinaffid=3149328"
+    "&ued=https%3A%2F%2Fplantaddicts.com%2Fcube-color-planter%2F"
+)
+PLANTADDICTS_BASKET = (
+    "https://www.awin1.com/cread.php?awinmid=123910&awinaffid=3149328"
+    "&ued=https%3A%2F%2Fplantaddicts.com%2Frustic-herb-basket-with-burlap-liner%2F"
+)
+PLANTADDICTS_MINI = (
+    "https://www.awin1.com/cread.php?awinmid=123910&awinaffid=3149328"
+    "&ued=https%3A%2F%2Fplantaddicts.com%2Fself-watering-mini-planter-pot-with-trellis%2F"
 )
 SEED_LABEL = "Browse microgreen seeds"
 AIR_LABEL = "See LPH-Air at LetPot"
@@ -72,6 +101,14 @@ def letpot_air(item: str, note: str) -> dict:
     return {"kind": "letpot", "item": item, "note": note, "label": AIR_LABEL, "url": LETPOT_AIR}
 
 
+def highmowing(item: str, note: str, url: str) -> dict:
+    return {"kind": "highmowing", "item": item, "note": note, "label": "View at High Mowing", "url": url}
+
+
+def plantaddicts(item: str, note: str, url: str) -> dict:
+    return {"kind": "plantaddicts", "item": item, "note": note, "label": "View at Plant Addicts", "url": url}
+
+
 # Names follow the live listing title and brand line checked on 2026-11-10.
 # Notes stay with this site's method. They do not add a price, rating, or stock claim.
 
@@ -112,6 +149,13 @@ PEA = "Pea microgreen seed"
 PEA_HALF = "Pea seed, half tray"
 BROCCOLI = "Broccoli microgreen seed"
 MIXED_SEED = "Mixed microgreens seed"
+HM_ARUGULA = "High Mowing arugula seed"
+HM_BLAZE = "High Mowing blaze blend seed"
+HM_DAIKON = "High Mowing daikon radish seed"
+HM_BROCCOLI = "High Mowing broccoli seed"
+PA_CUBE = "CUBE Color planter"
+PA_BASKET = "Rustic herb basket"
+PA_MINI = "Self-watering mini planter with trellis"
 AIR = "LetPot LPH-Air, 10 pods"
 
 AIR_NOTE = "A 10-pod garden with its own light."
@@ -157,6 +201,8 @@ SHOP_PAGES: dict[str, dict] = {
             seed(PEA, "Pea is 150 g on a 1020, weighed dry."),
             seed(BROCCOLI, "Broccoli is 28 g on a 1020."),
             seed(MIXED_SEED, "Several crops from one collection."),
+            highmowing(HM_ARUGULA, "Organic arugula seed, weighed dry.", HIGHMOWING_ARUGULA),
+            highmowing(HM_BLAZE, "A mixed organic seed blend.", HIGHMOWING_BLAZE),
         ],
     },
     "pea": {
@@ -182,6 +228,8 @@ SHOP_PAGES: dict[str, dict] = {
             amazon("B0CHDBY2PD", SANSI_CLIP, "A clip-on lamp with a timer."),
             amazon("B0D1XJ3H19", SANSI_BULB, "A 10W bulb for a lamp you own."),
             amazon("B08KTXTNR7", HEAT_SILL, "A narrow mat for a cold sill."),
+            plantaddicts(PA_CUBE, "A compact planter that fits a sill.", PLANTADDICTS_CUBE),
+            plantaddicts(PA_MINI, "A small self-watering pot with a trellis.", PLANTADDICTS_MINI),
         ],
     },
     "seed-starting": {
@@ -196,6 +244,7 @@ SHOP_PAGES: dict[str, dict] = {
             amazon("B001W8U2NY", MIRACLE, "A smaller conventional seed mix."),
             amazon("B010BVRMIA", HEAT_1020, "A heat mat sized for a 1020."),
             amazon("B0CHDBY2PD", SANSI_CLIP, "A clip-on lamp near the leaves."),
+            plantaddicts(PA_BASKET, "A lined basket for a small herb planting.", PLANTADDICTS_BASKET),
         ],
     },
     "bottom": {
@@ -868,7 +917,7 @@ def render_shop(key: str) -> str:
                 f'alt="{esc(image["alt"])}">'
             )
             if official:
-                caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
+                caption = f'<figcaption class="pick-credit">Photo: {esc(image.get("author") or "LetPot")}</figcaption>'
             elif plain:
                 caption = ""
             else:
@@ -959,7 +1008,7 @@ def supply_credit_html() -> str:
         src = f"/assets/products/{stem}-600.webp"
         credit_id = image.get("credit_id") or f"supply-{slug}"
         if official:
-            origin = "LetPot product page"
+            origin = f"{image.get('author') or 'merchant'} product page"
             use = f"{esc(image['note'])} Shown with the full frame on a light background."
         else:
             source = image["source_url"] or ""
@@ -986,7 +1035,7 @@ def supply_credit_html() -> str:
 def placement_counts() -> dict[str, dict[str, int]]:
     counts = {}
     for key, page in SHOP_PAGES.items():
-        bucket = {"amazon": 0, "trueleaf": 0, "letpot": 0}
+        bucket = {"amazon": 0, "trueleaf": 0, "letpot": 0, "highmowing": 0, "plantaddicts": 0}
         for row in page["rows"]:
             bucket[row["kind"]] += 1
         counts[key] = bucket

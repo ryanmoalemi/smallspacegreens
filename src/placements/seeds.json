@@ -31,7 +31,7 @@
       "title": "A young radish seedling",
       "alt": "A young chonggak radish seedling in soil, with rounded leaves and a pink stem.",
       "credit_id": "product-radish-seedling",
-      "author": "이태수",
+      "author": "\uc774\ud0dc\uc218",
       "author_url": "https://commons.wikimedia.org/wiki/File:Sprouting_chonggakmu(chonggak_radish).jpg",
       "source_url": "https://commons.wikimedia.org/wiki/File:Sprouting_chonggakmu(chonggak_radish).jpg",
       "source_label": "Sprouting chonggakmu (chonggak radish)",
@@ -116,6 +116,36 @@
       "license": "CC BY 2.0",
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
       "note": "Stand-in for Rambo radish microgreen seed."
+    },
+    "hm-daikon-radish": {
+      "slug": "hm-daikon-radish",
+      "title": "High Mowing daikon-type radish microgreens",
+      "alt": "High Mowing daikon-type radish microgreens",
+      "credit_id": "supply-hm-daikon-radish",
+      "author": "High Mowing",
+      "author_url": "https://www.highmowingseeds.com/organic-non-gmo-daikon-radish-microgreens.html",
+      "source_url": "https://www.highmowingseeds.com/organic-non-gmo-daikon-radish-microgreens.html",
+      "source_label": "Daikon-type radish microgreens",
+      "license": "High Mowing product photograph",
+      "license_url": "https://www.highmowingseeds.com/organic-non-gmo-daikon-radish-microgreens.html",
+      "official": "highmowing",
+      "treatment": "official",
+      "note": "Official product photograph from the High Mowing listing, checked in stock on 12 November 2026. Converted to WebP at the same aspect. Not cropped or recolored."
+    },
+    "hm-broccoli": {
+      "slug": "hm-broccoli",
+      "title": "High Mowing broccoli microgreens in a bowl",
+      "alt": "High Mowing broccoli microgreens in a bowl",
+      "credit_id": "supply-hm-broccoli",
+      "author": "High Mowing",
+      "author_url": "https://www.highmowingseeds.com/organic-non-gmo-broccoli-micro-greens.html",
+      "source_url": "https://www.highmowingseeds.com/organic-non-gmo-broccoli-micro-greens.html",
+      "source_label": "Broccoli microgreens",
+      "license": "High Mowing product photograph",
+      "license_url": "https://www.highmowingseeds.com/organic-non-gmo-broccoli-micro-greens.html",
+      "official": "highmowing",
+      "treatment": "official",
+      "note": "Official product photograph from the High Mowing listing, checked in stock on 12 November 2026. Converted to WebP at the same aspect. Not cropped or recolored."
     }
   },
   "cards": {
@@ -178,6 +208,24 @@
       "why": "Sprouting seed is a different food from the microgreens on this page.",
       "cta": "Browse sprouting seed",
       "image": "alfalfa-jar"
+    },
+    "hm-daikon-radish": {
+      "kind": "highmowing",
+      "href_key": "daikon",
+      "brand": "High Mowing",
+      "short": "Daikon radish microgreen seed",
+      "why": "Organic daikon radish seed for a first tray.",
+      "cta": "View at High Mowing",
+      "image": "hm-daikon-radish"
+    },
+    "hm-broccoli": {
+      "kind": "highmowing",
+      "href_key": "broccoli",
+      "brand": "High Mowing",
+      "short": "Broccoli microgreen seed",
+      "why": "Organic broccoli seed for a microgreen tray.",
+      "cta": "View at High Mowing",
+      "image": "hm-broccoli"
     }
   },
   "sections": [
@@ -190,6 +238,15 @@
         "tl-pea",
         "tl-broccoli",
         "tl-sunflower"
+      ]
+    },
+    {
+      "id": "high-mowing-seeds",
+      "title": "Organic seed from High Mowing",
+      "lead": "These are named organic microgreen crops from High Mowing Organic Seeds.",
+      "cards": [
+        "hm-daikon-radish",
+        "hm-broccoli"
       ]
     },
     {
