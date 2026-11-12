@@ -13,6 +13,7 @@ from datetime import datetime
 from html.parser import HTMLParser
 from pathlib import Path
 
+import catalog
 import shop_placements
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -662,6 +663,15 @@ def check_images_load(document: str, label: str) -> None:
         if url.startswith("data:"):
             continue
         if url.startswith(("http://", "https://")):
+            # Amazon listing photos are hotlinked, not rehosted. The catalog already
+            # requires a valid m.media-amazon.com listing URL. Do not fetch them at
+            # build time; load checks happen on the rendered page in preview.
+            if "m.media-amazon.com/images/I/" in url:
+                import catalog
+                if catalog.is_amazon_photo_url(url):
+                    REMOTE_IMAGE_OK[url] = True
+                    continue
+                raise SystemExit(f"{label}: Amazon image URL is not a listing CDN photo: {url}")
             if url not in REMOTE_IMAGE_OK:
                 try:
                     request = urllib.request.Request(url, method="HEAD", headers={"User-Agent": "SSG-build/1.0"})
@@ -2951,6 +2961,7 @@ def render_static_pages() -> dict[str, str]:
 
 
 def main() -> None:
+    catalog.validate_amazon_photos()
     credit_page = (SRC / "pages" / "photo-credits.html").read_text()
     for key, photo in LIST_PHOTOS.items():
         if photo.get("src"):

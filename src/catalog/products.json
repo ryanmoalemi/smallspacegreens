@@ -1,13 +1,14 @@
 {
   "updated": "2026-11-12",
   "checked_timezone": "America/Los_Angeles",
-  "editor_note": "Shared product catalog for Small Space Greens. Names, variant, size, and destination URLs follow the live listings last checked on 2026-11-10. Image treatments were audited on 2026-11-12 against the live-site review. Named Amazon products use a typographic card unless a permitted exact photograph exists. Amazon photos are never rehosted; image_embed is reserved for an Amazon-served Creators API URL. True Leaf pack shots were not taken from the merchant website; Awin feed images can replace crop photos when a feed file is available. LetPot photos are official promotional images already in use. Seed cards may use a correctly identified crop photograph; that photo identifies the crop, not the packet.",
+  "editor_note": "Shared product catalog for Small Space Greens. Names, variant, size, and destination URLs follow the live listings last checked on 10 November 2026. On 12 November 2026, typographic Amazon cards were replaced with that ASIN's own Amazon listing photograph, hotlinked from Amazon's image CDN and not rehosted. Crop photos remain on seed and collection cards. The Verdana coir brick keeps its licensed coir-brick photograph. Etekcity 0.1 g scale (B08BPTXK4L) stays typographic because the listing is currently unavailable and no main product photograph was found. Future Amazon picks always use the listing photograph via image.image_embed.",
   "image_policy": {
     "official": "Merchant-permitted official product photo, hosted as WebP without recoloring.",
     "licensed-exact": "A third-party licensed photo of the same product type, credited, not a different item.",
     "crop": "A licensed photo of the named crop. Identifies the crop, not the merchant packet.",
-    "neutral": "Typographic card. Used when no permitted exact product photograph is available.",
-    "image_embed": "Amazon-served product image URL only. Never download or rehost Amazon images."
+    "neutral": "Typographic card. Used only when no permitted exact product photograph, including a listing main image, is available.",
+    "image_embed": "Hotlinked Amazon image URL on m.media-amazon.com for amazon-treatment cards, or a Creators API URL when that is in use. Never download or rehost Amazon images.",
+    "amazon": "Main product photograph from that ASIN's Amazon listing, hotlinked from m.media-amazon.com. Never downloaded or rehosted. Future Amazon picks use this treatment."
   },
   "products": {
     "tray-1020-holes": {
@@ -30,16 +31,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-tray-1020-holes",
-        "alt": "Typographic card for 1020 trays with holes. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "1020 trays with holes",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B06XZFLY9P?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B06XZFLY9P?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/710e+WckqsL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -62,16 +63,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-tray-1020-solid",
-        "alt": "Typographic card for 1020 trays, no holes. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "1020 trays, no holes",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B07DT72V6H?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B07DT72V6H?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/41zkc5LTwBL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -95,16 +96,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-tray-1010-holes",
-        "alt": "Typographic card for 1010 trays with holes. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "1010 trays with holes",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B07NKSKMCN?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B07NKSKMCN?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/41RllbvVPML._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -128,16 +129,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-tray-1010-solid-10",
-        "alt": "Typographic card for 1010 trays, no holes. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "1010 trays, no holes",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B07MYNVP8G?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B07MYNVP8G?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/51TRpf7gICL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -161,16 +162,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-tray-1010-solid-5",
-        "alt": "Typographic card for 1010 solid trays, 5 pack. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "1010 solid trays, 5 pack",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B00VOEQTPG?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B00VOEQTPG?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/51Ahqb+G+oL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -192,16 +193,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-espoma-seed-starter-16qt",
-        "alt": "Typographic card for Espoma seed starter, 16 qt. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Espoma seed starter, 16 qt",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B01N38GBTM?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B01N38GBTM?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/81UCGYXJSzL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -223,16 +224,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-espoma-potting-mix-16qt",
-        "alt": "Typographic card for Espoma potting mix, 16 qt. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Espoma potting mix, 16 qt",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B078WY9Z7Q?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B078WY9Z7Q?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/81uE-Q5UgVL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -254,16 +255,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-fiskars-5in-scissors",
-        "alt": "Typographic card for Fiskars 5 in scissors. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Fiskars 5 in scissors",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B07FV7TZVH?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B07FV7TZVH?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/71vl9gXHYWL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -286,16 +287,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-spongease-kit-3trays",
-        "alt": "Typographic card for Spongease kit, 3 trays. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Spongease kit, 3 trays",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B07KRMP93C?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B07KRMP93C?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/51qW3nrdNnL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -318,16 +319,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-mizuna-kit-2trays",
-        "alt": "Typographic card for Mizuna kit, 2 ceramic trays. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Mizuna kit, 2 ceramic trays",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B0DGF8Z1Z6?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B0DGF8Z1Z6?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/81Ksjcu7AhL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -356,11 +357,11 @@
         "source_url": null,
         "license": null,
         "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
+        "note": "No main product photograph was found on the Amazon listing for this ASIN on 12 November 2026. The listing was currently unavailable and did not expose a pack shot. A typographic card is shown instead of an unrelated photo.",
         "credit_id": null,
         "image_embed": null
       },
-      "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
+      "previous_image_issue": "Listing main image not found; typographic card kept."
     },
     "sansi-clip-light": {
       "id": "sansi-clip-light",
@@ -380,16 +381,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-sansi-clip-light",
-        "alt": "Typographic card for SANSI clip-on grow light. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "SANSI clip-on grow light",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B0CHDBY2PD?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B0CHDBY2PD?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/61a6Qs14l9L._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -411,16 +412,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-sansi-10w-bulb",
-        "alt": "Typographic card for SANSI 10W grow bulb. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "SANSI 10W grow bulb",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B0D1XJ3H19?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B0D1XJ3H19?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/8142OSNdBeL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -442,16 +443,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-aoraki-mister",
-        "alt": "Typographic card for AORAKI plant mister. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "AORAKI plant mister",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B0BHX5C38P?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B0BHX5C38P?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/61qhaLYhCYL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -474,16 +475,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-plant-buddy-bamboo-kit",
-        "alt": "Typographic card for Plant Buddy bamboo kit. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Plant Buddy bamboo kit",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B087RQWPBK?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B087RQWPBK?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/91Q2N3uAXiL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -506,16 +507,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-greenease-kit-1010",
-        "alt": "Typographic card for GreenEase kit, 10 by 10 trays. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "GreenEase kit, 10 by 10 trays",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B07D7JDST2?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B07D7JDST2?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/81wUfKXAqJL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -537,16 +538,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-sunblaster-kit-heat",
-        "alt": "Typographic card for SunBlaster kit with heat mat. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "SunBlaster kit with heat mat",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B0F2W7RNCC?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B0F2W7RNCC?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/71-mNmykJmL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -568,16 +569,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-ac-infinity-mat-3x20",
-        "alt": "Typographic card for AC Infinity mat, 3 by 20 in. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "AC Infinity mat, 3 by 20 in",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B08KTXTNR7?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B08KTXTNR7?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/41z4M+RH6fL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -600,16 +601,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-heat-mat-10x20",
-        "alt": "Typographic card for Heat mat, 10 by 20 in. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Heat mat, 10 by 20 in",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B010BVRMIA?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B010BVRMIA?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/61Uaz1vz9NL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -631,16 +632,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-seed-starter-kit-dome",
-        "alt": "Typographic card for Seed starter kit with dome. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Seed starter kit with dome",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B075PV83JQ?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B075PV83JQ?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/71QUaorUn1L._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -662,16 +663,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-tray-dome-72cells",
-        "alt": "Typographic card for Tray, dome, and 72 cells. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Tray, dome, and 72 cells",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B089KDN3HS?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B089KDN3HS?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/71sM72jx2IL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -694,16 +695,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-tray-1020-heavy",
-        "alt": "Typographic card for Heavy duty 1020 trays. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Heavy duty 1020 trays",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B07YXGFGZ4?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B07YXGFGZ4?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/61ta8OeviWL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -725,16 +726,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-trays-humidity-domes",
-        "alt": "Typographic card for Trays with humidity domes. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Trays with humidity domes",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B0981WC6ZW?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B0981WC6ZW?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/3126LbIv3qL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -756,16 +757,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-miraclegro-seed-mix-8qt",
-        "alt": "Typographic card for Miracle-Gro seed mix, 8 qt. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Miracle-Gro seed mix, 8 qt",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B001W8U2NY?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B001W8U2NY?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/71cK3e---kL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -788,16 +789,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-pots-8in-saucers",
-        "alt": "Typographic card for 8 in pots with saucers. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "8 in pots with saucers",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B0DCSH7T1R?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B0DCSH7T1R?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/71vMNuNmIcL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -819,16 +820,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-pots-ceramic-8-10",
-        "alt": "Typographic card for Ceramic pots, 8 and 10 in. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Ceramic pots, 8 and 10 in",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B07W31GG31?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B07W31GG31?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/81CohTT-kYL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -851,16 +852,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-bloem-rail-24in",
-        "alt": "Typographic card for Bloem rail planter, 24 in. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Bloem rail planter, 24 in",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B007WQBDVA?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B007WQBDVA?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/717kPbNixCL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -882,16 +883,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-grow-bags-5gal",
-        "alt": "Typographic card for 5 gal fabric grow bags. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "5 gal fabric grow bags",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B00TF9E6XE?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B00TF9E6XE?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/81PjHdnKyHL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },
@@ -915,16 +916,16 @@
       "names_checked": "2026-11-10",
       "image_audited": "2026-11-12",
       "image": {
-        "treatment": "neutral",
+        "treatment": "amazon",
         "slug": "plain-hemp-mats-10x20",
-        "alt": "Typographic card for Hemp mats, 10 by 20 in. No product photograph.",
-        "author": null,
-        "source_url": null,
-        "license": null,
-        "license_url": null,
-        "note": "No permitted exact product photograph. Amazon image_embed is empty (Creators API is not in use). A typographic card is shown instead of an unrelated photo.",
-        "credit_id": null,
-        "image_embed": null
+        "alt": "Hemp mats, 10 by 20 in",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B0758LHRNR?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B0758LHRNR?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 12 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/818mYDBiWlL._AC_SL1500_.jpg"
       },
       "previous_image_issue": "Shown with an unrelated or different-item photograph on the live site."
     },

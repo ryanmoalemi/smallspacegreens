@@ -7,6 +7,8 @@ import json
 import re
 from pathlib import Path
 
+import catalog
+
 ROOT = Path(__file__).resolve().parents[1]
 PLACEMENTS = ROOT / "src" / "placements"
 AMAZON_HREF = re.compile(r"https://www\.amazon\.com/dp/([A-Z0-9]{10})\?tag=smallspaceg04-20\Z")
@@ -29,6 +31,8 @@ def load_placement(name: str) -> dict:
     images = data["images"]
     cards = data["cards"]
     for image in images.values():
+        if image.get("treatment") == "amazon" or image.get("image_embed"):
+            continue
         slug = image["slug"]
         for size in (300, 600):
             file_path = ROOT / "assets" / "products" / f"{slug}-{size}.webp"
@@ -72,7 +76,11 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
         cards_html = []
         for card_id in section["cards"]:
             card = data["cards"][card_id]
-            image = data["images"][card["image"]]
+            image = dict(data["images"][card["image"]])
+            if card.get("kind") == "amazon" and card.get("asin"):
+                product = catalog.by_asin(card["asin"])
+                if product and (product.get("image") or {}).get("treatment") == "amazon":
+                    image = dict(product["image"])
             slug = image["slug"]
             if slug in seen_images:
                 raise SystemExit(f"{name}: image {slug} is used more than once")
@@ -80,33 +88,55 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
             if len(card["why"]) > 70:
                 raise SystemExit(f"{name}: why line for {card_id} is {len(card['why'])} characters")
             url = href_for(card, letpot, trueleaf)
-            src = f"/assets/products/{slug}-600.webp"
-            srcset = f"/assets/products/{slug}-300.webp 300w, /assets/products/{slug}-600.webp 600w"
             official = image.get("official") == "letpot"
             plain = image.get("treatment") == "neutral"
-            img_class = ' class="letpot-photo"' if official else (' class="plain-photo"' if plain else "")
-            media_class = "pick-media"
-            if official:
-                media_class += " pick-media-letpot"
-            if plain:
-                media_class += " pick-media-plain"
-            if official:
-                caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
-            elif plain:
-                caption = ""
-            else:
+            amazon = image.get("treatment") == "amazon"
+            if amazon:
+                src, srcset = catalog.amazon_srcset(image.get("image_embed") or "")
+                img_class = ' class="amazon-photo"'
+                media_class = "pick-media pick-media-amazon"
+                credit_id = image.get("credit_id") or "credit-amazon-listing"
+                photo = (
+                    f'<a class="pick-photo-link" href="{esc(url)}" rel="sponsored nofollow noopener" target="_blank">'
+                    f'<img{img_class} src="{esc(src)}" srcset="{esc(srcset)}" '
+                    'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
+                    'width="600" height="600" loading="lazy" decoding="async" '
+                    f'alt="{esc(image["alt"])}">'
+                    '<span class="sr-only">View on Amazon (opens in a new tab)</span></a>'
+                )
                 caption = (
                     f'<figcaption class="pick-credit">Photo: '
-                    f'<a href="/photo-credits/#{esc(image["credit_id"])}">{esc(image["author"])}</a>'
-                    "</figcaption>"
+                    f'<a href="/photo-credits/#{esc(credit_id)}">Amazon</a></figcaption>'
                 )
+            else:
+                src = f"/assets/products/{slug}-600.webp"
+                srcset = f"/assets/products/{slug}-300.webp 300w, /assets/products/{slug}-600.webp 600w"
+                img_class = ' class="letpot-photo"' if official else (' class="plain-photo"' if plain else "")
+                media_class = "pick-media"
+                if official:
+                    media_class += " pick-media-letpot"
+                if plain:
+                    media_class += " pick-media-plain"
+                photo = (
+                    f'<img{img_class} src="{esc(src)}" srcset="{esc(srcset)}" '
+                    'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
+                    'width="600" height="600" loading="lazy" decoding="async" '
+                    f'alt="{esc(image["alt"])}">'
+                )
+                if official:
+                    caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
+                elif plain:
+                    caption = ""
+                else:
+                    caption = (
+                        f'<figcaption class="pick-credit">Photo: '
+                        f'<a href="/photo-credits/#{esc(image["credit_id"])}">{esc(image["author"])}</a>'
+                        "</figcaption>"
+                    )
             cards_html.append(
                 "<li class=\"pick\">"
                 f'<figure class="{media_class}">'
-                f'<img{img_class} src="{esc(src)}" srcset="{esc(srcset)}" '
-                'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
-                'width="600" height="600" loading="lazy" decoding="async" '
-                f'alt="{esc(image["alt"])}">'
+                f"{photo}"
                 f"{caption}</figure>"
                 f'<p class="pick-badge">{esc(card["badge"])}</p>'
                 f'<h3 class="pick-name"><span class="pick-brand">{esc(card["brand"])}</span> '
@@ -147,7 +177,7 @@ def render_credits() -> str:
         shop_credit_ids = set()
     for data in all_placements():
         for image in data["images"].values():
-            if image.get("treatment") == "neutral" or not image.get("credit_id"):
+            if image.get("treatment") in {"neutral", "amazon"} or not image.get("credit_id"):
                 continue
             credit_id = image["credit_id"]
             if credit_id in seen or credit_id in shop_credit_ids:
@@ -190,8 +220,26 @@ def apply_placeholders(html: str, letpot: dict[str, str], trueleaf: dict[str, st
 
 
 def check_document(path: str, text: str) -> None:
-    if "m.media-amazon.com" in text.lower() or "images-amazon.com" in text.lower():
-        raise SystemExit(f"{path} contains an Amazon image host")
+    allowed_amazon_images = set()
+    for tag in re.findall(r"<img\b[^>]*>", text, flags=re.I):
+        src = re.search(r"\bsrc=[\"']([^\"']+)[\"']", tag)
+        srcset = re.search(r"\bsrcset=[\"']([^\"']+)[\"']", tag)
+        if src:
+            allowed_amazon_images.add(html.unescape(src.group(1)))
+        if srcset:
+            for part in srcset.group(1).split(","):
+                candidate = part.strip().split()[0]
+                if candidate:
+                    allowed_amazon_images.add(html.unescape(candidate))
+    for host_match in re.finditer(
+        r"https://(?:m\.media-amazon\.com|images-na\.ssl-images-amazon\.com|images-amazon\.com)[^\"\'\s<]*",
+        text,
+        flags=re.I,
+    ):
+        url = html.unescape(host_match.group(0))
+        if url in allowed_amazon_images and "m.media-amazon.com/images/i/" in url.lower():
+            continue
+        raise SystemExit(f"{path} contains an Amazon image host: {url}")
     for href in re.findall(r"https://www\.amazon\.com[^\"'\s<]*", text):
         bare = html.unescape(href)
         if not AMAZON_HREF.fullmatch(bare):
@@ -206,7 +254,19 @@ def check_document(path: str, text: str) -> None:
                 raise SystemExit(f"{path} has a product card without an image")
             figure = card.split("</figure>", 1)[0]
             if "<a " in figure[: figure.find("<img")]:
-                raise SystemExit(f"{path} wraps a product photo in a link")
+                # Amazon listing photos must be wrapped in the tagged associate link.
+                link = re.search(r'<a class="pick-photo-link"([^>]*)>', figure)
+                if not link:
+                    raise SystemExit(f"{path} wraps a product photo in a link")
+                attrs = link.group(1)
+                href = re.search(r'href="([^"]*)"', attrs)
+                rel = re.search(r'rel="([^"]*)"', attrs)
+                rel_parts = rel.group(1).split() if rel else []
+                bare = html.unescape(href.group(1)) if href else ""
+                if not AMAZON_HREF.fullmatch(bare):
+                    raise SystemExit(f"{path} product photo link is not the tagged Amazon URL: {bare}")
+                if "sponsored" not in rel_parts or "nofollow" not in rel_parts:
+                    raise SystemExit(f"{path} product photo link is missing rel sponsored nofollow")
             cta = re.search(r'<a class="pick-cta"([^>]*)>', card)
             if not cta:
                 raise SystemExit(f"{path} has a product card without a button")

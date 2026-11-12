@@ -474,6 +474,9 @@ input:disabled,select:disabled{opacity:.55}
 .pick-media-letpot,.pick-media:has(.letpot-photo),.fact-card:has(.letpot-photo){background:#f7f6f2}
 .pick-media img.letpot-photo,.fact-card img.letpot-photo{object-fit:contain;background:#f7f6f2;aspect-ratio:1/1}
 .pick-media-plain img,.pick-media img.plain-photo{object-fit:contain;background:#FAF9F5;aspect-ratio:1/1}
+.pick-media-amazon,.pick-media:has(.amazon-photo){background:#FAF9F5}
+.pick-media img.amazon-photo{object-fit:contain;background:#FAF9F5;aspect-ratio:1/1}
+.pick-photo-link{display:block}
 .pick-credit{font-size:12px;line-height:1.2;letter-spacing:0;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pick-badge{align-self:flex-start;margin:var(--space-2) 0 0;padding:2px var(--space-2);border-radius:999px;background:var(--sage);color:var(--ink);font-size:12px;font-weight:600;line-height:20px}
 .pick h3.pick-name,.guide-main h3.pick-name{font-family:Inter,system-ui,sans-serif;font-size:15px;font-weight:700;line-height:1.25;letter-spacing:0;text-wrap:wrap;margin:8px 0 0;display:block;overflow:visible;word-break:normal;overflow-wrap:normal}
@@ -522,8 +525,11 @@ input:disabled,select:disabled{opacity:.55}
 .pick-badge{background:#1d2c23;color:#e8efe6}
 .pick-media img{background:#1d2c23}
 .pick-media-plain img,.pick-media img.plain-photo{background:#FAF9F5}
+.pick-media-amazon img,.pick-media img.amazon-photo{background:#FAF9F5}
 .pick-media-letpot .pick-credit{color:#536056}
 .pick-media-letpot .pick-credit a,.pick-media-letpot .pick-credit a:hover{color:#234d39}
+.pick-media-amazon .pick-credit{color:#536056}
+.pick-media-amazon .pick-credit a,.pick-media-amazon .pick-credit a:hover{color:#234d39}
 .pick-cta{background:#8fc79f;color:#0f1a14}
 .pick-cta:hover,.pick-cta:focus-visible{background:#b7dcc0;color:#0f1a14}
 .pick a.pick-cta:focus-visible{outline:3px solid #f4f7f2;outline-offset:3px;box-shadow:0 0 0 3px #0f1a14}
@@ -547,6 +553,7 @@ input:disabled,select:disabled{opacity:.55}
 .pick-media img,.fact-card img{aspect-ratio:3/2}
 .pick-media img.letpot-photo,.fact-card img.letpot-photo{aspect-ratio:3/2}
 .pick-media-plain img,.pick-media img.plain-photo{aspect-ratio:3/2}
+.pick-media-amazon img,.pick-media img.amazon-photo{aspect-ratio:3/2}
 .pick-cta{width:100%}
 }
 /* 12px floor for small labels (Ryan's text-size rule). */
