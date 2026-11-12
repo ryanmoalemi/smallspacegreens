@@ -2384,6 +2384,30 @@ def check_calculator_box_photos(page_html: str, packs: dict) -> None:
             raise SystemExit(f"Package box photo for {crop_id} repeats an image already on the calculator page: {name}")
 
 
+
+def write_setup_js() -> None:
+    rates = json.loads((SRC / "rates.json").read_text())
+    crops = {}
+    for row in rates:
+        entry = {"name": row["name"], "source": row["source"], "note": row["note"]}
+        if row.get("needsRate"):
+            entry["needsRate"] = True
+        elif "grams" in row:
+            entry["grams"] = row["grams"]
+        crops[row["id"]] = entry
+    payload = "window.SSG_CROPS = " + json.dumps(crops, ensure_ascii=False) + ";\n"
+    target = ROOT / "js" / "setup.js"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(
+        (SRC / "calc-core.js").read_text()
+        + "\n"
+        + (SRC / "supply-state.js").read_text()
+        + "\n"
+        + payload
+        + (SRC / "setup.js").read_text()
+    )
+
+
 def write_calculator_js() -> dict:
     rates = json.loads((SRC / "rates.json").read_text())
     crops = {}
@@ -2950,8 +2974,8 @@ def main() -> None:
     signup_js.parent.mkdir(parents=True, exist_ok=True)
     signup_js.write_text((SRC / "signup.js").read_text())
     (ROOT / "js" / "site.js").write_text((SRC / "site.js").read_text())
-    for name in ["setup.js", "cost-compare.js"]:
-        (ROOT / "js" / name).write_text((SRC / name).read_text())
+    (ROOT / "js" / "cost-compare.js").write_text((SRC / "cost-compare.js").read_text())
+    write_setup_js()
     pages = render_static_pages()
     check_calculator_box_photos(pages["tools/microgreens-seed-calculator/index.html"], calculator_packs)
     urls = []
