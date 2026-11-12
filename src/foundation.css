@@ -1,0 +1,46 @@
+/* Design foundation (handoff 2026-11-12): tokens, type, radius, and control size.
+   Homepage, /gear/, and article templates still follow later phases. */
+body{font-size:16px;line-height:1.6;background:var(--paper);color:var(--ink)}
+h1,.article-header h1,.page-intro h1,.calculator-intro h1,.home-hero h1,.checklist-header h1,.setup-intro h1{
+  font-family:Newsreader,Georgia,serif;
+  font-size:40px;
+  line-height:1.1;
+  letter-spacing:-.035em;
+  font-weight:400;
+}
+@media(min-width:800px){
+  h1,.article-header h1,.page-intro h1,.calculator-intro h1,.home-hero h1,.checklist-header h1,.setup-intro h1{
+    font-size:72px;
+    line-height:1.06;
+  }
+}
+label,.signup .field label,.choices label,.custom-dims label,.tool label{
+  font-size:15px;
+}
+.eyebrow,.harvest-heading .eyebrow,.setup-next .eyebrow,.setup-intro .eyebrow,.setup-option .eyebrow,.calculator-feature .eyebrow,.story-label,.story-copy .eyebrow,.story-row .eyebrow,.about-band .eyebrow,.library-card .eyebrow,.home-hero .eyebrow,.section-head .eyebrow,.setup-copy .eyebrow,.story-teaser-copy .eyebrow,.setup-choice-card .setup-choice small{
+  font-size:15px;
+}
+
+.dek,.guide-main p,.guide-main li,.guide-intro p{
+  font-size:16px;
+  line-height:1.6;
+}
+.credit,.photo-credit,.pick-credit,.fact-credit,.credit-line,.nav-credit,
+.guide-main p.credit,.guide-main p.photo-credit,.guide-main p.fact-credit,.guide-main p.pick-credit,.guide-main p.credit-line,
+.guide-intro p.credit,.guide-intro .photo-credit,figcaption.credit,figcaption.photo-credit{
+  font-size:12px;
+}
+.button,a.button,button.button,button.calc,.button.secondary,.calculator-result-actions .button,.supply-tools .button,.setup-next .button,.pick-cta,.nav-toggle,.nav li:last-child a,.results .result-pack-link a,.checklist-print .button{
+  min-height:48px;
+  border-radius:var(--radius-control);
+}
+input[type="text"],input[type="email"],input[type="number"],input[type="search"],input[type="url"],input:not([type]),select,textarea{
+  border-radius:var(--radius-control);
+  font-size:16px;
+}
+.pick,.fact-card,.product-card,.seed-chart,.cost-example,.affiliate-box,.setup-alt,.result-pack,.setup-choice-card,.setup-choice,.setup-photo img{
+  border-radius:var(--radius-card);
+}
+.pick-media img,.fact-card img,.library-card img{
+  border-radius:var(--radius-card);
+}
