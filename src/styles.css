@@ -465,9 +465,21 @@ input:disabled,select:disabled{opacity:.55}
 .picks{margin-block:var(--space-8);min-width:0}
 .picks h2{margin-top:0}
 .picks-lead{font-size:15px;line-height:1.5;margin:0 0 var(--space-4);max-width:60ch}
-.pick-grid{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-3);grid-template-columns:repeat(2,minmax(0,1fr))}
-@media(min-width:720px){.pick-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4)}}
-@media(min-width:1024px){.pick-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.pick-grid{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-3);grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+/* Article product cards follow the article measure: two generous cards for a pair, compact photo-and-details rows otherwise. Never four skinny columns in a 760px column. */
+@media(min-width:600px){
+.page-article .pick-grid:not(:has(> :nth-child(2)):not(:has(> :nth-child(3)))){grid-template-columns:1fr}
+.page-article .pick-grid:not(:has(> :nth-child(2)):not(:has(> :nth-child(3)))) .pick{display:grid;grid-template-columns:minmax(140px,200px) minmax(0,1fr);grid-template-rows:auto auto auto auto;column-gap:18px;row-gap:0;align-items:start;align-content:start;height:auto}
+.page-article .pick-grid:not(:has(> :nth-child(2)):not(:has(> :nth-child(3)))) .pick-media{grid-column:1;grid-row:1/-1;margin:0}
+.page-article .pick-grid:not(:has(> :nth-child(2)):not(:has(> :nth-child(3)))) .pick-media img{aspect-ratio:1/1;width:100%}
+.page-article .pick-grid:not(:has(> :nth-child(2)):not(:has(> :nth-child(3)))) .pick-badge,
+.page-article .pick-grid:not(:has(> :nth-child(2)):not(:has(> :nth-child(3)))) .pick-name,
+.page-article .pick-grid:not(:has(> :nth-child(2)):not(:has(> :nth-child(3)))) .pick-why,
+.page-article .pick-grid:not(:has(> :nth-child(2)):not(:has(> :nth-child(3)))) .pick-cta{grid-column:2}
+.page-article .pick-grid:not(:has(> :nth-child(2)):not(:has(> :nth-child(3)))) .pick-badge{justify-self:start;width:auto;max-width:100%}
+.page-article .pick-grid:not(:has(> :nth-child(2)):not(:has(> :nth-child(3)))) .pick-cta{max-width:320px;width:100%;justify-self:start;margin-top:12px}
+.page-article .pick-grid:has(> :nth-child(2)):not(:has(> :nth-child(3))){grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4)}
+}
 .pick{display:flex;flex-direction:column;height:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:var(--space-2);min-width:0}
 .pick-media{margin:0}
 .pick-media img{display:block;width:100%;height:auto;aspect-ratio:1/1;border-radius:8px;object-fit:cover;background:var(--sage)}
@@ -584,3 +596,12 @@ input:disabled,select:disabled{opacity:.55}
 .setup-alt>summary{color:#f4f7f2}
 .setup-alt-lead{color:#d5e2d4}
 }
+
+.article-header .verdict{margin:18px 0 16px;max-width:760px}
+.article-header .next-action{margin:0}
+.guide-library-group{margin:0 0 48px}
+.guide-library-group h2{margin:0 0 8px;font-size:clamp(28px,3.2vw,40px)}
+.guide-library-group .guide-library-grid{margin-top:8px}
+.guide-library-note{font-size:15px;line-height:1.5;color:var(--muted);margin:0 0 12px;max-width:60ch}
+.guide-library-secondary{margin-top:8px;padding-top:28px;border-top:1px solid var(--line)}
+.guide-library-secondary h2{font-size:clamp(24px,2.6vw,32px)}

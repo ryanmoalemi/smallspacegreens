@@ -907,7 +907,7 @@ def render_shop(key: str) -> str:
             photo = (
                 f'<a class="pick-photo-link" href="{esc(href)}" rel="sponsored nofollow noopener" target="_blank">'
                 f'<img{img_class} src="{esc(src)}" srcset="{esc(srcset)}" '
-                'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
+                'sizes="(max-width: 599px) 92vw, (min-width: 700px) 340px, 200px" '
                 'width="600" height="600" loading="lazy" decoding="async" '
                 f'alt="{esc(image["alt"])}">'
                 '<span class="sr-only">View on Amazon (opens in a new tab)</span></a>'
@@ -928,7 +928,7 @@ def render_shop(key: str) -> str:
                 media_class += " pick-media-plain"
             photo = (
                 f'<img{img_class} src="{src}" srcset="{srcset}" '
-                'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
+                'sizes="(max-width: 599px) 92vw, (min-width: 700px) 340px, 200px" '
                 'width="600" height="600" loading="lazy" decoding="async" '
                 f'alt="{esc(image["alt"])}">'
             )
