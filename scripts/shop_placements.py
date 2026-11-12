@@ -168,7 +168,7 @@ SHOP_PAGES: dict[str, dict] = {
             amazon("B07KRMP93C", KIT_SPONGE, "Trays, seed, and coir in one kit."),
             amazon("B07NKSKMCN", BF_1010_HOLES, "A smaller tray when a 1020 does not fit."),
             amazon("B07MYNVP8G", TRAY_1010_SOLID_10, "A solid 1010 tray under the one with holes."),
-            seed(MIXED_SEED, "Several crops in one collection."),
+            seed_product(RADISH, "Radish for a first tray. Check that the bag covers the dry grams.", TRUELEAF_RADISH, "See radish seed"),
             amazon("B07QNSSN81", COCO, "A soilless coir brick. Not garden soil."),
             amazon("B0CHDBY2PD", SANSI_CLIP, "A clip-on lamp if the window falls short."),
             amazon("B07FV7TZVH", SCISSORS, "A short pair for a cut above the mix."),
@@ -185,8 +185,7 @@ SHOP_PAGES: dict[str, dict] = {
             amazon("B0F2W7RNCC", KIT_SUN, "Trays, a heat mat, and domes."),
             amazon("B06XZFLY9P", BF_1020_HOLES, "A reusable tray for the DIY route."),
             amazon("B07DT72V6H", BF_1020_SOLID, "The matching solid tray for that DIY pair."),
-            seed(MIXED_SEED, "Loose seed for the DIY route."),
-            letpot_air(AIR, AIR_NOTE),
+            seed_product(RADISH, "Loose radish seed for the DIY route. Check the bag weight.", TRUELEAF_RADISH, "See radish seed"),
         ],
     },
     "density": {
