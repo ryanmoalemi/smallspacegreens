@@ -879,6 +879,10 @@ def render_shop(key: str) -> str:
         seen.append(slug)
         treatment = image["treatment"]
         official = treatment == "official"
+        letpot_frame = official and (
+            (image.get("author") == "LetPot")
+            or str(image.get("slug") or "").startswith("letpot-")
+        )
         plain = treatment == "neutral"
         amazon = treatment == "amazon"
         button = BUTTON[row["kind"]] if row["kind"] == "amazon" else row["label"]
@@ -904,9 +908,9 @@ def render_shop(key: str) -> str:
             stem = catalog.require_photo_files(slug)
             src = f"/assets/products/{stem}-600.webp"
             srcset = f"/assets/products/{stem}-300.webp 300w, /assets/products/{stem}-600.webp 600w"
-            img_class = ' class="letpot-photo"' if official else (' class="plain-photo"' if plain else "")
+            img_class = ' class="letpot-photo"' if letpot_frame else (' class="plain-photo"' if plain else "")
             media_class = "pick-media"
-            if official:
+            if letpot_frame:
                 media_class += " pick-media-letpot"
             if plain:
                 media_class += " pick-media-plain"
@@ -1009,7 +1013,10 @@ def supply_credit_html() -> str:
         credit_id = image.get("credit_id") or f"supply-{slug}"
         if official:
             origin = f"{image.get('author') or 'merchant'} product page"
-            use = f"{esc(image['note'])} Shown with the full frame on a light background."
+            if (image.get("author") == "LetPot") or str(image.get("slug") or "").startswith("letpot-"):
+                use = f"{esc(image['note'])} Shown with the full frame on a light background."
+            else:
+                use = esc(image["note"] or "")
         else:
             source = image["source_url"] or ""
             origin = "Flickr" if "flickr.com" in source else "Wikimedia Commons"

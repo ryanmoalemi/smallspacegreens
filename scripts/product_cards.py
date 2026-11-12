@@ -105,6 +105,9 @@ def render_picks(
                 raise SystemExit(f"{name}: why line for {card_id} is {len(card['why'])} characters")
             url = href_for(card, letpot, trueleaf, highmowing, plantaddicts)
             official = bool(image.get("official")) or image.get("treatment") == "official"
+            letpot_frame = (image.get("official") == "letpot") or (
+                official and ((image.get("author") == "LetPot") or str(image.get("slug") or "").startswith("letpot-"))
+            )
             plain = image.get("treatment") == "neutral"
             amazon = image.get("treatment") == "amazon"
             if amazon:
@@ -127,9 +130,9 @@ def render_picks(
             else:
                 src = f"/assets/products/{slug}-600.webp"
                 srcset = f"/assets/products/{slug}-300.webp 300w, /assets/products/{slug}-600.webp 600w"
-                img_class = ' class="letpot-photo"' if official else (' class="plain-photo"' if plain else "")
+                img_class = ' class="letpot-photo"' if letpot_frame else (' class="plain-photo"' if plain else "")
                 media_class = "pick-media"
-                if official:
+                if letpot_frame:
                     media_class += " pick-media-letpot"
                 if plain:
                     media_class += " pick-media-plain"
