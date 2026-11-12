@@ -3010,7 +3010,7 @@ def main() -> None:
             raise SystemExit(f"Missing photo thumbnail for {key}")
         if f'id="{photo["credit_id"]}"' not in credit_page:
             raise SystemExit(f"Missing photo credit record for {key}")
-    css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css", "photo-lists.css", "harvest-chart.css", "foundation.css"]))
+    css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css", "photo-lists.css", "harvest-chart.css", "home.css", "foundation.css"]))
     check_card_contrast(css)
     check_chrome_text_size(css)
     check_credit_line_css(css)
