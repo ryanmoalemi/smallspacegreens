@@ -1526,6 +1526,27 @@ def apply_trueleaf(html: str) -> str:
     return html
 
 
+
+INFO_TEMPLATE_URLS = {
+    "/about/",
+    "/contact/",
+    "/editorial-method/",
+    "/affiliate-disclosure/",
+    "/privacy/",
+    "/terms/",
+    "/photo-credits/",
+}
+
+
+def info_body_class(page: dict) -> str:
+    from urllib.parse import urlparse
+    raw = page.get("url") or ""
+    path = urlparse(raw).path if "://" in raw else raw
+    if path in INFO_TEMPLATE_URLS:
+        return " template-info"
+    return ""
+
+
 def layout(page: dict, main: str, graph: list[dict]) -> str:
     from product_cards import apply_placeholders
 
@@ -1625,7 +1646,7 @@ if (toc && window.matchMedia("(max-width: 899px)").matches) toc.removeAttribute(
 <link rel="stylesheet" href="/css/styles.css?v={asset_version('css/styles.css')}">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
-<body class="page-{page['kind']}">
+<body class="page-{page['kind']}{info_body_class(page)}">
 <header class="site-header">
 <a class="skip" href="#content">Skip to content</a>
 <div class="header-bar">
@@ -1910,7 +1931,27 @@ def split_opening_verdict(body: str) -> tuple[str, str]:
     match = re.match(r'\s*(<div class="verdict">.*?</div>)\s*', body, flags=re.S)
     if not match:
         return "", body
-    return match.group(1), body[match.end():]
+    block = match.group(1)
+
+    def compact_jumps(item: re.Match) -> str:
+        links = re.findall(r"<a\b[^>]*>.*?</a>", item.group(0), flags=re.S)
+        if not links:
+            return item.group(0)
+
+        def capitalize_link(html: str) -> str:
+            def cap(part: re.Match) -> str:
+                text = part.group(2)
+                if text and text[0].islower():
+                    text = text[0].upper() + text[1:]
+                return part.group(1) + text + part.group(3)
+
+            return re.sub(r"(<a\b[^>]*>)(.*?)(</a>)", cap, html, flags=re.S)
+
+        links = [capitalize_link(link) for link in links]
+        return '<p class="next-action jump-links">' + "".join(links) + "</p>"
+
+    block = re.sub(r'<p class="next-action">.*?</p>', compact_jumps, block, flags=re.S)
+    return block, body[match.end():]
 
 
 def article_page(guide: dict, body: str) -> str:
@@ -3010,7 +3051,7 @@ def main() -> None:
             raise SystemExit(f"Missing photo thumbnail for {key}")
         if f'id="{photo["credit_id"]}"' not in credit_page:
             raise SystemExit(f"Missing photo credit record for {key}")
-    css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css", "photo-lists.css", "harvest-chart.css", "home.css", "gear.css", "foundation.css"]))
+    css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css", "photo-lists.css", "harvest-chart.css", "home.css", "gear.css", "templates.css", "foundation.css"]))
     check_card_contrast(css)
     check_chrome_text_size(css)
     check_credit_line_css(css)
