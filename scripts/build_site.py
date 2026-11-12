@@ -1905,6 +1905,14 @@ def disclosure() -> str:
     )
 
 
+def split_opening_verdict(body: str) -> tuple[str, str]:
+    """Lift the short answer and jump links into the article header."""
+    match = re.match(r'\s*(<div class="verdict">.*?</div>)\s*', body, flags=re.S)
+    if not match:
+        return "", body
+    return match.group(1), body[match.end():]
+
+
 def article_page(guide: dict, body: str) -> str:
     show_signup = guide["slug"] not in {"balcony-salad-garden", "apartment-seed-starting"}
     url = f"{SITE}/guides/{guide['slug']}/"
@@ -1947,11 +1955,13 @@ def article_page(guide: dict, body: str) -> str:
             ],
         }
     )
+    verdict, body = split_opening_verdict(body)
     main = (
         crumbs_html(crumbs)
         + '<header class="article-header"><p class="eyebrow">The small-space growing guide</p>'
         + f"<h1>{esc(guide['h1'])}</h1>"
         + f"<p class=\"dek\">{esc(guide['dek'])}</p>"
+        + (verdict if verdict else "")
         + f"<p class=\"byline\">By <a href=\"/about/\">Ryan Moalemi</a>. Updated {esc(guide.get('updated_label', DATE_LABEL))}.</p>"
         + '</header>'
         + prepare_guide_body(body)
@@ -2826,7 +2836,27 @@ def render_static_pages() -> dict[str, str]:
     guides_body = f"""<div class="guide-library-intro"><p class="eyebrow">The growing library</p><h1>Small steps.<br>Something good to grow.</h1>
 <p class="dek">Find the guide for the job in front of you, from your first tray to a little balcony harvest.</p>
 <div class="cta-row"><a class="button" href="/guides/microgreens-in-a-small-apartment/">Start with your first tray ↗</a><a class="text-link" href="/guides/first-tray-checklist/">Get the checklist ↗</a></div></div>
-{cards(["microgreens-in-a-small-apartment","gifts-for-indoor-gardeners","microgreen-seeds-for-beginners","windowsill-microgreens","microgreens-seed-density-per-tray","pea-vs-radish-microgreens","bottom-watering-trays","apartment-seed-starting","balcony-salad-garden","microgreens-kit-vs-diy-cost"])}
+<section class="guide-library-group" aria-labelledby="guides-start">
+<h2 id="guides-start">Start</h2>
+{cards(["microgreens-in-a-small-apartment"])}
+</section>
+<section class="guide-library-group" aria-labelledby="guides-supplies">
+<h2 id="guides-supplies">Choose supplies</h2>
+{cards(["microgreen-seeds-for-beginners","microgreens-seed-density-per-tray","microgreens-kit-vs-diy-cost","pea-vs-radish-microgreens"])}
+</section>
+<section class="guide-library-group" aria-labelledby="guides-problems">
+<h2 id="guides-problems">Solve a problem</h2>
+{cards(["bottom-watering-trays"])}
+</section>
+<section class="guide-library-group" aria-labelledby="guides-spaces">
+<h2 id="guides-spaces">Try another growing space</h2>
+{cards(["windowsill-microgreens","apartment-seed-starting","balcony-salad-garden"])}
+</section>
+<section class="guide-library-group guide-library-secondary" aria-labelledby="guides-gifts">
+<h2 id="guides-gifts">Gifts</h2>
+<p class="guide-library-note">A secondary route if you are shopping for someone else.</p>
+{cards(["gifts-for-indoor-gardeners"])}
+</section>
 <div class="verdict" style="margin-top:40px"><p><strong>Advice you can check.</strong> Growing steps link to university extension and public-agency sources. Our <a href="/editorial-method/">editorial method</a> explains how research, illustrations, and firsthand evidence are kept distinct.</p></div>
 """
     pages["guides/index.html"] = simple_page(guides_page, guides_body)
