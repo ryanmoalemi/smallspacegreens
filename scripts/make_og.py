@@ -27,6 +27,7 @@ PAGES = [
     ("about", None, "About Small Space Greens"),
     ("contact", None, "Contact Ryan Moalemi"),
     ("privacy", None, "Privacy policy"),
+    ("terms", None, "Terms of use"),
     ("affiliate", None, "Affiliate disclosure"),
     ("editorial", None, "How these guides are made"),
     ("gear", "sunflower-small-tray.jpg", "Gear and comparisons"),

@@ -346,6 +346,7 @@ def render_content_photos(html: str) -> str:
 TEXT_LIST_PAGES = {
     "photo-credits/index.html": "photo credits page (the records themselves)",
     "privacy/index.html": "legal page",
+    "terms/index.html": "legal page",
     "affiliate-disclosure/index.html": "legal page",
 }
 TEXT_LIST_CONTAINERS = {
@@ -1609,6 +1610,7 @@ if (toc && window.matchMedia("(max-width: 899px)").matches) toc.removeAttribute(
 <a href="/editorial-method/">Editorial method</a>
 <a href="/photo-credits/">Photo credits</a>
 <a href="/privacy/">Privacy</a>
+<a href="/terms/">Terms of use</a>
 <a href="/affiliate-disclosure/">Affiliate disclosure</a>
 <a href="/contact/">Contact</a>
 </nav>
@@ -2553,6 +2555,20 @@ def render_static_pages() -> dict[str, str]:
         "crumbs": [("Home", f"{SITE}/"), ("Privacy", f"{SITE}/privacy/")],
     }
     pages["privacy/index.html"] = simple_page(privacy, (SRC / "pages" / "privacy.html").read_text())
+
+    terms_title = "Small Space Greens Terms of Use, Updated Nov 2026"
+    terms_desc = "Terms for using Small Space Greens: information only, affiliate commissions, third-party sites, content use, liability, and California law."
+    check_lengths(terms_title, terms_desc, "terms")
+    terms = {
+        "title": terms_title,
+        "description": terms_desc,
+        "url": f"{SITE}/terms/",
+        "kind": "page",
+        "nav": "",
+        "image": f"{SITE}/assets/og/terms.jpg",
+        "crumbs": [("Home", f"{SITE}/"), ("Terms of use", f"{SITE}/terms/")],
+    }
+    pages["terms/index.html"] = simple_page(terms, (SRC / "pages" / "terms.html").read_text())
 
     affiliate_title = "Affiliate Disclosure Statement | Small Space Greens"
     affiliate_desc = "Small Space Greens may earn commissions from qualifying purchases. Prices are not raised, and recommendations stay independent of any program."
