@@ -1253,8 +1253,8 @@ TRUELEAF_URLS = {
     "radish": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fproducts%2Fradish-rambo-seeds",
     "pea": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fproducts%2Fdun-pea-seeds",
     "micro-kits": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fmicrogreens-kits-and-supplies",
-    "sprout-seed": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fwholesale-sprouting-seed",
-    "sprout-kits": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fsprouting-kits-and-supplies",
+    "broccoli": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fproducts%2Fbroccoli-waltham-29-microgreens-seeds",
+    "sunflower": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fproducts%2Fsunflower-black-oil-microgreens-seeds",
 }
 
 # High Mowing Organic Seeds through Awin, merchant 95143.
@@ -1281,20 +1281,12 @@ TRUELEAF_LINKS = {
         "Microgreens kits and supplies",
         "True Leaf Market describes this as kits and supplies for growing microgreens at home, with bulk and wholesale options.",
     ),
-    "sprout-seed": (
-        "Wholesale sprouting seed",
-        "True Leaf Market labels this collection wholesale sprouting seed: organic and conventional seed for sprouting.",
-    ),
-    "sprout-kits": (
-        "Sprouting kits and supplies",
-        "True Leaf Market describes this as sprouting seeds, sprouters, and other supplies for sprouting at home, with bulk and wholesale options.",
-    ),
 }
 
 TRUELEAF_BOXES = {
     "apartment": (
         "A first tray needs microgreen seed, and some people start with a kit. Sprouting seed is a different food from the microgreens on this page.",
-        ["micro-seed", "micro-kits", "sprout-seed"],
+        ["micro-seed", "micro-kits"],
     ),
     "windowsill": (
         "A windowsill tray needs microgreen seed. A kit is a separate choice.",
@@ -1314,7 +1306,7 @@ TRUELEAF_BOXES = {
     ),
     "cost": (
         "A kit and a bag of seed are different purchases.",
-        ["micro-kits", "micro-seed", "sprout-kits"],
+        ["micro-kits", "micro-seed"],
     ),
 }
 
@@ -1334,8 +1326,6 @@ def trueleaf_link(key: str, label: str) -> str:
 TRUELEAF_CARD_PHOTOS = {
     "micro-seed": ["radish-bowl", "radish"],
     "micro-kits": ["home-microgreens", "sunflower"],
-    "sprout-seed": ["alfalfa-jar", "pea-sack"],
-    "sprout-kits": ["alfalfa-jar", "pea-sack", "sunflower"],
 }
 
 
@@ -1360,8 +1350,6 @@ LETPOT_SHORT = {
 TRUELEAF_SHORT = {
     "micro-seed": "Organic and conventional seed, bulk sizes too.",
     "micro-kits": "Kits and supplies for growing at home.",
-    "sprout-seed": "Organic and conventional seed for sprouting.",
-    "sprout-kits": "Sprouting seed, sprouters, and supplies.",
 }
 
 
@@ -1427,7 +1415,13 @@ def letpot_box(name: str, used: set[str]) -> str:
     for key in keys:
         label, _blurb = LETPOT_MODELS[key]
         cards.append(supply_pick_card(take_slug(used, [f"letpot-{key}"]), "LetPot", label, LETPOT_SHORT[key], LETPOT_URLS[key], "See at LetPot"))
-    return affiliate_box("letpot-choice", "If you'd rather not deal with trays and soil", lead, "".join(cards))
+    return (
+        '<details class="setup-alt">'
+        "<summary>Considering a different setup?</summary>"
+        f'<p class="setup-alt-lead">{esc(lead)}</p>'
+        f'<ul class="pick-grid" role="list">{"".join(cards)}</ul>'
+        "</details>"
+    )
 
 
 def trueleaf_box(name: str, used: set[str]) -> str:

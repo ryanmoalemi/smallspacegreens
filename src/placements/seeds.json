@@ -171,22 +171,22 @@
     },
     "tl-broccoli": {
       "kind": "trueleaf",
-      "href_key": "micro-seed",
+      "href_key": "broccoli",
       "brand": "True Leaf Market",
       "short": "Broccoli microgreen seed",
       "badge": "Beginner",
-      "why": "Waltham 29 broccoli is in the seed collection. Check the bag.",
-      "cta": "Browse microgreen seeds",
+      "why": "28 g on a 1020 tray. Check that the bag covers that weight.",
+      "cta": "See broccoli seed",
       "image": "broccoli-sprouts"
     },
     "tl-sunflower": {
       "kind": "trueleaf",
-      "href_key": "micro-seed",
+      "href_key": "sunflower",
       "brand": "True Leaf Market",
       "short": "Sunflower microgreen seed",
       "badge": "Beginner",
-      "why": "Black oil sunflower is in the seed collection. Check the packet.",
-      "cta": "Browse microgreen seeds",
+      "why": "48 g on a 1020 tray, after a soak. Check the bag.",
+      "cta": "See sunflower seed",
       "image": "sunflower-tray"
     },
     "tl-kits": {
@@ -198,16 +198,6 @@
       "why": "Mini kits are in this collection. Check what the kit includes.",
       "cta": "Browse microgreen kits",
       "image": "home-microgreens"
-    },
-    "tl-sprouts": {
-      "kind": "trueleaf",
-      "href_key": "sprout-seed",
-      "brand": "True Leaf Market",
-      "short": "Wholesale sprouting seed",
-      "badge": "Not microgreens",
-      "why": "Sprouting seed is a different food from the microgreens on this page.",
-      "cta": "Browse sprouting seed",
-      "image": "alfalfa-jar"
     },
     "hm-daikon-radish": {
       "kind": "highmowing",
@@ -231,8 +221,8 @@
   "sections": [
     {
       "id": "first-seeds",
-      "title": "Microgreen seeds to start with",
-      "lead": "These crops are listed in True Leaf Market's microgreens seed collection.",
+      "title": "Start with one named crop",
+      "lead": "Radish is the lighter first tray in the Utah State table. Buy a bag that covers the dry grams for your tray.",
       "cards": [
         "tl-radish",
         "tl-pea",
@@ -255,14 +245,6 @@
       "lead": "A kit is a different purchase from a bag of seed.",
       "cards": [
         "tl-kits"
-      ]
-    },
-    {
-      "id": "more-options",
-      "title": "More options",
-      "lead": "Jar sprouts are eaten whole. Microgreens are cut above the mix.",
-      "cards": [
-        "tl-sprouts"
       ]
     }
   ]
