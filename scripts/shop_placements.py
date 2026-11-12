@@ -27,6 +27,10 @@ TRUELEAF_PEA = (
     "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328"
     "&ued=https%3A%2F%2Ftrueleafmarket.com%2Fproducts%2Fdun-pea-seeds"
 )
+TRUELEAF_BROCCOLI = (
+    "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328"
+    "&ued=https%3A%2F%2Ftrueleafmarket.com%2Fproducts%2Fbroccoli-waltham-29-microgreens-seeds"
+)
 LETPOT_AIR = (
     "https://www.awin1.com/cread.php?awinmid=47605&awinaffid=3149328"
     "&ued=https%3A%2F%2Fletpot.com%2Fproducts%2Flph-air-indoor-hydroponic-gardening-system"
@@ -186,6 +190,15 @@ SHOP_PAGES: dict[str, dict] = {
             amazon("B06XZFLY9P", BF_1020_HOLES, "A reusable tray for the DIY route."),
             amazon("B07DT72V6H", BF_1020_SOLID, "The matching solid tray for that DIY pair."),
             seed_product(RADISH, "Loose radish seed for the DIY route. Check the bag weight.", TRUELEAF_RADISH, "See radish seed"),
+        ],
+    },
+    "cost-example": {
+        "heading": "Products priced here",
+        "lead": "Confirm the price you would pay on the seller page.",
+        "rows": [
+            amazon("B0DGF8Z1Z6", KIT_MIZUNA, "Two ceramic trays, coconut coir, and broccoli seed."),
+            seed_product(BROCCOLI, "Waltham 29 broccoli seed. This price check uses the 4 oz pack.", TRUELEAF_BROCCOLI, "See broccoli seed"),
+            amazon("B07QNSSN81", COCO, "A 10 lb coir brick. The label states it expands to 72 quarts."),
         ],
     },
     "density": {
