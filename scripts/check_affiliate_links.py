@@ -2,6 +2,7 @@
 """Every awin1.com link must use rel sponsored.
 
 awinmid=47605 is LetPot. awinmid=124042 is True Leaf Market.
+awinmid=95143 is High Mowing. awinmid=123910 is Plant Addicts.
 Those links must be the approved URLs for that program.
 """
 
@@ -19,6 +20,8 @@ import build_site  # noqa: E402
 PROGRAMS = {
     "47605": set(build_site.LETPOT_URLS.values()),
     "124042": set(build_site.TRUELEAF_URLS.values()),
+    "95143": set(build_site.HIGHMOWING_URLS.values()),
+    "123910": set(build_site.PLANTADDICTS_URLS.values()),
 }
 ALLOWED = set().union(*PROGRAMS.values())
 ANCHOR = re.compile(r"<a\b([^>]*)>", re.I)
@@ -157,7 +160,7 @@ def main() -> None:
         fail("approved affiliate URLs missing from the built site: " + ", ".join(sorted(missing)))
     print(
         f"affiliate link checks passed ({total} Awin links on {pages} pages, "
-        f"{amazon_total} Amazon links, awinmid=47605 and awinmid=124042)"
+        f"{amazon_total} Amazon links, awinmid=47605, 124042, 95143, and 123910)"
     )
 
 

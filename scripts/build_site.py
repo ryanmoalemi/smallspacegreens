@@ -1257,6 +1257,21 @@ TRUELEAF_URLS = {
     "sprout-kits": "https://www.awin1.com/cread.php?awinmid=124042&awinaffid=3149328&ued=https%3A%2F%2Ftrueleafmarket.com%2Fcollections%2Fsprouting-kits-and-supplies",
 }
 
+# High Mowing Organic Seeds through Awin, merchant 95143.
+HIGHMOWING_URLS = {
+    "daikon": "https://www.awin1.com/cread.php?awinmid=95143&awinaffid=3149328&ued=https%3A%2F%2Fwww.highmowingseeds.com%2Forganic-non-gmo-daikon-radish-microgreens.html",
+    "broccoli": "https://www.awin1.com/cread.php?awinmid=95143&awinaffid=3149328&ued=https%3A%2F%2Fwww.highmowingseeds.com%2Forganic-non-gmo-broccoli-micro-greens.html",
+    "arugula": "https://www.awin1.com/cread.php?awinmid=95143&awinaffid=3149328&ued=https%3A%2F%2Fwww.highmowingseeds.com%2Forganic-non-gmo-arugula-microgreens-1.html",
+    "blaze": "https://www.awin1.com/cread.php?awinmid=95143&awinaffid=3149328&ued=https%3A%2F%2Fwww.highmowingseeds.com%2Forganic-non-gmo-blaze-mix-microgreens.html",
+}
+
+# Plant Addicts through Awin, merchant 123910.
+PLANTADDICTS_URLS = {
+    "cube": "https://www.awin1.com/cread.php?awinmid=123910&awinaffid=3149328&ued=https%3A%2F%2Fplantaddicts.com%2Fcube-color-planter%2F",
+    "basket": "https://www.awin1.com/cread.php?awinmid=123910&awinaffid=3149328&ued=https%3A%2F%2Fplantaddicts.com%2Frustic-herb-basket-with-burlap-liner%2F",
+    "mini": "https://www.awin1.com/cread.php?awinmid=123910&awinaffid=3149328&ued=https%3A%2F%2Fplantaddicts.com%2Fself-watering-mini-planter-pot-with-trellis%2F",
+}
+
 TRUELEAF_LINKS = {
     "micro-seed": (
         "Microgreens seed",
@@ -1520,7 +1535,7 @@ def apply_trueleaf(html: str) -> str:
 def layout(page: dict, main: str, graph: list[dict]) -> str:
     from product_cards import apply_placeholders
 
-    main = apply_placeholders(main, LETPOT_URLS, TRUELEAF_URLS)
+    main = apply_placeholders(main, LETPOT_URLS, TRUELEAF_URLS, HIGHMOWING_URLS, PLANTADDICTS_URLS)
     main = apply_shop(main)
     main = apply_letpot(main)
     main = apply_trueleaf(main)
@@ -1752,7 +1767,7 @@ def guide_toc(html: str) -> str:
 def prepare_guide_body(html: str) -> str:
     from product_cards import apply_placeholders
 
-    html = apply_placeholders(html, LETPOT_URLS, TRUELEAF_URLS)
+    html = apply_placeholders(html, LETPOT_URLS, TRUELEAF_URLS, HIGHMOWING_URLS, PLANTADDICTS_URLS)
     html = apply_shop(html)
     html = add_heading_ids(html)
     html = open_first_faqs(html)
@@ -3060,9 +3075,13 @@ def main() -> None:
         raise SystemExit("Missing internal targets: " + ", ".join(missing))
     print("built", len(pages), "pages")
     for key, bucket in shop_placements.placement_counts().items():
+        extra = ""
+        for kind in ("highmowing", "plantaddicts"):
+            if bucket.get(kind):
+                extra += f", {kind} {bucket[kind]}"
         print(
             f"placements {key}: amazon {bucket['amazon']}, "
-            f"trueleaf {bucket['trueleaf']}, letpot {bucket['letpot']}"
+            f"trueleaf {bucket['trueleaf']}, letpot {bucket['letpot']}{extra}"
         )
     print("photographed editorial list items", photographed_items)
     print("indexnow", INDEXNOW)

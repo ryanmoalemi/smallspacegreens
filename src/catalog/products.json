@@ -1505,6 +1505,233 @@
         "image_embed": null
       },
       "previous_image_issue": "None. Official LetPot product photo."
+    },
+    "hm-daikon-radish": {
+      "id": "hm-daikon-radish",
+      "name": "High Mowing daikon radish seed",
+      "brand": "High Mowing",
+      "variant": "Organic daikon-type radish microgreens",
+      "size": null,
+      "kind": "highmowing",
+      "asin": null,
+      "url": "https://www.highmowingseeds.com/organic-non-gmo-daikon-radish-microgreens.html",
+      "affiliate_url": "https://www.awin1.com/cread.php?awinmid=95143&awinaffid=3149328&ued=https%3A%2F%2Fwww.highmowingseeds.com%2Forganic-non-gmo-daikon-radish-microgreens.html",
+      "merchant": "High Mowing",
+      "affiliate_tag": null,
+      "fits": {
+        "role": "seed",
+        "crop": "radish"
+      },
+      "default_note": "Organic daikon radish seed for a first tray.",
+      "names_checked": "2026-11-12",
+      "image_audited": "2026-11-12",
+      "image": {
+        "treatment": "official",
+        "slug": "hm-daikon-radish",
+        "alt": "High Mowing daikon-type radish microgreens",
+        "author": "High Mowing",
+        "source_url": "https://www.highmowingseeds.com/organic-non-gmo-daikon-radish-microgreens.html",
+        "license": "High Mowing product photograph",
+        "license_url": "https://www.highmowingseeds.com/organic-non-gmo-daikon-radish-microgreens.html",
+        "note": "Official product photograph from the High Mowing listing, checked in stock on 12 November 2026. The largest listing photo was cropped so the plant fills the card. Not recolored.",
+        "credit_id": "supply-hm-daikon-radish",
+        "image_embed": null
+      },
+      "previous_image_issue": null
+    },
+    "hm-broccoli": {
+      "id": "hm-broccoli",
+      "name": "High Mowing broccoli seed",
+      "brand": "High Mowing",
+      "variant": "Organic broccoli microgreens",
+      "size": null,
+      "kind": "highmowing",
+      "asin": null,
+      "url": "https://www.highmowingseeds.com/organic-non-gmo-broccoli-micro-greens.html",
+      "affiliate_url": "https://www.awin1.com/cread.php?awinmid=95143&awinaffid=3149328&ued=https%3A%2F%2Fwww.highmowingseeds.com%2Forganic-non-gmo-broccoli-micro-greens.html",
+      "merchant": "High Mowing",
+      "affiliate_tag": null,
+      "fits": {
+        "role": "seed",
+        "crop": "broccoli"
+      },
+      "default_note": "Organic broccoli seed for a microgreen tray.",
+      "names_checked": "2026-11-12",
+      "image_audited": "2026-11-12",
+      "image": {
+        "treatment": "official",
+        "slug": "hm-broccoli",
+        "alt": "High Mowing broccoli microgreens in a bowl",
+        "author": "High Mowing",
+        "source_url": "https://www.highmowingseeds.com/organic-non-gmo-broccoli-micro-greens.html",
+        "license": "High Mowing product photograph",
+        "license_url": "https://www.highmowingseeds.com/organic-non-gmo-broccoli-micro-greens.html",
+        "note": "Official product photograph from the High Mowing listing, checked in stock on 12 November 2026. The largest listing photo was cropped so the plant fills the card. Not recolored.",
+        "credit_id": "supply-hm-broccoli",
+        "image_embed": null
+      },
+      "previous_image_issue": null
+    },
+    "hm-arugula": {
+      "id": "hm-arugula",
+      "name": "High Mowing arugula seed",
+      "brand": "High Mowing",
+      "variant": "Organic arugula microgreens",
+      "size": null,
+      "kind": "highmowing",
+      "asin": null,
+      "url": "https://www.highmowingseeds.com/organic-non-gmo-arugula-microgreens-1.html",
+      "affiliate_url": "https://www.awin1.com/cread.php?awinmid=95143&awinaffid=3149328&ued=https%3A%2F%2Fwww.highmowingseeds.com%2Forganic-non-gmo-arugula-microgreens-1.html",
+      "merchant": "High Mowing",
+      "affiliate_tag": null,
+      "fits": {
+        "role": "seed",
+        "crop": "arugula"
+      },
+      "default_note": "Organic arugula seed for a microgreen tray.",
+      "names_checked": "2026-11-12",
+      "image_audited": "2026-11-12",
+      "image": {
+        "treatment": "official",
+        "slug": "hm-arugula",
+        "alt": "High Mowing arugula microgreens",
+        "author": "High Mowing",
+        "source_url": "https://www.highmowingseeds.com/organic-non-gmo-arugula-microgreens-1.html",
+        "license": "High Mowing product photograph",
+        "license_url": "https://www.highmowingseeds.com/organic-non-gmo-arugula-microgreens-1.html",
+        "note": "Official product photograph from the High Mowing listing, checked in stock on 12 November 2026. The largest listing photo was cropped so the plant fills the card. Not recolored.",
+        "credit_id": "supply-hm-arugula",
+        "image_embed": null
+      },
+      "previous_image_issue": null
+    },
+    "hm-blaze-blend": {
+      "id": "hm-blaze-blend",
+      "name": "High Mowing blaze blend seed",
+      "brand": "High Mowing",
+      "variant": "Organic blaze blend microgreens",
+      "size": null,
+      "kind": "highmowing",
+      "asin": null,
+      "url": "https://www.highmowingseeds.com/organic-non-gmo-blaze-mix-microgreens.html",
+      "affiliate_url": "https://www.awin1.com/cread.php?awinmid=95143&awinaffid=3149328&ued=https%3A%2F%2Fwww.highmowingseeds.com%2Forganic-non-gmo-blaze-mix-microgreens.html",
+      "merchant": "High Mowing",
+      "affiliate_tag": null,
+      "fits": {
+        "role": "seed"
+      },
+      "default_note": "A mixed organic microgreen seed blend.",
+      "names_checked": "2026-11-12",
+      "image_audited": "2026-11-12",
+      "image": {
+        "treatment": "official",
+        "slug": "hm-blaze-blend",
+        "alt": "High Mowing blaze blend microgreens",
+        "author": "High Mowing",
+        "source_url": "https://www.highmowingseeds.com/organic-non-gmo-blaze-mix-microgreens.html",
+        "license": "High Mowing product photograph",
+        "license_url": "https://www.highmowingseeds.com/organic-non-gmo-blaze-mix-microgreens.html",
+        "note": "Official product photograph from the High Mowing listing, checked in stock on 12 November 2026. The largest listing photo was cropped so the plant fills the card. Not recolored.",
+        "credit_id": "supply-hm-blaze-blend",
+        "image_embed": null
+      },
+      "previous_image_issue": null
+    },
+    "pa-cube-color": {
+      "id": "pa-cube-color",
+      "name": "CUBE Color planter",
+      "brand": "Lechuza",
+      "variant": "CUBE Color indoor planter",
+      "size": null,
+      "kind": "plantaddicts",
+      "asin": null,
+      "url": "https://plantaddicts.com/cube-color-planter/",
+      "affiliate_url": "https://www.awin1.com/cread.php?awinmid=123910&awinaffid=3149328&ued=https%3A%2F%2Fplantaddicts.com%2Fcube-color-planter%2F",
+      "merchant": "Plant Addicts",
+      "affiliate_tag": null,
+      "fits": {
+        "role": "container"
+      },
+      "default_note": "A compact indoor planter that fits a sill.",
+      "names_checked": "2026-11-12",
+      "image_audited": "2026-11-12",
+      "image": {
+        "treatment": "official",
+        "slug": "pa-cube-color",
+        "alt": "CUBE Color planters on a windowsill",
+        "author": "Plant Addicts",
+        "source_url": "https://plantaddicts.com/cube-color-planter/",
+        "license": "Plant Addicts product photograph",
+        "license_url": "https://plantaddicts.com/cube-color-planter/",
+        "note": "Official product photograph from the Plant Addicts listing, checked in stock on 12 November 2026. The largest listing photo was cropped so the product fills the card. Not recolored.",
+        "credit_id": "supply-pa-cube-color",
+        "image_embed": null
+      },
+      "previous_image_issue": null
+    },
+    "pa-herb-basket": {
+      "id": "pa-herb-basket",
+      "name": "Rustic herb basket",
+      "brand": "Plant Addicts",
+      "variant": "Herb basket with burlap liner",
+      "size": null,
+      "kind": "plantaddicts",
+      "asin": null,
+      "url": "https://plantaddicts.com/rustic-herb-basket-with-burlap-liner/",
+      "affiliate_url": "https://www.awin1.com/cread.php?awinmid=123910&awinaffid=3149328&ued=https%3A%2F%2Fplantaddicts.com%2Frustic-herb-basket-with-burlap-liner%2F",
+      "merchant": "Plant Addicts",
+      "affiliate_tag": null,
+      "fits": {
+        "role": "container"
+      },
+      "default_note": "A lined basket for a small herb planting.",
+      "names_checked": "2026-11-12",
+      "image_audited": "2026-11-12",
+      "image": {
+        "treatment": "official",
+        "slug": "pa-herb-basket",
+        "alt": "Rustic herb basket with a burlap liner, planted with herbs",
+        "author": "Plant Addicts",
+        "source_url": "https://plantaddicts.com/rustic-herb-basket-with-burlap-liner/",
+        "license": "Plant Addicts product photograph",
+        "license_url": "https://plantaddicts.com/rustic-herb-basket-with-burlap-liner/",
+        "note": "Official product photograph from the Plant Addicts listing, checked in stock on 12 November 2026. The largest listing photo was cropped so the product fills the card. Not recolored.",
+        "credit_id": "supply-pa-herb-basket",
+        "image_embed": null
+      },
+      "previous_image_issue": null
+    },
+    "pa-mini-trellis": {
+      "id": "pa-mini-trellis",
+      "name": "Self-watering mini planter with trellis",
+      "brand": "Plant Addicts",
+      "variant": "Mini planter pot with trellis",
+      "size": null,
+      "kind": "plantaddicts",
+      "asin": null,
+      "url": "https://plantaddicts.com/self-watering-mini-planter-pot-with-trellis/",
+      "affiliate_url": "https://www.awin1.com/cread.php?awinmid=123910&awinaffid=3149328&ued=https%3A%2F%2Fplantaddicts.com%2Fself-watering-mini-planter-pot-with-trellis%2F",
+      "merchant": "Plant Addicts",
+      "affiliate_tag": null,
+      "fits": {
+        "role": "container"
+      },
+      "default_note": "A small self-watering planter with a trellis.",
+      "names_checked": "2026-11-12",
+      "image_audited": "2026-11-12",
+      "image": {
+        "treatment": "official",
+        "slug": "pa-mini-trellis",
+        "alt": "Self-watering mini planter with a trellis, grown with herbs",
+        "author": "Plant Addicts",
+        "source_url": "https://plantaddicts.com/self-watering-mini-planter-pot-with-trellis/",
+        "license": "Plant Addicts product photograph",
+        "license_url": "https://plantaddicts.com/self-watering-mini-planter-pot-with-trellis/",
+        "note": "Official product photograph from the Plant Addicts listing, checked in stock on 12 November 2026. The largest listing photo was cropped so the product fills the card. Not recolored.",
+        "credit_id": "supply-pa-mini-trellis",
+        "image_embed": null
+      },
+      "previous_image_issue": null
     }
   }
 }
