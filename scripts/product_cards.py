@@ -83,18 +83,26 @@ def render_picks(name: str, letpot: dict[str, str], trueleaf: dict[str, str]) ->
             src = f"/assets/products/{slug}-600.webp"
             srcset = f"/assets/products/{slug}-300.webp 300w, /assets/products/{slug}-600.webp 600w"
             official = image.get("official") == "letpot"
-            img_class = ' class="letpot-photo"' if official else ""
+            plain = image.get("treatment") == "neutral"
+            img_class = ' class="letpot-photo"' if official else (' class="plain-photo"' if plain else "")
+            media_class = "pick-media"
+            if official:
+                media_class += " pick-media-letpot"
+            if plain:
+                media_class += " pick-media-plain"
             if official:
                 caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
+            elif plain:
+                caption = ""
             else:
                 caption = (
-                    f'<figcaption class="pick-credit">Credit: '
+                    f'<figcaption class="pick-credit">Photo: '
                     f'<a href="/photo-credits/#{esc(image["credit_id"])}">{esc(image["author"])}</a>'
                     "</figcaption>"
                 )
             cards_html.append(
                 "<li class=\"pick\">"
-                f'<figure class="pick-media{" pick-media-letpot" if official else ""}">'
+                f'<figure class="{media_class}">'
                 f'<img{img_class} src="{esc(src)}" srcset="{esc(srcset)}" '
                 'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
                 'width="600" height="600" loading="lazy" decoding="async" '
@@ -124,11 +132,23 @@ def render_credits() -> str:
     seen: set[str] = set()
     try:
         import shop_placements
-        shop_credit_ids = {f"supply-{slug}" for slug in shop_placements.SUPPLY_IMAGES}
+        shop_credit_ids = set()
+        for slug, rec in shop_placements.SUPPLY_IMAGES.items():
+            shop_credit_ids.add(f"supply-{slug}")
+        try:
+            import catalog
+            for product in catalog.products().values():
+                cid = (product.get("image") or {}).get("credit_id")
+                if cid:
+                    shop_credit_ids.add(cid)
+        except Exception:
+            pass
     except Exception:
         shop_credit_ids = set()
     for data in all_placements():
         for image in data["images"].values():
+            if image.get("treatment") == "neutral" or not image.get("credit_id"):
+                continue
             credit_id = image["credit_id"]
             if credit_id in seen or credit_id in shop_credit_ids:
                 continue

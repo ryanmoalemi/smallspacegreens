@@ -774,7 +774,11 @@ def photo_groups() -> dict[str, str]:
         {p for p in (ROOT / "assets" / "photos").rglob("*") if p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}}
         | {p for p in (ROOT / "assets" / "products").glob("*-600.webp")}
     )
-    shas = {f: _image_sha(f) for f in files}
+    # Typographic product cards share a frame, so ORB would treat different names as one photo.
+    # Group those files by exact bytes only.
+    photograph_files = [f for f in files if not f.name.startswith("plain-")]
+    shas = {f: _image_sha(f) for f in photograph_files}
+    typographic_shas = {f: _image_sha(f) for f in files if f.name.startswith("plain-")}
     # The cache lists every photo already compared and only the pairs that share keypoints,
     # so a build without OpenCV still works when no photo is new or changed.
     stored = json.loads(PHOTO_MATCH_CACHE.read_text()) if PHOTO_MATCH_CACHE.exists() else {}
@@ -851,6 +855,14 @@ def photo_groups() -> dict[str, str]:
     for same in SAME_PHOTO_SETS:
         for name in same:
             _photo_groups.setdefault(name, find(name))
+    typo_by_sha: dict[str, list[str]] = {}
+    for f, sha in typographic_shas.items():
+        typo_by_sha.setdefault(sha, []).append(photo_stem_key(f.name))
+    for names in typo_by_sha.values():
+        for name in names:
+            union(name, names[0])
+        for name in names:
+            _photo_groups[name] = find(name)
     return _photo_groups
 
 
@@ -1330,22 +1342,27 @@ TRUELEAF_SHORT = {
 
 def supply_pick_card(slug: str, brand: str, name: str, line: str, url: str, button: str) -> str:
     """The shared product card: photo, one-line credit, name, one short line, store button."""
-    alt, author, *_rest = shop_placements.SUPPLY_IMAGES[slug]
+    meta = shop_placements.image_meta(slug)
+    alt, author = meta["alt"], meta.get("author") or ""
     stem = shop_placements.photo_stem(slug)
-    official = slug.startswith("letpot-")
-    img_class = ' class="letpot-photo"' if official else ""
+    official = meta.get("treatment") == "official" or slug.startswith("letpot-")
+    plain = meta.get("treatment") == "neutral"
+    img_class = ' class="letpot-photo"' if official else (' class="plain-photo"' if plain else "")
     if official:
         caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
+    elif plain:
+        caption = ""
     else:
+        credit_id = meta.get("credit_id") or f"supply-{slug}"
         caption = (
-            f'<figcaption class="pick-credit">Credit: '
-            f'<a href="/photo-credits/#supply-{slug}">{esc(author)}</a></figcaption>'
+            f'<figcaption class="pick-credit">Photo: '
+            f'<a href="/photo-credits/#{esc(credit_id)}">{esc(author)}</a></figcaption>'
         )
     if len(line) > 70:
         raise SystemExit(f"Card line for {name} is {len(line)} characters; keep it to a few words")
     return (
         '<li class="pick">'
-        f'<figure class="pick-media{" pick-media-letpot" if official else ""}">'
+        f'<figure class="pick-media{" pick-media-letpot" if official else ""}{" pick-media-plain" if plain else ""}">'
         f'<img{img_class} src="/assets/products/{stem}-600.webp" '
         f'srcset="/assets/products/{stem}-300.webp 300w, /assets/products/{stem}-600.webp 600w" '
         'sizes="(min-width: 1024px) 240px, (min-width: 600px) 30vw, 92vw" '

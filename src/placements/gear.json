@@ -26,32 +26,6 @@
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
       "note": "Square crop. Not a seed packet."
     },
-    "basil-seedlings": {
-      "slug": "basil-window-seedlings",
-      "title": "Basil seedlings by a window",
-      "alt": "Young basil seedlings in a pot beside a window.",
-      "credit_id": "product-basil-window-seedlings",
-      "author": "Jon Eben Field",
-      "author_url": "https://commons.wikimedia.org/wiki/File:Pot_of_basil_sprouts_(Ocimum_basilicum)_-_20050422.jpg#Summary",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Pot_of_basil_sprouts_(Ocimum_basilicum)_-_20050422.jpg",
-      "source_label": "Basil",
-      "license": "CC BY 2.0",
-      "license_url": "https://creativecommons.org/licenses/by/2.0/",
-      "note": "Square crop. Shows a small plant by a window, not the LetPot unit."
-    },
-    "lettuce-pot": {
-      "slug": "lettuce-container",
-      "title": "Lettuce in a container",
-      "alt": "Leaf lettuce growing in a container.",
-      "credit_id": "product-lettuce-container",
-      "author": "Netha Hussain",
-      "author_url": "https://commons.wikimedia.org/wiki/User:Netha_Hussain",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Leaf_lettuce_plant_in_a_pot_10.jpg",
-      "source_label": "Leaf lettuce plant in a pot 10",
-      "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "note": "Square crop. Shows container lettuce, not the LetPot unit. Cropped versions remain under CC BY-SA 4.0."
-    },
     "letpot-mini": {
       "slug": "letpot-mini",
       "title": "LetPot LPH-Mini indoor garden",
@@ -80,31 +54,19 @@
       "official": "letpot",
       "note": "Official product photo from LetPot's product page. Converted to WebP at the same aspect. Not cropped or recolored."
     },
-    "mixed-greens": {
-      "slug": "microgreens-mixed",
-      "title": "Mixed small greens in a container",
-      "alt": "Small green leaves and pink stems in a clear plastic container.",
-      "credit_id": "product-microgreens-mixed",
-      "author": "Stacy Spensley",
-      "author_url": "https://commons.wikimedia.org/wiki/File:11_microgreens.jpg",
-      "source_url": "https://commons.wikimedia.org/wiki/File:11_microgreens.jpg",
-      "source_label": "11 microgreens",
-      "license": "CC BY 2.0",
-      "license_url": "https://creativecommons.org/licenses/by/2.0/",
-      "note": "Square crop. Shows small greens, not the ceramic kit."
-    },
-    "microgreens-plate": {
-      "slug": "supply-microgreens-plate",
-      "title": "Green microgreens on a white ceramic plate",
-      "alt": "Green microgreens on a white ceramic plate.",
-      "credit_id": "supply-microgreens-plate",
-      "author": "apapac",
-      "author_url": "https://www.flickr.com/photos/146235256@N06/37037208672",
-      "source_url": "https://www.flickr.com/photos/146235256@N06/37037208672",
-      "source_label": "Green microgreens on a white ceramic plate",
-      "license": "CC BY 2.0",
-      "license_url": "https://creativecommons.org/licenses/by/2.0/",
-      "note": "Stand-in for a ceramic microgreens kit."
+    "mizuna-plain": {
+      "slug": "plain-mizuna-kit-2trays",
+      "title": "Mizuna ceramic microgreens kit, 2 trays",
+      "alt": "Typographic card for the Mizuna ceramic microgreens kit, 2 trays. No product photograph.",
+      "treatment": "neutral",
+      "credit_id": null,
+      "author": null,
+      "author_url": null,
+      "source_url": null,
+      "source_label": null,
+      "license": null,
+      "license_url": null,
+      "note": "No permitted exact product photograph. Amazon image_embed is empty. A typographic card is shown instead of plated microgreens."
     }
   },
   "cards": {
@@ -156,7 +118,7 @@
       "badge": "Windowsill",
       "why": "Two ceramic trays with coir and seeds, listed for a kitchen sill.",
       "cta": "View on Amazon",
-      "image": "microgreens-plate"
+      "image": "mizuna-plain"
     }
   },
   "sections": [
