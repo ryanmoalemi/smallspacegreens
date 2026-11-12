@@ -50,17 +50,11 @@
     });
   }
   function updateCount() {
-    var missingChecks = activePanel() ? activePanel().querySelectorAll('[data-supply]:not(:checked)').length : 0;
-    var missingCards = essentialCards(current).filter(function (card) { return !isOwnedRole(cardRole(card)) && !card.hidden; }).length;
-    var missing = Math.max(missingChecks, missingCards);
-    // After grouping, the visible essential count should agree with the cards still in Still needed.
     var still = document.querySelectorAll('.supply-group-needed .pick:not([hidden])').length;
-    if (document.querySelector('.supply-groups')) missing = still + (activePanel() ? Array.from(activePanel().querySelectorAll('[data-supply]:not(:checked)')).filter(function (box) {
-      // checklist items that have no product card still count
-      var role = box.getAttribute('data-role');
-      return role && !builder.querySelector('[data-routes][data-role="' + role + '"]');
-    }).length : 0);
-    if (count) count.textContent = missing ? missing + ' essential' + (missing === 1 ? '' : 's') + ' left to gather' : 'You have the essentials on this list.';
+    if (!document.querySelector('.supply-groups')) {
+      still = essentialCards(current).filter(function (card) { return !isOwnedRole(cardRole(card)); }).length;
+    }
+    if (count) count.textContent = still ? still + ' essential' + (still === 1 ? '' : 's') + ' left to gather' : 'You have the essentials on this list.';
   }
   var routePicks = Array.from(builder.querySelectorAll('[data-routes]'));
   var routeStatus = document.getElementById('route-picks-status');
