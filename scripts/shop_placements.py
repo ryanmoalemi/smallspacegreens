@@ -9,6 +9,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import catalog
+
 AMAZON_TAG = "smallspaceg04-20"
 AMAZON_DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 COMMISSION_SENTENCE = "We earn a commission from purchases through this page."
@@ -260,121 +262,552 @@ def row_url(row: dict) -> str:
     return row["url"]
 
 
-# Product card photos. stand_in means the picture is the closest real product type, not that exact item.
-SUPPLY_IMAGES = {
-    "pepper-trays": ("Nursery cell trays in black flats", "Furkan Akkurt", "https://commons.wikimedia.org/wiki/File:Pepper_and_tomato_seedling_trays_at_Bo%C4%9Fazi%C3%A7i_University_2026.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Cell trays in nursery flats. Closest photo for a holed seed tray.", False),
-    "farm-trays": ("Seed trays at a nursery", "Judgefloro", "https://commons.wikimedia.org/wiki/File:5670Farm_Ready_Seedling_Facility_East_West_Seed_Philippines_20.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "Nursery seed trays. Stand-in where the listing is a solid tray or a heat mat.", True),
-    "lufa": ("Pea shoots in long greenhouse trays", "Lufa Farms", "https://commons.wikimedia.org/wiki/File:Lufa_Farms_Microgreens_in_Trays.jpg", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "Greenhouse trays. Stand-in for a home kit or a half tray of pea.", True),
-    "sunflower": ("Sunflower microgreens in a small clear tray", "Pannet", "https://commons.wikimedia.org/wiki/File:Sunflower_microgreens_02.jpg", "CC BY 4.0", "https://creativecommons.org/licenses/by/4.0/", "A small tray of microgreens. Stand-in for a small or solid tray and for a bamboo kit.", True),
-    "mixed": ("Small green leaves and pink stems in a clear container", "Stacy Spensley", "https://commons.wikimedia.org/wiki/File:11_microgreens.jpg", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Mixed small greens. Stand-in for a seed mix or a small radish tray.", True),
-    "radish": ("A young chonggak radish seedling", "이태수", "https://commons.wikimedia.org/wiki/File:Sprouting_chonggakmu(chonggak_radish).jpg", "CC BY 4.0", "https://creativecommons.org/licenses/by/4.0/", "A radish seedling. Stand-in for radish seed, and for a heat mat on the seed-starting page.", True),
-    "pea-sack": ("Sprouted garden peas in a cloth sack", "Yarzaryeni", "https://commons.wikimedia.org/wiki/File:Garden_pea_sprouts.jpg", "CC BY 3.0", "https://creativecommons.org/licenses/by/3.0/", "Sprouted peas. Stand-in for a bag of pea seed.", True),
-    "pea-shoots": ("Snow pea shoots in a container on a counter", "Daderot", "https://commons.wikimedia.org/wiki/File:Snow_pea_shoots_-_Massachusetts.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "Pea shoots in a container. Stand-in for a small holed tray and for a deep 1020.", True),
-    "broccoli": ("A dense stand of small green sprouts", "Julie Gibbons", "https://commons.wikimedia.org/wiki/File:Broccoli_sprouts.jpg", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Broccoli sprouts, as titled by the photographer.", False),
-    "basil": ("Young basil seedlings beside a window", "Jon Eben Field", "https://commons.wikimedia.org/wiki/File:Pot_of_basil_sprouts_(Ocimum_basilicum)_-_20050422.jpg", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Seedlings by a window. Stand-in for a dome kit and for the full SunBlaster kit.", True),
-    "lettuce-pot": ("Leaf lettuce growing in a container", "Netha Hussain", "https://commons.wikimedia.org/wiki/File:Leaf_lettuce_plant_in_a_pot_10.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Container lettuce. Stand-in for the LetPot garden and for buttercrunch seed.", True),
-    "basil-mosaic": ("Basil in a mosaic pot by a window", "Personal Creations", "https://commons.wikimedia.org/wiki/File:Chalkboard_Plant_Stake_Basil_in_a_window_(14889072919).jpg", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "A second pot. Stand-in for the 8 and 10 in ceramic pot pair.", True),
-    "lettuce-leaves": ("Frilly green lettuce leaves, close up", "Leon Brooks", "https://commons.wikimedia.org/wiki/File:Hydroponic_lettuce_leaves_green.jpg", "Public domain", "https://commons.wikimedia.org/wiki/File:Hydroponic_lettuce_leaves_green.jpg", "Lettuce leaves. Stand-in for mixed microgreen seed on the setup page, where the mixed-greens photo is already used.", True),
-    "potting-soil": ("Potting mix with white perlite in a round pot", "Chris Radcliff", "https://commons.wikimedia.org/wiki/File:Potting_soil.jpg", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "Potting mix with perlite, color-corrected and cropped on Commons by Daniel Case. Stand-in for bagged potting and seed-starting mix.", True),
-    "coir-pile": ("A compressed brick of coco coir", "Victor M. Vicente Selvas", "https://commons.wikimedia.org/wiki/File:Horticulture_coir1310.JPG", "Public domain", "https://commons.wikimedia.org/wiki/File:Horticulture_coir1310.JPG", "A dry, compressed coir brick before soaking. Stand-in for seed-starting mix.", True),
-    "coco-brick": ("A compressed brick of coco coir", "MatiasMiika", "https://commons.wikimedia.org/wiki/File:Brick_of_coco_coir.JPG", "CC BY 3.0", "https://creativecommons.org/licenses/by/3.0/", "A coir brick.", False),
-    "coir-fiber": ("Loose coconut coir fiber", "Fotokannan", "https://commons.wikimedia.org/wiki/File:Coir_fibery.jpg", "CC BY-SA 3.0", "https://creativecommons.org/licenses/by-sa/3.0/", "Coir fiber. Stand-in for a hemp grow mat.", True),
-    "scale": ("A plain digital pocket scale", "TBBSC", "https://commons.wikimedia.org/wiki/File:TBBSC_Digital_Scale.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "A plain digital pocket scale with no brand name on the face. Not the Etekcity model.", True),
-    "scissors": ("Herb scissors on a white background", "Raimond Spekking", "https://commons.wikimedia.org/wiki/File:Kr%C3%A4uterschere-0836.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Herb scissors. Not the Fiskars model.", True),
-    "spray": ("A plastic bottle with a hose spray head", "Rlsheehan", "https://commons.wikimedia.org/wiki/File:Plastic_bottle_with_hose_spray_attachment.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "A spray bottle. Stand-in for a plant mister.", True),
-    "grow-light": ("Potted plants under a grow light", "Asdfjrjjj", "https://commons.wikimedia.org/wiki/File:Potted_plants_succulents_under_grow_light_Nov_2016.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Plants under a grow light. Stand-in for a clip-on lamp.", True),
-    "led-bulb": ("An LED light bulb", "Dmitry G", "https://commons.wikimedia.org/wiki/File:PILA_9290013873.JPG", "CC BY-SA 3.0", "https://creativecommons.org/licenses/by-sa/3.0/", "A photographed LED bulb. Stand-in for a plant bulb.", True),
-    "ceramic": ("A leafy plant in a ceramic pot", "W.carter", "https://commons.wikimedia.org/wiki/File:Plectranthus_verticillatus_in_a_ceramic_pot.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "A ceramic pot. Stand-in for the ceramic microgreens kit and for 8 in pots.", True),
-    "windowbox": ("A planted window box", "litchick_1", "https://commons.wikimedia.org/wiki/File:2009_windowbox_2463967211.jpg", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "A window box. Stand-in for a balcony rail planter.", True),
-    "grow-bag": ("A plant growing in a fabric grow bag", "Clintacc", "https://commons.wikimedia.org/wiki/File:Brinjal_plant_with_fruits_in_grow_bag.jpg", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "A fabric grow bag with a plant. Stand-in for empty grow bags.", True),
-    "dome-trays": ("Seedling cell trays on a rack, one under a clear humidity dome", "F. D. Richards", "https://www.flickr.com/photos/50697352@N00/4464904926", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "Cell trays with a clear humidity dome, square crop. Stand-in for trays sold with domes and cells.", True),
-    "microgreens-tray": ("Young red and green microgreens in a small black tray", "Zenyrgarden", "https://commons.wikimedia.org/wiki/File:Microgreen_growing.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Microgreens growing in a small tray, square crop. Stand-in for a microgreens kit.", True),
-    "radish-bowl": ("Purple radish microgreens in a steel bowl", "jonny.hunter", "https://www.flickr.com/photos/51931594@N00/461461364", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Harvested purple-stemmed radish microgreens, enlarged from a 500 by 375 pixel original. Stand-in for Rambo radish microgreen seed.", True),
-    "mixed-seed": ("Mixed seeds just sprouting, in purple, tan and green", "Br3nda", "https://www.flickr.com/photos/36251685@N00/6778605865", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "A mix of seeds starting to sprout. Stand-in for a mixed microgreens seed collection.", True),
-    "microgreens-plate": ("Green microgreens on a white ceramic plate", "apapac", "https://www.flickr.com/photos/146235256@N06/37037208672", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Microgreens on a ceramic plate. Stand-in for a ceramic microgreens kit.", True),
-    "microgreens-dense": ("A dense stand of young microgreens", "Rosmarie Voegtli", "https://www.flickr.com/photos/94212497@N00/51830064936", "CC BY 2.0", "https://creativecommons.org/licenses/by/2.0/", "Young microgreens growing close together. Stand-in for a small counter kit.", True),
-    "heat-propagator": ("A heated seed tray with three clear domes and a thermostat", "Home Garden Labs", "https://www.flickr.com/photos/98760644@N06/15471637569", "CC BY-SA 2.0", "https://creativecommons.org/licenses/by-sa/2.0/", "An X-Stream heated propagator by Nutriculture, padded to a square on white. Stand-in for a kit with trays, a heat mat, and domes.", True),
-    "electric-propagator": ("Seedlings in cells under a clear lid on a heated base", "Simon Speed", "https://commons.wikimedia.org/wiki/File:ElectricPropagator.JPG", "CC0 1.0", "https://creativecommons.org/publicdomain/zero/1.0/", "An electric propagator that warms seedlings from below. Closest licensed photo for a seedling heat mat.", True),
-    "home-microgreens": ("Young microgreens in a small pot", "Zenyrgarden", "https://commons.wikimedia.org/wiki/File:Microgreen_in_a_pot.jpg", "CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/", "Microgreens in a small pot. Stand-in for a home kit.", True),
-    "alfalfa-jar": ("Alfalfa sprouts in a glass jar", "Sproutable", "https://commons.wikimedia.org/wiki/File:AlfalfaSproutsJar1.jpg", "Public domain", "https://commons.wikimedia.org/wiki/File:AlfalfaSproutsJar1.jpg", "A jar of sprouts. Stand-in for sprouting seed, not microgreens.", True),
-    "letpot-mini": ("LetPot LPH-Mini indoor garden", "LetPot", "https://letpot.com/products/mini-hydroponics-growing-system", "LetPot promotional materials", "https://letpot.com/products/mini-hydroponics-growing-system", "Official product photo, converted to WebP at the same aspect. Not cropped or recolored.", False),
-    "letpot-air": ("LetPot LPH-Air indoor garden", "LetPot", "https://letpot.com/products/lph-air-indoor-hydroponic-gardening-system", "LetPot promotional materials", "https://letpot.com/products/lph-air-indoor-hydroponic-gardening-system", "Official product photo, converted to WebP at the same aspect. Not cropped or recolored.", False),
-    "letpot-se": ("LetPot LPH-SE indoor garden", "LetPot", "https://letpot.com/products/letpot-senior-12-pod-hydroponic-growing-system-with-app-control", "LetPot promotional materials", "https://letpot.com/products/letpot-senior-12-pod-hydroponic-growing-system-with-app-control", "Official product photo, converted to WebP at the same aspect. Not cropped or recolored.", False),
-    "letpot-lite": ("LetPot LPH-Lite indoor garden", "LetPot", "https://letpot.com/products/letpot-lph-lite-hydroponics-growing-system-12-pods", "LetPot promotional materials", "https://letpot.com/products/letpot-lph-lite-hydroponics-growing-system-12-pods", "Official product photo, converted to WebP at the same aspect. Not cropped or recolored.", False),
-    "letpot-max": ("LetPot LPH-Max indoor garden", "LetPot", "https://letpot.com/products/lph-max-21-pod-hydroponics-system-with-app-control", "LetPot promotional materials", "https://letpot.com/products/lph-max-21-pod-hydroponics-system-with-app-control", "Official product photo, converted to WebP at the same aspect. Not cropped or recolored.", False),
-}
-
-ITEM_IMAGE = {
-    BF_1020_HOLES: "pepper-trays",
-    BF_1020_SOLID: "farm-trays",
-    BF_1010_HOLES: "pea-shoots",
-    TRAY_1010_SOLID_10: "sunflower",
-    TRAY_1010_SOLID_5: "sunflower",
-    ESPOMA_SEED: "coir-pile",
-    HEMP: "coir-fiber",
-    SCALE: "scale",
-    SCISSORS: "scissors",
-    MISTER: "spray",
-    KIT_SPONGE: "lufa",
-    COCO: "coco-brick",
-    SANSI_CLIP: "grow-light",
-    KIT_BUDDY: "sunflower",
-    KIT_GREEN: "mixed",
-    KIT_SUN: "heat-propagator",
-    KIT_MIZUNA: "microgreens-plate",
-    SANSI_BULB: "led-bulb",
-    HEAT_SILL: "electric-propagator",
-    KIT_CELLS: "pepper-trays",
-    SUNPACK: "farm-trays",
-    TRAY_DEEP: "pea-shoots",
-    DOMES: "dome-trays",
-    MIRACLE: "potting-soil",
-    HEAT_1020: "electric-propagator",
-    POTS_8: "ceramic",
-    POTS_8_10: "basil-mosaic",
-    RAIL: "windowbox",
-    ESPOMA_POT: "potting-soil",
-    LETTUCE: "lettuce-pot",
-    BAGS: "grow-bag",
-    RADISH: "radish-bowl",
-    RADISH_SMALL: "mixed",
-    PEA: "pea-shoots",
-    PEA_HALF: "lufa",
-    BROCCOLI: "broccoli",
-    MIXED_SEED: "mixed",
-    AIR: "letpot-air",
-}
-
-# Same photo cannot appear twice on /gear/, which already uses the mixed-greens file.
-PAGE_IMAGE = {
-    "gear": {MIXED_SEED: "mixed-seed"},
-    "windowsill": {RADISH_SMALL: "broccoli"},
-    "density": {BF_1010_HOLES: "lufa"},
-    "calculator": {BF_1010_HOLES: "sunflower"},
-    "cost": {KIT_GREEN: "broccoli", KIT_BUDDY: "microgreens-dense"},
-    # Pea page: the hero is the Daderot pea photo, so the pea seed row uses the sprouted-pea sack.
-    "pea": {PEA: "pea-sack", PEA_HALF: "microgreens-tray"},
-    # Apartment guide: the step photo is Pannet's sunflower tray, so the solid tray uses nursery trays.
-    "apartment": {TRAY_1010_SOLID_10: "farm-trays"},
-    # Balcony guide: the layout list already shows the potted lettuce photo.
-    "balcony": {LETTUCE: "lettuce-leaves"},
-    "bottom": {SUNPACK: "dome-trays"},
-}
-
+# Image metadata for leftover affiliate-box slugs that are not a catalog product key.
+# Catalog products are the source of truth for shop and placement cards.
 BUTTON = {"amazon": "View on Amazon", "trueleaf": "See at True Leaf", "letpot": "See at LetPot"}
+
+LEGACY_IMAGES = {
+    "radish": {
+        "treatment": "crop",
+        "slug": "radish",
+        "alt": "A young chonggak radish seedling",
+        "author": "이태수",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sprouting_chonggakmu(chonggak_radish).jpg",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "note": "A radish seedling. Identifies the crop, not a seed packet.",
+        "credit_id": "supply-radish",
+    },
+}
+
+EDITORIAL_IMAGES = {
+    'pepper-trays': {
+        'treatment': 'editorial',
+        'slug': 'pepper-trays',
+        'alt': 'Nursery cell trays in black flats',
+        'author': 'Furkan Akkurt',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Pepper_and_tomato_seedling_trays_at_Bo%C4%9Fazi%C3%A7i_University_2026.jpg',
+        'license': 'CC BY-SA 4.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/4.0/',
+        'note': 'Cell trays in nursery flats. Closest photo for a holed seed tray.',
+        'credit_id': 'supply-pepper-trays',
+    },
+    'farm-trays': {
+        'treatment': 'editorial',
+        'slug': 'farm-trays',
+        'alt': 'Seed trays at a nursery',
+        'author': 'Judgefloro',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:5670Farm_Ready_Seedling_Facility_East_West_Seed_Philippines_20.jpg',
+        'license': 'CC0 1.0',
+        'license_url': 'https://creativecommons.org/publicdomain/zero/1.0/',
+        'note': 'Nursery seed trays. Stand-in where the listing is a solid tray or a heat mat.',
+        'credit_id': 'supply-farm-trays',
+    },
+    'lufa': {
+        'treatment': 'editorial',
+        'slug': 'lufa',
+        'alt': 'Pea shoots in long greenhouse trays',
+        'author': 'Lufa Farms',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Lufa_Farms_Microgreens_in_Trays.jpg',
+        'license': 'CC BY-SA 2.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/2.0/',
+        'note': 'Greenhouse trays. Editorial photo used in a guide. Not a photograph of a home kit or a half tray of pea.',
+        'credit_id': 'supply-lufa',
+    },
+    'sunflower': {
+        'treatment': 'editorial',
+        'slug': 'sunflower',
+        'alt': 'Sunflower microgreens in a small clear tray',
+        'author': 'Pannet',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Sunflower_microgreens_02.jpg',
+        'license': 'CC BY 4.0',
+        'license_url': 'https://creativecommons.org/licenses/by/4.0/',
+        'note': 'A small tray of microgreens. Editorial photo used in a guide. Not a photograph of a small or solid tray and for a bamboo kit.',
+        'credit_id': 'supply-sunflower',
+    },
+    'mixed': {
+        'treatment': 'editorial',
+        'slug': 'mixed',
+        'alt': 'Small green leaves and pink stems in a clear container',
+        'author': 'Stacy Spensley',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:11_microgreens.jpg',
+        'license': 'CC BY 2.0',
+        'license_url': 'https://creativecommons.org/licenses/by/2.0/',
+        'note': 'Mixed small greens. Editorial photo used in a guide. Not a photograph of a seed mix or a small radish tray.',
+        'credit_id': 'supply-mixed',
+    },
+    'radish': {
+        'treatment': 'editorial',
+        'slug': 'radish',
+        'alt': 'A young chonggak radish seedling',
+        'author': '이태수',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Sprouting_chonggakmu(chonggak_radish).jpg',
+        'license': 'CC BY 4.0',
+        'license_url': 'https://creativecommons.org/licenses/by/4.0/',
+        'note': 'A radish seedling. Editorial photo used in a guide. Not a photograph of radish seed, and for a heat mat on the seed-starting page.',
+        'credit_id': 'supply-radish',
+    },
+    'pea-sack': {
+        'treatment': 'editorial',
+        'slug': 'pea-sack',
+        'alt': 'Sprouted garden peas in a cloth sack',
+        'author': 'Yarzaryeni',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Garden_pea_sprouts.jpg',
+        'license': 'CC BY 3.0',
+        'license_url': 'https://creativecommons.org/licenses/by/3.0/',
+        'note': 'Sprouted peas. Editorial photo used in a guide. Not a photograph of a bag of pea seed.',
+        'credit_id': 'supply-pea-sack',
+    },
+    'pea-shoots': {
+        'treatment': 'editorial',
+        'slug': 'pea-shoots',
+        'alt': 'Snow pea shoots in a container on a counter',
+        'author': 'Daderot',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Snow_pea_shoots_-_Massachusetts.jpg',
+        'license': 'CC0 1.0',
+        'license_url': 'https://creativecommons.org/publicdomain/zero/1.0/',
+        'note': 'Pea shoots in a container. Editorial photo used in a guide. Not a photograph of a small holed tray and for a deep 1020.',
+        'credit_id': 'supply-pea-shoots',
+    },
+    'broccoli': {
+        'treatment': 'editorial',
+        'slug': 'broccoli',
+        'alt': 'A dense stand of small green sprouts',
+        'author': 'Julie Gibbons',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Broccoli_sprouts.jpg',
+        'license': 'CC BY 2.0',
+        'license_url': 'https://creativecommons.org/licenses/by/2.0/',
+        'note': 'Broccoli sprouts, as titled by the photographer.',
+        'credit_id': 'supply-broccoli',
+    },
+    'basil': {
+        'treatment': 'editorial',
+        'slug': 'basil',
+        'alt': 'Young basil seedlings beside a window',
+        'author': 'Jon Eben Field',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Pot_of_basil_sprouts_(Ocimum_basilicum)_-_20050422.jpg',
+        'license': 'CC BY 2.0',
+        'license_url': 'https://creativecommons.org/licenses/by/2.0/',
+        'note': 'Seedlings by a window. Editorial photo used in a guide. Not a photograph of a dome kit and for the full SunBlaster kit.',
+        'credit_id': 'supply-basil',
+    },
+    'lettuce-pot': {
+        'treatment': 'editorial',
+        'slug': 'lettuce-pot',
+        'alt': 'Leaf lettuce growing in a container',
+        'author': 'Netha Hussain',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Leaf_lettuce_plant_in_a_pot_10.jpg',
+        'license': 'CC BY-SA 4.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/4.0/',
+        'note': 'Container lettuce. Editorial photo used in a guide. Not a photograph of the LetPot garden and for buttercrunch seed.',
+        'credit_id': 'supply-lettuce-pot',
+    },
+    'basil-mosaic': {
+        'treatment': 'editorial',
+        'slug': 'basil-mosaic',
+        'alt': 'Basil in a mosaic pot by a window',
+        'author': 'Personal Creations',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Chalkboard_Plant_Stake_Basil_in_a_window_(14889072919).jpg',
+        'license': 'CC BY 2.0',
+        'license_url': 'https://creativecommons.org/licenses/by/2.0/',
+        'note': 'A second pot. Editorial photo used in a guide. Not a photograph of the 8 and 10 in ceramic pot pair.',
+        'credit_id': 'supply-basil-mosaic',
+    },
+    'lettuce-leaves': {
+        'treatment': 'editorial',
+        'slug': 'lettuce-leaves',
+        'alt': 'Frilly green lettuce leaves, close up',
+        'author': 'Leon Brooks',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Hydroponic_lettuce_leaves_green.jpg',
+        'license': 'Public domain',
+        'license_url': 'https://commons.wikimedia.org/wiki/File:Hydroponic_lettuce_leaves_green.jpg',
+        'note': 'Lettuce leaves. Editorial photo used in a guide. Not a photograph of mixed microgreen seed on the setup page, where the mixed-greens photo is already used.',
+        'credit_id': 'supply-lettuce-leaves',
+    },
+    'potting-soil': {
+        'treatment': 'editorial',
+        'slug': 'potting-soil',
+        'alt': 'Potting mix with white perlite in a round pot',
+        'author': 'Chris Radcliff',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Potting_soil.jpg',
+        'license': 'CC BY-SA 2.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/2.0/',
+        'note': 'Potting mix with perlite, color-corrected and cropped on Commons by Daniel Case. Editorial photo used in a guide. Not a photograph of bagged potting and seed-starting mix.',
+        'credit_id': 'supply-potting-soil',
+    },
+    'coir-pile': {
+        'treatment': 'editorial',
+        'slug': 'coir-pile',
+        'alt': 'A compressed brick of coco coir',
+        'author': 'Victor M. Vicente Selvas',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Horticulture_coir1310.JPG',
+        'license': 'Public domain',
+        'license_url': 'https://commons.wikimedia.org/wiki/File:Horticulture_coir1310.JPG',
+        'note': 'A dry, compressed coir brick before soaking. Editorial photo used in a guide. Not a photograph of seed-starting mix.',
+        'credit_id': 'supply-coir-pile',
+    },
+    'coco-brick': {
+        'treatment': 'editorial',
+        'slug': 'coco-brick',
+        'alt': 'A compressed brick of coco coir',
+        'author': 'MatiasMiika',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Brick_of_coco_coir.JPG',
+        'license': 'CC BY 3.0',
+        'license_url': 'https://creativecommons.org/licenses/by/3.0/',
+        'note': 'A coir brick.',
+        'credit_id': 'supply-coco-brick',
+    },
+    'coir-fiber': {
+        'treatment': 'editorial',
+        'slug': 'coir-fiber',
+        'alt': 'Loose coconut coir fiber',
+        'author': 'Fotokannan',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Coir_fibery.jpg',
+        'license': 'CC BY-SA 3.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/3.0/',
+        'note': 'Coir fiber. Editorial photo used in a guide. Not a photograph of a hemp grow mat.',
+        'credit_id': 'supply-coir-fiber',
+    },
+    'scale': {
+        'treatment': 'editorial',
+        'slug': 'scale',
+        'alt': 'A plain digital pocket scale',
+        'author': 'TBBSC',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:TBBSC_Digital_Scale.jpg',
+        'license': 'CC BY-SA 4.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/4.0/',
+        'note': 'A plain digital pocket scale with no brand name on the face. Not the Etekcity model.',
+        'credit_id': 'supply-scale',
+    },
+    'scissors': {
+        'treatment': 'editorial',
+        'slug': 'scissors',
+        'alt': 'Herb scissors on a white background',
+        'author': 'Raimond Spekking',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Kr%C3%A4uterschere-0836.jpg',
+        'license': 'CC BY-SA 4.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/4.0/',
+        'note': 'Herb scissors. Not the Fiskars model.',
+        'credit_id': 'supply-scissors',
+    },
+    'spray': {
+        'treatment': 'editorial',
+        'slug': 'spray',
+        'alt': 'A plastic bottle with a hose spray head',
+        'author': 'Rlsheehan',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Plastic_bottle_with_hose_spray_attachment.jpg',
+        'license': 'CC BY-SA 4.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/4.0/',
+        'note': 'A spray bottle. Editorial photo used in a guide. Not a photograph of a plant mister.',
+        'credit_id': 'supply-spray',
+    },
+    'grow-light': {
+        'treatment': 'editorial',
+        'slug': 'grow-light',
+        'alt': 'Potted plants under a grow light',
+        'author': 'Asdfjrjjj',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Potted_plants_succulents_under_grow_light_Nov_2016.jpg',
+        'license': 'CC BY-SA 4.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/4.0/',
+        'note': 'Plants under a grow light. Editorial photo used in a guide. Not a photograph of a clip-on lamp.',
+        'credit_id': 'supply-grow-light',
+    },
+    'led-bulb': {
+        'treatment': 'editorial',
+        'slug': 'led-bulb',
+        'alt': 'An LED light bulb',
+        'author': 'Dmitry G',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:PILA_9290013873.JPG',
+        'license': 'CC BY-SA 3.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/3.0/',
+        'note': 'A photographed LED bulb. Editorial photo used in a guide. Not a photograph of a plant bulb.',
+        'credit_id': 'supply-led-bulb',
+    },
+    'ceramic': {
+        'treatment': 'editorial',
+        'slug': 'ceramic',
+        'alt': 'A leafy plant in a ceramic pot',
+        'author': 'W.carter',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Plectranthus_verticillatus_in_a_ceramic_pot.jpg',
+        'license': 'CC0 1.0',
+        'license_url': 'https://creativecommons.org/publicdomain/zero/1.0/',
+        'note': 'A ceramic pot. Editorial photo used in a guide. Not a photograph of the ceramic microgreens kit and for 8 in pots.',
+        'credit_id': 'supply-ceramic',
+    },
+    'windowbox': {
+        'treatment': 'editorial',
+        'slug': 'windowbox',
+        'alt': 'A planted window box',
+        'author': 'litchick_1',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:2009_windowbox_2463967211.jpg',
+        'license': 'CC BY-SA 2.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/2.0/',
+        'note': 'A window box. Editorial photo used in a guide. Not a photograph of a balcony rail planter.',
+        'credit_id': 'supply-windowbox',
+    },
+    'grow-bag': {
+        'treatment': 'editorial',
+        'slug': 'grow-bag',
+        'alt': 'A plant growing in a fabric grow bag',
+        'author': 'Clintacc',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Brinjal_plant_with_fruits_in_grow_bag.jpg',
+        'license': 'CC0 1.0',
+        'license_url': 'https://creativecommons.org/publicdomain/zero/1.0/',
+        'note': 'A fabric grow bag with a plant. Editorial photo used in a guide. Not a photograph of empty grow bags.',
+        'credit_id': 'supply-grow-bag',
+    },
+    'dome-trays': {
+        'treatment': 'editorial',
+        'slug': 'dome-trays',
+        'alt': 'Seedling cell trays on a rack, one under a clear humidity dome',
+        'author': 'F. D. Richards',
+        'source_url': 'https://www.flickr.com/photos/50697352@N00/4464904926',
+        'license': 'CC BY-SA 2.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/2.0/',
+        'note': 'Cell trays with a clear humidity dome, square crop. Editorial photo used in a guide. Not a photograph of trays sold with domes and cells.',
+        'credit_id': 'supply-dome-trays',
+    },
+    'microgreens-tray': {
+        'treatment': 'editorial',
+        'slug': 'microgreens-tray',
+        'alt': 'Young red and green microgreens in a small black tray',
+        'author': 'Zenyrgarden',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Microgreen_growing.jpg',
+        'license': 'CC BY-SA 4.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/4.0/',
+        'note': 'Microgreens growing in a small tray, square crop. Editorial photo used in a guide. Not a photograph of a microgreens kit.',
+        'credit_id': 'supply-microgreens-tray',
+    },
+    'radish-bowl': {
+        'treatment': 'editorial',
+        'slug': 'radish-bowl',
+        'alt': 'Purple radish microgreens in a steel bowl',
+        'author': 'jonny.hunter',
+        'source_url': 'https://www.flickr.com/photos/51931594@N00/461461364',
+        'license': 'CC BY 2.0',
+        'license_url': 'https://creativecommons.org/licenses/by/2.0/',
+        'note': 'Harvested purple-stemmed radish microgreens, enlarged from a 500 by 375 pixel original. Editorial photo used in a guide. Not a photograph of Rambo radish microgreen seed.',
+        'credit_id': 'supply-radish-bowl',
+    },
+    'mixed-seed': {
+        'treatment': 'editorial',
+        'slug': 'mixed-seed',
+        'alt': 'Mixed seeds just sprouting, in purple, tan and green',
+        'author': 'Br3nda',
+        'source_url': 'https://www.flickr.com/photos/36251685@N00/6778605865',
+        'license': 'CC BY 2.0',
+        'license_url': 'https://creativecommons.org/licenses/by/2.0/',
+        'note': 'A mix of seeds starting to sprout. Editorial photo used in a guide. Not a photograph of a mixed microgreens seed collection.',
+        'credit_id': 'supply-mixed-seed',
+    },
+    'microgreens-plate': {
+        'treatment': 'editorial',
+        'slug': 'microgreens-plate',
+        'alt': 'Green microgreens on a white ceramic plate',
+        'author': 'apapac',
+        'source_url': 'https://www.flickr.com/photos/146235256@N06/37037208672',
+        'license': 'CC BY 2.0',
+        'license_url': 'https://creativecommons.org/licenses/by/2.0/',
+        'note': 'Microgreens on a ceramic plate. Editorial photo used in a guide. Not a photograph of a ceramic microgreens kit.',
+        'credit_id': 'supply-microgreens-plate',
+    },
+    'microgreens-dense': {
+        'treatment': 'editorial',
+        'slug': 'microgreens-dense',
+        'alt': 'A dense stand of young microgreens',
+        'author': 'Rosmarie Voegtli',
+        'source_url': 'https://www.flickr.com/photos/94212497@N00/51830064936',
+        'license': 'CC BY 2.0',
+        'license_url': 'https://creativecommons.org/licenses/by/2.0/',
+        'note': 'Young microgreens growing close together. Editorial photo used in a guide. Not a photograph of a small counter kit.',
+        'credit_id': 'supply-microgreens-dense',
+    },
+    'heat-propagator': {
+        'treatment': 'editorial',
+        'slug': 'heat-propagator',
+        'alt': 'A heated seed tray with three clear domes and a thermostat',
+        'author': 'Home Garden Labs',
+        'source_url': 'https://www.flickr.com/photos/98760644@N06/15471637569',
+        'license': 'CC BY-SA 2.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/2.0/',
+        'note': 'An X-Stream heated propagator by Nutriculture, padded to a square on white. Editorial photo used in a guide. Not a photograph of a kit with trays, a heat mat, and domes.',
+        'credit_id': 'supply-heat-propagator',
+    },
+    'electric-propagator': {
+        'treatment': 'editorial',
+        'slug': 'electric-propagator',
+        'alt': 'Seedlings in cells under a clear lid on a heated base',
+        'author': 'Simon Speed',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:ElectricPropagator.JPG',
+        'license': 'CC0 1.0',
+        'license_url': 'https://creativecommons.org/publicdomain/zero/1.0/',
+        'note': 'An electric propagator that warms seedlings from below. Closest licensed photo for a seedling heat mat.',
+        'credit_id': 'supply-electric-propagator',
+    },
+    'home-microgreens': {
+        'treatment': 'editorial',
+        'slug': 'home-microgreens',
+        'alt': 'Young microgreens in a small pot',
+        'author': 'Zenyrgarden',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:Microgreen_in_a_pot.jpg',
+        'license': 'CC BY-SA 4.0',
+        'license_url': 'https://creativecommons.org/licenses/by-sa/4.0/',
+        'note': 'Microgreens in a small pot. Editorial photo used in a guide. Not a photograph of a home kit.',
+        'credit_id': 'supply-home-microgreens',
+    },
+    'alfalfa-jar': {
+        'treatment': 'editorial',
+        'slug': 'alfalfa-jar',
+        'alt': 'Alfalfa sprouts in a glass jar',
+        'author': 'Sproutable',
+        'source_url': 'https://commons.wikimedia.org/wiki/File:AlfalfaSproutsJar1.jpg',
+        'license': 'Public domain',
+        'license_url': 'https://commons.wikimedia.org/wiki/File:AlfalfaSproutsJar1.jpg',
+        'note': 'A jar of sprouts. Editorial photo used in a guide. Not a photograph of sprouting seed, not microgreens.',
+        'credit_id': 'supply-alfalfa-jar',
+    },
+    'letpot-mini': {
+        'treatment': 'editorial',
+        'slug': 'letpot-mini',
+        'alt': 'LetPot LPH-Mini indoor garden',
+        'author': 'LetPot',
+        'source_url': 'https://letpot.com/products/mini-hydroponics-growing-system',
+        'license': 'LetPot promotional materials',
+        'license_url': 'https://letpot.com/products/mini-hydroponics-growing-system',
+        'note': 'Official product photo, converted to WebP at the same aspect. Not cropped or recolored.',
+        'credit_id': 'supply-letpot-mini',
+    },
+    'letpot-air': {
+        'treatment': 'editorial',
+        'slug': 'letpot-air',
+        'alt': 'LetPot LPH-Air indoor garden',
+        'author': 'LetPot',
+        'source_url': 'https://letpot.com/products/lph-air-indoor-hydroponic-gardening-system',
+        'license': 'LetPot promotional materials',
+        'license_url': 'https://letpot.com/products/lph-air-indoor-hydroponic-gardening-system',
+        'note': 'Official product photo, converted to WebP at the same aspect. Not cropped or recolored.',
+        'credit_id': 'supply-letpot-air',
+    },
+    'letpot-se': {
+        'treatment': 'editorial',
+        'slug': 'letpot-se',
+        'alt': 'LetPot LPH-SE indoor garden',
+        'author': 'LetPot',
+        'source_url': 'https://letpot.com/products/letpot-senior-12-pod-hydroponic-growing-system-with-app-control',
+        'license': 'LetPot promotional materials',
+        'license_url': 'https://letpot.com/products/letpot-senior-12-pod-hydroponic-growing-system-with-app-control',
+        'note': 'Official product photo, converted to WebP at the same aspect. Not cropped or recolored.',
+        'credit_id': 'supply-letpot-se',
+    },
+    'letpot-lite': {
+        'treatment': 'editorial',
+        'slug': 'letpot-lite',
+        'alt': 'LetPot LPH-Lite indoor garden',
+        'author': 'LetPot',
+        'source_url': 'https://letpot.com/products/letpot-lph-lite-hydroponics-growing-system-12-pods',
+        'license': 'LetPot promotional materials',
+        'license_url': 'https://letpot.com/products/letpot-lph-lite-hydroponics-growing-system-12-pods',
+        'note': 'Official product photo, converted to WebP at the same aspect. Not cropped or recolored.',
+        'credit_id': 'supply-letpot-lite',
+    },
+    'letpot-max': {
+        'treatment': 'editorial',
+        'slug': 'letpot-max',
+        'alt': 'LetPot LPH-Max indoor garden',
+        'author': 'LetPot',
+        'source_url': 'https://letpot.com/products/lph-max-21-pod-hydroponics-system-with-app-control',
+        'license': 'LetPot promotional materials',
+        'license_url': 'https://letpot.com/products/lph-max-21-pod-hydroponics-system-with-app-control',
+        'note': 'Official product photo, converted to WebP at the same aspect. Not cropped or recolored.',
+        'credit_id': 'supply-letpot-max',
+    },
+}
+
+
+# Page-only image choices when two catalog products share a display name.
+PAGE_PRODUCT = {}
+
+
+
+
+def supply_image_tuple(slug: str):
+    """Legacy (alt, author, source, license, license_url, note, stand_in) for older callers."""
+    image = image_meta(slug)
+    return (
+        image["alt"],
+        image.get("author") or "",
+        image.get("source_url") or "",
+        image.get("license") or "",
+        image.get("license_url") or "",
+        image.get("note") or "",
+        image.get("treatment") not in {"official", "licensed-exact"},
+    )
+
+
+class _SupplyImages(dict):
+    def __contains__(self, slug):
+        try:
+            image_meta(slug)
+            return True
+        except SystemExit:
+            return False
+
+    def __getitem__(self, slug):
+        return supply_image_tuple(slug)
+
+    def items(self):
+        slugs = {p["image"]["slug"] for p in catalog.products().values()}
+        slugs.update(LEGACY_IMAGES)
+        return ((slug, self[slug]) for slug in sorted(slugs))
+
+    def keys(self):
+        return (slug for slug, _ in self.items())
+
+    def values(self):
+        return (row for _, row in self.items())
+
+
+SUPPLY_IMAGES = _SupplyImages()
+
+
+def product_for(key: str, row: dict) -> dict:
+    if row.get("asin"):
+        found = catalog.by_asin(row["asin"])
+        if found:
+            return found
+    found = catalog.by_name(row["item"])
+    if not found:
+        raise SystemExit(f"No catalog product for {key} item {row['item']!r}")
+    override = PAGE_PRODUCT.get(key, {}).get(row["item"])
+    if override:
+        return catalog.by_id(override)
+    return found
+
+
+def image_meta(slug: str) -> dict:
+    for product in catalog.products().values():
+        image = product["image"]
+        if image["slug"] == slug:
+            return image
+    if slug in LEGACY_IMAGES:
+        return LEGACY_IMAGES[slug]
+    if slug in EDITORIAL_IMAGES:
+        return EDITORIAL_IMAGES[slug]
+    raise SystemExit(f"No image metadata for slug {slug}")
 
 
 def image_for(key: str, item: str) -> str:
-    slug = PAGE_IMAGE.get(key, {}).get(item, ITEM_IMAGE[item])
-    if slug not in SUPPLY_IMAGES:
-        raise SystemExit(f"No supply photo for {item}")
-    return slug
+    # Kept for callers that only have a page key and item name.
+    row = {"item": item}
+    for candidate in SHOP_PAGES[key]["rows"]:
+        if candidate["item"] == item:
+            row = candidate
+            break
+    return product_for(key, row)["image"]["slug"]
 
 
 def photo_stem(slug: str) -> str:
-    if slug.startswith("letpot-") or slug == "alfalfa-jar":
-        return slug
-    return f"supply-{slug}"
+    return catalog.photo_stem(slug)
 
 
 def render_shop(key: str) -> str:
@@ -385,35 +818,46 @@ def render_shop(key: str) -> str:
     seen = []
     cards = []
     for row in rows:
-        slug = image_for(key, row["item"])
-        photo_dir = Path(__file__).resolve().parents[1] / "assets" / "products"
-        stem = photo_stem(slug)
-        if not (photo_dir / f"{stem}-600.webp").is_file() or not (photo_dir / f"{stem}-300.webp").is_file():
-            raise SystemExit(f"Missing supply photo files for {slug}")
+        product = product_for(key, row)
+        image = product["image"]
+        slug = image["slug"]
+        stem = catalog.require_photo_files(slug)
         if slug in seen:
             raise SystemExit(f"{key} repeats supply photo {slug}")
         seen.append(slug)
-        alt, author, _source, _license, _license_url, _note, _stand_in = SUPPLY_IMAGES[slug]
         src = f"/assets/products/{stem}-600.webp"
         srcset = f"/assets/products/{stem}-300.webp 300w, /assets/products/{stem}-600.webp 600w"
-        official = slug.startswith("letpot-")
-        img_class = ' class="letpot-photo"' if official else ""
+        treatment = image["treatment"]
+        official = treatment == "official"
+        plain = treatment == "neutral"
+        img_class = ' class="letpot-photo"' if official else (' class="plain-photo"' if plain else "")
+        media_class = "pick-media"
+        if official:
+            media_class += " pick-media-letpot"
+        if plain:
+            media_class += " pick-media-plain"
         if official:
             caption = '<figcaption class="pick-credit">Photo: LetPot</figcaption>'
+        elif plain:
+            caption = ""
         else:
+            credit_id = image.get("credit_id") or f"supply-{slug}"
             caption = (
-                f'<figcaption class="pick-credit">Credit: '
-                f'<a href="/photo-credits/#supply-{slug}">{esc(author)}</a></figcaption>'
+                f'<figcaption class="pick-credit">Photo: '
+                f'<a href="/photo-credits/#{esc(credit_id)}">{esc(image["author"])}</a></figcaption>'
             )
         button = BUTTON[row["kind"]] if row["kind"] == "amazon" else row["label"]
         routes_attr = f' data-routes="{esc(row["routes"])}"' if row.get("routes") else ""
+        role = (product.get("fits") or {}).get("role") or ""
+        role_attr = f' data-role="{esc(role)}"' if role else ""
+        product_attr = f' data-product="{esc(product["id"])}"'
         cards.append(
-            f'<li class="pick"{routes_attr}>'
-            f'<figure class="pick-media{" pick-media-letpot" if official else ""}">'
+            f'<li class="pick"{routes_attr}{product_attr}{role_attr}>'
+            f'<figure class="{media_class}">'
             f'<img{img_class} src="{src}" srcset="{srcset}" '
             'sizes="(min-width: 1024px) 240px, (min-width: 720px) 30vw, 46vw" '
             'width="600" height="600" loading="lazy" decoding="async" '
-            f'alt="{esc(alt)}">'
+            f'alt="{esc(image["alt"])}">'
             f"{caption}"
             "</figure>"
             f'<h3 class="pick-name">{esc(row["item"])}</h3>'
@@ -445,21 +889,43 @@ def render_shop(key: str) -> str:
 
 def supply_credit_html() -> str:
     blocks = []
-    for slug, (alt, author, source, license_name, license_url, note, _stand_in) in SUPPLY_IMAGES.items():
+    seen: set[str] = set()
+    records = []
+    for product in catalog.products().values():
+        image = product["image"]
+        if image["treatment"] == "neutral":
+            continue
+        slug = image["slug"]
+        if slug in seen:
+            continue
+        seen.add(slug)
+        records.append(image)
+    for image in list(LEGACY_IMAGES.values()) + list(EDITORIAL_IMAGES.values()):
+        if image["slug"] not in seen:
+            records.append(image)
+            seen.add(image["slug"])
+    for image in records:
+        slug = image["slug"]
         stem = photo_stem(slug)
+        official = image["treatment"] == "official"
         src = f"/assets/products/{stem}-600.webp"
-        official = slug.startswith("letpot-")
+        credit_id = image.get("credit_id") or f"supply-{slug}"
         if official:
             origin = "LetPot product page"
-            use = f"{esc(note)} Shown with the full frame on a light background."
+            use = f"{esc(image['note'])} Shown with the full frame on a light background."
         else:
+            source = image["source_url"] or ""
             origin = "Flickr" if "flickr.com" in source else "Wikimedia Commons"
-            use = f"{esc(note)} Square crop for a product card. Not the listed product."
+            use = esc(image["note"] or "")
+        author = image["author"] or "Unknown"
+        source = image["source_url"] or ""
+        license_name = image["license"] or ""
+        license_url = image["license_url"] or source
         blocks.append(
-            f'<section class="photo-credit-entry" id="supply-{slug}">'
-            f'<img src="{src}" width="600" height="600" alt="{esc(alt)}" loading="lazy" decoding="async">'
+            f'<section class="photo-credit-entry" id="{esc(credit_id)}">'
+            f'<img src="{src}" width="600" height="600" alt="{esc(image["alt"])}" loading="lazy" decoding="async">'
             "<div>"
-            f"<h2>{esc(alt)}</h2>"
+            f'<h2>{esc(image["alt"])}</h2>'
             f'<p><strong>Photographer:</strong> <a href="{esc(source)}">{esc(author)}</a>.</p>'
             f'<p><strong>Original:</strong> <a href="{esc(source)}">{origin}</a>.</p>'
             f'<p><strong>License:</strong> <a href="{esc(license_url)}">{esc(license_name)}</a>.</p>'

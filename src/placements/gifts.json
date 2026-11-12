@@ -69,97 +69,6 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
       "note": "Microgreens in a small pot. Not a listed kit."
     },
-    "hero-mixed": {
-      "slug": "microgreens-mixed",
-      "title": "Mixed small greens in a container",
-      "alt": "Small green leaves and pink stems in a clear plastic container.",
-      "credit_id": "product-microgreens-mixed",
-      "author": "Stacy Spensley",
-      "author_url": "https://commons.wikimedia.org/wiki/File:11_microgreens.jpg",
-      "source_url": "https://commons.wikimedia.org/wiki/File:11_microgreens.jpg",
-      "source_label": "11 microgreens",
-      "license": "CC BY 2.0",
-      "license_url": "https://creativecommons.org/licenses/by/2.0/",
-      "note": "Square crop of a Wikimedia Commons photo. Not a photo of a listed product. Used as the page hero."
-    },
-    "basil-seedlings": {
-      "slug": "basil-window-seedlings",
-      "title": "Basil seedlings by a window",
-      "alt": "Young basil seedlings in a pot beside a window.",
-      "credit_id": "product-basil-window-seedlings",
-      "author": "Jon Eben Field",
-      "author_url": "https://commons.wikimedia.org/wiki/File:Pot_of_basil_sprouts_(Ocimum_basilicum)_-_20050422.jpg#Summary",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Pot_of_basil_sprouts_(Ocimum_basilicum)_-_20050422.jpg",
-      "source_label": "Basil",
-      "license": "CC BY 2.0",
-      "license_url": "https://creativecommons.org/licenses/by/2.0/",
-      "note": "Square crop. Shows a small plant by a window, not the LetPot unit."
-    },
-    "basil-mosaic": {
-      "slug": "basil-mosaic-pot",
-      "title": "Basil in a mosaic pot",
-      "alt": "Mature basil in a colorful mosaic pot beside a sunny window.",
-      "credit_id": "product-basil-mosaic-pot",
-      "author": "Personal Creations",
-      "author_url": "https://www.flickr.com/people/127294011@N07",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Chalkboard_Plant_Stake_Basil_in_a_window_(14889072919).jpg",
-      "source_label": "Chalkboard Plant Stake Basil in a window",
-      "license": "CC BY 2.0",
-      "license_url": "https://creativecommons.org/licenses/by/2.0/",
-      "note": "Square crop. Shows a windowsill plant, not the LetPot unit."
-    },
-    "lettuce-pot": {
-      "slug": "lettuce-container",
-      "title": "Lettuce in a container",
-      "alt": "Leaf lettuce growing in a container.",
-      "credit_id": "product-lettuce-container",
-      "author": "Netha Hussain",
-      "author_url": "https://commons.wikimedia.org/wiki/User:Netha_Hussain",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Leaf_lettuce_plant_in_a_pot_10.jpg",
-      "source_label": "Leaf lettuce plant in a pot 10",
-      "license": "CC BY-SA 4.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "note": "Square crop. Shows container lettuce, not the LetPot unit. Cropped versions remain under CC BY-SA 4.0."
-    },
-    "pea-counter": {
-      "slug": "pea-shoots-counter",
-      "title": "Pea shoots on a counter",
-      "alt": "Snow pea shoots in a round container on a kitchen counter.",
-      "credit_id": "product-pea-shoots-counter",
-      "author": "Daderot",
-      "author_url": "https://commons.wikimedia.org/wiki/User:Daderot",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Snow_pea_shoots_-_Massachusetts.jpg",
-      "source_label": "Snow pea shoots - Massachusetts",
-      "license": "CC0 1.0",
-      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "note": "Square crop. Shows a countertop crop, not the LetPot unit."
-    },
-    "sunflower-tray": {
-      "slug": "sunflower-tray",
-      "title": "Sunflower microgreens in a small tray",
-      "alt": "Sunflower microgreens with black seed hulls in a small clear tray.",
-      "credit_id": "product-sunflower-tray",
-      "author": "Pannet",
-      "author_url": "https://commons.wikimedia.org/wiki/User:Pannet",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Sunflower_microgreens_02.jpg",
-      "source_label": "Sunflower microgreens 02",
-      "license": "CC BY 4.0",
-      "license_url": "https://creativecommons.org/licenses/by/4.0/",
-      "note": "Square crop. Shows a small tray of microgreens, not the ceramic kit."
-    },
-    "radish-seedling": {
-      "slug": "radish-seedling",
-      "title": "A young radish seedling",
-      "alt": "A young chonggak radish seedling in soil, with rounded leaves and a pink stem.",
-      "credit_id": "product-radish-seedling",
-      "author": "이태수",
-      "author_url": "https://commons.wikimedia.org/wiki/File:Sprouting_chonggakmu(chonggak_radish).jpg",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Sprouting_chonggakmu(chonggak_radish).jpg",
-      "source_label": "Sprouting chonggakmu (chonggak radish)",
-      "license": "CC BY 4.0",
-      "license_url": "https://creativecommons.org/licenses/by/4.0/",
-      "note": "Square crop enlarged from a 550 by 376 pixel original. Shows a radish seedling, not a True Leaf packet."
-    },
     "broccoli-sprouts": {
       "slug": "broccoli-sprouts",
       "title": "A dense stand of small green sprouts",
@@ -173,32 +82,6 @@
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
       "note": "Square crop. The photographer titled this broccoli sprouts. Not a True Leaf packet."
     },
-    "lufa-trays": {
-      "slug": "lufa-trays",
-      "title": "Pea shoots on a greenhouse shelf",
-      "alt": "Pea shoots growing in long trays on a greenhouse shelf.",
-      "credit_id": "product-lufa-trays",
-      "author": "Lufa Farms",
-      "author_url": "https://commons.wikimedia.org/wiki/File:Lufa_Farms_Microgreens_in_Trays.jpg",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Lufa_Farms_Microgreens_in_Trays.jpg",
-      "source_label": "Lufa Farms Microgreens in Trays",
-      "license": "CC BY-SA 2.0",
-      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
-      "note": "Square crop of a commercial greenhouse. Not a home kit. Cropped versions remain under CC BY-SA 2.0."
-    },
-    "microgreens-plate": {
-      "slug": "supply-microgreens-plate",
-      "title": "Green microgreens on a white ceramic plate",
-      "alt": "Green microgreens on a white ceramic plate.",
-      "credit_id": "supply-microgreens-plate",
-      "author": "apapac",
-      "author_url": "https://www.flickr.com/photos/146235256@N06/37037208672",
-      "source_url": "https://www.flickr.com/photos/146235256@N06/37037208672",
-      "source_label": "Green microgreens on a white ceramic plate",
-      "license": "CC BY 2.0",
-      "license_url": "https://creativecommons.org/licenses/by/2.0/",
-      "note": "Stand-in for a ceramic microgreens kit."
-    },
     "radish-bowl": {
       "slug": "supply-radish-bowl",
       "title": "Purple radish microgreens in a steel bowl",
@@ -211,6 +94,20 @@
       "license": "CC BY 2.0",
       "license_url": "https://creativecommons.org/licenses/by/2.0/",
       "note": "Stand-in for Rambo radish microgreen seed."
+    },
+    "mizuna-plain": {
+      "slug": "plain-mizuna-kit-2trays",
+      "title": "Mizuna ceramic microgreens kit, 2 trays",
+      "alt": "Typographic card for the Mizuna ceramic microgreens kit, 2 trays. No product photograph.",
+      "treatment": "neutral",
+      "credit_id": null,
+      "author": null,
+      "author_url": null,
+      "source_url": null,
+      "source_label": null,
+      "license": null,
+      "license_url": null,
+      "note": "No permitted exact product photograph. Amazon image_embed is empty. A typographic card is shown instead of plated microgreens."
     }
   },
   "cards": {
@@ -232,7 +129,7 @@
       "badge": "Apartment cook",
       "why": "Two ceramic trays with coir and seeds, listed for a kitchen sill.",
       "cta": "View on Amazon",
-      "image": "microgreens-plate"
+      "image": "mizuna-plain"
     },
     "letpot-air": {
       "kind": "letpot",
