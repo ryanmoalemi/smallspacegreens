@@ -144,3 +144,28 @@ body.template-info .credit-line{font-size:12px}
 /* Cost comparison and article cards keep 16px body text on small screens. */
 .page-article .guide-main p,
 .page-article .guide-main li{font-size:16px;line-height:1.6}
+
+/* 3 hour balcony salad landing page: large photo steps, no change to site fonts. */
+.pin-hero{margin:0 0 var(--space-6)}
+.pin-hero img{
+  display:block;
+  width:100%;
+  max-width:520px;
+  height:auto;
+  max-height:none;
+  margin:0 auto;
+  border-radius:var(--radius-card);
+  background:var(--sage);
+}
+.pin-step{margin:0 0 var(--space-7);max-width:760px}
+.pin-step figure.photo{margin:0 0 var(--space-4)}
+body.page-article .pin-hero img,
+body.page-article .pin-step figure.photo img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:none;
+  object-fit:cover;
+  border-radius:var(--radius-card);
+  background:var(--sage);
+}

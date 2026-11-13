@@ -126,6 +126,15 @@ GUIDES = [
         "dek": "Choose salad crops for the sun you have, then match the containers to your space.",
         "og": "balcony",
     },
+    {
+        "slug": "3-hour-balcony-salad",
+        "title": "Grow a 3 Hour Salad on Your Balcony: Lettuce and Herb Pots",
+        "description": "About 3 hours of direct sun is enough for leafy greens. Use two 8 inch lettuce pots plus a small herb pot, skip radishes, and get the pots, container mix, and seeds for a small balcony salad.",
+        "h1": "Grow a 3 hour salad on your balcony",
+        "dek": "Two 8 inch lettuce pots and a small herb pot are enough when you have about 3 hours of sun.",
+        "og": "3-hour-balcony",
+        "updated_label": "November 13, 2026",
+    },
 ]
 
 
@@ -201,6 +210,7 @@ GUIDE_PHOTOS = {
     "apartment-seed-starting": "sowing",
     "bottom-watering-trays": "tray",
     "balcony-salad-garden": "balcony",
+    "3-hour-balcony-salad": "salad-plant",
 }
 
 
@@ -216,6 +226,7 @@ RELATED_PHOTO_CHOICES = {
     "apartment-seed-starting": ["sowing", "seed-starting", "thin"],
     "bottom-watering-trays": ["tray", "tray-pair", "bw-set"],
     "balcony-salad-garden": ["balcony", "lettuce"],
+    "3-hour-balcony-salad": ["salad-plant", "salad-hero", "salad-harvest"],
     "calculator": ["scale", "seeds", "radish-micro"],
 }
 
@@ -1120,6 +1131,7 @@ def related_html(slug: str) -> str:
         "apartment-seed-starting": ["bottom-watering-trays", "balcony-salad-garden", "windowsill-microgreens"],
         "bottom-watering-trays": ["microgreens-in-a-small-apartment", "apartment-seed-starting", "windowsill-microgreens"],
         "balcony-salad-garden": ["apartment-seed-starting", "windowsill-microgreens", "microgreens-in-a-small-apartment"],
+        "3-hour-balcony-salad": ["balcony-salad-garden", "apartment-seed-starting", "windowsill-microgreens"],
         "calculator": ["microgreens-seed-density-per-tray", "microgreens-in-a-small-apartment", "pea-vs-radish-microgreens", "microgreens-kit-vs-diy-cost"],
         "first-tray-checklist": ["microgreens-in-a-small-apartment", "windowsill-microgreens", "bottom-watering-trays"],
     }
@@ -1131,7 +1143,7 @@ def related_html(slug: str) -> str:
             f'<li data-photo="{GUIDE_PHOTOS[item]}"><a href="/guides/{item}/">{esc(guide["h1"])}</a><p>{esc(guide["dek"])}</p></li>'
         )
     calc = '<li data-photo="scale"><a href="/tools/microgreens-seed-calculator/">Microgreens seed calculator</a><p>Scale a published 10 by 20 inch rate to your tray and estimate seed cost.</p></li>'
-    if slug in {"balcony-salad-garden", "apartment-seed-starting", "calculator"}:
+    if slug in {"balcony-salad-garden", "apartment-seed-starting", "3-hour-balcony-salad", "calculator"}:
         calc = ""
     return "<h2>Related guides</h2><ul class=\"related-list\">" + calc + "".join(items) + "</ul>"
 
@@ -1955,7 +1967,7 @@ def split_opening_verdict(body: str) -> tuple[str, str]:
 
 
 def article_page(guide: dict, body: str) -> str:
-    show_signup = guide["slug"] not in {"balcony-salad-garden", "apartment-seed-starting"}
+    show_signup = guide["slug"] not in {"balcony-salad-garden", "apartment-seed-starting", "3-hour-balcony-salad"}
     url = f"{SITE}/guides/{guide['slug']}/"
     published, modified = git_times(SRC / "guides" / f"{guide['slug']}.html")
     crumbs = [
