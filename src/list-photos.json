@@ -445,8 +445,8 @@
   },
   "salad-plant": {
     "src": "/assets/photos/salad-step-plant.webp",
-    "width": 1152,
-    "height": 864,
+    "width": 852,
+    "height": 639,
     "alt": "Two black pots of frilly green lettuce and a smaller terracotta pot of basil sit on a balcony beside a chipped light blue railing, with a little potting mix spilled on the concrete and a city street below.",
     "credit_id": "salad-step-plant",
     "illustrative": true
@@ -461,9 +461,9 @@
   },
   "salad-harvest": {
     "src": "/assets/photos/salad-step-harvest.webp",
-    "width": 1152,
-    "height": 864,
-    "alt": "A hand cuts leafy green lettuce from a pot with scissors into a small bowl, while a second lettuce pot and a small herb pot sit nearby on a balcony with a chipped railing.",
+    "width": 778,
+    "height": 584,
+    "alt": "A hand cuts leafy green lettuce from a pot with scissors, with cut leaves in a bowl and a second pot just in frame on a balcony.",
     "credit_id": "salad-step-harvest",
     "illustrative": true
   }

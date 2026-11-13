@@ -129,7 +129,7 @@ GUIDES = [
     {
         "slug": "3-hour-balcony-salad",
         "title": "Grow a 3 Hour Salad on Your Balcony: Lettuce and Herb Pots",
-        "description": "About 3 hours of direct sun is enough for leafy greens. Use two 8 inch lettuce pots plus a small herb pot, skip radishes, and get the pots, container mix, and seeds for a small balcony salad.",
+        "description": "About 3 hours of direct sun is enough for leafy greens. Use two 8 inch lettuce pots plus a small herb pot, and skip radishes on that sun budget.",
         "h1": "Grow a 3 hour salad on your balcony",
         "dek": "Two 8 inch lettuce pots and a small herb pot are enough when you have about 3 hours of sun.",
         "og": "3-hour-balcony",
