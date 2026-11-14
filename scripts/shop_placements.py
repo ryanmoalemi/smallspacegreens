@@ -146,6 +146,9 @@ POTS_8_10 = "Ceramic pots, 8 and 10 in"
 RAIL = "Bloem rail planter, 24 in"
 ESPOMA_POT = "Espoma potting mix, 16 qt"
 LETTUCE = "Buttercrunch lettuce seeds"
+BIBB = "Bibb lettuce seeds, 2500 seeds"
+HERB_SEEDS = "Culinary herb seed collection"
+WATERING_CAN = "Watering can, 0.48 gal"
 BAGS = "5 gal fabric grow bags"
 RADISH = "Radish microgreen seed"
 RADISH_SMALL = "Radish seed, small tray"
@@ -284,6 +287,17 @@ SHOP_PAGES: dict[str, dict] = {
             amazon("B078GVDB1D", LETTUCE, "Buttercrunch for an 8 in pot."),
             amazon("B00TF9E6XE", BAGS, "A larger bag than the 8 in pot."),
             amazon("B07FV7TZVH", SCISSORS, "For cut-and-come-again leaves."),
+        ],
+    },
+    "3-hour": {
+        "heading": "Pots, mix, and seed for this layout",
+        "lead": "The 3 hour layout is two 8 inch pots of lettuce plus a small herb pot. Every pot needs a hole. Use container mix, not ground soil. Check balcony load before adding wet mix.",
+        "rows": [
+            amazon("B0DCSH7T1R", POTS_8, "Two pots with saucers, one lettuce each."),
+            amazon("B078WY9Z7Q", ESPOMA_POT, "Container mix, not ground soil."),
+            amazon("B078GY42NM", BIBB, "One lettuce for each 8 inch pot."),
+            amazon("B081ZPBQ7L", HERB_SEEDS, "For the small herb pot."),
+            amazon("B08L3T5RN6", WATERING_CAN, "For watering the pots, then empty the saucer."),
         ],
     },
     "gear": {

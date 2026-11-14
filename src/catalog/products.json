@@ -1732,6 +1732,97 @@
         "image_embed": null
       },
       "previous_image_issue": null
+    },
+    "bibb-lettuce-seed": {
+      "id": "bibb-lettuce-seed",
+      "name": "Bibb lettuce seeds, 2500 seeds",
+      "brand": "Burpee",
+      "variant": "2500 seeds",
+      "size": "2500 seeds",
+      "kind": "amazon",
+      "asin": "B078GY42NM",
+      "url": "https://www.amazon.com/dp/B078GY42NM?tag=smallspaceg04-20",
+      "merchant": "Amazon",
+      "affiliate_tag": "smallspaceg04-20",
+      "fits": {
+        "role": "seed",
+        "crop": "lettuce"
+      },
+      "default_note": "One lettuce for each 8 inch pot.",
+      "names_checked": "2026-11-13",
+      "image_audited": "2026-11-13",
+      "image": {
+        "treatment": "amazon",
+        "slug": "plain-bibb-lettuce-seed",
+        "alt": "Bibb lettuce seeds, 2500 seeds",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B078GY42NM?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B078GY42NM?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 13 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/71-ls5S5bQL._AC_SL1000_.jpg"
+      }
+    },
+    "culinary-herb-seed-collection": {
+      "id": "culinary-herb-seed-collection",
+      "name": "Culinary herb seed collection",
+      "brand": "Burpee",
+      "variant": "10 packets",
+      "size": "10 packets",
+      "kind": "amazon",
+      "asin": "B081ZPBQ7L",
+      "url": "https://www.amazon.com/dp/B081ZPBQ7L?tag=smallspaceg04-20",
+      "merchant": "Amazon",
+      "affiliate_tag": "smallspaceg04-20",
+      "fits": {
+        "role": "seed"
+      },
+      "default_note": "For the small herb pot.",
+      "names_checked": "2026-11-13",
+      "image_audited": "2026-11-13",
+      "image": {
+        "treatment": "amazon",
+        "slug": "plain-culinary-herb-seed-collection",
+        "alt": "Culinary herb seed collection",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B081ZPBQ7L?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B081ZPBQ7L?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 13 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/71tCVM7MQLL._AC_SL1500_.jpg"
+      }
+    },
+    "watering-can-048": {
+      "id": "watering-can-048",
+      "name": "Watering can, 0.48 gal",
+      "brand": "seller listing",
+      "variant": "0.48 gal",
+      "size": "0.48 gal",
+      "kind": "amazon",
+      "asin": "B08L3T5RN6",
+      "url": "https://www.amazon.com/dp/B08L3T5RN6?tag=smallspaceg04-20",
+      "merchant": "Amazon",
+      "affiliate_tag": "smallspaceg04-20",
+      "fits": {
+        "role": "watering"
+      },
+      "default_note": "For watering the pots, then empty the saucer.",
+      "names_checked": "2026-11-13",
+      "image_audited": "2026-11-13",
+      "image": {
+        "treatment": "amazon",
+        "slug": "plain-watering-can-048",
+        "alt": "Watering can, 0.48 gal",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B08L3T5RN6?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B08L3T5RN6?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 13 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/61VGQubTNDL._AC_SL1500_.jpg"
+      }
     }
   }
 }

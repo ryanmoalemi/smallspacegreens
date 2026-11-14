@@ -418,5 +418,53 @@
     "alt": "Handwritten garden planning pages beside a bag of seed packets.",
     "credit_id": "garden-notebook-danak",
     "author": "DanaK~WaterPenny"
+  },
+  "salad-hero": {
+    "src": "/assets/photos/salad-hero-hand-railing.webp",
+    "width": 720,
+    "height": 1280,
+    "alt": "A hand holds a freshly pulled head of frilly green lettuce, roots and soil attached, over a chipped balcony railing above a city street, with a pot of lettuce and spilled soil at the corner.",
+    "credit_id": "salad-hero-hand-railing",
+    "illustrative": true
+  },
+  "salad-pots": {
+    "src": "/assets/photos/salad-step-pots.webp",
+    "width": 1152,
+    "height": 864,
+    "alt": "Two 8 inch black pots with saucers and a smaller terracotta pot with a saucer sit on a concrete balcony, filled with potting mix, beside a chipped light blue railing above a city street.",
+    "credit_id": "salad-step-pots",
+    "illustrative": true
+  },
+  "salad-soil": {
+    "src": "/assets/photos/salad-step-soil.webp",
+    "width": 1152,
+    "height": 864,
+    "alt": "Hands scoop dark potting mix from an open bag into a black pot with a saucer on a balcony, with mix spilled on the concrete and a chipped railing behind.",
+    "credit_id": "salad-step-soil",
+    "illustrative": true
+  },
+  "salad-plant": {
+    "src": "/assets/photos/salad-step-plant.webp",
+    "width": 852,
+    "height": 639,
+    "alt": "Two black pots of frilly green lettuce and a smaller terracotta pot of basil sit on a balcony beside a chipped light blue railing, with a little potting mix spilled on the concrete and a city street below.",
+    "credit_id": "salad-step-plant",
+    "illustrative": true
+  },
+  "salad-water": {
+    "src": "/assets/photos/salad-step-water.webp",
+    "width": 1152,
+    "height": 864,
+    "alt": "A hand waters a potted lettuce with a small metal watering can on a balcony, with water in the saucer, a second lettuce pot and a small herb pot nearby, and apartment buildings behind a chipped railing.",
+    "credit_id": "salad-step-water",
+    "illustrative": true
+  },
+  "salad-harvest": {
+    "src": "/assets/photos/salad-step-harvest.webp",
+    "width": 778,
+    "height": 584,
+    "alt": "A hand cuts leafy green lettuce from a pot with scissors, with cut leaves in a bowl and a second pot just in frame on a balcony.",
+    "credit_id": "salad-step-harvest",
+    "illustrative": true
   }
 }
