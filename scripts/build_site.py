@@ -31,7 +31,6 @@ NAV = [
     ("Growing guides", f"{SITE}/guides/", "/guides/"),
     ("Seed calculator", f"{SITE}/tools/microgreens-seed-calculator/", "/tools/microgreens-seed-calculator/"),
     ("About", f"{SITE}/about/", "/about/"),
-    ("Find your setup ↗", f"{SITE}/gear/", "/gear/"),
 ]
 
 BRAND_MARK = '<svg viewBox="0 0 40 48" fill="none" aria-hidden="true"><path d="M20 43V15" stroke="currentColor" stroke-width="1.8"/><path d="M20 29C7 30 3 21 4 13c11 0 16 7 16 16Z" fill="currentColor"/><path d="M20 20C31 21 36 13 35 5c-11 0-15 7-15 15Z" fill="currentColor"/><path d="M7 43h26" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'

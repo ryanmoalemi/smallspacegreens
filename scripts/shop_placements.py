@@ -168,6 +168,20 @@ AIR = "LetPot LPH-Air, 10 pods"
 AIR_NOTE = "A 10-pod garden with its own light."
 
 SHOP_PAGES: dict[str, dict] = {
+    "home": {
+        "heading": "Grow your first tray",
+        "lead": "",
+        "rows": [
+            amazon("B07KRMP93C", KIT_SPONGE, "Trays, seed, and coir in one kit."),
+            amazon("B07NKSKMCN", BF_1010_HOLES, "A smaller tray when a 1020 does not fit."),
+            amazon("B07MYNVP8G", TRAY_1010_SOLID_10, "A solid 1010 tray under the one with holes."),
+            seed_product(RADISH, "Radish for a first tray. Check that the bag covers the dry grams.", TRUELEAF_RADISH, "See radish seed"),
+            amazon("B07QNSSN81", COCO, "A soilless coir brick. Not garden soil."),
+            amazon("B0CHDBY2PD", SANSI_CLIP, "A clip-on lamp if the window falls short."),
+            amazon("B07FV7TZVH", SCISSORS, "A short pair for a cut above the mix."),
+            amazon("B08BPTXK4L", SCALE, "Weigh seed dry before sowing or soaking."),
+        ],
+    },
     "apartment": {
         "heading": "Supplies for a first tray",
         "lead": "",
