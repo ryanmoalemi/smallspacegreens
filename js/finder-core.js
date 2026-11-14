@@ -20,10 +20,12 @@
     if (!a.grow) return {step:'grow'};
     if (a.grow === 'microgreens' && !a.micro) return {step:'micro'};
     if (!a.spot) return {step:'space'};
+    if (a.grow === 'tomato' && a.spot !== 'dim') return {step:'unavailable',reason:'tomato-support'};
     if (a.grow === 'tomato' && a.spot === 'dim') return {step:'switch',reason:'tomato'};
     if (a.grow === 'microgreens' && a.spot === 'balcony') return {step:'switch',reason:'balcony'};
     if ((a.grow === 'salad' || a.grow === 'radish') && a.spot === 'dim') return {step:'switch',reason:a.grow};
-    const needsSetup = a.spot === 'dim' || (a.grow === 'microgreens' && a.micro !== 'pea');
+    const pea = a.grow === 'microgreens' && a.micro === 'pea';
+    const needsSetup = !pea && (a.spot === 'dim' || (a.grow === 'microgreens' && a.micro !== 'pea'));
     if (needsSetup && !a.setup) return {step:'setup'};
     const dim = a.spot === 'dim';
     const pot = ['pot','soil'];

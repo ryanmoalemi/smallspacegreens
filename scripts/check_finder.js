@@ -21,6 +21,8 @@ for(const micro of ['radish','broccoli']) {
  assert.equal(route({grow:'microgreens',micro,spot:'sunny',setup:'kit'}).product,'microkit');
 }
 assert.equal(route({grow:'microgreens',micro:'pea',spot:'sunny'}).product,'micro-pea');
+assert.equal(route({grow:'microgreens',micro:'pea',spot:'dim'}).product,'micro-pea');
+assert.equal(route({grow:'tomato',spot:'sunny'}).step,'unavailable');
 assert.equal(route({grow:'unsure',spot:'dim',setup:'basics'}).product,'micro-broccoli');
 assert.equal(route({grow:'unsure',spot:'sunny'}).product,'lettuce');
 let total=0,products=0,unsupported=0;
@@ -50,7 +52,24 @@ assert.ok(js.includes('sponsored nofollow noopener'));
 assert.ok(fs.readFileSync(root+'/src/finder.css','utf8').includes('prefers-reduced-motion:reduce'));
 console.log(`Finder: ${total} complete combinations checked (${products} product routes, ${unsupported} explicit switch/unavailable routes); affiliate, image, light and tray checks passed.`);
 if(process.argv.includes('--release')){
- const unresolved=Object.entries(data.products).filter(([,p])=>p.status==='unverified'||!p.imageUseApproved||!p.availabilityVerified).map(([id])=>id);
- assert.equal(unresolved.length,0,'Release checks incomplete: '+unresolved.join(', '));
+ const active=new Set();
+ for(const grow of core.crops) for(const micro of grow==='microgreens'?core.micros:[undefined]) for(const spot of core.spots) for(const setup of ['kit','basics']){
+  const r=route({grow,micro,spot,setup});
+  if(r.step==='result') for(const id of [r.product,...r.extras])active.add(id);
+ }
+ const credit=fs.readFileSync(root+'/photo-credits/index.html','utf8');
+ for(const id of active){
+  const p=data.products[id];
+  assert.equal(p.status,'reviewed',id+' is not reviewed');
+  assert.ok(p.identityEvidence?.reviewedAt,id+' has no identity evidence');
+  assert.equal(p.identityEvidence.stockClaim,false,id+' must not claim stock');
+  assert.equal(p.imageRole,'illustrative',id+' cannot imply a merchandise photograph');
+  assert.ok(p.imageUseApproved&&p.image.startsWith('/assets/')&&fs.existsSync(root+p.image),id+' image must be a licensed local photo');
+  assert.ok(p.photoCaption&&p.photoCredit?.startsWith('/photo-credits/#'),id+' needs a visible caption and credit');
+  assert.ok(credit.includes('id="'+p.photoCredit.split('#')[1]+'"'),id+' credit record missing');
+ }
+ assert.equal(data.products.cage.status,'unverified');
  assert.equal(data.releaseReady,true,'Release has not been approved');
+ assert.ok(js.includes('As an Amazon Associate I earn from qualifying purchases.'));
+ console.log('Release: '+active.size+' active products have identity evidence and clearly labeled licensed photos. Unverified tomato routes are withheld; no stock claims.');
 }

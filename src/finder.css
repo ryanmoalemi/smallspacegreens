@@ -123,3 +123,5 @@
 .page-home .nav-toggle{background:transparent;border:0;box-shadow:none;color:#214d3a;gap:6px;align-items:center}
 
 .page-home .brand{min-height:44px}
+
+.finder-photo-caption,.finder-purchase-note{font:400 12px/18px Inter,Arial,sans-serif;color:#58645a;margin:10px 0 0}.finder-photo-caption a{color:#214d3a;text-underline-offset:3px}.finder-purchase-note{margin-top:20px}.finder .finder-photo-caption{padding:0 6px}.finder-setup img{object-fit:cover!important}

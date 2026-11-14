@@ -2653,7 +2653,7 @@ def render_static_pages() -> dict[str, str]:
         "nav": "",
         "verify": True,
         "signup": False,
-        "scripts": '<script src="/js/finder-data.js" defer></script><script src="/js/finder-core.js" defer></script><script src="/js/finder.js" defer></script>',
+        "scripts": f'<script src="/js/finder-data.js?v={asset_version("js/finder-data.js")}" defer></script><script src="/js/finder-core.js?v={asset_version("js/finder-core.js")}" defer></script><script src="/js/finder.js?v={asset_version("js/finder.js")}" defer></script>',
         "image": f"{SITE}/assets/og/home.jpg",
         "crumbs": [("Home", f"{SITE}/")],
         "wrap": "wrap-wide",

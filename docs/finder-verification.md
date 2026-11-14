@@ -1,52 +1,46 @@
-# Find your grow v1.1: review build
+# Find your grow v1.1 launch checks
 
-Implements the corrected 2026-11-14 handoff. The existing PR #55 is repurposed as the single implementation PR. No merge or deployment is authorized.
+Ryan authorized launch on November 14, 2026, with review afterward. PR #55 contains the implementation and conservative launch corrections.
 
-## What is implemented
+## Recommendations
 
-Eight unique real-photo crop choices, three spaces, microgreen crop choice, conditional setup choice, shareable result URLs, Back and editable answer chips, browser Back/Forward, one product CTA, quieter required-supply links, honest crop-switch and unavailable states, original decorative garden SVG, reduced motion, a usable non-JavaScript guide link, and local Inter/EB Garamond fonts. No timers withhold results. No prices, ratings, value badges, fabricated scans, or email gates.
+The 60 complete answer combinations resolve to 41 product routes and 19 explicit adjustment/unavailable routes. The release test enumerates the products actually reachable from those routes, not unused catalog candidates.
 
-Homepage crop photographs use Commons/CC sources and existing licensed photographs. New files and rights metadata are in `src/finder-photo-sources.json`; the site's photo credits identify originals, authors and licenses. All derivative photographs retain their source licenses. Current production logo is preserved. Product pictures are actual product photography, not generated packaging. The reference boards are not shipped as UI images.
+- Full-size tomatoes are withheld because the required cage pack size could not be confirmed. The dim-space route explains the sunlight limitation. Sunny/balcony routes explain the need for room, strong sun and support, with a guide or explicit lettuce alternative.
+- Lettuce and herb countertop-kit paths do not assume the contents of an unnamed AeroGarden seed kit. Visitors can choose seed supplies or explicitly switch to the basil kit. Old shared kit URLs still return an adjustment screen.
+- Salad greens and root radishes in dim spaces require a visitor-approved change to microgreens; no crop is silently substituted.
+- Microgreens on balconies route to indoor/alternative-crop guidance.
+- Pea shoots use their own seed and separate supplies. The unnecessary kit question is removed for both sunny and dim spaces.
+- Dim tray kits require a separate light. The Alpas kit includes seed, medium and trays, not a lamp. Basil Smart Garden 3 includes its lamp and three basil pods, with no unrelated pots/soil added.
+- DIY tray supplies are drained and solid 1010 trays, not a mislabeled 1020 tray. Visitors are told to confirm nesting and outside dimensions. Fit illustrations are explicitly not true to scale.
+- Supporting light guidance requires following the fixture's actual coverage/distance instructions; a dim room by itself is not enough light.
 
-## Source conflicts resolved in the implementation
+## Product identity evidence and limits
 
-- v1.1 overrides the original waiting screen and repeated Not sure button.
-- Use named Grow / Space / Setup stages, never a universal tap count.
-- Not sure + dim + basics follows v2.1's broccoli route, and explicitly says which crop was chosen.
-- Lettuce/herbs/Not sure + dim + kit do not promise an unnamed AeroGarden seed mix. They show an explicit unavailable/adjustment screen, offering basics or a confirmed-identity basil kit. No silent crop switch.
-- Mature salad greens/radish roots + dim require an explicit crop-change choice before microgreens. Tomato + dim also requires consent to change crop.
-- Microgreens + balcony offers guides or a crop/space change, without a kit purchase.
-- Pea shoots do not get a spurious complete-kit question; the selected seed uses separate tray supplies.
-- DIY microgreens use separate drained and solid **1010** trays. They are not described or drawn as 1020. The Alpas kit's manufacturer lists **8.8 × 5.5 in** trays, and its own fit disclosure uses that size.
-- Dim microgreen kits require a separate lamp. The included contents do not claim a built-in light.
-- SANSI B0CHDBY2PD replaces the GooingTop primary using the matrix's approved backup: its catalog photo and listing identity are accessible, unlike the weak primary thumbnail.
-- Neutral product identity and a benefit replace unsupported “best value” claims.
+ASIN/name pairings are grounded in the supplied November 13 v2.1 recommendation matrix. Accessible Amazon copies and the Click & Grow and Alpas manufacturer pages were cross-checked November 14. Several Amazon pages could not be fetched; these records are not live stock checks. Product identity evidence is in src/finder.json. No stock, delivery, price, star-rating, review-count or best-value claim is published. Users are told to check the exact pack, included items and availability on Amazon before buying.
 
-## Product/photo checks and release limits
-
-The private review build is **not release-ready**. `node scripts/check_finder.js --release` deliberately fails while these checks remain open. The normal build/test commands pass; they are not publication approval.
-
-Amazon direct pages were not available for many ASINs during this task. Accessible search-service copies confirmed white Click & Grow B01MRVMKQH including three basil pods, broccoli seed B00W2FAPF6 in the 1 lb bag, Genovese basil B07VRJVJ9F, and the 12-variety herb collection B003BM42R6. Those copies are dated before this task, so they do not establish current stock. The source matrix supplies the other candidate ASIN/photo pairings. No stock or delivery claim is shown.
-
-The Alpas manufacturer page links its coco-coir kit photograph directly to B0CQPQKTFC and confirms radish/broccoli seeds, two tray sets and growing medium, without a lamp:
+Primary sources:
+https://www.clickandgrow.com/products/the-smart-garden-3
 https://alpaslife.com/microgreen-products/
-https://alpaslife.com/wp-content/uploads/2024/10/new-main-coco-coir-kit.jpg
+https://www.amazon.com/dp/B00W2FAPF6
+https://www.amazon.com/dp/B07VRJVJ9F
+https://www.amazon.com/dp/B003BM42R6
+https://www.amazon.com/dp/B0DCSH7T1R
+https://www.amazon.com/dp/B078WY9Z7Q
+https://www.amazon.com/dp/B07QNSSN81
+https://www.amazon.com/dp/B0CHDBY2PD
 
-The Rambo seed photograph comes from Country Creek's own product page. Its 16 oz Amazon variation still needs verification:
-https://www.organic-heirloom-seed.com/products/rambo-radish-sprouting-seed-non-gmo-country-creek-brand-rambo-radish-sprouts-garden-planting-cooking-soup-emergency-food-storage-vegetable-gardening-juicing
+## Photography correction for public release
 
-The Verdana supporting photo is the retailer's actual 10 lb package photograph, with UPC 040232359095. Cross-check that UPC against the Amazon variation and obtain display rights before release:
-https://famousmicrogreens.com/verdana-coconut-fiber-potting-mix-10-lb-compressed-block-brick-coco-coir-coco-peat-coir-pith-alternative-to-peat-moss-soilless-growing-medium-low-ec-optimum-ph-high-expansion/
+The preview's Amazon/manufacturer/retailer product-image hotlinks had no confirmed reuse basis. They are removed from the new finder. All visible finder photos now use already licensed local crop/supply photography, with a visible caption explicitly saying the crop or supply type is shown, not the merchandise/packaging. Product names and links remain separate from these illustrations. The primary result layout and photography remain, but these are not presented as exact-product photos.
 
-**Tomato cage conflict:** original matrix calls B0CR7KSCG3 a 2-pack; an external listing identifies it as a 4-pack. Exact Amazon pack/photo identity is unconfirmed. The product is marked `unverified`, so tomato result pages show an unavailable/adjustment screen instead of a partially verified basket. Do not silently change the pack.
+New crop source records are in src/finder-photo-sources.json; all existing photographers and licenses are on /photo-credits/. Release validation checks each active photo file and corresponding credit anchor. Authorized exact-product photographs can replace the illustrative ones later. Existing unrelated guide pages and their image delivery were not audited as part of this homepage launch.
 
-**Image delivery:** The old brief's SiteStripe image assumption was not adopted as current policy. Current official Amazon program policies require permitted API/feed use and limit image-link caching. Existing hard-coded CDN URLs are candidate review imagery, not evidence of an approved API integration. All new catalog items have `imageUseApproved: false` and `availabilityVerified: false` until current publication checks are completed. Manufacturer/retailer photos also need an appropriate reuse basis. Do not publish the preview catalog unchanged.
-https://affiliate-program.amazon.com/help/operating/policies
+## Checks
 
-**Before release:** verify exact current ASIN variants and all required supplies; validate tray nesting/dimensions; resolve cage pack conflict; provide an authorized image-delivery method or licensed originals; verify seeds included in any newly enabled countertop garden; ensure the correct fuller Amazon disclosure is present near purchase content, beyond the short top-line disclosure; review actual screenshots; then obtain Ryan's separate merge/deployment approval. The implementation does not assume every requested crop has an available complete kit.
+- python scripts/build_site.py: existing static-site build, affiliate, duplicate-photo, contrast/text-size, and content checks.
+- node scripts/check_finder.js --release: 60 route combinations, invalid/partial inputs, required lights, tray components, affiliate tag, and 16 reachable product records with source evidence and correctly captioned local photos.
+- No artificial waits, email gate or scan claims.
+- Prior browser review confirmed 390px grid fits through pixel 783 without horizontal overflow, navigation, edit chips, browser Back and all three sample result layouts. Launch changes are checked in the browser again before release.
 
-Fit illustrations are explicitly illustrative, not true-to-scale drawings. No unverified appliance dimension is printed.
-
-## Validation
-
-`python scripts/build_site.py` runs the existing site checks and regenerates static outputs. `node scripts/check_finder.js` exhausts 60 completed combinations, including 45 product-route decisions and 15 crop-switch/unavailable decisions, plus partial/invalid input, required-light, no-extra-kit, 1010 tray-pair, affiliate-tag and image-existence checks. The UI additionally refuses any product route containing an unverified required supply. Responsive screenshots are captured from the real implementation in a 390px iframe and the desktop viewport, not from the design boards. Preview harness and screenshots are excluded from the published source.
+The release gate is updated to validate the narrower public launch contract: product identity evidence and licensed illustrative photography, no unsupported availability claims, and withheld uncertain recommendations. It does not mark unavailable live-stock checks or missing exact-product image permissions as completed.
