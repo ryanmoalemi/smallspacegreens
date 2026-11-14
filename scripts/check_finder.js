@@ -14,10 +14,14 @@ assert.equal(route({grow:'lettuce',spot:'sunny',setup:'kit'}).product,'lettuce')
 assert.equal(route({grow:'basil',spot:'dim',kit:'1'}).product,'basil-kit');
 assert.deepEqual(route({grow:'basil',spot:'dim',setup:'kit'}).extras,[]);
 // Invalid bookmarked combinations return to the relevant question, never a dead end.
-assert.equal(route({grow:'tomato',spot:'sunny'}).step,'grow');
+assert.equal(route({grow:'tomato',spot:'sunny'}).step,'space');
+assert.deepEqual(core.choices('spot',{grow:'tomato'}),['balcony']);
+assert.deepEqual(route({grow:'tomato',spot:'balcony'}).extras,['bag','soil']);
+assert.equal(route({grow:'tomato',spot:'balcony'}).product,'tomato');
+assert.equal(route({grow:'tomato',spot:'dim'}).step,'space');
 assert.equal(route({grow:'salad',spot:'dim'}).step,'space');
 assert.equal(route({grow:'microgreens',micro:'pea',spot:'dim',setup:'kit'}).step,'setup');
-assert.ok(!core.choices('grow').includes('tomato'));
+assert.ok(core.choices('grow').includes('tomato'));
 assert.deepEqual(core.choices('spot',{grow:'radish'}),['sunny','balcony']);
 assert.deepEqual(core.choices('spot',{grow:'microgreens',micro:'broccoli'}),['sunny','dim']);
 assert.deepEqual(core.choices('setup',{grow:'lettuce',spot:'dim'}),['basics']);
@@ -70,12 +74,12 @@ if(process.argv.includes('--release')){
   assert.equal(p.identityEvidence.stockClaim,false,id+' must not claim stock');
   assert.equal(p.imageRole,'product',id+' must use the selected product photo');
   assert.ok(p.imageUseApproved,id+' photo lacks owner demo approval');
-  assert.ok(['m.media-amazon.com','www.organic-heirloom-seed.com','alpaslife.com','cdn11.bigcommerce.com'].includes(new URL(p.image).hostname),id+' photo host is unexpected');
+  assert.ok(['m.media-amazon.com','www.organic-heirloom-seed.com','alpaslife.com','cdn11.bigcommerce.com','cdn.shopify.com'].includes(new URL(p.image).hostname),id+' photo host is unexpected');
   assert.ok(data.demoPhotoApproval?.approvedAt,'Demo photo approval must be recorded');
   assert.equal(data.demoPhotoApproval.licenseVerified,false,'Do not imply independent license clearance');
  }
  assert.equal(data.products.cage.status,'unverified');
  assert.equal(data.releaseReady,true,'Release has not been approved');
  assert.ok(fs.readFileSync(root+'/src/pages/home.html','utf8').includes('As an Amazon Associate I earn from qualifying purchases.'));
- console.log('Release: '+active.size+' active products have identity evidence and owner-approved demo photos (license not independently verified). Unverified tomato routes are withheld; no stock claims.');
+ console.log('Release: '+active.size+' active products have identity evidence and owner-approved demo photos (license not independently verified). Tomatoes are limited to the full-sun balcony setup; no stock claims.');
 }
