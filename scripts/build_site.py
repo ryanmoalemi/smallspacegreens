@@ -2040,11 +2040,16 @@ def article_page(guide: dict, body: str) -> str:
         if hero
         else '<header class="article-header"><p class="eyebrow">The small-space growing guide</p>'
     )
+    # Inter and Newsreader latin files do not include U+2011, so keep "3-Hour"
+    # together with nowrap instead of a no-break hyphen.
+    h1_html = esc(guide["h1"])
+    if guide["slug"] == "balcony-salad-garden":
+        h1_html = h1_html.replace("3-Hour", '<span style="white-space:nowrap">3-Hour</span>', 1)
     main = (
         crumbs_html(crumbs)
         + header_open
         + (hero if hero else "")
-        + f"<h1>{esc(guide['h1'])}</h1>"
+        + f"<h1>{h1_html}</h1>"
         + f"<p class=\"dek\">{esc(guide['dek'])}</p>"
         + (verdict if verdict else "")
         + f"<p class=\"byline\">By <a href=\"/about/\">Ryan Moalemi</a>. Updated {esc(guide.get('updated_label', DATE_LABEL))}.</p>"
