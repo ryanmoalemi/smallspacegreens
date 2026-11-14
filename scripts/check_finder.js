@@ -21,7 +21,8 @@ for(const micro of ['radish','broccoli']) {
  assert.equal(route({grow:'microgreens',micro,spot:'sunny',setup:'kit'}).product,'microkit');
 }
 assert.equal(route({grow:'microgreens',micro:'pea',spot:'sunny'}).product,'micro-pea');
-assert.equal(route({grow:'microgreens',micro:'pea',spot:'dim'}).product,'micro-pea');
+assert.equal(route({grow:'microgreens',micro:'pea',spot:'dim'}).step,'setup');
+assert.equal(route({grow:'microgreens',micro:'pea',spot:'dim',setup:'kit'}).step,'unavailable');
 assert.equal(route({grow:'tomato',spot:'sunny'}).step,'unavailable');
 assert.equal(route({grow:'unsure',spot:'dim',setup:'basics'}).product,'micro-broccoli');
 assert.equal(route({grow:'unsure',spot:'sunny'}).product,'lettuce');
@@ -70,6 +71,6 @@ if(process.argv.includes('--release')){
  }
  assert.equal(data.products.cage.status,'unverified');
  assert.equal(data.releaseReady,true,'Release has not been approved');
- assert.ok(js.includes('As an Amazon Associate I earn from qualifying purchases.'));
+ assert.ok(fs.readFileSync(root+'/src/pages/home.html','utf8').includes('As an Amazon Associate I earn from qualifying purchases.'));
  console.log('Release: '+active.size+' active products have identity evidence and clearly labeled licensed photos. Unverified tomato routes are withheld; no stock claims.');
 }
