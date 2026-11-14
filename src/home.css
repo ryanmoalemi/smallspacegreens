@@ -1,27 +1,29 @@
 /* Homepage T01 (handoff board, pdf page 2). Layout and composition only;
    typography, tokens, and control sizes come from the foundation. */
 .page-home .home-hero{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:var(--space-8);
-  align-items:center;
-  padding:var(--space-6) 0 var(--space-8);
+  display:block;
+  padding:var(--space-3) 0 0;
 }
-.page-home .hero-copy{padding:0;max-width:36rem}
-.page-home .home-lead{font-size:16px;line-height:1.6;color:var(--muted);max-width:36rem;margin:0 0 var(--space-5)}
-.page-home .cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4);margin:0}
 .page-home .hero-image{margin:0;min-width:0}
 .page-home .hero-image img{
   display:block;
   width:100%;
-  height:auto;
-  aspect-ratio:4/3;
+  height:260px;
+  aspect-ratio:auto;
   object-fit:cover;
   object-position:50% 40%;
   border-radius:var(--radius-card);
   background:var(--sage);
 }
-.page-home .hero-image .photo-credit{margin-top:var(--space-2);font-size:12px}
+.page-home .hero-image .photo-credit{margin-top:var(--space-2);margin-bottom:0;font-size:12px}
+.page-home .picks{margin-block:var(--space-3) var(--space-8)}
+.page-home .picks h1{
+  margin:0 0 var(--space-2);
+}
+.page-home .affiliate-disclosure{
+  margin:0 0 var(--space-3);
+  max-width:none;
+}
 
 .space-routes{margin:0 0 var(--space-8)}
 .space-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4)}
@@ -132,14 +134,10 @@ a.button-on-dark:hover{background:#fff;color:var(--ink)}
 }
 
 @media(max-width:959px){
-  .page-home .home-hero{display:flex;flex-direction:column;gap:var(--space-5);padding:var(--space-4) 0 var(--space-6)}
-  .page-home .hero-image{order:-1}
+  .page-home .home-hero{padding:var(--space-3) 0 0}
   .page-home .hero-image img{
-    min-height:0;
-    height:280px;
-    max-height:280px;
-    aspect-ratio:auto;
-    object-fit:cover;
+    height:240px;
+    max-height:240px;
   }
   .space-photo-grid{grid-template-columns:1fr;gap:var(--space-4)}
   .space-route-link>img{height:220px}

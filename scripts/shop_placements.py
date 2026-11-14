@@ -170,6 +170,8 @@ AIR_NOTE = "A 10-pod garden with its own light."
 SHOP_PAGES: dict[str, dict] = {
     "home": {
         "heading": "Grow your first tray",
+        "heading_tag": "h1",
+        "heading_id": "home-title",
         "lead": "",
         "rows": [
             amazon("B07KRMP93C", KIT_SPONGE, "Trays, seed, and coir in one kit."),
@@ -1003,9 +1005,13 @@ def render_shop(key: str) -> str:
             + "".join(cards)
             + "</ul></section>"
         )
+    tag = page.get("heading_tag") or "h2"
+    heading_id = page.get("heading_id")
+    id_attr = f' id="{esc(heading_id)}"' if heading_id else ""
+    labelled = f' aria-labelledby="{esc(heading_id)}"' if heading_id else ""
     return (
-        '<section class="picks" id="matching-supplies">'
-        f"<h2>{esc(page['heading'])}</h2>"
+        f'<section class="picks" id="matching-supplies"{labelled}>'
+        f"<{tag}{id_attr}>{esc(page['heading'])}</{tag}>"
         + (f'<p class="picks-lead">{esc(page["lead"])}</p>' if page["lead"] else "")
         + '<ul class="pick-grid" role="list">'
         + "".join(cards)
