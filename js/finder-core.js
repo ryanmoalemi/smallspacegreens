@@ -20,8 +20,7 @@
     if (!a.grow) return {step:'grow'};
     if (a.grow === 'microgreens' && !a.micro) return {step:'micro'};
     if (!a.spot) return {step:'space'};
-    if (a.grow === 'tomato' && a.spot !== 'dim') return {step:'unavailable',reason:'tomato-support'};
-    if (a.grow === 'tomato' && a.spot === 'dim') return {step:'switch',reason:'tomato'};
+    if (a.grow === 'tomato') return a.spot==='balcony' ? {step:'result',product:'tomato',extras:['bag','soil'],guide:'tomato',fit:'bag',note:'Grow one Tiny Tim plant per bag in 6 to 8 hours of direct sun. Buy enough potting mix to fill one 5-gallon bag, about 20 US quarts; check the mix bag size. Check moisture daily and feed established plants with a tomato fertilizer according to its label. These are seeds, not a live plant or all-in-one kit.'} : {step:'unavailable',reason:'tomato-light'};
     if (a.grow === 'microgreens' && a.spot === 'balcony') return {step:'switch',reason:'balcony'};
     if ((a.grow === 'salad' || a.grow === 'radish') && a.spot === 'dim') return {step:'switch',reason:a.grow};
     const pea = a.grow === 'microgreens' && a.micro === 'pea';
@@ -138,8 +137,9 @@
   function resultCopy(input, recommendation) {
     const a=normalize(input), r=recommendation||route(a);
     const location=a.spot==='sunny'?'your sunny window':a.spot==='dim'?'your dim spot':'your balcony';
-    const labels={lettuce:'Buttercrunch lettuce',basil:'Genovese basil',herbs:'Culinary herbs',radish:'Cherry Belle radishes',salad:'Mixed salad greens','micro-pea':'Pea shoots','micro-radish':'Radish microgreens','micro-broccoli':'Broccoli microgreens','basil-kit':'Smart Garden 3 basil kit',microkit:(a.micro==='radish'?'Radish':'Broccoli')+' microgreens kit'};
+    const labels={tomato:'Tiny Tim cherry tomatoes',lettuce:'Buttercrunch lettuce',basil:'Genovese basil',herbs:'Culinary herbs',radish:'Cherry Belle radishes',salad:'Mixed salad greens','micro-pea':'Pea shoots','micro-radish':'Radish microgreens','micro-broccoli':'Broccoli microgreens','basil-kit':'Smart Garden 3 basil kit',microkit:(a.micro==='radish'?'Radish':'Broccoli')+' microgreens kit'};
     const benefits={
+      tomato:'For fresh cherry tomatoes on your sunny balcony, we’d choose compact Tiny Tim seeds with a roomy grow bag and potting mix to give your first plant a comfortable start.',
       lettuce:`We’d start with Buttercrunch for fresh salad leaves, with a pot and growing mix to suit ${location}.`,
       basil:`For the fresh basil you want, we’d start with Genovese seeds and a pot setup for ${location}.`,
       herbs:`We’d choose this collection so you can grow the herbs you cook with most in separate pots for ${location}.`,

@@ -25,25 +25,25 @@
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "tomato": {
-      "asin": "B07YR28RRK",
-      "name": "Sow Right Large Red Cherry Tomato",
-      "kind": "Seeds",
-      "image": "https://m.media-amazon.com/images/I/71PjfnVqdXL._SL800_.jpg",
-      "benefit": "Classic cherry tomatoes for a large, sunny pot with a cage. Allow room for a climbing plant.",
+      "asin": "B00H4E9ULA",
+      "name": "Seed Needs Tiny Tim Dwarf Cherry Tomato Seeds",
+      "kind": "Dwarf cherry tomato seeds",
+      "image": "https://cdn.shopify.com/s/files/1/1766/2959/files/531-MAIN-2026.webp?v=1783281501",
+      "benefit": "A compact cherry tomato for one plant in a 5-gallon bag on a full-sun balcony.",
       "status": "reviewed",
-      "url": "https://www.amazon.com/dp/B07YR28RRK?tag=smallspaceg04-20",
-      "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
+      "url": "https://www.amazon.com/dp/B00H4E9ULA?tag=smallspaceg04-20",
+      "verification": "Tiny Tim cultivar and care checked against Seed Needs manufacturer page; ASIN cross-checked against MerchantWords and Ubuy listings. No stock, delivery or harvest guarantee.",
       "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
       "imageRole": "product",
       "identityEvidence": {
-        "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
-        "stockClaim": false
+        "stockClaim": false,
+        "source": "https://www.seedneeds.com/products/tiny-tim-tomato ; https://www.merchantwords.com/asin/us/B00H4E9ULA ; https://www.ubuy.mq/en/product/2C4NIU4I-seed-needs-tiny-tim-tomato-lycopersicon-esculentum-80-seeds-non-gmo"
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Manufacturer product photo selected for the owner-authorized demo. Image license not independently verified."
     },
     "salad": {
       "asin": "B0D1LL6CG6",
@@ -354,19 +354,24 @@
     },
     "bag": {
       "asin": "B00TF9E6XE",
-      "name": "VIVOSUN 5-Gallon Grow Bags",
+      "name": "VIVOSUN 5-Gallon Grow Bags \u00b7 5-pack",
       "kind": "5 gal",
-      "image": "https://m.media-amazon.com/images/I/81PjHdnKyHL._SL800_.jpg",
+      "image": "https://m.media-amazon.com/images/I/51S7VI81XWL._SL800_.jpg",
       "benefit": "",
-      "status": "unverified",
+      "status": "reviewed",
       "url": "https://www.amazon.com/dp/B00TF9E6XE?tag=smallspaceg04-20",
-      "verification": "Source matrix 2026-11-13; no current stock claim. See docs/finder-verification.md.",
+      "verification": "Amazon ASIN B00TF9E6XE title confirms VIVOSUN 5-pack 5-gallon grow bags; manufacturer confirms draining fabric construction.",
       "imageUseApproved": true,
       "availabilityVerified": false,
       "imageRole": "product",
       "photoCaption": "",
       "photoCredit": null,
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
+      "identityEvidence": {
+        "reviewedAt": "2026-11-14",
+        "stockClaim": false,
+        "source": "https://www.amazon.com/dp/B00TF9E6XE ; https://vivosun.com/en-US/vivosun-5-gallon-grow-bags-5-pack-black-thickened-nonwoven-fabric-pots-with-handles-p68320123310965170-v58820960379602944"
+      }
     },
     "coir": {
       "asin": "B07QNSSN81",
@@ -395,9 +400,9 @@
     "microgreens": "/guides/first-tray-checklist/",
     "basil": "/guides/apartment-seed-starting/",
     "balcony": "/guides/balcony-salad-garden/",
-    "tomato": "/guides/apartment-seed-starting/"
+    "tomato": "/guides/balcony-salad-garden/#tiny-tim-tomatoes"
   },
-  "releasePolicy": "Private review only. No unsupported value badge, simulated research or artificial result delay. Exact product image delivery needs verification before publication.",
+  "releasePolicy": "Owner-approved public demo. Only offer complete shopping paths; do not invent stock, prices or value claims.",
   "demoPhotoApproval": {
     "approvedBy": "site owner",
     "approvedAt": "2026-11-14",
