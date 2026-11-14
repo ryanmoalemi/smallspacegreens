@@ -15,7 +15,7 @@
     if (input.kit === '0') a.setup = 'basics';
     return a;
   }
-  function route(input) {
+  function rawRoute(input) {
     const a = normalize(input);
     if (!a.grow) return {step:'grow'};
     if (a.grow === 'microgreens' && !a.micro) return {step:'micro'};
@@ -47,6 +47,29 @@
     }
     const extras = a.grow === 'tomato' ? ['bag','soil','cage'] : lit(pot);
     return {step:'result',product:a.grow,extras,guide:a.spot==='balcony'?'balcony':a.spot==='sunny'?'window':'basil',fit:a.grow==='tomato'?'bag':'pot'};
+  }
+  // Offer only answers with at least one complete, reviewed shopping setup.
+  function choices(field,input={}) {
+    const a=normalize(input);
+    const values={grow:crops,micro:micros,spot:spots,setup:['kit','basics']}[field]||[];
+    return values.filter(value=>{
+      const prefix=field==='grow'?{grow:value}:field==='micro'?{grow:a.grow,micro:value}:field==='spot'?{grow:a.grow,micro:a.micro,spot:value}:{...a,setup:value};
+      for(const grow of crops) for(const micro of grow==='microgreens'?micros:[undefined]) for(const spot of spots) for(const setup of ['kit','basics']) {
+        const leaf={grow,micro,spot,setup};
+        if(Object.entries(prefix).some(([k,v])=>v!==undefined&&leaf[k]!==v))continue;
+        if(rawRoute(leaf).step==='result')return true;
+      }
+      return false;
+    });
+  }
+  function route(input) {
+    const a=normalize(input);
+    if(!a.grow||!choices('grow').includes(a.grow))return {step:'grow'};
+    if(a.grow==='microgreens'&&!choices('micro',a).includes(a.micro))return {step:'micro'};
+    if(!choices('spot',a).includes(a.spot))return {step:'space'};
+    const r=rawRoute(a);
+    if(r.step==='unavailable'||r.step==='switch')return {step:'setup'};
+    return r;
   }
   function explain(input, recommendation) {
     const a = normalize(input), r = recommendation || route(a);
@@ -131,7 +154,7 @@
     const headline=(labels[r.product]||'Your growing setup')+' for '+location;
     return {headline,benefit:(a.grow==='unsure'?'Not sure where to start? ':'')+(benefits[r.product]||explain(a,r).reason)};
   }
-  const api = {normalize,route,explain,resultCopy,crops,spots,micros};
+  const api = {normalize,route,explain,resultCopy,choices,crops,spots,micros};
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.SSGFinder = api;
 })(typeof window === 'object' ? window : globalThis);
