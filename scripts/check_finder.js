@@ -49,6 +49,20 @@ function visit(a) {
 visit({});
 // Stale URLs for every formerly exposed combination must also avoid dead-end pages.
 for(const grow of core.crops)for(const micro of grow==='microgreens'?core.micros:[undefined])for(const spot of core.spots)for(const setup of ['kit','basics'])assert.ok(!['switch','unavailable'].includes(route({grow,micro,spot,setup}).step));
+// Exercise malformed and outdated URL combinations as well as exposed choices.
+let recoveryCases=0;
+for(const grow of [undefined,'invalid',...core.crops])for(const micro of [undefined,'invalid',...core.micros])for(const spot of [undefined,'invalid',...core.spots])for(const setup of [undefined,'invalid','kit','basics']){
+ const a={grow,micro,spot,setup},r=route(a);recoveryCases++;
+ if(r.step==='result'){
+  assert.equal(data.products[r.product]?.status,'reviewed');
+  assert.ok(r.extras.every(id=>data.products[id]?.status==='reviewed'));
+ }else{
+  const field={grow:'grow',micro:'micro',space:'spot',setup:'setup'}[r.step];
+  assert.ok(field,'Dead-end recovery state '+JSON.stringify(a));
+  assert.ok(core.choices(field,a).length,'Recovery has no valid answer '+JSON.stringify(a));
+ }
+}
+console.log(`Finder recovery: ${recoveryCases} incomplete, invalid and saved URL combinations checked.`);
 for(const [id,p] of Object.entries(data.products)){
  const u=new URL(p.url);assert.equal(u.hostname,'www.amazon.com');assert.equal(u.pathname,'/dp/'+p.asin);assert.equal(u.searchParams.get('tag'),'smallspaceg04-20');
  assert.ok(!('price' in p)&&!('rating' in p)&&!('reviewCount' in p));
