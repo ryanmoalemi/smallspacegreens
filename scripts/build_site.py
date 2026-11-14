@@ -1687,7 +1687,6 @@ if (toc && window.matchMedia("(max-width: 899px)").matches) toc.removeAttribute(
 <div class="footer-top"><div><a class="brand" href="/" aria-label="Small Space Greens home">{BRAND}</a><p class="footer-tagline">A little space. Something good to grow.</p></div>
 <nav class="footer-nav" aria-label="Footer">
 <a href="/guides/">Growing guides</a>
-<a href="/gear/">Find your setup</a>
 <a href="/editorial-method/">Editorial method</a>
 <a href="/photo-credits/">Photo credits</a>
 <a href="/privacy/">Privacy</a>
@@ -2083,7 +2082,7 @@ def simple_page(page: dict, body: str, extra_graph: list[dict] | None = None) ->
     graph.append(crumbs_ld(crumbs))
     if extra_graph:
         graph.extend(extra_graph)
-    main = crumbs_html(crumbs) + body
+    main = ("" if page["kind"] == "home" else crumbs_html(crumbs)) + body
     return layout(page, main, graph)
 
 
@@ -2653,7 +2652,8 @@ def render_static_pages() -> dict[str, str]:
         "kind": "home",
         "nav": "",
         "verify": True,
-        "signup": True,
+        "signup": False,
+        "scripts": '<script src="/js/finder-data.js" defer></script><script src="/js/finder-core.js" defer></script><script src="/js/finder.js" defer></script>',
         "image": f"{SITE}/assets/og/home.jpg",
         "crumbs": [("Home", f"{SITE}/")],
         "wrap": "wrap-wide",
@@ -3102,7 +3102,7 @@ def main() -> None:
             raise SystemExit(f"Missing photo thumbnail for {key}")
         if f'id="{photo["credit_id"]}"' not in credit_page:
             raise SystemExit(f"Missing photo credit record for {key}")
-    css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css", "photo-lists.css", "harvest-chart.css", "home.css", "gear.css", "templates.css", "foundation.css"]))
+    css = minify_css("\n".join((SRC / name).read_text() for name in ["styles.css", "setup.css", "cost-compare.css", "photo-lists.css", "harvest-chart.css", "home.css", "finder.css", "gear.css", "templates.css", "foundation.css"]))
     check_card_contrast(css)
     check_chrome_text_size(css)
     check_credit_line_css(css)
@@ -3118,6 +3118,9 @@ def main() -> None:
     (ROOT / "js" / "site.js").write_text((SRC / "site.js").read_text())
     (ROOT / "js" / "cost-compare.js").write_text((SRC / "cost-compare.js").read_text())
     write_setup_js()
+    for name in ("finder.js", "finder-core.js"):
+        (ROOT / "js" / name).write_text((SRC / name).read_text())
+    (ROOT / "js" / "finder-data.js").write_text("window.SSG_FINDER_DATA = " + (SRC / "finder.json").read_text() + ";\n")
     pages = render_static_pages()
     check_calculator_box_photos(pages["tools/microgreens-seed-calculator/index.html"], calculator_packs)
     urls = []
@@ -3126,7 +3129,7 @@ def main() -> None:
     for rel, document in pages.items():
         document = render_related_placeholders(document)
         document = choose_related_photos(document)
-        document = add_nav_photos(document, rel)
+        document = add_nav_photos(document, rel) if rel != "index.html" else document
         document = normalize_photo_credits(document, credit_licenses, rel)
         check_no_example_word(document, rel)
         check_copy(Path(rel), document)
