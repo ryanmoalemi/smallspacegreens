@@ -30,7 +30,7 @@ label,.signup .field label,.choices label,.custom-dims label,.tool label{
 .guide-intro p.credit,.guide-intro .photo-credit,figcaption.credit,figcaption.photo-credit{
   font-size:12px;
 }
-.button,a.button,button.button,button.calc,.button.secondary,.calculator-result-actions .button,.supply-tools .button,.setup-next .button,.pick-cta,.nav-toggle,.nav li:last-child a,.results .result-pack-link a,.checklist-print .button{
+.button,a.button,button.button,button.calc,.button.secondary,.calculator-result-actions .button,.supply-tools .button,.setup-next .button,.pick-cta,.nav-toggle,.results .result-pack-link a,.checklist-print .button{
   min-height:48px;
   border-radius:var(--radius-control);
 }
