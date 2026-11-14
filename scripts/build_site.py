@@ -120,10 +120,10 @@ GUIDES = [
     },
     {
         "slug": "balcony-salad-garden",
-        "title": "The 3-Hour Balcony Salad Garden: What to Grow in Low Sun",
+        "title": "Grow Salad on a 3-Hour Sun Balcony: Pots and Layouts",
         "description": "Leafy greens and herbs can work with about 3 hours of direct sun. See pot sizes, container mix, and two balcony layouts matched to the light you measured.",
-        "h1": "The 3-Hour Balcony Salad Garden: What to Grow in Low Sun",
-        "dek": "Leafy greens and herbs can work with about 3 hours of direct sun. Pot sizes, soil, and two layouts are below.",
+        "h1": "Grow Salad on a 3-Hour Sun Balcony",
+        "dek": "Leafy greens and herbs work with about 3 hours of direct sun.",
         "og": "balcony",
         "updated_label": "November 13, 2026",
     },
@@ -132,7 +132,7 @@ GUIDES = [
         "title": "Grow a 3 Hour Salad on Your Balcony: Lettuce and Herb Pots",
         "description": "About 3 hours of direct sun is enough for leafy greens. Use two 8 inch lettuce pots plus a small herb pot, and skip radishes on that sun budget.",
         "h1": "Grow a 3 hour salad on your balcony",
-        "dek": "'3 hour' means 3 hours of direct sun a day, not a faster way to grow the salad.",
+        "dek": "3 hours = 3 hours of direct sun a day.",
         "og": "3-hour-balcony",
         "updated_label": "November 13, 2026",
     },
@@ -1464,6 +1464,16 @@ def disclosure_sentence(html: str) -> str | None:
 
 
 def insert_after_intro(html: str, block: str) -> str:
+    photo_header = re.search(
+        r'<header class="article-header article-header-photo-first".*?</header>',
+        html,
+        flags=re.S,
+    )
+    if photo_header:
+        byline = re.search(r'<p class="byline">.*?</p>', photo_header.group(0), flags=re.S)
+        if byline:
+            at = photo_header.start() + byline.end()
+            return html[:at] + block + html[at:]
     header = re.search(r"<header\b[^>]*>.*?</header>", html, flags=re.S)
     if header and "<h1" in header.group(0):
         end = header.end()
@@ -1659,7 +1669,7 @@ if (toc && window.matchMedia("(max-width: 899px)").matches) toc.removeAttribute(
 <link rel="stylesheet" href="/css/styles.css?v={asset_version('css/styles.css')}">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
-<body class="page-{page['kind']}{info_body_class(page)}">
+<body class="page-{page['kind']}{info_body_class(page)}{page.get('body_class', '')}">
 <header class="site-header">
 <a class="skip" href="#content">Skip to content</a>
 <div class="header-bar">
@@ -1939,6 +1949,17 @@ def disclosure() -> str:
     )
 
 
+HERO_FIRST_SLUGS = {"3-hour-balcony-salad", "balcony-salad-garden"}
+
+
+def split_opening_hero(body: str) -> tuple[str, str]:
+    """Lift the first content photo above the H1 on photo-first guides."""
+    match = re.match(r'\s*(<figure class="photo\b[^"]*".*?</figure>)\s*', body, flags=re.S)
+    if not match:
+        return "", body
+    return match.group(1), body[match.end():]
+
+
 def split_opening_verdict(body: str) -> tuple[str, str]:
     """Lift the short answer and jump links into the article header."""
     match = re.match(r'\s*(<div class="verdict">.*?</div>)\s*', body, flags=re.S)
@@ -2009,10 +2030,20 @@ def article_page(guide: dict, body: str) -> str:
             ],
         }
     )
+    hero, body = split_opening_hero(body) if guide["slug"] in HERO_FIRST_SLUGS else ("", body)
     verdict, body = split_opening_verdict(body)
+    if hero and verdict:
+        body = verdict + body
+        verdict = ""
+    header_open = (
+        '<header class="article-header article-header-photo-first">'
+        if hero
+        else '<header class="article-header"><p class="eyebrow">The small-space growing guide</p>'
+    )
     main = (
         crumbs_html(crumbs)
-        + '<header class="article-header"><p class="eyebrow">The small-space growing guide</p>'
+        + header_open
+        + (hero if hero else "")
         + f"<h1>{esc(guide['h1'])}</h1>"
         + f"<p class=\"dek\">{esc(guide['dek'])}</p>"
         + (verdict if verdict else "")
@@ -2027,6 +2058,7 @@ def article_page(guide: dict, body: str) -> str:
         "description": guide["description"],
         "url": url,
         "kind": "article",
+        "body_class": " hero-first" if hero else "",
         "nav": guide.get("nav", "/guides/"),
         "image": page_image,
         "signup": show_signup,

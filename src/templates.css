@@ -247,3 +247,50 @@ body.page-article .layout-hero-panel figure.photo img{
   .spec-box dt:first-child{margin-top:0}
   .layout-hero{grid-template-columns:1fr}
 }
+
+/* Photo-first balcony pages: big hero, then a short headline. Existing fonts and
+   site-wide crumb/header styles stay as they are. */
+body.hero-first .crumbs .nav-photo,
+body.hero-first .crumbs .nav-credit{display:none}
+body.hero-first .crumbs{margin:0 0 12px}
+body.hero-first .crumbs a,
+body.hero-first .crumbs .crumb-current{min-height:0;padding:2px 0}
+.article-header-photo-first{padding:0 0 20px;max-width:880px}
+.article-header-photo-first .pin-hero,
+.article-header-photo-first .hero-first-photo{margin:0 0 16px}
+.article-header-photo-first .pin-hero img,
+.article-header-photo-first .hero-first-photo img,
+body.page-article .article-header-photo-first .pin-hero img,
+body.page-article .article-header-photo-first .hero-first-photo img,
+body.page-article.hero-first .article-header-photo-first .photo img[src$=".jpg"],
+body.page-article.hero-first .article-header-photo-first .photo img[src$=".webp"]{
+  display:block;
+  width:100%;
+  max-width:none;
+  height:auto;
+  max-height:none;
+  aspect-ratio:2/3;
+  object-fit:cover;
+  object-position:center top;
+  margin:0;
+  border-radius:var(--radius-card);
+  background:var(--sage);
+}
+.article-header-photo-first h1{margin:0 0 10px}
+.article-header-photo-first .dek{margin:0 0 10px}
+.article-header-photo-first .byline{margin:0}
+.article-header-photo-first .affiliate-disclosure{
+  font-size:12px;
+  line-height:1.4;
+  margin:6px 0 0;
+  max-width:720px;
+}
+.jump-pills a{font-size:12px}
+@media(min-width:800px){
+  .article-header-photo-first .pin-hero img,
+  .article-header-photo-first .hero-first-photo img,
+  body.page-article .article-header-photo-first .pin-hero img,
+  body.page-article .article-header-photo-first .hero-first-photo img{
+    max-width:560px;
+  }
+}
