@@ -169,3 +169,81 @@ body.page-article .pin-step figure.photo img{
   border-radius:var(--radius-card);
   background:var(--sage);
 }
+
+/* Balcony salad garden: compact spec box, exit line, pill jumps, layout hero. */
+.spec-box{
+  background:var(--sage);
+  border:1px solid #d6dfcb;
+  border-left:3px solid #66804f;
+  border-radius:var(--radius-card);
+  padding:16px 18px;
+  margin:0 0 var(--space-4);
+  max-width:760px;
+}
+.spec-box-title{
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  margin:0 0 10px;
+  color:var(--ink);
+}
+.spec-box dl{
+  margin:0;
+  display:grid;
+  grid-template-columns:minmax(7.5rem,32%) minmax(0,1fr);
+  gap:8px 16px;
+}
+.spec-box dt{
+  font-size:13px;
+  font-weight:600;
+  margin:0;
+}
+.spec-box dd{
+  font-size:14px;
+  line-height:1.5;
+  margin:0;
+}
+.sun-exit{
+  font-size:14px;
+  line-height:1.5;
+  margin:0 0 var(--space-4);
+  max-width:760px;
+}
+.jump-pills{margin:0 0 var(--space-5)}
+.jump-pills a{border-radius:999px}
+.layout-hero{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:var(--space-4);
+  margin:0 0 var(--space-6);
+}
+.layout-hero-panel{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius-card);
+  padding:var(--space-4);
+  min-width:0;
+}
+.layout-hero-panel figure.photo{margin:0 0 var(--space-3)}
+.layout-hero-panel figure.photo img,
+body.page-article .layout-hero-panel figure.photo img{
+  width:100%;
+  height:auto;
+  max-height:280px;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  border-radius:var(--radius-card);
+  background:var(--sage);
+}
+.layout-hero-panel p{
+  margin:0;
+  font-size:16px;
+  line-height:1.5;
+}
+@media(max-width:700px){
+  .spec-box dl{grid-template-columns:1fr;gap:2px 0}
+  .spec-box dt{margin-top:8px}
+  .spec-box dt:first-child{margin-top:0}
+  .layout-hero{grid-template-columns:1fr}
+}
