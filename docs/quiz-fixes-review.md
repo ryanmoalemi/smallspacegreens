@@ -1,3 +1,7 @@
+Demo release approved, 14 November 2026. The site owner explicitly approved the selected photos for this public demo and will handle removal requests. This records owner authorization, not independent verification of image licensing. Release validation retains product identity and route checks.
+
+Previous review notes follow for history:
+
 SmallSpaceGreens quiz review, 14 November 2026
 
 Unmerged review only. The live website has not been updated.

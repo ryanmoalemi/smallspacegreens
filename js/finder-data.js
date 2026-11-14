@@ -1,7 +1,7 @@
 window.SSG_FINDER_DATA = {
-  "version": "1.2-review",
+  "version": "1.2-demo",
   "affiliateTag": "smallspaceg04-20",
-  "releaseReady": false,
+  "releaseReady": true,
   "products": {
     "lettuce": {
       "asin": "B00YO5TZ26",
@@ -12,17 +12,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B00YO5TZ26?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "tomato": {
       "asin": "B07YR28RRK",
@@ -33,17 +33,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B07YR28RRK?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "salad": {
       "asin": "B0D1LL6CG6",
@@ -54,17 +54,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B0D1LL6CG6?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "basil": {
       "asin": "B07VRJVJ9F",
@@ -75,17 +75,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B07VRJVJ9F?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "herbs": {
       "asin": "B003BM42R6",
@@ -96,17 +96,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B003BM42R6?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "radish": {
       "asin": "B00YO59N32",
@@ -117,17 +117,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B00YO59N32?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "basil-kit": {
       "asin": "B01MRVMKQH",
@@ -138,17 +138,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B01MRVMKQH?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. Manufacturer confirms included basil pods and light.",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "micro-broccoli": {
       "asin": "B00W2FAPF6",
@@ -159,17 +159,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B00W2FAPF6?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "micro-pea": {
       "asin": "B06XWGTV57",
@@ -180,17 +180,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B06XWGTV57?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "micro-radish": {
       "asin": "B08V1ZMGFX",
@@ -201,17 +201,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B08V1ZMGFX?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "microkit": {
       "asin": "B0CQPQKTFC",
@@ -222,17 +222,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B0CQPQKTFC?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. Manufacturer confirms radish/broccoli seed and trays, without lamp.",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "light": {
       "asin": "B0CHDBY2PD",
@@ -243,17 +243,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B0CHDBY2PD?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "cage": {
       "asin": "B0CR7KSCG3",
@@ -277,17 +277,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B0DCSH7T1R?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "soil": {
       "asin": "B078WY9Z7Q",
@@ -298,17 +298,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B078WY9Z7Q?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "tray": {
       "asin": "B07NKSKMCN",
@@ -319,17 +319,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B07NKSKMCN?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "drip": {
       "asin": "B07MYNVP8G",
@@ -340,17 +340,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B07MYNVP8G?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "bag": {
       "asin": "B00TF9E6XE",
@@ -361,12 +361,12 @@ window.SSG_FINDER_DATA = {
       "status": "unverified",
       "url": "https://www.amazon.com/dp/B00TF9E6XE?tag=smallspaceg04-20",
       "verification": "Source matrix 2026-11-13; no current stock claim. See docs/finder-verification.md.",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "photoCaption": "",
       "photoCredit": null,
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     },
     "coir": {
       "asin": "B07QNSSN81",
@@ -377,17 +377,17 @@ window.SSG_FINDER_DATA = {
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B07QNSSN81?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
-      "imageUseApproved": false,
+      "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
-      "imageRole": "product-preview",
+      "imageRole": "product",
       "identityEvidence": {
         "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
     }
   },
   "guides": {
@@ -397,6 +397,12 @@ window.SSG_FINDER_DATA = {
     "balcony": "/guides/balcony-salad-garden/",
     "tomato": "/guides/apartment-seed-starting/"
   },
-  "releasePolicy": "Private review only. No unsupported value badge, simulated research or artificial result delay. Exact product image delivery needs verification before publication."
+  "releasePolicy": "Private review only. No unsupported value badge, simulated research or artificial result delay. Exact product image delivery needs verification before publication.",
+  "demoPhotoApproval": {
+    "approvedBy": "site owner",
+    "approvedAt": "2026-11-14",
+    "scope": "Selected product photos for public demo; owner will handle removal requests",
+    "licenseVerified": false
+  }
 }
 ;
