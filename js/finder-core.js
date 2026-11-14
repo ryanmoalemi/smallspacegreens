@@ -25,12 +25,13 @@
     if (a.grow === 'microgreens' && a.spot === 'balcony') return {step:'switch',reason:'balcony'};
     if ((a.grow === 'salad' || a.grow === 'radish') && a.spot === 'dim') return {step:'switch',reason:a.grow};
     const pea = a.grow === 'microgreens' && a.micro === 'pea';
-    const needsSetup = !pea && (a.spot === 'dim' || (a.grow === 'microgreens' && a.micro !== 'pea'));
+    const needsSetup = a.spot === 'dim' || (a.grow === 'microgreens' && a.micro !== 'pea');
     if (needsSetup && !a.setup) return {step:'setup'};
     const dim = a.spot === 'dim';
     const pot = ['pot','soil'];
     const tray = ['tray','drip','coir'];
     const lit = ids => dim ? [...ids,'light'] : ids;
+    if (pea && a.setup === 'kit') return {step:'unavailable',reason:'pea-kit'};
     if (a.grow === 'microgreens') {
       if (a.setup === 'kit' && a.micro !== 'pea') return {step:'result',product:'microkit',extras:dim?['light']:[],guide:'microgreens',fit:'microkit',note:'The kit includes radish and broccoli seed. No light is included.'};
       return {step:'result',product:'micro-'+a.micro,extras:lit(tray),guide:'microgreens',fit:'tray'};
@@ -45,7 +46,7 @@
       return {step:'unavailable',reason:'unnamed'};
     }
     const extras = a.grow === 'tomato' ? ['bag','soil','cage'] : lit(pot);
-    return {step:'result',product:a.grow,extras,guide:a.spot==='balcony'?'balcony':a.grow==='tomato'?'tomato':a.grow==='basil'||a.grow==='herbs'?'basil':'window',fit:a.grow==='tomato'?'bag':'pot'};
+    return {step:'result',product:a.grow,extras,guide:a.spot==='balcony'?'balcony':a.spot==='sunny'?'window':'basil',fit:a.grow==='tomato'?'bag':'pot'};
   }
   function explain(input, recommendation) {
     const a = normalize(input), r = recommendation || route(a);
@@ -111,7 +112,26 @@
     };
     return copy[r.product] || {heading:'Here’s where we’d start',intro:`We’ve put together a starting setup for ${location}.`,reason:'Check the included items and growing requirements before you begin.'};
   }
-  const api = {normalize,route,explain,crops,spots,micros};
+  function resultCopy(input, recommendation) {
+    const a=normalize(input), r=recommendation||route(a);
+    const location=a.spot==='sunny'?'your sunny window':a.spot==='dim'?'your dim spot':'your balcony';
+    const labels={lettuce:'Buttercrunch lettuce',basil:'Genovese basil',herbs:'Culinary herbs',radish:'Cherry Belle radishes',salad:'Mixed salad greens','micro-pea':'Pea shoots','micro-radish':'Radish microgreens','micro-broccoli':'Broccoli microgreens','basil-kit':'Smart Garden 3 basil kit',microkit:(a.micro==='radish'?'Radish':'Broccoli')+' microgreens kit'};
+    const benefits={
+      lettuce:`We’d start with Buttercrunch for fresh salad leaves, with a pot and growing mix to suit ${location}.`,
+      basil:`For the fresh basil you want, we’d start with Genovese seeds and a pot setup for ${location}.`,
+      herbs:`We’d choose this collection so you can grow the herbs you cook with most in separate pots for ${location}.`,
+      radish:`For crunchy garden radishes, we’d start with Cherry Belle seeds and a pot with space for the roots.`,
+      salad:`We’d start with this collection so you can choose a few salad crops to grow in separate pots for ${location}.`,
+      'basil-kit':`Since you want basil in a dim spot, we’d choose this garden with its own light and three basil pods included.`,
+      'micro-pea':`For the pea shoots you want, we’d start with sprouting seed and the reusable tray supplies below.`,
+      'micro-radish':`For peppery young radish shoots, we’d pair these seeds with a reusable tray and growing medium.`,
+      'micro-broccoli':`For mild young broccoli shoots, we’d start with these seeds and the tray supplies below.`,
+      microkit:`Since you prefer a kit, we’d start with this box of trays, medium and both radish and broccoli seeds.`
+    };
+    const headline=(labels[r.product]||'Your growing setup')+' for '+location;
+    return {headline,benefit:(a.grow==='unsure'?'Not sure where to start? ':'')+(benefits[r.product]||explain(a,r).reason)};
+  }
+  const api = {normalize,route,explain,resultCopy,crops,spots,micros};
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.SSGFinder = api;
 })(typeof window === 'object' ? window : globalThis);

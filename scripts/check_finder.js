@@ -21,7 +21,8 @@ for(const micro of ['radish','broccoli']) {
  assert.equal(route({grow:'microgreens',micro,spot:'sunny',setup:'kit'}).product,'microkit');
 }
 assert.equal(route({grow:'microgreens',micro:'pea',spot:'sunny'}).product,'micro-pea');
-assert.equal(route({grow:'microgreens',micro:'pea',spot:'dim'}).product,'micro-pea');
+assert.equal(route({grow:'microgreens',micro:'pea',spot:'dim'}).step,'setup');
+assert.equal(route({grow:'microgreens',micro:'pea',spot:'dim',setup:'kit'}).step,'unavailable');
 assert.equal(route({grow:'tomato',spot:'sunny'}).step,'unavailable');
 assert.equal(route({grow:'unsure',spot:'dim',setup:'basics'}).product,'micro-broccoli');
 assert.equal(route({grow:'unsure',spot:'sunny'}).product,'lettuce');
@@ -63,13 +64,14 @@ if(process.argv.includes('--release')){
   assert.equal(p.status,'reviewed',id+' is not reviewed');
   assert.ok(p.identityEvidence?.reviewedAt,id+' has no identity evidence');
   assert.equal(p.identityEvidence.stockClaim,false,id+' must not claim stock');
-  assert.equal(p.imageRole,'illustrative',id+' cannot imply a merchandise photograph');
-  assert.ok(p.imageUseApproved&&p.image.startsWith('/assets/')&&fs.existsSync(root+p.image),id+' image must be a licensed local photo');
-  assert.ok(p.photoCaption&&p.photoCredit?.startsWith('/photo-credits/#'),id+' needs a visible caption and credit');
-  assert.ok(credit.includes('id="'+p.photoCredit.split('#')[1]+'"'),id+' credit record missing');
+  assert.equal(p.imageRole,'product',id+' must use the selected product photo');
+  assert.ok(p.imageUseApproved,id+' photo lacks owner demo approval');
+  assert.ok(['m.media-amazon.com','www.organic-heirloom-seed.com','alpaslife.com','cdn11.bigcommerce.com'].includes(new URL(p.image).hostname),id+' photo host is unexpected');
+  assert.ok(data.demoPhotoApproval?.approvedAt,'Demo photo approval must be recorded');
+  assert.equal(data.demoPhotoApproval.licenseVerified,false,'Do not imply independent license clearance');
  }
  assert.equal(data.products.cage.status,'unverified');
  assert.equal(data.releaseReady,true,'Release has not been approved');
- assert.ok(js.includes('As an Amazon Associate I earn from qualifying purchases.'));
- console.log('Release: '+active.size+' active products have identity evidence and clearly labeled licensed photos. Unverified tomato routes are withheld; no stock claims.');
+ assert.ok(fs.readFileSync(root+'/src/pages/home.html','utf8').includes('As an Amazon Associate I earn from qualifying purchases.'));
+ console.log('Release: '+active.size+' active products have identity evidence and owner-approved demo photos (license not independently verified). Unverified tomato routes are withheld; no stock claims.');
 }
