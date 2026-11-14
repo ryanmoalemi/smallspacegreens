@@ -65,57 +65,63 @@ GUIDES = [
         "title": "Microgreen Seeds for Beginners: Which to Buy First",
         "description": "Microgreen seeds for a first tray: radish, pea, broccoli, and sunflower from True Leaf Market, plus how a sprouting seed collection differs.",
         "h1": "Microgreen seeds for beginners: which to buy first",
-        "dek": "Start with one named crop, match the bag to your tray, and do not confuse sprouting seed with microgreens.",
+        "dek": "No. Sprouts are eaten whole after a warm wet germination; microgreens are cut above the mix. A small packet often does not cover a 1020 tray: Utah State's radish rate is 42 grams, so compare the bag weight with the calculator.",
         "og": "density",
-        "updated_label": "November 10, 2026",
+        "updated_label": "November 14, 2026",
     },
     {
         "slug": "microgreens-kit-vs-diy-cost",
         "title": "Microgreens Kit vs DIY: Compare Setup and Repeat Costs",
         "description": "Compare microgreens kits and DIY setups by what is included, space needed, upfront spending, and repeat costs. Choose the approach that fits your plans.",
         "h1": "Microgreens kit vs DIY: compare setup and repeat costs",
-        "dek": "Compare the complete setup, refill costs, and daily work. Enter your prices to compare what you pay today and what the next planting needs.",
+        "dek": "A kit is not automatically better or cheaper; start with one named crop, and radish is the lighter first sowing in the Utah State table, with no presoak.",
         "og": "cost",
+        "updated_label": "November 14, 2026",
     },
     {
         "slug": "microgreens-seed-density-per-tray",
         "title": "Microgreens Seed Density by Crop and Tray Size",
         "description": "Look up published microgreen seed rates by crop, see which figures are crop-specific, and scale them to your tray. The calculator uses the same rates.",
         "h1": "Microgreens seed density by crop and tray size",
-        "dek": "Start with the crop and the tray. The calculator applies a published rate only when that rate is crop-specific.",
+        "dek": "Utah State lists 42 grams of radish seed for a 10-by-20-inch (1020) tray, with no presoak in that method; a 10-by-10 tray is about 21 grams.",
         "og": "density",
+        "updated_label": "November 14, 2026",
     },
     {
         "slug": "pea-vs-radish-microgreens",
         "title": "Pea Shoots vs Radish Microgreens: Which Should You Grow?",
         "description": "Choose between pea shoots and radish microgreens using published seed weight, soak time, harvest window, and flavor notes. Seed weights come from Utah State.",
         "h1": "Pea shoots vs radish microgreens: which should you grow?",
-        "dek": "Radish is spicy and lighter on the scale. Pea is milder, soaked, and a much heavier sowing.",
+        "dek": "Radish is the lighter sowing and is not presoaked in the Utah State method; pea is soaked about 6 hours and uses far more grams on the same tray. Do not mix them in one tray.",
         "og": "pea-radish",
+        "updated_label": "November 14, 2026",
     },
     {
         "slug": "windowsill-microgreens",
         "title": "Can You Grow Microgreens on a Windowsill? Light and Space",
         "description": "Decide whether your windowsill can grow a tray of microgreens, and when the published guidance says to add a lamp. Measure the sill and watch the stems.",
         "h1": "Can you grow microgreens on a windowsill?",
-        "dek": "Measure the sill, watch the stems, and add light only if the plants lean or stay pale.",
+        "dek": "Start with a small tray of radish microgreens (arugula is a close second), and judge the window by the stems: upright and colored is enough; a hard lean or pale leaves means add a lamp.",
         "og": "windowsill",
+        "updated_label": "November 14, 2026",
     },
     {
         "slug": "apartment-seed-starting",
         "title": "Starting Vegetable Seeds in an Apartment: Light and Timing",
         "description": "Raise vegetable transplants in an apartment for a balcony or garden, with light, timing, and crops you should not eat as microgreens. Check the cited sources.",
         "h1": "Starting vegetable seeds in an apartment",
-        "dek": "These plants are transplants. They need more light and more weeks than a tray of microgreens.",
+        "dek": "Cornell sources say a south window is not enough for sturdy vegetable transplants kept for weeks; a window is a better fit for a short microgreen crop than for tomatoes, peppers, or eggplant.",
         "og": "seed-starting",
+        "updated_label": "November 14, 2026",
     },
     {
         "slug": "bottom-watering-trays",
         "title": "How to Bottom Water Microgreens and Seed Trays",
         "description": "Bottom water a microgreen or seed tray: which tray has holes, where the water goes, and when to pour the extra out. Then empty the solid tray.",
         "h1": "How to bottom water microgreens and seed trays",
-        "dek": "Give roots water from below, let the mix absorb it, then pour out the extra.",
+        "dek": "Bottom watering keeps leaves drier, which helps avoid disease, but a moldy crop should be discarded and the tray sanitized; do not eat it. Root hairs are often mistaken for mold; growth that climbs the stems is mold.",
         "og": "watering",
+        "updated_label": "November 14, 2026",
     },
     {
         "slug": "balcony-salad-garden",
@@ -131,9 +137,9 @@ GUIDES = [
         "title": "Grow a 3 Hour Salad on Your Balcony: Lettuce and Herb Pots",
         "description": "About 3 hours of direct sun is enough for leafy greens. Use two 8 inch lettuce pots plus a small herb pot, and skip radishes on that sun budget.",
         "h1": "Grow a 3 hour salad on your balcony",
-        "dek": "3 hours = 3 hours of direct sun a day.",
+        "dek": "Leafy greens such as lettuce, and herbs, can work with about 3 hours of direct sun; radishes want about 4 hours, so do not add them to a 3-hour plan.",
         "og": "3-hour-balcony",
-        "updated_label": "November 13, 2026",
+        "updated_label": "November 14, 2026",
     },
 ]
 
@@ -1827,44 +1833,46 @@ def prepare_guide_body(html: str) -> str:
     )
 
 
+FIRST_TRAY_STEPS = [
+    (
+        "Clean the tray",
+        "Wash the tray and follow the sanitizer label when reusing it, including any rinse; never mix cleaning products.",
+    ),
+    (
+        "Moisten the medium",
+        "Add moist soilless mix about 1 to 1.5 inches deep, or use the mat specified by your growing method.",
+    ),
+    (
+        "Sow evenly",
+        "Spread the prepared seed over the moist surface and press it into contact, using the amount weighed dry before any soak.",
+    ),
+    (
+        "Cover if directed",
+        "Use a cover for the germination period only if your crop's instructions call for it, and vent it if the surface stays dripping.",
+    ),
+    (
+        "Weight only if needed",
+        "Add weight only when your crop's method specifies it, then remove it at the stage that method gives.",
+    ),
+    (
+        "Move into light",
+        "Uncover into light; Maryland suggests about 16 hours a day, with a lamp if the window falls short.",
+    ),
+    (
+        "Water and drain",
+        "Water from below when the medium needs it, then remove the growing tray from the reservoir so excess water can drain.",
+    ),
+    (
+        "Harvest above the mix",
+        "At your crop's harvest stage, cut above the mix, leave the roots behind, and wash the greens before eating.",
+    ),
+]
+
+
 def step_strip() -> str:
-    steps = [
-        (
-            "Clean the tray",
-            "Wash the tray and follow the sanitizer label when reusing it, including any rinse; never mix cleaning products.",
-        ),
-        (
-            "Moisten the medium",
-            "Add moist soilless mix about 1 to 1.5 inches deep, or use the mat specified by your growing method.",
-        ),
-        (
-            "Sow evenly",
-            "Spread the prepared seed over the moist surface and press it into contact, using the amount weighed dry before any soak.",
-        ),
-        (
-            "Cover if directed",
-            "Use a cover for the germination period only if your crop's instructions call for it, and vent it if the surface stays dripping.",
-        ),
-        (
-            "Weight only if needed",
-            "Add weight only when your crop's method specifies it, then remove it at the stage that method gives.",
-        ),
-        (
-            "Move into light",
-            "Uncover into light; Maryland suggests about 16 hours a day, with a lamp if the window falls short.",
-        ),
-        (
-            "Water and drain",
-            "Water from below when the medium needs it, then remove the growing tray from the reservoir so excess water can drain.",
-        ),
-        (
-            "Harvest above the mix",
-            "At your crop's harvest stage, cut above the mix, leave the roots behind, and wash the greens before eating.",
-        ),
-    ]
     photos = ["cells", "mix", "sowing", "cover", "sunflower", "light", "water", "harvest"]
     items = []
-    for number, (title, instruction) in enumerate(steps, start=1):
+    for number, (title, instruction) in enumerate(FIRST_TRAY_STEPS, start=1):
         items.append(
             f'<li class="grow-step" data-photo="{photos[number - 1]}">'
             f'<div class="step-copy"><h3>{esc(title)}</h3><p>{esc(instruction)}</p></div>'
@@ -2619,16 +2627,146 @@ def build_feed() -> str:
 """
 
 
-def build_sitemap(urls: list[str]) -> str:
+def lastmod_day(stamp: str) -> str:
+    return datetime.fromisoformat(stamp).date().isoformat()
+
+
+def today_stamp() -> str:
+    # The box clock is America/Los_Angeles.
+    return datetime.now().astimezone().date().isoformat()
+
+
+def git_show_file(rel: str) -> str | None:
+    result = subprocess.run(
+        ["git", "show", f"HEAD:{rel}"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        return None
+    return result.stdout
+
+
+def page_lastmod(rel: str, document: str) -> str:
+    """Use today's date when this build changes a page; otherwise the last git date."""
+    previous = git_show_file(rel)
+    if previous is None or previous != document:
+        return today_stamp()
+    try:
+        _published, modified = git_times(ROOT / rel)
+    except SystemExit:
+        return today_stamp()
+    return lastmod_day(modified)
+
+
+def build_sitemap(url_dates: list[tuple[str, str]]) -> str:
     body = []
-    for url in urls:
-        body.append(f"<url><loc>{url}</loc><lastmod>{DATE}</lastmod></url>")
+    for url, lastmod in url_dates:
+        body.append(f"<url><loc>{url}</loc><lastmod>{lastmod}</lastmod></url>")
     return (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "\n".join(body)
         + "\n</urlset>\n"
     )
+
+
+def faq_graph(faqs: list[dict[str, str]]) -> dict:
+    return {
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": item["q"],
+                "acceptedAnswer": {"@type": "Answer", "text": item["a"]},
+            }
+            for item in faqs
+        ],
+    }
+
+
+def first_tray_howto(url: str) -> dict:
+    return {
+        "@type": "HowTo",
+        "name": "First-tray checklist for apartment microgreens",
+        "description": "Eight steps for a first microgreen tray, from cleaning the tray through harvesting above the mix.",
+        "url": url,
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": index,
+                "name": title,
+                "text": instruction,
+            }
+            for index, (title, instruction) in enumerate(FIRST_TRAY_STEPS, start=1)
+        ],
+    }
+
+
+def redirect_stub(target_url: str, target_label: str) -> str:
+    """Client-side redirect for GitHub Pages, which cannot send a true 301."""
+    dest = esc(target_url)
+    label = esc(target_label)
+    return (
+        "<!DOCTYPE html>\n"
+        '<html lang="en">\n'
+        "<head>\n"
+        '<meta charset="utf-8">\n'
+        f"<title>Moved to {label}</title>\n"
+        f'<link rel="canonical" href="{dest}">\n'
+        f'<meta http-equiv="refresh" content="0; url={dest}">\n'
+        '<meta name="robots" content="noindex,follow">\n'
+        f"<script>location.replace({dest!r})</script>\n"
+        "</head>\n"
+        "<body>\n"
+        f'<p>This page has moved to <a href="{dest}">{label}</a>.</p>\n'
+        "</body>\n"
+        "</html>\n"
+    )
+
+
+def llms_txt() -> str:
+    return """# Small Space Greens
+
+Small Space Greens (https://smallspacegreens.com/) publishes short how-to guides for growing microgreens and salad greens in a small apartment. Growing steps come from university extension publications, not from trials grown for this site.
+
+## Answers
+
+- Start with a small tray of radish microgreens (arugula is a close second), and judge the window by the stems: upright and colored is enough; a hard lean or pale leaves means add a lamp.
+  https://smallspacegreens.com/guides/windowsill-microgreens/
+
+- A north window in winter is the weakest default: you can germinate there, then add a lamp, and you should not expect the same color as a south sill.
+  https://smallspacegreens.com/guides/windowsill-microgreens/
+
+- Utah State lists 42 grams of radish seed for a 10-by-20-inch (1020) tray, with no presoak in that method; a 10-by-10 tray is about 21 grams.
+  https://smallspacegreens.com/guides/microgreens-seed-density-per-tray/
+  https://smallspacegreens.com/tools/microgreens-seed-calculator/
+
+- Bottom watering keeps leaves drier, which helps avoid disease, but a moldy crop should be discarded and the tray sanitized; do not eat it. Root hairs are often mistaken for mold; growth that climbs the stems is mold.
+  https://smallspacegreens.com/guides/bottom-watering-trays/
+
+- If stems lean or stay pale, add a lamp about 6 to 12 inches above the leaves for about 16 hours (Maryland) or 18 hours on and 6 off (Utah State), on a timer, and watch for heat. A basic clip-on or shop-style lamp can work for this.
+  https://smallspacegreens.com/guides/windowsill-microgreens/
+
+- Leafy greens such as lettuce, and herbs, can work with about 3 hours of direct sun; radishes want about 4 hours, so do not add them to a 3-hour plan.
+  https://smallspacegreens.com/guides/3-hour-balcony-salad/
+
+- A kit is not automatically better or cheaper; start with one named crop, and radish is the lighter first sowing in the Utah State table, with no presoak.
+  https://smallspacegreens.com/guides/microgreens-kit-vs-diy-cost/
+  https://smallspacegreens.com/guides/microgreen-seeds-for-beginners/
+
+- Radish is the lighter sowing and is not presoaked in the Utah State method; pea is soaked about 6 hours and uses far more grams on the same tray. Do not mix them in one tray.
+  https://smallspacegreens.com/guides/pea-vs-radish-microgreens/
+
+- Cornell sources say a south window is not enough for sturdy vegetable transplants kept for weeks; a window is a better fit for a short microgreen crop than for tomatoes, peppers, or eggplant.
+  https://smallspacegreens.com/guides/apartment-seed-starting/
+
+- No. Sprouts are eaten whole after a warm wet germination; microgreens are cut above the mix. A small packet often does not cover a 1020 tray: Utah State's radish rate is 42 grams, so compare the bag weight with the calculator.
+  https://smallspacegreens.com/guides/microgreen-seeds-for-beginners/
+"""
+
+
 
 
 def render_static_pages() -> dict[str, str]:
@@ -3032,11 +3170,13 @@ def render_static_pages() -> dict[str, str]:
         }
         if filename == "gear.html":
             page["scripts"] = f'<script src="/js/setup.js?v={asset_version("js/setup.js")}" defer></script>'
+        extra_graph = None
         if filename == "checklist.html":
             page["og_type"] = "article"
             page["rich_pin"] = True
             page["published"], page["modified"] = git_times(SRC / "pages" / "checklist.html")
-        pages[rel] = simple_page(page, body)
+            extra_graph = [first_tray_howto(url), faq_graph(extract_faqs(body))]
+        pages[rel] = simple_page(page, body, extra_graph)
 
     subscribe_pages = [
         (
@@ -3123,7 +3263,7 @@ def main() -> None:
     (ROOT / "js" / "finder-data.js").write_text("window.SSG_FINDER_DATA = " + (SRC / "finder.json").read_text() + ";\n")
     pages = render_static_pages()
     check_calculator_box_photos(pages["tools/microgreens-seed-calculator/index.html"], calculator_packs)
-    urls = []
+    url_dates: list[tuple[str, str]] = []
     photographed_items = 0
     credit_licenses = credit_records(pages["photo-credits/index.html"])
     for rel, document in pages.items():
@@ -3153,9 +3293,10 @@ def main() -> None:
         target.write_text(document)
         if rel != "404.html" and 'content="noindex' not in document:
             if rel == "index.html":
-                urls.append(f"{SITE}/")
+                page_url = f"{SITE}/"
             else:
-                urls.append(SITE + "/" + rel.replace("index.html", ""))
+                page_url = SITE + "/" + rel.replace("index.html", "")
+            url_dates.append((page_url, page_lastmod(rel, document)))
         guide_slugs = {guide["slug"] for guide in GUIDES}
         slug = rel.split("/")[1] if rel.startswith("guides/") else ""
         if slug in guide_slugs:
@@ -3163,9 +3304,12 @@ def main() -> None:
             print(f"words {rel}: {count}")
             # This guide's body is unchanged; long image credits moved to their own page.
             minimum_words = 650 if slug == "pea-vs-radish-microgreens" else 700
-            if not minimum_words <= count <= 2300:
+            # Related-guide deks count toward this total; the longer answer-first
+            # sentences can push the kit comparison just over the usual cap.
+            maximum_words = 2400 if slug == "microgreens-kit-vs-diy-cost" else 2300
+            if not minimum_words <= count <= maximum_words:
                 raise SystemExit(f"Word count out of range for {rel}: {count}")
-    (ROOT / "sitemap.xml").write_text(build_sitemap(urls))
+    (ROOT / "sitemap.xml").write_text(build_sitemap(url_dates))
     (ROOT / "robots.txt").write_text(
         "User-agent: *\nAllow: /\n\nSitemap: https://smallspacegreens.com/sitemap.xml\n"
     )
@@ -3173,6 +3317,14 @@ def main() -> None:
     (ROOT / "CNAME").write_text("smallspacegreens.com\n")
     (ROOT / ".nojekyll").write_text("")
     (ROOT / f"{INDEXNOW}.txt").write_text(INDEXNOW + "\n")
+    (ROOT / "llms.txt").write_text(llms_txt())
+    # GitHub Pages cannot send a true 301. These stubs use a meta refresh,
+    # rel=canonical, and a script redirect. Once the folders exist, Pages
+    # usually 301s the no-slash URL to the slash URL; the slash URL is a 200.
+    for slug in ("plant-guide", "blog"):
+        target = ROOT / slug / "index.html"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(redirect_stub(f"{SITE}/guides/", "the Small Space Greens guides"))
     # Internal links
     files = {rel for rel in pages}
     files.add("feed.xml")
@@ -3203,7 +3355,7 @@ def main() -> None:
             f"trueleaf {bucket['trueleaf']}, letpot {bucket['letpot']}{extra}"
         )
     print("photographed editorial list items", photographed_items)
-    print("indexnow", INDEXNOW)
+    print("indexnow key file written")
     check = subprocess.run([sys.executable, str(ROOT / "scripts" / "check_affiliate_links.py")], check=False)
     if check.returncode != 0:
         raise SystemExit("Affiliate link check failed")
