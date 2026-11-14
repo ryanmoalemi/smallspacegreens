@@ -365,6 +365,8 @@ TEXT_LIST_CONTAINERS = {
     "site-nav": "the site menu in the header",
     "sources": "sources list",
     "footnotes": "footnotes",
+    "home-steps": "homepage first-tray steps",
+    "home-quick-guides": "homepage compact guide links",
 }
 # Repeated content blocks that must carry a photo, besides list items and table rows.
 PHOTO_CARD_CLASSES = {"fact-card", "pick", "harvest-row", "seed-photo-row", "setup-choice-card"}

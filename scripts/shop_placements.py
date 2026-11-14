@@ -172,6 +172,7 @@ SHOP_PAGES: dict[str, dict] = {
         "heading": "Grow your first tray",
         "heading_tag": "h1",
         "heading_id": "home-title",
+        "layout": "first-tray-steps",
         "lead": "",
         "rows": [
             amazon("B07KRMP93C", KIT_SPONGE, "Trays, seed, and coir in one kit."),
@@ -905,6 +906,39 @@ def photo_stem(slug: str) -> str:
     return catalog.photo_stem(slug)
 
 
+
+def render_home_first_tray(page: dict, cards: list[str]) -> str:
+    if len(cards) != 8:
+        raise SystemExit(f"home first-tray layout needs 8 cards, got {len(cards)}")
+    kit, diy, extras = cards[0], cards[1:5], cards[5:]
+    heading_id = page.get("heading_id") or "home-title"
+    return (
+        f'<section class="picks home-first-tray" id="matching-supplies" aria-labelledby="{esc(heading_id)}">'
+        f'<h1 id="{esc(heading_id)}">{esc(page["heading"])}</h1>'
+        '<ol class="home-steps">'
+        '<li><p><strong>Get a kit.</strong> The Spongease kit has trays, seed, and coir.</p>'
+        '<ul class="pick-grid home-kit-card" role="list">'
+        + kit
+        + '</ul></li>'
+        '<li><p><strong>Sow and cover.</strong> Spread seed on damp coir, then cover about 1 to 2 days.</p></li>'
+        '<li><p><strong>Light and harvest.</strong> Bright window; cut in about 7 to 21 days.</p></li>'
+        '</ol>'
+        '<p class="home-guide-link"><a class="text-link" href="/guides/microgreens-in-a-small-apartment/">'
+        'Read the first-tray guide <span aria-hidden="true">→</span></a></p>'
+        '<details class="home-diy">'
+        '<summary>Doing it yourself?</summary>'
+        '<ul class="pick-grid" role="list">'
+        + "".join(diy)
+        + '</ul>'
+        '<p class="home-diy-label">Extras</p>'
+        '<ul class="pick-grid" role="list">'
+        + "".join(extras)
+        + '</ul>'
+        '</details>'
+        '</section>'
+    )
+
+
 def render_shop(key: str) -> str:
     page = SHOP_PAGES[key]
     rows = page["rows"]
@@ -994,6 +1028,8 @@ def render_shop(key: str) -> str:
             f'{esc(button)}<span class="sr-only"> (opens in a new tab)</span></a>'
             "</li>"
         )
+    if page.get("layout") == "first-tray-steps":
+        return render_home_first_tray(page, cards)
     if page.get("chooser"):
         return (
             '<section class="picks route-picks" id="matching-supplies" aria-labelledby="matching-supplies-title">'
