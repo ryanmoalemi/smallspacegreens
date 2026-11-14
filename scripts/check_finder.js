@@ -13,34 +13,38 @@ assert.equal(route({grow:'basil',spot:'dim'}).step,'setup');
 assert.equal(route({grow:'lettuce',spot:'sunny',setup:'kit'}).product,'lettuce');
 assert.equal(route({grow:'basil',spot:'dim',kit:'1'}).product,'basil-kit');
 assert.deepEqual(route({grow:'basil',spot:'dim',setup:'kit'}).extras,[]);
-for(const crop of ['lettuce','herbs']) assert.equal(route({grow:crop,spot:'dim',setup:'kit'}).step,'unavailable');
-for(const crop of ['tomato','salad','radish']) assert.equal(route({grow:crop,spot:'dim',setup:'basics'}).step,'switch');
-for(const micro of core.micros) assert.equal(route({grow:'microgreens',micro,spot:'balcony'}).step,'switch');
-for(const micro of ['radish','broccoli']) {
- assert.deepEqual(route({grow:'microgreens',micro,spot:'dim',setup:'kit'}).extras,['light']);
- assert.equal(route({grow:'microgreens',micro,spot:'sunny',setup:'kit'}).product,'microkit');
-}
-assert.equal(route({grow:'microgreens',micro:'pea',spot:'sunny'}).product,'micro-pea');
-assert.equal(route({grow:'microgreens',micro:'pea',spot:'dim'}).step,'setup');
-assert.equal(route({grow:'microgreens',micro:'pea',spot:'dim',setup:'kit'}).step,'unavailable');
-assert.equal(route({grow:'tomato',spot:'sunny'}).step,'unavailable');
-assert.equal(route({grow:'unsure',spot:'dim',setup:'basics'}).product,'micro-broccoli');
-assert.equal(route({grow:'unsure',spot:'sunny'}).product,'lettuce');
+// Invalid bookmarked combinations return to the relevant question, never a dead end.
+assert.equal(route({grow:'tomato',spot:'sunny'}).step,'grow');
+assert.equal(route({grow:'salad',spot:'dim'}).step,'space');
+assert.equal(route({grow:'microgreens',micro:'pea',spot:'dim',setup:'kit'}).step,'setup');
+assert.ok(!core.choices('grow').includes('tomato'));
+assert.deepEqual(core.choices('spot',{grow:'radish'}),['sunny','balcony']);
+assert.deepEqual(core.choices('spot',{grow:'microgreens',micro:'broccoli'}),['sunny','dim']);
+assert.deepEqual(core.choices('setup',{grow:'lettuce',spot:'dim'}),['basics']);
+assert.deepEqual(core.choices('setup',{grow:'microgreens',micro:'pea',spot:'dim'}),['basics']);
 let total=0,products=0,unsupported=0;
-for(const grow of core.crops) for(const micro of grow==='microgreens'?core.micros:[undefined]) for(const spot of core.spots) for(const setup of ['kit','basics']) {
- const a={grow,micro,spot,setup}, r=route(a);total++;
- assert.ok(['result','switch','unavailable'].includes(r.step),JSON.stringify(a));
+function visit(a) {
+ const r=route(a);
+ assert.ok(!['switch','unavailable'].includes(r.step),JSON.stringify(a));
  if(r.step==='result'){
-  products++;
-  assert.ok(data.products[r.product],JSON.stringify(a));
-  assert.ok(r.extras.every(x=>data.products[x]));
+  total++;products++;
+  assert.equal(data.products[r.product]?.status,'reviewed');
+  assert.ok(r.extras.every(x=>data.products[x]?.status==='reviewed'));
   assert.ok(!r.extras.includes(r.product));
-  assert.ok(new Set(r.extras).size===r.extras.length);
-  if(spot==='dim'&&r.product!=='basil-kit')assert.ok(r.extras.includes('light'),JSON.stringify(a));
+  assert.equal(new Set(r.extras).size,r.extras.length);
+  if(a.spot==='dim'&&r.product!=='basil-kit')assert.ok(r.extras.includes('light'),JSON.stringify(a));
   if(r.product.startsWith('micro-'))for(const x of ['tray','drip','coir'])assert.ok(r.extras.includes(x));
   assert.ok(data.guides[r.guide]);
- }else unsupported++;
+  return;
+ }
+ const field={grow:'grow',micro:'micro',space:'spot',setup:'setup'}[r.step];
+ assert.ok(field,'Unexpected question '+r.step);
+ const choices=core.choices(field,a);assert.ok(choices.length,'No shopping choices '+JSON.stringify(a));
+ for(const value of choices)visit({...a,[field]:value});
 }
+visit({});
+// Stale URLs for every formerly exposed combination must also avoid dead-end pages.
+for(const grow of core.crops)for(const micro of grow==='microgreens'?core.micros:[undefined])for(const spot of core.spots)for(const setup of ['kit','basics'])assert.ok(!['switch','unavailable'].includes(route({grow,micro,spot,setup}).step));
 for(const [id,p] of Object.entries(data.products)){
  const u=new URL(p.url);assert.equal(u.hostname,'www.amazon.com');assert.equal(u.pathname,'/dp/'+p.asin);assert.equal(u.searchParams.get('tag'),'smallspaceg04-20');
  assert.ok(!('price' in p)&&!('rating' in p)&&!('reviewCount' in p));
@@ -51,7 +55,7 @@ for(const m of js.matchAll(/['"](\/assets\/[^'"]+)['"]/g))assert.ok(fs.existsSyn
 assert.ok(!js.includes('setTimeout'));
 assert.ok(js.includes('sponsored nofollow noopener'));
 assert.ok(fs.readFileSync(root+'/src/finder.css','utf8').includes('prefers-reduced-motion:reduce'));
-console.log(`Finder: ${total} complete combinations checked (${products} product routes, ${unsupported} explicit switch/unavailable routes); affiliate, image, light and tray checks passed.`);
+console.log(`Finder: ${total} selectable shopping journeys checked (all end in reviewed products; no dead ends); affiliate, image, light and tray checks passed.`);
 if(process.argv.includes('--release')){
  const active=new Set();
  for(const grow of core.crops) for(const micro of grow==='microgreens'?core.micros:[undefined]) for(const spot of core.spots) for(const setup of ['kit','basics']){

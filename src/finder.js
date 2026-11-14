@@ -55,7 +55,7 @@
    unsure:['/assets/photos/lettuce-in-pot.jpg','/assets/photos/pea-shoots-counter.jpg','/assets/photos/balcony-garden-ruth-hartnup.jpg']
   };
   const selected=photos[answers.grow]||photos.unsure;
-  return spaces.map((x,i)=>[x[0],x[1],selected[i],x[3]]);
+  return spaces.map((x,i)=>[x[0],x[1],selected[i],x[3]]).filter(x=>core.choices('spot',answers).includes(x[0]));
  }
  function completion() {
   return `<aside class="completion-banner" aria-label="Your choices are ready"><div class="completion-plant">${garden()}</div><div><strong>Your match is ready.</strong><p>Based on the choices you made.</p><div class="completion-chips"><span>Light</span><span>Space</span><span>What you want to eat</span></div></div></aside>`;
@@ -104,14 +104,14 @@
   const r=core.route(answers);
   if (view==='result') host.innerHTML=result(r);
   else if (view==='switch'||view==='unavailable') host.innerHTML=message(r.reason);
-  else if(view==='grow') host.innerHTML=`${rail()}<h1 tabindex="-1">What do you want<br class="mobile-break"> to grow?</h1><div class="finder-grid">${crops.map(x=>option(x,'grow',false,answers.grow===x[0])).join('')}</div>${credits()}`;
+  else if(view==='grow') host.innerHTML=`${rail()}<h1 tabindex="-1">What do you want<br class="mobile-break"> to grow?</h1><div class="finder-grid">${crops.filter(x=>core.choices('grow').includes(x[0])).map(x=>option(x,'grow',false,answers.grow===x[0])).join('')}</div>${credits()}`;
   else if(view==='space') host.innerHTML=`${rail()}<h1 tabindex="-1">Where will it grow?</h1><div class="space-selection">${chips()}</div><div class="finder-space-grid">${spaceChoices().map(x=>option(x,'spot',false,answers.spot===x[0])).join('')}</div><div class="finder-bottom"></div>${credits()}`;
-  else if(view==='micro') host.innerHTML=`${rail()}<h1 tabindex="-1">Which microgreens?</h1><div class="finder-split"><aside class="finder-summary">${chips()}</aside><div><div class="finder-options">${micros.map(x=>option(x,'micro',true,answers.micro===x[0])).join('')}</div><div class="micro-controls"><button class="finder-link micro-skip" data-answer="micro" data-value="broccoli">Not sure? Try broccoli</button></div></div></div>${credits()}`;
+  else if(view==='micro') host.innerHTML=`${rail()}<h1 tabindex="-1">Which microgreens?</h1><div class="finder-split"><aside class="finder-summary">${chips()}</aside><div><div class="finder-options">${micros.filter(x=>core.choices('micro',answers).includes(x[0])).map(x=>option(x,'micro',true,answers.micro===x[0])).join('')}</div><div class="micro-controls"><button class="finder-link micro-skip" data-answer="micro" data-value="broccoli">Not sure? Try broccoli</button></div></div></div>${credits()}`;
   else if(view==='setup') {
    const micro=answers.grow==='microgreens';
    const kitPhoto=micro?data.products.microkit.image:data.products['basil-kit'].image;
    const switchKit=false;
-   host.innerHTML=`${rail()}<h1 tabindex="-1">All-in-one kit or<br> just the basics?</h1><div class="finder-split"><aside class="finder-summary">${chips()}</aside><div><div class="finder-options finder-setup">${switchKit?`<button class="finder-choice" data-adjust="basil">${photo(kitPhoto)}<span class="choice-label">Switch to a basil kit</span><span class="choice-helper">Basil shown. The recommended garden includes basil pods and a light.</span></button>`:option(['kit',micro?'Tray kit':'All-in-one kit',kitPhoto,micro?'Seeds, trays and medium. Add a separate light in a dim spot.':answers.grow==='basil'?'Light and three basil pods included':'Check crop-matched kit options'],'setup',false,answers.setup==='kit')}${option(['basics','Just the basics','/assets/photos/seedling-trays-nested-kvdp.jpg',answers.spot==='dim'?'Seeds + containers + a separate light':'Seeds + containers + growing medium'],'setup',false,answers.setup==='basics')}</div><div class="finder-bottom">${garden()}</div></div></div>${credits()}`;
+   host.innerHTML=`${rail()}<h1 tabindex="-1">All-in-one kit or<br> just the basics?</h1><div class="finder-split"><aside class="finder-summary">${chips()}</aside><div><div class="finder-options finder-setup">${!core.choices('setup',answers).includes('kit')?'':switchKit?`<button class="finder-choice" data-adjust="basil">${photo(kitPhoto)}<span class="choice-label">Switch to a basil kit</span><span class="choice-helper">Basil shown. The recommended garden includes basil pods and a light.</span></button>`:option(['kit',micro?'Tray kit':'All-in-one kit',kitPhoto,micro?'Seeds, trays and medium. Add a separate light in a dim spot.':answers.grow==='basil'?'Light and three basil pods included':'Check crop-matched kit options'],'setup',false,answers.setup==='kit')}${option(['basics','Just the basics','/assets/photos/seedling-trays-nested-kvdp.jpg',answers.spot==='dim'?'Seeds + containers + a separate light':'Seeds + containers + growing medium'],'setup',false,answers.setup==='basics')}</div><div class="finder-bottom">${garden()}</div></div></div>${credits()}`;
   }
   host.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{
    const frame=img.closest('.result-photo');
