@@ -50,3 +50,34 @@
 }
 
 @media(min-width:768px){.b-sequential .b-back{display:inline-flex;align-items:center;min-height:44px;border:1px solid #b6c2b0;border-radius:10px;background:#fff;color:var(--deep);padding:9px 15px;font-size:15px;font-weight:650;cursor:pointer}}
+
+/* Center the sequential desktop form and keep its action in the viewport. */
+@media(min-width:768px){
+ body:has(.b-step-form){padding-bottom:100px}
+ body:has(.b-step-form) .b-hero{min-height:0;padding:18px 8px;align-items:center}
+ body:has(.b-step-form) .hero-copy{max-width:740px}
+ body:has(.b-step-form) .hero-copy h1{font-size:32px;line-height:1.15;margin-bottom:8px;letter-spacing:-1px}
+ body:has(.b-step-form) .hero-copy h1 br{display:none}
+ body:has(.b-step-form) .hero-copy>p:not(.hero-kicker){font-size:16px;max-width:650px}
+ body:has(.b-step-form) .b-checklist{font-size:19px;min-width:210px;padding:12px 17px;gap:5px;margin:0}
+ body:has(.b-step-form) .b-checklist b{font-size:15px}
+ .b-panels .b-step-form{display:block;padding:20px 30px 28px;text-align:center}
+ .b-step-form>h2{justify-content:center;font-size:25px;margin-bottom:12px}
+ .b-step-form .b-rail{margin:12px 0 16px}
+ .b-desktop-question{width:100%;max-width:840px;margin:0 auto;position:relative}
+ .b-desktop-question>h2{justify-content:center;font-size:25px;margin:10px 0}
+ .b-desktop-question>.b-back{display:flex;width:max-content;margin:0 0 8px}
+ .b-desktop-question .mobile-helper{margin-bottom:16px}
+ .b-desktop-question .b-options{width:100%;margin:0 auto}
+ .b-desktop-question .b-option img{height:100px}
+ .b-desktop-question .option-copy{min-height:62px;padding:10px 8px}
+ .b-desktop-question .b-foods .food-option img{height:80px}
+ .b-desktop-question .b-mobile-actions{position:fixed;z-index:30;left:0;right:0;bottom:0;margin:0;padding:12px 24px;background:#fcfbf7;box-shadow:0 -4px 18px #123e2014;display:flex;justify-content:center}
+ .b-desktop-question .b-mobile-actions .b-button{width:min(500px,100%);margin:0 auto;min-height:52px}
+ .b-desktop-question .b-option{scroll-margin-bottom:110px}
+}
+
+/* Choice cards advance directly, matching the main-domain flow. */
+@media(min-width:768px){body:has(.b-step-form){padding-bottom:0}.b-desktop-question>.b-options{max-width:840px}.b-step-form>.b-text{margin-top:18px}}
+@media(max-width:767px){.b-mobile-question{padding-bottom:20px}.b-mobile-question>.b-text{display:block;margin:16px auto;min-height:44px}}
+.b-results .finder-detail{font-size:14px;line-height:1.5;margin:18px 0}.b-results .finder-detail summary{min-height:44px;display:flex;align-items:center;cursor:pointer;color:var(--deep);text-decoration:underline}.b-results .finder-size{max-width:400px;width:100%;height:auto;margin:auto}.b-results .finder-detail p{margin:8px 0}
