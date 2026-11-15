@@ -20,7 +20,7 @@ for(const variant of ['a','b']){
    results++;const copy=core.resultCopy(a,r);
    content+=`<h1>${esc(copy.headline)}</h1><p>${esc(copy.benefit)}</p><p class="affiliate-disclosure">We earn a commission from purchases through this page. As an Amazon Associate I earn from qualifying purchases.</p><div class="static-products">`;
    for(const id of [r.product,...(r.extras||[])]){const p=data.products[id];content+=`<article class="static-product" data-product="${id}"><img class="${p.image.includes('m.media-amazon.com')?'amazon-photo':'product-photo'}" src="${esc(p.image)}" alt="${esc(p.name)}" width="300" height="190"><h2>${esc(p.name)}</h2><a class="static-buy" href="${esc(p.url)}" rel="sponsored nofollow noopener" target="_blank">Buy on Amazon</a></article>`;}
-   content+=`</div>${r.note?`<p>${esc(r.note)}</p>`:''}<p><a href="${esc(data.guides[r.guide])}">Read the growing guide</a> · <a href="${base}">Start over</a></p>`;
+   content+=`</div>${r.note?`<p>${esc(r.note)}</p>`:''}<p><a href="${base}">Start over</a></p>`;
   }else{
    const field={grow:'grow',micro:'micro',space:'spot',setup:'setup'}[r.step];
    content+=`${r.step==='grow'?'<p>A little space. A fresh start.</p><h1>Find your small-space garden setup</h1><p>Choose what you want to grow. We’ll match seeds, kits and supplies to your space.</p>':''}<h${r.step==='grow'?'2':'1'}>${{grow:'What do you want to grow?',micro:'Which microgreens?',space:'Where will it grow?',setup:'All-in-one kit or just the basics?'}[r.step]}</h${r.step==='grow'?'2':'1'}><div class="static-grid">`;
