@@ -130,3 +130,4 @@
 @media(prefers-reduced-motion:reduce){.surprise-sprout,.garden-surprise i{animation:none}.garden-surprise i{display:none}}
 
 .b-results.ready{scroll-margin-top:12px}.b-results.ready h2{gap:12px;margin-top:0;margin-bottom:10px}.b-results.ready .garden-surprise{margin-right:8px}.b-results.ready{padding-top:18px}.b-results.ready .plan-ready{margin-block:5px}.b-results.ready .b-result-intro{margin-block:10px}
+@media(max-width:699px){.b-results.ready>h2:first-of-type{display:flex;align-items:center;font-size:21px;line-height:1.15}.b-results.ready .mobile-result-title{display:none}.b-results.ready .garden-surprise{width:40px;height:40px;flex-basis:40px}}
