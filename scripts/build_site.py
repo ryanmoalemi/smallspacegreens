@@ -3344,6 +3344,8 @@ def main() -> None:
             missing.append(href)
     if missing:
         raise SystemExit("Missing internal targets: " + ", ".join(missing))
+    import build_finder_b
+    build_finder_b.build()
     print("built", len(pages), "pages")
     for key, bucket in shop_placements.placement_counts().items():
         extra = ""
