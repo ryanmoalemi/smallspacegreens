@@ -17,10 +17,11 @@
   const angle=matches.find(r=>r.angle==='lessons')||candidates.find(r=>r.angle==='lessons')||candidates.find(r=>r.id!==reddit?.id);
   if(!reddit||!angle)return [];
   const place=answers.spot==='balcony'?'balcony':answers.spot==='dim'?'indoor':'windowsill';
-  const item=route.product==='basil-kit'?'a compact herb garden':route.product==='microkit'?'a starter kit':crop==='microgreens'?'seeds and trays':'seeds and planters';
+  const item=route.product==='basil-kit'?'starter kits':route.product==='microkit'?'starter kits':crop==='microgreens'?'seeds and trays':'seeds and planters';
+  const productCrop=crop==='microgreens'&&answers.micro?({radish:'radish microgreens',broccoli:'broccoli microgreens',pea:'pea shoot'}[answers.micro]||'microgreens'):{tomato:'tomato',herbs:'herb',radish:'radish',salad:'salad greens',microgreens:'microgreens',basil:'basil',lettuce:'lettuce'}[crop]||name;
   const lessons={tomato:'pot size and plant support',lettuce:'repeat harvests',salad:'repeat harvests',basil:'watering and pruning',herbs:'watering different herbs',radish:'room for the roots',microgreens:'watering and tray drainage'};
   return [{...reddit,label:'REDDIT GROWER EXPERIENCES',question:`Reviewing Reddit comments to help choose your ${({tomato:"tomato",herbs:"herb",radish:"radish",microgreens:"microgreen"}[crop]||name)} setup`},
-   {platform:'catalog',label:'YOUR AMAZON SHORTLIST',question:`Choosing ${item} from our Amazon shortlist for your ${place} ${name}`,url:null},
+   {platform:'catalog',label:'OUR AMAZON PICKS',question:`Our picks for the best ${place} ${productCrop} ${item} on Amazon.`,url:null},
    {...angle,label:'TIPS FROM REAL GROWERS',question:`Using grower tips on ${lessons[crop]||'small-space growing'} to refine your picks`}];
  }
  const api={match,finalLine,sequence};root.SSGReviewMatcher=api;if(typeof module!=='undefined')module.exports=api;
