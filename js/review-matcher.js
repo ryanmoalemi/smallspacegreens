@@ -19,8 +19,8 @@
   const place=answers.spot==='balcony'?'balcony':answers.spot==='dim'?'indoor':'windowsill';
   const item=route.product==='basil-kit'?'a compact herb garden':route.product==='microkit'?'a starter kit':crop==='microgreens'?'seeds and trays':'seeds and planters';
   const lessons={tomato:'pot size and plant support',lettuce:'repeat harvests',salad:'repeat harvests',basil:'watering and pruning',herbs:'watering different herbs',radish:'room for the roots',microgreens:'watering and tray drainage'};
-  return [{...reddit,label:'REDDIT GROWER EXPERIENCES',question:`Reviewing saved Reddit comments to help choose your ${({tomato:"tomato",herbs:"herb",radish:"radish",microgreens:"microgreen"}[crop]||name)} setup`},
-   {platform:'catalog',label:'YOUR AMAZON SHORTLIST',question:`Matching Amazon-listed ${item} to your ${place} ${name}`,url:null},
+  return [{...reddit,label:'REDDIT GROWER EXPERIENCES',question:`Reviewing Reddit comments to help choose your ${({tomato:"tomato",herbs:"herb",radish:"radish",microgreens:"microgreen"}[crop]||name)} setup`},
+   {platform:'catalog',label:'YOUR AMAZON SHORTLIST',question:`Choosing ${item} from our Amazon shortlist for your ${place} ${name}`,url:null},
    {...angle,label:'TIPS FROM REAL GROWERS',question:`Using grower tips on ${lessons[crop]||'small-space growing'} to refine your picks`}];
  }
  const api={match,finalLine,sequence};root.SSGReviewMatcher=api;if(typeof module!=='undefined')module.exports=api;
