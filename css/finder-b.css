@@ -33,3 +33,20 @@
  .b-mobile-question .b-mobile-actions .b-button.green{width:100%;min-height:52px;margin:0}
  .b-option{scroll-margin-bottom:110px}
 }
+
+@media(min-width:768px){
+ .b-panels.b-sequential{display:block;max-width:960px;margin-bottom:32px;scroll-margin-top:20px}
+ .b-step-form{padding:28px 36px}.b-step-form .b-rail{margin:20px 0 28px}
+ .b-desktop-question .mobile-plan-label,.b-desktop-question .b-mobile-progress,.b-desktop-question .b-garden-footer{display:none}
+ .b-desktop-question>h2{font-size:27px;margin:18px 0 12px}.b-desktop-question>h2 svg{width:32px;height:32px}
+ .b-desktop-question .mobile-helper{font-size:16px;line-height:24px;color:var(--muted);margin:0 0 22px}
+ .b-desktop-question .b-option img{height:150px}.b-desktop-question .option-copy{min-height:76px;padding:14px 10px;display:flex;flex-direction:column;gap:7px}
+ .b-desktop-question .option-copy strong{font-size:18px;line-height:24px}.b-desktop-question .option-copy>span{font-size:14px;line-height:20px}
+ .b-desktop-question .b-foods{grid-template-columns:repeat(4,minmax(0,1fr))}.b-desktop-question .b-foods .food-option{display:block;padding:0;text-align:center}
+ .b-desktop-question .b-foods .food-option img{width:100%;height:110px;border-radius:0}.b-desktop-question .b-foods .option-copy{padding:10px;min-height:48px;align-items:center}
+ .b-desktop-question .b-foods .option-copy strong{font-size:16px;line-height:22px}.b-desktop-question .b-foods .option-check{width:25px;height:25px;top:7px;right:7px;font-size:17px}
+ .b-desktop-question .b-mobile-actions{margin:26px 0 18px}.b-desktop-question .b-mobile-actions .b-button{display:flex;width:100%;max-width:500px;margin:0 auto;min-height:54px;font-size:18px}
+ .b-step-form>.b-text{display:block;margin:14px auto 0}.b-desktop-result>.b-back{margin:0 0 14px}.b-desktop-result .b-results{padding:28px}
+}
+
+@media(min-width:768px){.b-sequential .b-back{display:inline-flex;align-items:center;min-height:44px;border:1px solid #b6c2b0;border-radius:10px;background:#fff;color:var(--deep);padding:9px 15px;font-size:15px;font-weight:650;cursor:pointer}}
