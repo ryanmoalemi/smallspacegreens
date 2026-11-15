@@ -218,7 +218,7 @@ window.SSG_FINDER_DATA = {
       "name": "ALPAS LIFE Microgreens Kit",
       "kind": "Kit \u00b7 no built-in light",
       "image": "https://alpaslife.com/wp-content/uploads/2024/10/new-main-coco-coir-kit.jpg",
-      "benefit": "Radish and broccoli microgreen seeds with tray-growing supplies.",
+      "benefit": "Includes trays, growing medium, and both radish and broccoli seed. No light is included.",
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B0CQPQKTFC?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. Manufacturer confirms radish/broccoli seed and trays, without lamp.",
@@ -254,19 +254,6 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
-    },
-    "cage": {
-      "asin": "B0CR7KSCG3",
-      "name": "Halatool Adjustable Tomato Cages",
-      "kind": "Plant support \u00b7 pack size needs confirmation",
-      "image": null,
-      "benefit": "",
-      "status": "unverified",
-      "url": "https://www.amazon.com/dp/B0CR7KSCG3?tag=smallspaceg04-20",
-      "verification": "Source matrix calls ASIN B0CR7KSCG3 a 2-pack, secondary listing identifies it as a 4-pack. Do not show as a verified purchase until exact Amazon pack and photo match are confirmed.",
-      "imageUseApproved": false,
-      "availabilityVerified": false,
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
     },
     "pot": {
       "asin": "B0DCSH7T1R",
@@ -393,6 +380,19 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+    },
+    "cage": {
+      "asin": "B0CR7KSCG3",
+      "name": "Halatool Adjustable Tomato Cages",
+      "kind": "Plant support \u00b7 pack size needs confirmation",
+      "image": null,
+      "benefit": "",
+      "status": "unverified",
+      "url": "https://www.amazon.com/dp/B0CR7KSCG3?tag=smallspaceg04-20",
+      "verification": "Source matrix calls ASIN B0CR7KSCG3 a 2-pack, secondary listing identifies it as a 4-pack. Do not show as a verified purchase until exact Amazon pack and photo match are confirmed.",
+      "imageUseApproved": false,
+      "availabilityVerified": false,
+      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
     }
   },
   "guides": {

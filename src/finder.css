@@ -238,3 +238,6 @@
 @keyframes finale-twinkle{0%,100%{opacity:.15;transform:scale(.5) rotate(-12deg)}50%{opacity:1;transform:scale(1.2) rotate(12deg)}}
 @keyframes finale-glow{0%,100%{filter:drop-shadow(0 0 2px #ffed85)}50%{filter:drop-shadow(0 0 10px #ffd349)}}
 @media(prefers-reduced-motion:reduce){.garden-reveal .reveal-finale::before,.garden-reveal .reveal-finale::after{animation:none!important;opacity:.8}.garden-reveal .reveal-finale.is-active .reveal-prize{animation:none!important}}
+/* Keep longer, crop-specific supply explanations inside mobile cards. */
+.finder-extra,.finder-extra>div{min-width:0}.finder-extra .amazon-button{max-width:100%;white-space:normal;box-sizing:border-box}.finder-extra p{overflow-wrap:anywhere}
+@media(max-width:699px){.match-welcome{overflow:hidden}}

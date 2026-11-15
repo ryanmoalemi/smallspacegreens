@@ -162,3 +162,6 @@
 .b-panels.b-sequential{max-width:1100px;margin-top:0;scroll-margin-top:8px}.b-sequential .b-form{padding:18px 24px}.b-form>h2{font-size:24px;margin:0 0 12px}.b-form>.b-rail{margin:8px 0 12px}.b-desktop-question>h2{font-size:24px;margin:8px 0}.b-desktop-question .mobile-helper{font-size:14px;line-height:20px;margin:0 0 12px}.b-desktop-question .b-option img{height:90px}.b-desktop-question .option-copy{min-height:44px;padding:8px;gap:3px}.b-desktop-question .option-copy strong{font-size:16px;line-height:20px}.b-desktop-question .b-options{gap:9px}.b-form>.b-text{margin:6px auto 0}
 }
 @media(min-width:768px) and (max-height:750px){.b-hero{padding-block:6px!important}.b-hero p{display:none}.b-sequential .b-form{padding:12px 20px}.b-desktop-question .b-option img{height:72px}.b-form>h2{font-size:21px;margin-bottom:7px}}
+/* Variable question counts and unclipped result introduction. */
+.b-rail li{flex:1;width:auto;min-width:0}
+@media(max-width:767px){.b-results.ready .mobile-result-photo{display:none}.b-results.ready>h2{position:relative;inset:auto;margin:12px 0;padding:0;overflow:visible}.b-product .b-button{max-width:100%;white-space:normal}}

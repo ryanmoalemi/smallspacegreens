@@ -24,5 +24,6 @@
    {platform:'catalog',label:'OUR AMAZON PICKS',question:`Comparing ${place} ${productCrop} ${item} on Amazon.`,url:null},
    {...angle,label:'TIPS FROM REAL GROWERS',question:'Using real growers’ advice to pick the right setup for your space.'}];
  }
- const api={match,finalLine,sequence};root.SSGReviewMatcher=api;if(typeof module!=='undefined')module.exports=api;
+ function proof(a,r,records){return match(a,r,records).find(x=>x.platform==='reddit'&&x.excerpt&&/^https:\/\/(www\.)?reddit\.com\//.test(x.url))||null;}
+ const api={match,finalLine,sequence,proof};root.SSGReviewMatcher=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

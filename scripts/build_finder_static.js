@@ -1,10 +1,14 @@
 /* Build every supported no-JS journey from the same routing engine as the quiz. */
 const fs=require('fs'),path=require('path'),core=require('../src/finder-core');
+const matcher=require('../src/review-matcher'),evidence=require('../data/reviews/evidence.json');
 const root=path.resolve(__dirname,'..'),data=require('../src/finder.json');
 const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const labels={tomato:'Cherry tomatoes',lettuce:'Lettuce',salad:'Salad mix',basil:'Basil',herbs:'Herbs',radish:'Radishes',microgreens:'Microgreens',unsure:'Not sure',sunny:'Sunny window',dim:'Dim spot',balcony:'Balcony',broccoli:'Broccoli',pea:'Pea shoots',kit:'All-in-one kit',basics:'Just the basics'};
 const images={tomato:'/assets/finder/cherry-tomatoes.webp',lettuce:'/assets/products/supply-lettuce-leaves-600.webp',salad:'/assets/finder/salad-mix.webp',basil:'/assets/finder/basil.webp',herbs:'/assets/finder/herbs.webp',radish:'/assets/finder/radishes.webp',microgreens:'/assets/photos/trays-broccoli-radish.jpg',unsure:'/assets/finder/not-sure.webp',sunny:'/assets/photos/basil-window-personal-creations.jpg',dim:'/assets/photos/pea-shoots-counter.jpg',balcony:'/assets/photos/balcony-garden-ruth-hartnup.jpg',broccoli:'/assets/photos/broccoli-microgreens-anotherdaysjourney.jpg',pea:'/assets/photos/pea-shoots-basket-susan-slater.jpg',kit:data.products.microkit.image,basics:'/assets/photos/seedling-trays-nested-kvdp.jpg'};
 const states=[];function walk(a,parent){const r=core.route(a);states.push({a,r,parent});if(r.step==='result')return;const field={grow:'grow',micro:'micro',space:'spot',setup:'setup'}[r.step];if(!field)throw Error('Unsupported static route '+r.step);for(const value of core.choices(field,a))walk({...a,[field]:value},a);}walk({},null);
+// Refresh bookmarked URLs from before the single-option setup questions were removed.
+const legacy=states.filter(x=>x.r.step==='result'&&!x.a.setup&&core.normalize(x.a).setup).map(x=>({...x,a:core.normalize(x.a)}));
+states.push(...legacy);
 function key(a){return ['grow','micro','spot','setup'].filter(k=>a[k]).map(k=>k+'-'+a[k]).join('--')||'start';}
 const style=`<style>.static-finder{max-width:960px;margin:12px auto;padding:20px;background:#fffdf8;border-radius:22px;color:#214d3a;text-align:center}.static-finder h1{font-size:30px;line-height:1.15;margin:8px}.static-finder p{font-size:15px;line-height:1.4}.static-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.static-choice,.static-product{border:1px solid #d8ded6;border-radius:14px;padding:8px;background:white;color:#214d3a;text-decoration:none;overflow:hidden}.static-choice img{width:100%;height:125px;object-fit:cover;border-radius:9px}.static-choice strong{display:block;padding:8px;font-size:15px}.static-products{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}.static-product{flex:1 1 230px;max-width:400px}.static-product img{width:100%;height:190px;object-fit:contain}.static-buy{display:block;background:#ffd814;color:#0f1111;padding:12px;border-radius:24px;text-decoration:none}.static-back{display:block;text-align:left;margin:4px 0 12px}.static-choice:focus-visible,.static-buy:focus-visible{outline:3px solid #007185;outline-offset:3px}@media(max-width:699px){.static-finder{padding:12px;margin:8px}.static-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.static-choice img{height:95px}.static-finder h1{font-size:25px}}</style>`;
 let results=0;
@@ -19,8 +23,9 @@ for(const variant of ['a','b']){
   if(r.step==='result'){
    results++;const copy=core.resultCopy(a,r);
    content+=`<h1>${esc(copy.headline)}</h1><p>${esc(copy.benefit)}</p><p class="affiliate-disclosure">We earn a commission from purchases through this page. As an Amazon Associate I earn from qualifying purchases.</p><div class="static-products">`;
-   for(const id of [r.product,...(r.extras||[])]){const p=data.products[id];content+=`<article class="static-product" data-product="${id}"><img class="${p.image.includes('m.media-amazon.com')?'amazon-photo':'product-photo'}" src="${esc(p.image)}" alt="${esc(p.name)}" width="300" height="190"><h2>${esc(p.name)}</h2><a class="static-buy" href="${esc(p.url)}" rel="sponsored nofollow noopener" target="_blank">Buy on Amazon</a></article>`;}
-   content+=`</div>${r.note?`<p>${esc(r.note)}</p>`:''}<p><a href="${base}">Start over</a></p>`;
+   for(const id of [r.product,...(r.extras||[])]){const p=data.products[id];content+=`<article class="static-product" data-product="${id}"><img class="${p.image.includes('m.media-amazon.com')?'amazon-photo':'product-photo'}" src="${esc(p.image)}" alt="${esc(p.name)}" width="300" height="190"><h2>${esc(p.name)}</h2><p>${esc(core.supplyReason(id,a,r,data.products))}</p><a class="static-buy" href="${esc(p.url)}" rel="sponsored nofollow noopener" target="_blank">Check price on Amazon</a></article>`;}
+   const ev=matcher.proof(a,r,evidence.records),alt=core.alternative(a,r);
+   content+=`</div>${ev?`<details open><summary>What growers say</summary><blockquote>“${esc(ev.excerpt)}”</blockquote><a href="${esc(ev.url)}" target="_blank" rel="nofollow noopener">Read the Reddit discussion</a><p>A grower’s experience, not a review of these exact products.</p></details>`:''}${alt?`<p>${esc(alt.intro)} <a href="${url(alt.field==='grow'?{grow:alt.value}:{...a,[alt.field]:alt.value})}">${esc(alt.label)}</a></p>`:''}<p>Items are sold separately. Check current prices and pack sizes on Amazon.</p>${r.note?`<p>${esc(r.note)}</p>`:''}<p><a href="${base}">Start over</a></p>`;
   }else{
    const field={grow:'grow',micro:'micro',space:'spot',setup:'setup'}[r.step];
    content+=`${r.step==='grow'?'<p>A little space. A fresh start.</p><h1>Find your small-space garden setup</h1><p>Choose what you want to grow. We’ll match seeds, kits and supplies to your space.</p>':''}<h${r.step==='grow'?'2':'1'}>${{grow:'What do you want to grow?',micro:'Which microgreens?',space:'Where will it grow?',setup:'All-in-one kit or just the basics?'}[r.step]}</h${r.step==='grow'?'2':'1'}><div class="static-grid">`;
@@ -34,5 +39,5 @@ for(const variant of ['a','b']){
   const out=path.join(root,url(a),'index.html');fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,html);
  }
 }
-if(results!==56)throw Error('Expected 28 results per variant, got '+results);
+if(results!==64)throw Error('Expected current and legacy results, got '+results);
 console.log(`Static finder: ${states.length} states per variant; ${results} result pages generated.`);

@@ -20,7 +20,7 @@ assert.deepEqual(route({grow:'tomato',spot:'balcony'}).extras,['bag','soil']);
 assert.equal(route({grow:'tomato',spot:'balcony'}).product,'tomato');
 assert.equal(route({grow:'tomato',spot:'dim'}).step,'space');
 assert.equal(route({grow:'salad',spot:'dim'}).step,'space');
-assert.equal(route({grow:'microgreens',micro:'pea',spot:'dim',setup:'kit'}).step,'setup');
+assert.equal(route({grow:'microgreens',micro:'pea',spot:'dim',setup:'kit'}).step,'result');
 assert.ok(core.choices('grow').includes('tomato'));
 assert.deepEqual(core.choices('spot',{grow:'radish'}),['sunny','balcony']);
 assert.deepEqual(core.choices('spot',{grow:'microgreens',micro:'broccoli'}),['sunny','dim']);
@@ -100,3 +100,8 @@ if(process.argv.includes('--release')){
  assert.ok(fs.readFileSync(root+'/src/pages/home.html','utf8').includes('As an Amazon Associate I earn from qualifying purchases.'));
  console.log('Release: '+active.size+' active products have identity evidence and owner-approved demo photos (license not independently verified). Tomatoes are limited to the full-sun balcony setup; no stock claims.');
 }
+// Conversion regressions: skipped choices, distinct reasons and valid alternatives.
+for(const a of [{grow:'lettuce',spot:'dim'},{grow:'herbs',spot:'dim'},{grow:'unsure',spot:'dim'},{grow:'microgreens',micro:'pea',spot:'dim'}]){assert.equal(core.route(a).step,'result');assert.ok(!core.questionSteps(a).includes('setup'));}
+assert.notEqual(core.supplyReason('pot',{grow:'herbs'},{product:'herbs'},data.products),core.supplyReason('pot',{grow:'radish'},{product:'radish'},data.products));
+for(const a of [{grow:'basil',spot:'dim',setup:'kit'},{grow:'microgreens',micro:'radish',spot:'sunny',setup:'kit'}]){const r=core.route(a),alt=core.alternative(a,r);assert.equal(core.route({...a,[alt.field]:alt.value}).step,'result');assert.notEqual(core.route({...a,[alt.field]:alt.value}).product,r.product);}
+for(const file of ['src/finder.js','src/finder-b.js','scripts/build_finder_static.js'])assert.ok(!fs.readFileSync(file,'utf8').includes('Read the growing guide'));

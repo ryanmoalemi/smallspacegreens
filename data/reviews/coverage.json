@@ -164,19 +164,6 @@
       "note": "No exact ASIN verified. Research scope: brand-or-product-family, category-search-candidate"
     },
     {
-      "productId": "cage",
-      "name": "Halatool Adjustable Tomato Cages",
-      "asin": "B0CR7KSCG3",
-      "threads": 16,
-      "excerpts": 61,
-      "exactAsinVerified": false,
-      "scope": [
-        "cultivar-or-category",
-        "category-search-candidate"
-      ],
-      "note": "No exact ASIN verified. Research scope: cultivar-or-category, category-search-candidate"
-    },
-    {
       "productId": "pot",
       "name": "Melphoe 8 in Pots with Saucers",
       "asin": "B0DCSH7T1R",
@@ -253,6 +240,19 @@
         "category-search-candidate"
       ],
       "note": "No exact ASIN verified. Research scope: category, category-search-candidate"
+    },
+    {
+      "productId": "cage",
+      "name": "Halatool Adjustable Tomato Cages",
+      "asin": "B0CR7KSCG3",
+      "threads": 16,
+      "excerpts": 61,
+      "exactAsinVerified": false,
+      "scope": [
+        "cultivar-or-category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: cultivar-or-category, category-search-candidate"
     }
   ],
   "rainforest": {

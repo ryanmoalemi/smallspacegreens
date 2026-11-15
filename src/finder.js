@@ -39,9 +39,9 @@
  }
  function rail() {
   const done=view==='result';
-  const i=view==='grow'||view==='micro'?0:view==='space'?1:2;
-  const percent=done?100:[33,67,90][i];
-  return `<div class="finder-navigation">${view==='grow'?'<span></span>':back()}<div class="finder-progress"><p class="stage-count">${done?'Your match is ready':`${i+1} of 3 <span>${['Grow','Space','Setup'][i]}</span>`}</p><div class="finder-progress-track" role="progressbar" aria-label="Finder progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}"><span style="width:${percent}%"></span></div><ol class="finder-stages" aria-label="Your growing setup">${['Grow','Space','Setup'].map((label,n)=>`<li${!done&&n===i?' aria-current="step"':''} class="${done||n<i?'is-complete':''}">${label}</li>`).join('')}</ol></div></div>`;
+  const steps=core.questionSteps(answers), labels=steps.map(x=>({grow:'Grow',micro:'Crop',space:'Space',setup:'Setup'}[x]));
+  const i=Math.max(0,steps.indexOf(view)),percent=done?100:Math.round(100*i/steps.length);
+  return `<div class="finder-navigation">${view==='grow'?'<span></span>':back()}<div class="finder-progress"><p class="stage-count">${done?'Your match is ready':`${i+1} of ${labels.length} <span>${labels[i]}</span>`}</p><div class="finder-progress-track" role="progressbar" aria-label="Finder progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}"><span style="width:${percent}%"></span></div><ol class="finder-stages" aria-label="Your growing setup">${labels.map((label,n)=>`<li${!done&&n===i?' aria-current="step"':''} class="${done||n<i?'is-complete':''}">${label}</li>`).join('')}</ol></div></div>`;
  }
  function spaceChoices() {
   return spaces.map((x,i)=>[x[0],answers.grow==='tomato'&&x[0]==='balcony'?'Sunny balcony':x[1],x[2],answers.grow==='tomato'&&x[0]==='balcony'?'6 to 8 hours direct sun · space for a 5-gallon bag':x[3]]).filter(x=>core.choices('spot',answers).includes(x[0]));
@@ -55,7 +55,7 @@
  }
  function credits(){return '<p class="finder-credits"><a href="/photo-credits/#finder-photography">Photo credits</a></p>';}
 
- function amazon(p,text,primary=false){return `<a class="amazon-button ${primary?'finder-primary':'finder-link'}" href="${e(p.url)}" rel="sponsored nofollow noopener" target="_blank" data-amazon="${e(p.asin)}">Buy on Amazon<span class="sr-only"> (opens Amazon in a new tab)</span></a>`;}
+ function amazon(p,text,primary=false){return `<a class="amazon-button ${primary?'finder-primary':'finder-link'}" href="${e(p.url)}" rel="sponsored nofollow noopener" target="_blank" data-amazon="${e(p.asin)}">Check price on Amazon<span class="sr-only"> (opens Amazon in a new tab)</span></a>`;}
  function message(reason) {
   const cases={
    tomato:['This spot is not a fit for our tomato setup.','Tomatoes need strong direct sun and room to grow. A dim counter with a small clip-on lamp is not our recommended tomato setup.','Try lettuce instead','lettuce','/assets/finder/cherry-tomatoes.webp'],
@@ -70,6 +70,10 @@
   const c=cases[reason]||cases.product;
   return `${rail()}<section class="finder-message"><h1 tabindex="-1">${c[0]}</h1>${chips()}${photo(c[4],'','message-photo')}<p>${c[1]}</p><button class="finder-primary" data-adjust="${c[3]}">${c[2]}</button>${reason==='unnamed'?'<button class="finder-link" data-adjust="basil">Try the basil kit instead</button>':''}<button class="finder-link" data-edit="space">Change growing spot</button></section>${credits()}`;
  }
+ function resultSupport(r){
+  const ev=window.SSGReviewMatcher.proof(answers,r,window.SSG_REVIEW_EVIDENCE.records),alt=core.alternative(answers,r);
+  return `${ev?`<details class="result-context" open><summary>What growers say</summary><blockquote><p>“${e(ev.excerpt)}”</p><a href="${e(ev.url)}" target="_blank" rel="nofollow noopener">Read the Reddit discussion</a></blockquote><p>A grower’s experience, not a review of these exact products.</p></details>`:''}${alt?`<p class="result-context">${e(alt.intro)} <button class="finder-link" data-answer="${alt.field}" data-value="${alt.value}">${e(alt.label)}</button></p>`:''}<p class="result-context">Items are sold separately. Check current prices and pack sizes on Amazon.</p>`;
+ }
  function result(r) {
   const p=data.products[r.product];
   if(!p||p.status==='unverified'||!p.image||r.extras.some(id=>!data.products[id]?.image||data.products[id].status==='unverified'))return message('product');
@@ -78,8 +82,8 @@
   const caution=answers.spot==='balcony'&&['lettuce','salad'].includes(r.product)?'Salad greens prefer cooler conditions. Check the direct sun and heat on your balcony.':'';
   const cropPhoto=answers.grow==='microgreens'?(micros.find(x=>x[0]===answers.micro)||micros[1])[2]:answers.grow==='unsure'?(r.product==='micro-broccoli'?micros[1][2]:crops[1][2]):(crops.find(x=>x[0]===answers.grow)||crops[1])[2];
   const matchFacts=[r.product==='basil-kit'?'Grow light included':r.extras.includes('light')?'Separate light below':'Natural light setup',r.product==='basil-kit'?'Basil pods included':r.product==='microkit'?'Seeds + trays + medium':'Seeds + supplies below'];
-  const extras=r.extras.length?`<section class="finder-extras"><h2>Make it a growing setup</h2><p class="extras-intro">A few useful companions for your new grow. Sold separately.</p><div class="finder-extra-grid count-${r.extras.length}">${r.extras.map(id=>{const x=data.products[id];return `<article class="finder-extra">${photo(x.image,x.name)}<div><h3>${e(x.name)}</h3>${r.product==='tomato'&&id==='bag'?'<p>Use one bag per plant; this listing is a multipack.</p>':r.product==='tomato'&&id==='soil'?'<p>Allow about 20 US quarts for one 5-gallon bag. Check pack volume.</p>':''}${amazon(x,'View on Amazon')}</div></article>`;}).join('')}</div></section>`:'';
-  return `<section class="finder-result"><header class="match-welcome"><button class="finder-back result-back" data-back>‹ Back</button><div><p class="match-kicker">TA-DA! YOUR GARDEN PICKS</p><h2>Your little garden starts here.</h2><p>Chosen for your space. Ready to grow.</p></div><span class="garden-surprise" aria-hidden="true"><span class="surprise-sprout">🌱</span><i style="--leaf:0"></i><i style="--leaf:1"></i><i style="--leaf:2"></i><i style="--leaf:3"></i><i style="--leaf:4"></i><i style="--leaf:5"></i><i style="--leaf:6"></i><i style="--leaf:7"></i></span></header><div class="answer-echo">${chips()}</div><div class="result-layout"><figure class="result-photo"><span class="photo-sun" aria-hidden="true"></span><span class="grow-sticker">LET’S GROW</span>${photo(p.image,p.name)}<span class="crop-peek">${photo(cropPhoto,'')}<span>A little inspiration</span></span></figure><div class="result-copy"><p class="product-kind"><span class="match-check" aria-hidden="true">✓</span> Picked for you · ${e(p.kind)}</p><h1 tabindex="-1">${e(copy.headline)}</h1><p class="product-brand">${e(p.name)}</p><p class="benefit">${e(copy.benefit)}</p><ul class="match-facts">${matchFacts.map(x=>`<li><span aria-hidden="true">✓</span>${e(x)}</li>`).join('')}</ul>${amazon(p,'Buy on Amazon',true)}</div></div>${r.note?`<p class="result-context">${e(r.note)}</p>`:''}${caution?`<p class="result-context">${e(caution)}</p>`:''}${extras}<div class="finder-result-links"><button class="finder-link" data-reset>Start over</button></div></section>${credits()}`;
+  const extras=r.extras.length?`<section class="finder-extras"><h2>Make it a growing setup</h2><p class="extras-intro">A few useful companions for your new grow. Sold separately.</p><div class="finder-extra-grid count-${r.extras.length}">${r.extras.map(id=>{const x=data.products[id];return `<article class="finder-extra">${photo(x.image,x.name)}<div><h3>${e(x.name)}</h3><p>${e(core.supplyReason(id,answers,r,data.products))}</p>${amazon(x,'View on Amazon')}</div></article>`;}).join('')}</div></section>`:'';
+  return `<section class="finder-result"><header class="match-welcome"><button class="finder-back result-back" data-back>‹ Back</button><div><p class="match-kicker">TA-DA! YOUR GARDEN PICKS</p><h2>Your little garden starts here.</h2><p>Chosen for your space. Ready to grow.</p></div><span class="garden-surprise" aria-hidden="true"><span class="surprise-sprout">🌱</span><i style="--leaf:0"></i><i style="--leaf:1"></i><i style="--leaf:2"></i><i style="--leaf:3"></i><i style="--leaf:4"></i><i style="--leaf:5"></i><i style="--leaf:6"></i><i style="--leaf:7"></i></span></header><div class="answer-echo">${chips()}</div><div class="result-layout"><figure class="result-photo"><span class="photo-sun" aria-hidden="true"></span><span class="grow-sticker">LET’S GROW</span>${photo(p.image,p.name)}<span class="crop-peek">${photo(cropPhoto,'')}<span>A little inspiration</span></span></figure><div class="result-copy"><p class="product-kind"><span class="match-check" aria-hidden="true">✓</span> Picked for you · ${e(p.kind)}</p><h1 tabindex="-1">${e(copy.headline)}</h1><p class="product-brand">${e(p.name)}</p><p class="benefit">${e(copy.benefit)}</p><ul class="match-facts">${matchFacts.map(x=>`<li><span aria-hidden="true">✓</span>${e(x)}</li>`).join('')}</ul>${amazon(p,'Buy on Amazon',true)}</div></div>${r.note?`<p class="result-context">${e(r.note)}</p>`:''}${caution?`<p class="result-context">${e(caution)}</p>`:''}${extras}${resultSupport(r)}<div class="finder-result-links"><button class="finder-link" data-reset>Start over</button></div></section>${credits()}`;
  }
  function sync(push=true) {
   const u=new URL(location.href);u.pathname='/';
@@ -120,7 +124,7 @@
   if (view==='result') host.innerHTML=result(r);
   else if (view==='switch'||view==='unavailable') host.innerHTML=message(r.reason);
   else if(view==='grow') host.innerHTML=`${rail()}<h1 tabindex="-1">What do you want<br class="mobile-break"> to grow?</h1><div class="finder-grid">${crops.filter(x=>core.choices('grow').includes(x[0])).map(x=>option(x,'grow',false,answers.grow===x[0])).join('')}</div>${credits()}`;
-  else if(view==='space') host.innerHTML=`${rail()}<h1 tabindex="-1">Where will it grow?</h1><div class="space-selection">${chips()}</div><div class="finder-space-grid count-${spaceChoices().length}">${spaceChoices().map(x=>option(x,'spot',false,answers.spot===x[0])).join('')}</div><div class="finder-bottom"></div>${credits()}`;
+  else if(view==='space') host.innerHTML=`${rail()}<h1 tabindex="-1">${answers.grow==='tomato'?'Do you have a sunny balcony?':'Where will it grow?'}</h1>${answers.grow==='tomato'?'<p>This tomato setup needs 6 to 8 hours of direct sun and room for a 5-gallon bag. Confirm this space to continue.</p>':''}<div class="space-selection">${chips()}</div><div class="finder-space-grid count-${spaceChoices().length}">${spaceChoices().map(x=>option(x,'spot',false,answers.spot===x[0])).join('')}</div><div class="finder-bottom"></div>${credits()}`;
   else if(view==='micro') host.innerHTML=`${rail()}<h1 tabindex="-1">Which microgreens?</h1><div class="finder-split"><aside class="finder-summary">${chips()}</aside><div><div class="finder-options">${micros.filter(x=>core.choices('micro',answers).includes(x[0])).map(x=>option(x,'micro',true,answers.micro===x[0])).join('')}</div><div class="micro-controls"><button class="finder-link micro-skip" data-answer="micro" data-value="broccoli">Not sure? Try broccoli</button></div></div></div>${credits()}`;
   else if(view==='setup') {
    const micro=answers.grow==='microgreens';
@@ -152,7 +156,7 @@
   }
   if(b.dataset.edit){view=b.dataset.edit;sync();render();return;}
   if(b.hasAttribute('data-back')){
-   view=view==='micro'?'grow':view==='space'?(answers.grow==='microgreens'?'micro':'grow'):view==='result'?(core.route({...answers,setup:undefined}).step==='setup'?'setup':'space'):view==='setup'||view==='switch'||view==='unavailable'?'space':'grow';sync();render();return;
+   const steps=core.questionSteps(answers);view=view==='result'?steps.at(-1):steps[Math.max(0,steps.indexOf(view)-1)];sync();render();return;
   }
   if(b.dataset.adjust){
    const x=b.dataset.adjust; const wasSalad=answers.grow==='salad';

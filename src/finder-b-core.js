@@ -2,7 +2,7 @@
 (function(root){
  'use strict';
  const base=typeof module==='object'&&module.exports?require('./finder-core.js'):root.SSGFinder;
- function questionSteps(input={}){const a=base.normalize(input),steps=['grow'];if(a.grow==='microgreens')steps.push('micro');steps.push('space');if(base.route({...a,setup:undefined}).step==='setup')steps.push('setup');return steps;}
+ const questionSteps=base.questionSteps;
  function choose(input,field,value){const a=base.normalize(input);if(!base.choices(field,a).includes(value))return a;if(a[field]===value)return a;if(field==='grow')return {grow:value};if(field==='micro'){a.micro=value;delete a.setup;}else if(field==='spot'){a.spot=value;delete a.setup;}else a.setup=value;return a;}
  const api={normalize:base.normalize,mapped:base.normalize,route:input=>({...base.route(input),answers:base.normalize(input)}),choose,questionSteps,choices:base.choices};
  if(typeof module==='object'&&module.exports)module.exports=api;else root.SSGFinderB=api;

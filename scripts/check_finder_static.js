@@ -11,4 +11,6 @@ for(const variant of ['a','b']){
  for(const v of expected){const next={...a,[field]:v};assert.ok(s.includes(`href="${prefix+key(next)}/"`));walk(next);}
  }walk({});
 }
-assert.equal(results,56);assert.equal(states,98);console.log('Static HTML: all 98 states, 56 results, allowed choices, preserved answers and affiliate products verified.');
+assert.equal(results,56);
+for(const folder of ['finder-steps','product-finder/steps']){for(const dir of fs.readdirSync(path.join(__dirname,'..',folder))){const html=fs.readFileSync(path.join(__dirname,'..',folder,dir,'index.html'),'utf8');assert.ok(!html.includes('Read the growing guide'));if(html.includes('data-product='))assert.ok(html.includes('Check current prices and pack sizes on Amazon'));}}
+assert.equal(states,90);console.log('Static HTML: all 90 states, 56 results, allowed choices, preserved answers and affiliate products verified.');
