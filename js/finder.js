@@ -24,7 +24,7 @@
   ['pea','Pea shoots','/assets/photos/pea-shoots-basket-susan-slater.jpg','Sweet shoots']
  ];
  const e = s => String(s || '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- let answers = core.normalize(Object.fromEntries(new URLSearchParams(location.search)));
+ let answers = core.normalize(Object.assign(JSON.parse(host.dataset.initialAnswers||'{}'),Object.fromEntries(new URLSearchParams(location.search))));
  let view = core.route(answers).step;
  function track(event, params) { if (typeof window.gtag === 'function') window.gtag('event',event,params); }
  function label(id,list=crops) { return (list.find(x=>x[0]===id)||[])[1] || ''; }
@@ -82,7 +82,7 @@
   return `<section class="finder-result"><header class="match-welcome"><button class="finder-back result-back" data-back>‹ Back</button><div><p class="match-kicker">TA-DA! YOUR GARDEN PICKS</p><h2>Your little garden starts here.</h2><p>Chosen for your space. Ready to grow.</p></div><span class="garden-surprise" aria-hidden="true"><span class="surprise-sprout">🌱</span><i style="--leaf:0"></i><i style="--leaf:1"></i><i style="--leaf:2"></i><i style="--leaf:3"></i><i style="--leaf:4"></i><i style="--leaf:5"></i><i style="--leaf:6"></i><i style="--leaf:7"></i></span></header><div class="answer-echo">${chips()}</div><div class="result-layout"><figure class="result-photo"><span class="photo-sun" aria-hidden="true"></span><span class="grow-sticker">LET’S GROW</span>${photo(p.image,p.name)}<span class="crop-peek">${photo(cropPhoto,'')}<span>A little inspiration</span></span></figure><div class="result-copy"><p class="product-kind"><span class="match-check" aria-hidden="true">✓</span> Picked for you · ${e(p.kind)}</p><h1 tabindex="-1">${e(copy.headline)}</h1><p class="product-brand">${e(p.name)}</p><p class="benefit">${e(copy.benefit)}</p><ul class="match-facts">${matchFacts.map(x=>`<li><span aria-hidden="true">✓</span>${e(x)}</li>`).join('')}</ul>${amazon(p,'Buy on Amazon',true)}</div></div>${r.note?`<p class="result-context">${e(r.note)}</p>`:''}${caution?`<p class="result-context">${e(caution)}</p>`:''}${extras}<div class="finder-result-links"><a class="finder-link" href="${e(data.guides[r.guide])}">Read the growing guide</a><button class="finder-link" data-reset>Start over</button></div></section>${credits()}`;
  }
  function sync(push=true) {
-  const u=new URL(location.href);
+  const u=new URL(location.href);u.pathname='/';
   ['grow','micro','spot','setup','kit'].forEach(k=>u.searchParams.delete(k));
   Object.entries(answers).forEach(([k,v])=>u.searchParams.set(k,v));
   if (push) history.pushState({answers,view},'',u); else history.replaceState({answers,view},'',u);

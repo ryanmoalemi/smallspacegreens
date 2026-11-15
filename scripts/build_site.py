@@ -3347,6 +3347,7 @@ def main() -> None:
         raise SystemExit("Missing internal targets: " + ", ".join(missing))
     import build_finder_b
     build_finder_b.build()
+    subprocess.run(["node", str(ROOT / "scripts" / "build_finder_static.js")], check=True)
     print("built", len(pages), "pages")
     for key, bucket in shop_placements.placement_counts().items():
         extra = ""

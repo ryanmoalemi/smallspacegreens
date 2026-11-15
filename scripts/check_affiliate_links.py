@@ -67,7 +67,7 @@ def check_amazon(path: Path, text: str) -> int:
         if is_photo:
             if label not in {"View on Amazon", "Check price on Amazon"}:
                 fail(f"{path} Amazon photo link text is not an approved label")
-        elif label not in {"Check price on Amazon", "View on Amazon"}:
+        elif label not in {"Check price on Amazon", "View on Amazon", "Buy on Amazon"}:
             fail(f"{path} Amazon link text is not an approved label")
     if re.search(r"amazon\.com(?!/dp/)", text, re.I):
         # Tagged /dp/ links are the only allowed amazon.com URLs.
