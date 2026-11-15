@@ -29,8 +29,8 @@
  }
  function chips(){const xs=[answers.light&&['light',label(answers.light,lightOptions)],answers.space&&['space',label(answers.space,spaceOptions)],answers.grow&&['food',label(answers.grow,foods)],answers.micro&&['micro',label(answers.micro,microOptions)],answers.setup&&['setup',answers.setup==='kit'?'Kit':'Basics']].filter(Boolean);return `<div class="b-chips">${xs.map(([step,l])=>`<button data-edit="${step}" aria-label="Change ${e(l)}">${e(l)}</button>`).join('')}</div>`;}
  function rail(){
-  const r=engine.route(answers),active=revealed&&r.step==='result'?3:!answers.light?0:!answers.space?1:2;
-  const completed=[!!answers.light,!!answers.space,r.step==='result',revealed&&r.step==='result'];
+  const r=engine.route(answers),active=revealed&&r.step==='result'?3:phase==='light'||phase==='entry'?0:phase==='space'?1:2;
+  const completed=[active>0&&!!answers.light,active>1&&!!answers.space,revealed&&r.step==='result',revealed&&r.step==='result'];
   return `<ol class="b-rail" style="--rail-progress:${completed[2]?100:completed[1]?66:completed[0]?33:0}%" aria-label="Your garden plan">${['Light','Space','What to Eat','Your Picks'].map((x,i)=>`<li class="${completed[i]?'complete ':''}${i===active?'current':''}"${i===active?' aria-current="step"':''}><span>${completed[i]?'✓':i+1}</span><strong>${x}</strong></li>`).join('')}</ol>`;
  }
  function hero(){return `<section class="b-hero"><div class="hero-copy"><p class="hero-kicker">A LITTLE SPACE. A FRESH START.</p><h1><span class="desktop-heading">Find Gardening Gear<br>for Your<br><em>Small Space.</em></span><span class="mobile-heading">Grow Fresh<br>Food in<br>Small Spaces</span></h1><p>A fun, easy way to find your growing setup, from your first seed to the supplies you need.</p><button class="b-button yellow entry-start" data-start>${icons.sprout}Find My Setup <span aria-hidden="true">→</span></button><span class="no-email">A few quick questions. No email needed.</span></div><aside class="b-checklist" aria-label="Our focus"><span>✓ <b>Small spaces</b></span><span>✓ <b>Real products</b></span><span>✓ <b>Fresh food at home</b></span><i aria-hidden="true"></i></aside></section>`;}
@@ -41,8 +41,7 @@
   return `<fieldset class="b-group b-group-${field}"${!opts.length?' disabled':''}><legend>${number?number+'. ':''}${e(title)}</legend>${helper?`<p class="question-helper">${e(helper)}</p>`:''}${opts.length?`<div class="b-options ${field==='grow'?'b-foods':''}">${opts.map(x=>option(x,field,true)).join('')}</div>`:`<p class="waiting-answer">${field==='space'?'Choose your light first.':'Choose your light and space first.'}</p>`}</fieldset>`;
  }
  function desktopForm(){
-  const r=engine.route(answers),needMicro=answers.grow==='microgreens',needSetup=engine.questionSteps(answers).includes('setup');
-  return `<section class="b-panel b-form" aria-label="Build your garden plan"><h2>${icons.sprout}Let’s Build Your Garden Plan</h2>${rail()}${fieldset('light','How much direct sun do you have?','',1)}${fieldset('space','What’s your space like?','',2)}${fieldset('grow','What would you like to eat? Pick one.','',3)}${needMicro?fieldset('micro','Which microgreens?','Choose the flavor you like.'):''}${needSetup?fieldset('setup','How would you like to start?','Choose your setup style.'):''}<button class="b-button green" data-submit${r.step!=='result'?' disabled':''}>See My Recommendations <span aria-hidden="true">→</span></button>${answers.light?'<button class="b-text" data-reset>Start over</button>':''}</section>`;
+  return `<section class="b-panel b-form b-step-form" aria-label="Build your garden plan"><h2>${icons.sprout}Let’s Build Your Garden Plan</h2>${rail()}${question().replace('b-mobile-question','b-desktop-question').replace('<h1 tabindex="-1">','<h2 tabindex="-1">').replace('</span></h1>','</span></h2>')}<button class="b-text" data-reset>Start over</button></section>`;
  }
  function readyCards(r){
   const all=[r.product,...r.extras],roles={pot:'Growing container',bag:'Growing container',soil:'Potting mix',tray:'Drained growing tray',drip:'Solid drip tray',coir:'Growing medium',light:'Grow light'};
@@ -68,11 +67,12 @@
  function sync(push=true){const u=new URL(location.href);['light','space','grow','micro','spot','setup','kit','step'].forEach(k=>u.searchParams.delete(k));Object.entries(answers).forEach(([k,v])=>{if(k!=='spot')u.searchParams.set(k,v);});if(phase!=='entry')u.searchParams.set('step',phase);history[push?'pushState':'replaceState']({phase,revealed,answers},'',u);}
  function render(focus=false){
   const r=engine.route(answers);
+  if(!mobile.matches&&phase==='entry')phase='light';
   if(revealed&&r.step!=='result')revealed=false;
   document.body.dataset.screen=mobile.matches?phase:'desktop';
-  host.innerHTML=mobile.matches?(phase==='entry'?entry():phase==='result'&&r.step==='result'?`<div class="mobile-results-wrap"><button class="b-back" data-back>‹ Back</button>${resultPanel()}</div>`:question()):`${hero()}<div class="b-panels">${desktopForm()}${resultPanel()}</div>`;
+  host.innerHTML=mobile.matches?(phase==='entry'?entry():phase==='result'&&r.step==='result'?`<div class="mobile-results-wrap"><button class="b-back" data-back>‹ Back</button>${resultPanel()}</div>`:question()):`${hero()}<div class="b-panels b-sequential">${revealed&&r.step==='result'?`<div class="b-desktop-result"><button class="b-back" data-back>‹ Back</button>${resultPanel()}</div>`:desktopForm()}</div>`;
   host.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{const p=document.createElement('span');p.className='b-image-fallback';p.textContent='Photo unavailable';img.replaceWith(p);},{once:true}));
-  if(focus){const target=host.querySelector(mobile.matches?'.b-mobile-question h1,.b-result-intro h3':'.b-result-intro h3');if(target){target.focus({preventScroll:true});if(mobile.matches)window.scrollTo({top:0,behavior:'instant'});}}
+  if(focus){const target=host.querySelector(mobile.matches?'.b-mobile-question h1,.b-result-intro h3':'.b-desktop-question h2,.b-result-intro h3');if(target){target.focus({preventScroll:true});if(mobile.matches)window.scrollTo({top:0,behavior:'instant'});}}
   if(revealed&&r.step==='result'){const key=JSON.stringify(answers);if(key!==lastResult){lastResult=key;track('finder_result_view',{...answers,product:r.product});}}
  }
  function start(){if(!started){started=true;track('finder_start');}phase='light';sync();render(true);if(!mobile.matches)host.querySelector('.b-form')?.scrollIntoView({behavior:'smooth',block:'start'});}
@@ -85,10 +85,10 @@
   if(el.dataset.edit){phase=el.dataset.edit;revealed=false;sync();render(true);if(!mobile.matches)host.querySelector('.b-form')?.scrollIntoView({behavior:'smooth',block:'start'});return;}
   if(el.hasAttribute('data-back')){if(phase==='light'){answers={};started=false;lastResult='';completedEvents.clear();}revealed=false;const steps=engine.questionSteps(answers),index=steps.indexOf(phase);phase=phase==='result'?steps[steps.length-1]:index>0?steps[index-1]:'entry';sync();render(true);return;}
   if(el.hasAttribute('data-next')||el.hasAttribute('data-submit')){
-   if(el.disabled)return;const completedStep=mobile.matches?phase:'form',r=engine.route(answers);
-   if(!mobile.matches||r.step==='result'&&phase===engine.questionSteps(answers).slice(-1)[0]){if(r.step!=='result')return;revealed=true;phase='result';}
+   if(el.disabled)return;const completedStep=phase,r=engine.route(answers);
+   if(r.step==='result'&&phase===engine.questionSteps(answers).slice(-1)[0]){if(r.step!=='result')return;revealed=true;phase='result';}
    else {const steps=engine.questionSteps(answers),index=steps.indexOf(phase);phase=steps[index+1]||r.step;}
-   const eventKey=completedStep+JSON.stringify(answers);if(!completedEvents.has(eventKey)){completedEvents.add(eventKey);track('finder_question_complete',{step:completedStep,next_step:phase,...answers});}sync();render(true);if(!mobile.matches)host.querySelector('.b-results')?.scrollIntoView({behavior:'smooth',block:'nearest'});
+   const eventKey=completedStep+JSON.stringify(answers);if(!completedEvents.has(eventKey)){completedEvents.add(eventKey);track('finder_question_complete',{step:completedStep,next_step:phase,...answers});}sync();render(true);if(!mobile.matches)host.querySelector('.b-sequential')?.scrollIntoView({behavior:'smooth',block:'start'});
   }
  });
  document.querySelector('.b-menu')?.addEventListener('click',event=>{const button=event.currentTarget,open=button.getAttribute('aria-expanded')!=='true';button.setAttribute('aria-expanded',String(open));document.querySelector('#b-nav').classList.toggle('open',open);});
