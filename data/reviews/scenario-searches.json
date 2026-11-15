@@ -1,0 +1,882 @@
+[
+  {
+    "id": "bags",
+    "query": "5 gallon grow bags tomatoes balcony watering",
+    "productIds": [
+      "bag",
+      "tomato"
+    ],
+    "searchContext": "balcony",
+    "threadIds": [
+      "1bc4vzc",
+      "1inoc6a",
+      "1jng5gc",
+      "1kxptcb",
+      "1lafv0f",
+      "1s8a8ko",
+      "1slr0t3",
+      "1t0cm5l",
+      "1tcmtlh",
+      "1tdv7yq",
+      "1whh2ch",
+      "gdcwol"
+    ]
+  },
+  {
+    "id": "basil-balcony",
+    "query": "basil balcony container sun watering",
+    "productIds": [
+      "basil"
+    ],
+    "searchContext": "balcony",
+    "threadIds": [
+      "1d7i5qp",
+      "1dxh0uk",
+      "1k4lxaq",
+      "1ldoida",
+      "1stwxu0",
+      "1tq1nq5",
+      "1v0wvxn",
+      "1vjre65",
+      "1vxx9o1",
+      "1w823lc",
+      "1wgbfzc",
+      "u5x9zj"
+    ]
+  },
+  {
+    "id": "basil-low",
+    "query": "basil indoors low light grow light leggy",
+    "productIds": [
+      "basil",
+      "light"
+    ],
+    "searchContext": "low-light",
+    "threadIds": [
+      "1ixvelf",
+      "1jft7nj",
+      "1kgrx0p",
+      "1lbju0h",
+      "1ql8qbh",
+      "1rtv0qp",
+      "1tdqrsw",
+      "1w9f337",
+      "1wh11b0",
+      "1x10zw1",
+      "1xalltq",
+      "1xgviut"
+    ]
+  },
+  {
+    "id": "basil-window",
+    "query": "growing basil sunny windowsill harvest",
+    "productIds": [
+      "basil"
+    ],
+    "searchContext": "window",
+    "threadIds": [
+      "1k94vnf",
+      "1ks54c4",
+      "1ldoida",
+      "1m2uqai",
+      "1qndjt5",
+      "1u1mue7",
+      "1u7mltc",
+      "1v4deys",
+      "1va0pdn",
+      "1wgbfzc",
+      "1xgviut",
+      "xey5fy"
+    ]
+  },
+  {
+    "id": "broccoli-low",
+    "query": "broccoli microgreens low light leggy",
+    "productIds": [
+      "micro-broccoli",
+      "light"
+    ],
+    "searchContext": "low-light",
+    "threadIds": [
+      "13gd4fc",
+      "1acjho8",
+      "1fcmkl1",
+      "1i2o97j",
+      "1j0qs8p",
+      "1kxhuyq",
+      "1rke4ht",
+      "1rwgi9c",
+      "1sxfdwu",
+      "1vk2hih",
+      "1wpkxar",
+      "hmc1ho"
+    ]
+  },
+  {
+    "id": "broccoli-window",
+    "query": "broccoli microgreens windowsill grow",
+    "productIds": [
+      "micro-broccoli"
+    ],
+    "searchContext": "window",
+    "threadIds": [
+      "1bnmsnn",
+      "1guuhdu",
+      "1kxhuyq",
+      "1nx5ppy",
+      "1ts2ast",
+      "1tv70ik",
+      "1v40xs6",
+      "1vk2hih",
+      "1wpkxar",
+      "gyl08b",
+      "id5rjp",
+      "lx17g2"
+    ]
+  },
+  {
+    "id": "cage",
+    "query": "dwarf tomato cage container balcony support",
+    "productIds": [
+      "cage",
+      "tomato"
+    ],
+    "searchContext": "balcony",
+    "threadIds": [
+      "1e4oydd",
+      "1jlk4nl",
+      "1jlzsqr",
+      "1l724i2",
+      "1l7751w",
+      "1q36b4n",
+      "1sx24km",
+      "1tdv7yq",
+      "1tplh7j",
+      "1v1s4px",
+      "1weusxk",
+      "n3jodp"
+    ]
+  },
+  {
+    "id": "coir",
+    "query": "coco coir microgreens growing mold watering",
+    "productIds": [
+      "coir",
+      "microkit"
+    ],
+    "searchContext": "indoors",
+    "threadIds": [
+      "123kqt6",
+      "17in22t",
+      "1ehrk7q",
+      "1l2zp6l",
+      "1v7ebyn",
+      "1veii51",
+      "1vho8dg",
+      "1vicsen",
+      "1vmhkhe",
+      "1vobzwz",
+      "1vulgiu",
+      "1xti0xz"
+    ]
+  },
+  {
+    "id": "herbs-balcony",
+    "query": "growing herbs balcony pots beginner",
+    "productIds": [
+      "herbs"
+    ],
+    "searchContext": "balcony",
+    "threadIds": [
+      "1aq5bbw",
+      "1c84zva",
+      "1dspz6s",
+      "1mlnvic",
+      "1oqawts",
+      "1v7a3ju",
+      "1vjhcl6",
+      "1vxmt2e",
+      "1w0l50r",
+      "1wbytew",
+      "1xovjsy",
+      "1xovmwn"
+    ]
+  },
+  {
+    "id": "herbs-kit",
+    "query": "Click Grow smart garden 3 basil harvest",
+    "productIds": [
+      "basil-kit"
+    ],
+    "searchContext": "indoors",
+    "threadIds": [
+      "10jiosy",
+      "17z6ve9",
+      "1e69yws",
+      "1ia6i60",
+      "1j2j05w",
+      "1o3o61w",
+      "1oaslaj",
+      "1qauiu7",
+      "1r2uhl7",
+      "1r5gnt3",
+      "1sr0rmh",
+      "le3o2i"
+    ]
+  },
+  {
+    "id": "herbs-low-followup",
+    "query": "\"herbs\" \"north facing\" \"grow light\"",
+    "productIds": [
+      "herbs",
+      "light"
+    ],
+    "searchContext": "low-light",
+    "threadIds": [
+      "17y7s88",
+      "1dbd91o",
+      "1ltbsix",
+      "1nhaukg",
+      "1slbyva",
+      "cyv1b0"
+    ]
+  },
+  {
+    "id": "herbs-low",
+    "query": "growing herbs low light north facing window",
+    "productIds": [
+      "herbs"
+    ],
+    "searchContext": "low-light",
+    "threadIds": [
+      "1agv8y4",
+      "1b1vpxg",
+      "1n7rc33",
+      "1nhaukg",
+      "1nkao6a",
+      "1qzsqu5",
+      "1slbyva",
+      "1w7qv4b",
+      "1wdoi87",
+      "1xmsolu",
+      "g6t6s9",
+      "o8m6uq"
+    ]
+  },
+  {
+    "id": "herbs-mistakes",
+    "query": "growing herbs indoors beginner mistakes watering",
+    "productIds": [
+      "herbs"
+    ],
+    "searchContext": "indoors",
+    "threadIds": [
+      "17v464v",
+      "1b4vhqz",
+      "1ha0tha",
+      "1k8kosi",
+      "1khexis",
+      "1lpo0ed",
+      "1rhys65",
+      "1rp1azo",
+      "1segppm",
+      "1svso6d",
+      "1u7tola",
+      "l0qgro"
+    ]
+  },
+  {
+    "id": "herbs-varieties",
+    "query": "cilantro parsley thyme windowsill growing indoors",
+    "productIds": [
+      "herbs"
+    ],
+    "searchContext": "window",
+    "threadIds": [
+      "1ep2x31",
+      "1is6vk3",
+      "1llk4kz",
+      "1mzxlo0",
+      "1ozo8qr",
+      "1rh0orh",
+      "1rlw0w3",
+      "1segppm",
+      "1soz0p3",
+      "1u2nc07",
+      "1vtoub2",
+      "1x29kgc"
+    ]
+  },
+  {
+    "id": "herbs-window",
+    "query": "growing herbs windowsill indoors beginner",
+    "productIds": [
+      "herbs"
+    ],
+    "searchContext": "window",
+    "threadIds": [
+      "11lkkkk",
+      "1iufsy7",
+      "1lpo0ed",
+      "1lue4u6",
+      "1rhys65",
+      "1rldjyk",
+      "1rwyset",
+      "1traziw",
+      "1u2nc07",
+      "1w7qv4b",
+      "1wbytew",
+      "1x2bw2l"
+    ]
+  },
+  {
+    "id": "lettuce-low",
+    "query": "growing lettuce low light partial shade container",
+    "productIds": [
+      "lettuce",
+      "salad"
+    ],
+    "searchContext": "low-light",
+    "threadIds": [
+      "16ban3u",
+      "1902goy",
+      "1fiuu37",
+      "1jy0z4u",
+      "1l4xvcy",
+      "1r1mubl",
+      "1r85hp8",
+      "1s0wb3r",
+      "1tmtlc4",
+      "1vv0lkn",
+      "1wg5nab",
+      "nnweny"
+    ]
+  },
+  {
+    "id": "lettuce-window",
+    "query": "buttercrunch lettuce indoors window harvest",
+    "productIds": [
+      "lettuce"
+    ],
+    "searchContext": "window",
+    "threadIds": [
+      "1dej46e",
+      "1iujqnn",
+      "1jbfeqd",
+      "1jq48fg",
+      "1kk5v0v",
+      "1nzfkis",
+      "1rep0ok",
+      "1u1ndmw",
+      "1vv0lkn",
+      "1wg7o1l",
+      "1wnmykj",
+      "ml0cbt"
+    ]
+  },
+  {
+    "id": "light",
+    "query": "SANSI grow light herbs basil indoors",
+    "productIds": [
+      "light",
+      "basil"
+    ],
+    "searchContext": "indoors",
+    "threadIds": [
+      "1geqtjy",
+      "1icbu3a",
+      "1iq3frp",
+      "1ltbsix",
+      "1n8h5yh",
+      "1pq2xg9",
+      "1q3xaax",
+      "1ql8qbh",
+      "1s6a61u",
+      "1stzjcq",
+      "1xalltq",
+      "1xw9xzs"
+    ]
+  },
+  {
+    "id": "micro-balcony",
+    "query": "microgreens balcony outdoors growing",
+    "productIds": [
+      "microkit"
+    ],
+    "searchContext": "balcony",
+    "threadIds": [
+      "1gbcmll",
+      "1hfmo49",
+      "1lphj8z",
+      "1r0z9ee",
+      "1rmgobg",
+      "1suoaan",
+      "1ts2ast",
+      "1ui41la",
+      "1vho8dg",
+      "1w0l50r",
+      "gv70k1",
+      "i0fcj3"
+    ]
+  },
+  {
+    "id": "micro-beginner",
+    "query": "microgreens beginner kit first harvest",
+    "productIds": [
+      "microkit"
+    ],
+    "searchContext": "indoors",
+    "threadIds": [
+      "1gwgkzm",
+      "1h2od3t",
+      "1j606cj",
+      "1j61dpi",
+      "1kblnrd",
+      "1kyfoea",
+      "1lphj8z",
+      "1np9v8w",
+      "1pa39rz",
+      "1tb4eef",
+      "1vigh5w",
+      "1wpkxar"
+    ]
+  },
+  {
+    "id": "micro-low",
+    "query": "microgreens low light window no grow light",
+    "productIds": [
+      "microkit",
+      "light"
+    ],
+    "searchContext": "low-light",
+    "threadIds": [
+      "1iycrxx",
+      "1j606cj",
+      "1j60uwh",
+      "1j61dpi",
+      "1kf0icl",
+      "1ksh37m",
+      "1n31f9p",
+      "1sorrr9",
+      "1ts2ast",
+      "1wpkxar",
+      "lx17g2",
+      "tcvr4j"
+    ]
+  },
+  {
+    "id": "pea-tray",
+    "query": "speckled pea microgreens soaking trays mold",
+    "productIds": [
+      "micro-pea",
+      "tray"
+    ],
+    "searchContext": "indoors",
+    "threadIds": [
+      "106p0vu",
+      "17706g3",
+      "1azu0h6",
+      "1c1qdlt",
+      "1gyq85v",
+      "1hvsnda",
+      "1rwb595",
+      "1sx02ge",
+      "1vxzp0l",
+      "fo6ir5",
+      "g9wi7j",
+      "gjp2no"
+    ]
+  },
+  {
+    "id": "pea-window-followup",
+    "query": "\"pea shoots\" \"windowsill\"",
+    "productIds": [
+      "micro-pea"
+    ],
+    "searchContext": "window",
+    "threadIds": [
+      "11lj820",
+      "1bnmsnn",
+      "1did7kf",
+      "1eigm6c",
+      "1guuhdu",
+      "1ikstb1",
+      "1itmc0f",
+      "1nx5ppy",
+      "1ts2ast",
+      "1wpkxar",
+      "j536bd",
+      "lx17g2"
+    ]
+  },
+  {
+    "id": "pea-window",
+    "query": "pea shoots windowsill growing harvest",
+    "productIds": [
+      "micro-pea"
+    ],
+    "searchContext": "window",
+    "threadIds": [
+      "1ctmfpu",
+      "1gc3xrf",
+      "1gl5ixa",
+      "1kq4tmp",
+      "1ri1p0p",
+      "1tz830o",
+      "1uerwcs",
+      "1ufnjsh",
+      "1ug88o9",
+      "fzl9le",
+      "g2jz9y",
+      "x1ukn2"
+    ]
+  },
+  {
+    "id": "pots",
+    "query": "herbs windowsill pots drainage saucers",
+    "productIds": [
+      "pot",
+      "herbs"
+    ],
+    "searchContext": "window",
+    "threadIds": [
+      "108axik",
+      "16hm653",
+      "16wk405",
+      "1d5hss5",
+      "1jtmd6y",
+      "1mn5fec",
+      "1slbyva",
+      "1vxwd1r",
+      "ezh6i5",
+      "g7nswq",
+      "gn9i2t",
+      "goa0t7"
+    ]
+  },
+  {
+    "id": "radish-balcony",
+    "query": "growing radishes balcony containers depth",
+    "productIds": [
+      "radish"
+    ],
+    "searchContext": "balcony",
+    "threadIds": [
+      "14hyn7z",
+      "1g5claj",
+      "1gn9gjh",
+      "1nm3c5f",
+      "1ramh63",
+      "1riekn4",
+      "1s2icsf",
+      "1t50u0g",
+      "1t8e7l2",
+      "1v20bkf",
+      "lrkcuv",
+      "uepkqy"
+    ]
+  },
+  {
+    "id": "radish-low",
+    "query": "radishes partial shade low light no bulbs",
+    "productIds": [
+      "radish"
+    ],
+    "searchContext": "low-light",
+    "threadIds": [
+      "1b0bcr9",
+      "1ce20rd",
+      "1d5b8ve",
+      "1dbwrep",
+      "1k64hjw",
+      "1pol4cu",
+      "1tn92gg",
+      "1u2xdek",
+      "brw9i3",
+      "q3iixe",
+      "sapzlu",
+      "vw1p8b"
+    ]
+  },
+  {
+    "id": "radish-micro",
+    "query": "Rambo radish microgreens grow taste",
+    "productIds": [
+      "micro-radish"
+    ],
+    "searchContext": "indoors",
+    "threadIds": [
+      "11u5idi",
+      "132a8gp",
+      "1arcsrp",
+      "1dqjj3k",
+      "1fywvrq",
+      "1h2od3t",
+      "1ki87yj",
+      "1uj4c94",
+      "1wpkxar",
+      "ejktc3",
+      "jj4xkh",
+      "l6tlky"
+    ]
+  },
+  {
+    "id": "radish-success",
+    "query": "Cherry Belle radishes container harvest",
+    "productIds": [
+      "radish"
+    ],
+    "searchContext": "container",
+    "threadIds": [
+      "1bz30u0",
+      "1d5zv21",
+      "1drfydk",
+      "1ikn6vu",
+      "1kd3qny",
+      "1krakp3",
+      "1mz7955",
+      "1sxlecg",
+      "1t82shb",
+      "1u4v0xl",
+      "1wf3nu1",
+      "1wzgmkw"
+    ]
+  },
+  {
+    "id": "radish-window-followup",
+    "query": "\"radishes\" \"windowsill\" \"harvest\"",
+    "productIds": [
+      "radish"
+    ],
+    "searchContext": "window",
+    "threadIds": [
+      "1js6lmf",
+      "1wnx3ni",
+      "ud7ig7"
+    ]
+  },
+  {
+    "id": "radish-window",
+    "query": "growing radishes indoors windowsill roots",
+    "productIds": [
+      "radish"
+    ],
+    "searchContext": "window",
+    "threadIds": [
+      "100nh15",
+      "14c30gi",
+      "1d5b8ve",
+      "1g5claj",
+      "1hbgfuh",
+      "1io7tcw",
+      "1r1k8ft",
+      "1ruhd4r",
+      "1sew1xl",
+      "1ts2ast",
+      "1wmze9g",
+      "1wnx3ni"
+    ]
+  },
+  {
+    "id": "salad-balcony-followup",
+    "query": "\"lettuce\" \"balcony\" \"harvest\"",
+    "productIds": [
+      "lettuce",
+      "salad"
+    ],
+    "searchContext": "balcony",
+    "threadIds": [
+      "10ejcli",
+      "1fcsyy7",
+      "1l69ai7",
+      "1syb0fj",
+      "1tmtlc4",
+      "1u21n62",
+      "1umel8m",
+      "1v65u9d",
+      "1vc4zfo",
+      "rw6ork",
+      "t1zv8j"
+    ]
+  },
+  {
+    "id": "salad-balcony",
+    "query": "salad mix mesclun balcony container growing",
+    "productIds": [
+      "salad",
+      "lettuce"
+    ],
+    "searchContext": "balcony",
+    "threadIds": [
+      "15x7yci",
+      "1cppmgw",
+      "1e8odp2",
+      "1ibhv20",
+      "1spcc1l",
+      "1tmtlc4",
+      "1uc8lsu",
+      "1vl7nb0",
+      "dc4tzh",
+      "fwejrs",
+      "mydw3e",
+      "ngeyo6"
+    ]
+  },
+  {
+    "id": "salad-heat",
+    "query": "lettuce balcony heat bolting shade growing",
+    "productIds": [
+      "salad",
+      "lettuce"
+    ],
+    "searchContext": "balcony",
+    "threadIds": [
+      "1afpz85",
+      "1jvh9jy",
+      "1kw3n7m",
+      "1m41yhe",
+      "1me5vy1",
+      "1rxhgjx",
+      "1t7qmhj",
+      "1tpiuqy",
+      "1w5ra4u",
+      "1wg5nab",
+      "1xtqi7j",
+      "w6i065"
+    ]
+  },
+  {
+    "id": "salad-window",
+    "query": "salad mix lettuce growing windowsill indoors",
+    "productIds": [
+      "salad",
+      "lettuce"
+    ],
+    "searchContext": "window",
+    "threadIds": [
+      "14c30gi",
+      "19bidj4",
+      "1jbfeqd",
+      "1n7chz8",
+      "1nzfkis",
+      "1ueisoq",
+      "1ven9da",
+      "1vl7nb0",
+      "1vv0lkn",
+      "1vxj6ay",
+      "1w3grbd",
+      "1xrfpay"
+    ]
+  },
+  {
+    "id": "soil",
+    "query": "Espoma potting mix vegetables indoors gnats",
+    "productIds": [
+      "soil"
+    ],
+    "searchContext": "indoors",
+    "threadIds": [
+      "1jm4rg1",
+      "1kc6846",
+      "1kgjjdu",
+      "1l0sp3q",
+      "1lp3ayd",
+      "1po64nq",
+      "1qfrlsk",
+      "1tq5qgw",
+      "1vkuuc6",
+      "1vokphc",
+      "1xr0trp",
+      "l267p2"
+    ]
+  },
+  {
+    "id": "tomato-balcony",
+    "query": "Tiny Tim tomatoes balcony container harvest",
+    "productIds": [
+      "tomato"
+    ],
+    "searchContext": "balcony",
+    "threadIds": [
+      "1cgl8vl",
+      "1ljaiik",
+      "1t5ch4e",
+      "1uq3vtd",
+      "1vi2x1r",
+      "1w3y99u",
+      "1w5hjkp",
+      "1w8vhv1",
+      "1whh2ch",
+      "1wlaei3",
+      "1xj6zt7",
+      "1xt5ss6"
+    ]
+  },
+  {
+    "id": "tomato-low",
+    "query": "tomatoes indoors low light grow lights fruit",
+    "productIds": [
+      "tomato",
+      "light"
+    ],
+    "searchContext": "low-light",
+    "threadIds": [
+      "1av8mm5",
+      "1evp3vh",
+      "1fwpsjl",
+      "1hfjzvl",
+      "1lq6vnj",
+      "1q7e44l",
+      "1qa55bg",
+      "1s5wotz",
+      "1sn7bq4",
+      "1wicn7t",
+      "1xj6zt7"
+    ]
+  },
+  {
+    "id": "tomato-window",
+    "query": "Tiny Tim tomato sunny window indoors fruit",
+    "productIds": [
+      "tomato"
+    ],
+    "searchContext": "window",
+    "threadIds": [
+      "1c8s500",
+      "1gea6a6",
+      "1jvomax",
+      "1k19a2u",
+      "1qym0sz",
+      "1syfg3v",
+      "1u0sc2g",
+      "1upwngo",
+      "1wj7bke",
+      "1xj6zt7",
+      "1xt5ss6",
+      "voe4r3"
+    ]
+  },
+  {
+    "id": "trays",
+    "query": "1010 microgreens trays bottom watering drainage",
+    "productIds": [
+      "tray",
+      "drip"
+    ],
+    "searchContext": "indoors",
+    "threadIds": [
+      "128dk31",
+      "12atk9h",
+      "18t7d0n",
+      "1aqylvd",
+      "1l7vv1u",
+      "1tf8qcp",
+      "1vt933n",
+      "1vulgiu",
+      "1xrsu6i",
+      "jca0rs",
+      "nk5ckz",
+      "rp33rm"
+    ]
+  }
+]

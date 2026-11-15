@@ -1,0 +1,272 @@
+{
+  "retrievedAt": "2026-11-15",
+  "threads": 460,
+  "excerpts": 1987,
+  "coverage": [
+    {
+      "productId": "lettuce",
+      "name": "The Seed Plant Buttercrunch Lettuce",
+      "asin": "B00YO5TZ26",
+      "threads": 68,
+      "excerpts": 311,
+      "exactAsinVerified": false,
+      "scope": [
+        "cultivar-or-category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: cultivar-or-category, category-search-candidate"
+    },
+    {
+      "productId": "tomato",
+      "name": "Seed Needs Tiny Tim Dwarf Cherry Tomato Seeds",
+      "asin": "B00H4E9ULA",
+      "threads": 60,
+      "excerpts": 246,
+      "exactAsinVerified": false,
+      "scope": [
+        "brand",
+        "cultivar-or-category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: brand, cultivar-or-category, category-search-candidate"
+    },
+    {
+      "productId": "salad",
+      "name": "Organo Republic Salad Greens Collection",
+      "asin": "B0D1LL6CG6",
+      "threads": 61,
+      "excerpts": 273,
+      "exactAsinVerified": false,
+      "scope": [
+        "cultivar-or-category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: cultivar-or-category, category-search-candidate"
+    },
+    {
+      "productId": "basil",
+      "name": "Sow Right Genovese Sweet Basil",
+      "asin": "B07VRJVJ9F",
+      "threads": 48,
+      "excerpts": 202,
+      "exactAsinVerified": false,
+      "scope": [
+        "brand-other-product",
+        "cultivar-or-category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: brand-other-product, cultivar-or-category, category-search-candidate"
+    },
+    {
+      "productId": "herbs",
+      "name": "Seed Needs Culinary Herb Collection",
+      "asin": "B003BM42R6",
+      "threads": 76,
+      "excerpts": 303,
+      "exactAsinVerified": false,
+      "scope": [
+        "brand",
+        "cultivar-or-category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: brand, cultivar-or-category, category-search-candidate"
+    },
+    {
+      "productId": "radish",
+      "name": "The Seed Plant Cherry Belle Radish",
+      "asin": "B00YO59N32",
+      "threads": 49,
+      "excerpts": 223,
+      "exactAsinVerified": false,
+      "scope": [
+        "cultivar",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: cultivar, category-search-candidate"
+    },
+    {
+      "productId": "basil-kit",
+      "name": "Click & Grow Smart Garden 3",
+      "asin": "B01MRVMKQH",
+      "threads": 14,
+      "excerpts": 67,
+      "exactAsinVerified": false,
+      "scope": [
+        "named-model",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: named-model, category-search-candidate"
+    },
+    {
+      "productId": "micro-broccoli",
+      "name": "Food to Live Organic Broccoli Seeds",
+      "asin": "B00W2FAPF6",
+      "threads": 34,
+      "excerpts": 151,
+      "exactAsinVerified": false,
+      "scope": [
+        "brand-or-product-family",
+        "category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: brand-or-product-family, category, category-search-candidate"
+    },
+    {
+      "productId": "micro-pea",
+      "name": "Mountain Valley Speckled Pea Seeds",
+      "asin": "B06XWGTV57",
+      "threads": 37,
+      "excerpts": 171,
+      "exactAsinVerified": false,
+      "scope": [
+        "brand-other-product",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: brand-other-product, category-search-candidate"
+    },
+    {
+      "productId": "micro-radish",
+      "name": "Country Creek Rambo Radish Seeds",
+      "asin": "B08V1ZMGFX",
+      "threads": 19,
+      "excerpts": 94,
+      "exactAsinVerified": false,
+      "scope": [
+        "category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: category, category-search-candidate"
+    },
+    {
+      "productId": "microkit",
+      "name": "ALPAS LIFE Microgreens Kit",
+      "asin": "B0CQPQKTFC",
+      "threads": 50,
+      "excerpts": 186,
+      "exactAsinVerified": false,
+      "scope": [
+        "category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: category, category-search-candidate"
+    },
+    {
+      "productId": "light",
+      "name": "SANSI Clip-on Grow Light",
+      "asin": "B0CHDBY2PD",
+      "threads": 65,
+      "excerpts": 266,
+      "exactAsinVerified": false,
+      "scope": [
+        "brand-or-product-family",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: brand-or-product-family, category-search-candidate"
+    },
+    {
+      "productId": "cage",
+      "name": "Halatool Adjustable Tomato Cages",
+      "asin": "B0CR7KSCG3",
+      "threads": 16,
+      "excerpts": 61,
+      "exactAsinVerified": false,
+      "scope": [
+        "cultivar-or-category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: cultivar-or-category, category-search-candidate"
+    },
+    {
+      "productId": "pot",
+      "name": "Melphoe 8 in Pots with Saucers",
+      "asin": "B0DCSH7T1R",
+      "threads": 16,
+      "excerpts": 78,
+      "exactAsinVerified": false,
+      "scope": [
+        "cultivar-or-category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: cultivar-or-category, category-search-candidate"
+    },
+    {
+      "productId": "soil",
+      "name": "Espoma Organic Potting Mix",
+      "asin": "B078WY9Z7Q",
+      "threads": 14,
+      "excerpts": 68,
+      "exactAsinVerified": false,
+      "scope": [
+        "named-product-family",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: named-product-family, category-search-candidate"
+    },
+    {
+      "productId": "tray",
+      "name": "1010 Trays with Drainage Holes",
+      "asin": "B07NKSKMCN",
+      "threads": 37,
+      "excerpts": 157,
+      "exactAsinVerified": false,
+      "scope": [
+        "category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: category, category-search-candidate"
+    },
+    {
+      "productId": "drip",
+      "name": "1010 Solid Drip Trays",
+      "asin": "B07MYNVP8G",
+      "threads": 25,
+      "excerpts": 100,
+      "exactAsinVerified": false,
+      "scope": [
+        "category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: category, category-search-candidate"
+    },
+    {
+      "productId": "bag",
+      "name": "VIVOSUN 5-Gallon Grow Bags \u00b7 5-pack",
+      "asin": "B00TF9E6XE",
+      "threads": 18,
+      "excerpts": 71,
+      "exactAsinVerified": false,
+      "scope": [
+        "brand-or-product-family",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: brand-or-product-family, category-search-candidate"
+    },
+    {
+      "productId": "coir",
+      "name": "Verdana Coco Coir",
+      "asin": "B07QNSSN81",
+      "threads": 20,
+      "excerpts": 73,
+      "exactAsinVerified": false,
+      "scope": [
+        "category",
+        "category-search-candidate"
+      ],
+      "note": "No exact ASIN verified. Research scope: category, category-search-candidate"
+    }
+  ],
+  "rainforest": {
+    "status": "blocked_missing_credentials",
+    "testAsin": "B00TF9E6XE",
+    "testCredential": "documented demo value, not a private key",
+    "httpStatus": 401,
+    "message": "Please sign up for a Plan or Free Trial",
+    "amazonReviewsImported": 0
+  },
+  "limitations": [
+    "Search-returned excerpts, not full Reddit thread exports.",
+    "Comment IDs/authors were not provided; thread URLs and excerpt ordinals retained.",
+    "Product links express research relevance, not endorsement or verified purchase.",
+    "Collected excerpts need review before being enabled in the visitor experience."
+  ]
+}

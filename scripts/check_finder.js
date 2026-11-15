@@ -70,7 +70,10 @@ for(const [id,p] of Object.entries(data.products)){
 }
 const js=fs.readFileSync(root+'/src/finder.js','utf8');
 for(const m of js.matchAll(/['"](\/assets\/[^'"]+)['"]/g))assert.ok(fs.existsSync(root+m[1]),'Missing image '+m[1]);
-assert.ok(!js.includes('setTimeout'));
+assert.ok(!js.includes('data-skip-reveal'), 'Reveal advances automatically without a skip button');
+assert.ok(js.includes('reveal-progress'));
+assert.ok(js.includes('advance(index+1)'));
+assert.ok(js.includes('clearTimeout(revealTimer)'));
 assert.ok(js.includes('sponsored nofollow noopener'));
 assert.ok(fs.readFileSync(root+'/src/finder.css','utf8').includes('prefers-reduced-motion:reduce'));
 console.log(`Finder: ${total} selectable shopping journeys checked (all end in reviewed products; no dead ends); affiliate, image, light and tray checks passed.`);
