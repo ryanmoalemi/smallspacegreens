@@ -156,3 +156,9 @@
 @keyframes finale-twinkle{0%,100%{opacity:.15;transform:scale(.5) rotate(-12deg)}50%{opacity:1;transform:scale(1.2) rotate(12deg)}}
 @keyframes finale-glow{0%,100%{filter:drop-shadow(0 0 2px #ffed85)}50%{filter:drop-shadow(0 0 10px #ffd349)}}
 @media(prefers-reduced-motion:reduce){.garden-reveal .reveal-finale::before,.garden-reveal .reveal-finale::after{animation:none!important;opacity:.8}.garden-reveal .reveal-finale.is-active .reveal-prize{animation:none!important}}
+/* Bring both desktop crop rows into the first screen. */
+@media(min-width:768px){
+.b-hero{min-height:0!important;padding:10px 16px 12px!important;align-items:center;gap:20px}.b-hero h1{font-size:28px!important;line-height:1.1!important;margin:4px 0!important}.b-hero p{font-size:14px!important;line-height:1.35!important;margin:5px 0!important}.b-hero .b-checklist{display:none}.b-hero .eyebrow{display:none}
+.b-panels.b-sequential{max-width:1100px;margin-top:0;scroll-margin-top:8px}.b-sequential .b-form{padding:18px 24px}.b-form>h2{font-size:24px;margin:0 0 12px}.b-form>.b-rail{margin:8px 0 12px}.b-desktop-question>h2{font-size:24px;margin:8px 0}.b-desktop-question .mobile-helper{font-size:14px;line-height:20px;margin:0 0 12px}.b-desktop-question .b-option img{height:90px}.b-desktop-question .option-copy{min-height:44px;padding:8px;gap:3px}.b-desktop-question .option-copy strong{font-size:16px;line-height:20px}.b-desktop-question .b-options{gap:9px}.b-form>.b-text{margin:6px auto 0}
+}
+@media(min-width:768px) and (max-height:750px){.b-hero{padding-block:6px!important}.b-hero p{display:none}.b-sequential .b-form{padding:12px 20px}.b-desktop-question .b-option img{height:72px}.b-form>h2{font-size:21px;margin-bottom:7px}}
