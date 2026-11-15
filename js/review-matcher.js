@@ -20,7 +20,7 @@
   const item=route.product==='basil-kit'?'starter kits':route.product==='microkit'?'starter kits':crop==='microgreens'?'seeds and trays':'seeds and planters';
   const productCrop=crop==='microgreens'&&answers.micro?({radish:'radish microgreens',broccoli:'broccoli microgreens',pea:'pea shoot'}[answers.micro]||'microgreens'):{tomato:'tomato',herbs:'herb',radish:'radish',salad:'salad greens',microgreens:'microgreens',basil:'basil',lettuce:'lettuce'}[crop]||name;
 
-  return [{...reddit,label:'REDDIT GROWER EXPERIENCES',question:`Reviewing Reddit comments to help choose your ${({tomato:"tomato",herbs:"herb",radish:"radish",microgreens:"microgreen"}[crop]||name)} setup`},
+  return [{...reddit,label:'REDDIT GROWER EXPERIENCES',question:`Reviewing Reddit for the best advice on your ${place} ${productCrop} setup`},
    {platform:'catalog',label:'OUR AMAZON PICKS',question:`Comparing ${place} ${productCrop} ${item} on Amazon.`,url:null},
    {...angle,label:'TIPS FROM REAL GROWERS',question:'Using real growers’ advice to pick the right setup for your space.'}];
  }
