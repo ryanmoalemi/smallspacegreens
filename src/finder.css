@@ -227,3 +227,5 @@
 @keyframes step-shine{from{background-position:-80px 0}to{background-position:80px 0}}
 @media(max-width:699px){.garden-reveal .reveal-step-icon{width:32px;height:36px;flex-basis:32px;border-radius:9px}.reveal-step-icon svg{width:24px;height:24px}.reveal-step-icon b{width:16px;height:16px;font-size:9px}}
 @media(prefers-reduced-motion:reduce){.garden-reveal .reveal-step-icon,.garden-reveal .reveal-step-icon svg,.garden-reveal .reveal-stage.is-active .reveal-progress>span{animation:none!important}.garden-reveal .reveal-stage.is-active .reveal-progress>span{width:100%}}
+/* Do not reserve a missing Back button column on the opening mobile step. */
+@media(max-width:699px){.finder-navigation:has(>span:empty){grid-template-columns:minmax(0,1fr);justify-items:center}.finder-navigation>span:empty{display:none}.finder-navigation:has(>span:empty) .finder-progress{grid-column:1;width:100%}.finder-navigation .stage-count{text-align:center}}
