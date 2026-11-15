@@ -14,7 +14,7 @@
   ['unsure','Not sure','/assets/finder/not-sure.webp']
  ];
  const spaces = [
-  ['sunny','Sunny window','/assets/photos/basil-by-window.jpg','Direct sun at the window'],
+  ['sunny','Sunny window','/assets/photos/basil-window-personal-creations.jpg','Direct sun at the window'],
   ['dim','Dim spot','/assets/photos/pea-shoots-counter.jpg','Little or no direct sun'],
   ['balcony','Balcony','/assets/photos/balcony-garden-ruth-hartnup.jpg','An outdoor growing space']
  ];
@@ -44,18 +44,7 @@
   return `<div class="finder-navigation">${view==='grow'?'<span></span>':back()}<div class="finder-progress"><p class="stage-count">${done?'Your match is ready':`${i+1} of 3 <span>${['Grow','Space','Setup'][i]}</span>`}</p><div class="finder-progress-track" role="progressbar" aria-label="Finder progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}"><span style="width:${percent}%"></span></div><ol class="finder-stages" aria-label="Your growing setup">${['Grow','Space','Setup'].map((label,n)=>`<li${!done&&n===i?' aria-current="step"':''} class="${done||n<i?'is-complete':''}">${label}</li>`).join('')}</ol></div></div>`;
  }
  function spaceChoices() {
-  const photos={
-   tomato:['/assets/photos/tomato-seedlings-amandabhslater.jpg','/assets/photos/crop-tomato.jpg','/assets/finder/cherry-tomatoes.webp'],
-   lettuce:['/assets/photos/lettuce-in-pot.jpg','/assets/products/supply-lettuce-leaves-600.webp','/assets/photos/balcony-garden-ruth-hartnup.jpg'],
-   salad:['/assets/finder/salad-mix.webp','/assets/photos/crop-arugula.jpg','/assets/photos/balcony-garden-ruth-hartnup.jpg'],
-   basil:['/assets/photos/basil-by-window.jpg','/assets/photos/basil-seedlings-eiku.jpg','/assets/photos/basil-window-personal-creations.jpg'],
-   herbs:['/assets/photos/basil-window-personal-creations.jpg','/assets/photos/cilantro-seedlings-jason-sandeman.jpg','/assets/finder/herbs.webp'],
-   radish:['/assets/photos/radish-microgreens-apapac.jpg','/assets/products/radish-seedling-600.webp','/assets/finder/radishes.webp'],
-   microgreens:['/assets/photos/windowsill-seedlings-psd.jpg','/assets/photos/pea-shoots-counter.jpg','/assets/photos/balcony-garden-ruth-hartnup.jpg'],
-   unsure:['/assets/photos/lettuce-in-pot.jpg','/assets/photos/pea-shoots-counter.jpg','/assets/photos/balcony-garden-ruth-hartnup.jpg']
-  };
-  const selected=photos[answers.grow]||photos.unsure;
-  return spaces.map((x,i)=>[x[0],answers.grow==='tomato'&&x[0]==='balcony'?'Sunny balcony':x[1],selected[i],answers.grow==='tomato'&&x[0]==='balcony'?'6 to 8 hours direct sun · space for a 5-gallon bag':x[3]]).filter(x=>core.choices('spot',answers).includes(x[0]));
+  return spaces.map((x,i)=>[x[0],answers.grow==='tomato'&&x[0]==='balcony'?'Sunny balcony':x[1],x[2],answers.grow==='tomato'&&x[0]==='balcony'?'6 to 8 hours direct sun · space for a 5-gallon bag':x[3]]).filter(x=>core.choices('spot',answers).includes(x[0]));
  }
  function completion() {
   return `<aside class="completion-banner" aria-label="Your choices are ready"><div class="completion-plant">${garden()}</div><div><strong>Your match is ready.</strong><p>Based on the choices you made.</p><div class="completion-chips"><span>Light</span><span>Space</span><span>What you want to eat</span></div></div></aside>`;
@@ -65,11 +54,7 @@
   return `<button type="button" class="finder-choice ${row?'finder-row':''} ${item[0]==='unsure'?'not-sure':''}" data-answer="${field}" data-value="${item[0]}" aria-pressed="${selected}">${photo(item[2])}<span class="choice-label">${e(item[1])}${item[3]?`<span class="choice-helper">${e(item[3])}</span>`:''}</span></button>`;
  }
  function credits(){return '<p class="finder-credits"><a href="/photo-credits/#finder-photography">Photo credits</a></p>';}
- function fit(kind) {
-  const title = kind==='microkit'?'8.8 × 5.5 in tray':kind==='tray'?'1010 tray pair':kind==='bag'?'5-gallon grow bag':kind==='garden'?'Smart Garden 3':'8 in pot';
-  const shape = ['tray','microkit'].includes(kind)?'<path d="M164 80h175l-12 29H176z" fill="#214d3a"/><path d="M162 78h179" stroke="#24372c" stroke-width="4"/>':kind==='garden'?'<rect x="174" y="72" width="130" height="36" rx="10" fill="#e7eddf"/><path d="M295 74V26H183" fill="none" stroke="#214d3a" stroke-width="5"/>':`<path d="M196 46h95l-12 63h-69z" fill="${kind==='bag'?'#58645a':'#b85e43'}"/>`;
-  return `<details class="finder-detail"${window.matchMedia('(max-width:699px)').matches?' open':''}><summary>Will it fit?</summary><svg class="finder-size" viewBox="0 0 400 160" role="img" aria-label="Illustrative size comparison of a coffee cup and ${e(title)}"><path d="M18 111h350" stroke="#d8ded6"/><path d="M56 60h44l-5 49H61z" fill="#ebddad"/><path d="M99 68q25 0 20 24h-22" fill="none" stroke="#a78d56" stroke-width="3"/>${shape}<text x="52" y="139" font-size="13" fill="#24372c">12 oz cup</text><text x="186" y="139" font-size="13" fill="#24372c">${e(title)}</text></svg><p>Illustrative size comparison. ${kind==='garden'?'Allow room above the lamp and check the exact model dimensions before ordering.':kind==='microkit'?'Alpas Life lists the kit trays at 8.8 × 5.5 in. Allow extra space for watering and the separate lamp, if needed.':kind==='tray'?'1010 is a tray format, not a 10 × 20 in tray. Check the outside dimensions and that the drained tray nests inside its solid drip tray.':kind==='bag'?'Bag capacity is not an outside dimension. Allow room for one bushy Tiny Tim plant, listed by Seed Needs at about 15 to 20 inches tall and 12 inches wide. The fabric bag drains, so protect the surface beneath it. Check the selected bag’s outside dimensions; this drawing is not to scale.':'The pot diameter is nominal. Check its outside width, depth and saucer footprint before ordering.'}</p></details>`;
- }
+
  function amazon(p,text,primary=false){return `<a class="amazon-button ${primary?'finder-primary':'finder-link'}" href="${e(p.url)}" rel="sponsored nofollow noopener" target="_blank" data-amazon="${e(p.asin)}">Buy on Amazon<span class="sr-only"> (opens Amazon in a new tab)</span></a>`;}
  function message(reason) {
   const cases={
@@ -78,7 +63,7 @@
    radish:['Radish roots need more light.','You chose garden radishes. For this dim spot, you could grow peppery radish microgreens instead, with a grow light.','Try radish microgreens','microgreens','/assets/finder/radishes.webp'],
    salad:['A different kind of salad for this spot.','A dim counter needs added light. A microgreen tray grows young leaves, rather than the mature salad greens you selected.','Choose microgreens','microgreens','/assets/finder/salad-mix.webp'],
    'pea-kit':['Let’s build your pea-shoot setup.','We haven’t confirmed a complete kit containing the pea seed you chose. You can start with pea seed and separate tray supplies instead.','Show me the basics','basics','/assets/photos/pea-shoots-basket-susan-slater.jpg'],
-   unnamed:['Let’s choose a crop-matched setup.','We could not confirm that the suggested countertop kit includes the seeds you chose. You can use seeds and a separate light, or choose a basil kit with named basil pods.','See seeds and a light','basics','/assets/photos/basil-by-window.jpg'],
+   unnamed:['Let’s choose a crop-matched setup.','We could not confirm that the suggested countertop kit includes the seeds you chose. You can use seeds and a separate light, or choose a basil kit with named basil pods.','See seeds and a light','basics','/assets/photos/basil-window-personal-creations.jpg'],
    'tomato-support':['A tomato setup needs more room and support.','Our selected tomato is a full-size climbing plant. It needs 6 to 8 hours of direct sun, a large container and suitable support. Use the tomato-growing guidance before buying, or try lettuce in a smaller pot.','Try lettuce instead','lettuce','/assets/finder/cherry-tomatoes.webp'],
    product:['This setup needs another check.','We have not confirmed every exact product and photo for this combination. Choose another setup, or use the growing guide while we check it.','Change growing spot','space','/assets/photos/trays-broccoli-radish.jpg']
   };
@@ -94,7 +79,7 @@
   const cropPhoto=answers.grow==='microgreens'?(micros.find(x=>x[0]===answers.micro)||micros[1])[2]:answers.grow==='unsure'?(r.product==='micro-broccoli'?micros[1][2]:crops[1][2]):(crops.find(x=>x[0]===answers.grow)||crops[1])[2];
   const matchFacts=[r.product==='basil-kit'?'Grow light included':r.extras.includes('light')?'Separate light below':'Natural light setup',r.product==='basil-kit'?'Basil pods included':r.product==='microkit'?'Seeds + trays + medium':'Seeds + supplies below'];
   const extras=r.extras.length?`<section class="finder-extras"><h2>Make it a growing setup</h2><p class="extras-intro">A few useful companions for your new grow. Sold separately.</p><div class="finder-extra-grid count-${r.extras.length}">${r.extras.map(id=>{const x=data.products[id];return `<article class="finder-extra">${photo(x.image,x.name)}<div><h3>${e(x.name)}</h3>${r.product==='tomato'&&id==='bag'?'<p>Use one bag per plant; this listing is a multipack.</p>':r.product==='tomato'&&id==='soil'?'<p>Allow about 20 US quarts for one 5-gallon bag. Check pack volume.</p>':''}${amazon(x,'View on Amazon')}</div></article>`;}).join('')}</div></section>`:'';
-  return `${rail()}<section class="finder-result"><header class="match-welcome"><div><p class="match-kicker">YOUR MATCH · A FRESH START</p><h2>Your little garden starts here.</h2><p>Small space. Something lovely to grow.</p></div><span class="welcome-sprout" aria-hidden="true">${garden()}</span></header><div class="answer-echo">${chips()}</div>${light?`<p class="match-light">${e(light)}</p>`:''}<div class="result-layout"><figure class="result-photo"><span class="photo-sun" aria-hidden="true"></span><span class="grow-sticker">LET’S GROW</span>${photo(p.image,p.name)}<span class="crop-peek">${photo(cropPhoto,'')}<span>A little inspiration</span></span></figure><div class="result-copy"><p class="product-kind"><span class="match-check" aria-hidden="true">✓</span> Picked for you · ${e(p.kind)}</p><h1 tabindex="-1">${e(copy.headline)}</h1><p class="product-brand">${e(p.name)}</p><p class="benefit">${e(copy.benefit)}</p><ul class="match-facts">${matchFacts.map(x=>`<li><span aria-hidden="true">✓</span>${e(x)}</li>`).join('')}</ul>${amazon(p,'Buy on Amazon',true)}</div></div>${r.note?`<p class="result-context">${e(r.note)}</p>`:''}${caution?`<p class="result-context">${e(caution)}</p>`:''}${extras}${fit(r.fit)}<div class="finder-result-links"><a class="finder-link" href="${e(data.guides[r.guide])}">Read the growing guide</a><button class="finder-link" data-reset>Start over</button></div></section>${credits()}`;
+  return `${rail()}<section class="finder-result"><header class="match-welcome"><div><p class="match-kicker">YOUR MATCH · A FRESH START</p><h2>Your little garden starts here.</h2><p>Small space. Something lovely to grow.</p></div><span class="welcome-sprout" aria-hidden="true">${garden()}</span></header><div class="answer-echo">${chips()}</div>${light?`<p class="match-light">${e(light)}</p>`:''}<div class="result-layout"><figure class="result-photo"><span class="photo-sun" aria-hidden="true"></span><span class="grow-sticker">LET’S GROW</span>${photo(p.image,p.name)}<span class="crop-peek">${photo(cropPhoto,'')}<span>A little inspiration</span></span></figure><div class="result-copy"><p class="product-kind"><span class="match-check" aria-hidden="true">✓</span> Picked for you · ${e(p.kind)}</p><h1 tabindex="-1">${e(copy.headline)}</h1><p class="product-brand">${e(p.name)}</p><p class="benefit">${e(copy.benefit)}</p><ul class="match-facts">${matchFacts.map(x=>`<li><span aria-hidden="true">✓</span>${e(x)}</li>`).join('')}</ul>${amazon(p,'Buy on Amazon',true)}</div></div>${r.note?`<p class="result-context">${e(r.note)}</p>`:''}${caution?`<p class="result-context">${e(caution)}</p>`:''}${extras}<div class="finder-result-links"><a class="finder-link" href="${e(data.guides[r.guide])}">Read the growing guide</a><button class="finder-link" data-reset>Start over</button></div></section>${credits()}`;
  }
  function sync(push=true) {
   const u=new URL(location.href);
@@ -102,12 +87,27 @@
   Object.entries(answers).forEach(([k,v])=>u.searchParams.set(k,v));
   if (push) history.pushState({answers,view},'',u); else history.replaceState({answers,view},'',u);
  }
+
+ let revealTimer;
+ function reveal(){
+  clearTimeout(revealTimer);
+  const evidence=window.SSGReviewMatcher.sequence(answers,core.route(answers),window.SSG_REVIEW_EVIDENCE.records);
+  if(!evidence.length){render(true);return;}
+  const final=window.SSGReviewMatcher.finalLine(answers);
+  host.innerHTML=`<section class="garden-reveal" aria-labelledby="reveal-title"><div class="reveal-art" aria-hidden="true"><span class="reveal-sun">☀</span><span class="reveal-sprout">🌱</span><span class="reveal-spark">✦</span></div><p class="reveal-eyebrow">FROM OTHER GROWERS TO YOUR LITTLE GARDEN</p><h1 id="reveal-title" tabindex="-1">Let’s see what other growers say.</h1><p>Checking saved discussions against your choices.</p><ol class="reveal-checks">${evidence.map((r,i)=>`<li style="animation-delay:${i*.6}s"><a href="${e(r.url)}" target="_blank" rel="noopener">${e(r.question)}</a></li>`).join('')}<li style="animation-delay:${evidence.length*.6}s"><strong>${e(final)}</strong></li></ol><p class="review-date">Saved source excerpts · checked November 15, 2026</p><button class="reveal-skip" data-skip-reveal>Show my picks now</button></section>`;
+  host.querySelector('h1').focus({preventScroll:true});host.scrollIntoView({block:'start',behavior:'instant'});
+  const finish=()=>{clearTimeout(revealTimer);render(true);};
+  host.querySelector('[data-skip-reveal]').addEventListener('click',finish,{once:true});
+  revealTimer=setTimeout(finish,window.matchMedia('(prefers-reduced-motion: reduce)').matches?350:(evidence.length+1)*1000+500);
+ }
+
  function render(focus=true) {
+  clearTimeout(revealTimer);
   const r=core.route(answers);
   if (view==='result') host.innerHTML=result(r);
   else if (view==='switch'||view==='unavailable') host.innerHTML=message(r.reason);
   else if(view==='grow') host.innerHTML=`${rail()}<h1 tabindex="-1">What do you want<br class="mobile-break"> to grow?</h1><div class="finder-grid">${crops.filter(x=>core.choices('grow').includes(x[0])).map(x=>option(x,'grow',false,answers.grow===x[0])).join('')}</div>${credits()}`;
-  else if(view==='space') host.innerHTML=`${rail()}<h1 tabindex="-1">Where will it grow?</h1><div class="space-selection">${chips()}</div><div class="finder-space-grid">${spaceChoices().map(x=>option(x,'spot',false,answers.spot===x[0])).join('')}</div><div class="finder-bottom"></div>${credits()}`;
+  else if(view==='space') host.innerHTML=`${rail()}<h1 tabindex="-1">Where will it grow?</h1><div class="space-selection">${chips()}</div><div class="finder-space-grid count-${spaceChoices().length}">${spaceChoices().map(x=>option(x,'spot',false,answers.spot===x[0])).join('')}</div><div class="finder-bottom"></div>${credits()}`;
   else if(view==='micro') host.innerHTML=`${rail()}<h1 tabindex="-1">Which microgreens?</h1><div class="finder-split"><aside class="finder-summary">${chips()}</aside><div><div class="finder-options">${micros.filter(x=>core.choices('micro',answers).includes(x[0])).map(x=>option(x,'micro',true,answers.micro===x[0])).join('')}</div><div class="micro-controls"><button class="finder-link micro-skip" data-answer="micro" data-value="broccoli">Not sure? Try broccoli</button></div></div></div>${credits()}`;
   else if(view==='setup') {
    const micro=answers.grow==='microgreens';
@@ -135,7 +135,7 @@
     else if(k==='spot'){answers.spot=v;delete answers.setup;}
     else answers[k]=v;
    }
-   view=k==='grow'?(v==='microgreens'?'micro':'space'):k==='micro'?'space':core.route(answers).step;track('finder_answer',{field:k,value:v});sync();render();return;
+   view=k==='grow'?(v==='microgreens'?'micro':'space'):k==='micro'?'space':core.route(answers).step;track('finder_answer',{field:k,value:v});sync();if(view==='result'){reveal();return;}render();return;
   }
   if(b.dataset.edit){view=b.dataset.edit;sync();render();return;}
   if(b.hasAttribute('data-back')){

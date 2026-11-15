@@ -2791,7 +2791,7 @@ def render_static_pages() -> dict[str, str]:
         "nav": "",
         "verify": True,
         "signup": False,
-        "scripts": f'<script src="/js/finder-data.js?v={asset_version("js/finder-data.js")}" defer></script><script src="/js/finder-core.js?v={asset_version("js/finder-core.js")}" defer></script><script src="/js/finder.js?v={asset_version("js/finder.js")}" defer></script>',
+        "scripts": f'<script src="/js/finder-data.js?v={asset_version("js/finder-data.js")}" defer></script><script src="/js/finder-core.js?v={asset_version("js/finder-core.js")}" defer></script><script src="/js/review-evidence.js?v={asset_version("js/review-evidence.js")}" defer></script><script src="/js/review-matcher.js?v={asset_version("js/review-matcher.js")}" defer></script><script src="/js/finder.js?v={asset_version("js/finder.js")}" defer></script>',
         "image": f"{SITE}/assets/og/home.jpg",
         "crumbs": [("Home", f"{SITE}/")],
         "wrap": "wrap-wide",
@@ -3232,6 +3232,7 @@ def render_static_pages() -> dict[str, str]:
 
 
 def main() -> None:
+    subprocess.run([sys.executable, str(ROOT / "scripts/build_review_store.py")], check=True)
     catalog.validate_amazon_photos()
     credit_page = (SRC / "pages" / "photo-credits.html").read_text()
     for key, photo in LIST_PHOTOS.items():
@@ -3258,7 +3259,7 @@ def main() -> None:
     (ROOT / "js" / "site.js").write_text((SRC / "site.js").read_text())
     (ROOT / "js" / "cost-compare.js").write_text((SRC / "cost-compare.js").read_text())
     write_setup_js()
-    for name in ("finder.js", "finder-core.js"):
+    for name in ("finder.js", "finder-core.js", "review-matcher.js"):
         (ROOT / "js" / name).write_text((SRC / name).read_text())
     (ROOT / "js" / "finder-data.js").write_text("window.SSG_FINDER_DATA = " + (SRC / "finder.json").read_text() + ";\n")
     pages = render_static_pages()
