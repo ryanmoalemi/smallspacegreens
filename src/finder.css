@@ -213,3 +213,17 @@
 /* Keep the result introduction immediately below the disclosure. */
 .finder .finder-result{margin-top:0}.finder .finder-result .match-welcome{display:flex;align-items:center;margin:0 0 6px;gap:14px}.finder .finder-result .match-welcome>div{flex:1}.finder .finder-result .result-back{margin:0;min-height:34px;flex:none}.page-home:has(.finder-result) .finder-disclosure{margin:6px 0 8px!important}.finder .finder-result .match-welcome h2{font-size:24px;margin:2px 0}.finder .finder-result .garden-surprise{width:40px;height:40px;flex-basis:40px}.finder .finder-result .answer-echo .finder-chips{margin-bottom:0}.finder .finder-result .answer-echo{margin-bottom:6px}
 @media(max-width:699px){.finder .finder-result .match-welcome{gap:8px}.finder .finder-result .match-welcome h2{font-size:20px}.finder .finder-result .match-kicker{font-size:9px!important}.finder .finder-result .result-back{padding:5px 8px;font-size:12px}}
+
+/* A small animated illustration gives each step its own personality. */
+.garden-reveal .reveal-step-icon{position:relative;display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:13px;background:#e5edda;color:#315b40}
+.reveal-step-icon svg{width:28px;height:28px}.reveal-step-icon b{position:absolute;right:-3px;bottom:-4px;display:grid;place-items:center;border:2px solid white;border-radius:50%;width:18px;height:18px;font-size:10px;line-height:1;background:#315b40;color:white}
+.garden-reveal .icon-0{background:#fff0e7;color:#c75626}.garden-reveal .icon-1{background:#fff2bf;color:#865d12}.garden-reveal .icon-2{background:#e4efda;color:#477736}.garden-reveal .icon-finale{background:#f5cf66;color:#886019;font-size:32px}
+.reveal-stage.is-active .reveal-step-icon svg{animation:step-icon-bob 1.2s ease-in-out infinite}.reveal-stage.is-active .icon-0 svg{animation:step-icon-talk 1s ease-in-out infinite}.reveal-stage.is-active .icon-finale{animation:step-star 1.1s ease-in-out infinite}
+.garden-reveal .reveal-stage.is-active .reveal-progress>span{background-image:linear-gradient(110deg,transparent 25%,#ffffff60 48%,transparent 70%);background-size:80px 100%;animation:fill-garden-step var(--step-duration) linear forwards,step-shine 1.2s linear infinite}
+.garden-reveal .reveal-checks li.reveal-finale.is-active{box-shadow:0 0 0 3px #f3cf6a55,0 5px 20px #c9992c25}.garden-reveal .reveal-stage.is-done .reveal-step-icon b{background:#315b40}
+@keyframes step-icon-bob{0%,100%{transform:translateY(1px) rotate(-4deg)}50%{transform:translateY(-3px) rotate(4deg)}}
+@keyframes step-icon-talk{0%,100%{transform:scale(.94)}50%{transform:scale(1.09) rotate(-4deg)}}
+@keyframes step-star{0%,100%{transform:rotate(-8deg) scale(.94)}50%{transform:rotate(8deg) scale(1.06)}}
+@keyframes step-shine{from{background-position:-80px 0}to{background-position:80px 0}}
+@media(max-width:699px){.garden-reveal .reveal-step-icon{width:32px;height:36px;flex-basis:32px;border-radius:9px}.reveal-step-icon svg{width:24px;height:24px}.reveal-step-icon b{width:16px;height:16px;font-size:9px}}
+@media(prefers-reduced-motion:reduce){.garden-reveal .reveal-step-icon,.garden-reveal .reveal-step-icon svg,.garden-reveal .reveal-stage.is-active .reveal-progress>span{animation:none!important}.garden-reveal .reveal-stage.is-active .reveal-progress>span{width:100%}}
