@@ -105,6 +105,17 @@
 
 .garden-reveal .reveal-checks li.reveal-finale{background:#f9d770;border:2px solid #d4ad45;box-shadow:3px 3px 0 #72561f20}.garden-reveal .reveal-checks li:nth-child(2){background:#fff}.garden-reveal .reveal-stage.is-active .reveal-number{background:#245a1c;color:white}
 
-/* Larger, easier-to-read reveal copy. */
-.garden-reveal .reveal-checks a,.garden-reveal .reveal-checks li div>span,.garden-reveal .reveal-finale strong{font-size:19px;line-height:1.4}.garden-reveal .reveal-checks small{font-size:11px;line-height:1.3}.garden-reveal .reveal-status{font-size:15px!important}.garden-reveal .reveal-progress{height:7px}.garden-reveal .reveal-checks li{padding:14px 16px}
-@media(max-width:699px){.garden-reveal .reveal-checks a,.garden-reveal .reveal-checks li div>span,.garden-reveal .reveal-finale strong{font-size:16px;line-height:1.35}.garden-reveal .reveal-checks small{font-size:9px}.garden-reveal .reveal-status{font-size:14px!important}.garden-reveal .reveal-checks li{padding:11px 10px}.garden-reveal .reveal-art{height:48px}.garden-reveal .reveal-sprout{font-size:40px}.garden-reveal .reveal-progress{height:6px}}
+/* Keep the complete reveal readable within the questionnaire viewport. */
+.garden-reveal{margin:8px auto;padding:16px 22px;max-width:760px;scroll-margin-top:8px}
+.garden-reveal .reveal-art{height:38px;width:64px}.garden-reveal .reveal-sprout{font-size:32px}.garden-reveal .reveal-sun{font-size:20px}.garden-reveal .reveal-spark{font-size:14px;top:16px}
+.garden-reveal .reveal-eyebrow{display:none}.garden-reveal h1{font-size:24px!important;line-height:1.15!important;margin:6px auto!important}
+.garden-reveal .reveal-status{font-size:13px!important;line-height:18px;margin:6px auto!important;min-height:0}
+.garden-reveal .reveal-checks{max-width:650px;margin:10px auto;gap:7px}
+.garden-reveal .reveal-checks li,.garden-reveal .reveal-checks li.reveal-finale{min-height:0;padding:10px 12px;gap:10px}
+.garden-reveal .reveal-checks a,.garden-reveal .reveal-checks li div>span,.garden-reveal .reveal-finale strong{font-size:16px;line-height:1.25}
+.garden-reveal .reveal-checks small{font-size:10px;line-height:12px;letter-spacing:.8px;margin-bottom:3px}
+.garden-reveal .reveal-progress{height:14px;margin-top:7px}
+.garden-reveal .reveal-number{flex-basis:26px;height:26px;font-size:13px}
+.garden-reveal .reveal-prize{width:48px;flex-basis:48px}.garden-reveal .review-date{font-size:10px!important;line-height:14px;margin:7px auto 0!important}
+@media(max-width:699px){.garden-reveal{padding:10px;margin:4px auto}.garden-reveal h1{font-size:21px!important}.garden-reveal .reveal-art{height:30px}.garden-reveal .reveal-sprout{font-size:26px}.garden-reveal .reveal-checks li,.garden-reveal .reveal-checks li.reveal-finale{padding:9px;gap:8px}.garden-reveal .reveal-checks a,.garden-reveal .reveal-checks li div>span,.garden-reveal .reveal-finale strong{font-size:14px;line-height:1.25}.garden-reveal .reveal-checks small{font-size:9px;letter-spacing:.4px}.garden-reveal .reveal-progress{height:12px;margin-top:6px}.garden-reveal .reveal-prize{width:38px;flex-basis:38px}}
+@media(max-height:650px){.garden-reveal .reveal-art{display:none}.garden-reveal{padding-block:9px}.garden-reveal .reveal-checks{gap:5px;margin-block:7px}}
