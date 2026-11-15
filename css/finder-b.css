@@ -119,3 +119,14 @@
 .garden-reveal .reveal-prize{width:48px;flex-basis:48px}.garden-reveal .review-date{font-size:10px!important;line-height:14px;margin:7px auto 0!important}
 @media(max-width:699px){.garden-reveal{padding:10px;margin:4px auto}.garden-reveal h1{font-size:21px!important}.garden-reveal .reveal-art{height:30px}.garden-reveal .reveal-sprout{font-size:26px}.garden-reveal .reveal-checks li,.garden-reveal .reveal-checks li.reveal-finale{padding:9px;gap:8px}.garden-reveal .reveal-checks a,.garden-reveal .reveal-checks li div>span,.garden-reveal .reveal-finale strong{font-size:14px;line-height:1.25}.garden-reveal .reveal-checks small{font-size:9px;letter-spacing:.4px}.garden-reveal .reveal-progress{height:12px;margin-top:6px}.garden-reveal .reveal-prize{width:38px;flex-basis:38px}}
 @media(max-height:650px){.garden-reveal .reveal-art{display:none}.garden-reveal{padding-block:9px}.garden-reveal .reveal-checks{gap:5px;margin-block:7px}}
+
+/* Celebrate the result without pushing the product below the fold. */
+.garden-surprise{position:relative;display:inline-grid;place-items:center;width:52px;height:52px;flex:0 0 52px;background:#fae7ad;border-radius:50%;overflow:visible;vertical-align:middle}
+.surprise-sprout{font-size:32px;animation:garden-pop .65s cubic-bezier(.2,1.7,.5,1) both}
+.garden-surprise i{position:absolute;left:24px;top:24px;width:7px;height:12px;border-radius:80% 0 80% 0;background:#74a347;transform:rotate(calc(var(--leaf)*45deg));animation:garden-burst 1.3s .2s ease-out both;pointer-events:none}
+.garden-surprise i:nth-child(even){background:#d5a632}
+@keyframes garden-pop{0%{transform:scale(0) rotate(-25deg)}70%{transform:scale(1.2) rotate(6deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes garden-burst{0%{opacity:0;transform:rotate(calc(var(--leaf)*45deg)) translateY(0) scale(.3)}25%{opacity:1}100%{opacity:0;transform:rotate(calc(var(--leaf)*45deg)) translateY(-65px) rotate(90deg)}}
+@media(prefers-reduced-motion:reduce){.surprise-sprout,.garden-surprise i{animation:none}.garden-surprise i{display:none}}
+
+.b-results.ready{scroll-margin-top:12px}.b-results.ready h2{gap:12px;margin-top:0;margin-bottom:10px}.b-results.ready .garden-surprise{margin-right:8px}.b-results.ready{padding-top:18px}.b-results.ready .plan-ready{margin-block:5px}.b-results.ready .b-result-intro{margin-block:10px}

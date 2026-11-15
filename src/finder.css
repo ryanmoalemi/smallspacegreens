@@ -187,3 +187,15 @@
 .garden-reveal .reveal-prize{width:48px;flex-basis:48px}.garden-reveal .review-date{font-size:10px!important;line-height:14px;margin:7px auto 0!important}
 @media(max-width:699px){.garden-reveal{padding:10px;margin:4px auto}.garden-reveal h1{font-size:21px!important}.garden-reveal .reveal-art{height:30px}.garden-reveal .reveal-sprout{font-size:26px}.garden-reveal .reveal-checks li,.garden-reveal .reveal-checks li.reveal-finale{padding:9px;gap:8px}.garden-reveal .reveal-checks a,.garden-reveal .reveal-checks li div>span,.garden-reveal .reveal-finale strong{font-size:14px;line-height:1.25}.garden-reveal .reveal-checks small{font-size:9px;letter-spacing:.4px}.garden-reveal .reveal-progress{height:12px;margin-top:6px}.garden-reveal .reveal-prize{width:38px;flex-basis:38px}}
 @media(max-height:650px){.garden-reveal .reveal-art{display:none}.garden-reveal{padding-block:9px}.garden-reveal .reveal-checks{gap:5px;margin-block:7px}}
+
+/* Celebrate the result without pushing the product below the fold. */
+.garden-surprise{position:relative;display:inline-grid;place-items:center;width:52px;height:52px;flex:0 0 52px;background:#fae7ad;border-radius:50%;overflow:visible;vertical-align:middle}
+.surprise-sprout{font-size:32px;animation:garden-pop .65s cubic-bezier(.2,1.7,.5,1) both}
+.garden-surprise i{position:absolute;left:24px;top:24px;width:7px;height:12px;border-radius:80% 0 80% 0;background:#74a347;transform:rotate(calc(var(--leaf)*45deg));animation:garden-burst 1.3s .2s ease-out both;pointer-events:none}
+.garden-surprise i:nth-child(even){background:#d5a632}
+@keyframes garden-pop{0%{transform:scale(0) rotate(-25deg)}70%{transform:scale(1.2) rotate(6deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes garden-burst{0%{opacity:0;transform:rotate(calc(var(--leaf)*45deg)) translateY(0) scale(.3)}25%{opacity:1}100%{opacity:0;transform:rotate(calc(var(--leaf)*45deg)) translateY(-65px) rotate(90deg)}}
+@media(prefers-reduced-motion:reduce){.surprise-sprout,.garden-surprise i{animation:none}.garden-surprise i{display:none}}
+
+.finder-result{scroll-margin-top:12px;margin-top:6px}.result-back{margin-bottom:6px;padding:5px 12px;min-height:34px}.finder-result .match-welcome{margin:0 0 8px;gap:10px}.finder .finder-result .match-welcome h2{font-size:27px;line-height:1.1;margin:3px 0}.finder-result .match-welcome p:last-child{display:none}.finder-result .match-welcome .match-kicker{font-size:11px!important}.finder-result .answer-echo{margin-bottom:8px}.finder-result .result-layout{padding:14px;gap:24px}.finder-result .result-photo{min-height:280px;padding:20px 40px}.finder-result .result-photo>img{height:230px}.finder .finder-result .result-copy h1{font-size:30px;line-height:1.1}
+@media(max-width:699px){.finder .finder-result .match-welcome h2{font-size:23px}.finder-result .garden-surprise{width:40px;height:40px;flex-basis:40px}.finder-result .result-layout{padding:10px;gap:10px}.finder-result .result-photo{min-height:132px;padding:15px 60px 12px 38px}.finder-result .result-photo>img{height:108px}.finder .finder-result .result-copy h1{font-size:24px}}
