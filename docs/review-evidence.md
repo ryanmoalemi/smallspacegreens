@@ -20,3 +20,8 @@ API candidates checked November 15, 2026:
 - Canopy: https://www.canopyapi.co/amazon-reviews-api . Review bodies and pagination documented. US requests require an Amazon session cookie in addition to the API key; do not put credentials in source, browser bundles or chat.
 - DataForSEO dedicated reviews endpoint currently marked temporarily unavailable; do not build on it.
 No provider subscription, credentials, or live sample request has been obtained.
+
+## Catalog research import, November 15
+Research corpus: 57 Reddit discussion sources, retained as returned by web search, with dated post/comment excerpts split into SQLite tables. `research_threads`, `research_excerpts`, `research_product_links`, and `catalog_coverage` support per-item lookup. `data/reviews/coverage.json` records counts and gaps. These candidate excerpts are not automatically exported to the public finder or treated as exact-product reviews. No user profiles collected.
+
+Rainforest test: product request for VIVOSUN ASIN B00TF9E6XE with the public documentation's demo key returned HTTP 401 asking for a plan/free trial. RAINFOREST_API_KEY is absent. No Amazon reviews imported, no account created, and no charges incurred. This is an authentication blocker, not a confirmed retrieval failure with a valid account.

@@ -17,3 +17,8 @@ with con:
 con.close()
 (ROOT/'js/review-evidence.js').write_text('window.SSG_REVIEW_EVIDENCE = '+json.dumps(payload,ensure_ascii=True)+';\n')
 print(f'Built SQLite store and browser index: {len(records)} sourced excerpts')
+
+# Keep the larger research corpus separate from approved visitor-facing evidence.
+import subprocess,sys
+if (ROOT/"data/reviews/reddit-research.json").exists():
+    subprocess.run([sys.executable,str(ROOT/"scripts/build_reddit_research.py")],check=True)
