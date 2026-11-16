@@ -91,7 +91,7 @@ if(process.argv.includes('--release')){
   assert.equal(p.identityEvidence.stockClaim,false,id+' must not claim stock');
   assert.equal(p.imageRole,'product',id+' must use the selected product photo');
   assert.ok(p.imageUseApproved,id+' photo lacks owner demo approval');
-  assert.ok(['m.media-amazon.com','www.organic-heirloom-seed.com','alpaslife.com','cdn11.bigcommerce.com','cdn.shopify.com'].includes(new URL(p.image).hostname),id+' photo host is unexpected');
+  assert.ok(p.image.startsWith('/assets/finder-products/') || ['m.media-amazon.com','ugc.production.linktr.ee','www.organic-heirloom-seed.com','alpaslife.com','cdn11.bigcommerce.com','cdn.shopify.com'].includes(new URL(p.image).hostname),id+' photo host is unexpected');
   assert.ok(data.demoPhotoApproval?.approvedAt,'Demo photo approval must be recorded');
   assert.equal(data.demoPhotoApproval.licenseVerified,false,'Do not imply independent license clearance');
  }

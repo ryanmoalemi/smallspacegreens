@@ -2,7 +2,7 @@
  'use strict';
  const host = document.getElementById('finder');
  if (!host || !window.SSGFinder || !window.SSG_FINDER_DATA) return;
- const core = window.SSGFinder, data = window.SSG_FINDER_DATA;
+ const core = window.SSGFinder, data = window.SSG_FINDER_DATA, shopping=window.SSGShopping;
  const crops = [
   ['tomato','Cherry tomatoes','/assets/finder/cherry-tomatoes.webp'],
   ['lettuce','Lettuce','/assets/products/supply-lettuce-leaves-600.webp'],
@@ -25,8 +25,8 @@
  ];
  const e = s => String(s || '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  let answers = core.normalize(Object.assign(JSON.parse(host.dataset.initialAnswers||'{}'),Object.fromEntries(new URLSearchParams(location.search))));
- let view = core.route(answers).step;
- function track(event, params) { if (typeof window.gtag === 'function') window.gtag('event',event,params); }
+ let view = core.route(answers).step, started=false, lastResult='';
+ function track(event, params={}) { if (['smallspacegreens.com','www.smallspacegreens.com'].includes(location.hostname)&&!new URLSearchParams(location.search).has('qa')&&typeof window.gtag === 'function') window.gtag('event',event,{variant:'A',...params}); }
  function label(id,list=crops) { return (list.find(x=>x[0]===id)||[])[1] || ''; }
  function photo(src,alt='',cls='') { return `<img class="${e(cls)}" ${src.startsWith('/assets/finder/')?`srcset="${e(src.replace('.webp','-360.webp'))} 360w, ${e(src)} 720w" sizes="(max-width:699px) 173px, 264px"`:''} src="${e(src)}" width="800" height="600" alt="${e(alt)}" decoding="async">`; }
  function garden() {
@@ -44,7 +44,7 @@
   return `<div class="finder-navigation">${view==='grow'?'<span></span>':back()}<div class="finder-progress"><p class="stage-count">${done?'Your match is ready':`${i+1} of ${labels.length} <span>${labels[i]}</span>`}</p><div class="finder-progress-track" role="progressbar" aria-label="Finder progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}"><span style="width:${percent}%"></span></div><ol class="finder-stages" aria-label="Your growing setup">${labels.map((label,n)=>`<li${!done&&n===i?' aria-current="step"':''} class="${done||n<i?'is-complete':''}">${label}</li>`).join('')}</ol></div></div>`;
  }
  function spaceChoices() {
-  return spaces.map((x,i)=>[x[0],answers.grow==='tomato'&&x[0]==='balcony'?'Sunny balcony':x[1],x[2],answers.grow==='tomato'&&x[0]==='balcony'?'6 to 8 hours direct sun · space for a 5-gallon bag':x[3]]).filter(x=>core.choices('spot',answers).includes(x[0]));
+  return spaces.map((x,i)=>[x[0],answers.grow==='tomato'&&x[0]==='balcony'?'Sunny balcony':x[1],x[2],answers.grow==='tomato'&&x[0]==='balcony'?'6 to 8 hours direct sun · space for a 5-gallon bag':core.spaceHint(x[0],answers)]).filter(x=>core.choices('spot',answers).includes(x[0]));
  }
  function completion() {
   return `<aside class="completion-banner" aria-label="Your choices are ready"><div class="completion-plant">${garden()}</div><div><strong>Your match is ready.</strong><p>Based on the choices you made.</p><div class="completion-chips"><span>Light</span><span>Space</span><span>What you want to eat</span></div></div></aside>`;
@@ -72,7 +72,7 @@
  }
  function resultSupport(r){
   const ev=window.SSGReviewMatcher.proof(answers,r,window.SSG_REVIEW_EVIDENCE.records),alt=core.alternative(answers,r);
-  return `${ev?`<details class="result-context" open><summary>What growers say</summary><blockquote><p>“${e(ev.excerpt)}”</p><a href="${e(ev.url)}" target="_blank" rel="nofollow noopener">Read the Reddit discussion</a></blockquote><p>A grower’s experience, not a review of these exact products.</p></details>`:''}${alt?`<p class="result-context">${e(alt.intro)} <button class="finder-link" data-answer="${alt.field}" data-value="${alt.value}">${e(alt.label)}</button></p>`:''}<p class="result-context">Items are sold separately. Check current prices and pack sizes on Amazon.</p>`;
+  return `${ev?`<details class="result-context" open><summary>What growers say</summary><blockquote><p>“${e(ev.excerpt)}”</p><a href="${e(ev.url)}" target="_blank" rel="nofollow noopener">Read the Reddit discussion</a></blockquote><p>${e(ev.proofContext||'A grower’s experience with this crop and growing method.')}</p></details>`:''}${alt?`<p class="result-context">${e(alt.intro)} <button class="finder-link" data-answer="${alt.field}" data-value="${alt.value}">${e(alt.label)}</button></p>`:''}<p class="result-context">Items are sold separately. Check current prices and pack sizes on Amazon.</p>`;
  }
  function result(r) {
   const p=data.products[r.product];
@@ -82,8 +82,8 @@
   const caution=answers.spot==='balcony'&&['lettuce','salad'].includes(r.product)?'Salad greens prefer cooler conditions. Check the direct sun and heat on your balcony.':'';
   const cropPhoto=answers.grow==='microgreens'?(micros.find(x=>x[0]===answers.micro)||micros[1])[2]:answers.grow==='unsure'?(r.product==='micro-broccoli'?micros[1][2]:crops[1][2]):(crops.find(x=>x[0]===answers.grow)||crops[1])[2];
   const matchFacts=[r.product==='basil-kit'?'Grow light included':r.extras.includes('light')?'Separate light below':'Natural light setup',r.product==='basil-kit'?'Basil pods included':r.product==='microkit'?'Seeds + trays + medium':'Seeds + supplies below'];
-  const extras=r.extras.length?`<section class="finder-extras"><h2>Make it a growing setup</h2><p class="extras-intro">A few useful companions for your new grow. Sold separately.</p><div class="finder-extra-grid count-${r.extras.length}">${r.extras.map(id=>{const x=data.products[id];return `<article class="finder-extra">${photo(x.image,x.name)}<div><h3>${e(x.name)}</h3><p>${e(core.supplyReason(id,answers,r,data.products))}</p>${amazon(x,'View on Amazon')}</div></article>`;}).join('')}</div></section>`:'';
-  return `<section class="finder-result"><header class="match-welcome"><button class="finder-back result-back" data-back>‹ Back</button><div><p class="match-kicker">TA-DA! YOUR GARDEN PICKS</p><h2>Your little garden starts here.</h2><p>Chosen for your space. Ready to grow.</p></div><span class="garden-surprise" aria-hidden="true"><span class="surprise-sprout">🌱</span><i style="--leaf:0"></i><i style="--leaf:1"></i><i style="--leaf:2"></i><i style="--leaf:3"></i><i style="--leaf:4"></i><i style="--leaf:5"></i><i style="--leaf:6"></i><i style="--leaf:7"></i></span></header><div class="answer-echo">${chips()}</div><div class="result-layout"><figure class="result-photo"><span class="photo-sun" aria-hidden="true"></span><span class="grow-sticker">LET’S GROW</span>${photo(p.image,p.name)}<span class="crop-peek">${photo(cropPhoto,'')}<span>A little inspiration</span></span></figure><div class="result-copy"><p class="product-kind"><span class="match-check" aria-hidden="true">✓</span> Picked for you · ${e(p.kind)}</p><h1 tabindex="-1">${e(copy.headline)}</h1><p class="product-brand">${e(p.name)}</p><p class="benefit">${e(copy.benefit)}</p><ul class="match-facts">${matchFacts.map(x=>`<li><span aria-hidden="true">✓</span>${e(x)}</li>`).join('')}</ul>${amazon(p,'Buy on Amazon',true)}</div></div>${r.note?`<p class="result-context">${e(r.note)}</p>`:''}${caution?`<p class="result-context">${e(caution)}</p>`:''}${extras}${resultSupport(r)}<div class="finder-result-links"><button class="finder-link" data-reset>Start over</button></div></section>${credits()}`;
+  const extras=r.extras.length?`<section class="finder-extras"><h2>Make it a growing setup</h2><p class="extras-intro">Your starting supplies. Skip anything you already have.</p><div class="finder-extra-grid count-${r.extras.length}">${r.extras.map(id=>{const x=data.products[id];return `<article class="finder-extra" data-shopping-product="${e(id)}">${photo(x.image,x.name)}<div><h3>${e(x.name)}</h3><p>${e(core.supplyReason(id,answers,r,data.products))}</p>${shopping.meta(id,answers,r,data)}${amazon(x,'View on Amazon')}</div></article>`;}).join('')}</div></section>`:'';
+  return `<section class="finder-result"><header class="match-welcome"><button class="finder-back result-back" data-back>‹ Back</button><div><p class="match-kicker">TA-DA! YOUR GARDEN PICKS</p><h2>Your little garden starts here.</h2><p>Chosen for your space. Ready to grow.</p></div><span class="garden-surprise" aria-hidden="true"><span class="surprise-sprout">🌱</span><i style="--leaf:0"></i><i style="--leaf:1"></i><i style="--leaf:2"></i><i style="--leaf:3"></i><i style="--leaf:4"></i><i style="--leaf:5"></i><i style="--leaf:6"></i><i style="--leaf:7"></i></span></header><div class="answer-echo">${chips()}</div><div class="result-layout"><figure class="result-photo"><span class="photo-sun" aria-hidden="true"></span><span class="grow-sticker">LET’S GROW</span>${photo(p.image,p.name)}<span class="crop-peek">${photo(cropPhoto,'')}<span>A little inspiration</span></span></figure><div class="result-copy" data-shopping-product="${e(r.product)}"><p class="product-kind"><span class="match-check" aria-hidden="true">✓</span> Picked for you · ${e(p.kind)}</p><h1 tabindex="-1">${e(copy.headline)}</h1><p class="product-brand">${e(p.name)}</p><p class="benefit">${e(copy.benefit)}</p><ul class="match-facts">${matchFacts.map(x=>`<li><span aria-hidden="true">✓</span>${e(x)}</li>`).join('')}</ul>${shopping.meta(r.product,answers,r,data)}${amazon(p,'Buy on Amazon',true)}</div></div>${r.note?`<p class="result-context">${e(r.note)}</p>`:''}${caution?`<p class="result-context">${e(caution)}</p>`:''}${shopping.summary(answers,r)}${extras}${shopping.optional(answers,r,data)}${resultSupport(r)}<div class="finder-result-links"><button class="finder-link" data-reset>Start over</button></div></section>${credits()}`;
  }
  function sync(push=true) {
   const u=new URL(location.href);u.pathname='/';
@@ -101,6 +101,7 @@
   const final=window.SSGReviewMatcher.finalLine(answers);
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const duration=reduced?200:3200;
+  track('finder_reveal_start',{...answers,duration_ms:duration*4});
   const finaleGraphic=`<svg class="reveal-prize" viewBox="0 0 96 80" aria-hidden="true"><path class="prize-rays" d="M12 26l9 5M75 20l8-7M48 7v10M84 43h-10M18 59l-8 4" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M29 43h40l-6 29H35z" fill="#dc8c63"/><path d="M25 42h48v8H25z" fill="#f0b389"/><path d="M49 44V25" fill="none" stroke="#24563a" stroke-width="4"/><path class="prize-leaf" d="M49 34C29 35 27 19 28 16c16 0 23 8 21 18M49 28C48 9 65 8 70 9c-1 16-10 23-21 19" fill="#62983c"/><path d="M78 54l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" fill="#f4ce58"/></svg>`;
   host.innerHTML=`<section class="garden-reveal" aria-labelledby="reveal-title" style="--step-duration:${duration}ms"><div class="reveal-art" aria-hidden="true"><span class="reveal-sun">☀</span><span class="reveal-sprout">🌱</span><span class="reveal-spark">✦</span></div><p class="reveal-eyebrow">YOUR GARDEN PLAN · THE FINAL STEP</p><h1 id="reveal-title" tabindex="-1">Your little garden is taking shape.</h1><p class="reveal-status" role="status" aria-live="polite">1 of 4 · A little grower wisdom</p><ol class="reveal-checks">${evidence.map((r,i)=>`<li class="reveal-stage" data-stage="${i}"><span class="reveal-step-icon icon-${i}">${revealIcon(i)}<b>${i+1}</b></span><div class="reveal-stage-copy"><small>${e(r.label)}</small><span>${e(r.question)}</span><div class="reveal-progress" aria-hidden="true"><span></span></div></div></li>`).join('')}<li class="reveal-stage reveal-finale" data-stage="3"><span class="reveal-step-icon icon-finale" aria-hidden="true">✦<b>4</b></span><div class="reveal-stage-copy"><small>MADE FOR YOUR LITTLE SPACE</small><strong>${e(final)}</strong><div class="reveal-progress" aria-hidden="true"><span></span></div></div>${finaleGraphic}</li></ol><p class="review-date">Based on saved grower discussions and our product shortlist.</p></section>`;
   host.querySelector('h1').focus({preventScroll:true});host.querySelector('.garden-reveal').scrollIntoView({block:'start',behavior:'instant'});
@@ -109,7 +110,7 @@
   const labels=['A little grower wisdom','Finding your fit','The details growers care about','Your picks are almost ready!'];
   function advance(index){
    if(index>0){stages[index-1].classList.remove('is-active');stages[index-1].classList.add('is-done');stages[index-1].removeAttribute('aria-current');}
-   if(index===stages.length){render(true);return;}
+   if(index===stages.length){track('finder_reveal_complete',{...answers,duration_ms:duration*4});render(true);return;}
    stages[index].classList.add('is-active');stages[index].setAttribute('aria-current','step');
    status.textContent=`${index+1} of 4 · ${labels[index]}`;
    host.querySelector('.garden-reveal').classList.toggle('is-finale',index===3);
@@ -138,13 +139,14 @@
    else {img.hidden=true;}
   },{once:true}));
   if (focus) {host.querySelector('h1')?.focus({preventScroll:true});if(view==='result')host.querySelector('.finder-result')?.scrollIntoView({block:'start',behavior:'instant'});else window.scrollTo({top:0,behavior:'instant'});}
-  if(view==='result') track('finder_result_view',{...answers,product:r.product});
+  if(view==='result'){shopping.update(host,r);const key=JSON.stringify(answers);if(key!==lastResult){lastResult=key;track('finder_result_view',{...answers,product:r.product});}}
  }
  host.addEventListener('click',event=>{
   const b=event.target.closest('button,a');if(!b)return;
-  if(b.hasAttribute('data-reset')){answers={};view='grow';sync();render();return;}
+  if(b.hasAttribute('data-reset')){answers={};view='grow';started=false;lastResult='';sync();render();return;}
   if(b.dataset.amazon){track('finder_amazon_click',{asin:b.dataset.amazon,...answers});return;}
   if(b.dataset.answer){
+   if(!started){started=true;track('finder_start');}
    const k=b.dataset.answer,v=b.dataset.value;
    if(answers[k]!==v){
     if(k==='grow'){answers={grow:v};}
@@ -167,5 +169,6 @@
   }
  });
  window.addEventListener('popstate',event=>{answers=core.normalize(Object.fromEntries(new URLSearchParams(location.search)));view=event.state?.view||core.route(answers).step;render();});
- sync(false);render(false);
+ shopping.bind(host,()=>core.route(answers),track);
+ sync(false);render(false);track('finder_variant_entry');
 })();

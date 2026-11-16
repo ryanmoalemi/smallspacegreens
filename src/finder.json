@@ -22,13 +22,14 @@
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
+      "packLabel": "1 packet · Buttercrunch lettuce"
     },
     "tomato": {
       "asin": "B00H4E9ULA",
       "name": "Seed Needs Tiny Tim Dwarf Cherry Tomato Seeds",
       "kind": "Dwarf cherry tomato seeds",
-      "image": "https://cdn.shopify.com/s/files/1/1766/2959/files/531-MAIN-2026.webp?v=1783281501",
+      "image": "/assets/finder-products/tomato.webp",
       "benefit": "A compact cherry tomato for one plant in a 5-gallon bag on a full-sun balcony.",
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B00H4E9ULA?tag=smallspaceg04-20",
@@ -39,11 +40,12 @@
       "photoCredit": null,
       "imageRole": "product",
       "identityEvidence": {
-        "reviewedAt": "2026-11-14",
-        "stockClaim": false,
-        "source": "https://www.seedneeds.com/products/tiny-tim-tomato ; https://www.merchantwords.com/asin/us/B00H4E9ULA ; https://www.ubuy.mq/en/product/2C4NIU4I-seed-needs-tiny-tim-tomato-lycopersicon-esculentum-80-seeds-non-gmo"
+        "source": "Owner-supplied Amazon listing title and screenshots, product tomato",
+        "reviewedAt": "2026-11-16",
+        "stockClaim": false
       },
-      "photoReview": "Manufacturer product photo selected for the owner-authorized demo. Image license not independently verified."
+      "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
+      "packLabel": "1 packet · approximately 30 seeds"
     },
     "salad": {
       "asin": "B0D1LL6CG6",
@@ -64,7 +66,8 @@
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
+      "packLabel": "1 salad greens seed collection"
     },
     "basil": {
       "asin": "B07VRJVJ9F",
@@ -85,7 +88,8 @@
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
+      "packLabel": "1 packet · approximately 400 seeds"
     },
     "herbs": {
       "asin": "B003BM42R6",
@@ -106,7 +110,8 @@
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
+      "packLabel": "1 collection · 12 seed packets"
     },
     "radish": {
       "asin": "B00YO59N32",
@@ -127,12 +132,13 @@
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
+      "packLabel": "1 packet · Cherry Belle radish"
     },
     "basil-kit": {
       "asin": "B01MRVMKQH",
       "name": "Click & Grow Smart Garden 3",
-      "kind": "White \u00b7 includes 3 basil pods",
+      "kind": "White · includes 3 basil pods",
       "image": "https://m.media-amazon.com/images/I/41Mq4qvHYiL._SL800_.jpg",
       "benefit": "Fresh basil on a dim counter, with its own light and basil pods.",
       "status": "reviewed",
@@ -148,7 +154,8 @@
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
+      "packLabel": "1 garden · light + 3 basil pods"
     },
     "micro-broccoli": {
       "asin": "B00W2FAPF6",
@@ -169,7 +176,8 @@
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
+      "packLabel": "1 bag · 1 lb"
     },
     "micro-pea": {
       "asin": "B06XWGTV57",
@@ -190,13 +198,14 @@
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
+      "packLabel": "1 bag · speckled pea seeds"
     },
     "micro-radish": {
       "asin": "B08V1ZMGFX",
       "name": "Country Creek Rambo Radish Seeds",
       "kind": "Seeds",
-      "image": "https://www.organic-heirloom-seed.com/cdn/shop/products/91to51M5WcL._AC_SL1500.jpg?v=1608579950",
+      "image": "/assets/finder-products/micro-radish.webp",
       "benefit": "Peppery radish microgreens for an indoor tray.",
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B08V1ZMGFX?tag=smallspaceg04-20",
@@ -207,17 +216,18 @@
       "photoCredit": null,
       "imageRole": "product",
       "identityEvidence": {
-        "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
-        "reviewedAt": "2026-11-14",
+        "source": "Owner-supplied Amazon listing title and screenshots, product micro-radish",
+        "reviewedAt": "2026-11-16",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
+      "packLabel": "1 bag · 16 oz"
     },
     "microkit": {
       "asin": "B0CQPQKTFC",
       "name": "ALPAS LIFE Microgreens Kit",
-      "kind": "Kit \u00b7 no built-in light",
-      "image": "https://alpaslife.com/wp-content/uploads/2024/10/new-main-coco-coir-kit.jpg",
+      "kind": "Kit · no built-in light",
+      "image": "/assets/finder-products/microkit.webp",
       "benefit": "Includes trays, growing medium, and both radish and broccoli seed. No light is included.",
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B0CQPQKTFC?tag=smallspaceg04-20",
@@ -228,38 +238,40 @@
       "photoCredit": null,
       "imageRole": "product",
       "identityEvidence": {
-        "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
-        "reviewedAt": "2026-11-14",
+        "source": "Owner-supplied Amazon listing title and screenshots, product microkit",
+        "reviewedAt": "2026-11-16",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
+      "packLabel": "1 kit · 2 tray sets, mister, coir discs, radish + broccoli seeds"
     },
     "light": {
-      "asin": "B0CHDBY2PD",
-      "name": "SANSI Clip-on Grow Light",
-      "kind": "Required for this dim spot \u00b7 10W",
-      "image": "https://m.media-amazon.com/images/I/61a6Qs14l9L._SL800_.jpg",
+      "asin": "B0D7CMRZT8",
+      "name": "MetryGrow 48W Grow Light with Stand",
+      "kind": "Grow light with adjustable stand",
+      "image": "https://ugc.production.linktr.ee/ecb77a01-0e04-45aa-9eac-6df538204e42_41-QWgar-TL.-SL500-.jpeg",
       "benefit": "",
       "status": "reviewed",
-      "url": "https://www.amazon.com/dp/B0CHDBY2PD?tag=smallspaceg04-20",
-      "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
+      "url": "https://www.amazon.com/dp/B0D7CMRZT8?tag=smallspaceg04-20",
+      "verification": "Brand storefront names exact 48W model with 2 x 2 ft rated footprint and links ASIN; supplier diagrams confirm included base, stand, adapter and control. No independent PPFD or current stock verification.",
       "imageUseApproved": true,
       "availabilityVerified": false,
       "photoCaption": "",
       "photoCredit": null,
       "imageRole": "product",
       "identityEvidence": {
-        "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
-        "reviewedAt": "2026-11-14",
+        "source": "https://linktr.ee/metrygrow ; https://www.amazon.com/dp/B0D7CMRZT8",
+        "reviewedAt": "2026-11-16",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Exact model image from manufacturer storefront.",
+      "packLabel": "1 light · stand, power adapter + controller"
     },
     "pot": {
       "asin": "B0DCSH7T1R",
       "name": "Melphoe 8 in Pots with Saucers",
       "kind": "8 in pots with saucers",
-      "image": "https://m.media-amazon.com/images/I/71vMNuNmIcL._SL800_.jpg",
+      "image": "/assets/finder-products/pot.webp",
       "benefit": "",
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B0DCSH7T1R?tag=smallspaceg04-20",
@@ -270,17 +282,18 @@
       "photoCredit": null,
       "imageRole": "product",
       "identityEvidence": {
-        "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
-        "reviewedAt": "2026-11-14",
+        "source": "Owner-supplied Amazon listing title and screenshots, product pot",
+        "reviewedAt": "2026-11-16",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
+      "packLabel": "1 pack · two 8-inch pots + saucers"
     },
     "soil": {
       "asin": "B078WY9Z7Q",
       "name": "Espoma Organic Potting Mix",
       "kind": "Container potting mix",
-      "image": "https://m.media-amazon.com/images/I/81uE-Q5UgVL._SL800_.jpg",
+      "image": "/assets/finder-products/soil.webp",
       "benefit": "",
       "status": "reviewed",
       "url": "https://www.amazon.com/dp/B078WY9Z7Q?tag=smallspaceg04-20",
@@ -291,11 +304,12 @@
       "photoCredit": null,
       "imageRole": "product",
       "identityEvidence": {
-        "source": "Supplied survey-recommendation-matrix v2.1, checked 2026-11-13; accessible Amazon/manufacturer copies cross-checked 2026-11-14 where available.",
-        "reviewedAt": "2026-11-14",
+        "source": "Owner-supplied Amazon listing title and screenshots, product soil",
+        "reviewedAt": "2026-11-16",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
+      "packLabel": "1 bag · 16 quarts"
     },
     "tray": {
       "asin": "B07NKSKMCN",
@@ -316,7 +330,8 @@
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
+      "packLabel": "1010 drained trays · select the pack size on Amazon"
     },
     "drip": {
       "asin": "B07MYNVP8G",
@@ -337,11 +352,12 @@
         "reviewedAt": "2026-11-14",
         "stockClaim": false
       },
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
+      "packLabel": "1010 solid trays · select the matching pack size on Amazon"
     },
     "bag": {
       "asin": "B00TF9E6XE",
-      "name": "VIVOSUN 5-Gallon Grow Bags \u00b7 5-pack",
+      "name": "VIVOSUN 5-Gallon Grow Bags · 5-pack",
       "kind": "5 gal",
       "image": "https://m.media-amazon.com/images/I/51S7VI81XWL._SL800_.jpg",
       "benefit": "",
@@ -358,16 +374,112 @@
         "reviewedAt": "2026-11-14",
         "stockClaim": false,
         "source": "https://www.amazon.com/dp/B00TF9E6XE ; https://vivosun.com/en-US/vivosun-5-gallon-grow-bags-5-pack-black-thickened-nonwoven-fabric-pots-with-handles-p68320123310965170-v58820960379602944"
-      }
+      },
+      "packLabel": "1 pack · five 5-gallon bags"
     },
     "coir": {
+      "asin": "B093CKN811",
+      "name": "Nutrifield Coco Brick",
+      "kind": "Growing medium",
+      "image": "https://m.media-amazon.com/images/I/71jK9sV5-jL._AC_SL1500_.jpg",
+      "benefit": "A compact brick of coco coir for repeated microgreen tray sowings.",
+      "status": "reviewed",
+      "url": "https://www.amazon.com/dp/B093CKN811?tag=smallspaceg04-20",
+      "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
+      "imageUseApproved": true,
+      "availabilityVerified": false,
+      "photoCaption": "",
+      "photoCredit": null,
+      "imageRole": "product",
+      "identityEvidence": {
+        "source": "https://www.amazon.com/dp/B093CKN811 ; https://www.nutrifield.com/p/cocobrick",
+        "reviewedAt": "2026-11-16",
+        "stockClaim": false
+      },
+      "photoReview": "Exact product image from the verified Amazon listing.",
+      "packLabel": "1 brick · 650 g / 1.4 lb"
+    },
+    "cage": {
+      "asin": "B0CR7KSCG3",
+      "name": "Halatool Adjustable Tomato Cages",
+      "kind": "Plant support · pack size needs confirmation",
+      "image": null,
+      "benefit": "",
+      "status": "unverified",
+      "url": "https://www.amazon.com/dp/B0CR7KSCG3?tag=smallspaceg04-20",
+      "verification": "Source matrix calls ASIN B0CR7KSCG3 a 2-pack, secondary listing identifies it as a 4-pack. Do not show as a verified purchase until exact Amazon pack and photo match are confirmed.",
+      "imageUseApproved": false,
+      "availabilityVerified": false,
+      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
+    },
+    "fertilizer": {
+      "asin": "B000P7345G",
+      "name": "Miracle-Gro Water Soluble Tomato Plant Food",
+      "kind": "Plant food",
+      "packLabel": "1 box · 1.5 lb",
+      "benefit": "Feed established tomato plants according to the product label.",
+      "image": "/assets/finder-products/fertilizer.webp",
+      "imageRole": "product",
+      "status": "reviewed",
+      "url": "https://www.amazon.com/dp/B000P7345G?tag=smallspaceg04-20",
+      "availabilityVerified": false,
+      "imageUseApproved": true,
+      "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
+      "identityEvidence": {
+        "source": "Owner-supplied exact Amazon URL and listing screenshot",
+        "reviewedAt": "2026-11-16",
+        "stockClaim": false
+      }
+    },
+    "windowbox": {
+      "asin": "B098SBSWQL",
+      "name": "CHUKEMAOYI Window Box Planters",
+      "kind": "Optional planters",
+      "packLabel": "1 pack · seven 17-inch boxes + saucers",
+      "benefit": "An optional expansion pack for a larger balcony salad garden.",
+      "image": "/assets/finder-products/windowbox.webp",
+      "imageRole": "product",
+      "status": "reviewed",
+      "url": "https://www.amazon.com/dp/B098SBSWQL?tag=smallspaceg04-20",
+      "availabilityVerified": false,
+      "imageUseApproved": true,
+      "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
+      "identityEvidence": {
+        "source": "Owner-supplied exact Amazon URL and listing screenshot",
+        "reviewedAt": "2026-11-16",
+        "stockClaim": false
+      }
+    },
+    "coir-bulk": {
       "asin": "B07QNSSN81",
       "name": "Verdana Coco Coir",
       "kind": "Growing medium",
-      "image": "https://cdn11.bigcommerce.com/s-jilfw9woyr/images/stencil/558x558/products/784729/790447/51uyV_V4vAL__03224.1675906753.jpg?c=1",
+      "image": "/assets/finder-products/coir.webp",
       "benefit": "",
-      "status": "reviewed",
+      "status": "unverified",
       "url": "https://www.amazon.com/dp/B07QNSSN81?tag=smallspaceg04-20",
+      "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
+      "imageUseApproved": true,
+      "availabilityVerified": false,
+      "photoCaption": "",
+      "photoCredit": null,
+      "imageRole": "product",
+      "identityEvidence": {
+        "source": "Owner-supplied Amazon listing title and screenshots, product coir",
+        "reviewedAt": "2026-11-16",
+        "stockClaim": false
+      },
+      "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
+      "packLabel": "1 block · 10 lb"
+    },
+    "light-small": {
+      "asin": "B0CHDBY2PD",
+      "name": "SANSI Clip-on Grow Light",
+      "kind": "Required for this dim spot · 10W",
+      "image": "https://m.media-amazon.com/images/I/61a6Qs14l9L._SL800_.jpg",
+      "benefit": "",
+      "status": "unverified",
+      "url": "https://www.amazon.com/dp/B0CHDBY2PD?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
       "imageUseApproved": true,
       "availabilityVerified": false,
@@ -380,19 +492,6 @@
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
-    },
-    "cage": {
-      "asin": "B0CR7KSCG3",
-      "name": "Halatool Adjustable Tomato Cages",
-      "kind": "Plant support \u00b7 pack size needs confirmation",
-      "image": null,
-      "benefit": "",
-      "status": "unverified",
-      "url": "https://www.amazon.com/dp/B0CR7KSCG3?tag=smallspaceg04-20",
-      "verification": "Source matrix calls ASIN B0CR7KSCG3 a 2-pack, secondary listing identifies it as a 4-pack. Do not show as a verified purchase until exact Amazon pack and photo match are confirmed.",
-      "imageUseApproved": false,
-      "availabilityVerified": false,
-      "photoReview": "Exact-product candidate retained for private review only. Image delivery/reuse basis requires confirmation before publication."
     }
   },
   "guides": {
