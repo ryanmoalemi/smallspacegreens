@@ -23,7 +23,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
-      "packLabel": "1 packet · Buttercrunch lettuce"
+      "packLabel": "1 packet · Buttercrunch lettuce",
+      "benefits": [
+        "Buttercrunch leaves for small, fresh picks",
+        "One packet lets you stagger later sowings"
+      ]
     },
     "tomato": {
       "asin": "B00H4E9ULA",
@@ -45,7 +49,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
-      "packLabel": "1 packet · approximately 30 seeds"
+      "packLabel": "1 packet · approximately 30 seeds",
+      "benefits": [
+        "Compact Tiny Tim variety for container growing",
+        "One packet supplies seed for more than your first plant"
+      ]
     },
     "salad": {
       "asin": "B0D1LL6CG6",
@@ -67,7 +75,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
-      "packLabel": "1 salad greens seed collection"
+      "packLabel": "1 salad greens seed collection",
+      "benefits": [
+        "A choice of salad crops in one collection",
+        "Start two varieties now; save the rest for later"
+      ]
     },
     "basil": {
       "asin": "B07VRJVJ9F",
@@ -89,7 +101,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
-      "packLabel": "1 packet · approximately 400 seeds"
+      "packLabel": "1 packet · approximately 400 seeds",
+      "benefits": [
+        "Genovese basil for pesto and fresh leaves",
+        "One variety keeps your first herb grow simple"
+      ]
     },
     "herbs": {
       "asin": "B003BM42R6",
@@ -111,7 +127,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
-      "packLabel": "1 collection · 12 seed packets"
+      "packLabel": "1 collection · 12 seed packets",
+      "benefits": [
+        "Twelve herb varieties to choose from",
+        "Start your two favorites in separate pots"
+      ]
     },
     "radish": {
       "asin": "B00YO59N32",
@@ -133,7 +153,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
-      "packLabel": "1 packet · Cherry Belle radish"
+      "packLabel": "1 packet · Cherry Belle radish",
+      "benefits": [
+        "Cherry Belle roots for a crunchy small harvest",
+        "Sow a few seeds at a time for later batches"
+      ]
     },
     "basil-kit": {
       "asin": "B01MRVMKQH",
@@ -155,7 +179,12 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
-      "packLabel": "1 garden · light + 3 basil pods"
+      "packLabel": "1 garden · light + 3 basil pods",
+      "benefits": [
+        "Built-in light with an automatic timer",
+        "Water reservoir reduces daily watering",
+        "Three basil pods included"
+      ]
     },
     "micro-broccoli": {
       "asin": "B00W2FAPF6",
@@ -177,7 +206,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
-      "packLabel": "1 bag · 1 lb"
+      "packLabel": "1 bag · 1 lb",
+      "benefits": [
+        "Young broccoli shoots for sandwiches and salads",
+        "Bulk seed for repeats after the kit’s starter packet"
+      ]
     },
     "micro-pea": {
       "asin": "B06XWGTV57",
@@ -199,7 +232,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
-      "packLabel": "1 bag · speckled pea seeds"
+      "packLabel": "1 bag · speckled pea seeds",
+      "benefits": [
+        "Sweet edible pea shoots",
+        "Separate pea seed to use with the tray kit below"
+      ]
     },
     "micro-radish": {
       "asin": "B08V1ZMGFX",
@@ -221,7 +258,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
-      "packLabel": "1 bag · 16 oz"
+      "packLabel": "1 bag · 16 oz",
+      "benefits": [
+        "Peppery young radish shoots",
+        "One-pound bag for repeats after the kit’s starter packet"
+      ]
     },
     "microkit": {
       "asin": "B0CQPQKTFC",
@@ -238,12 +279,17 @@ window.SSG_FINDER_DATA = {
       "photoCredit": null,
       "imageRole": "product",
       "identityEvidence": {
-        "source": "Owner-supplied Amazon listing title and screenshots, product microkit",
+        "source": "https://alpaslife.com/microgreen-products/ ; https://www.amazon.com/dp/B0CQPQKTFC",
         "reviewedAt": "2026-11-16",
         "stockClaim": false
       },
       "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
-      "packLabel": "1 kit · 2 tray sets, mister, coir discs, radish + broccoli seeds"
+      "packLabel": "1 kit · two 8.8 × 5.5-inch tray sets, mister, coir + seed for 2 plantings",
+      "benefits": [
+        "Trays, coir, mister and seed together",
+        "Two reusable tray sets, each 8.8 × 5.5 inches",
+        "Two starter plantings: one broccoli, one radish"
+      ]
     },
     "light": {
       "asin": "B0D7CMRZT8",
@@ -265,7 +311,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Exact model image from manufacturer storefront.",
-      "packLabel": "1 light · stand, power adapter + controller"
+      "packLabel": "1 light · stand, power adapter + controller",
+      "benefits": [
+        "Adds light where your window cannot",
+        "Adjustable stand and brightness as plants grow"
+      ]
     },
     "pot": {
       "asin": "B0DCSH7T1R",
@@ -287,7 +337,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
-      "packLabel": "1 pack · two 8-inch pots + saucers"
+      "packLabel": "1 pack · two 8-inch pots + saucers",
+      "benefits": [
+        "Drainage holes help excess water escape",
+        "Matching saucers included for both pots"
+      ]
     },
     "soil": {
       "asin": "B078WY9Z7Q",
@@ -309,7 +363,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
-      "packLabel": "1 bag · 16 quarts"
+      "packLabel": "1 bag · 16 quarts",
+      "benefits": [
+        "Ready-to-use mix for container growing",
+        "Two bags cover the one-bag tomato starter plan"
+      ]
     },
     "tray": {
       "asin": "B07NKSKMCN",
@@ -317,7 +375,7 @@ window.SSG_FINDER_DATA = {
       "kind": "Drained growing trays",
       "image": "https://m.media-amazon.com/images/I/41RllbvVPML._SL800_.jpg",
       "benefit": "",
-      "status": "reviewed",
+      "status": "unverified",
       "url": "https://www.amazon.com/dp/B07NKSKMCN?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
       "imageUseApproved": true,
@@ -331,7 +389,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
-      "packLabel": "1010 drained trays · select the pack size on Amazon"
+      "packLabel": "1010 drained trays · select the pack size on Amazon",
+      "benefits": [
+        "Drainage holes let excess water leave the roots",
+        "Shallow sides make shoots easier to cut"
+      ]
     },
     "drip": {
       "asin": "B07MYNVP8G",
@@ -339,7 +401,7 @@ window.SSG_FINDER_DATA = {
       "kind": "Solid drip trays",
       "image": "https://m.media-amazon.com/images/I/51TRpf7gICL._SL800_.jpg",
       "benefit": "",
-      "status": "reviewed",
+      "status": "unverified",
       "url": "https://www.amazon.com/dp/B07MYNVP8G?tag=smallspaceg04-20",
       "verification": "Product identity grounded in supplied source matrix; not a live stock or delivery check. ",
       "imageUseApproved": true,
@@ -353,29 +415,37 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
-      "packLabel": "1010 solid trays · select the matching pack size on Amazon"
+      "packLabel": "1010 solid trays · select the matching pack size on Amazon",
+      "benefits": [
+        "Catches runoff beneath the growing tray",
+        "Lets you water the growing medium from below"
+      ]
     },
     "bag": {
-      "asin": "B00TF9E6XE",
-      "name": "VIVOSUN 5-Gallon Grow Bags · 5-pack",
-      "kind": "5 gal",
-      "image": "https://m.media-amazon.com/images/I/51S7VI81XWL._SL800_.jpg",
+      "asin": "B002JUOWB2",
+      "name": "Smart Pot 5-Gallon Fabric Container",
+      "kind": "Single 5-gallon grow bag",
+      "image": "https://m.media-amazon.com/images/I/61JbdobpOBL._AC_SL1200_.jpg",
       "benefit": "",
       "status": "reviewed",
-      "url": "https://www.amazon.com/dp/B00TF9E6XE?tag=smallspaceg04-20",
-      "verification": "Amazon ASIN B00TF9E6XE title confirms VIVOSUN 5-pack 5-gallon grow bags; manufacturer confirms draining fabric construction.",
+      "url": "https://www.amazon.com/dp/B002JUOWB2?tag=smallspaceg04-20",
+      "verification": "Amazon exact RC5 listing confirms one piece, 12-inch diameter and 9.5-inch height. Manufacturer confirms porous fabric construction.",
       "imageUseApproved": true,
       "availabilityVerified": false,
       "imageRole": "product",
       "photoCaption": "",
       "photoCredit": null,
-      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
+      "photoReview": "Exact listing image selected for the owner-authorized recommendation update; no independent license claim.",
       "identityEvidence": {
-        "reviewedAt": "2026-11-14",
+        "reviewedAt": "2026-11-16",
         "stockClaim": false,
-        "source": "https://www.amazon.com/dp/B00TF9E6XE ; https://vivosun.com/en-US/vivosun-5-gallon-grow-bags-5-pack-black-thickened-nonwoven-fabric-pots-with-handles-p68320123310965170-v58820960379602944"
+        "source": "https://www.amazon.com/dp/B002JUOWB2 ; https://smartpots.com/smart-pot-products/"
       },
-      "packLabel": "1 pack · five 5-gallon bags"
+      "packLabel": "1 fabric container · 5 gallons",
+      "benefits": [
+        "One bag for your one-plant starter plan",
+        "Porous fabric lets excess water drain"
+      ]
     },
     "coir": {
       "asin": "B093CKN811",
@@ -397,7 +467,11 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Exact product image from the verified Amazon listing.",
-      "packLabel": "1 brick · 650 g / 1.4 lb"
+      "packLabel": "1 brick · 650 g / 1.4 lb",
+      "benefits": [
+        "Compact brick is easy to store before use",
+        "Hydrate a portion for your next tray"
+      ]
     },
     "cage": {
       "asin": "B0CR7KSCG3",
@@ -429,7 +503,11 @@ window.SSG_FINDER_DATA = {
         "source": "Owner-supplied exact Amazon URL and listing screenshot",
         "reviewedAt": "2026-11-16",
         "stockClaim": false
-      }
+      },
+      "benefits": [
+        "Formulated for tomato feeding",
+        "Water-soluble concentrate for measured dilution"
+      ]
     },
     "windowbox": {
       "asin": "B098SBSWQL",
@@ -448,7 +526,11 @@ window.SSG_FINDER_DATA = {
         "source": "Owner-supplied exact Amazon URL and listing screenshot",
         "reviewedAt": "2026-11-16",
         "stockClaim": false
-      }
+      },
+      "benefits": [
+        "Seven containers for an expanded garden",
+        "Matching saucers included"
+      ]
     },
     "coir-bulk": {
       "asin": "B07QNSSN81",
@@ -492,6 +574,54 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified."
+    },
+    "bag-bulk": {
+      "asin": "B00TF9E6XE",
+      "name": "VIVOSUN 5-Gallon Grow Bags · 5-pack",
+      "kind": "5 gal",
+      "image": "https://m.media-amazon.com/images/I/51S7VI81XWL._SL800_.jpg",
+      "benefit": "",
+      "status": "optional",
+      "url": "https://www.amazon.com/dp/B00TF9E6XE?tag=smallspaceg04-20",
+      "verification": "Amazon ASIN B00TF9E6XE title confirms VIVOSUN 5-pack 5-gallon grow bags; manufacturer confirms draining fabric construction.",
+      "imageUseApproved": true,
+      "availabilityVerified": false,
+      "imageRole": "product",
+      "photoCaption": "",
+      "photoCredit": null,
+      "photoReview": "Site owner approved this selected product image for the public demo on 2026-11-14. Reuse license has not been independently verified.",
+      "identityEvidence": {
+        "reviewedAt": "2026-11-14",
+        "stockClaim": false,
+        "source": "https://www.amazon.com/dp/B00TF9E6XE ; https://vivosun.com/en-US/vivosun-5-gallon-grow-bags-5-pack-black-thickened-nonwoven-fabric-pots-with-handles-p68320123310965170-v58820960379602944"
+      },
+      "packLabel": "1 pack · five 5-gallon bags"
+    },
+    "soil-small": {
+      "asin": "B002Y04TK6",
+      "name": "Espoma Organic Potting Mix · 8 qt",
+      "kind": "Container potting mix",
+      "image": "https://m.media-amazon.com/images/I/810yT0itbeL._AC_SL1500_.jpg",
+      "benefit": "",
+      "status": "reviewed",
+      "url": "https://www.amazon.com/dp/B002Y04TK6?tag=smallspaceg04-20",
+      "verification": "Amazon exact listing AP8 confirms 8qt, pack of one. Espoma identifies AP8 as 8qt and estimates four dry quarts for a typical 8-inch pot.",
+      "imageUseApproved": true,
+      "availabilityVerified": false,
+      "photoCaption": "",
+      "photoCredit": null,
+      "imageRole": "product",
+      "identityEvidence": {
+        "reviewedAt": "2026-11-16",
+        "stockClaim": false,
+        "source": "https://www.amazon.com/dp/B002Y04TK6 ; https://www.espoma.com/espoma-item-data-sheet/ ; https://www.espoma.com/product/espoma-organic-potting-soil-mix/"
+      },
+      "photoReview": "Exact listing image selected for the owner-authorized recommendation update; no independent license claim.",
+      "packLabel": "1 bag · 8 quarts",
+      "benefits": [
+        "Smaller 8-quart bag for two starter pots",
+        "Ready-to-use container mix"
+      ]
     }
   },
   "guides": {
@@ -507,6 +637,166 @@ window.SSG_FINDER_DATA = {
     "approvedAt": "2026-11-14",
     "scope": "Selected product photos for public demo; owner will handle removal requests",
     "licenseVerified": false
+  },
+  "fitProfiles": {
+    "garden": {
+      "summary": "12 × 5 in counter space",
+      "detail": "Garden: about 12 in wide × 5 in deep; height adjusts from 8 to 19 in. Allow access for refilling, space for leaves and a nearby outlet.",
+      "source": "https://www.clickandgrow.com/products/the-smart-garden-3"
+    },
+    "microkit": {
+      "summary": "8.8 × 5.5 in per tray",
+      "detail": "Use one tray at a time. Leave open space above for shoots and access for watering. A dim spot also needs the separate standing light.",
+      "source": "https://alpaslife.com/microgreen-products/"
+    },
+    "pot": {
+      "summary": "Two 8 in starter pots",
+      "detail": "Each pot is 8 × 8 × 6.7 in. Allow extra width for saucers and leaves; two pots need more than a 16 × 8 in strip. Herbs may need larger pots as they mature.",
+      "source": "https://www.amazon.com/dp/B0DCSH7T1R"
+    },
+    "bag": {
+      "summary": "12 in diameter grow bag",
+      "detail": "Bag: 12 in diameter × 9.5 in high. Tiny Tim grows about 15–20 in above the mix. Leave room around the plant and protect the surface from drainage.",
+      "source": "https://www.amazon.com/dp/B002JUOWB2 ; https://www.seedneeds.com/products/tiny-tim-tomato"
+    },
+    "tray": {
+      "summary": "One 1010 growing tray",
+      "detail": "Allow roughly 11 × 11 in for a nested tray set, plus access for watering and space above the shoots. A dim spot also needs the separate standing light.",
+      "source": "https://www.bootstrapfarmer.com/products/1010-microgreen-trays"
+    }
+  },
+  "growingPlans": {
+    "tomato": {
+      "harvest": "About 45 days after transplanting",
+      "timingNote": "Tiny Tim variety estimate; allow seed-starting time too, usually 6–8 weeks before transplanting. Weather and light change timing.",
+      "scale": "One plant for small, fresh tomato picks.",
+      "care": "Check moisture daily; feed established plants according to the product label.",
+      "start": [
+        "Start a few seeds ¼ inch deep in moist mix and a warm, bright spot.",
+        "Keep one strong plant for your grow bag. Move it outside gradually after frost risk has passed.",
+        "Give it 6–8 hours of direct sun; check water daily and pick ripe fruit."
+      ],
+      "sources": [
+        "https://shop.hudsonvalleyseed.com/collections/vegetables/products/tiny-tim-tomato",
+        "https://www.seedneeds.com/products/tiny-tim-tomato"
+      ]
+    },
+    "lettuce": {
+      "harvest": "About 3–9 weeks from sowing",
+      "timingNote": "Baby leaves first; a fuller Buttercrunch head takes longer. Window light and heat can delay or reduce harvest.",
+      "scale": "Two small plants for fresh leaves to add to meals.",
+      "care": "Keep mix evenly moist and protect leaves from excessive heat.",
+      "start": [
+        "Sow a few seeds near the surface, following the packet depth.",
+        "Thin to one lettuce plant per pot; keep the mix moist and the plants well lit.",
+        "Pick outer leaves once large enough, leaving at least half the plant growing."
+      ],
+      "sources": [
+        "https://www.botanicalinterests.com/products/buttercrunch-butterhead-lettuce-seeds"
+      ]
+    },
+    "salad": {
+      "harvest": "Baby leaves in about 4–6 weeks",
+      "timingNote": "From sowing, depending on the varieties selected and growing conditions.",
+      "scale": "Small handfuls of baby leaves to add to a salad.",
+      "care": "Keep mix moist and avoid overheating at hot glass.",
+      "start": [
+        "Choose two varieties from the collection and sow them in separate pots.",
+        "Thin baby-leaf crops to their packet spacing and keep the mix evenly moist.",
+        "Cut young outer leaves, leaving the center to grow; sow again for later crops."
+      ],
+      "sources": [
+        "https://www.extension.umd.edu/resource/salad-greens-grow-salad-tablestm-or-salad-boxestm",
+        "https://www.extension.umd.edu/resource/plant-fertilize-water-salad-tabletm-or-salad-boxtm"
+      ]
+    },
+    "basil": {
+      "harvest": "First leaves in about 6–10 weeks",
+      "timingNote": "From seed, once plants are established. Warmth, light and variety affect timing.",
+      "scale": "Fresh leaves for garnishes and cooking; larger batches take more plants.",
+      "care": "Check moisture and pinch growing tips to encourage branching.",
+      "start": [
+        "Sow basil ¼ inch deep in moist potting mix.",
+        "Thin to one strong plant per starter pot and keep it warm and well lit.",
+        "Pinch above a pair of leaves once established; upsize the pot as the plant grows."
+      ],
+      "sources": [
+        "https://extension.umd.edu/resource/growing-basil-home-garden",
+        "https://www.johnnyseeds.com/herbs/basil/genovese-basil/genovese-basil-seed-911.30.html"
+      ]
+    },
+    "herbs": {
+      "harvest": "Timing varies by herb",
+      "timingNote": "Basil can give earlier picks; slower perennial herbs take longer. Follow each packet rather than one date for all twelve varieties.",
+      "scale": "Start two favorite herbs for fresh cooking additions.",
+      "care": "Keep varieties in separate pots so watering can match each herb.",
+      "start": [
+        "Choose two herbs you will actually cook with and follow their packet sowing depths.",
+        "Give each its own starter pot and the light it needs; thin crowded seedlings.",
+        "Pick lightly once established and move larger herbs into bigger pots."
+      ],
+      "sources": [
+        "https://www.extension.umd.edu/resource/growing-vegetables-containers-and-salad-tables"
+      ]
+    },
+    "radish": {
+      "harvest": "About 3–5 weeks from sowing",
+      "timingNote": "For small spring radishes in suitable conditions. Low window light can slow root development.",
+      "scale": "A small batch of crunchy roots; sow again for the next batch.",
+      "care": "Keep moisture even and give each root its own space.",
+      "start": [
+        "Sow directly in the final pot, about ½ inch deep.",
+        "Thin seedlings to about 2 inches apart and water evenly.",
+        "Check roots at harvest size and pull promptly; sow a fresh batch for more."
+      ],
+      "sources": [
+        "https://extension.umn.edu/garden-and-home/yard-and-garden/gardening-in-minnesota/growing-radishes",
+        "https://www.botanicalinterests.com/products/cherry-belle-radish-seeds"
+      ]
+    },
+    "micro": {
+      "harvest": "Often about 1–2 weeks from sowing",
+      "timingNote": "Broccoli and radish research estimates are 8–12 days under controlled conditions. Home window light can take longer.",
+      "scale": "One tray of young shoots for sandwiches, toppings and salads.",
+      "care": "Check moisture daily; keep the medium moist and drain excess water.",
+      "start": [
+        "Clean the tray, moisten the medium and spread seed evenly; follow the kit or seed instructions.",
+        "Uncover after germination and move into bright light. Water from below once roots establish.",
+        "Cut shoots above the medium with clean scissors, then wash before eating. Re-sow for the next crop."
+      ],
+      "sources": [
+        "https://extension.usu.edu/yardandgarden/research/grow-your-own-microgreens"
+      ]
+    },
+    "pea": {
+      "harvest": "Often about 1–2 weeks from sowing",
+      "timingNote": "Research estimates are 8–10 days in controlled conditions. Variety and home conditions can take longer.",
+      "scale": "A tray of young pea shoots to add to meals.",
+      "care": "Check moisture daily; drain away excess water.",
+      "start": [
+        "Soak seed for about 6 hours, then sow in clean, moist medium; follow the packet if it differs.",
+        "Cover during germination, then uncover and provide bright light.",
+        "Cut shoots above the medium with clean scissors and wash before eating."
+      ],
+      "sources": [
+        "https://extension.usu.edu/yardandgarden/research/grow-your-own-microgreens"
+      ]
+    },
+    "basil-kit": {
+      "harvest": "Basil harvest window: 5–12 weeks",
+      "timingNote": "Manufacturer’s range from planting the pods; growth depends on temperature and care.",
+      "scale": "Three basil plants for fresh additions to cooking.",
+      "care": "Top up the reservoir as indicated and trim basil as it grows.",
+      "start": [
+        "Insert the three basil pods, fill the reservoir and plug the garden in.",
+        "Use the included germination domes as directed; remove them when seedlings reach them.",
+        "Keep the light above the plants and refill when needed. Pinch basil once established."
+      ],
+      "sources": [
+        "https://support.clickandgrow.com/hc/en-us/articles/360001273727-Basil",
+        "https://www.clickandgrow.com/products/the-smart-garden-3"
+      ]
+    }
   }
 }
 ;

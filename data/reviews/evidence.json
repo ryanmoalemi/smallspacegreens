@@ -231,9 +231,9 @@
       ]
     },
     {
-      "id": "reddit-leafy-window-19bidj4",
+      "id": "reddit-leafy-window-1ri6cs4",
       "platform": "reddit",
-      "url": "https://www.reddit.com/r/vegetablegardening/comments/19bidj4/",
+      "url": "https://www.reddit.com/r/vegetablegardening/comments/1ri6cs4/any_recommendations_of_plants_i_can_put_on_my/",
       "retrievedAt": "2026-11-16",
       "retrievalMethod": "primary_reddit_page_or_returned_thread_content",
       "coverage": "selected verbatim excerpt; not complete thread",
@@ -247,12 +247,13 @@
       "productIds": [],
       "angle": "lessons",
       "question": "What do growers say about this setup?",
-      "excerpt": "Lettuce and other \"greens\" can get by with much less sun than a fruiting plant, so you can probably grow it in a sunny window.",
+      "excerpt": "Leafy greens, like loose-leaf lettuce, are good windowsill options.",
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
       "proofApproved": true,
-      "proofContext": "A grower’s tip on choosing leafy greens for a sunny window."
+      "proofContext": "A grower’s suggestion for a sunny apartment window. Window-grown crops can take longer than packet estimates.",
+      "proofExcerpt": "Leafy greens, like loose-leaf lettuce, are good windowsill options."
     },
     {
       "id": "reddit-windowsill-radish-thinning-1kg5s1g",
