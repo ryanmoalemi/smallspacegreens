@@ -21,16 +21,16 @@ for(const {a,r} of leaves){
  assert.ok(!r.extras.includes('coir'),'Kit already includes starter coir');
  const planKey=r.product==='micro-pea'?'pea':r.product==='microkit'||r.product.startsWith('micro-')?'micro':r.product;
  assert.equal(data.growingPlans[planKey].start.length,3);assert.ok(data.growingPlans[planKey].sources.length);assert.ok(data.fitProfiles[r.fit].source);
- // Exercise every route with no supplies, one supply, all supplies, and unrelated supplies owned.
+ // Old saved ownership states must not suppress any part of the complete shopping list.
  for(const owned of [[],r.extras.slice(0,1),r.extras,['unrelated']]){
   const w={SSGFinder:core,SSGReviewMatcher:matcher,SSG_REVIEW_EVIDENCE:evidence},storage={'ssg-owned-supplies':JSON.stringify(owned)};
   vm.runInNewContext(fs.readFileSync('src/finder-shopping.js','utf8'),{window:w,sessionStorage:{getItem:k=>storage[k],setItem:(k,v)=>storage[k]=v}});
   const cards=[r.product,...r.extras].map(id=>({dataset:{shoppingProduct:id},classList:{toggle(){}},buy:{},qty:{},input:{},querySelector(s){return s==='[data-amazon]'?this.buy:s==='.order-quantity'?this.qty:this.input;}}));
   const count={},current={},alternative={},host={querySelectorAll:s=>s==='[data-shopping-product]'?cards:s==='[data-shopping-count]'?[count]:s==='[data-current-count]'?[current]:s==='[data-alternative-count]'?[alternative]:[]};
-  w.SSGShopping.update(host,r,a);const needed=1+r.extras.filter(id=>!owned.includes(id)).length;
-  assert.equal(count.textContent,`${needed} ${needed===1?'item':'items'} on your shopping list.`);assert.equal(cards[0].buy.hidden,false);
-  for(const c of cards.slice(1))assert.equal(c.buy.hidden,owned.includes(c.dataset.shoppingProduct));
-  if(alt){const other=core.route(alt.answers),n=1+other.extras.filter(id=>!owned.includes(id)).length;assert.equal(alternative.textContent,`${n} ${n===1?'item':'items'}`);}
+  w.SSGShopping.update(host,r,a);const needed=1+r.extras.length;
+  assert.equal(count.textContent,`${needed} ${needed===1?'item':'items'}`);
+  for(const id of [r.product,...r.extras])assert.ok(!w.SSGShopping.meta(id,a,r,data).includes('data-owned'));
+  if(alt){const other=core.route(alt.answers),n=1+other.extras.length;assert.equal(alternative.textContent,`${n} ${n===1?'item':'items'}`);}
   assert.ok(w.SSGShopping.proof(a,r).includes('Reddit source'));
   assert.ok(!/href=".*\/guides\//.test(w.SSGShopping.plan(a,r,data)));
   scenarios++;
@@ -39,4 +39,4 @@ for(const {a,r} of leaves){
 for(const f of ['src/finder.js','src/finder-b.js']){
  const s=fs.readFileSync(f,'utf8');assert.ok(s.includes('shopping.proof(answers,r)'));assert.ok(s.includes('data-alternative'));assert.ok(s.includes('room'));assert.ok(s.includes('const duration=reduced?200:3200;'));assert.ok(!s.includes('Just the basics'));
 }
-console.log(`Recommendation upgrade: ${scenarios} shopping/ownership scenarios; 30 matched plans; valid alternatives; exact smaller packs; fit and timing evidence; no duplicate coir; unchanged reveal passed.`);
+console.log(`Recommendation upgrade: ${scenarios} shopping/legacy-storage scenarios; 30 matched plans; valid alternatives; exact smaller packs; fit and timing evidence; no duplicate coir; unchanged reveal passed.`);

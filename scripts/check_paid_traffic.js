@@ -30,13 +30,14 @@ for(const file of ['src/finder.js','src/finder-b.js']){
  for(const event of ['finder_start','finder_variant_entry','finder_reveal_start','finder_reveal_complete','finder_result_view','finder_amazon_click'])assert.ok(s.includes(event),file+' '+event);
  assert.ok(s.includes("has('qa')"));
 }
-// Exercise the owned-supply event with a DOM stub, including persistence and undo.
-const values={},window={SSGFinder:core},ctx={window,sessionStorage:{getItem:k=>values[k],setItem:(k,v)=>values[k]=v}};
-vm.runInNewContext(fs.readFileSync('src/finder-shopping.js','utf8'),ctx);
-const cards=['tomato','bag','soil'].map(id=>({dataset:{shoppingProduct:id},classList:{toggle(){}},buy:{},qty:{},input:{},querySelector(s){return s==='[data-amazon]'?this.buy:s==='.order-quantity'?this.qty:this.input;}}));
-const label={},handlers={},host={addEventListener:(event,fn)=>handlers[event]=fn,querySelectorAll:s=>s==='[data-shopping-product]'?cards:[label]},route=core.route({grow:'tomato',spot:'balcony'}),events=[];
-window.SSGShopping.bind(host,()=>route,(...e)=>events.push(e));
-const input={dataset:{owned:'soil'},checked:true};handlers.change({target:{closest:()=>input}});
-assert.equal(cards[2].buy.hidden,true);assert.equal(label.textContent,'2 items on your shopping list.');assert.equal(values['ssg-owned-supplies'],'["soil"]');
-input.checked=false;handlers.change({target:{closest:()=>input}});assert.equal(cards[2].buy.hidden,false);assert.equal(label.textContent,'3 items on your shopping list.');assert.equal(events.length,2);
-console.log('Paid traffic fixes: 30 routes, both static variants, quote relevance, quantities, affiliate products, unchanged reveal timing and owned-supply persistence passed.');
+// Previously saved owned-supply choices must no longer hide products or their purchase actions.
+const window={SSGFinder:core};
+vm.runInNewContext(fs.readFileSync('src/finder-shopping.js','utf8'),{window,sessionStorage:{getItem:()=>JSON.stringify(['bag','soil'])}});
+const label={},host={querySelectorAll:s=>s==='[data-shopping-count]'?[label]:[]},route=core.route({grow:'tomato',spot:'balcony'});
+window.SSGShopping.update(host,route,{grow:'tomato',spot:'balcony'});
+assert.equal(label.textContent,'3 items');
+assert.ok(!window.SSGShopping.meta('soil',{grow:'tomato',spot:'balcony'},route,data).includes('data-owned'));
+const optional=window.SSGShopping.optional({grow:'tomato',spot:'balcony'},route,data);
+assert.ok(optional.includes('<section class="optional-products"'));
+assert.ok(!optional.includes('<details class="optional-products"'));
+console.log('Paid traffic fixes: 30 routes, both static variants, quote relevance, quantities, affiliate products, unchanged reveal timing and removal of saved ownership filtering passed.');
