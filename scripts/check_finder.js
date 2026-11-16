@@ -37,11 +37,11 @@ function visit(a) {
   assert.ok(!r.extras.includes(r.product));
   assert.equal(new Set(r.extras).size,r.extras.length);
   if(a.spot==='dim'&&r.product!=='basil-kit')assert.ok(r.extras.includes('light'),JSON.stringify(a));
-  if(r.product.startsWith('micro-'))for(const x of ['tray','drip','coir'])assert.ok(r.extras.includes(x));
+  if(r.product.startsWith('micro-'))for(const x of ['microkit'])assert.ok(r.extras.includes(x));
   assert.ok(data.guides[r.guide]);
   return;
  }
- const field={grow:'grow',micro:'micro',space:'spot',setup:'setup'}[r.step];
+ const field={grow:'grow',micro:'micro',space:'spot',room:'room',setup:'setup'}[r.step];
  assert.ok(field,'Unexpected question '+r.step);
  const choices=core.choices(field,a);assert.ok(choices.length,'No shopping choices '+JSON.stringify(a));
  for(const value of choices)visit({...a,[field]:value});
@@ -57,7 +57,7 @@ for(const grow of [undefined,'invalid',...core.crops])for(const micro of [undefi
   assert.equal(data.products[r.product]?.status,'reviewed');
   assert.ok(r.extras.every(id=>data.products[id]?.status==='reviewed'));
  }else{
-  const field={grow:'grow',micro:'micro',space:'spot',setup:'setup'}[r.step];
+  const field={grow:'grow',micro:'micro',space:'spot',room:'room',setup:'setup'}[r.step];
   assert.ok(field,'Dead-end recovery state '+JSON.stringify(a));
   assert.ok(core.choices(field,a).length,'Recovery has no valid answer '+JSON.stringify(a));
  }
@@ -101,7 +101,7 @@ if(process.argv.includes('--release')){
  console.log('Release: '+active.size+' active products have identity evidence and owner-approved demo photos (license not independently verified). Tomatoes are limited to the full-sun balcony setup; no stock claims.');
 }
 // Conversion regressions: skipped choices, distinct reasons and valid alternatives.
-for(const a of [{grow:'lettuce',spot:'dim'},{grow:'herbs',spot:'dim'},{grow:'unsure',spot:'dim'},{grow:'microgreens',micro:'pea',spot:'dim'}]){assert.equal(core.route(a).step,'result');assert.ok(!core.questionSteps(a).includes('setup'));}
+for(const a of [{grow:'lettuce',spot:'dim'},{grow:'herbs',spot:'dim'},{grow:'unsure',spot:'dim',room:'roomy'},{grow:'microgreens',micro:'pea',spot:'dim'}]){assert.equal(core.route(a).step,'result');assert.ok(!core.questionSteps(a).includes('setup'));}
 assert.notEqual(core.supplyReason('pot',{grow:'herbs'},{product:'herbs'},data.products),core.supplyReason('pot',{grow:'radish'},{product:'radish'},data.products));
-for(const a of [{grow:'basil',spot:'dim',setup:'kit'},{grow:'microgreens',micro:'radish',spot:'sunny',setup:'kit'}]){const r=core.route(a),alt=core.alternative(a,r);assert.equal(core.route({...a,[alt.field]:alt.value}).step,'result');assert.notEqual(core.route({...a,[alt.field]:alt.value}).product,r.product);}
+for(const a of [{grow:'basil',spot:'dim',setup:'kit'},{grow:'microgreens',micro:'radish',spot:'sunny',setup:'kit'}]){const r=core.route(a),alt=core.alternative(a,r);assert.equal(core.route(alt.answers).step,'result');assert.notEqual(core.route(alt.answers).product,r.product);}
 for(const file of ['src/finder.js','src/finder-b.js','scripts/build_finder_static.js'])assert.ok(!fs.readFileSync(file,'utf8').includes('Read the growing guide'));

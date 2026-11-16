@@ -10,10 +10,12 @@
     a.grow = input.grow;
     if (a.grow === 'microgreens' && micros.includes(input.micro)) a.micro = input.micro;
     if (spots.includes(input.spot)) a.spot = input.spot;
+    if (a.grow==='unsure' && ['sunny','dim'].includes(a.spot) && ['compact','roomy'].includes(input.room)) a.room=input.room;
     if (['kit','basics'].includes(input.setup)) a.setup = input.setup;
     if (input.kit === '1') a.setup = 'kit';
     if (input.kit === '0') a.setup = 'basics';
-    if (a.spot==='dim' && ['lettuce','herbs','unsure'].includes(a.grow) || a.spot==='dim' && a.grow==='microgreens' && a.micro==='pea') a.setup='basics';
+    if (a.spot==='dim' && ['lettuce','herbs'].includes(a.grow) || a.spot==='dim' && a.grow==='microgreens' && a.micro==='pea') a.setup='basics';
+    if(a.grow==='unsure')delete a.setup;
     return a;
   }
   function rawRoute(input) {
@@ -21,6 +23,12 @@
     if (!a.grow) return {step:'grow'};
     if (a.grow === 'microgreens' && !a.micro) return {step:'micro'};
     if (!a.spot) return {step:'space'};
+    if(a.grow==='unsure') {
+      if(a.spot!=='balcony'&&!a.room)return {step:'room'};
+      if(a.spot==='dim'&&a.room==='compact')return {step:'result',product:'basil-kit',extras:[],guide:'basil',fit:'garden'};
+      if(a.spot==='dim'||a.room==='compact')return {step:'result',product:'microkit',extras:a.spot==='dim'?['light']:[],guide:'microgreens',fit:'microkit'};
+      return {step:'result',product:'lettuce',extras:['pot','soil-small'],guide:a.spot==='balcony'?'balcony':'window',fit:'pot'};
+    }
     if (a.grow === 'tomato') return a.spot==='balcony' ? {step:'result',product:'tomato',extras:['bag','soil'],optional:['fertilizer'],guide:'tomato',fit:'bag',note:'Grow one Tiny Tim plant per bag in 6 to 8 hours of direct sun. Use two 16-quart bags of potting mix to fill one 5-gallon bag, with some mix left over. Check moisture daily and feed established plants with a tomato fertilizer according to its label. These are seeds, not a live plant or all-in-one kit.'} : {step:'unavailable',reason:'tomato-light'};
     if (a.grow === 'microgreens' && a.spot === 'balcony') return {step:'switch',reason:'balcony'};
     if ((a.grow === 'salad' || a.grow === 'radish') && a.spot === 'dim') return {step:'switch',reason:a.grow};
@@ -28,18 +36,13 @@
     const needsSetup = a.spot === 'dim' || (a.grow === 'microgreens' && a.micro !== 'pea');
     if (needsSetup && !a.setup) return {step:'setup'};
     const dim = a.spot === 'dim';
-    const pot = ['pot','soil'];
-    const tray = ['tray','drip','coir'];
+    const pot = ['pot','soil-small'];
+    const tray = ['microkit'];
     const lit = ids => dim ? [...ids,'light'] : ids;
     if (pea && a.setup === 'kit') return {step:'unavailable',reason:'pea-kit'};
     if (a.grow === 'microgreens') {
       if (a.setup === 'kit' && a.micro !== 'pea') return {step:'result',product:'microkit',extras:dim?['light']:[],guide:'microgreens',fit:'microkit',note:'The kit includes radish and broccoli seed. No light is included.'};
-      return {step:'result',product:'micro-'+a.micro,extras:lit(tray),guide:'microgreens',fit:'tray'};
-    }
-    if (a.grow === 'unsure') {
-      if (!dim) return {step:'result',product:'lettuce',extras:pot,guide:a.spot==='balcony'?'balcony':'window',fit:'pot',note:'We suggest starting with lettuce for this space.'};
-      if (a.setup === 'basics') return {step:'result',product:'micro-broccoli',extras:lit(tray),guide:'microgreens',fit:'tray',note:'We suggest a tray of broccoli microgreens for this space.'};
-      return {step:'unavailable',reason:'unnamed',alternate:'basil'};
+      return {step:'result',product:'micro-'+a.micro,extras:lit(tray),optional:['coir'],guide:'microgreens',fit:'microkit'};
     }
     if (dim && a.setup === 'kit') {
       if (a.grow === 'basil') return {step:'result',product:'basil-kit',extras:[],guide:'basil',fit:'garden'};
@@ -51,12 +54,13 @@
   // Offer only answers with at least one complete, reviewed shopping setup.
   function choices(field,input={}) {
     const a=normalize(input);
-    if(field==='setup' && a.spot==='dim' && (['lettuce','herbs','unsure'].includes(a.grow)||a.grow==='microgreens'&&a.micro==='pea'))return ['basics'];
+    if(field==='room')return a.grow==='unsure'&&['sunny','dim'].includes(a.spot)?['compact','roomy']:[];
+    if(field==='setup' && a.spot==='dim' && (['lettuce','herbs'].includes(a.grow)||a.grow==='microgreens'&&a.micro==='pea'))return ['basics'];
     const values={grow:crops,micro:micros,spot:spots,setup:['kit','basics']}[field]||[];
     return values.filter(value=>{
       const prefix=field==='grow'?{grow:value}:field==='micro'?{grow:a.grow,micro:value}:field==='spot'?{grow:a.grow,micro:a.micro,spot:value}:{...a,setup:value};
-      for(const grow of crops) for(const micro of grow==='microgreens'?micros:[undefined]) for(const spot of spots) for(const setup of ['kit','basics']) {
-        const leaf={grow,micro,spot,setup};
+      for(const grow of crops) for(const micro of grow==='microgreens'?micros:[undefined]) for(const spot of spots) for(const setup of ['kit','basics']) for(const room of grow==='unsure'&&spot!=='balcony'?['compact','roomy']:[undefined]) {
+        const leaf={grow,micro,spot,setup,room};
         if(Object.entries(prefix).some(([k,v])=>v!==undefined&&leaf[k]!==v))continue;
         if(rawRoute(leaf).step==='result')return true;
       }
@@ -104,7 +108,7 @@
       return {
         heading: `A little tray of ${crop} for ${location}`,
         intro: `For the ${crop} you want to grow ${place}, we’d start with these seeds and a reusable tray setup.`,
-        reason: `${r.product === 'micro-pea' ? 'These are sprouting peas for edible shoots, rather than full-size pea plants. Soak the seed before sowing.' : r.product === 'micro-radish' ? 'These seeds are for peppery young radish shoots, rather than a pot of radish roots.' : 'These seeds are for mild young broccoli shoots, rather than full-size broccoli heads.'} ${light ? 'The separate lamp below supplies light your chosen spot is missing.' : 'The trays and growing medium below give the seeds somewhere to grow.'}`
+        reason: `${r.product === 'micro-pea' ? 'These are sprouting peas for edible shoots, rather than full-size pea plants. Soak the seed before sowing.' : r.product === 'micro-radish' ? 'These seeds are for peppery young radish shoots, rather than a pot of radish roots.' : 'These seeds are for mild young broccoli shoots, rather than full-size broccoli heads.'} ${light ? 'The separate lamp below supplies light your chosen spot is missing.' : 'The tray kit below includes medium for two plantings; its radish and broccoli seed packets are also included.'}`
       };
     }
     const copy = {
@@ -151,22 +155,24 @@
       'micro-pea':`For the pea shoots you want, we’d start with sprouting seed and the reusable tray supplies below.`,
       'micro-radish':`For peppery young radish shoots, we’d pair these seeds with a reusable tray and growing medium.`,
       'micro-broccoli':`For mild young broccoli shoots, we’d start with these seeds and the tray supplies below.`,
-      microkit:`Since you prefer a kit, we’d start with this box of trays, medium and both radish and broccoli seeds.`
+      microkit:`Start with two small trays, coir and one packet each of radish and broccoli seed. Use the crop you selected first.`
     };
     const headline=(labels[r.product]||'Your growing setup')+' for '+location;
-    return {headline,benefit:(a.grow==='unsure'?(r.product==='micro-broccoli'?'For a first grow in your dim spot, we’d choose a small tray of broccoli shoots under a lamp. ':'For a first grow, lettuce lets you start with one pot and pick individual leaves as they develop. '):'')+(benefits[r.product]||explain(a,r).reason)};
+    const first=a.grow==='unsure'?(r.product==='basil-kit'?'For your narrow counter, start with one garden that includes its own light and three basil pods.':r.product==='microkit'?`Start with one small tray of broccoli shoots. The kit brings seeds, trays and medium together${a.spot==='dim'?'; add the standing light below':'. Use the bright window you selected'}.`:'Start with two small pots of Buttercrunch lettuce and pick a few leaves as they develop.'):null;
+    return {headline,benefit:first||benefits[r.product]||explain(a,r).reason};
   }
   function questionSteps(input={}) {
     const a=normalize(input), steps=['grow'];
     if(a.grow==='microgreens')steps.push('micro');
     steps.push('space');
+    if(a.grow==='unsure'&&['sunny','dim'].includes(a.spot))steps.push('room');
     if(route({...a,setup:undefined}).step==='setup')steps.push('setup');
     return steps;
   }
   function purchaseQuantity(id,input,r) { return id==='soil'&&r.product==='tomato'?2:1; }
   function starterScope(input,r) {
     if(r.product==='basil-kit')return 'Start with the three included basil pods.';
-    if(r.product==='microkit'||r.product.startsWith('micro-'))return 'Start with one tray at a time.';
+    if(r.product==='microkit'||r.product.startsWith('micro-'))return r.product==='microkit'?'Start with one tray at a time; seed and coir cover two starter plantings.':'Start with one tray at a time; the tray kit includes coir for two plantings.';
     if(r.product==='tomato')return 'Start with one tomato plant in one grow bag.';
     return 'Start with two pots, using the included saucers.';
   }
@@ -178,11 +184,11 @@
   function supplyReason(id,input,r,products) {
     const crop=r.product==='lettuce'?'lettuce':input.grow;
     const pots={lettuce:'Two pots for lettuce, with one plant per pot.',basil:'Two pots for basil, with one plant per pot.',herbs:'Start two herbs in separate pots so you can water each individually.',salad:'Start two salad crops in separate pots.',radish:'Two pots let you stagger radish sowings for successive harvests.'};
-    const reasons={pot:pots[crop]||'Drainage holes and saucers keep your container setup practical.',soil:r.product==='tomato'?'Two bags provide 32 quarts for one 5-gallon grow bag, with mix left over.':'One 16-quart bag supplies the two starter pots, with some mix left over.',bag:'Use one bag for your first Tiny Tim plant; keep the other four for later.',tray:'Use one drained 1010 tray for your first microgreen crop; keep any extra trays for later.',drip:'A solid tray to catch drainage from the growing tray.',coir:'A small compressed brick of growing medium for repeat tray sowings.',light:'A standing light with a manufacturer-rated 2 × 2 ft footprint for your starter pots or tray.',fertilizer:'Tomato plant food for established plants, used according to its label.',windowbox:'Seven window boxes for expanding later, beyond your two starter pots.'};
+    const reasons={pot:pots[crop]||'Drainage holes and saucers keep your container setup practical.',soil:'Two bags provide 32 quarts for one 5-gallon grow bag, with mix left over.','soil-small':'About 4 dry quarts per 8-inch pot. One 8-quart bag is the smaller starting purchase for two pots.',bag:'One 5-gallon fabric pot for your first Tiny Tim plant.',tray:'Use one drained 1010 tray for your first microgreen crop; keep extra trays for repeat sowings.',drip:'A solid tray to catch drainage from the growing tray.',microkit:input.micro==='pea'?'Reusable trays and coir for your pea shoots. Radish and broccoli seed packets are also included.':'Trays and coir for your first two plantings, plus radish and broccoli seed packets.',coir:'Optional refill medium for later tray sowings; the kit already includes coir for two plantings.',light:'A standing LED panel for your starter pots or tray. Allow room for its separate base and an outlet.',fertilizer:'Tomato plant food for established plants, used according to its label.',windowbox:'Seven window boxes for expanding later, beyond your two starter pots.'};
     return reasons[id]||products[id]?.benefit||products[id]?.kind||'';
   }
   function supplyDetails(id,input,r) {
-    const notes={light:'Center one tray or two 8-inch pots beneath the panel. Adjust the included stand and brightness following the manufacturer’s instructions. Start with one ALPAS tray at a time and keep extra supplies for later.',pot:input.grow==='radish'?'Thin Cherry Belle seedlings to about 2 inches apart. Empty saucers after watering.':'Use one plant or crop per pot. Empty saucers after watering.',soil:'Fill containers with loose potting mix, leaving watering space at the rim. Actual use varies with fill depth.',bag:'The purchase is a five-pack. The starter plan uses just one bag, not five.',coir:'Hydrate only the amount you need, following the pack instructions. Store the unused medium dry.',fertilizer:'Optional add-on for later feeding. Follow the fertilizer label for dilution and timing, and the potting-mix label before adding feed.',windowbox:'This seven-pack is optional. It replaces or expands your containers, so additional potting mix will be needed. Check its dimensions against your space before ordering.'};
+    const notes={light:'Center the crop under the 13.6 × 7.7-inch panel. The stand adjusts from 4 to 72 inches. Its 2 × 2 ft rating describes light coverage, not the base size. Check the stand’s base against your floor or counter before ordering.',pot:input.grow==='radish'?'Sow directly and thin Cherry Belle seedlings to about 2 inches apart. Empty saucers after watering.':'These are starter containers. Use one plant or crop per pot; established herbs may need larger pots later. Empty saucers after watering.',soil:'Fill containers with loose potting mix, leaving watering space at the rim. Actual use varies with fill depth.','soil-small':'Espoma estimates about 4 dry quarts for a typical 8-inch pot. Actual use varies with shape and fill level; leave watering space at the rim.',bag:'The purchase is one fabric pot. Place it where drainage will not damage the surface.',coir:'Hydrate only the amount you need, following the pack instructions. Store the unused medium dry.',fertilizer:'Optional add-on for later feeding. Follow the fertilizer label for dilution and timing, and the potting-mix label before adding feed.',windowbox:'This seven-pack is optional. It replaces or expands your containers, so additional potting mix will be needed. Check its dimensions against your space before ordering.'};
     return notes[id]||'';
   }
   function resultReasons(input,r){
@@ -190,12 +196,24 @@
     return [a.spot==='dim'?'Grow light included in your picks':a.spot==='balcony'?'Containers for your balcony':'A container setup for your sunny window',r.product==='basil-kit'?'Light and basil pods in one garden':r.product==='microkit'?'Seeds, trays and growing medium together':r.product.startsWith('micro-')?'Seeds paired with reusable trays and growing medium':'Seeds paired with a container and potting mix'];
   }
   function alternative(input,r){
-    if(r.product==='microkit')return {field:'setup',value:'basics',intro:'Want to build your own reusable tray setup?',label:'See seeds and trays'};
-    if(r.product==='basil-kit')return {field:'setup',value:'basics',intro:'Prefer to choose separate supplies?',label:'See seeds, pots and a grow light'};
-    if(input.grow==='unsure')return {field:'grow',value:'herbs',intro:'Prefer fresh herbs for cooking?',label:'Explore an herb setup'};
+    const a=normalize(input), dim=a.spot==='dim';
+    function option(next,intro,label){return {answers:normalize(next),intro,label};}
+    if(a.grow==='unsure'&&a.spot!=='balcony')return option({...a,room:a.room==='compact'?'roomy':'compact'},a.room==='compact'?'Have more room for a larger setup?':'Working with a narrower space?',a.room==='compact'?'Compare the roomier option':'Compare the compact option');
+    if(r.product==='microkit')return option({...a,setup:'basics'},'Planning to keep sowing? Add a bulk bag of your chosen seed to the same starter kit. Refill growing medium later.','Compare kit + bulk seed');
+    if(['micro-radish','micro-broccoli'].includes(r.product))return option({...a,setup:'kit'},`Prefer a smaller first purchase? Skip the bulk seed bag. The kit already includes one ${a.micro==='radish'?'radish':'broccoli'} seed packet, trays and medium${dim?', plus the same separate light':''}.`,'Compare the starter kit');
+    if(r.product==='basil-kit')return option({...a,setup:'basics'},'One kit includes the light and pods. Separate seeds, pots, mix and a light give you more control over each component.','Compare separate supplies');
+    if(r.product==='basil'&&dim)return option({...a,setup:'kit'},'Prefer one purchase? The Smart Garden 3 includes a light and three basil pods.','Compare the all-in-one kit');
+    if(r.product==='herbs')return option({grow:'basil',spot:a.spot,setup:dim?'basics':undefined},'Only want one herb? Start with a single Genovese basil seed packet instead of twelve varieties.','Start with basil only');
     return null;
   }
-  const api = {normalize,route,explain,resultCopy,choices,crops,spots,micros,questionSteps,supplyReason,supplyDetails,purchaseQuantity,starterScope,spaceHint,resultReasons,alternative};
+  function roomOptions(input){return input.spot==='dim'?[
+    ['compact','A narrow counter','About 12 × 5 inches, with 19 inches of height and an outlet. Basil kit with its own light.','basil-kit'],
+    ['roomy','A tray plus a standing light','An 8.8 × 5.5-inch tray, with extra room for the light’s base and adjustable stand.','microkit']
+  ]:[
+    ['compact','A narrow windowsill','An 8.8 × 5.5-inch tray, with clear space above for shoots.','microkit'],
+    ['roomy','Room for two starter pots','Two 8-inch pots plus saucers and room for leaves.','pot']
+  ];}
+  const api = {normalize,route,explain,resultCopy,choices,crops,spots,micros,questionSteps,supplyReason,supplyDetails,purchaseQuantity,starterScope,spaceHint,resultReasons,alternative,roomOptions};
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.SSGFinder = api;
 })(typeof window === 'object' ? window : globalThis);

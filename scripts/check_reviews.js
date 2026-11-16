@@ -29,8 +29,8 @@ function walk(answers){
   assert.ok(sequence.filter(x=>x.url).every(x=>x.platform==='reddit'));
   journeys++;return;
  }
- const field={grow:'grow',micro:'micro',space:'spot',setup:'setup'}[route.step];
+ const field={grow:'grow',micro:'micro',space:'spot',room:'room',setup:'setup'}[route.step];
  for(const value of core.choices(field,answers))walk({...answers,[field]:value});
 }
-walk({});assert.equal(journeys,28);
-console.log('Personalized reveal: all 28 paths have sourced discussion steps and a catalog matching step.');
+walk({});assert.equal(journeys,30);
+console.log('Personalized reveal: all 30 paths have sourced discussion steps and a catalog matching step.');

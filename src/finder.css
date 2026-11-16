@@ -265,3 +265,34 @@
 .finder-extra>div,.b-product-copy{display:flex;flex-direction:column;flex:1}
 .finder-extra .amazon-button,.b-product-copy>.b-button{margin-top:auto}
 @media(max-width:550px){.optional-product{grid-template-columns:100px minmax(0,1fr);gap:12px}.optional-product img{width:100px;height:130px}.optional-product h3{font-size:18px}.purchase-details .pack-size{font-size:13px}}
+
+/* Practical recommendation details, shared by both designs. */
+.product-benefits{list-style:none!important;padding:0!important;margin:10px 0!important;text-align:left!important;color:#214d3a}
+.product-benefits li{position:relative;padding:0 0 0 21px!important;margin:7px 0!important;font-size:15px!important;line-height:1.4!important;background:none!important;border:0!important}
+.product-benefits li:before{content:'✓';position:absolute;left:0;color:#527e31;font-weight:700}
+.recommendation-proof{margin:12px 0;padding:10px 12px;border-left:3px solid #92ad76;background:#f3f6ed;border-radius:0 10px 10px 0;text-align:left}
+.recommendation-proof .proof-label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#54704a}
+.recommendation-proof blockquote{padding:0;margin:5px 0;font-size:15px!important;line-height:1.4;font-style:normal;color:#214d3a}
+.recommendation-proof p{font-size:12px!important;line-height:1.4!important;margin:4px 0 0!important;color:#52634e}
+.recommendation-proof a{color:#315b40;text-decoration:underline;text-underline-offset:2px}
+.shopping-summary{padding:10px 14px!important;margin:12px 0!important}
+.shopping-summary>strong{font-size:15px}.shopping-summary p{font-size:14px!important;line-height:1.45!important;margin:4px 0!important}
+.starter-plan{border:1px solid #d9e2d0;border-radius:15px;padding:14px 16px;background:#fafbf5;margin:18px 0;text-align:left;color:#214d3a}
+.plan-facts{display:grid;grid-template-columns:1fr 1.4fr;gap:18px}
+.plan-facts>div{min-width:0}.plan-facts span{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#627257}
+.plan-facts strong{display:block;font-size:17px;line-height:1.35;margin:5px 0}
+.plan-facts small{display:block;font-size:13px;line-height:1.4;color:#52634e}
+.plan-details{margin-top:12px;border-top:1px solid #d9e2d0;padding-top:10px}
+.plan-details summary{font-size:14px;font-weight:600;cursor:pointer}
+.plan-details p,.plan-details li{font-size:14px!important;line-height:1.5!important}
+.plan-details ol{padding-left:22px}.plan-details li{margin:8px 0}
+.setup-comparison{border:1px solid #d9e2d0;border-radius:15px;background:#fffdf4;padding:16px;margin:20px 0;text-align:left}
+.setup-comparison h3{font-size:18px!important;margin:0 0 8px!important;line-height:1.3}
+.setup-comparison p{font-size:14px!important;line-height:1.5!important;margin:8px 0!important}
+.setup-comparison .comparison-count{color:#52634e;font-size:13px!important}
+.compare-setup{display:inline-block;background:#e6eedc;color:#214d3a;border:1px solid #b5c8a6;border-radius:20px;padding:10px 16px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none}
+.compare-setup:focus-visible{outline:3px solid #376f42;outline-offset:3px}
+.light-match{font-size:14px!important;font-weight:600;margin:7px 0!important;color:#315b40}
+@media(max-width:550px){.starter-plan{padding:12px}.plan-facts{grid-template-columns:1fr 1fr;gap:12px}.plan-facts strong{font-size:15px}.plan-facts small{font-size:12px}.recommendation-proof blockquote{font-size:14px!important}.product-benefits li{font-size:14px!important}}
+
+.finder-result .result-copy{padding:22px}.finder-result .result-copy h1{font-size:clamp(25px,2.4vw,34px);line-height:1.15;margin:10px 0}.finder-result .benefit{font-size:16px;line-height:1.5;margin:10px 0}.finder-result .result-photo>img{max-height:390px;object-fit:contain}.finder-result .result-layout{align-items:start}.finder-result .match-welcome{padding-bottom:0}.finder-result .product-brand{font-size:14px}.finder-result .purchase-details{margin:8px 0}.finder-result .result-photo{position:sticky;top:20px}@media(max-width:699px){.finder-result .result-photo{position:relative;top:auto}.finder-result .result-copy{padding:16px}.finder-result .result-photo>img{max-height:260px}.finder-result .result-copy h1{font-size:25px}}

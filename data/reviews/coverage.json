@@ -217,8 +217,8 @@
     },
     {
       "productId": "bag",
-      "name": "VIVOSUN 5-Gallon Grow Bags \u00b7 5-pack",
-      "asin": "B00TF9E6XE",
+      "name": "Smart Pot 5-Gallon Fabric Container",
+      "asin": "B002JUOWB2",
       "threads": 18,
       "excerpts": 71,
       "exactAsinVerified": false,
@@ -288,6 +288,26 @@
       "productId": "light-small",
       "name": "SANSI Clip-on Grow Light",
       "asin": "B0CHDBY2PD",
+      "threads": 0,
+      "excerpts": 0,
+      "exactAsinVerified": false,
+      "scope": [],
+      "note": "No exact ASIN verified. No relevant indexed source found; evidence gap."
+    },
+    {
+      "productId": "bag-bulk",
+      "name": "VIVOSUN 5-Gallon Grow Bags \u00b7 5-pack",
+      "asin": "B00TF9E6XE",
+      "threads": 0,
+      "excerpts": 0,
+      "exactAsinVerified": false,
+      "scope": [],
+      "note": "No exact ASIN verified. No relevant indexed source found; evidence gap."
+    },
+    {
+      "productId": "soil-small",
+      "name": "Espoma Organic Potting Mix \u00b7 8 qt",
+      "asin": "B002Y04TK6",
       "threads": 0,
       "excerpts": 0,
       "exactAsinVerified": false,
