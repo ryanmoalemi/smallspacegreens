@@ -152,8 +152,8 @@
     },
     {
       "productId": "light",
-      "name": "SANSI Clip-on Grow Light",
-      "asin": "B0CHDBY2PD",
+      "name": "MetryGrow 48W Grow Light with Stand",
+      "asin": "B0D7CMRZT8",
       "threads": 65,
       "excerpts": 266,
       "exactAsinVerified": false,
@@ -230,8 +230,8 @@
     },
     {
       "productId": "coir",
-      "name": "Verdana Coco Coir",
-      "asin": "B07QNSSN81",
+      "name": "Nutrifield Coco Brick",
+      "asin": "B093CKN811",
       "threads": 20,
       "excerpts": 73,
       "exactAsinVerified": false,
@@ -253,6 +253,46 @@
         "category-search-candidate"
       ],
       "note": "No exact ASIN verified. Research scope: cultivar-or-category, category-search-candidate"
+    },
+    {
+      "productId": "fertilizer",
+      "name": "Miracle-Gro Water Soluble Tomato Plant Food",
+      "asin": "B000P7345G",
+      "threads": 0,
+      "excerpts": 0,
+      "exactAsinVerified": false,
+      "scope": [],
+      "note": "No exact ASIN verified. No relevant indexed source found; evidence gap."
+    },
+    {
+      "productId": "windowbox",
+      "name": "CHUKEMAOYI Window Box Planters",
+      "asin": "B098SBSWQL",
+      "threads": 0,
+      "excerpts": 0,
+      "exactAsinVerified": false,
+      "scope": [],
+      "note": "No exact ASIN verified. No relevant indexed source found; evidence gap."
+    },
+    {
+      "productId": "coir-bulk",
+      "name": "Verdana Coco Coir",
+      "asin": "B07QNSSN81",
+      "threads": 0,
+      "excerpts": 0,
+      "exactAsinVerified": false,
+      "scope": [],
+      "note": "No exact ASIN verified. No relevant indexed source found; evidence gap."
+    },
+    {
+      "productId": "light-small",
+      "name": "SANSI Clip-on Grow Light",
+      "asin": "B0CHDBY2PD",
+      "threads": 0,
+      "excerpts": 0,
+      "exactAsinVerified": false,
+      "scope": [],
+      "note": "No exact ASIN verified. No relevant indexed source found; evidence gap."
     }
   ],
   "rainforest": {

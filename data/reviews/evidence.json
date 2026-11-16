@@ -2,6 +2,279 @@
   "version": 1,
   "records": [
     {
+      "id": "reddit-basil-kit-gkm42r",
+      "platform": "reddit",
+      "url": "https://www.reddit.com/r/ClickAndGrow/comments/gkm42r/comment/fquqoi8/",
+      "retrievedAt": "2026-11-16",
+      "retrievalMethod": "primary_reddit_page_or_returned_thread_content",
+      "coverage": "selected verbatim excerpt; not complete thread",
+      "crops": [
+        "basil"
+      ],
+      "spaces": [
+        "dim"
+      ],
+      "productIds": [
+        "basil-kit"
+      ],
+      "angle": "experience",
+      "question": "What do growers say about this setup?",
+      "excerpt": "My chili pepper and basil plants are doing great in my Click and Grow 3.",
+      "status": "reviewed",
+      "scope": "growing-experience",
+      "exactProductReview": true,
+      "proofApproved": true,
+      "proofContext": "Early Click & Grow 3 experience, after 3 to 4 weeks.",
+      "proofProducts": [
+        "basil-kit"
+      ]
+    },
+    {
+      "id": "reddit-herbs-sunny-s4sp11",
+      "platform": "reddit",
+      "url": "https://www.reddit.com/r/gardening/comments/s4sp11/comment/hst1spb/",
+      "retrievedAt": "2026-11-16",
+      "retrievalMethod": "primary_reddit_page_or_returned_thread_content",
+      "coverage": "selected verbatim excerpt; not complete thread",
+      "crops": [
+        "herbs"
+      ],
+      "spaces": [
+        "sunny"
+      ],
+      "productIds": [],
+      "angle": "experience",
+      "question": "What do growers say about this setup?",
+      "excerpt": "We always have on hand: basil, rosemary, chives, cilantro, oregano, and parsley.",
+      "status": "reviewed",
+      "scope": "growing-experience",
+      "exactProductReview": false,
+      "proofApproved": true,
+      "proofContext": "A grower describing herbs in a south-facing kitchen window."
+    },
+    {
+      "id": "reddit-basil-sunny-s4sp11",
+      "platform": "reddit",
+      "url": "https://www.reddit.com/r/gardening/comments/s4sp11/comment/hst7buf/",
+      "retrievedAt": "2026-11-16",
+      "retrievalMethod": "primary_reddit_page_or_returned_thread_content",
+      "coverage": "selected verbatim excerpt; not complete thread",
+      "crops": [
+        "basil"
+      ],
+      "spaces": [
+        "sunny"
+      ],
+      "productIds": [],
+      "angle": "experience",
+      "question": "What do growers say about this setup?",
+      "excerpt": "I've been successful with my sunny window planting",
+      "status": "reviewed",
+      "scope": "growing-experience",
+      "exactProductReview": false,
+      "proofApproved": true,
+      "proofContext": "A grower describing basil in a pot on a sunny windowsill.",
+      "excludeProducts": [
+        "basil-kit"
+      ]
+    },
+    {
+      "id": "reddit-herbs-dim-1ozo8qr",
+      "platform": "reddit",
+      "url": "https://www.reddit.com/r/vegetablegardening/comments/1ozo8qr/i_grow_herbs_indoors_all_year/",
+      "retrievedAt": "2026-11-16",
+      "retrievalMethod": "primary_reddit_page_or_returned_thread_content",
+      "coverage": "selected verbatim excerpt; not complete thread",
+      "crops": [
+        "herbs"
+      ],
+      "spaces": [
+        "dim"
+      ],
+      "productIds": [],
+      "angle": "experience",
+      "question": "What do growers say about this setup?",
+      "excerpt": "I love growing herbs indoors. I’ve been doing it for about 15 years, and it’s honestly my favourite hobby.",
+      "status": "reviewed",
+      "scope": "growing-experience",
+      "exactProductReview": false,
+      "proofApproved": true,
+      "proofContext": "A grower who raises herbs indoors under LED lights."
+    },
+    {
+      "id": "reddit-basil-dim-1ozo8qr",
+      "platform": "reddit",
+      "url": "https://www.reddit.com/r/vegetablegardening/comments/1ozo8qr/comment/nqt7vtq/",
+      "retrievedAt": "2026-11-16",
+      "retrievalMethod": "primary_reddit_page_or_returned_thread_content",
+      "coverage": "selected verbatim excerpt; not complete thread",
+      "crops": [
+        "basil"
+      ],
+      "spaces": [
+        "dim"
+      ],
+      "productIds": [],
+      "angle": "experience",
+      "question": "What do growers say about this setup?",
+      "excerpt": "I've been trying to grow herbs year round and I've had the most success with basil (it seems to be very forgiving).",
+      "status": "reviewed",
+      "scope": "growing-experience",
+      "exactProductReview": false,
+      "proofApproved": true,
+      "proofContext": "A grower describing basil on indoor shelving with grow lights.",
+      "excludeProducts": [
+        "basil-kit"
+      ]
+    },
+    {
+      "id": "reddit-herbs-balcony-1aq5bbw",
+      "platform": "reddit",
+      "url": "https://www.reddit.com/r/gardening/comments/1aq5bbw/comment/kqbuonh/",
+      "retrievedAt": "2026-11-16",
+      "retrievalMethod": "primary_reddit_page_or_returned_thread_content",
+      "coverage": "selected verbatim excerpt; not complete thread",
+      "crops": [
+        "herbs"
+      ],
+      "spaces": [
+        "balcony"
+      ],
+      "productIds": [],
+      "angle": "lessons",
+      "question": "What do growers say about this setup?",
+      "excerpt": "Herbs are super easy and don't need a ton of space.",
+      "status": "reviewed",
+      "scope": "growing-experience",
+      "exactProductReview": false,
+      "proofApproved": true,
+      "proofContext": "A grower’s tip for a beginner apartment balcony garden."
+    },
+    {
+      "id": "reddit-basil-balcony-1djre6p",
+      "platform": "reddit",
+      "url": "https://www.reddit.com/r/gardening/comments/1djre6p/",
+      "retrievedAt": "2026-11-16",
+      "retrievalMethod": "primary_reddit_page_or_returned_thread_content",
+      "coverage": "selected verbatim excerpt; not complete thread",
+      "crops": [
+        "basil"
+      ],
+      "spaces": [
+        "balcony"
+      ],
+      "productIds": [],
+      "angle": "experience",
+      "question": "What do growers say about this setup?",
+      "excerpt": "I love growing basil. It’s one of the best things about summer for me.",
+      "status": "reviewed",
+      "scope": "growing-experience",
+      "exactProductReview": false,
+      "proofApproved": true,
+      "proofContext": "A grower describing basil in two large balcony planters.",
+      "excludeProducts": [
+        "basil-kit"
+      ]
+    },
+    {
+      "id": "reddit-microgreens-dim-1kp1t4f",
+      "platform": "reddit",
+      "url": "https://www.reddit.com/r/microgreens/comments/1kp1t4f/",
+      "retrievedAt": "2026-11-16",
+      "retrievalMethod": "primary_reddit_page_or_returned_thread_content",
+      "coverage": "selected verbatim excerpt; not complete thread",
+      "crops": [
+        "microgreens"
+      ],
+      "spaces": [
+        "dim"
+      ],
+      "productIds": [],
+      "angle": "experience",
+      "question": "What do growers say about this setup?",
+      "excerpt": "I grow peas radish sunflowers and broccoli, all fairly easy.",
+      "status": "reviewed",
+      "scope": "growing-experience",
+      "exactProductReview": false,
+      "proofApproved": true,
+      "proofContext": "A grower using LED grow lights and bottom-watered trays.",
+      "microTypes": [
+        "pea",
+        "radish",
+        "broccoli"
+      ]
+    },
+    {
+      "id": "reddit-pea-window-13vudlv",
+      "platform": "reddit",
+      "url": "https://www.reddit.com/r/Winnipeg/comments/13vudlv/",
+      "retrievedAt": "2026-11-16",
+      "retrievalMethod": "primary_reddit_page_or_returned_thread_content",
+      "coverage": "selected verbatim excerpt; not complete thread",
+      "crops": [
+        "microgreens"
+      ],
+      "spaces": [
+        "sunny"
+      ],
+      "productIds": [],
+      "angle": "experience",
+      "question": "What do growers say about this setup?",
+      "excerpt": "I also grow pea shoots & some greens in indoor potting mix in recycled packaging under a lamp or in the window.",
+      "status": "reviewed",
+      "scope": "growing-experience",
+      "exactProductReview": false,
+      "proofApproved": true,
+      "proofContext": "A grower describing indoor pea shoots with window light or a lamp.",
+      "microTypes": [
+        "pea"
+      ]
+    },
+    {
+      "id": "reddit-leafy-window-19bidj4",
+      "platform": "reddit",
+      "url": "https://www.reddit.com/r/vegetablegardening/comments/19bidj4/",
+      "retrievedAt": "2026-11-16",
+      "retrievalMethod": "primary_reddit_page_or_returned_thread_content",
+      "coverage": "selected verbatim excerpt; not complete thread",
+      "crops": [
+        "lettuce",
+        "salad"
+      ],
+      "spaces": [
+        "sunny"
+      ],
+      "productIds": [],
+      "angle": "lessons",
+      "question": "What do growers say about this setup?",
+      "excerpt": "Lettuce and other \"greens\" can get by with much less sun than a fruiting plant, so you can probably grow it in a sunny window.",
+      "status": "reviewed",
+      "scope": "growing-experience",
+      "exactProductReview": false,
+      "proofApproved": true,
+      "proofContext": "A grower’s tip on choosing leafy greens for a sunny window."
+    },
+    {
+      "id": "reddit-windowsill-radish-thinning-1kg5s1g",
+      "platform": "reddit",
+      "url": "https://www.reddit.com/r/GardeningIRE/comments/1kg5s1g",
+      "retrievedAt": "2026-11-16",
+      "crops": [
+        "radish"
+      ],
+      "spaces": [
+        "sunny"
+      ],
+      "productIds": [],
+      "angle": "lessons",
+      "question": "What helps windowsill radish seedlings?",
+      "excerpt": "Not leggy, just thin them a wee bit.",
+      "status": "reviewed",
+      "proofApproved": true,
+      "proofContext": "Advice on thinning radish seedlings in a south-facing window.",
+      "verification": "Verbatim comment excerpt retrieved from primary Reddit search result; context is seedlings, not a harvest claim."
+    },
+    {
       "id": "reddit-1t5ch4e",
       "platform": "reddit",
       "url": "https://www.reddit.com/r/tomatoes/comments/1t5ch4e/container_size_for_tiny_tims/",
@@ -22,7 +295,8 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "experience"
+      "angle": "experience",
+      "proofApproved": false
     },
     {
       "id": "reddit-1uq3vtd",
@@ -45,7 +319,8 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "experience"
+      "angle": "experience",
+      "proofApproved": false
     },
     {
       "id": "reddit-1bc4vzc",
@@ -68,7 +343,8 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "experience"
+      "angle": "experience",
+      "proofApproved": true
     },
     {
       "id": "reddit-1t0cm5l",
@@ -91,7 +367,8 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "lessons"
+      "angle": "lessons",
+      "proofApproved": false
     },
     {
       "id": "reddit-1ep2x31",
@@ -116,7 +393,8 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "experience"
+      "angle": "experience",
+      "proofApproved": false
     },
     {
       "id": "reddit-1ldoida",
@@ -127,8 +405,7 @@
       "retrievalMethod": "web_search_returned_thread_content",
       "coverage": "selected excerpt; not complete thread",
       "crops": [
-        "basil",
-        "herbs"
+        "basil"
       ],
       "spaces": [
         "sunny",
@@ -141,7 +418,11 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "lessons"
+      "angle": "lessons",
+      "proofApproved": false,
+      "excludeProducts": [
+        "basil-kit"
+      ]
     },
     {
       "id": "reddit-1wdha8r",
@@ -152,9 +433,7 @@
       "retrievalMethod": "web_search_returned_thread_content",
       "coverage": "selected excerpt; not complete thread",
       "crops": [
-        "radish",
-        "lettuce",
-        "salad"
+        "radish"
       ],
       "spaces": [
         "balcony"
@@ -166,7 +445,8 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "experience"
+      "angle": "experience",
+      "proofApproved": true
     },
     {
       "id": "reddit-1bnmsnn",
@@ -189,7 +469,12 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "experience"
+      "angle": "experience",
+      "proofApproved": true,
+      "microTypes": [
+        "radish",
+        "broccoli"
+      ]
     },
     {
       "id": "reddit-1did7kf",
@@ -213,7 +498,8 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "experience"
+      "angle": "experience",
+      "proofApproved": false
     },
     {
       "id": "reddit-1js25ml",
@@ -236,7 +522,8 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "experience"
+      "angle": "experience",
+      "proofApproved": false
     },
     {
       "id": "reddit-1fcmkl1",
@@ -254,12 +541,13 @@
       ],
       "productIds": [],
       "question": "What would Reddit growers change about their tray setup?",
-      "excerpt": "Lights need to be much closer\u2026",
+      "excerpt": "Lights need to be much closer…",
       "summary": "Growers discuss leggy greens, light distance, and blackout duration; advice is anecdotal and sometimes conflicting.",
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "lessons"
+      "angle": "lessons",
+      "proofApproved": false
     },
     {
       "id": "reddit-c0pumt",
@@ -282,7 +570,8 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "experience"
+      "angle": "experience",
+      "proofApproved": false
     },
     {
       "id": "scenario-43181e30511b38037d61fb32",
@@ -306,7 +595,9 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "lessons"
+      "angle": "lessons",
+      "proofApproved": true,
+      "proofExcerpt": "I grow various baby lettuce and greens in 8\" stubby pots under a grow light."
     },
     {
       "id": "scenario-dc83fbd9d45711017e951168",
@@ -330,7 +621,9 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "lessons"
+      "angle": "lessons",
+      "proofApproved": true,
+      "proofExcerpt": "I just used potting mix for mine and worked fine."
     },
     {
       "id": "scenario-a34568b952d47a733fd05c09",
@@ -346,12 +639,13 @@
       "spaces": [],
       "productIds": [],
       "question": "What do Reddit growers say about getting radish roots, not just leaves?",
-      "excerpt": "My indoor radishes failed. Nice greens and I\u2019ll likely harvest and eat tomorrow, but not meaningful radish \u201cbulbs\u201d. The red stems grew out of the ground and never made a bulb. As if reaching for light maybe?\nAnyone have success?\nI kept LED aquarium lights on them for 16 hours. Used a small fan for airflow. Watered regularly but not too deeply. Less than a half gallon every other day maybe?\nThoughts on where this most likely failed? Or is getting \u201cfruit\u201d indoors just hard?\n(Newbie)",
+      "excerpt": "My indoor radishes failed. Nice greens and I’ll likely harvest and eat tomorrow, but not meaningful radish “bulbs”. The red stems grew out of the ground and never made a bulb. As if reaching for light maybe?\nAnyone have success?\nI kept LED aquarium lights on them for 16 hours. Used a small fan for airflow. Watered regularly but not too deeply. Less than a half gallon every other day maybe?\nThoughts on where this most likely failed? Or is getting “fruit” indoors just hard?\n(Newbie)",
       "summary": "Firsthand failure to form roots; preserve as internal suitability check.",
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "lessons"
+      "angle": "lessons",
+      "proofApproved": false
     },
     {
       "id": "scenario-12ae65bd147b5fccfe8ac154",
@@ -374,7 +668,8 @@
       "status": "reviewed",
       "scope": "growing-experience",
       "exactProductReview": false,
-      "angle": "lessons"
+      "angle": "lessons",
+      "proofApproved": false
     }
   ],
   "sourceStatus": {

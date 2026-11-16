@@ -5,7 +5,7 @@ const r={product:'tomato',extras:['bag','soil']};
 assert.ok(matcher.match({grow:'tomato',spot:'balcony'},r,records).length>=4);
 assert.equal(matcher.match({grow:'tomato',spot:'sunny'},r,records).length,0);
 assert.equal(matcher.match({grow:'basil',spot:'sunny'},r,records).every(x=>x.crops.includes('basil')),true);
-const fake={...records[0],platform:'amazon',productIds:['unrelated']};
+const fake={...records.find(x=>x.crops.includes('tomato')&&x.spaces.includes('balcony')),platform:'amazon',productIds:['unrelated']};
 assert.equal(matcher.match({grow:'tomato',spot:'balcony'},r,[fake]).length,0);
 assert.equal(matcher.match({grow:'tomato',spot:'balcony'},r,[{...fake,productIds:['bag']}]).length,1);
 assert.equal(matcher.match({grow:'tomato',spot:'balcony'},r,[{...records[0],status:'removed'}]).length,0);

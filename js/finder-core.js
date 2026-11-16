@@ -21,7 +21,7 @@
     if (!a.grow) return {step:'grow'};
     if (a.grow === 'microgreens' && !a.micro) return {step:'micro'};
     if (!a.spot) return {step:'space'};
-    if (a.grow === 'tomato') return a.spot==='balcony' ? {step:'result',product:'tomato',extras:['bag','soil'],guide:'tomato',fit:'bag',note:'Grow one Tiny Tim plant per bag in 6 to 8 hours of direct sun. Buy enough potting mix to fill one 5-gallon bag, about 20 US quarts; check the mix bag size. Check moisture daily and feed established plants with a tomato fertilizer according to its label. These are seeds, not a live plant or all-in-one kit.'} : {step:'unavailable',reason:'tomato-light'};
+    if (a.grow === 'tomato') return a.spot==='balcony' ? {step:'result',product:'tomato',extras:['bag','soil'],optional:['fertilizer'],guide:'tomato',fit:'bag',note:'Grow one Tiny Tim plant per bag in 6 to 8 hours of direct sun. Use two 16-quart bags of potting mix to fill one 5-gallon bag, with some mix left over. Check moisture daily and feed established plants with a tomato fertilizer according to its label. These are seeds, not a live plant or all-in-one kit.'} : {step:'unavailable',reason:'tomato-light'};
     if (a.grow === 'microgreens' && a.spot === 'balcony') return {step:'switch',reason:'balcony'};
     if ((a.grow === 'salad' || a.grow === 'radish') && a.spot === 'dim') return {step:'switch',reason:a.grow};
     const pea = a.grow === 'microgreens' && a.micro === 'pea';
@@ -46,7 +46,7 @@
       return {step:'unavailable',reason:'unnamed'};
     }
     const extras = lit(pot);
-    return {step:'result',product:a.grow,extras,guide:a.spot==='balcony'?'balcony':a.spot==='sunny'?'window':'basil',fit:a.grow==='tomato'?'bag':'pot'};
+    return {step:'result',product:a.grow,extras,optional:a.spot==='balcony'&&['lettuce','salad','herbs'].includes(a.grow)?['windowbox']:[],guide:a.spot==='balcony'?'balcony':a.spot==='sunny'?'window':'basil',fit:a.grow==='tomato'?'bag':'pot'};
   }
   // Offer only answers with at least one complete, reviewed shopping setup.
   function choices(field,input={}) {
@@ -163,11 +163,27 @@
     if(route({...a,setup:undefined}).step==='setup')steps.push('setup');
     return steps;
   }
+  function purchaseQuantity(id,input,r) { return id==='soil'&&r.product==='tomato'?2:1; }
+  function starterScope(input,r) {
+    if(r.product==='basil-kit')return 'Start with the three included basil pods.';
+    if(r.product==='microkit'||r.product.startsWith('micro-'))return 'Start with one tray at a time.';
+    if(r.product==='tomato')return 'Start with one tomato plant in one grow bag.';
+    return 'Start with two pots, using the included saucers.';
+  }
+  function spaceHint(spot,input) {
+    if(spot==='dim')return 'Little direct sun · a grow light is included in your picks';
+    if(spot==='balcony')return input.grow==='tomato'?'6 to 8 hours direct sun · room for a 5-gallon bag':'At least 6 hours of sun · check heat and wind';
+    return input.grow==='microgreens'?'Bright window · turn the tray for even growth':['lettuce','salad','unsure'].includes(input.grow)?'4 to 6 hours of direct sun · avoid hot glass':'6 to 8 hours of direct sun at plant level';
+  }
   function supplyReason(id,input,r,products) {
-    const a=normalize(input), crop=r.product==='lettuce'?'lettuce':a.grow;
-    const pots={lettuce:'Start with one lettuce plant per pot, giving its leaves room to spread.',basil:'Start with one basil plant per pot so you can give it room to branch.',herbs:'Start with three herbs in three separate pots so you can water each variety individually.',salad:'Start with three pots, one salad crop per pot, so you can harvest each at its own pace.',radish:'Space Cherry Belle seedlings about 2 inches apart. Start with two pots and sow them at different times for staggered harvests.'};
-    const reasons={pot:(pots[crop]||'Give each plant its own growing space.')+' Drainage holes release excess water; empty the saucers after watering. Check the listing’s pack count before ordering.',soil:r.product==='tomato'?'Allow about 20 US quarts of potting mix for one 5-gallon grow bag. Check bag volume before ordering.':'Use container potting mix for drainage and root growth. Buy enough to fill the number of pots you plan to use.',bag:'Use one 5-gallon bag for one Tiny Tim plant. This listing includes five bags; you do not need to plant them all.',tray:'A reusable 1010 tray with holes lets excess water drain into the solid tray below.',drip:'Place this solid 1010 tray under the matching drained tray to catch water.',coir:'Hydrate this growing medium before spreading it in your microgreen tray.',light:r.product==='microkit'?'Your kit has no built-in light. Position this lamp over the tray in your dim spot, following its distance instructions.':'Your spot has little direct sun. Position this lamp over your plants and adjust its height as they grow.'};
+    const crop=r.product==='lettuce'?'lettuce':input.grow;
+    const pots={lettuce:'Two pots for lettuce, with one plant per pot.',basil:'Two pots for basil, with one plant per pot.',herbs:'Start two herbs in separate pots so you can water each individually.',salad:'Start two salad crops in separate pots.',radish:'Two pots let you stagger radish sowings for successive harvests.'};
+    const reasons={pot:pots[crop]||'Drainage holes and saucers keep your container setup practical.',soil:r.product==='tomato'?'Two bags provide 32 quarts for one 5-gallon grow bag, with mix left over.':'One 16-quart bag supplies the two starter pots, with some mix left over.',bag:'Use one bag for your first Tiny Tim plant; keep the other four for later.',tray:'Use one drained 1010 tray for your first microgreen crop; keep any extra trays for later.',drip:'A solid tray to catch drainage from the growing tray.',coir:'A small compressed brick of growing medium for repeat tray sowings.',light:'A standing light with a manufacturer-rated 2 × 2 ft footprint for your starter pots or tray.',fertilizer:'Tomato plant food for established plants, used according to its label.',windowbox:'Seven window boxes for expanding later, beyond your two starter pots.'};
     return reasons[id]||products[id]?.benefit||products[id]?.kind||'';
+  }
+  function supplyDetails(id,input,r) {
+    const notes={light:'Center one tray or two 8-inch pots beneath the panel. Adjust the included stand and brightness following the manufacturer’s instructions. Start with one ALPAS tray at a time and keep extra supplies for later.',pot:input.grow==='radish'?'Thin Cherry Belle seedlings to about 2 inches apart. Empty saucers after watering.':'Use one plant or crop per pot. Empty saucers after watering.',soil:'Fill containers with loose potting mix, leaving watering space at the rim. Actual use varies with fill depth.',bag:'The purchase is a five-pack. The starter plan uses just one bag, not five.',coir:'Hydrate only the amount you need, following the pack instructions. Store the unused medium dry.',fertilizer:'Optional add-on for later feeding. Follow the fertilizer label for dilution and timing, and the potting-mix label before adding feed.',windowbox:'This seven-pack is optional. It replaces or expands your containers, so additional potting mix will be needed. Check its dimensions against your space before ordering.'};
+    return notes[id]||'';
   }
   function resultReasons(input,r){
     const a=normalize(input);
@@ -179,7 +195,7 @@
     if(input.grow==='unsure')return {field:'grow',value:'herbs',intro:'Prefer fresh herbs for cooking?',label:'Explore an herb setup'};
     return null;
   }
-  const api = {normalize,route,explain,resultCopy,choices,crops,spots,micros,questionSteps,supplyReason,resultReasons,alternative};
+  const api = {normalize,route,explain,resultCopy,choices,crops,spots,micros,questionSteps,supplyReason,supplyDetails,purchaseQuantity,starterScope,spaceHint,resultReasons,alternative};
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.SSGFinder = api;
 })(typeof window === 'object' ? window : globalThis);

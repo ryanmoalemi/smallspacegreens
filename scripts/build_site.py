@@ -1590,7 +1590,7 @@ def layout(page: dict, main: str, graph: list[dict]) -> str:
     description = page["description"]
     canonical = page["url"]
     nav_html = []
-    for label, _abs, href in NAV:
+    for label, _abs, href in ([("Product Finder", SITE + "/", "/")] if page["url"] == SITE + "/" else NAV):
         current = ' aria-current="page"' if page.get("nav") == href else ""
         nav_html.append(f'<li><a href="{href}"{current}>{label}</a></li>')
     robots = page.get("robots", "index,follow")
@@ -1622,7 +1622,7 @@ def layout(page: dict, main: str, graph: list[dict]) -> str:
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-8YDK0NYXM5');
+if (['smallspacegreens.com','www.smallspacegreens.com'].includes(location.hostname) && !new URLSearchParams(location.search).has('qa')) gtag('config', 'G-8YDK0NYXM5');
 </script>
 """
     scripts = page.get("scripts", "")
@@ -1692,7 +1692,7 @@ if (toc && window.matchMedia("(max-width: 899px)").matches) toc.removeAttribute(
 <div class="footer-bar">
 <div class="footer-top"><div><a class="brand" href="/" aria-label="Small Space Greens home">{BRAND}</a><p class="footer-tagline">A little space. Something good to grow.</p></div>
 <nav class="footer-nav" aria-label="Footer">
-<a href="/guides/">Growing guides</a>
+{'<a href="/">Product Finder</a>' if page["url"] == SITE + "/" else '<a href="/guides/">Growing guides</a>'}
 <a href="/editorial-method/">Editorial method</a>
 <a href="/photo-credits/">Photo credits</a>
 <a href="/privacy/">Privacy</a>
@@ -2773,7 +2773,7 @@ def render_static_pages() -> dict[str, str]:
     pages: dict[str, str] = {}
 
     home_title = "Small Space Greens | Microgreens and Small-Space Gardening"
-    home_desc = "Grow microgreens and salad greens in a small space. Find practical guides, a seed calculator, and help choosing trays, lights, and growing supplies."
+    home_desc = "Find seeds, starter kits, planters and grow lights for your small space. Answer a few quick questions to get a garden shopping list for your crop and light."
     check_lengths(home_title, home_desc, "home")
     home_body = (
         (SRC / "pages" / "home.html")
@@ -2791,7 +2791,7 @@ def render_static_pages() -> dict[str, str]:
         "nav": "",
         "verify": True,
         "signup": False,
-        "scripts": f'<script src="/js/finder-data.js?v={asset_version("js/finder-data.js")}" defer></script><script src="/js/finder-core.js?v={asset_version("js/finder-core.js")}" defer></script><script src="/js/review-evidence.js?v={asset_version("js/review-evidence.js")}" defer></script><script src="/js/review-matcher.js?v={asset_version("js/review-matcher.js")}" defer></script><script src="/js/finder.js?v={asset_version("js/finder.js")}" defer></script>',
+        "scripts": f'<script src="/js/finder-data.js?v={asset_version("js/finder-data.js")}" defer></script><script src="/js/finder-core.js?v={asset_version("js/finder-core.js")}" defer></script><script src="/js/review-evidence.js?v={asset_version("js/review-evidence.js")}" defer></script><script src="/js/review-matcher.js?v={asset_version("js/review-matcher.js")}" defer></script><script src="/js/finder-shopping.js?v={asset_version("js/finder-shopping.js")}" defer></script><script src="/js/finder.js?v={asset_version("js/finder.js")}" defer></script>',
         "image": f"{SITE}/assets/og/home.jpg",
         "crumbs": [("Home", f"{SITE}/")],
         "wrap": "wrap-wide",
@@ -3259,7 +3259,7 @@ def main() -> None:
     (ROOT / "js" / "site.js").write_text((SRC / "site.js").read_text())
     (ROOT / "js" / "cost-compare.js").write_text((SRC / "cost-compare.js").read_text())
     write_setup_js()
-    for name in ("finder.js", "finder-core.js", "review-matcher.js"):
+    for name in ("finder.js", "finder-core.js", "review-matcher.js", "finder-shopping.js"):
         (ROOT / "js" / name).write_text((SRC / name).read_text())
     (ROOT / "js" / "finder-data.js").write_text("window.SSG_FINDER_DATA = " + (SRC / "finder.json").read_text() + ";\n")
     pages = render_static_pages()

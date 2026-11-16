@@ -241,3 +241,27 @@
 /* Keep longer, crop-specific supply explanations inside mobile cards. */
 .finder-extra,.finder-extra>div{min-width:0}.finder-extra .amazon-button{max-width:100%;white-space:normal;box-sizing:border-box}.finder-extra p{overflow-wrap:anywhere}
 @media(max-width:699px){.match-welcome{overflow:hidden}}
+
+/* Shared shopping information keeps both designs equally useful. */
+.purchase-details{text-align:left;margin:12px 0;font-size:14px;line-height:1.4}
+.purchase-details .pack-size{font-size:14px;line-height:1.45;margin:0 0 5px;color:#405c45}
+.purchase-details .order-quantity{font-size:15px;font-weight:700;margin:0 0 8px;color:#214d3a}
+.owned-supply{display:flex;align-items:center;gap:8px;min-height:40px;font-size:14px;cursor:pointer}
+.owned-supply input{width:18px;height:18px;accent-color:#315b40;flex:none}
+.growing-note{margin:6px 0;font-size:14px}
+.growing-note summary{cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.growing-note p{font-size:14px!important;line-height:1.5;margin:8px 0!important}
+.shopping-summary{padding:14px 16px;border:1px solid #d9e2d0;border-radius:14px;background:#f4f7ee;font-size:15px!important;line-height:1.5;text-align:left}
+.shopping-summary span{font-weight:700}
+[data-shopping-product] [hidden]{display:none!important}
+[data-shopping-product].is-owned{border-color:#8ca17d;background:#f2f5ed}
+.optional-products{margin:22px 0;padding:16px;border:1px solid #d9e2d0;border-radius:14px;text-align:left}
+.optional-products>summary{font-size:17px;font-weight:600;cursor:pointer}
+.optional-product{display:grid;grid-template-columns:160px minmax(0,1fr);gap:18px;padding:16px 0}
+.optional-product img{width:160px;height:180px;object-fit:contain;background:white;border-radius:12px}
+.optional-product h3{font-size:20px;margin:0 0 8px}
+.optional-product p{font-size:15px;line-height:1.45}
+.optional-buy{display:block;text-align:center;border-radius:24px;background:#ffd814;color:#111;padding:12px 18px;font-size:16px;font-weight:600;text-decoration:none}
+.finder-extra>div,.b-product-copy{display:flex;flex-direction:column;flex:1}
+.finder-extra .amazon-button,.b-product-copy>.b-button{margin-top:auto}
+@media(max-width:550px){.optional-product{grid-template-columns:100px minmax(0,1fr);gap:12px}.optional-product img{width:100px;height:130px}.optional-product h3{font-size:18px}.purchase-details .pack-size{font-size:13px}}
