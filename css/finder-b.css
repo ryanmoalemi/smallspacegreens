@@ -218,3 +218,6 @@
 .compare-setup:focus-visible{outline:3px solid #376f42;outline-offset:3px}
 .light-match{font-size:14px!important;font-weight:600;margin:7px 0!important;color:#315b40}
 @media(max-width:550px){.starter-plan{padding:12px}.plan-facts{grid-template-columns:1fr 1fr;gap:12px}.plan-facts strong{font-size:15px}.plan-facts small{font-size:12px}.recommendation-proof blockquote{font-size:14px!important}.product-benefits li{font-size:14px!important}}
+/* Keep card reasons next to their benefits; only the CTA absorbs spare row height. */
+.b-product-copy>p{flex:0 0 auto}.b-product-copy{gap:5px}
+@media(min-width:768px){.b-products.count-1{max-width:640px}.b-products .b-product-photo img{height:150px}}

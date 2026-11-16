@@ -24,7 +24,7 @@ let results=0;
 for(const variant of ['a','b']){
  const base=variant==='a'?'/':'/product-finder/',prefix=variant==='a'?'/finder-steps/':'/product-finder/steps/';
  const url=a=>Object.keys(a).length?prefix+key(a)+'/':base;
- const source=fs.readFileSync(path.join(root,base,'index.html'),'utf8');
+ const source=fs.readFileSync(path.join(root,base,'index.html'),'utf8').replace(/<style>\.static-finder[\s\S]*?<\/style>/g,'');
  const pattern=variant==='a'?/<div id="finder"[^>]*>[\s\S]*?<\/div>\s*<\/main>/:/<div id="finder-b"[^>]*>[\s\S]*?<\/div><\/main>/;
  if(!pattern.test(source))throw Error('Missing host '+variant);
  for(const {a,r,parent} of states){
