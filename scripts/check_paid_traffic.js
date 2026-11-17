@@ -22,6 +22,15 @@ for(const {a,r} of cases){
   const html=fs.readFileSync(prefix+key+'/index.html','utf8');
   assert.ok(!/href="(?:https:\/\/smallspacegreens.com)?\/guides\//.test(html),'Guide exit in '+prefix+key);
   assert.ok(html.includes('finder-shopping.js'));
+  const ids=[r.product,...r.extras,...(r.optional||[])];
+  assert.equal((html.match(/data-pick-link=/g)||[]).length,ids.length,'All picks must be visible in the overview');
+  for(const id of ids){
+   assert.ok(html.includes('href="#pick-'+id+'"'),'Missing product jump '+id);
+   assert.equal((html.match(new RegExp('id="pick-'+id+'"','g'))||[]).length,1,'Product jump needs one target '+id);
+  }
+  assert.ok(html.indexOf('class="setup-overview"')<html.indexOf('class="static-products"'),'Overview must come before the first detailed card');
+  assert.ok(!html.includes('using the included saucers'));
+
  }
 }
 for(const path of ['index.html','product-finder/index.html'])assert.ok(!/href="(?:https:\/\/smallspacegreens.com)?\/guides\//.test(fs.readFileSync(path,'utf8')));

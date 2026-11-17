@@ -337,10 +337,10 @@ window.SSG_FINDER_DATA = {
         "stockClaim": false
       },
       "photoReview": "Exact product photo supplied by the site owner on 2026-11-15.",
-      "packLabel": "1 pack · two 8-inch pots + saucers",
+      "packLabel": "1 pack · two 8-inch pots + drip trays",
       "benefits": [
         "Drainage holes help excess water escape",
-        "Matching saucers included for both pots"
+        "Matching drip trays included with both pots"
       ]
     },
     "soil": {
