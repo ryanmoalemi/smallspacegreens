@@ -174,7 +174,7 @@
     if(r.product==='basil-kit')return 'Start with the three included basil pods.';
     if(r.product==='microkit'||r.product.startsWith('micro-'))return r.product==='microkit'?'Start with one tray at a time; seed and coir cover two starter plantings.':'Start with one tray at a time; the tray kit includes coir for two plantings.';
     if(r.product==='tomato')return 'Start with one tomato plant in one grow bag.';
-    return 'Start with two pots, using the included saucers.';
+    return 'Start with two pots. The recommended pots come with matching drip trays.';
   }
   function spaceHint(spot,input) {
     if(spot==='dim')return 'Little direct sun · a grow light is included in your picks';

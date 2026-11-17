@@ -7,6 +7,19 @@
  }
  function notes(id,a,r){const details=root.SSGFinder.supplyDetails(id,a,r);return details?`<details class="growing-note"><summary>Growing notes</summary><p>${e(details)}</p></details>`:'';}
  function summary(a,r){return `<div class="shopping-summary"><div><strong>Your starter list</strong><span data-shopping-count></span></div><p>${e(root.SSGFinder.starterScope(a,r))}</p></div>`;}
+ const shortNames={tomato:'Tomato seeds',lettuce:'Lettuce seeds',salad:'Salad seeds',basil:'Basil seeds',herbs:'Herb seeds',radish:'Radish seeds','basil-kit':'Basil garden','micro-radish':'Radish seeds','micro-broccoli':'Broccoli seeds','micro-pea':'Pea seeds',microkit:'Growing kit',pot:'2 pots + trays',bag:'Fabric pot',soil:'Potting mix','soil-small':'Potting mix',light:'Grow light',coir:'Coir refill',fertilizer:'Plant food',windowbox:'Window boxes',tray:'Growing trays',drip:'Drip trays'};
+ function overview(a,r,data){
+  const required=[r.product,...(r.extras||[])],optional=r.optional||[],ids=[...required,...optional];
+  return `<nav class="setup-overview" aria-label="All recommended products"><div class="setup-overview-heading"><strong>Your complete setup</strong><span>${required.length} ${required.length===1?'item':'items'}${optional.length?` + ${optional.length} optional`:''} · Tap to view</span></div><div class="setup-overview-items">${ids.map(id=>{const p=data.products[id],extra=optional.includes(id);return `<a class="setup-overview-item${extra?' is-optional':''}" href="#pick-${e(id)}" data-pick-link="${e(id)}" aria-label="View ${e(p.name)}${extra?', optional extra':''}"><img class="${p.image.includes('m.media-amazon.com')?'amazon-photo':'product-photo'}" src="${e(p.image)}" alt="" width="36" height="36"><span><strong>${e(shortNames[id]||p.kind)}</strong><small>${extra?'Optional':'View item'} <span aria-hidden="true">↓</span></small></span></a>`;}).join('')}</div></nav>`;
+ }
+ function navigate(event,host){
+  const link=event.target.closest('[data-pick-link]');if(!link||!host.contains(link))return false;
+  const target=host.querySelector('#pick-'+link.dataset.pickLink);if(!target)return false;
+  event.preventDefault();target.focus({preventScroll:true});
+  const offset=(host.querySelector('.setup-overview')?.getBoundingClientRect().height||0)+12;
+  root.scrollTo({top:Math.max(0,target.getBoundingClientRect().top+root.scrollY-offset),behavior:root.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+  return true;
+ }
  function benefits(id,data){return `<ul class="product-benefits">${(data.products[id].benefits||[]).map(b=>`<li>${e(b)}</li>`).join('')}</ul>`;}
  function proof(a,r){
   const ev=root.SSGReviewMatcher.proof(a,r,root.SSG_REVIEW_EVIDENCE.records);
@@ -24,7 +37,7 @@
  }
  function optional(a,r,data){
   const ids=r.optional||[];if(!ids.length)return '';
-  return `<section class="optional-products" aria-label="Optional extras for later"><h2>Optional extras for later</h2><div>${ids.map(id=>{const p=data.products[id];return `<article class="optional-product" data-shopping-product="${e(id)}"><img src="${e(p.image)}" alt="${e(p.name)}" width="180" height="180" loading="lazy"><div><h3>${e(p.name)}</h3><p>${e(root.SSGFinder.supplyReason(id,a,r,data.products))}</p>${meta(id,a,r,data)}<a class="optional-buy" href="${e(p.url)}" target="_blank" rel="sponsored nofollow noopener" data-amazon="${e(p.asin)}">Check price on Amazon</a>${notes(id,a,r)}</div></article>`;}).join('')}</div></section>`;
+  return `<section class="optional-products" aria-label="Optional extras for later"><h2>Optional extras for later</h2><div>${ids.map(id=>{const p=data.products[id];return `<article class="optional-product" id="pick-${e(id)}" tabindex="-1" data-shopping-product="${e(id)}"><img src="${e(p.image)}" alt="${e(p.name)}" width="180" height="180" loading="lazy"><div><h3>${e(p.name)}</h3><p>${e(root.SSGFinder.supplyReason(id,a,r,data.products))}</p>${meta(id,a,r,data)}<a class="optional-buy" href="${e(p.url)}" target="_blank" rel="sponsored nofollow noopener" data-amazon="${e(p.asin)}">Check price on Amazon</a>${notes(id,a,r)}</div></article>`;}).join('')}</div></section>`;
  }
  function update(host,r,a){
   const count=1+(r.extras||[]).length;
@@ -33,5 +46,5 @@
   const alt=a&&root.SSGFinder.alternative(a,r),other=alt&&root.SSGFinder.route(alt.answers);
   if(other?.step==='result'){const n=1+other.extras.length;for(const label of host.querySelectorAll('[data-alternative-count]'))label.textContent=`${n} ${n===1?'item':'items'}`;}
  }
- root.SSGShopping={meta,summary,optional,update,benefits,proof,plan,comparison,notes};
+ root.SSGShopping={meta,summary,overview,navigate,optional,update,benefits,proof,plan,comparison,notes};
 })(window);
