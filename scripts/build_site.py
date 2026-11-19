@@ -1957,7 +1957,7 @@ def disclosure() -> str:
     )
 
 
-HERO_FIRST_SLUGS = {"3-hour-balcony-salad", "balcony-salad-garden"}
+HERO_FIRST_SLUGS = {"3-hour-balcony-salad", "balcony-salad-garden", "microgreens-in-a-small-apartment"}
 
 
 def split_opening_hero(body: str) -> tuple[str, str]:
