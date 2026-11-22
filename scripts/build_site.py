@@ -102,6 +102,7 @@ GUIDES = [
         "description": "Decide whether your windowsill can grow a tray of microgreens, and when the published guidance says to add a lamp. Measure the sill and watch the stems.",
         "h1": "Can you grow microgreens on a windowsill?",
         "dek": "Start with a small tray of radish microgreens (arugula is a close second), and judge the window by the stems: upright and colored is enough; a hard lean or pale leaves means add a lamp.",
+        "hero_dek": "Try a small radish tray, and judge the stems.",
         "og": "windowsill",
         "updated_label": "November 14, 2026",
     },
@@ -1958,12 +1959,12 @@ def disclosure() -> str:
     )
 
 
-HERO_FIRST_SLUGS = {"3-hour-balcony-salad", "balcony-salad-garden", "microgreens-in-a-small-apartment", "apartment-seed-starting"}
+HERO_FIRST_SLUGS = {"3-hour-balcony-salad", "balcony-salad-garden", "microgreens-in-a-small-apartment", "apartment-seed-starting", "windowsill-microgreens"}
 # Full 720x1280 pin photo in the header, not the cropped 180/240 banner used on other hero-first pages.
-PIN_FULL_HERO_SLUGS = {"apartment-seed-starting"}
+PIN_FULL_HERO_SLUGS = {"apartment-seed-starting", "windowsill-microgreens"}
 
 PIN_FULL_HERO_CSS = """<style>
-/* Seed-starting guide only: show the full pin photo, not the cropped 180/240 banner.
+/* Pin-full hero pages only: show the full pin photo, not the cropped 180/240 banner.
    Cap height so the short headline and one-line dek stay on the first screen.
    Fonts are unchanged. */
 body.hero-pin-full .article-header-photo-first .pin-hero img,
@@ -1971,7 +1972,7 @@ body.page-article.hero-pin-full .article-header-photo-first .pin-hero img,
 body.page-article.hero-first.hero-pin-full .article-header-photo-first .photo img[src$=".jpg"],
 body.page-article.hero-first.hero-pin-full .article-header-photo-first .photo img[src$=".webp"]{
   height:auto;
-  max-height:58vh;
+  max-height:50vh;
   max-width:520px;
   width:auto;
   margin-left:auto;
