@@ -111,6 +111,7 @@ GUIDES = [
         "description": "Raise vegetable transplants in an apartment for a balcony or garden, with light, timing, and crops you should not eat as microgreens. Check the cited sources.",
         "h1": "Starting vegetable seeds in an apartment",
         "dek": "Cornell sources say a south window is not enough for sturdy vegetable transplants kept for weeks; a window is a better fit for a short microgreen crop than for tomatoes, peppers, or eggplant.",
+        "hero_dek": "Start transplants under a lamp, not a window.",
         "og": "seed-starting",
         "updated_label": "November 14, 2026",
     },
@@ -1674,7 +1675,7 @@ if (toc && window.matchMedia("(max-width: 899px)").matches) toc.removeAttribute(
 <link rel="icon" href="/favicon.svg?v={asset_version('favicon.svg')}" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Small Space Greens" href="/feed.xml">
 <link rel="stylesheet" href="/css/styles.css?v={asset_version('css/styles.css')}">
-<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
+{page.get("head_extra", "")}<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
 <body class="page-{page['kind']}{info_body_class(page)}{page.get('body_class', '')}">
 <header class="site-header">
@@ -1957,7 +1958,41 @@ def disclosure() -> str:
     )
 
 
-HERO_FIRST_SLUGS = {"3-hour-balcony-salad", "balcony-salad-garden", "microgreens-in-a-small-apartment"}
+HERO_FIRST_SLUGS = {"3-hour-balcony-salad", "balcony-salad-garden", "microgreens-in-a-small-apartment", "apartment-seed-starting"}
+# Full 720x1280 pin photo in the header, not the cropped 180/240 banner used on other hero-first pages.
+PIN_FULL_HERO_SLUGS = {"apartment-seed-starting"}
+
+PIN_FULL_HERO_CSS = """<style>
+/* Seed-starting guide only: show the full pin photo, not the cropped 180/240 banner.
+   Cap height so the short headline and one-line dek stay on the first screen.
+   Fonts are unchanged. */
+body.hero-pin-full .article-header-photo-first .pin-hero img,
+body.page-article.hero-pin-full .article-header-photo-first .pin-hero img,
+body.page-article.hero-first.hero-pin-full .article-header-photo-first .photo img[src$=".jpg"],
+body.page-article.hero-first.hero-pin-full .article-header-photo-first .photo img[src$=".webp"]{
+  height:auto;
+  max-height:58vh;
+  max-width:520px;
+  width:auto;
+  margin-left:auto;
+  margin-right:auto;
+  aspect-ratio:auto;
+  object-fit:contain;
+  object-position:center;
+}
+@media(min-width:800px){
+  body.hero-pin-full .article-header-photo-first .pin-hero img,
+  body.page-article.hero-pin-full .article-header-photo-first .pin-hero img,
+  body.page-article.hero-first.hero-pin-full .article-header-photo-first .photo img[src$=".jpg"],
+  body.page-article.hero-first.hero-pin-full .article-header-photo-first .photo img[src$=".webp"]{
+    height:auto;
+    max-height:58vh;
+    max-width:520px;
+    width:auto;
+  }
+}
+</style>
+"""
 
 
 def split_opening_hero(body: str) -> tuple[str, str]:
@@ -2058,7 +2093,7 @@ def article_page(guide: dict, body: str) -> str:
         + header_open
         + (hero if hero else "")
         + f"<h1>{h1_html}</h1>"
-        + f"<p class=\"dek\">{esc(guide['dek'])}</p>"
+        + f"<p class=\"dek\">{esc(guide.get('hero_dek') or guide['dek'])}</p>"
         + (verdict if verdict else "")
         + f"<p class=\"byline\">By <a href=\"/about/\">Ryan Moalemi</a>. Updated {esc(guide.get('updated_label', DATE_LABEL))}.</p>"
         + '</header>'
@@ -2071,7 +2106,11 @@ def article_page(guide: dict, body: str) -> str:
         "description": guide["description"],
         "url": url,
         "kind": "article",
-        "body_class": " hero-first" if hero else "",
+        "body_class": (
+            " hero-first hero-pin-full" if hero and guide["slug"] in PIN_FULL_HERO_SLUGS
+            else " hero-first" if hero else ""
+        ),
+        "head_extra": PIN_FULL_HERO_CSS if hero and guide["slug"] in PIN_FULL_HERO_SLUGS else "",
         "nav": guide.get("nav", "/guides/"),
         "image": page_image,
         "signup": show_signup,
