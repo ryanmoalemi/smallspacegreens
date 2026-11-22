@@ -1,0 +1,47 @@
+{
+  "source": "https://github.com/Renhuai123/ziwei-doushu",
+  "commit": "39c0abd3b8dac609975dddfadd4d4e1d3a978deb",
+  "full_source_archive": "ziwei-doushu-source-39c0abd3.zip",
+  "source_files": 525,
+  "runtime_dependencies": [
+    {
+      "name": "iztro",
+      "version": "2.6.1",
+      "license": "MIT"
+    },
+    {
+      "name": "lunar-javascript",
+      "version": "1.7.7",
+      "license": "MIT"
+    },
+    {
+      "name": "lunar-lite",
+      "version": "0.2.8",
+      "license": "MIT"
+    },
+    {
+      "name": "lunar-typescript",
+      "version": "1.8.6",
+      "license": "MIT"
+    },
+    {
+      "name": "dayjs",
+      "version": "1.11.23",
+      "license": "MIT"
+    },
+    {
+      "name": "i18next",
+      "version": "23.16.8",
+      "license": "MIT"
+    },
+    {
+      "name": "@babel/runtime",
+      "version": "7.29.7",
+      "license": "MIT"
+    }
+  ],
+  "bundle_sha256": "f2f3de80282e342e0df8c6077ebc2012f992794c8d19a3c3aedfa082f5483dff",
+  "bundle_bytes": 878137,
+  "gzip_bytes": 260439,
+  "source_archive_sha256": null
+}

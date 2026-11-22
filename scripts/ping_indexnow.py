@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://smallspacegreens.com"
 INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow"
 
-SKIP_PREFIXES = ("assets/", "css/", "js/", "src/", "scripts/", "docs/", ".github/")
+SKIP_PREFIXES = ("assets/", "css/", "js/", "src/", "scripts/", "docs/", ".github/", "fortune-lab/")
 SKIP_NAMES = {"CNAME", ".nojekyll", "404.html", "feed.xml", "README.md", ".gitignore"}
 KEY_FILE_NAME = re.compile(r"^[0-9a-f]{32}\.txt$")
 

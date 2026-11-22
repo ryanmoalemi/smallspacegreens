@@ -1,0 +1,4 @@
+Bundled license information:
+
+lunar-typescript/dist/lib/index.cjs:
+  /*! lunar-typescript v1.8.7 */

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#102c27">
+  <meta name="description" content="Discover a symbolic starseed archetype and create a simple seven-day ritual, tailored to your interests and the time you have.">
+  <title>Starseed Rituals · A little more you</title>
+  <link rel="stylesheet" href="starseed.css">
+  <script src="starseed.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a href="./" class="brand" aria-label="Starseed Rituals home"><span class="brand-symbol" aria-hidden="true">✧</span><span>Starseed<span class="brand-sub">RITUALS</span></span></a>
+    <nav aria-label="Demo navigation"><a href="../">All concepts</a><span class="demo-label">WORKING DEMO</span></nav>
+  </header>
+  <main id="main">
+    <section class="intro" id="intro" aria-labelledby="intro-title">
+      <div class="intro-copy">
+        <p class="eyebrow"><span aria-hidden="true">✦</span> A RITUAL THAT FEELS LIKE YOU</p>
+        <h1 id="intro-title">A small ritual.<br>A little more <em>you.</em></h1>
+        <p class="hero-description">Find the cosmic archetype that speaks to you. Turn it into seven days of small, meaningful moments.</p>
+        <button class="button button-primary" id="start-quiz">Find my ritual <span aria-hidden="true">✧</span></button>
+        <p class="start-note">4 questions <span aria-hidden="true">·</span> About a minute <span aria-hidden="true">·</span> No email</p>
+      </div>
+      <div class="atlas-art" aria-hidden="true">
+        <svg class="ritual-atlas" viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><radialGradient id="atlasGlow"><stop stop-color="#9AB994" stop-opacity=".27"/><stop offset="1" stop-color="#182F28" stop-opacity="0"/></radialGradient><linearGradient id="leafGlow" x1="200" y1="170" x2="350" y2="400"><stop stop-color="#E4D4A3"/><stop offset="1" stop-color="#A4C9AC"/></linearGradient></defs>
+          <circle cx="280" cy="280" r="265" fill="url(#atlasGlow)"/>
+          <circle cx="280" cy="280" r="229" stroke="#CFBC8D" stroke-opacity=".34"/>
+          <circle cx="280" cy="280" r="218" stroke="#CFBC8D" stroke-opacity=".14" stroke-dasharray="2 9"/>
+          <circle cx="280" cy="280" r="172" stroke="#CFBC8D" stroke-opacity=".25"/>
+          <circle cx="280" cy="280" r="159" stroke="#CFBC8D" stroke-opacity=".10"/>
+          <path d="M280 41V76M280 484V519M41 280H76M484 280H519" stroke="#CFBC8D" stroke-opacity=".4"/>
+          <path d="M118 118L143 143M417 417L442 442M118 442L143 417M417 143L442 118" stroke="#CFBC8D" stroke-opacity=".25"/>
+          <ellipse cx="280" cy="280" rx="100" ry="218" transform="rotate(-37 280 280)" stroke="#CFBC8D" stroke-opacity=".23"/>
+          <ellipse cx="280" cy="280" rx="100" ry="218" transform="rotate(37 280 280)" stroke="#CFBC8D" stroke-opacity=".23"/>
+          <path d="M280 175L293 215L335 228L293 241L280 283L267 241L225 228L267 215Z" fill="url(#leafGlow)"/>
+          <path d="M280 301V398M280 337C251 336 229 319 225 290C255 292 277 308 280 337ZM280 361C309 359 330 343 336 315C305 316 282 333 280 361ZM280 385C258 383 244 371 239 351C261 353 277 366 280 385Z" stroke="url(#leafGlow)" stroke-width="1.6"/>
+          <path d="M257 403H303M265 410H295" stroke="#CFBC8D" stroke-opacity=".5"/>
+          <circle cx="141" cy="98" r="5" fill="#D7C18A"/><circle cx="458" cy="358" r="5" fill="#D7C18A"/><circle cx="113" cy="390" r="4" fill="#BDD6B3"/><circle cx="377" cy="125" r="4" fill="#BDD6B3"/>
+          <path d="M457 150L460 159L469 162L460 165L457 174L454 165L445 162L454 159Z" fill="#D7C18A"/>
+          <path d="M144 250L146 257L153 259L146 261L144 268L142 261L135 259L142 257Z" fill="#D7C18A"/>
+          <path d="M365 412L367 419L374 421L367 423L365 430L363 423L356 421L363 419Z" fill="#D7C18A"/>
+          <text x="280" y="22" text-anchor="middle" fill="#D7CBAA" font-family="Georgia,serif" font-size="12" letter-spacing="4">THE RITUAL ATLAS</text>
+          <text x="280" y="548" text-anchor="middle" fill="#A9C2AC" font-family="Arial,sans-serif" font-size="10" letter-spacing="3">CONNECTION · RHYTHM · WONDER · FREEDOM</text>
+        </svg>
+        <span class="art-note">A little wonder.<br>A place to begin.</span>
+      </div>
+      <div class="intro-bottom">
+        <p>A symbolic personality quiz for self-reflection and entertainment.<br>Archetypes are creative themes, not a claim about your ancestry or future.</p>
+        <span class="intro-bottom-mark" aria-hidden="true">✶</span>
+        <p>Your free result includes an archetype,<br>a seven-day plan, and optional ritual companions.</p>
+      </div>
+    </section>
+    <section class="quiz-section" id="quiz-section" hidden aria-labelledby="question-title">
+      <div class="quiz-topline"><button class="text-button" id="quiz-back">Back</button><span id="step-label">Question 1 of 4</span><button class="text-button" id="quiz-restart">Restart</button></div>
+      <div class="progress-track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="4" aria-valuenow="1" id="quiz-progress"><span id="progress-fill"></span></div>
+      <div class="question-heading"><p class="eyebrow" id="question-category"></p><h1 id="question-title" tabindex="-1"></h1><p id="question-description"></p></div>
+      <div class="options" id="quiz-options"></div>
+      <p class="quiz-privacy">Your answers stay in this tab. No birth details or email required.</p>
+    </section>
+    <section class="result-section" id="result-section" hidden aria-labelledby="result-title"></section>
+  </main>
+  <footer class="site-footer"><span>Starseed Rituals <span aria-hidden="true">✧</span> Make a little space for yourself.</span><div><a href="../business.html#starseed">Concept &amp; monetization</a><button class="text-button" id="about-button">How it works</button></div></footer>
+  <dialog id="info-dialog" class="info-dialog" aria-labelledby="dialog-title"><form method="dialog"><button class="dialog-close" aria-label="Close dialog">×</button></form><div id="dialog-content"></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

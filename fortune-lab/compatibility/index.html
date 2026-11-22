@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#fbf4f7">
+  <meta name="description" content="Two birthdays. Two ways of seeing the world. Explore a symbolic connection reading and start a more thoughtful conversation.">
+  <title>Orbit Two · A little closer</title>
+  <link rel="stylesheet" href="../assets/shared.css">
+  <link rel="stylesheet" href="compatibility.css">
+</head>
+<body class="pair">
+  <noscript><div class="noscript">This interactive reading needs JavaScript. Enable it to try the four-step experience.</div></noscript>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="../" aria-label="Orbit Two, back to the concept collection"><b aria-hidden="true">◎</b> Orbit Two</a>
+      <nav class="nav" aria-label="Main navigation"><a href="../">All concepts</a><a class="optional" href="../business.html#compatibility">Business model</a><span class="demo-pill">Working demo</span></nav>
+    </header>
+
+    <main>
+      <section class="view" id="intro-view" aria-labelledby="intro-title">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">A little closer, a little clearer</p>
+            <h1 id="intro-title">Some connections have their own <em>gravity.</em></h1>
+            <p>Two birthdays. Two ways of seeing the world. Find a fresh perspective on your connection, then turn it into a real conversation.</p>
+            <div class="actions"><button class="btn" id="start-reading">Explore our connection</button><button class="btn secondary" id="sample-reading">Try Alex &amp; Jordan’s reading</button></div>
+            <p class="subnote">Four short steps · Free reading · No email needed</p>
+          </div>
+          <div class="art pair-art" aria-hidden="true">
+            <svg class="orbit-art" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="rose-orb"><stop stop-color="#e9bbca" stop-opacity=".8"/><stop offset="1" stop-color="#efd5df" stop-opacity=".16"/></radialGradient>
+                <radialGradient id="plum-orb"><stop stop-color="#af8bc1" stop-opacity=".5"/><stop offset="1" stop-color="#e6d8ed" stop-opacity=".12"/></radialGradient>
+                <linearGradient id="pair-line" x1="79" y1="79" x2="413" y2="388"><stop stop-color="#b46e8a"/><stop offset="1" stop-color="#735583"/></linearGradient>
+              </defs>
+              <circle cx="185" cy="220" r="135" fill="url(#rose-orb)"/>
+              <circle cx="295" cy="245" r="135" fill="url(#plum-orb)"/>
+              <circle cx="185" cy="220" r="131" stroke="url(#pair-line)" stroke-width="1.1"/>
+              <circle cx="295" cy="245" r="131" stroke="url(#pair-line)" stroke-width="1.1"/>
+              <circle cx="185" cy="220" r="116" stroke="#ad6a87" opacity=".2"/>
+              <circle cx="295" cy="245" r="116" stroke="#8b638f" opacity=".24"/>
+              <ellipse cx="240" cy="232" rx="220" ry="74" transform="rotate(-33 240 232)" stroke="#8f5b83" opacity=".38"/>
+              <ellipse cx="240" cy="232" rx="208" ry="83" transform="rotate(34 240 232)" stroke="#b37795" opacity=".2"/>
+              <path d="M240 161V304M169 232H311" stroke="#8e5f80" opacity=".13"/>
+              <path d="m240 207 7 18 18 7-18 7-7 18-7-18-18-7 18-7z" fill="#925b80"/>
+              <circle cx="97" cy="123" r="6" fill="#be7c98"/>
+              <circle cx="405" cy="316" r="6" fill="#8b638f"/>
+              <circle cx="365" cy="134" r="3" fill="#8b638f"/>
+              <path d="m77 327 3-9 3 9 9 3-9 3-3 9-3-9-9-3zM389 91l3-9 3 9 9 3-9 3-3 9-3-9-9-3z" fill="#ab7397"/>
+              <text x="143" y="226" fill="#925b80" font-size="18" font-family="Georgia" text-anchor="middle">you</text>
+              <text x="333" y="251" fill="#795982" font-size="18" font-family="Georgia" text-anchor="middle">them</text>
+              <text x="240" y="428" fill="#715b6c" font-size="10" letter-spacing="3.6" text-anchor="middle">TWO STORIES. ONE SHARED SPACE.</text>
+            </svg>
+          </div>
+        </div>
+        <div class="strip">
+          <div><div class="mark" aria-hidden="true">◌</div><h3>Understand the contrast</h3><p>Explore two symbolic personality themes without reducing your connection to a score.</p></div>
+          <div><div class="mark" aria-hidden="true">∞</div><h3>Make room for both</h3><p>Your chosen focus and conversation styles shape the reading and suggestions.</p></div>
+          <div><div class="mark" aria-hidden="true">✧</div><h3>Take something with you</h3><p>Get questions worth asking and a personalized report you can keep.</p></div>
+        </div>
+      </section>
+
+      <section class="view" id="quiz-view" hidden aria-labelledby="quiz-title">
+        <div class="quiz-shell">
+          <div class="quiz-top"><span id="step-label">Step 1 of 4</span><span>Our connection</span></div>
+          <div class="progress" id="quiz-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="4" aria-valuenow="1"><span id="progress-fill"></span></div>
+          <h1 id="quiz-title">Who’s in this orbit?</h1>
+          <p class="quiz-sub" id="quiz-subtitle">First names are optional. Birthdays create your symbolic number themes.</p>
+          <form id="quiz-form" novalidate>
+            <div id="quiz-fields"></div>
+            <p class="error" id="quiz-error" role="alert"></p>
+            <div class="quiz-actions"><button type="button" class="btn text" id="go-back">Back</button><button type="submit" class="btn" id="continue">Continue</button></div>
+          </form>
+          <p class="quiz-privacy">Your details stay in this tab. No account or email required.</p>
+        </div>
+      </section>
+
+      <section class="view" id="results-view" hidden aria-labelledby="result-title">
+        <div class="results">
+          <div class="result-top"><p class="eyebrow">Your shared orbit</p><button class="btn text" id="edit-reading">Edit your answers</button></div>
+          <div id="result-content"></div>
+          <div class="wide-panel conversation-panel">
+            <p class="eyebrow">The conversation starts here</p><h2>One question. A little more space.</h2>
+            <p class="prompt-card" id="conversation-prompt" aria-live="polite"></p>
+            <div class="prompt-controls"><button class="btn secondary" id="next-prompt">Another question</button><span class="small muted" id="prompt-counter"></span></div>
+          </div>
+          <div class="offer">
+            <div><p class="offer-price">Proposed offer · $19 one time</p><h2>A deeper look at your shared orbit.</h2><p>Both profiles, your chosen relationship focus, a conversation plan and seven days of thoughtful prompts.</p></div>
+            <div class="offer-cta"><button class="btn" id="preview-report">Preview the $19 pair report</button><p class="offer-note">Full preview is free. No payment collected.</p></div>
+          </div>
+          <div id="merchant-content"></div>
+          <details class="method"><summary>How this reading works</summary><p>Orbit Two uses a digit-sum numerology method: add all the digits in each birth date, then reduce the sum to 1–9, retaining 11, 22 and 33 when encountered. We combine those symbolic themes with the relationship type, focus and conversation preferences you choose. The prompts and interpretations are original editorial content. This is an entertainment and reflection tool, not a scientific compatibility test or a prediction of your relationship.</p><p>We do not send or save the names, birthdays or reading on a server. Copying, downloading or printing is your choice. Product links open a merchant’s website, where its own privacy and purchase terms apply.</p></details>
+          <div class="results-actions"><button class="btn secondary" id="copy-reading">Copy our short reading</button><button class="btn text" id="restart-reading">Start a new reading</button><a class="btn text" href="../">Compare all concepts</a></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><p>Symbolic reflection for entertainment. Real connections are shaped by people, choices and circumstances. This demo does not predict relationship outcomes.</p><a href="../business.html#compatibility">How this concept earns</a></footer>
+  </div>
+
+  <dialog id="report-modal" aria-labelledby="report-title">
+    <div class="modal-head"><p>Personalized pair report · Free demo preview</p><button type="button" id="close-report" aria-label="Close report">×</button></div>
+    <div class="modal-body" id="full-report"></div>
+    <div class="modal-actions"><button class="btn" id="download-report">Save as text</button><button class="btn secondary" id="print-report">Print / save PDF</button></div>
+  </dialog>
+  <script type="module" src="compatibility.js"></script>
+</body>
+</html>

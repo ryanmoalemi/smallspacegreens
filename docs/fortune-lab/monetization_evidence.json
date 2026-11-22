@@ -1,0 +1,262 @@
+{
+  "checked_date": "2026-11-22",
+  "market": "US",
+  "status": "Research for working demos; all outbound links below are ordinary untracked merchant links. No affiliate acceptance, account creation, payment connection, or sales validation has been performed.",
+  "programs": [
+    {
+      "id": "art-of-tea",
+      "name": "Art of Tea / AWIN",
+      "program_url": "https://www.artoftea.com/pages/affiliates",
+      "network_url": "https://ui.awin.com/merchant-profile/85315",
+      "public_commission_percent": 10,
+      "public_cookie_days": 30,
+      "approval_required": true,
+      "sources": [
+        "turn589795514view0",
+        "turn549454309view0"
+      ],
+      "notes": "Official merchant and AWIN pages agree on 10%. AWIN says 30-day attribution. Program offers product feed and creatives after acceptance. Best confirmed candidate for tea ritual finder."
+    },
+    {
+      "id": "intelligent-change",
+      "name": "Intelligent Change",
+      "program_url": "https://www.intelligentchange.com/pages/ic-partner-program",
+      "network_url": "https://ui.awin.com/merchant-profile/68866",
+      "public_commission_percent": 10,
+      "public_cookie_days": null,
+      "approval_required": true,
+      "sources": [
+        "turn589795514view2",
+        "turn293210469view0",
+        "turn584169287search4"
+      ],
+      "notes": "Official direct program says 10% and audience 10% discount after acceptance. Direct creator requirements include 2,500 engaged followers, prior product use, and monthly original content. An AWIN advertiser listing separately reports 10% and 90 days; confirm whether website-publisher route is currently open rather than mixing its terms with direct creator program."
+    },
+    {
+      "id": "keen",
+      "name": "Keen",
+      "program_url": "https://www.keen.com/affiliate",
+      "faq_url": "https://help.keen.com/hc/en-us/articles/4409272169363-Affiliate-Program-FAQ",
+      "public_commission_percent": null,
+      "public_bounty_usd": null,
+      "approval_required": true,
+      "sources": [
+        "turn549454309view1",
+        "turn584169287search0",
+        "turn584169287search2"
+      ],
+      "notes": "Main official page confirms one-time bounty on first paid new customer and 30-day free-to-paid conversion window; it does not give a numeric bounty. FAQ says $50, but FAQ/main/agreement name different platforms (TUNE/BargesTech/Impact) and payout thresholds. Treat $50 as unconfirmed legacy/support-page amount, not base-case economics. 18+, entertainment. Confirm active offer in approved affiliate account."
+    },
+    {
+      "id": "hay-house",
+      "name": "Hay House",
+      "program_url": "https://hayhouse.zendesk.com/hc/en-us/articles/4404646361623-Does-Hay-House-offer-a-Affiliate-Partnership-Program",
+      "public_commission_percent": null,
+      "approval_required": true,
+      "sources": [
+        "turn589795514view1"
+      ],
+      "notes": "Official help article says external affiliate program was discontinued in October 2021. Do not claim a direct Hay House partnership. It points to Amazon Associates as an alternative for eligible titles. Use merchant pages for facts, then approved product-specific Amazon links once tracked catalog is configured."
+    }
+  ],
+  "products": [
+    {
+      "id": "five-minute-journal",
+      "name": "The Five Minute Journal",
+      "merchant": "Intelligent Change",
+      "url": "https://www.intelligentchange.com/products/the-five-minute-journal",
+      "image_url": "https://www.intelligentchange.com/cdn/shop/products/4X5-1600x2000-Intelligent-Change-Five-Minute-Journal-Linen-1_0fd12c11-f576-4621-be36-5fcb307c925b.jpg?v=1671124315&width=1120",
+      "observed_price_usd": 32,
+      "display_price_recommendation": "Check current price",
+      "quantity": "One undated journal, 264 pages, about six months of daily prompts",
+      "facts": [
+        "Five daily prompts",
+        "Weekly challenges",
+        "Linen-bound, recycled paper"
+      ],
+      "why_fit": "For visitors who choose short writing rituals and daily reflection.",
+      "limitation": "A structured gratitude journal, not a blank notebook or personalized astrology report.",
+      "program_id": "intelligent-change",
+      "sources": [
+        "turn815639596view0"
+      ],
+      "image_source": "turn549454309view2"
+    },
+    {
+      "id": "couples-cards",
+      "name": "Get Closer Conversation Game: Couples",
+      "merchant": "Intelligent Change",
+      "url": "https://www.intelligentchange.com/collections/play/products/get-closer-couples-edition",
+      "image_url": "https://www.intelligentchange.com/cdn/shop/files/4X5-Intelligent-Change-Get-Closer-Couples-New-1_ded14498-1ff0-4f31-a38e-bcf512b01bbf.jpg?v=1778777799&width=1120",
+      "observed_price_usd": 30,
+      "display_price_recommendation": "Check current price",
+      "quantity": "100 prompt and wild cards",
+      "facts": [
+        "Three levels of conversation",
+        "Love, dreams, and life-experience topics",
+        "Merchant recommends age 18+"
+      ],
+      "why_fit": "A tangible next step for a couple who wants a shared conversation activity.",
+      "limitation": "Requires two willing participants; no claim to measure relationship health or predict success.",
+      "program_id": "intelligent-change",
+      "sources": [
+        "turn296933073view2"
+      ],
+      "image_source": "turn549454309view4"
+    },
+    {
+      "id": "starseed-oracle",
+      "name": "The Starseed Oracle",
+      "merchant": "Hay House",
+      "url": "https://shop.hayhouse.com/products/the-starseed-oracle",
+      "image_url": "https://shop.hayhouse.com/cdn/shop/files/starseed_2x_c6b5c916-cbec-4154-9f58-6945f6fb1b55.png?v=1777882529&width=1946",
+      "observed_price_usd": 15,
+      "regular_price_usd": 24.99,
+      "display_price_recommendation": "Check current price and availability",
+      "quantity": "53 cards and guidebook",
+      "facts": [
+        "Rebecca Campbell and Danielle Noel",
+        "English-language deck and guidebook",
+        "ISBN 9781788172882"
+      ],
+      "why_fit": "For visitors who enjoy starseed-inspired symbolism and drawing reflection cards.",
+      "limitation": "Spiritual symbolism; do not frame a card deck or quiz as proof of extraterrestrial identity. Merchant markup simultaneously exposes sold-out and in-stock text, so avoid asserting stock.",
+      "program_id": "hay-house",
+      "sources": [
+        "turn396677731view1"
+      ],
+      "image_source": "turn404950076view2"
+    },
+    {
+      "id": "moonology-oracle",
+      "name": "Moonology Oracle Cards",
+      "merchant": "Hay House",
+      "url": "https://shop.hayhouse.com/products/moonology-oracle-cards",
+      "image_url": "https://shop.hayhouse.com/cdn/shop/files/9781781809969.jpg?v=1777577214&width=1946",
+      "observed_price_usd": 13,
+      "regular_price_usd": 22.99,
+      "display_price_recommendation": "Check current price and availability",
+      "quantity": "44 cards and guidebook",
+      "facts": [
+        "By Yasmin Boland",
+        "English-language deck",
+        "ISBN 9781781809969"
+      ],
+      "why_fit": "For users who prefer moon imagery and card-based reflection to writing.",
+      "limitation": "Oracle deck, not a standard 78-card tarot deck. No promise that the cards predict events. Stock markup conflicts, so avoid stock claims.",
+      "program_id": "hay-house",
+      "sources": [
+        "turn404950076view0"
+      ],
+      "image_source": "turn296933073view4"
+    },
+    {
+      "id": "pacific-mint",
+      "name": "Pacific Coast Mint Tea",
+      "merchant": "Art of Tea",
+      "url": "https://www.artoftea.com/products/pacific-coast-mint-caffeine-free?variant=32498733776941",
+      "image_url": "https://www.artoftea.com/cdn/shop/products/PACIFIC_COAST_MINT.jpg?v=1763055758&width=360",
+      "observed_price_usd": 22,
+      "display_price_recommendation": "Choose size and check price",
+      "quantity": "One loose-leaf tea pack; confirm selected size at merchant",
+      "facts": [
+        "Organic peppermint and organic spearmint only",
+        "Caffeine-free",
+        "Merchant flavor notes: refreshing, sharp, smooth"
+      ],
+      "ingredients": [
+        "peppermint",
+        "spearmint"
+      ],
+      "caffeine": "none",
+      "why_fit": "For a visitor who chooses a mint flavor and a simple tea ritual.",
+      "limitation": "Loose leaf needs an infuser. Exclude if mint is an avoided ingredient; do not suggest physiological or supernatural benefits.",
+      "program_id": "art-of-tea",
+      "sources": [
+        "turn396677731view3"
+      ],
+      "image_source": "turn404950076view3"
+    },
+    {
+      "id": "egyptian-chamomile",
+      "name": "Egyptian Chamomile Tea",
+      "merchant": "Art of Tea",
+      "url": "https://www.artoftea.com/products/egyptian-chamomile-caffeine-free",
+      "image_url": "https://www.artoftea.com/cdn/shop/products/EGYPTIAN_CHAMOMILE.jpg?v=1739313719&width=360",
+      "observed_price_usd": 25,
+      "display_price_recommendation": "Choose size and check price",
+      "quantity": "One loose-flower tea pack; choose size at merchant",
+      "facts": [
+        "Single ingredient: organic chamomile",
+        "Caffeine-free",
+        "Floral taste with soft sweetness"
+      ],
+      "ingredients": [
+        "chamomile"
+      ],
+      "caffeine": "none",
+      "why_fit": "For a visitor who prefers a floral taste and selects no chamomile avoidance.",
+      "limitation": "Loose flowers need an infuser. Hide when chamomile is an avoided ingredient; make no sleep or treatment claims.",
+      "program_id": "art-of-tea",
+      "sources": [
+        "turn296933073view0"
+      ],
+      "image_source": "turn549454309view6"
+    },
+    {
+      "id": "tea-infuser",
+      "name": "Art of Tea Stainless Steel Tea Infuser",
+      "merchant": "Art of Tea",
+      "url": "https://www.artoftea.com/products/art-of-tea-infuser",
+      "image_url": "https://www.artoftea.com/cdn/shop/files/20260212_ArtofTea__AudreyMa_0056-Edit.jpg?v=1774556062&width=360",
+      "observed_price_usd": 17,
+      "display_price_recommendation": "Check current price",
+      "quantity": "One stainless-steel infuser",
+      "facts": [
+        "Stainless steel",
+        "Dishwasher-safe per merchant",
+        "Basket for loose-leaf tea"
+      ],
+      "why_fit": "Optional practical extra only when the visitor needs a loose-leaf tea infuser.",
+      "limitation": "Do not suggest another if the visitor already has suitable equipment.",
+      "program_id": "art-of-tea",
+      "sources": [
+        "turn296933073view1"
+      ],
+      "image_source": "turn549454309view7"
+    },
+    {
+      "id": "sencha",
+      "name": "Sencha Tea",
+      "merchant": "Art of Tea",
+      "url": "https://www.artoftea.com/products/sencha",
+      "image_url": null,
+      "observed_price_usd": 18,
+      "display_price_recommendation": "Check current price and availability",
+      "quantity": "One loose-leaf green tea pack; size varies",
+      "facts": [
+        "Organic green tea only",
+        "Contains caffeine; merchant classifies it as medium",
+        "Origin: China; grassy flavor"
+      ],
+      "ingredients": [
+        "green tea"
+      ],
+      "caffeine": "present",
+      "why_fit": "For visitors who want a grassy green tea and explicitly allow caffeine.",
+      "limitation": "Do not show for caffeine-free preference. Avoid claiming Japanese origin: SEO title says Japanese but product description says China. Some parsed markup says sold out; availability must be checked.",
+      "program_id": "art-of-tea",
+      "sources": [
+        "turn878419397search1"
+      ]
+    }
+  ],
+  "implementation_notes": [
+    "Use ordinary merchant product links now. Do not invent affiliate IDs, describe these merchants as current partners, or claim commissions are connected.",
+    "Use 'View at [merchant]' or 'Check current price' for external product CTAs. Merchant owns price and checkout; prices in this evidence file are dated observations.",
+    "Merchant image URLs are reference product photography. Obtain partner-authorized creative rights/feed before scaled live promotion; never imply permission was verified merely because a URL is publicly accessible.",
+    "Recommend tea by stated flavor, caffeine preference and ingredient avoidance, not by alleged celestial biology. Frame starseed outcomes as playful spiritual archetypes.",
+    "Keep health, wealth, relationship certainty, and extraterrestrial origin claims out of report outcomes. Price tests and conversion assumptions below are experiments, not demonstrated demand.",
+    "Record concept_id, offer_id, quiz completion and outbound product click without birth dates, partner names, email, or report text in analytics."
+  ]
+}

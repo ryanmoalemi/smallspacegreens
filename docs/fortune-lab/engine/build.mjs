@@ -1,0 +1,30 @@
+import {build} from 'esbuild';
+import {readFileSync,writeFileSync,existsSync,mkdirSync,statSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {gzipSync} from 'node:zlib';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.dirname(fileURLToPath(import.meta.url));
+process.chdir(root);
+await build({entryPoints:['src/index.ts'],bundle:true,format:'esm',platform:'browser',target:'es2020',minify:true,legalComments:'linked',outfile:'dist/chart-engine.js',banner:{js:'/*! Fortune Lab chart adapter; upstream MIT chart code and dependency notices: THIRD_PARTY_LICENSES.txt. */'}});
+const read=p=>readFileSync(p,'utf8');
+const packages=['iztro','lunar-javascript','lunar-lite','lunar-typescript','dayjs','i18next','@babel/runtime'];
+const lock=JSON.parse(read('package-lock.json'));
+const license=read('LICENSE-ziwei-doushu.txt');
+const sections=['Renhuai123/ziwei-doushu\nSource: https://github.com/Renhuai123/ziwei-doushu\nCommit: 39c0abd3b8dac609975dddfadd4d4e1d3a978deb\n\n'+license];
+const dependencies=[];
+for(const name of packages){
+  const packagePath=Object.keys(lock.packages).find(p=>p.endsWith('node_modules/'+name));
+  if(!packagePath) throw new Error('Missing package lock entry for '+name);
+  const dir=path.join(root,packagePath),p=JSON.parse(read(path.join(dir,'package.json')));
+  const file=['LICENSE','LICENSE.md','LICENSE.txt','license','license.md'].find(f=>existsSync(path.join(dir,f)));
+  if(!file) throw new Error('Missing license for '+name);
+  dependencies.push({name,version:p.version,license:p.license});
+  sections.push(name+' '+p.version+'\n'+read(path.join(dir,file)));
+}
+writeFileSync('dist/LICENSE-ziwei-doushu.txt',license);
+writeFileSync('dist/THIRD_PARTY_LICENSES.txt',sections.join('\n\n'));
+const data=readFileSync('dist/chart-engine.js'),archive='ziwei-doushu-source-39c0abd3.zip';
+const manifest={source:'https://github.com/Renhuai123/ziwei-doushu',commit:'39c0abd3b8dac609975dddfadd4d4e1d3a978deb',full_source_archive:archive,source_files:525,runtime_dependencies:dependencies,bundle_sha256:createHash('sha256').update(data).digest('hex'),bundle_bytes:data.length,gzip_bytes:gzipSync(data).length,source_archive_sha256:existsSync(archive)?createHash('sha256').update(readFileSync(archive)).digest('hex'):null};
+writeFileSync('SOURCE_MANIFEST.json',JSON.stringify(manifest,null,2)+'\n');
+console.log('Built standalone chart bundle: '+data.length+' bytes ('+manifest.gzip_bytes+' gzip).');

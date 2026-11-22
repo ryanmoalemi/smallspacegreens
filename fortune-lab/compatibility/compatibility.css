@@ -1,0 +1,45 @@
+.pair{color:var(--ink)}
+.pair .hero h1 em{font-weight:400;color:var(--accent)}
+.pair .pair-art::before{background:radial-gradient(circle,#b886a229,transparent 70%)}
+.pair .hero .art{margin-top:-12px}
+.person-fields{border:0;margin:0;padding:0}
+.person-fields+ .person-fields{border-top:1px solid var(--line);padding-top:23px;margin-top:25px}
+.person-fields legend{font-family:var(--serif);font-size:24px;margin-bottom:15px;padding:0}
+.person-fields label small{font-size:13px;font-weight:400;color:var(--muted)}
+.person-fields .fields-two{grid-template-columns:.9fr 1.1fr}
+.person-fields .field{margin:0}
+.pair .style-picker{border:0;padding:0;margin:0}
+.pair .style-picker+ .style-picker{margin-top:29px}
+.style-picker legend{font-family:var(--serif);font-size:25px;margin-bottom:13px;padding:0}
+.pair .style-picker .choice{align-items:flex-start;height:100%}
+.pair .style-picker .choice small{font-size:13px;margin-top:5px;line-height:1.5}
+.pair .style-picker .choices{align-items:stretch}
+.pair .relationship-note{font-size:13px;color:var(--muted);margin:17px 0 0}
+.pair .badge-name{max-width:85px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:auto}
+.pair .result-banner h1{overflow-wrap:anywhere}
+.pair .result-banner .sigil{flex-shrink:0;background:var(--panel)}
+.pair .result-banner .sigil:last-child{z-index:1}
+.pair .profile-line{display:flex;gap:12px;align-items:center;margin-bottom:15px}
+.pair .profile-line .number{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:50%;font-family:var(--serif);font-size:24px;color:var(--accent);flex-shrink:0}
+.pair .profile-line h3{margin:0;font-size:22px}
+.pair .profile-line small{font-family:var(--sans);font-size:13px;color:var(--muted);display:block;margin-bottom:4px;overflow-wrap:anywhere}
+.pair .insight-lead{font-family:var(--serif);font-size:26px;color:var(--ink);line-height:1.3;margin-bottom:12px}
+.pair .connection-label{display:inline-block;border:1px solid var(--line);padding:5px 11px;font-size:12px;letter-spacing:.07em;border-radius:30px;margin-bottom:14px;color:var(--accent)}
+.pair .reading-card p+ p{margin-top:15px}
+.pair .style-summary{border-left:2px solid var(--accent);padding-left:17px;margin-top:20px}
+.pair .style-summary strong{color:var(--ink)}
+.prompt-controls{display:flex;gap:20px;align-items:center;justify-content:space-between}
+.pair .prompt-counter{font-variant-numeric:tabular-nums}
+.pair .merchant-area{margin-top:39px}
+.pair .merchant-area>h2{font-size:31px;margin-bottom:10px}
+.pair .merchant-note{font-size:13px;color:var(--muted);margin:12px 0 0}
+.pair .free-option{padding:20px 23px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);font-size:15px}
+.pair .free-option strong{display:block;color:var(--ink);font-size:16px;margin-bottom:5px}
+.pair .report-days{margin:20px 0 0;padding-left:22px}
+.pair .report-days li{padding-left:5px;margin-bottom:16px}
+.pair .report-days strong{color:var(--ink)}
+.pair .report-meta{font-size:14px;color:var(--accent);margin:0 0 14px;line-height:1.7}
+.pair .report-callout{padding:18px 20px;border-left:2px solid var(--accent);background:var(--panel);margin:21px 0;color:var(--muted)}
+@media(min-width:601px){.pair .hero-copy h1{max-width:620px}.pair .hero{grid-template-columns:1.12fr 1fr;gap:20px}}
+@media(max-width:600px){.pair .hero .art{margin-top:0;width:265px}.pair .person-fields .fields-two{grid-template-columns:1fr;gap:16px}.pair .person-fields legend{font-size:23px}.pair .person-fields+ .person-fields{margin-top:22px;padding-top:22px}.pair .badge-name{max-width:57px}.pair .style-picker legend{font-size:24px}.pair .prompt-controls{gap:12px}.pair .prompt-controls .btn{font-size:14px}.pair .prompt-controls span{font-size:12px}.pair .merchant-area{margin-top:30px}}
+@media print{.pair .report-callout{background:#fff;border-color:#888}.pair .report-meta,.pair .report-days strong{color:#333}.pair #report-title{font-size:32px}.pair .modal-body h3{break-after:avoid}.pair .report-days li{break-inside:avoid}}
