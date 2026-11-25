@@ -1823,6 +1823,67 @@
         "credit_id": "credit-amazon-listing",
         "image_embed": "https://m.media-amazon.com/images/I/61VGQubTNDL._AC_SL1500_.jpg"
       }
+    },
+    "zestigreens-kit": {
+      "id": "zestigreens-kit",
+      "name": "ZestiGreens kit, self-watering tray",
+      "brand": "ZestiGreens",
+      "variant": "1 tray, 2 hemp mats, 2 seed packs",
+      "size": "12 by 6 in tray",
+      "kind": "amazon",
+      "asin": "B095Z7QR9T",
+      "url": "https://www.amazon.com/dp/B095Z7QR9T?tag=smallspaceg04-20",
+      "merchant": "Amazon",
+      "affiliate_tag": "smallspaceg04-20",
+      "fits": {
+        "role": "kit",
+        "tray_count": 1
+      },
+      "default_note": "A reusable tray, hemp mats, and two seed packs.",
+      "names_checked": "2026-11-25",
+      "image_audited": "2026-11-25",
+      "image": {
+        "treatment": "amazon",
+        "slug": "plain-zestigreens-kit",
+        "alt": "ZestiGreens microgreens kit, self-watering tray",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B095Z7QR9T?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B095Z7QR9T?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 25 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/81sT4OF6ZqL._AC_SL1500_.jpg"
+      }
+    },
+    "etekcity-scale-bowl": {
+      "id": "etekcity-scale-bowl",
+      "name": "Etekcity 0.1 g scale with bowl",
+      "brand": "Etekcity",
+      "variant": "0.1 g, stainless steel",
+      "size": "11 lb",
+      "kind": "amazon",
+      "asin": "B08BPB9T1N",
+      "url": "https://www.amazon.com/dp/B08BPB9T1N?tag=smallspaceg04-20",
+      "merchant": "Amazon",
+      "affiliate_tag": "smallspaceg04-20",
+      "fits": {
+        "role": "scale"
+      },
+      "default_note": "Reads in 0.1 g steps under 1,000 g.",
+      "names_checked": "2026-11-25",
+      "image_audited": "2026-11-25",
+      "image": {
+        "treatment": "amazon",
+        "slug": "plain-etekcity-scale-bowl",
+        "alt": "Etekcity 0.1 g kitchen scale with bowl",
+        "author": "Amazon",
+        "source_url": "https://www.amazon.com/dp/B08BPB9T1N?tag=smallspaceg04-20",
+        "license": "Amazon product listing photograph",
+        "license_url": "https://www.amazon.com/dp/B08BPB9T1N?tag=smallspaceg04-20",
+        "note": "Main product photograph from the Amazon listing for this ASIN, checked 25 November 2026. Hotlinked from Amazon's image CDN. Not rehosted.",
+        "credit_id": "credit-amazon-listing",
+        "image_embed": "https://m.media-amazon.com/images/I/81BD+2irwgL._SL1500_.jpg"
+      }
     }
   }
 }

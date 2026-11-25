@@ -22,7 +22,10 @@ ROUTES = ("kit", "tray", "reuse")
 STATE = """() => {
   const b = document.querySelector('.setup-builder');
   const shown = el => el.offsetParent !== null;
-  const cards = [...b.querySelectorAll('.route-picks .pick')].filter(shown);
+  const route = (b.querySelector('input[name="setup-route"]:checked') || {}).value || '';
+  // The numbered "5 things" cards above the builder count toward the route's list.
+  const five = [...document.querySelectorAll('[data-five] .pick')].filter(c => (c.dataset.routes || '').split(' ').includes(route));
+  const cards = [...b.querySelectorAll('.route-picks .pick')].filter(shown).concat(five);
   const rows = [...b.querySelectorAll('[data-setup-panel]:not([hidden]) .supply-checks > li')];
   const bad = [];
   for (const el of [...cards, ...rows]) {
@@ -62,10 +65,10 @@ def main() -> int:
                 for route in ROUTES:
                     page.locator(f'input[name="setup-route"][value="{route}"]').check(force=True)
                     # Bring every shown card and row on screen, the way a reader scrolls past them.
-                    for el in page.locator('.route-picks .pick:visible img, [data-setup-panel]:not([hidden]) .supply-checks img').all():
+                    for el in page.locator('[data-five] .pick img, .route-picks .pick:visible img, [data-setup-panel]:not([hidden]) .supply-checks img').all():
                         el.scroll_into_view_if_needed()
                     page.wait_for_function(
-                        "() => [...document.querySelectorAll('.setup-builder img')].filter(i => i.offsetParent).every(i => i.complete)",
+                        "() => [...document.querySelectorAll('.setup-builder img, [data-five] img')].filter(i => i.offsetParent).every(i => i.complete)",
                         timeout=15000,
                     )
                     state = page.evaluate(STATE)

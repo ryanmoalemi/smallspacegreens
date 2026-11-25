@@ -11,6 +11,13 @@ import catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 PLACEMENTS = ROOT / "src" / "placements"
+MERCHANTS = {
+    "amazon": "Amazon",
+    "trueleaf": "True Leaf Market",
+    "letpot": "LetPot",
+    "highmowing": "High Mowing",
+    "plantaddicts": "Plant Addicts",
+}
 AMAZON_HREF = re.compile(r"https://www\.amazon\.com/dp/([A-Z0-9]{10})\?tag=smallspaceg04-20\Z")
 
 
@@ -104,6 +111,15 @@ def render_picks(
             if len(card["why"]) > 70:
                 raise SystemExit(f"{name}: why line for {card_id} is {len(card['why'])} characters")
             url = href_for(card, letpot, trueleaf, highmowing, plantaddicts)
+            product_id = card_id
+            if card.get("kind") == "amazon" and card.get("asin"):
+                found = catalog.by_asin(card["asin"])
+                if found:
+                    product_id = found["id"]
+            track = (
+                f' data-product-id="{esc(product_id)}"'
+                f' data-merchant="{esc(MERCHANTS.get(card["kind"], card["kind"]))}"'
+            )
             official = bool(image.get("official")) or image.get("treatment") == "official"
             letpot_frame = (image.get("official") == "letpot") or (
                 official and ((image.get("author") == "LetPot") or str(image.get("slug") or "").startswith("letpot-"))
@@ -116,7 +132,7 @@ def render_picks(
                 media_class = "pick-media pick-media-amazon"
                 credit_id = image.get("credit_id") or "credit-amazon-listing"
                 photo = (
-                    f'<a class="pick-photo-link" href="{esc(url)}" rel="sponsored nofollow noopener" target="_blank">'
+                    f'<a class="pick-photo-link" href="{esc(url)}" rel="sponsored nofollow noopener" target="_blank"{track}>'
                     f'<img{img_class} src="{esc(src)}" srcset="{esc(srcset)}" '
                     'sizes="(max-width: 599px) 92vw, (min-width: 700px) 340px, 200px" '
                     'width="600" height="600" loading="lazy" decoding="async" '
@@ -161,7 +177,7 @@ def render_picks(
                 + f'<h3 class="pick-name"><span class="pick-brand">{esc(card["brand"])}</span> '
                 f'{esc(card["short"])}</h3>'
                 f'<p class="pick-why">{esc(card["why"])}</p>'
-                f'<a class="pick-cta" href="{esc(url)}" rel="sponsored nofollow noopener" target="_blank">'
+                f'<a class="pick-cta" href="{esc(url)}" rel="sponsored nofollow noopener" target="_blank"{track}>'
                 f'{esc(card["cta"])}<span class="sr-only"> (opens in a new tab)</span></a>'
                 "</li>"
             )

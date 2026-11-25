@@ -53,12 +53,14 @@ GUIDES = [
     },
     {
         "slug": "gifts-for-indoor-gardeners",
-        "title": "Gardening Gifts for Plant Lovers in Small Spaces",
-        "description": "Gardening gifts for plant lovers and gardeners in a small space. Compare LetPot gardens, True Leaf seed and kits, and one windowsill kit. No prices here.",
-        "h1": "Gardening gifts for plant lovers in small spaces",
-        "dek": "Match a countertop garden, a bag of microgreen seed, or a small windowsill kit to the person and the space.",
+        "title": "8 Gifts for Gardeners With No Yard, by Budget",
+        "description": "8 indoor gifts for gardeners with no yard: microgreen seed, a clip-on grow light, windowsill kits, and LetPot countertop gardens, grouped by budget.",
+        "h1": "8 Gifts for Gardeners With No Yard",
+        "dek": "Seed, a grow light, windowsill kits, and countertop gardens, grouped under $25, $25 to $75, and over $75.",
+        "hero_dek": "Indoor picks, grouped by budget.",
         "og": "guides",
-        "updated_label": "November 10, 2026",
+        "updated_label": "November 25, 2026",
+        "disclosure_top": True,
     },
     {
         "slug": "microgreen-seeds-for-beginners",
@@ -1405,7 +1407,9 @@ def supply_pick_card(slug: str, brand: str, name: str, line: str, url: str, butt
         f"{caption}</figure>"
         f'<h3 class="pick-name"><span class="pick-brand">{esc(brand)}</span> {esc(name)}</h3>'
         f'<p class="pick-why">{esc(line)}</p>'
-        f'<a class="pick-cta" href="{esc(url)}" rel="sponsored nofollow noopener" target="_blank">'
+        f'<a class="pick-cta" href="{esc(url)}" rel="sponsored nofollow noopener" target="_blank"'
+        f' data-product-id="{esc(re.sub(r"[^a-z0-9]+", "-", (brand + " " + name).lower()).strip("-"))}"'
+        f' data-merchant="{esc(brand)}">'
         f'{esc(button)}<span class="sr-only"> (opens in a new tab)</span></a>'
         "</li>"
     )
@@ -1473,6 +1477,8 @@ def disclosure_sentence(html: str) -> str | None:
 
 
 def insert_after_intro(html: str, block: str) -> str:
+    if "<!--DISCLOSURE_TOP-->" in html:
+        return html.replace("<!--DISCLOSURE_TOP-->", block, 1)
     photo_header = re.search(
         r'<header class="article-header article-header-photo-first".*?</header>',
         html,
@@ -1511,7 +1517,7 @@ def place_single_disclosure(html: str) -> str:
     )
     sentence = disclosure_sentence(html)
     if sentence is None:
-        return html
+        return html.replace("<!--DISCLOSURE_TOP-->", "")
     block = f'<p class="affiliate-disclosure">{esc(sentence)}</p>'
     placed = insert_after_intro(html, block)
     first_store = min(
@@ -1959,9 +1965,9 @@ def disclosure() -> str:
     )
 
 
-HERO_FIRST_SLUGS = {"3-hour-balcony-salad", "balcony-salad-garden", "microgreens-in-a-small-apartment", "apartment-seed-starting", "windowsill-microgreens"}
+HERO_FIRST_SLUGS = {"3-hour-balcony-salad", "balcony-salad-garden", "microgreens-in-a-small-apartment", "apartment-seed-starting", "windowsill-microgreens", "gifts-for-indoor-gardeners"}
 # Full 720x1280 pin photo in the header, not the cropped 180/240 banner used on other hero-first pages.
-PIN_FULL_HERO_SLUGS = {"apartment-seed-starting", "windowsill-microgreens"}
+PIN_FULL_HERO_SLUGS = {"apartment-seed-starting", "windowsill-microgreens", "gifts-for-indoor-gardeners"}
 
 PIN_FULL_HERO_CSS = """<style>
 /* Pin-full hero pages only: show the full pin photo, not the cropped 180/240 banner.
@@ -1994,6 +2000,41 @@ body.page-article.hero-first.hero-pin-full .article-header-photo-first .photo im
 }
 </style>
 """
+
+
+GEAR_PIN_HERO_CSS = """<style>
+/* /gear/ only: the pin photo leads the first screen. Cap its height so the
+   headline and one-line dek stay above the fold on phones and desktops.
+   Fonts are unchanged. */
+.page-page .gear-pin-hero .setup-photo img{
+  height:auto;
+  width:auto;
+  max-width:100%;
+  max-height:min(50vh,440px);
+  aspect-ratio:4/5;
+  object-fit:cover;
+  margin:0 auto;
+}
+.page-page .gear-pin-hero .setup-photo .photo-credit{text-align:center}
+@media(min-width:621px){
+  .page-page .gear-pin-hero{grid-template-columns:.8fr 1.2fr}
+  .page-page .gear-pin-hero .setup-photo img{max-height:min(62vh,520px)}
+}
+</style>
+"""
+
+
+# Page-only overrides on top of PIN_FULL_HERO_CSS. The gift guide puts the
+# disclosure line above the photo, so its desktop photo is a little shorter to
+# keep the full headline above the fold at 1280 by 800.
+PIN_HERO_EXTRA_CSS = {
+    "gifts-for-indoor-gardeners": """<style>
+@media(min-width:800px){
+  body.page-article.hero-first.hero-pin-full .article-header-photo-first .photo img[src$=".webp"]{max-height:min(42vh,400px)}
+}
+</style>
+""",
+}
 
 
 def split_opening_hero(body: str) -> tuple[str, str]:
@@ -2091,6 +2132,7 @@ def article_page(guide: dict, body: str) -> str:
         h1_html = h1_html.replace("3-Hour", '<span style="white-space:nowrap">3-Hour</span>', 1)
     main = (
         crumbs_html(crumbs)
+        + ("<!--DISCLOSURE_TOP-->" if guide.get("disclosure_top") else "")
         + header_open
         + (hero if hero else "")
         + f"<h1>{h1_html}</h1>"
@@ -2111,7 +2153,8 @@ def article_page(guide: dict, body: str) -> str:
             " hero-first hero-pin-full" if hero and guide["slug"] in PIN_FULL_HERO_SLUGS
             else " hero-first" if hero else ""
         ),
-        "head_extra": PIN_FULL_HERO_CSS if hero and guide["slug"] in PIN_FULL_HERO_SLUGS else "",
+        "head_extra": (PIN_FULL_HERO_CSS if hero and guide["slug"] in PIN_FULL_HERO_SLUGS else "")
+        + PIN_HERO_EXTRA_CSS.get(guide["slug"], ""),
         "nav": guide.get("nav", "/guides/"),
         "image": page_image,
         "signup": show_signup,
@@ -3185,7 +3228,7 @@ def render_static_pages() -> dict[str, str]:
     pages["404.html"] = simple_page(missing, (SRC / "pages" / "404.html").read_text())
 
     extra_pages = [
-        ("gear/index.html", "Microgreens Growing Kits and Supplies for Small Spaces", "A microgreens growing kit for a small space, plus reusable trays, seed, and a no-soil indoor garden. Check what is included before you buy.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
+        ("gear/index.html", "Only 5 Things You Need to Grow Microgreens", "The only 5 things you need to grow microgreens: trays, seed, growing mix, a kitchen scale, and scissors. Plus kits and countertop gardens for fewer parts.", f"{SITE}/gear/", "/gear/", "Gear and comparisons", f"{SITE}/assets/og/gear.jpg", "gear.html", "wrap-wide"),
         ("editorial-method/index.html", "How Small Space Greens Chooses and Corrects Guides", "How sources are chosen, how product advice will be labeled, and how to send a correction.", f"{SITE}/editorial-method/", "", "Editorial method", f"{SITE}/assets/og/editorial.jpg", "editorial.html", ""),
         ("guides/first-tray-checklist/index.html", "First-Tray Checklist for Apartment Microgreens", "Print the first-tray checklist, or get the same list by email from Ryan after you confirm your address. You can print it without an email address.", f"{SITE}/guides/first-tray-checklist/", "/guides/", "First-tray checklist", f"{SITE}/assets/og/checklist.jpg", "checklist.html", ""),
     ]
@@ -3210,6 +3253,7 @@ def render_static_pages() -> dict[str, str]:
         }
         if filename == "gear.html":
             page["scripts"] = f'<script src="/js/setup.js?v={asset_version("js/setup.js")}" defer></script>'
+            page["head_extra"] = GEAR_PIN_HERO_CSS
         extra_graph = None
         if filename == "checklist.html":
             page["og_type"] = "article"

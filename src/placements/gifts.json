@@ -108,6 +108,26 @@
       "license": null,
       "license_url": null,
       "note": "No permitted exact product photograph. Amazon image_embed is empty. A typographic card is shown instead of plated microgreens."
+    },
+    "sansi-clip": {
+      "slug": "plain-sansi-clip",
+      "title": "SANSI clip-on grow light",
+      "alt": "SANSI clip-on grow light",
+      "treatment": "amazon",
+      "image_embed": "https://m.media-amazon.com/images/I/61a6Qs14l9L._AC_SL1500_.jpg",
+      "credit_id": "credit-amazon-listing",
+      "author": "Amazon",
+      "source_url": "https://www.amazon.com/dp/B0CHDBY2PD?tag=smallspaceg04-20"
+    },
+    "zestigreens-kit": {
+      "slug": "plain-zestigreens-kit",
+      "title": "ZestiGreens microgreens kit, self-watering tray",
+      "alt": "ZestiGreens microgreens kit, self-watering tray",
+      "treatment": "amazon",
+      "image_embed": "https://m.media-amazon.com/images/I/81sT4OF6ZqL._AC_SL1500_.jpg",
+      "credit_id": "credit-amazon-listing",
+      "author": "Amazon",
+      "source_url": "https://www.amazon.com/dp/B095Z7QR9T?tag=smallspaceg04-20"
     }
   },
   "cards": {
@@ -116,7 +136,7 @@
       "href_key": "mini",
       "brand": "LetPot",
       "short": "LPH-Mini indoor garden",
-      "badge": "Beginner",
+      "badge": "Apartment cook",
       "why": "LetPot lists a 5-pod garden, app control, and a schedulable light.",
       "cta": "See at LetPot",
       "image": "letpot-mini"
@@ -126,27 +146,17 @@
       "asin": "B0DGF8Z1Z6",
       "brand": "mizuna",
       "short": "Ceramic microgreens kit, 2 trays",
-      "badge": "Apartment cook",
+      "badge": "Windowsill",
       "why": "Two ceramic trays with coir and seeds, listed for a kitchen sill.",
       "cta": "View on Amazon",
       "image": "mizuna-plain"
-    },
-    "letpot-air": {
-      "kind": "letpot",
-      "href_key": "air",
-      "brand": "LetPot",
-      "short": "LPH-Air indoor garden",
-      "badge": "Foodie",
-      "why": "LetPot lists a 10-pod garden with app-controlled light and water flow.",
-      "cta": "See at LetPot",
-      "image": "letpot-air"
     },
     "letpot-lite": {
       "kind": "letpot",
       "href_key": "lite",
       "brand": "LetPot",
       "short": "LPH-Lite indoor garden",
-      "badge": "Apartment cook",
+      "badge": "Foodie",
       "why": "LetPot lists a 12-pod herb garden with a growing LED and a timer.",
       "cta": "See at LetPot",
       "image": "letpot-lite"
@@ -167,57 +177,67 @@
       "brand": "True Leaf Market",
       "short": "Radish microgreen seed",
       "badge": "Beginner",
-      "why": "42 g on a 1020 tray. About 21 g on a 10 by 10.",
-      "cta": "See radish seed",
+      "why": "Rambo radish seed. Utah State uses 42 g on a 1020 tray.",
+      "cta": "See at True Leaf Market",
       "image": "radish-bowl"
     },
     "tl-broccoli": {
       "kind": "trueleaf",
-      "href_key": "micro-seed",
+      "href_key": "broccoli",
       "brand": "True Leaf Market",
       "short": "Broccoli microgreen seed",
       "badge": "Beginner",
-      "why": "Waltham 29 broccoli is in the seed collection. Check the bag.",
-      "cta": "Browse microgreen seeds",
+      "why": "Waltham 29 broccoli seed for a first tray. Check the bag size.",
+      "cta": "See at True Leaf Market",
       "image": "broccoli-sprouts"
     },
-    "tl-kits": {
-      "kind": "trueleaf",
-      "href_key": "micro-kits",
-      "brand": "True Leaf Market",
-      "short": "Microgreens kits and supplies",
+    "sansi-clip": {
+      "kind": "amazon",
+      "asin": "B0CHDBY2PD",
+      "brand": "SANSI",
+      "short": "Clip-on grow light, 10W",
+      "badge": "Dim window",
+      "why": "A clip-on LED for a sill or shelf that falls short on light.",
+      "cta": "View on Amazon",
+      "image": "sansi-clip"
+    },
+    "zestigreens-kit": {
+      "kind": "amazon",
+      "asin": "B095Z7QR9T",
+      "brand": "ZestiGreens",
+      "short": "Microgreens kit, self-watering tray",
       "badge": "Beginner",
-      "why": "Mini kits are in this collection. Check what the kit includes.",
-      "cta": "Browse microgreen kits",
-      "image": "home-microgreens"
+      "why": "A reusable tray, two hemp mats, two seed packs, and a grow guide.",
+      "cta": "View on Amazon",
+      "image": "zestigreens-kit"
     }
   },
   "sections": [
     {
-      "id": "seed-and-kits",
-      "title": "Seed and kits",
-      "lead": "",
+      "id": "under-25",
+      "title": "Under $25",
+      "lead": "Seed prices are for the smallest bag. Prices checked November 25, 2026.",
       "cards": [
         "tl-radish",
         "tl-broccoli",
-        "tl-kits"
+        "sansi-clip"
       ]
     },
     {
-      "id": "band-25-60",
-      "title": "$25 to $60",
+      "id": "band-25-75",
+      "title": "$25 to $75",
       "lead": "",
       "cards": [
         "letpot-mini",
-        "mizuna-ceramic"
+        "mizuna-ceramic",
+        "zestigreens-kit"
       ]
     },
     {
       "id": "splurge",
-      "title": "Splurge",
+      "title": "Splurge: over $75",
       "lead": "Larger LetPot gardens.",
       "cards": [
-        "letpot-air",
         "letpot-lite",
         "letpot-max"
       ]
