@@ -125,6 +125,8 @@ SCALE = "Etekcity 0.1 g scale"
 SCISSORS = "Fiskars 5 in scissors"
 MISTER = "AORAKI plant mister"
 KIT_SPONGE = "Spongease kit, 3 trays"
+KIT_ZESTI = "ZestiGreens kit, self-watering tray"
+SCALE_BOWL = "Etekcity 0.1 g scale with bowl"
 TRAY_1010_SOLID_10 = "1010 trays, no holes"
 COCO = "Verdana coir brick, 10 lb"
 SANSI_CLIP = "SANSI clip-on grow light"
@@ -317,22 +319,35 @@ SHOP_PAGES: dict[str, dict] = {
             amazon("B08L3T5RN6", WATERING_CAN, "For watering the pots, then empty the saucer."),
         ],
     },
+    "gear-five": {
+        # The 5 numbered cards at the top of /gear/ ("Only 5 Things"). They match the
+        # reusable-tray checklist on the same page: trays, seed, mix, scale, scissors.
+        "heading": "The 5 things",
+        "heading_id": "five-things-title",
+        "lead": "",
+        "layout": "numbered",
+        "rows": [
+            routed(dict(amazon("B06XZFLY9P", BF_1020_HOLES, "Grow in the tray with holes. Set it in a solid tray to catch water."), number_label="Trays"), "tray"),
+            routed(dict(seed_product(RADISH, "Radish is an easy first crop. Utah State uses 42 g on a 1020 tray.", TRUELEAF_RADISH, "See at True Leaf Market"), number_label="Seed"), "tray reuse"),
+            routed(dict(amazon("B01N38GBTM", ESPOMA_SEED, "Soilless mix to fill the tray."), number_label="Growing mix"), "tray reuse"),
+            routed(dict(amazon("B08BPB9T1N", SCALE_BOWL, "Weigh the seed so the tray is not sown too thick."), number_label="Scale"), "tray reuse"),
+            routed(dict(amazon("B07FV7TZVH", SCISSORS, "Cut the greens just above the mix."), number_label="Scissors"), "kit tray reuse"),
+        ],
+    },
     "gear": {
+        # Interactive chooser list. The 5 numbered cards above it are rendered by "gear-five",
+        # so those products are not repeated here (setup.js counts them).
+        # Spongease kit (B07KRMP93C) was "Currently unavailable" on 2026-11-25; ZestiGreens replaces it.
         "heading": "Supplies for this list",
         "lead": "",
         "chooser": True,
         "rows": [
-            routed(amazon("B07KRMP93C", KIT_SPONGE, "A ready-to-sow kit with trays, seed, and coir."), "kit"),
-            routed(amazon("B06XZFLY9P", BF_1020_HOLES, "A reusable growing tray with holes."), "tray"),
+            routed(amazon("B095Z7QR9T", KIT_ZESTI, "A ready-to-sow kit: a reusable tray, hemp mats, and two seed packs."), "kit"),
             routed(amazon("B07DT72V6H", BF_1020_SOLID, "The matching solid tray."), "tray"),
             routed(amazon("B07NKSKMCN", BF_1010_HOLES, "A reusable 10 by 10 in growing tray."), "tray"),
             routed(amazon("B07MYNVP8G", TRAY_1010_SOLID_10, "A solid 10 by 10 in catch tray."), "tray"),
-            routed(seed_product(RADISH, "Loose radish seed, with package size chosen for your batch.", TRUELEAF_RADISH, "See radish seed"), "tray reuse"),
-            routed(seed_product(PEA, "Loose pea seed, weighed dry, then soaked.", TRUELEAF_PEA, "See pea seed"), "tray reuse"),
-            routed(seed(MIXED_SEED, "Loose seed for a tray or a container, when you have not chosen a crop."), "tray reuse"),
-            routed(amazon("B01N38GBTM", ESPOMA_SEED, "Soilless mix for a tray or a container."), "tray reuse"),
-            routed(amazon("B08BPTXK4L", SCALE, "For weighing loose seed."), "tray reuse"),
-            routed(amazon("B07FV7TZVH", SCISSORS, "For a cut above the mix."), "kit tray reuse"),
+            routed(seed_product(PEA, "Loose pea seed, weighed dry, then soaked.", TRUELEAF_PEA, "See at True Leaf Market"), "tray reuse"),
+            routed(dict(seed(MIXED_SEED, "Loose seed for a tray or a container, when you have not chosen a crop."), label="See at True Leaf Market"), "tray reuse"),
             routed(amazon("B0CHDBY2PD", SANSI_CLIP, "If the window falls short."), "kit tray reuse"),
         ],
     },
@@ -361,6 +376,14 @@ def row_url(row: dict) -> str:
 # Image metadata for leftover affiliate-box slugs that are not a catalog product key.
 # Catalog products are the source of truth for shop and placement cards.
 BUTTON = {"amazon": "View on Amazon", "trueleaf": "See at True Leaf", "letpot": "See at LetPot"}
+# data-merchant values for click tracking when a catalog product has no merchant field.
+MERCHANT_NAMES = {
+    "amazon": "Amazon",
+    "trueleaf": "True Leaf Market",
+    "letpot": "LetPot",
+    "highmowing": "High Mowing",
+    "plantaddicts": "Plant Addicts",
+}
 
 LEGACY_IMAGES = {
     "radish": {
@@ -963,13 +986,17 @@ def render_shop(key: str) -> str:
         amazon = treatment == "amazon"
         button = BUTTON[row["kind"]] if row["kind"] == "amazon" else row["label"]
         href = row_url(row)
+        track = (
+            f' data-product-id="{esc(product["id"])}"'
+            f' data-merchant="{esc(product.get("merchant") or MERCHANT_NAMES.get(row["kind"], row["kind"]))}"'
+        )
         if amazon:
             src, srcset = catalog.amazon_srcset(image.get("image_embed") or "")
             img_class = ' class="amazon-photo"'
             media_class = "pick-media pick-media-amazon"
             credit_id = image.get("credit_id") or "credit-amazon-listing"
             photo = (
-                f'<a class="pick-photo-link" href="{esc(href)}" rel="sponsored nofollow noopener" target="_blank">'
+                f'<a class="pick-photo-link" href="{esc(href)}" rel="sponsored nofollow noopener" target="_blank"{track}>'
                 f'<img{img_class} src="{esc(src)}" srcset="{esc(srcset)}" '
                 'sizes="(max-width: 599px) 92vw, (min-width: 700px) 340px, 200px" '
                 'width="600" height="600" loading="lazy" decoding="async" '
@@ -1016,20 +1043,39 @@ def render_shop(key: str) -> str:
         crop = fits.get("crop") or ""
         crop_attr = f' data-crop="{esc(crop)}"' if crop else ""
         optional_attr = ' data-optional="1"' if role.startswith("optional-") else ""
+        number = len(cards) + 1
+        badge = (
+            f'<p class="pick-badge">{number}. {esc(row["number_label"])}</p>'
+            if page.get("layout") == "numbered" and row.get("number_label")
+            else ""
+        )
         cards.append(
             f'<li class="pick"{routes_attr}{product_attr}{role_attr}{nominal_attr}{crop_attr}{optional_attr}>'
             f'<figure class="{media_class}">'
             f"{photo}"
             f"{caption}"
             "</figure>"
+            f"{badge}"
             f'<h3 class="pick-name">{esc(row["item"])}</h3>'
             f'<p class="pick-why">{esc(row["note"])}</p>'
-            f'<a class="pick-cta" href="{esc(row_url(row))}" rel="sponsored nofollow noopener" target="_blank">'
+            f'<a class="pick-cta" href="{esc(row_url(row))}" rel="sponsored nofollow noopener" target="_blank"{track}>'
             f'{esc(button)}<span class="sr-only"> (opens in a new tab)</span></a>'
             "</li>"
         )
     if page.get("layout") == "first-tray-steps":
         return render_home_first_tray(page, cards)
+    if page.get("layout") == "numbered":
+        if len(cards) != 5:
+            raise SystemExit(f"{key} numbered layout needs exactly 5 cards, got {len(cards)}")
+        heading_id = page.get("heading_id") or f"{key}-title"
+        return (
+            f'<section class="picks numbered-picks" id="five-things" data-five aria-labelledby="{esc(heading_id)}">'
+            f'<h2 id="{esc(heading_id)}">{esc(page["heading"])}</h2>'
+            + (f'<p class="picks-lead">{esc(page["lead"])}</p>' if page["lead"] else "")
+            + '<ul class="pick-grid" role="list">'
+            + "".join(cards)
+            + "</ul></section>"
+        )
     if page.get("chooser"):
         return (
             '<section class="picks route-picks" id="matching-supplies" aria-labelledby="matching-supplies-title">'

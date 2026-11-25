@@ -77,7 +77,7 @@
       "short": "Microgreens kits and supplies",
       "badge": "Kit",
       "why": "True Leaf lists mini kits and other supplies in this collection.",
-      "cta": "Browse microgreen kits",
+      "cta": "See at True Leaf Market",
       "image": "sunflower-tray"
     },
     "tl-seed": {
@@ -87,7 +87,7 @@
       "short": "Microgreens seed",
       "badge": "Seed",
       "why": "Loose microgreen seed for a tray you reuse. Check the crop on the bag.",
-      "cta": "Browse microgreen seeds",
+      "cta": "See at True Leaf Market",
       "image": "broccoli-sprouts"
     },
     "letpot-mini": {
@@ -124,8 +124,8 @@
   "sections": [
     {
       "id": "growing-kits",
-      "title": "Microgreens growing kits",
-      "lead": "A countertop garden is not a tray of mix.",
+      "title": "Extras: kits and countertop gardens",
+      "lead": "Skip the 5 parts with a kit, or grow in pods instead. A countertop garden is not a tray of mix.",
       "cards": [
         "tl-kits",
         "tl-seed",

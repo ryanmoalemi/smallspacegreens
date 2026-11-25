@@ -502,11 +502,20 @@ window.SSG_CROPS = {"radish": {"name": "Radish", "source": "Utah State Universit
       return group === 'essential';
     });
   }
+  // The numbered "5 things" cards sit above the builder and are never moved, but
+  // they still count toward the route's list.
+  var fiveCards = Array.from(document.querySelectorAll('[data-five] [data-routes]'));
+  function fiveOnRoute(route) {
+    return fiveCards.filter(function (card) { return card.dataset.routes.split(' ').indexOf(route) !== -1; });
+  }
   function updateCount() {
     var still = document.querySelectorAll('.supply-group-needed .pick:not([hidden])').length;
     if (!document.querySelector('.supply-groups')) {
       still = essentialCards(current).filter(function (card) { return !isOwnedRole(cardRole(card)); }).length;
     }
+    still += fiveOnRoute(current).filter(function (card) {
+      return cardGroup(card) === 'essential' && !isOwnedRole(cardRole(card));
+    }).length;
     if (count) count.textContent = still ? still + ' essential' + (still === 1 ? '' : 's') + ' left to gather' : 'You have the essentials on this list.';
   }
   var routePicks = Array.from(builder.querySelectorAll('[data-routes]'));
@@ -594,7 +603,9 @@ window.SSG_CROPS = {"radish": {"name": "Radish", "source": "Utah State Universit
       });
     }
     if (routeStatus && routePicks.length) {
-      routeStatus.textContent = shown + ' supplies for your ' + routeNames[route] + ' list.';
+      var fromFive = fiveOnRoute(route).length;
+      routeStatus.textContent = shown + ' more supplies for your ' + routeNames[route] + ' list' +
+        (fromFive ? ', plus ' + fromFive + ' of the numbered picks above.' : '.');
       routeStatus.hidden = false;
     }
   }
